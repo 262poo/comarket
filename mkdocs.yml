@@ -1,0 +1,68 @@
+site_name: POO - CoMarket
+site_description: Libro digital de apoyo para el curso de Programación Orientada a Objetos - UPeU 2026
+site_author: UPeU
+copyright: Angel Sullon @asullom - UPeU 2026
+
+theme:
+  name: material
+  language: es
+  palette:
+    - scheme: default
+      primary: blue grey
+      accent: amber
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+extra_javascript:
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+  - javascripts/mermaid.js
+
+nav:
+  - Inicio: index.md
+  - Sílabo: Silabo_POO.md
+  - 1. Fundamentos de la Programación Orientada a Objetos:
+    - 1 Clases, objetos y responsabilidad: S01_Clases_Objetos.md
+    - 2 Encapsulamiento y constructores: S02_Encapsulamiento_Constructores.md
+    - 3 Modelado del dominio y colecciones: S03_Modelado_Dominio_Colecciones.md
+    - 4 Herencia y polimorfismo: S04_Herencia_Polimorfismo.md
+    - 5 CRUD en memoria con ArrayList: S05_CRUD_Memoria_ArrayList.md
+    - 6 Evaluación unidad 1: S06_Evaluacion_Unidad_1.md
+  - 2. Aplicación de Escritorio con Persistencia de Datos:
+    - 7 Arquitectura por capas y persistencia relacional: S07_JDBC_SQLite_Arquitectura.md
+    - 8 Patrón DAO y operaciones CRUD: S08_DAO_CRUD.md
+    - 9 Interfaz gráfica de usuario: S09_JavaFX_FXML_Eventos.md
+    - 10 CRUD desde GUI: S10_CRUD_GUI.md
+    - 11 Validación e integración: S11_Validacion_Integracion_Pruebas.md
+    - 12 Evaluación unidad 2: S12_Evaluacion_Unidad_2.md
+  - 3. Proyecto Integrador CoMarket:
+    - 13 Integración del sistema: S13_Proyecto_Integrador_Ensamblaje.md
+    - 14 Validación y refinamiento: S14_Proyecto_Integrador_Refinamiento.md
+    - 15 Sustentación del proyecto CoMarket: S15_Documentacion_Demo.md
+    - 16 Evaluación final: S16_Evaluacion_Final.md
+  - 4. Anexos:
+      - Taller POO 01: POOTaller01.md
