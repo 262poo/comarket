@@ -13,7 +13,9 @@ Este repositorio publica el curso de Programación Orientada a Objetos como libr
 
 El curso está centrado en diseñar e implementar una aplicación de escritorio aplicando modelado del dominio, encapsulamiento, herencia, polimorfismo, colecciones, arquitectura por capas, persistencia relacional, DAO e interfaz gráfica.
 
-La herramienta base de trabajo es IntelliJ IDEA. El libro no depende de cuadernos Jupyter ni de ejecución embebida en el sitio.
+La herramienta base de trabajo es IntelliJ IDEA. Para las sesiones con JavaFX no se usará VS Code como entorno principal, porque la configuración, ejecución y depuración del proyecto de escritorio se gestionan desde IntelliJ IDEA con Maven.
+
+Este repositorio no busca funcionar como un entorno de desarrollo embebido. Su propósito es servir como libro digital, guía clonable y referencia de estructura para que cada estudiante mantenga su proyecto JavaFX/Maven en IntelliJ IDEA.
 
 ## Ruta de aprendizaje
 

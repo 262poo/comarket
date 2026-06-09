@@ -50,7 +50,7 @@ Cada sesión combina explicación breve, modelado del docente, práctica guiada,
 Analizar el caso -> modelar clases -> implementar -> probar -> integrar -> refinar
 ```
 
-La unidad de avance no es un cuaderno aislado, sino la evolución continua de un proyecto en IntelliJ IDEA.
+La unidad de avance no es un cuaderno aislado ni un entorno web embebido, sino la evolución continua de un proyecto JavaFX/Maven abierto y ejecutado en IntelliJ IDEA.
 
 ---
 
@@ -170,6 +170,8 @@ El producto final de este curso sirve como insumo directo para cursos y espacios
 4. JavaFX con FXML y MVC para interfaz gráfica.
 5. JDBC para acceso a datos.
 6. SQLite como base de datos local.
+
+> Para el desarrollo de la aplicación de escritorio, IntelliJ IDEA es el entorno recomendado del curso. VS Code puede servir para lectura o edición rápida de archivos, pero no reemplaza el flujo principal de trabajo con JavaFX, Maven y ejecución desde IntelliJ IDEA.
 
 ## 9. Modelo de referencia del proyecto integrador final
 
