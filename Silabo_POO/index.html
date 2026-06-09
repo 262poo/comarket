@@ -1,0 +1,1853 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Libro digital de apoyo para el curso de Programación Orientada a Objetos - UPeU 2026">
+      
+      
+        <meta name="author" content="UPeU">
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../S01_Clases_Objetos/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Sílabo - POO - CoMarket</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#silabo-del-curso-de-programacion-orientada-a-objetos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="POO - CoMarket" class="md-header__button md-logo" aria-label="POO - CoMarket" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            POO - CoMarket
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sílabo
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="POO - CoMarket" class="md-nav__button md-logo" aria-label="POO - CoMarket" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    POO - CoMarket
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sílabo
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sílabo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-datos-generales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Datos generales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-descripcion-del-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Descripción del curso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-proposito-formativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Propósito formativo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Propósito formativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#producto-final-del-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Producto final del curso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-enfoque-metodologico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Enfoque metodológico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-evaluacion-del-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Evaluación del aprendizaje
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Evaluación del aprendizaje">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criterios-generales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criterios generales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evidencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evidencias
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-organizacion-por-unidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Organización por unidades
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Organización por unidades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unidad-1-fundamentos-de-la-programacion-orientada-a-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unidad 1: Fundamentos de la Programación Orientada a Objetos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unidad-2-aplicacion-de-escritorio-con-persistencia-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unidad 2: Aplicación de Escritorio con Persistencia de Datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unidad-3-proyecto-integrador-comarket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unidad 3: Proyecto Integrador CoMarket
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-integracion-curricular" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Integración curricular
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Integración curricular">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ingenieria-de-requerimientos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ingeniería de Requerimientos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#administracion-de-base-de-datos-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Administración de Base de Datos I
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lenguaje-de-programacion-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lenguaje de Programación I
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proyecto-formativo-de-la-linea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proyecto Formativo de la Línea
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-stack-tecnologico-propuesto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Stack tecnológico propuesto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-modelo-de-referencia-del-proyecto-integrador-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Modelo de referencia del proyecto integrador final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-estructura-base-de-carpetas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Estructura base de carpetas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-resultado-esperado-del-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Resultado esperado del curso
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Fundamentos de la Programación Orientada a Objetos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. Fundamentos de la Programación Orientada a Objetos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S01_Clases_Objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Clases, objetos y responsabilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S02_Encapsulamiento_Constructores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 Encapsulamiento y constructores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S03_Modelado_Dominio_Colecciones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 Modelado del dominio y colecciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S04_Herencia_Polimorfismo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4 Herencia y polimorfismo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S05_CRUD_Memoria_ArrayList/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 CRUD en memoria con ArrayList
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S06_Evaluacion_Unidad_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 Evaluación unidad 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Aplicación de Escritorio con Persistencia de Datos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2. Aplicación de Escritorio con Persistencia de Datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S07_JDBC_SQLite_Arquitectura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7 Arquitectura por capas y persistencia relacional
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S08_DAO_CRUD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8 Patrón DAO y operaciones CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S09_JavaFX_FXML_Eventos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9 Interfaz gráfica de usuario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S10_CRUD_GUI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 CRUD desde GUI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S11_Validacion_Integracion_Pruebas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11 Validación e integración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S12_Evaluacion_Unidad_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12 Evaluación unidad 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Proyecto Integrador CoMarket
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3. Proyecto Integrador CoMarket
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S13_Proyecto_Integrador_Ensamblaje/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13 Integración del sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S14_Proyecto_Integrador_Refinamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14 Validación y refinamiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S15_Documentacion_Demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15 Sustentación del proyecto CoMarket
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S16_Evaluacion_Final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16 Evaluación final
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4. Anexos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../POOTaller01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Taller POO 01
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-datos-generales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Datos generales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-descripcion-del-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Descripción del curso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-proposito-formativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Propósito formativo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Propósito formativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#producto-final-del-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Producto final del curso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-enfoque-metodologico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Enfoque metodológico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-evaluacion-del-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Evaluación del aprendizaje
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Evaluación del aprendizaje">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criterios-generales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criterios generales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evidencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evidencias
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-organizacion-por-unidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Organización por unidades
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Organización por unidades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unidad-1-fundamentos-de-la-programacion-orientada-a-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unidad 1: Fundamentos de la Programación Orientada a Objetos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unidad-2-aplicacion-de-escritorio-con-persistencia-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unidad 2: Aplicación de Escritorio con Persistencia de Datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unidad-3-proyecto-integrador-comarket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unidad 3: Proyecto Integrador CoMarket
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-integracion-curricular" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Integración curricular
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Integración curricular">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ingenieria-de-requerimientos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ingeniería de Requerimientos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#administracion-de-base-de-datos-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Administración de Base de Datos I
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lenguaje-de-programacion-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lenguaje de Programación I
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proyecto-formativo-de-la-linea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proyecto Formativo de la Línea
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-stack-tecnologico-propuesto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Stack tecnológico propuesto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-modelo-de-referencia-del-proyecto-integrador-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Modelo de referencia del proyecto integrador final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-estructura-base-de-carpetas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Estructura base de carpetas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-resultado-esperado-del-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Resultado esperado del curso
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="silabo-del-curso-de-programacion-orientada-a-objetos">Sílabo del curso de Programación Orientada a Objetos<a class="headerlink" href="#silabo-del-curso-de-programacion-orientada-a-objetos" title="Permanent link">&para;</a></h1>
+<h2 id="1-datos-generales">1. Datos generales<a class="headerlink" href="#1-datos-generales" title="Permanent link">&para;</a></h2>
+<p><strong>Curso:</strong> Programación Orientada a Objetos<br />
+<strong>Abreviación:</strong> POO<br />
+<strong>Carrera profesional:</strong> Ingeniería de Sistemas<br />
+<strong>Institución:</strong> UPeU<br />
+<strong>Duración:</strong> 3 unidades y 16 sesiones teórico-prácticas<br />
+<strong>Entorno base:</strong> IntelliJ IDEA con Maven<br />
+<strong>Lenguaje de trabajo:</strong> Java</p>
+<hr />
+<h2 id="2-descripcion-del-curso">2. Descripción del curso<a class="headerlink" href="#2-descripcion-del-curso" title="Permanent link">&para;</a></h2>
+<p>El curso orienta al estudiante en la construcción progresiva de una aplicación de escritorio mediante modelado orientado a objetos, organización modular, interfaz gráfica y persistencia de datos. La secuencia pedagógica parte de clases, objetos y relaciones, continúa con arquitectura, acceso a datos y GUI, y culmina con la integración de <strong>CoMarket - Sistema Comercial Orientado a Objetos</strong>.</p>
+<hr />
+<h2 id="3-proposito-formativo">3. Propósito formativo<a class="headerlink" href="#3-proposito-formativo" title="Permanent link">&para;</a></h2>
+<p>Al finalizar el curso, el estudiante será capaz de diseñar, implementar y sustentar una aplicación de escritorio basada en objetos, integrando modelado del dominio, encapsulamiento, herencia, polimorfismo, persistencia con base de datos relacional, interfaz gráfica y organización modular del código.</p>
+<h3 id="producto-final-del-curso">Producto final del curso<a class="headerlink" href="#producto-final-del-curso" title="Permanent link">&para;</a></h3>
+<p><strong>CoMarket - Sistema Comercial Orientado a Objetos</strong></p>
+<p>Incluye:</p>
+<ul>
+<li>Modelo de dominio orientado a objetos.</li>
+<li>Clases y relaciones implementadas.</li>
+<li>Encapsulamiento y herencia aplicados.</li>
+<li>Colecciones y operaciones CRUD.</li>
+<li>Arquitectura por capas.</li>
+<li>Persistencia mediante base de datos relacional.</li>
+<li>DAO para acceso a datos.</li>
+<li>Interfaz gráfica funcional.</li>
+<li>Integración entre GUI, lógica y persistencia.</li>
+<li>Evidencias de funcionamiento.</li>
+<li>Sustentación técnica del proyecto.</li>
+</ul>
+<hr />
+<h2 id="4-enfoque-metodologico">4. Enfoque metodológico<a class="headerlink" href="#4-enfoque-metodologico" title="Permanent link">&para;</a></h2>
+<p>Cada sesión combina explicación breve, modelado del docente, práctica guiada, trabajo incremental sobre el proyecto y cierre con verificación. El patrón de trabajo del curso es:</p>
+<div class="highlight"><pre><span></span><code>Analizar el caso -&gt; modelar clases -&gt; implementar -&gt; probar -&gt; integrar -&gt; refinar
+</code></pre></div>
+<p>La unidad de avance no es un cuaderno aislado, sino la evolución continua de un proyecto en IntelliJ IDEA.</p>
+<hr />
+<h2 id="5-evaluacion-del-aprendizaje">5. Evaluación del aprendizaje<a class="headerlink" href="#5-evaluacion-del-aprendizaje" title="Permanent link">&para;</a></h2>
+<p>La evaluación es continua y basada en evidencias de diseño, implementación, funcionamiento y sustentación técnica.</p>
+<h3 id="criterios-generales">Criterios generales<a class="headerlink" href="#criterios-generales" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Modela correctamente entidades, atributos y relaciones del dominio.</li>
+<li>Aplica encapsulamiento y responsabilidad de clase con criterio.</li>
+<li>Usa colecciones, herencia y polimorfismo donde corresponde.</li>
+<li>Organiza el código por capas o paquetes de forma coherente.</li>
+<li>Implementa operaciones CRUD en memoria y luego sobre base de datos.</li>
+<li>Integra GUI, lógica y persistencia sin romper el flujo principal.</li>
+<li>Documenta, prueba y explica decisiones técnicas del proyecto.</li>
+</ul>
+<h3 id="evidencias">Evidencias<a class="headerlink" href="#evidencias" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Avances del proyecto por unidad.</li>
+<li>Prácticas guiadas y retos de sesión.</li>
+<li>Evaluaciones de unidad.</li>
+<li>Presentación y sustentación del proyecto final.</li>
+</ul>
+<hr />
+<h2 id="6-organizacion-por-unidades">6. Organización por unidades<a class="headerlink" href="#6-organizacion-por-unidades" title="Permanent link">&para;</a></h2>
+<h3 id="unidad-1-fundamentos-de-la-programacion-orientada-a-objetos">Unidad 1: Fundamentos de la Programación Orientada a Objetos<a class="headerlink" href="#unidad-1-fundamentos-de-la-programacion-orientada-a-objetos" title="Permanent link">&para;</a></h3>
+<p><strong>Propósito:</strong> modelar y construir objetos de software aplicando principios fundamentales de programación orientada a objetos, relaciones entre clases y estructuras de almacenamiento en memoria.</p>
+<p><strong>Producto de unidad:</strong> aplicación funcional en memoria con clases, relaciones entre objetos, colecciones y operaciones principales del dominio.</p>
+<ul>
+<li>S1. Clases, objetos, atributos, métodos, responsabilidad de clase y abstracción del dominio.</li>
+<li>S2. Encapsulamiento, constructores, modificadores de acceso, validación de atributos y control del estado interno.</li>
+<li>S3. Asociaciones, agregación, composición, modelado básico del dominio y navegación entre objetos.</li>
+<li>S4. Herencia, reutilización de código, sobrescritura de métodos, polimorfismo y jerarquías de clases.</li>
+<li>S5. Colecciones, generics, ArrayList, registro de objetos, búsqueda, ordenamiento y CRUD en memoria.</li>
+<li>S6. Evaluación de la unidad 1.</li>
+</ul>
+<h3 id="unidad-2-aplicacion-de-escritorio-con-persistencia-de-datos">Unidad 2: Aplicación de Escritorio con Persistencia de Datos<a class="headerlink" href="#unidad-2-aplicacion-de-escritorio-con-persistencia-de-datos" title="Permanent link">&para;</a></h3>
+<p><strong>Propósito:</strong> construir aplicaciones de escritorio organizadas por capas, integrando persistencia de datos, acceso a información e interfaz gráfica mediante una arquitectura modular.</p>
+<p><strong>Producto de unidad:</strong> aplicación de escritorio funcional con arquitectura por capas, interfaz gráfica y persistencia en base de datos relacional.</p>
+<ul>
+<li>S7. Arquitectura por capas, separación de responsabilidades, persistencia, JDBC, conexión relacional y preparación para DAO.</li>
+<li>S8. Patrón DAO, acceso a datos y operaciones de registro, consulta, actualización y eliminación.</li>
+<li>S9. Formularios, componentes visuales, eventos, navegación entre pantallas e integración básica con la lógica de negocio.</li>
+<li>S10. Registro, consulta, edición, eliminación y flujo completo de operación desde la interfaz gráfica.</li>
+<li>S11. Validación de datos, integración GUI-lógica-persistencia, pruebas del flujo principal y corrección de errores funcionales.</li>
+<li>S12. Evaluación de la unidad 2.</li>
+</ul>
+<h3 id="unidad-3-proyecto-integrador-comarket">Unidad 3: Proyecto Integrador CoMarket<a class="headerlink" href="#unidad-3-proyecto-integrador-comarket" title="Permanent link">&para;</a></h3>
+<p><strong>Propósito:</strong> integrar el modelo orientado a objetos, la interfaz gráfica, la persistencia de datos y la organización modular del código en una aplicación completa alineada al proyecto integrador del curso.</p>
+<p><strong>Producto de unidad:</strong> <strong>CoMarket - Sistema Comercial Orientado a Objetos</strong>.</p>
+<p>Incluye:</p>
+<ul>
+<li>Modelo de dominio implementado.</li>
+<li>Arquitectura por capas.</li>
+<li>Persistencia funcional.</li>
+<li>Operaciones CRUD completas.</li>
+<li>Interfaz gráfica integrada.</li>
+<li>Validaciones.</li>
+<li>Evidencias de funcionamiento.</li>
+<li>
+<p>Documentación técnica básica.</p>
+</li>
+<li>
+<p>S13. Integración del modelo de dominio, interfaz gráfica, persistencia y consolidación funcional del sistema.</p>
+</li>
+<li>S14. Validación funcional, manejo de errores, refinamiento del diseño, corrección de observaciones y preparación para sustentación.</li>
+<li>S15. Demostración funcional, presentación de arquitectura, modelo de dominio, persistencia y defensa técnica del proyecto.</li>
+<li>S16. Evaluación individual, recuperación de sustentaciones pendientes, corrección de observaciones y cierre académico del proyecto.</li>
+</ul>
+<hr />
+<h2 id="7-integracion-curricular">7. Integración curricular<a class="headerlink" href="#7-integracion-curricular" title="Permanent link">&para;</a></h2>
+<p>El producto final de este curso sirve como insumo directo para cursos y espacios formativos relacionados con análisis, datos, programación y proyecto de línea.</p>
+<h3 id="ingenieria-de-requerimientos">Ingeniería de Requerimientos<a class="headerlink" href="#ingenieria-de-requerimientos" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Identificación de actores.</li>
+<li>Reglas de negocio.</li>
+<li>Casos de uso.</li>
+<li>Modelado del dominio.</li>
+</ul>
+<h3 id="administracion-de-base-de-datos-i">Administración de Base de Datos I<a class="headerlink" href="#administracion-de-base-de-datos-i" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Entidades del dominio.</li>
+<li>Relaciones.</li>
+<li>Restricciones de negocio.</li>
+<li>Transformación al modelo de datos.</li>
+</ul>
+<h3 id="lenguaje-de-programacion-i">Lenguaje de Programación I<a class="headerlink" href="#lenguaje-de-programacion-i" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Arquitectura por capas.</li>
+<li>Persistencia de datos.</li>
+<li>Operaciones CRUD.</li>
+<li>Separación de responsabilidades.</li>
+</ul>
+<h3 id="proyecto-formativo-de-la-linea">Proyecto Formativo de la Línea<a class="headerlink" href="#proyecto-formativo-de-la-linea" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Base conceptual para el desarrollo de aplicaciones empresariales.</li>
+<li>Comprensión del dominio de negocio.</li>
+<li>Evolución hacia sistemas web y arquitecturas empresariales.</li>
+</ul>
+<hr />
+<h2 id="8-stack-tecnologico-propuesto">8. Stack tecnológico propuesto<a class="headerlink" href="#8-stack-tecnologico-propuesto" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Java como lenguaje orientado a objetos.</li>
+<li>Maven para dependencias, compilación y ejecución.</li>
+<li>IntelliJ IDEA como entorno base de trabajo.</li>
+<li>JavaFX con FXML y MVC para interfaz gráfica.</li>
+<li>JDBC para acceso a datos.</li>
+<li>SQLite como base de datos local.</li>
+</ol>
+<h2 id="9-modelo-de-referencia-del-proyecto-integrador-final">9. Modelo de referencia del proyecto integrador final<a class="headerlink" href="#9-modelo-de-referencia-del-proyecto-integrador-final" title="Permanent link">&para;</a></h2>
+<p>El siguiente diagrama se presenta como referencia del producto final del curso, una vez que el estudiante haya avanzado por modelado básico, encapsulamiento, colecciones, herencia, persistencia e interfaz gráfica.</p>
+<pre class="mermaid"><code>classDiagram
+    class Venta {
+        -String cliente
+        -Date fecha
+        -List~DetalleVenta~ detalles
+        +calcularTotal()
+    }
+
+    class DetalleVenta {
+        -int cantidad
+        -double precioUnitario
+        +calcularSubtotal()
+    }
+
+    class Producto {
+        -String nombre
+        -double precio
+        -int stock
+    }
+
+    Venta "1" *-- "*" DetalleVenta
+    DetalleVenta "*" --&gt; "1" Producto</code></pre>
+<p>Durante las primeras sesiones, el modelado debe comenzar con clases simples y cercanas, por ejemplo <code>Producto</code> con <code>Categoria</code>, o bien <code>Cliente</code>, <code>Proveedor</code> y <code>Usuario</code> como entidades independientes. La generalización con <code>Persona</code> y sus clases derivadas se introduce recién en la sesión de herencia.</p>
+<h2 id="10-estructura-base-de-carpetas">10. Estructura base de carpetas<a class="headerlink" href="#10-estructura-base-de-carpetas" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>comarket-poo/
+├── pom.xml
+├── data/
+│   └── comarket.db
+└── src/
+    └── main/
+        ├── java/
+        │   └── app/
+        │       ├── model/
+        │       ├── controller/
+        │       ├── dao/
+        │       ├── service/
+        │       └── util/
+        └── resources/
+            ├── view/
+            ├── css/
+            └── img/
+</code></pre></div>
+<h2 id="11-resultado-esperado-del-curso">11. Resultado esperado del curso<a class="headerlink" href="#11-resultado-esperado-del-curso" title="Permanent link">&para;</a></h2>
+<p>Al cierre del semestre, el estudiante debe contar con un proyecto ejecutable en IntelliJ IDEA, con modelo de dominio coherente, operaciones CRUD, interfaz gráfica funcional, conexión a base de datos relacional y documentación suficiente para presentar y sustentar <strong>CoMarket</strong>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Angel Sullon @asullom - UPeU 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "toc.follow", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="../javascripts/mermaid.js"></script>
+      
+    
+  </body>
+</html>
