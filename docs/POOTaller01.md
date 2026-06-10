@@ -1,24 +1,44 @@
 # Crear proyecto JavaFX + Maven + SQLite en IntelliJ IDEA
 
-## 1. Crear proyecto Maven
+## 1. Crear proyecto JavaFX con Maven
 
 Abrir IntelliJ IDEA:
 
 ```text
 New Project
--> Maven
--> Java 17 o Java 21
--> Create from archetype (desmarcado)
+-> JavaFX
 ```
 
 Configurar:
 
 ```text
-GroupId: pe.upeu
-ArtifactId: comarket-poo
+Name: comarket
+Location: C:\262\262poo
+Language: Java
+Build system: Maven
+Group: com.upeu
+Artifact: comarket
+JDK: temurin-17
 ```
 
-Finalizar el proyecto.
+Presionar:
+
+```text
+Next
+```
+
+En la ventana de librerias adicionales:
+
+```text
+Additional libraries:
+-> No seleccionar ninguna libreria
+```
+
+Finalizar el proyecto:
+
+```text
+Create
+```
 
 ---
 
