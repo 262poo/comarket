@@ -1021,10 +1021,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-crear-proyecto-maven" class="md-nav__link">
+  <a href="#1-crear-proyecto-javafx-con-maven" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Crear proyecto Maven
+        1. Crear proyecto JavaFX con Maven
       
     </span>
   </a>
@@ -1184,10 +1184,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-crear-proyecto-maven" class="md-nav__link">
+  <a href="#1-crear-proyecto-javafx-con-maven" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Crear proyecto Maven
+        1. Crear proyecto JavaFX con Maven
       
     </span>
   </a>
@@ -1322,18 +1322,30 @@
 
 
 <h1 id="crear-proyecto-javafx-maven-sqlite-en-intellij-idea">Crear proyecto JavaFX + Maven + SQLite en IntelliJ IDEA<a class="headerlink" href="#crear-proyecto-javafx-maven-sqlite-en-intellij-idea" title="Permanent link">&para;</a></h1>
-<h2 id="1-crear-proyecto-maven">1. Crear proyecto Maven<a class="headerlink" href="#1-crear-proyecto-maven" title="Permanent link">&para;</a></h2>
+<h2 id="1-crear-proyecto-javafx-con-maven">1. Crear proyecto JavaFX con Maven<a class="headerlink" href="#1-crear-proyecto-javafx-con-maven" title="Permanent link">&para;</a></h2>
 <p>Abrir IntelliJ IDEA:</p>
 <div class="highlight"><pre><span></span><code>New Project
--&gt; Maven
--&gt; Java 17 o Java 21
--&gt; Create from archetype (desmarcado)
+-&gt; JavaFX
 </code></pre></div>
 <p>Configurar:</p>
-<div class="highlight"><pre><span></span><code>GroupId: pe.upeu
-ArtifactId: comarket-poo
+<div class="highlight"><pre><span></span><code>Name: comarket
+Location: C:\262\262poo
+Language: Java
+Build system: Maven
+Group: com.upeu
+Artifact: comarket
+JDK: temurin-17
 </code></pre></div>
-<p>Finalizar el proyecto.</p>
+<p>Presionar:</p>
+<div class="highlight"><pre><span></span><code>Next
+</code></pre></div>
+<p>En la ventana de librerias adicionales:</p>
+<div class="highlight"><pre><span></span><code>Additional libraries:
+-&gt; No seleccionar ninguna libreria
+</code></pre></div>
+<p>Finalizar el proyecto:</p>
+<div class="highlight"><pre><span></span><code>Create
+</code></pre></div>
 <hr />
 <h2 id="2-estructura-inicial-del-proyecto">2. Estructura inicial del proyecto<a class="headerlink" href="#2-estructura-inicial-del-proyecto" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>comarket-poo/
