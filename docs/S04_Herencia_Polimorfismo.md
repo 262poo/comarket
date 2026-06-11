@@ -1,4 +1,4 @@
-# S4 - Herencia, reutilización y polimorfismo
+# S4 - Herencia y polimorfismo
 
 ## 1. Introducción
 
@@ -6,30 +6,30 @@ Tiempo: 20 min.
 
 ### 1.1 Propósito
 
-Aplicar herencia y polimorfismo en el modelo de dominio cuando el caso lo justifique, reforzando la separación de responsabilidades.
+Desarrollar dos mecanismos distintos de POO: herencia con entidades del dominio e interfaces con `implements` para aplicar polimorfismo.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante crea jerarquías simples, usa sobrescritura de métodos y evita cargar toda la lógica en `Main`.
+El estudiante crea jerarquías simples con `extends`, define una interface como contrato de operaciones y crea una implementación con `implements`.
 
 ### 1.3 Producto de sesión
 
-Jerarquía aplicada al dominio, probada desde un gestor y desde `Main`.
+Entidades con herencia y un primer contrato polimórfico con interface e implementación, probados desde `Main`.
 
 ### 1.4 Motivación de la sesión
 
-Cuando varias clases comparten datos o comportamiento, conviene reutilizar código. Cuando varias clases deben responder a una misma operación, conviene usar polimorfismo.
+Cuando varias entidades tienen una relación es-un, puede tener sentido usar herencia. Cuando queremos programar contra un contrato y permitir distintas implementaciones, usamos polimorfismo con interface e `implements`.
 
 Pregunta guía:
 
 ```text
-¿Cuándo conviene usar extends y cuándo es mejor mantener responsabilidades separadas?
+¿Cuándo usamos extends en entidades y cuándo usamos implements para trabajar con un contrato?
 ```
 
 ### 1.5 Ubicación en el curso
 
 - Unidad: U1.
-- Avance de sesión: el gestor trabaja con entidades relacionadas por herencia sin absorber responsabilidades del dominio.
+- Avance de sesión: las entidades incorporan herencia y el gestor/servicio se prepara para usar contratos con implementaciones.
 
 ## 2. Explica
 
@@ -37,62 +37,79 @@ Tiempo: 25 min.
 
 ### 2.1 Conceptos clave
 
+- Herencia en entidades.
 - Relación es-un.
-- Relación tiene-un.
-- Clase base.
-- Subclase.
+- Clase base y subclases.
 - `extends`.
-- Sobrescritura de métodos.
-- Polimorfismo.
+- Sobrescritura de métodos en entidades.
+- Polimorfismo con interface.
+- `implements`.
+- Contrato e implementación.
 - Separación de responsabilidades.
 - Principio de responsabilidad única como idea base de SOLID.
 
 Regla metodológica de la sesión:
 
 ```text
-La herencia se usa en entidades cuando existe una relación es-un.
-El gestor usa las entidades, pero no debe absorber su comportamiento propio.
+Tema 1: Herencia se trabaja en entidades cuando existe una relación es-un.
+Tema 2: Polimorfismo se trabaja con interface e implements para programar contra un contrato.
+Las entidades no implementan contratos de servicio; representan el dominio.
 ```
 
 ### 2.2 Arquitectura de la sesión
 
 ```mermaid
 flowchart TB
-    Gestor["Gestor"]
-    Base["Clase base"]
-    SubA["Subclase A"]
-    SubB["Subclase B"]
-    Lista[("List<Base>")]
+    subgraph Entidades["Entidades"]
+        direction TB
+        Base["Clase base"]
+        SubA["Subclase A<br/>extends"]
+        SubB["Subclase B<br/>extends"]
+    end
 
-    Gestor --> Lista
-    Lista --> Base
+    subgraph Polimorfismo["Polimorfismo con implements"]
+        direction TB
+        Contrato["Interface<br/>contrato de operaciones"]
+        Implementacion["Implementación<br/>implements"]
+    end
+
+    Main["Main / pruebas"]
+
     SubA --> Base
     SubB --> Base
+    Contrato ~~~ Implementacion
+    Implementacion -. implements .-> Contrato
+    Main --> Base
+    Main --> Contrato
 ```
 
 ## 3. Aplica: actividad práctica guiada
 
 Tiempo: 2h.
 
-1. Identificar clases con atributos o comportamiento común.
-2. Crear una clase base.
-3. Crear dos clases derivadas.
-4. Sobrescribir un método relevante.
-5. Usar una lista o gestor con referencias polimórficas.
-6. Probar el comportamiento desde `Main`.
-7. Verificar que la herencia no se use solo para reutilizar código sin relación de dominio.
+1. Identificar entidades con relación es-un.
+2. Crear una clase base del dominio.
+3. Crear dos subclases con `extends`.
+4. Sobrescribir un método relevante en las subclases.
+5. Probar herencia desde `Main` usando una referencia de la clase base.
+6. Definir una interface como contrato de operaciones.
+7. Crear una clase que implemente el contrato con `implements`.
+8. Probar polimorfismo desde `Main` usando una referencia de la interface.
+9. Verificar que herencia e interface resuelven problemas distintos.
 
 ## 4. Crea: actividad autónoma
 
 Tiempo: 2h fuera del aula.
 
-Aplica herencia en otra parte del dominio, solo si el caso lo justifica.
+Aplica herencia en una parte del dominio y define una interface sencilla con una implementación.
 
 Entrega evidencia breve con:
 
 - Clases involucradas.
 - Justificación de `extends`.
-- Prueba polimórfica.
+- Interface creada.
+- Clase que usa `implements`.
+- Prueba polimórfica con referencia a la interface.
 - Salida de consola.
 
 ## 5. Cierre evaluativo
@@ -103,13 +120,14 @@ Tiempo: 20 min.
 
 - La herencia tiene sentido en el dominio.
 - Hay sobrescritura o comportamiento especializado.
-- El gestor puede trabajar con referencias generales.
+- El estudiante diferencia herencia de polimorfismo con interfaces.
+- Existe una implementación que usa `implements`.
 - El estudiante evita herencia artificial.
 
 ### 5.2 Preguntas de defensa
 
 1. ¿Qué clases participan en la jerarquía?
-2. ¿Qué comportamiento se reutiliza?
-3. ¿Dónde se evidencia el polimorfismo?
-4. ¿Por qué no bastaba una relación tiene-un?
-5. ¿Qué responsabilidad queda en la entidad y qué responsabilidad queda en el gestor?
+2. ¿Por qué esa relación sí justifica `extends`?
+3. ¿Qué declara la interface?
+4. ¿Qué clase usa `implements`?
+5. ¿Dónde se evidencia el polimorfismo?

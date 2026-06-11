@@ -6,7 +6,7 @@ Tiempo: 20 min.
 
 ### 1.1 Propósito
 
-Formalizar el flujo `Main -> Gestor -> Entidades -> ArrayList` para implementar operaciones CRUD en memoria y preparar la entrega con Maven y GraalVM.
+Formalizar el flujo `Main -> Interface -> Implementación en memoria -> Entidades -> ArrayList` para implementar operaciones CRUD en memoria y preparar la entrega con Maven y GraalVM.
 
 ### 1.2 Resultado de aprendizaje
 
@@ -42,8 +42,9 @@ Tiempo: 25 min.
 - Ordenamiento básico.
 - Separación de responsabilidades.
 - Gestor o servicio en memoria.
+- Reutilización de interface e `implements` vistos en S4.
 - Interface como contrato de operaciones CRUD.
-- Implementación del contrato con `implements`.
+- Implementación en memoria del contrato.
 - Validaciones y excepciones básicas del flujo.
 - Maven para organizar compilación.
 - GraalVM para ejecutable nativo.
@@ -66,14 +67,13 @@ flowchart TB
     Gestor["Implementación en memoria<br/>implements"]
     Entidades["Entidades"]
     Lista[("ArrayList")]
-    Build["Maven + GraalVM<br/>entrega"]
 
     Main --> Interface
+    Interface ~~~ Gestor
     Gestor -. implements .-> Interface
     Interface -.-> Entidades
     Gestor -.-> Entidades
     Gestor --> Lista
-    Gestor --> Build
 ```
 
 ## 3. Aplica: actividad práctica guiada
@@ -81,7 +81,7 @@ flowchart TB
 Tiempo: 2h.
 
 1. Crear un menú simple en consola.
-2. Definir una interface con operaciones CRUD.
+2. Definir o reutilizar una interface con operaciones CRUD.
 3. Crear una implementación en memoria con `implements`.
 4. Implementar registrar.
 5. Implementar listar.
@@ -90,8 +90,8 @@ Tiempo: 2h.
 8. Implementar eliminar.
 9. Agregar ordenamiento básico.
 10. Manejar validaciones y excepciones básicas del flujo.
-11. Organizar el proyecto con Maven.
-12. Preparar la compilación nativa con GraalVM.
+11. Organizar el proyecto con Maven como preparación de entrega.
+12. Preparar la compilación nativa con GraalVM fuera del flujo CRUD.
 
 ## 4. Crea: actividad autónoma
 
@@ -101,7 +101,7 @@ Completa el CRUD de una entidad del dominio y prepara evidencia de ejecución.
 
 Entrega evidencia breve con:
 
-- Flujo `Main -> Interface -> Implementación en memoria -> ArrayList`.
+- Flujo `Main -> Interface -> Implementación en memoria -> Entidades -> ArrayList`.
 - Capturas o salidas de cada operación CRUD.
 - Evidencia de compilación o preparación con Maven/GraalVM.
 
@@ -123,4 +123,4 @@ Tiempo: 20 min.
 2. ¿Qué responsabilidad tiene la interface?
 3. ¿Qué responsabilidad tiene la implementación en memoria?
 4. ¿Dónde se almacenan los datos?
-5. ¿Qué cambia al pasar de Java simple a Maven?
+5. ¿Por qué Maven y GraalVM son parte de la entrega y no del flujo CRUD?

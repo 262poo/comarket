@@ -31,8 +31,8 @@ Resultado esperado U1: el estudiante modela y construye objetos de software apli
 | S1 | **Clases, objetos y responsabilidad de clase:**<br>Proyecto Java simple en VS Code, diferencia entre clase y objeto, atributos, métodos, estado, primeras entidades del dominio | Clases base del dominio con atributos, métodos y objetos instanciados desde `Main` |
 | S2 | **Encapsulamiento, constructores y control del estado:**<br>Modificadores de acceso, constructores, getters, setters, validaciones básicas, invariantes simples, métodos de comportamiento y pruebas desde `Main` | Clases encapsuladas con constructores, validaciones y comportamiento propio |
 | S3 | **Modelado del dominio, asociaciones y colecciones:**<br>Asociación, agregación, composición, colecciones de objetos, navegación entre objetos, relaciones uno a muchos, clase gestora inicial | Modelo inicial con entidades relacionadas y gestor básico sobre una colección |
-| S4 | **Herencia, reutilización y polimorfismo:**<br>Relación es-un, relación tiene-un, clase base, subclases, sobrescritura de métodos, polimorfismo aplicado desde gestores y separación de responsabilidades | Herencia en entidades y gestor separado sin cargar la lógica en `Main` |
-| S5 | **CRUD en memoria con ArrayList:**<br>Alta, consulta, actualización, eliminación, búsqueda, ordenamiento, flujo Main-Gestor-Entidades-ArrayList, introducción a Maven y compilación nativa con GraalVM | CRUD en memoria organizado con gestor, entidades y ArrayList, preparado para ejecutable nativo |
+| S4 | **Herencia y polimorfismo:**<br>Herencia con entidades usando `extends`, clase base, subclases, sobrescritura de métodos, polimorfismo con interface e `implements`, separación de responsabilidades | Entidades con herencia y primer contrato polimórfico implementado |
+| S5 | **CRUD en memoria con ArrayList:**<br>Alta, consulta, actualización, eliminación, búsqueda, ordenamiento, flujo Main-Interface-Implementación en memoria-Entidades-ArrayList, introducción a Maven y compilación nativa con GraalVM para la entrega | CRUD en memoria organizado con contrato, implementación en memoria, entidades y ArrayList, preparado para ejecutable nativo |
 | S6 | **Evaluación de la unidad 1:**<br>Clases del dominio, encapsulamiento, constructores, relaciones entre objetos, CRUD en memoria, búsquedas, validaciones básicas y ejecución del producto | Producto U1 validado con modelo de dominio, CRUD en memoria y ejecución demostrable |
 
 ### U2: Aplicación de escritorio con persistencia de datos
@@ -113,8 +113,8 @@ Flujo de trabajo U1:
 2. Implementa entidades iniciales del dominio y las prueba desde `Main`.
 3. Desde S2 mueve comportamiento y validaciones básicas hacia las clases.
 4. Desde S3 introduce una clase gestora para administrar colecciones y reducir lógica en `Main`.
-5. En S4 usa herencia en entidades cuando el dominio lo justifica y refuerza la separación de responsabilidades.
-6. En S5 formaliza el flujo Main-Gestor-Entidades-ArrayList y prepara la compilación nativa con Maven/GraalVM.
+5. En S4 usa herencia en entidades cuando el dominio lo justifica y aplica polimorfismo con interface e `implements`.
+6. En S5 formaliza el flujo Main-Interface-Implementación en memoria-Entidades-ArrayList y prepara la compilación nativa con Maven/GraalVM.
 7. En S6 presenta un producto de consola ejecutable, con modelo de dominio y CRUD en memoria.
 
 ## Arquitectura CoMarket POO: U2 y U3
