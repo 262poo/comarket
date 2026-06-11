@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#s4-herencia-reutilizacion-y-polimorfismo" class="md-skip">
+        <a href="#s4-herencia-y-polimorfismo" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -1398,74 +1398,91 @@
 
 
 
-<h1 id="s4-herencia-reutilizacion-y-polimorfismo">S4 - Herencia, reutilización y polimorfismo<a class="headerlink" href="#s4-herencia-reutilizacion-y-polimorfismo" title="Permanent link">&para;</a></h1>
+<h1 id="s4-herencia-y-polimorfismo">S4 - Herencia y polimorfismo<a class="headerlink" href="#s4-herencia-y-polimorfismo" title="Permanent link">&para;</a></h1>
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
 <h3 id="11-proposito">1.1 Propósito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
-<p>Aplicar herencia y polimorfismo en el modelo de dominio cuando el caso lo justifique, reforzando la separación de responsabilidades.</p>
+<p>Desarrollar dos mecanismos distintos de POO: herencia con entidades del dominio e interfaces con <code>implements</code> para aplicar polimorfismo.</p>
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
-<p>El estudiante crea jerarquías simples, usa sobrescritura de métodos y evita cargar toda la lógica en <code>Main</code>.</p>
+<p>El estudiante crea jerarquías simples con <code>extends</code>, define una interface como contrato de operaciones y crea una implementación con <code>implements</code>.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>Jerarquía aplicada al dominio, probada desde un gestor y desde <code>Main</code>.</p>
+<p>Entidades con herencia y un primer contrato polimórfico con interface e implementación, probados desde <code>Main</code>.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
-<p>Cuando varias clases comparten datos o comportamiento, conviene reutilizar código. Cuando varias clases deben responder a una misma operación, conviene usar polimorfismo.</p>
+<p>Cuando varias entidades tienen una relación es-un, puede tener sentido usar herencia. Cuando queremos programar contra un contrato y permitir distintas implementaciones, usamos polimorfismo con interface e <code>implements</code>.</p>
 <p>Pregunta guía:</p>
-<div class="highlight"><pre><span></span><code>¿Cuándo conviene usar extends y cuándo es mejor mantener responsabilidades separadas?
+<div class="highlight"><pre><span></span><code>¿Cuándo usamos extends en entidades y cuándo usamos implements para trabajar con un contrato?
 </code></pre></div>
 <h3 id="15-ubicacion-en-el-curso">1.5 Ubicación en el curso<a class="headerlink" href="#15-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Unidad: U1.</li>
-<li>Avance de sesión: el gestor trabaja con entidades relacionadas por herencia sin absorber responsabilidades del dominio.</li>
+<li>Avance de sesión: las entidades incorporan herencia y el gestor/servicio se prepara para usar contratos con implementaciones.</li>
 </ul>
 <h2 id="2-explica">2. Explica<a class="headerlink" href="#2-explica" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 25 min.</p>
 <h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Herencia en entidades.</li>
 <li>Relación es-un.</li>
-<li>Relación tiene-un.</li>
-<li>Clase base.</li>
-<li>Subclase.</li>
+<li>Clase base y subclases.</li>
 <li><code>extends</code>.</li>
-<li>Sobrescritura de métodos.</li>
-<li>Polimorfismo.</li>
+<li>Sobrescritura de métodos en entidades.</li>
+<li>Polimorfismo con interface.</li>
+<li><code>implements</code>.</li>
+<li>Contrato e implementación.</li>
 <li>Separación de responsabilidades.</li>
 <li>Principio de responsabilidad única como idea base de SOLID.</li>
 </ul>
 <p>Regla metodológica de la sesión:</p>
-<div class="highlight"><pre><span></span><code>La herencia se usa en entidades cuando existe una relación es-un.
-El gestor usa las entidades, pero no debe absorber su comportamiento propio.
+<div class="highlight"><pre><span></span><code>Tema 1: Herencia se trabaja en entidades cuando existe una relación es-un.
+Tema 2: Polimorfismo se trabaja con interface e implements para programar contra un contrato.
+Las entidades no implementan contratos de servicio; representan el dominio.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart TB
-    Gestor["Gestor"]
-    Base["Clase base"]
-    SubA["Subclase A"]
-    SubB["Subclase B"]
-    Lista[("List&lt;Base&gt;")]
+    subgraph Entidades["Entidades"]
+        direction TB
+        Base["Clase base"]
+        SubA["Subclase A&lt;br/&gt;extends"]
+        SubB["Subclase B&lt;br/&gt;extends"]
+    end
 
-    Gestor --&gt; Lista
-    Lista --&gt; Base
+    subgraph Polimorfismo["Polimorfismo con implements"]
+        direction TB
+        Contrato["Interface&lt;br/&gt;contrato de operaciones"]
+        Implementacion["Implementación&lt;br/&gt;implements"]
+    end
+
+    Main["Main / pruebas"]
+
     SubA --&gt; Base
-    SubB --&gt; Base</code></pre>
+    SubB --&gt; Base
+    Contrato ~~~ Implementacion
+    Implementacion -. implements .-&gt; Contrato
+    Main --&gt; Base
+    Main --&gt; Contrato</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <ol>
-<li>Identificar clases con atributos o comportamiento común.</li>
-<li>Crear una clase base.</li>
-<li>Crear dos clases derivadas.</li>
-<li>Sobrescribir un método relevante.</li>
-<li>Usar una lista o gestor con referencias polimórficas.</li>
-<li>Probar el comportamiento desde <code>Main</code>.</li>
-<li>Verificar que la herencia no se use solo para reutilizar código sin relación de dominio.</li>
+<li>Identificar entidades con relación es-un.</li>
+<li>Crear una clase base del dominio.</li>
+<li>Crear dos subclases con <code>extends</code>.</li>
+<li>Sobrescribir un método relevante en las subclases.</li>
+<li>Probar herencia desde <code>Main</code> usando una referencia de la clase base.</li>
+<li>Definir una interface como contrato de operaciones.</li>
+<li>Crear una clase que implemente el contrato con <code>implements</code>.</li>
+<li>Probar polimorfismo desde <code>Main</code> usando una referencia de la interface.</li>
+<li>Verificar que herencia e interface resuelven problemas distintos.</li>
 </ol>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h fuera del aula.</p>
-<p>Aplica herencia en otra parte del dominio, solo si el caso lo justifica.</p>
+<p>Aplica herencia en una parte del dominio y define una interface sencilla con una implementación.</p>
 <p>Entrega evidencia breve con:</p>
 <ul>
 <li>Clases involucradas.</li>
 <li>Justificación de <code>extends</code>.</li>
-<li>Prueba polimórfica.</li>
+<li>Interface creada.</li>
+<li>Clase que usa <code>implements</code>.</li>
+<li>Prueba polimórfica con referencia a la interface.</li>
 <li>Salida de consola.</li>
 </ul>
 <h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
@@ -1474,16 +1491,17 @@ El gestor usa las entidades, pero no debe absorber su comportamiento propio.
 <ul>
 <li>La herencia tiene sentido en el dominio.</li>
 <li>Hay sobrescritura o comportamiento especializado.</li>
-<li>El gestor puede trabajar con referencias generales.</li>
+<li>El estudiante diferencia herencia de polimorfismo con interfaces.</li>
+<li>Existe una implementación que usa <code>implements</code>.</li>
 <li>El estudiante evita herencia artificial.</li>
 </ul>
 <h3 id="52-preguntas-de-defensa">5.2 Preguntas de defensa<a class="headerlink" href="#52-preguntas-de-defensa" title="Permanent link">&para;</a></h3>
 <ol>
 <li>¿Qué clases participan en la jerarquía?</li>
-<li>¿Qué comportamiento se reutiliza?</li>
+<li>¿Por qué esa relación sí justifica <code>extends</code>?</li>
+<li>¿Qué declara la interface?</li>
+<li>¿Qué clase usa <code>implements</code>?</li>
 <li>¿Dónde se evidencia el polimorfismo?</li>
-<li>¿Por qué no bastaba una relación tiene-un?</li>
-<li>¿Qué responsabilidad queda en la entidad y qué responsabilidad queda en el gestor?</li>
 </ol>
 
 
