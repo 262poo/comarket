@@ -1422,7 +1422,7 @@
 <h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Flujo Vista-Controlador-Servicio-Entidades-ArrayList.</li>
-<li>Interface de servicio como contrato CRUD.</li>
+<li>Interface de servicio como contrato de operaciones CRUD.</li>
 <li>Implementación en memoria del contrato.</li>
 <li>Lectura de datos desde formularios.</li>
 <li>Delegación de operaciones al servicio CRUD.</li>
@@ -1434,7 +1434,7 @@
 <pre class="mermaid"><code>flowchart TB
     Vista["Formulario + TableView"]
     Controlador["Controlador"]
-    Contrato["Interface Servicio&lt;br/&gt;contrato CRUD"]
+    Contrato["Interface&lt;br/&gt;contrato de operaciones CRUD"]
     Servicio["Implementación en memoria&lt;br/&gt;implements"]
     Entidades["Entidades"]
     Memoria[("ArrayList")]

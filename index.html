@@ -1337,7 +1337,7 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
 </tr>
 <tr>
 <td>S8</td>
-<td><strong>CRUD desde GUI en memoria:</strong><br>Flujo Vista-Controlador-Servicio-Entidades-ArrayList, reutilización del contrato CRUD, carga de datos en tablas, registro, consulta, edición y eliminación</td>
+<td><strong>CRUD desde GUI en memoria:</strong><br>Flujo Vista-Controlador-Servicio-Entidades-ArrayList, reutilización del contrato de operaciones CRUD, carga de datos en tablas, registro, consulta, edición y eliminación</td>
 <td>Flujo completo de operación desde formularios y tablas JavaFX usando memoria</td>
 </tr>
 <tr>
@@ -1397,14 +1397,14 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
 </tbody>
 </table>
 <h2 id="arquitectura-u1-comarket-en-memoria">Arquitectura U1: CoMarket en memoria<a class="headerlink" href="#arquitectura-u1-comarket-en-memoria" title="Permanent link">&para;</a></h2>
-<p>La arquitectura de la Unidad 1 se concentra en Programación Orientada a Objetos sin interfaz gráfica. El estudiante trabaja con una clase <code>Main</code> para probar desde consola, entidades del dominio y colecciones en memoria. Al cierre de la unidad, el proyecto se organiza con Maven y se prepara un ejecutable nativo con GraalVM.</p>
+<p>La arquitectura de la Unidad 1 se concentra en Programación Orientada a Objetos sin interfaz gráfica. El estudiante trabaja con una clase <code>Main</code> para probar desde consola, entidades del dominio, un contrato de servicio y una implementación en memoria con colecciones. Al cierre de la unidad, el proyecto se organiza con Maven y se prepara un ejecutable nativo con GraalVM.</p>
 <pre class="mermaid"><code>flowchart TB
     Main["Main / Consola"]
 
     subgraph ServiceU1["Gestor / Servicio"]
         direction TB
         InterfaceU1["Interface&lt;br/&gt;contrato de operaciones CRUD"]
-        ImplementacionU1["Implementación&lt;br/&gt;implements"]
+        ImplementacionU1["Implementación en memoria&lt;br/&gt;implements"]
         ValidacionesU1["Validaciones/Excepciones básicas"]
     end
 
@@ -1423,7 +1423,7 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
     ImplementacionU1 -.-&gt; EntitiesU1
     HerenciaU1 --&gt; ClasesU1
     ImplementacionU1 --&gt; MemoriaU1</code></pre>
-<p>Nota metodológica: en U1 se trabaja una base elemental de separación de responsabilidades, alineada al principio de responsabilidad única de SOLID. <code>Main</code> coordina la ejecución, las entidades representan datos y comportamiento propio del dominio, y el gestor/servicio concentra operaciones CRUD y validaciones del flujo. No se introducen interfaces en entidades porque pueden complicar el modelo sin aportar claridad en esta etapa.</p>
+<p>Nota metodológica: en U1 se trabaja una base elemental de separación de responsabilidades, alineada al principio de responsabilidad única de SOLID. <code>Main</code> coordina la ejecución, las entidades representan datos y comportamiento propio del dominio, la interface declara el contrato de operaciones CRUD y la implementación en memoria ejecuta las operaciones sobre <code>ArrayList</code>. No se introducen interfaces en entidades porque pueden complicar el modelo sin aportar claridad en esta etapa.</p>
 <p>Stack tecnológico U1:</p>
 <ol>
 <li>Java como lenguaje orientado a objetos.</li>
@@ -1445,7 +1445,7 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
 <li>En S6 presenta un producto de consola ejecutable, con modelo de dominio y CRUD en memoria.</li>
 </ol>
 <h2 id="arquitectura-comarket-poo-u2-y-u3">Arquitectura CoMarket POO: U2 y U3<a class="headerlink" href="#arquitectura-comarket-poo-u2-y-u3" title="Permanent link">&para;</a></h2>
-<p>La arquitectura final de CoMarket organiza la aplicación de escritorio en capas simples. La Vista contiene FXML, formularios y tablas; el Controlador atiende eventos de usuario; el Servicio coordina operaciones, validaciones y reglas del flujo; las Entidades representan los objetos principales del sistema; y la Persistencia gestiona el acceso a la base de datos mediante DAO y el conector JDBC.</p>
+<p>La arquitectura final de CoMarket organiza la aplicación de escritorio en capas simples. La Vista contiene FXML, formularios y tablas; el Controlador atiende eventos de usuario; el Servicio conserva el contrato de operaciones CRUD trabajado desde U1, pero en U2-U3 se implementa contra base de datos; las Entidades representan los objetos principales del sistema; y la Persistencia gestiona el acceso mediante DAO y el conector JDBC.</p>
 <pre class="mermaid"><code>flowchart TB
     subgraph View["Vista"]
         FXML["Vistas FXML"]
@@ -1458,9 +1458,9 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
     end
 
     subgraph Service["Servicio"]
-        ServiceInterface["Interface&lt;br/&gt;contrato CRUD"]
-        ServiceMemoryImpl["Implementación en memoria&lt;br/&gt;implements"]
-        ServiceDbImpl["Implementación persistente&lt;br/&gt;implements"]
+        direction TB
+        ServiceInterface["Interface&lt;br/&gt;contrato de operaciones CRUD"]
+        ServiceDbImpl["Implementación con base de datos&lt;br/&gt;implements"]
         ServiceValidation["Validaciones/Excepciones"]
     end
 
@@ -1472,25 +1472,20 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
         DAO["DAO"]
     end
 
-    MemoryStore[("ArrayList / memoria")]
     SQLite[("SQLite / comarket.db")]
 
     FXML --&gt; Controllers
     Formularios --&gt; Controllers
     Eventos --&gt; Controllers
     Controllers --&gt; ServiceInterface
-    ServiceMemoryImpl -. implements .-&gt; ServiceInterface
+    ServiceInterface ~~~ ServiceDbImpl
     ServiceDbImpl -. implements .-&gt; ServiceInterface
     ServiceInterface -.-&gt; Entities
-    ServiceMemoryImpl -.-&gt; Entities
     ServiceDbImpl -.-&gt; Entities
-    ServiceMemoryImpl --&gt; MemoryStore
     ServiceDbImpl --&gt; DAO
-    ServiceMemoryImpl -.-&gt; ServiceValidation
-    ServiceDbImpl -.-&gt; ServiceValidation
     DAO --&gt; Entities
     DAO --&gt;|"JDBC"| SQLite</code></pre>
-<p>Convención del diagrama: las flechas muestran el flujo principal entre capas. El Controlador recibe acciones de la Vista y delega operaciones al contrato del Servicio. En S8 se usa una implementación en memoria con <code>ArrayList</code>; desde S10 se agrega una implementación persistente que usa DAO y SQLite. Las Entidades se mantienen como las mismas clases del dominio; no se cambian por pasar de memoria a base de datos. El DAO trabaja con entidades para convertir datos relacionales en objetos y objetos en operaciones de persistencia; la comunicación con SQLite se realiza mediante JDBC.</p>
+<p>Convención del diagrama: las flechas muestran el flujo principal entre capas. El Controlador recibe acciones de la Vista y delega operaciones al contrato del Servicio. En U1 ese contrato se implementa en memoria con <code>ArrayList</code>; en U2-U3 se implementa contra base de datos mediante DAO y SQLite. Las Entidades se mantienen como las mismas clases del dominio; no se cambian por pasar de memoria a base de datos. El DAO trabaja con entidades para convertir datos relacionales en objetos y objetos en operaciones de persistencia; la comunicación con SQLite se realiza mediante JDBC.</p>
 <p>Stack tecnológico U2:</p>
 <ol>
 <li>Java como lenguaje orientado a objetos.</li>

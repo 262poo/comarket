@@ -1435,14 +1435,14 @@
 <p>Regla metodológica de la sesión:</p>
 <div class="highlight"><pre><span></span><code>Main muestra el menú.
 La interface declara las operaciones CRUD.
-La implementación ejecuta las operaciones sobre ArrayList.
+La implementación en memoria ejecuta las operaciones sobre ArrayList.
 Las entidades no almacenan; representan datos y comportamiento del dominio.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart TB
     Main["Main / menú consola"]
-    Interface["Interface&lt;br/&gt;contrato CRUD"]
-    Gestor["Implementación&lt;br/&gt;implements"]
+    Interface["Interface&lt;br/&gt;contrato de operaciones CRUD"]
+    Gestor["Implementación en memoria&lt;br/&gt;implements"]
     Entidades["Entidades"]
     Lista[("ArrayList")]
     Build["Maven + GraalVM&lt;br/&gt;entrega"]
@@ -1458,7 +1458,7 @@ Las entidades no almacenan; representan datos y comportamiento del dominio.
 <ol>
 <li>Crear un menú simple en consola.</li>
 <li>Definir una interface con operaciones CRUD.</li>
-<li>Crear una implementación con <code>implements</code>.</li>
+<li>Crear una implementación en memoria con <code>implements</code>.</li>
 <li>Implementar registrar.</li>
 <li>Implementar listar.</li>
 <li>Implementar buscar.</li>
@@ -1474,7 +1474,7 @@ Las entidades no almacenan; representan datos y comportamiento del dominio.
 <p>Completa el CRUD de una entidad del dominio y prepara evidencia de ejecución.</p>
 <p>Entrega evidencia breve con:</p>
 <ul>
-<li>Flujo <code>Main -&gt; Interface -&gt; Implementación -&gt; ArrayList</code>.</li>
+<li>Flujo <code>Main -&gt; Interface -&gt; Implementación en memoria -&gt; ArrayList</code>.</li>
 <li>Capturas o salidas de cada operación CRUD.</li>
 <li>Evidencia de compilación o preparación con Maven/GraalVM.</li>
 </ul>
@@ -1483,7 +1483,7 @@ Las entidades no almacenan; representan datos y comportamiento del dominio.
 <h3 id="51-resultados-esperados">5.1 Resultados esperados<a class="headerlink" href="#51-resultados-esperados" title="Permanent link">&para;</a></h3>
 <ul>
 <li>CRUD funcional en memoria.</li>
-<li>Interface e implementación separadas de <code>Main</code>.</li>
+<li>Interface e implementación en memoria separadas de <code>Main</code>.</li>
 <li>Entidades encapsuladas.</li>
 <li>Búsqueda y ordenamiento básicos.</li>
 <li>Proyecto preparado para entrega ejecutable.</li>
@@ -1492,7 +1492,7 @@ Las entidades no almacenan; representan datos y comportamiento del dominio.
 <ol>
 <li>¿Qué responsabilidad tiene <code>Main</code>?</li>
 <li>¿Qué responsabilidad tiene la interface?</li>
-<li>¿Qué responsabilidad tiene la implementación?</li>
+<li>¿Qué responsabilidad tiene la implementación en memoria?</li>
 <li>¿Dónde se almacenan los datos?</li>
 <li>¿Qué cambia al pasar de Java simple a Maven?</li>
 </ol>

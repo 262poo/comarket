@@ -1423,7 +1423,7 @@
 <ul>
 <li>Patrón DAO.</li>
 <li>Servicio como coordinador entre controlador y DAO.</li>
-<li>Implementación persistente del contrato CRUD.</li>
+<li>Implementación persistente del contrato de operaciones CRUD.</li>
 <li>Mapeo objeto-relacional básico.</li>
 <li><code>insert</code>, <code>select</code>, <code>update</code>, <code>delete</code>.</li>
 <li>Confirmación de eliminación.</li>
@@ -1434,7 +1434,7 @@
 <pre class="mermaid"><code>flowchart TB
     Vista["Vista JavaFX"]
     Controlador["Controlador"]
-    Contrato["Interface Servicio&lt;br/&gt;contrato CRUD"]
+    Contrato["Interface&lt;br/&gt;contrato de operaciones CRUD"]
     Servicio["Implementación persistente&lt;br/&gt;implements"]
     Entidades["Entidades"]
     DAO["DAO"]
