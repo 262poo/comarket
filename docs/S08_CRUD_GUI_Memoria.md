@@ -6,19 +6,19 @@ Tiempo: 20 min.
 
 ### 1.1 Propósito
 
-Implementar un CRUD desde JavaFX usando entidades y `ArrayList`, sin base de datos todavía.
+Implementar un CRUD desde JavaFX reutilizando el servicio en memoria construido en U1, sin base de datos todavía.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante conecta formularios y tablas con objetos del dominio, valida entradas básicas y actualiza datos en memoria desde la GUI.
+El estudiante conecta formularios y tablas con un controlador JavaFX, delega operaciones al contrato del servicio CRUD y usa una implementación en memoria basada en `ArrayList`.
 
 ### 1.3 Producto de sesión
 
-CRUD funcional desde formularios y `TableView`, usando entidades y almacenamiento en memoria.
+CRUD funcional desde formularios y `TableView`, usando controlador, servicio, entidades y almacenamiento en memoria.
 
 ### 1.4 Motivación de la sesión
 
-Antes de conectar SQLite, conviene comprobar que la interfaz gráfica puede registrar, mostrar, editar y eliminar objetos en memoria.
+Antes de conectar SQLite, conviene comprobar que la interfaz gráfica puede registrar, mostrar, editar y eliminar objetos usando el mismo servicio que antes se probaba desde consola.
 
 Pregunta guía:
 
@@ -37,9 +37,11 @@ Tiempo: 25 min.
 
 ### 2.1 Conceptos clave
 
-- Flujo Vista-Controlador-Entidades.
+- Flujo Vista-Controlador-Servicio-Entidades-ArrayList.
+- Interface de servicio como contrato CRUD.
+- Implementación en memoria del contrato.
 - Lectura de datos desde formularios.
-- Creación de objetos.
+- Delegación de operaciones al servicio CRUD.
 - Carga de datos en `TableView`.
 - Selección de filas.
 - Actualización y eliminación.
@@ -50,13 +52,19 @@ Tiempo: 25 min.
 flowchart TB
     Vista["Formulario + TableView"]
     Controlador["Controlador"]
+    Contrato["Interface Servicio<br/>contrato CRUD"]
+    Servicio["Implementación en memoria<br/>implements"]
     Entidades["Entidades"]
     Memoria[("ArrayList")]
 
     Vista --> Controlador
-    Controlador --> Entidades
-    Controlador --> Memoria
-    Memoria --> Vista
+    Controlador --> Contrato
+    Servicio -. implements .-> Contrato
+    Servicio -.-> Entidades
+    Servicio --> Memoria
+    Memoria --> Servicio
+    Servicio --> Controlador
+    Controlador --> Vista
 ```
 
 ## 3. Aplica: actividad práctica guiada
@@ -66,11 +74,12 @@ Tiempo: 2h.
 1. Crear campos para datos de producto u otra entidad.
 2. Leer datos desde el formulario.
 3. Validar campos obligatorios y valores numéricos.
-4. Crear objetos.
-5. Agregar objetos a un `ArrayList`.
-6. Mostrar datos en `TableView`.
-7. Editar el elemento seleccionado.
-8. Eliminar con confirmación.
+4. Crear objetos o leerlos desde el formulario.
+5. Delegar registro, consulta, actualización y eliminación al contrato del servicio.
+6. Mantener el `ArrayList` dentro de la implementación en memoria.
+7. Mostrar datos en `TableView`.
+8. Editar el elemento seleccionado.
+9. Eliminar con confirmación.
 
 ## 4. Crea: actividad autónoma
 
@@ -82,7 +91,8 @@ Entrega evidencia breve con:
 
 - Capturas de registro, edición y eliminación.
 - Código del controlador.
-- Explicación de cómo se actualiza la tabla.
+- Código o referencia de la interface del servicio y su implementación en memoria.
+- Explicación de cómo se actualiza la tabla sin duplicar el CRUD en el controlador.
 
 ## 5. Cierre evaluativo
 
@@ -91,14 +101,17 @@ Tiempo: 20 min.
 ### 5.1 Resultados esperados
 
 - El CRUD funciona desde la interfaz gráfica.
-- Los datos se almacenan en memoria.
+- El controlador delega operaciones al servicio.
+- Los datos se almacenan en memoria dentro de la implementación del servicio.
+- Las entidades son las mismas clases del dominio usadas desde U1.
 - La tabla refleja los cambios.
-- El controlador usa entidades del dominio.
+- El controlador no concentra toda la lógica CRUD.
 
 ### 5.2 Preguntas de defensa
 
 1. ¿Dónde se almacenan los datos en esta sesión?
-2. ¿Cómo se refresca la tabla?
-3. ¿Qué validaciones implementaste?
-4. ¿Qué cambiará cuando usemos DAO?
-
+2. ¿Qué responsabilidad tiene el controlador?
+3. ¿Qué responsabilidad tiene la interface del servicio?
+4. ¿Qué responsabilidad tiene la implementación en memoria?
+5. ¿Cómo se refresca la tabla?
+6. ¿Qué cambiará cuando usemos DAO?

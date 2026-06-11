@@ -10,7 +10,7 @@ Integrar los módulos construidos en U1 y U2 en una versión coherente del proye
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante consolida pantallas, controladores, entidades, DAO, base de datos, recursos y dependencias en una sola aplicación ejecutable.
+El estudiante consolida pantallas, controladores, servicios, entidades, DAO, base de datos, recursos y dependencias en una sola aplicación ejecutable.
 
 ### 1.3 Producto de sesión
 
@@ -51,13 +51,23 @@ Tiempo: 25 min.
 flowchart TB
     Vista["Vistas FXML"]
     Controladores["Controladores"]
+    subgraph Servicios["Servicios"]
+        Contrato["Interface<br/>contrato CRUD"]
+        Implementacion["Implementación persistente<br/>implements"]
+        Validaciones["Validaciones/Excepciones"]
+    end
+
     Entidades["Entidades"]
     DAO["DAO"]
     SQLite[("SQLite")]
 
     Vista --> Controladores
-    Controladores --> Entidades
-    Controladores --> DAO
+    Controladores --> Contrato
+    Implementacion -. implements .-> Contrato
+    Contrato -.-> Entidades
+    Implementacion -.-> Entidades
+    Implementacion -.-> Validaciones
+    Implementacion --> DAO
     DAO --> Entidades
     DAO --> SQLite
 ```
@@ -69,7 +79,7 @@ Tiempo: 2h.
 1. Revisar estructura de paquetes.
 2. Eliminar duplicidades.
 3. Integrar pantallas y controladores.
-4. Revisar entidades usadas por la GUI y el DAO.
+4. Revisar interface del servicio, implementación persistente, entidades usadas por la GUI y el DAO.
 5. Verificar conexión con SQLite.
 6. Ejecutar el flujo principal de punta a punta.
 7. Revisar configuración Maven y recursos.
@@ -106,4 +116,3 @@ Tiempo: 20 min.
 2. ¿Qué duplicidad o inconsistencia corregiste?
 3. ¿Cómo verificaste el flujo principal?
 4. ¿Qué falta estabilizar antes de sustentar?
-

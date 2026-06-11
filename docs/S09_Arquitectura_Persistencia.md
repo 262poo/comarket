@@ -10,11 +10,11 @@ Preparar CoMarket para reemplazar el almacenamiento en memoria por persistencia 
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante organiza el proyecto por capas simples, configura SQLite, comprende JDBC y prepara la estructura para implementar DAO.
+El estudiante organiza el proyecto por capas simples, configura SQLite, comprende JDBC y prepara la estructura para una implementación persistente del servicio y DAO.
 
 ### 1.3 Producto de sesión
 
-Proyecto JavaFX/Maven organizado con entidades, controladores, paquete de persistencia, conexión JDBC y base de datos SQLite.
+Proyecto JavaFX/Maven organizado con entidades, controladores, servicio, paquete de persistencia, conexión JDBC y base de datos SQLite.
 
 ### 1.4 Motivación de la sesión
 
@@ -40,6 +40,8 @@ Tiempo: 25 min.
 - Arquitectura por capas.
 - Entidades.
 - Controladores.
+- Servicio como contrato de operaciones.
+- Implementación persistente como extensión del servicio.
 - Persistencia.
 - JDBC como conector.
 - SQLite como base de datos local.
@@ -50,12 +52,22 @@ Tiempo: 25 min.
 ```mermaid
 flowchart TB
     Controlador["Controlador"]
-    Entidades["Entidades"]
-    Conexion["ConexionBD / JDBC"]
-    SQLite[("SQLite / comarket.db")]
+    subgraph Servicio["Servicio"]
+        Contrato["Interface<br/>contrato CRUD"]
+        Implementacion["Implementación persistente<br/>implements"]
+    end
 
-    Controlador --> Entidades
-    Controlador --> Conexion
+    Entidades["Entidades"]
+    subgraph Persistencia["Persistencia"]
+        Conexion["ConexionBD"]
+        SQLite[("SQLite / comarket.db")]
+    end
+
+    Controlador --> Contrato
+    Implementacion -. implements .-> Contrato
+    Contrato -.-> Entidades
+    Implementacion -.-> Entidades
+    Implementacion --> Conexion
     Conexion -->|"JDBC"| SQLite
 ```
 
@@ -70,6 +82,9 @@ Tiempo: 2h.
 5. Crear una tabla inicial.
 6. Implementar una clase de conexión.
 7. Probar conexión con una consulta simple.
+8. Identificar el contrato de servicio que seguirá usando el controlador.
+9. Preparar la implementación persistente que reemplazará a la implementación en memoria.
+10. Verificar que las entidades no cambien por usar base de datos.
 
 ## 4. Crea: actividad autónoma
 
@@ -82,6 +97,7 @@ Entrega evidencia breve con:
 - Estructura de paquetes.
 - Script o captura de tabla.
 - Prueba de conexión.
+- Bosquejo del servicio y su implementación persistente.
 - Explicación del rol de JDBC.
 
 ## 5. Cierre evaluativo
@@ -93,7 +109,9 @@ Tiempo: 20 min.
 - El proyecto mantiene una estructura por capas.
 - SQLite está disponible.
 - JDBC conecta con la base de datos.
+- El controlador conserva como entrada el contrato del servicio.
 - La aplicación está preparada para DAO.
+- Las entidades siguen siendo clases del dominio, no clases de base de datos.
 
 ### 5.2 Preguntas de defensa
 
@@ -101,4 +119,4 @@ Tiempo: 20 min.
 2. ¿Qué función cumple JDBC?
 3. ¿Dónde vive la base de datos?
 4. ¿Qué capa debe conversar con SQL?
-
+5. ¿Por qué no cambiamos las entidades al pasar de memoria a SQLite?

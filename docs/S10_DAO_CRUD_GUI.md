@@ -10,7 +10,7 @@ Implementar el patrón DAO para ejecutar CRUD persistente desde la interfaz grá
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante separa el acceso a datos en DAO, mapea entidades a registros, ejecuta consultas SQL y conecta el flujo GUI-Controlador-Entidades-DAO.
+El estudiante separa el acceso a datos en DAO, mapea entidades a registros, ejecuta consultas SQL y agrega una implementación persistente del mismo contrato de servicio.
 
 ### 1.3 Producto de sesión
 
@@ -18,7 +18,7 @@ CRUD persistente funcional desde formularios y tablas JavaFX.
 
 ### 1.4 Motivación de la sesión
 
-La GUI ya funciona con memoria y la base de datos ya existe. Ahora toca unir ambos mundos sin poner SQL directamente en el controlador.
+La GUI ya funciona con memoria y la base de datos ya existe. Ahora toca agregar una implementación persistente del servicio para coordinar DAO y SQLite sin cambiar las entidades ni poner SQL en el controlador.
 
 Pregunta guía:
 
@@ -38,6 +38,8 @@ Tiempo: 25 min.
 ### 2.1 Conceptos clave
 
 - Patrón DAO.
+- Servicio como coordinador entre controlador y DAO.
+- Implementación persistente del contrato CRUD.
 - Mapeo objeto-relacional básico.
 - `insert`, `select`, `update`, `delete`.
 - Confirmación de eliminación.
@@ -50,13 +52,17 @@ Tiempo: 25 min.
 flowchart TB
     Vista["Vista JavaFX"]
     Controlador["Controlador"]
+    Contrato["Interface Servicio<br/>contrato CRUD"]
+    Servicio["Implementación persistente<br/>implements"]
     Entidades["Entidades"]
     DAO["DAO"]
     SQLite[("SQLite / comarket.db")]
 
     Vista --> Controlador
-    Controlador --> Entidades
-    Controlador --> DAO
+    Controlador --> Contrato
+    Servicio -. implements .-> Contrato
+    Servicio -.-> Entidades
+    Servicio --> DAO
     DAO --> Entidades
     DAO -->|"JDBC"| SQLite
 ```
@@ -71,8 +77,10 @@ Tiempo: 2h.
 4. Implementar `actualizar`.
 5. Implementar `eliminar`.
 6. Cargar la tabla desde la base de datos.
-7. Conectar botones de la GUI con el DAO.
-8. Confirmar eliminación y manejar errores básicos.
+7. Conectar botones de la GUI con el contrato del servicio, no directamente con SQL.
+8. Crear o adaptar una implementación persistente del servicio.
+9. Hacer que la implementación persistente use DAO para guardar y consultar.
+10. Confirmar eliminación y manejar errores básicos.
 
 ## 4. Crea: actividad autónoma
 
@@ -82,10 +90,10 @@ Completa el CRUD persistente para una entidad adicional o mejora el módulo prin
 
 Entrega evidencia breve con:
 
-- Código DAO.
+- Código de la interface del servicio, implementación persistente y DAO.
 - Capturas de GUI.
 - Registros persistidos en SQLite.
-- Explicación del flujo Vista-Controlador-Entidades-DAO.
+- Explicación del flujo Vista-Controlador-Servicio-Entidades-DAO.
 
 ## 5. Cierre evaluativo
 
@@ -95,13 +103,16 @@ Tiempo: 20 min.
 
 - El DAO concentra las consultas SQL.
 - El controlador no contiene SQL directo.
+- El servicio coordina operaciones, validaciones y DAO.
+- Las entidades se mantienen como las mismas clases del dominio.
 - La GUI registra, lista, actualiza y elimina datos persistentes.
 - La tabla se recarga desde SQLite.
 
 ### 5.2 Preguntas de defensa
 
 1. ¿Qué responsabilidad tiene el DAO?
-2. ¿Por qué no poner SQL en el controlador?
-3. ¿Cómo conviertes un registro en objeto?
-4. ¿Cómo verificas que el dato quedó guardado?
-
+2. ¿Qué responsabilidad tiene la interface del servicio?
+3. ¿Qué responsabilidad tiene la implementación persistente?
+4. ¿Por qué no poner SQL en el controlador?
+5. ¿Cómo conviertes un registro en objeto?
+6. ¿Cómo verificas que el dato quedó guardado?

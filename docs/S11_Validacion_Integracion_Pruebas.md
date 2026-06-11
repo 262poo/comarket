@@ -40,6 +40,7 @@ Tiempo: 25 min.
 - Validación de formularios.
 - Mensajes al usuario.
 - Excepciones personalizadas o controladas.
+- Validaciones del servicio.
 - Manejo de errores de persistencia.
 - Pruebas manuales.
 - Casos válidos, inválidos y límite.
@@ -51,13 +52,18 @@ flowchart TB
     Usuario["Usuario"]
     Vista["Vista"]
     Controlador["Controlador"]
+    Contrato["Interface Servicio<br/>contrato CRUD"]
+    Servicio["Implementación persistente<br/>implements"]
     Validaciones["Excepciones / Validaciones"]
     DAO["DAO"]
 
     Usuario --> Vista
     Vista --> Controlador
-    Controlador --> Validaciones
-    Controlador --> DAO
+    Controlador --> Contrato
+    Servicio -. implements .-> Contrato
+    Contrato -.-> Validaciones
+    Servicio --> Validaciones
+    Servicio --> DAO
 ```
 
 ## 3. Aplica: actividad práctica guiada
@@ -69,9 +75,10 @@ Tiempo: 2h.
 3. Validar rangos.
 4. Mostrar alertas claras.
 5. Controlar selección nula en tabla.
-6. Controlar errores de DAO.
-7. Probar escenarios normales y fallidos.
-8. Registrar una matriz mínima de pruebas.
+6. Ubicar validaciones del flujo principal en el servicio.
+7. Controlar errores de DAO desde la implementación persistente.
+8. Probar escenarios normales y fallidos.
+9. Registrar una matriz mínima de pruebas.
 
 ## 4. Crea: actividad autónoma
 
@@ -84,6 +91,7 @@ Entrega evidencia breve con:
 - Matriz de pruebas.
 - Capturas de alertas.
 - Un error controlado.
+- Una validación ubicada en el servicio.
 - Una corrección aplicada.
 
 ## 5. Cierre evaluativo
@@ -94,13 +102,14 @@ Tiempo: 20 min.
 
 - La GUI valida datos antes de guardar.
 - Los errores se comunican al usuario.
+- El servicio concentra validaciones del flujo y excepciones controladas.
 - Existen pruebas manuales documentadas.
 - El flujo principal queda listo para evaluación U2.
 
 ### 5.2 Preguntas de defensa
 
 1. ¿Qué validaciones implementaste?
-2. ¿Qué errores controlaste?
-3. ¿Qué caso límite probaste?
-4. ¿Cómo sabes que el flujo principal funciona?
-
+2. ¿Qué validación pertenece al controlador y cuál al servicio?
+3. ¿Qué errores controlaste?
+4. ¿Qué caso límite probaste?
+5. ¿Cómo sabes que el flujo principal funciona?

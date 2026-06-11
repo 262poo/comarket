@@ -6,7 +6,7 @@ Tiempo: 15 min.
 
 ### 1.1 Propósito
 
-Evaluar la aplicación de escritorio con GUI, entidades, DAO, SQLite, validaciones y pruebas del flujo principal.
+Evaluar la aplicación de escritorio con GUI, controladores, servicios, entidades, DAO, SQLite, validaciones y pruebas del flujo principal.
 
 ### 1.2 Resultado de aprendizaje
 
@@ -29,6 +29,7 @@ Tiempo: 15 min.
 
 - GUI operativa.
 - Controladores conectados.
+- Servicios CRUD funcionales.
 - Entidades coherentes.
 - DAO funcional.
 - SQLite con datos persistentes.
@@ -41,13 +42,23 @@ Tiempo: 15 min.
 flowchart TB
     Vista["Vista JavaFX"]
     Controlador["Controlador"]
+    subgraph Servicio["Servicio"]
+        Contrato["Interface<br/>contrato CRUD"]
+        Implementacion["Implementación persistente<br/>implements"]
+        Validaciones["Validaciones/Excepciones"]
+    end
+
     Entidades["Entidades"]
     DAO["DAO"]
     SQLite[("SQLite")]
 
     Vista --> Controlador
-    Controlador --> Entidades
-    Controlador --> DAO
+    Controlador --> Contrato
+    Implementacion -. implements .-> Contrato
+    Contrato -.-> Entidades
+    Implementacion -.-> Entidades
+    Implementacion -.-> Validaciones
+    Implementacion --> DAO
     DAO --> Entidades
     DAO --> SQLite
 ```
@@ -75,6 +86,7 @@ Entrega evidencia breve con:
 - Capturas de GUI.
 - Evidencia de registros en SQLite.
 - Código o descripción del DAO.
+- Código o descripción de la interface del servicio y su implementación persistente.
 - Matriz mínima de pruebas.
 - Reflexión técnica.
 
@@ -86,17 +98,17 @@ Tiempo: 30 min.
 
 1. ¿Cómo fluye una operación desde la vista hasta SQLite?
 2. ¿Qué responsabilidad tiene el controlador?
-3. ¿Qué responsabilidad tiene el DAO?
-4. ¿Qué validación evita un error frecuente?
-5. ¿Qué mejorarás en U3?
+3. ¿Qué responsabilidad tiene la interface del servicio y qué responsabilidad tiene la implementación?
+4. ¿Qué responsabilidad tiene el DAO?
+5. ¿Qué validación evita un error frecuente?
+6. ¿Qué mejorarás en U3?
 
 ### 5.2 Rúbrica breve
 
 | Criterio | Peso |
 |---|---:|
 | GUI funcional | 4 |
-| Entidades y controladores | 4 |
+| Controladores, servicios y entidades | 4 |
 | DAO y persistencia | 5 |
 | Validaciones y pruebas | 4 |
 | Evidencia y sustentación | 3 |
-
