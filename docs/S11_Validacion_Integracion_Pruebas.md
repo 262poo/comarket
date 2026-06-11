@@ -7,7 +7,7 @@ Fortalecer la calidad del sistema mediante validaciones, manejo básico de error
 ## Preparación en IntelliJ
 
 - Revisar puntos de entrada de datos.
-- Identificar excepciones frecuentes en GUI, servicios y DAO.
+- Identificar excepciones frecuentes en GUI, controladores y DAO.
 
 ## Contenidos
 

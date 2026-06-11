@@ -14,7 +14,7 @@ Unificar el trabajo de las unidades previas en una sola aplicación consistente,
 ## Práctica guiada
 
 - Consolidar el repositorio del proyecto.
-- Integrar pantallas, servicios y DAO.
+- Integrar pantallas, controladores, entidades y DAO.
 - Verificar el flujo principal de punta a punta.
 
 ## Reto de sesión

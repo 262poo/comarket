@@ -333,7 +333,8 @@ mvn gluonfx:nativerun
 ```text
 Java
 + JavaFX
-+ MVC
++ Scene Builder
++ Controladores JavaFX
 + DAO
 + SQLite
 + Maven

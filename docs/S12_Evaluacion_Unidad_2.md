@@ -17,7 +17,7 @@ Entregar un módulo funcional de CoMarket capaz de registrar, consultar, editar 
 
 ## Criterios de evaluación
 
-- Coherencia entre modelo, servicio, DAO y GUI.
+- Coherencia entre entidades, controlador, DAO y GUI.
 - Flujo funcional completo.
 - Legibilidad y organización del proyecto.
 - Capacidad de prueba y explicación del sistema.

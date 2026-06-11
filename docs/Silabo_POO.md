@@ -167,11 +167,12 @@ El producto final de este curso sirve como insumo directo para cursos y espacios
 1. Java como lenguaje orientado a objetos.
 2. Maven para dependencias, compilación y ejecución.
 3. IntelliJ IDEA como entorno base de trabajo.
-4. JavaFX con FXML y MVC para interfaz gráfica.
-5. JDBC para acceso a datos.
-6. SQLite como base de datos local.
+4. JavaFX con FXML y controladores para interfaz gráfica.
+5. Scene Builder para diseño visual de vistas FXML.
+6. JDBC para acceso a datos.
+7. SQLite como base de datos local.
 
-> Para el desarrollo de la aplicación de escritorio, IntelliJ IDEA es el entorno recomendado del curso. VS Code puede servir para lectura o edición rápida de archivos, pero no reemplaza el flujo principal de trabajo con JavaFX, Maven y ejecución desde IntelliJ IDEA.
+> Para el desarrollo de la aplicación de escritorio, IntelliJ IDEA es el entorno recomendado del curso. Scene Builder se utiliza como apoyo para diseñar vistas FXML. VS Code puede servir para lectura o edición rápida de archivos, pero no reemplaza el flujo principal de trabajo con JavaFX, Maven y ejecución desde IntelliJ IDEA.
 
 ## 9. Modelo de referencia del proyecto integrador final
 

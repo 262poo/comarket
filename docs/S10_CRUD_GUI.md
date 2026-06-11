@@ -2,16 +2,16 @@
 
 ## Objetivo
 
-Integrar la GUI con la capa de servicios y DAO para ejecutar operaciones CRUD completas desde la interfaz.
+Integrar la GUI con controladores, entidades y DAO para ejecutar operaciones CRUD completas desde la interfaz.
 
 ## Preparación en IntelliJ
 
 - Reusar el formulario y la tabla creados en la sesión anterior.
-- Asegurar que el servicio intermedio centralice la lógica del flujo.
+- Asegurar que el controlador coordine el flujo entre formulario, entidades y DAO.
 
 ## Contenidos
 
-- Flujo GUI -> controlador -> servicio -> DAO.
+- Flujo GUI -> controlador -> entidades -> DAO.
 - Carga de datos en tablas.
 - Edición de registros seleccionados.
 - Confirmación de eliminación.
