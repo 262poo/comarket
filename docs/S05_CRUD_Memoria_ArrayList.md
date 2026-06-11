@@ -1,31 +1,126 @@
-# Sesión 5: CRUD en memoria con ArrayList, búsqueda y ordenamiento
+# S5 - CRUD en memoria con ArrayList
 
-## Objetivo
+## 1. Introducción
 
-Implementar operaciones CRUD sobre colecciones en memoria para preparar la lógica que luego se llevará a persistencia.
+Tiempo: 20 min.
 
-## Preparación en IntelliJ
+### 1.1 Propósito
 
-- Crear el paquete `app.service` o `app.repository.memory`.
-- Definir una lista central de productos u operaciones comerciales para pruebas.
+Formalizar el flujo `Main -> Gestor -> Entidades -> ArrayList` para implementar operaciones CRUD en memoria y preparar la entrega con Maven y GraalVM.
 
-## Contenidos
+### 1.2 Resultado de aprendizaje
 
-- Alta, consulta, actualización y eliminación.
-- Búsqueda por código o nombre.
+El estudiante implementa alta, consulta, actualización, eliminación, búsqueda y ordenamiento en memoria, separando responsabilidades entre `Main`, gestor y entidades.
+
+### 1.3 Producto de sesión
+
+CRUD en memoria organizado con gestor, entidades y `ArrayList`, preparado para empaquetado o ejecutable nativo.
+
+### 1.4 Motivación de la sesión
+
+El modelo ya tiene clases, validaciones, relaciones y polimorfismo. Ahora necesita operaciones completas para manejar datos en memoria sin que `Main` concentre todo el código.
+
+Pregunta guía:
+
+```text
+¿Cómo organizamos un CRUD en memoria sin convertir Main en una clase gigante?
+```
+
+### 1.5 Ubicación en el curso
+
+- Unidad: U1.
+- Avance de sesión: consolidación funcional del producto U1 antes de la evaluación.
+
+## 2. Explica
+
+Tiempo: 25 min.
+
+### 2.1 Conceptos clave
+
+- CRUD.
+- Búsqueda por código, nombre u otro criterio.
 - Ordenamiento básico.
-- Separación entre modelo y operaciones.
+- Separación de responsabilidades.
+- Gestor o servicio en memoria.
+- Interface como contrato de operaciones CRUD.
+- Implementación del contrato con `implements`.
+- Validaciones y excepciones básicas del flujo.
+- Maven para organizar compilación.
+- GraalVM para ejecutable nativo.
 
-## Práctica guiada
+Regla metodológica de la sesión:
 
-- Crear una clase gestora para productos.
-- Implementar agregar, listar, buscar, editar y eliminar.
-- Mostrar resultados en consola de forma clara.
+```text
+Main muestra el menú.
+La interface declara las operaciones CRUD.
+La implementación ejecuta las operaciones sobre ArrayList.
+Las entidades no almacenan; representan datos y comportamiento del dominio.
+```
 
-## Reto de sesión
+### 2.2 Arquitectura de la sesión
 
-Incorporar control de duplicados y mensajes de error simples para operaciones inválidas.
+```mermaid
+flowchart TB
+    Main["Main / menú consola"]
+    Interface["Interface<br/>contrato CRUD"]
+    Gestor["Implementación<br/>implements"]
+    Entidades["Entidades"]
+    Lista[("ArrayList")]
+    Build["Maven + GraalVM<br/>entrega"]
 
-## Entregable mínimo
+    Main --> Interface
+    Gestor -. implements .-> Interface
+    Interface -.-> Entidades
+    Gestor -.-> Entidades
+    Gestor --> Lista
+    Gestor --> Build
+```
 
-CRUD funcional en memoria con `ArrayList`, búsquedas y ordenamiento sobre una entidad principal.
+## 3. Aplica: actividad práctica guiada
+
+Tiempo: 2h.
+
+1. Crear un menú simple en consola.
+2. Definir una interface con operaciones CRUD.
+3. Crear una implementación con `implements`.
+4. Implementar registrar.
+5. Implementar listar.
+6. Implementar buscar.
+7. Implementar actualizar.
+8. Implementar eliminar.
+9. Agregar ordenamiento básico.
+10. Manejar validaciones y excepciones básicas del flujo.
+11. Organizar el proyecto con Maven.
+12. Preparar la compilación nativa con GraalVM.
+
+## 4. Crea: actividad autónoma
+
+Tiempo: 3h fuera del aula.
+
+Completa el CRUD de una entidad del dominio y prepara evidencia de ejecución.
+
+Entrega evidencia breve con:
+
+- Flujo `Main -> Interface -> Implementación -> ArrayList`.
+- Capturas o salidas de cada operación CRUD.
+- Evidencia de compilación o preparación con Maven/GraalVM.
+
+## 5. Cierre evaluativo
+
+Tiempo: 20 min.
+
+### 5.1 Resultados esperados
+
+- CRUD funcional en memoria.
+- Interface e implementación separadas de `Main`.
+- Entidades encapsuladas.
+- Búsqueda y ordenamiento básicos.
+- Proyecto preparado para entrega ejecutable.
+
+### 5.2 Preguntas de defensa
+
+1. ¿Qué responsabilidad tiene `Main`?
+2. ¿Qué responsabilidad tiene la interface?
+3. ¿Qué responsabilidad tiene la implementación?
+4. ¿Dónde se almacenan los datos?
+5. ¿Qué cambia al pasar de Java simple a Maven?

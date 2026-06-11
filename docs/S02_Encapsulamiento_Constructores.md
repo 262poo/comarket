@@ -1,31 +1,109 @@
-# Sesión 2: Encapsulamiento, constructores y control del estado
+# S2 - Encapsulamiento, constructores y control del estado
 
-## Objetivo
+## 1. Introducción
 
-Aplicar encapsulamiento para proteger el estado interno de los objetos y usar constructores para garantizar su inicialización correcta.
+Tiempo: 20 min.
 
-## Preparación en IntelliJ
+### 1.1 Propósito
 
-- Reorganizar el proyecto manteniendo el paquete `app.model`.
-- Activar generación de constructores, getters y setters solo cuando sea pertinente.
+Proteger el estado de los objetos mediante encapsulamiento, constructores, validaciones básicas y métodos de comportamiento.
 
-## Contenidos
+### 1.2 Resultado de aprendizaje
 
-- Modificadores de acceso.
-- Constructores por defecto y parametrizados.
-- Getters, setters y validaciones básicas.
+El estudiante aplica modificadores de acceso, crea constructores, usa getters y setters con criterio, y mueve reglas simples desde `Main` hacia las clases.
+
+### 1.3 Producto de sesión
+
+Entidades encapsuladas con constructores, validaciones básicas y métodos de comportamiento probados desde `Main`.
+
+### 1.4 Motivación de la sesión
+
+Si cualquier parte del programa puede cambiar directamente el precio o el stock de un producto, el objeto puede quedar en un estado inválido. El encapsulamiento permite controlar esos cambios.
+
+Pregunta guía:
+
+```text
+¿Cómo evitamos que un objeto quede con datos inválidos?
+```
+
+### 1.5 Ubicación en el curso
+
+- Unidad: U1 - Fundamentos de la Programación Orientada a Objetos.
+- Avance de sesión: las entidades dejan de ser contenedores de datos y empiezan a controlar su propio estado.
+
+## 2. Explica
+
+Tiempo: 25 min.
+
+### 2.1 Conceptos clave
+
+- `private`, `public` y responsabilidad de acceso.
+- Constructor por defecto y constructor parametrizado.
+- Getters y setters.
+- Validación de datos.
+- Métodos de comportamiento.
 - Invariantes simples del dominio.
+- Separación de responsabilidades: `Main` prueba, la entidad protege su estado.
+- Principio de responsabilidad única como base inicial de SOLID.
 
-## Práctica guiada
+Regla metodológica de la sesión:
 
-- Encapsular atributos de `Producto`.
-- Validar que precio y stock no sean negativos.
-- Crear constructores para estados válidos.
+```text
+Main no debe corregir todo.
+La entidad debe impedir quedar en estado inválido.
+```
 
-## Reto de sesión
+### 2.2 Arquitectura de la sesión
 
-Agregar reglas de negocio simples, por ejemplo impedir cantidades menores o iguales a cero en una operación comercial.
+```mermaid
+flowchart TB
+    Main["Main / prueba"]
+    Entidad["Entidad encapsulada"]
+    Validacion["Validaciones internas"]
 
-## Entregable mínimo
+    Main --> Entidad
+    Entidad --> Validacion
+```
 
-Clases encapsuladas con constructores útiles y validaciones básicas sobre el estado del dominio.
+## 3. Aplica: actividad práctica guiada
+
+Tiempo: 2h.
+
+1. Encapsular los atributos de una entidad.
+2. Crear constructores para estados válidos.
+3. Agregar validaciones para valores vacíos, negativos o incoherentes.
+4. Crear métodos de comportamiento, por ejemplo `actualizarStock` o `aplicarDescuento`.
+5. Probar casos válidos e inválidos desde `Main`.
+6. Identificar qué validación pertenece a la entidad y cuál quedará para el gestor en sesiones posteriores.
+
+## 4. Crea: actividad autónoma
+
+Tiempo: 2h fuera del aula.
+
+Mejora otra entidad del dominio aplicando encapsulamiento, constructores y validaciones.
+
+Entrega evidencia breve con:
+
+- Clase encapsulada.
+- Pruebas desde `Main`.
+- Un caso válido.
+- Un caso inválido controlado.
+
+## 5. Cierre evaluativo
+
+Tiempo: 20 min.
+
+### 5.1 Resultados esperados
+
+- Las clases no exponen atributos públicos.
+- Los constructores inicializan objetos válidos.
+- Las validaciones básicas están dentro de las clases.
+- `Main` se usa para probar, no para controlar todas las reglas.
+
+### 5.2 Preguntas de defensa
+
+1. ¿Por qué los atributos deben ser privados?
+2. ¿Qué ventaja tiene validar dentro de la clase?
+3. ¿Cuándo usarías un setter?
+4. ¿Qué comportamiento moviste desde `Main` hacia la entidad?
+5. ¿Qué responsabilidad no debería tener `Main`?

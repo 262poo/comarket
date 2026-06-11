@@ -1,32 +1,115 @@
-# Sesión 4: Herencia, reutilización y polimorfismo
+# S4 - Herencia, reutilización y polimorfismo
 
-## Objetivo
+## 1. Introducción
 
-Identificar cuándo usar herencia y polimorfismo para reutilizar comportamiento sin degradar el diseño.
+Tiempo: 20 min.
 
-## Preparación en IntelliJ
+### 1.1 Propósito
 
-- Crear una jerarquía pequeña solo si el dominio la justifica.
-- Preparar pruebas manuales desde `Main`.
+Aplicar herencia y polimorfismo en el modelo de dominio cuando el caso lo justifique, reforzando la separación de responsabilidades.
 
-## Contenidos
+### 1.2 Resultado de aprendizaje
 
-- Relación "es un" frente a "tiene un".
-- Clase base y subclases.
+El estudiante crea jerarquías simples, usa sobrescritura de métodos y evita cargar toda la lógica en `Main`.
+
+### 1.3 Producto de sesión
+
+Jerarquía aplicada al dominio, probada desde un gestor y desde `Main`.
+
+### 1.4 Motivación de la sesión
+
+Cuando varias clases comparten datos o comportamiento, conviene reutilizar código. Cuando varias clases deben responder a una misma operación, conviene usar polimorfismo.
+
+Pregunta guía:
+
+```text
+¿Cuándo conviene usar extends y cuándo es mejor mantener responsabilidades separadas?
+```
+
+### 1.5 Ubicación en el curso
+
+- Unidad: U1.
+- Avance de sesión: el gestor trabaja con entidades relacionadas por herencia sin absorber responsabilidades del dominio.
+
+## 2. Explica
+
+Tiempo: 25 min.
+
+### 2.1 Conceptos clave
+
+- Relación es-un.
+- Relación tiene-un.
+- Clase base.
+- Subclase.
+- `extends`.
 - Sobrescritura de métodos.
-- Polimorfismo aplicado a reglas del negocio.
+- Polimorfismo.
+- Separación de responsabilidades.
+- Principio de responsabilidad única como idea base de SOLID.
 
-## Práctica guiada
+Regla metodológica de la sesión:
 
-- Introducir una clase base `Persona` cuando el dominio ya justifique atributos y comportamientos compartidos.
-- Derivar clases como `Cliente`, `Proveedor`, `Usuario` o `Trabajador` según el caso trabajado en sesiones anteriores.
-- Implementar un comportamiento compartido y especializaciones.
-- Probar llamadas polimórficas.
+```text
+La herencia se usa en entidades cuando existe una relación es-un.
+El gestor usa las entidades, pero no debe absorber su comportamiento propio.
+```
 
-## Reto de sesión
+### 2.2 Arquitectura de la sesión
 
-Comparar una solución con herencia frente a otra con composición y justificar la decisión tomada a partir del modelo construido en sesiones previas.
+```mermaid
+flowchart TB
+    Gestor["Gestor"]
+    Base["Clase base"]
+    SubA["Subclase A"]
+    SubB["Subclase B"]
+    Lista[("List<Base>")]
 
-## Entregable mínimo
+    Gestor --> Lista
+    Lista --> Base
+    SubA --> Base
+    SubB --> Base
+```
 
-Jerarquía pequeña y justificada, por ejemplo `Persona` con clases derivadas del dominio, integrada al proyecto con una decisión de diseño argumentada.
+## 3. Aplica: actividad práctica guiada
+
+Tiempo: 2h.
+
+1. Identificar clases con atributos o comportamiento común.
+2. Crear una clase base.
+3. Crear dos clases derivadas.
+4. Sobrescribir un método relevante.
+5. Usar una lista o gestor con referencias polimórficas.
+6. Probar el comportamiento desde `Main`.
+7. Verificar que la herencia no se use solo para reutilizar código sin relación de dominio.
+
+## 4. Crea: actividad autónoma
+
+Tiempo: 2h fuera del aula.
+
+Aplica herencia en otra parte del dominio, solo si el caso lo justifica.
+
+Entrega evidencia breve con:
+
+- Clases involucradas.
+- Justificación de `extends`.
+- Prueba polimórfica.
+- Salida de consola.
+
+## 5. Cierre evaluativo
+
+Tiempo: 20 min.
+
+### 5.1 Resultados esperados
+
+- La herencia tiene sentido en el dominio.
+- Hay sobrescritura o comportamiento especializado.
+- El gestor puede trabajar con referencias generales.
+- El estudiante evita herencia artificial.
+
+### 5.2 Preguntas de defensa
+
+1. ¿Qué clases participan en la jerarquía?
+2. ¿Qué comportamiento se reutiliza?
+3. ¿Dónde se evidencia el polimorfismo?
+4. ¿Por qué no bastaba una relación tiene-un?
+5. ¿Qué responsabilidad queda en la entidad y qué responsabilidad queda en el gestor?

@@ -1,34 +1,103 @@
-# Sesión 1: Clases, objetos y responsabilidad de clase
+# S1 - Clases, objetos y responsabilidad de clase
 
-## Objetivo
+## 1. Introducción
 
-Comprender cómo representar un problema del dominio mediante clases y objetos, definiendo atributos, métodos y responsabilidades básicas.
+Tiempo: 20 min.
 
-## Preparación en IntelliJ
+### 1.1 Propósito
 
-- Crear un proyecto Maven en Java.
-- Definir el paquete base `app.model`.
-- Configurar una clase `Main` para pruebas rápidas.
+Iniciar CoMarket en memoria mediante clases simples del dominio, objetos creados desde `Main` y pruebas por consola.
 
-## Contenidos
+### 1.2 Resultado de aprendizaje
 
-- Diferencia entre clase y objeto.
-- Atributos, métodos y estado.
+El estudiante diferencia clase y objeto, define atributos y métodos, crea instancias y explica la responsabilidad básica de una clase del dominio.
+
+### 1.3 Producto de sesión
+
+Proyecto Java simple en VS Code con una entidad inicial, objetos instanciados desde `Main` y salida por consola.
+
+### 1.4 Motivación de la sesión
+
+CoMarket inicia como una pequeña aplicación de consola. Antes de pensar en pantallas o base de datos, el sistema necesita representar objetos reales del negocio, por ejemplo productos, clientes, ventas o proveedores.
+
+Pregunta guía:
+
+```text
+¿Qué información y comportamiento debe tener un objeto para representar una parte del negocio?
+```
+
+### 1.5 Ubicación en el curso
+
+- Unidad: U1 - Fundamentos de la Programación Orientada a Objetos.
+- Producto de unidad: aplicación de consola en memoria con entidades, relaciones, colecciones y CRUD.
+- Avance de sesión: primeras clases del dominio probadas desde `Main`.
+
+## 2. Explica
+
+Tiempo: 25 min.
+
+### 2.1 Conceptos clave
+
+- Clase como molde.
+- Objeto como instancia.
+- Atributos como estado.
+- Métodos como comportamiento.
 - Responsabilidad de clase.
-- Primeras entidades del dominio con baja complejidad.
-- Relación simple entre `Producto` y `Categoria`, o modelado base de `Cliente`, `Proveedor` o `Usuario` como clases independientes.
+- Método `main` como punto de prueba inicial.
 
-## Práctica guiada
+### 2.2 Arquitectura de la sesión
 
-- Modelar la clase `Producto` con nombre, precio y stock.
-- Agregar una `Categoria` simple o una segunda clase base del dominio con atributos claros.
-- Crear objetos de prueba desde `Main`.
-- Mostrar estado del objeto con un método descriptivo.
+```mermaid
+flowchart TB
+    Main["Main / Consola"]
+    Entidad["Entidad del dominio<br/>Producto u otra"]
+    Salida["Salida por consola"]
 
-## Reto de sesión
+    Main --> Entidad
+    Entidad --> Salida
+```
 
-Construir una clase adicional del dominio y justificar qué responsabilidad le corresponde sin usar todavía herencia ni relaciones complejas.
+## 3. Aplica: actividad práctica guiada
 
-## Entregable mínimo
+Tiempo: 2h.
 
-Proyecto en IntelliJ con una o dos entidades base del dominio, sus atributos y métodos principales, y un programa de prueba que cree objetos y muestre su estado.
+1. Crear un proyecto Java simple en VS Code.
+2. Crear el paquete base del proyecto.
+3. Crear una clase del dominio, por ejemplo `Producto`.
+4. Agregar atributos básicos: nombre, precio y stock.
+5. Agregar métodos para mostrar información del objeto.
+6. Crear objetos desde `Main`.
+7. Imprimir resultados por consola.
+
+## 4. Crea: actividad autónoma
+
+Tiempo: 2h fuera del aula.
+
+Extiende el modelo inicial creando otra entidad del dominio, por ejemplo `Cliente`, `Proveedor` o `Usuario`.
+
+Entrega evidencia breve con:
+
+- Código de la clase.
+- Código de prueba desde `Main`.
+- Captura o salida de consola.
+- Explicación de la responsabilidad de cada clase.
+
+## 5. Cierre evaluativo
+
+Tiempo: 20 min.
+
+### 5.1 Resultados esperados
+
+- El proyecto ejecuta desde VS Code.
+- Existe al menos una clase del dominio.
+- Se crean objetos desde `Main`.
+- La salida por consola demuestra el estado del objeto.
+- El estudiante explica qué responsabilidad tiene cada clase.
+
+### 5.2 Preguntas de defensa
+
+1. ¿Cuál es la diferencia entre clase y objeto?
+2. ¿Qué representa el estado de un objeto?
+3. ¿Por qué una clase debe tener una responsabilidad clara?
+4. ¿Qué parte del código crea los objetos?
+

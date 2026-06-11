@@ -2,7 +2,7 @@
 
 Curso práctico de Programación Orientada a Objetos con Java, modelado de dominio, encapsulamiento, relaciones entre clases, herencia, polimorfismo, colecciones, arquitectura por capas, persistencia relacional, DAO, JavaFX y sustentación técnica del proyecto integrador.
 
-[`comarket`](https://github.com/262poo/comarket.git) es un repositorio académico para guiar la construcción progresiva de **CoMarket - Sistema Comercial Orientado a Objetos**, una aplicación de escritorio desarrollada con Java, Maven, IntelliJ IDEA, JavaFX, Scene Builder, JDBC y SQLite. El proyecto organiza las sesiones, evidencias y entregables del curso para que cada estudiante o equipo construya una solución mantenible, modular e integrada.
+[`comarket`](https://github.com/262poo/comarket.git) es un repositorio académico para guiar la construcción progresiva de **CoMarket - Sistema Comercial Orientado a Objetos**. La ruta inicia con una aplicación de consola en memoria usando Java y VS Code, avanza hacia una aplicación de escritorio con JavaFX, Scene Builder, DAO, JDBC y SQLite, y culmina con un producto integrado, documentado, ejecutable y sustentado técnicamente.
 
 ## Producto del curso
 
@@ -22,18 +22,18 @@ Al finalizar el curso, el estudiante diseña, implementa y sustenta una aplicaci
 
 ### U1: Fundamentos de la Programación Orientada a Objetos
 
-Producto U1: aplicación funcional en memoria con clases, relaciones entre objetos, colecciones y operaciones principales del dominio.
+Producto U1: aplicación de consola funcional en memoria con clases, relaciones entre objetos, colecciones, operaciones principales del dominio y preparación para ejecutable nativo.
 
 Resultado esperado U1: el estudiante modela y construye objetos de software aplicando principios fundamentales de programación orientada a objetos, relaciones entre clases y estructuras de almacenamiento en memoria.
 
 | Sesión | Tema | Producto de sesión |
 |---|---|---|
-| S1 | **Clases, objetos y responsabilidad de clase:**<br>Diferencia entre clase y objeto, atributos, métodos, estado, responsabilidad de clase, primeras entidades del dominio | Clases base del dominio con atributos, métodos y objetos instanciados |
-| S2 | **Encapsulamiento, constructores y control del estado:**<br>Modificadores de acceso, constructores, getters, setters, validaciones básicas, invariantes simples del dominio | Clases encapsuladas con constructores, modificadores de acceso y control de estado |
-| S3 | **Modelado del dominio, asociaciones y colecciones:**<br>Asociación, agregación, composición, colecciones de objetos, navegación entre objetos, relaciones uno a muchos | Modelo inicial con asociaciones, agregación, composición y colecciones |
-| S4 | **Herencia, reutilización y polimorfismo:**<br>Relación es-un, relación tiene-un, clase base, subclases, sobrescritura de métodos, polimorfismo aplicado | Jerarquías de clases con reutilización, sobrescritura y comportamiento polimórfico |
-| S5 | **CRUD en memoria con ArrayList:**<br>Alta, consulta, actualización, eliminación, búsqueda por código o nombre, ordenamiento básico, separación entre modelo y operaciones | Operaciones de registro, búsqueda, actualización, eliminación y ordenamiento en memoria |
-| S6 | **Evaluación de la unidad 1:**<br>Clases del dominio, encapsulamiento, constructores, relaciones entre objetos, CRUD en memoria, búsquedas y validaciones básicas | Producto U1 validado con modelo de dominio y CRUD en memoria |
+| S1 | **Clases, objetos y responsabilidad de clase:**<br>Proyecto Java simple en VS Code, diferencia entre clase y objeto, atributos, métodos, estado, primeras entidades del dominio | Clases base del dominio con atributos, métodos y objetos instanciados desde `Main` |
+| S2 | **Encapsulamiento, constructores y control del estado:**<br>Modificadores de acceso, constructores, getters, setters, validaciones básicas, invariantes simples, métodos de comportamiento y pruebas desde `Main` | Clases encapsuladas con constructores, validaciones y comportamiento propio |
+| S3 | **Modelado del dominio, asociaciones y colecciones:**<br>Asociación, agregación, composición, colecciones de objetos, navegación entre objetos, relaciones uno a muchos, clase gestora inicial | Modelo inicial con entidades relacionadas y gestor básico sobre una colección |
+| S4 | **Herencia, reutilización y polimorfismo:**<br>Relación es-un, relación tiene-un, clase base, subclases, sobrescritura de métodos, polimorfismo aplicado desde gestores y separación de responsabilidades | Herencia en entidades y gestor separado sin cargar la lógica en `Main` |
+| S5 | **CRUD en memoria con ArrayList:**<br>Alta, consulta, actualización, eliminación, búsqueda, ordenamiento, flujo Main-Gestor-Entidades-ArrayList, introducción a Maven y compilación nativa con GraalVM | CRUD en memoria organizado con gestor, entidades y ArrayList, preparado para ejecutable nativo |
+| S6 | **Evaluación de la unidad 1:**<br>Clases del dominio, encapsulamiento, constructores, relaciones entre objetos, CRUD en memoria, búsquedas, validaciones básicas y ejecución del producto | Producto U1 validado con modelo de dominio, CRUD en memoria y ejecución demostrable |
 
 ### U2: Aplicación de escritorio con persistencia de datos
 
@@ -43,11 +43,11 @@ Resultado esperado U2: el estudiante construye aplicaciones de escritorio organi
 
 | Sesión | Tema | Producto de sesión |
 |---|---|---|
-| S7 | **Arquitectura por capas y persistencia relacional:**<br>Organización por capas, clase de conexión, fundamentos de JDBC, base de datos relacional embebida | Proyecto preparado con paquetes, conexión relacional y separación de responsabilidades |
-| S8 | **Patrón DAO y operaciones CRUD:**<br>Responsabilidad del DAO, mapeo objeto-relacional básico, consultas insert/select/update/delete, manejo inicial de excepciones | DAO funcional con registro, consulta, actualización y eliminación sobre base de datos |
-| S9 | **Interfaz gráfica de usuario:**<br>Aplicación de escritorio con interfaz gráfica, FXML, separación vista-controlador, componentes de formularios, eventos y navegación básica | Pantallas y controladores integrados con eventos de usuario |
-| S10 | **Registro, consulta, edición y eliminación desde GUI:**<br>Flujo Vista-Controlador-Entidades-DAO, carga de datos en tablas, edición de registros, confirmación de eliminación | Flujo completo de operación desde formularios y tablas JavaFX |
-| S11 | **Validación de datos, integración y pruebas:**<br>Validaciones de formulario, mensajes al usuario, manejo de excepciones, pruebas manuales del flujo principal | GUI, lógica y persistencia integradas con validaciones y corrección de errores |
+| S7 | **Interfaz gráfica de usuario:**<br>Aplicación de escritorio con JavaFX, FXML, Scene Builder, controladores, formularios, eventos y navegación básica | Pantallas y controladores integrados con eventos de usuario |
+| S8 | **CRUD desde GUI en memoria:**<br>Flujo Vista-Controlador-Entidades, carga de datos en tablas, registro, consulta, edición, eliminación y uso de ArrayList | Flujo completo de operación desde formularios y tablas JavaFX usando memoria |
+| S9 | **Arquitectura por capas y persistencia relacional:**<br>Organización por capas, clase de conexión, fundamentos de JDBC, base de datos relacional embebida | Proyecto preparado con paquetes, conexión relacional y separación de responsabilidades |
+| S10 | **Patrón DAO y operaciones CRUD persistentes desde GUI:**<br>Flujo Vista-Controlador-Entidades-DAO, carga de datos en tablas, registro, consulta, edición, eliminación, confirmación de eliminación y manejo inicial de excepciones | CRUD persistente funcional desde formularios y tablas JavaFX |
+| S11 | **Validación de datos y pruebas del flujo principal:**<br>Validaciones de formulario, mensajes al usuario, manejo de excepciones, pruebas manuales y corrección de errores funcionales | GUI y persistencia validadas con pruebas del flujo principal |
 | S12 | **Evaluación de la unidad 2:**<br>Conexión a base de datos, DAO funcional, GUI operativa, validaciones, manejo básico de errores, flujo funcional completo | Producto U2 validado con arquitectura, persistencia e interfaz gráfica |
 
 ### U3: Proyecto Integrador CoMarket
@@ -58,12 +58,66 @@ Resultado esperado U3: el estudiante integra el modelo orientado a objetos, la i
 
 | Sesión | Tema | Producto de sesión |
 |---|---|---|
-| S13 | **Integración del sistema:**<br>Revisión de alcance, integración de módulos, consistencia entre paquetes, nombres y flujo, revisión de dependencias y recursos | Modelo, GUI, persistencia y funcionalidades principales ensambladas |
-| S14 | **Validación y refinamiento:**<br>Corrección de fallos, limpieza de código, organización final, mensajes, validaciones, consistencia visual, flujo crítico, preparación para sustentación | Manejo de errores, corrección de observaciones, refinamiento del diseño y preparación para sustentación |
+| S13 | **Integración del sistema:**<br>Revisión de alcance, integración de módulos, consistencia entre paquetes, nombres, flujo, dependencias, recursos y preparación inicial para ejecutable nativo | Modelo, GUI, persistencia y funcionalidades principales ensambladas |
+| S14 | **Validación y refinamiento:**<br>Corrección de fallos, limpieza de código, organización final, mensajes, validaciones, consistencia visual, flujo crítico, ejecutable nativo y preparación para sustentación | Manejo de errores, corrección de observaciones, refinamiento del diseño, ejecutable nativo y preparación para sustentación |
 | S15 | **Sustentación del proyecto CoMarket:**<br>Demostración funcional, arquitectura, modelo de dominio, persistencia, defensa técnica del proyecto | Demostración funcional, arquitectura, modelo de dominio, persistencia y defensa técnica |
 | S16 | **Evaluación final del proyecto integrador:**<br>Proyecto ejecutable, flujo principal, persistencia operativa, GUI validada, documentación mínima, sustentación técnica | Evaluación individual, recuperación de sustentaciones pendientes y cierre académico |
 
-## Arquitectura CoMarket POO
+## Arquitectura U1: CoMarket en memoria
+
+La arquitectura de la Unidad 1 se concentra en Programación Orientada a Objetos sin interfaz gráfica. El estudiante trabaja con una clase `Main` para probar desde consola, entidades del dominio y colecciones en memoria. Al cierre de la unidad, el proyecto se organiza con Maven y se prepara un ejecutable nativo con GraalVM.
+
+```mermaid
+flowchart TB
+    Main["Main / Consola"]
+
+    subgraph ServiceU1["Gestor / Servicio"]
+        direction TB
+        InterfaceU1["Interface<br/>contrato de operaciones CRUD"]
+        ImplementacionU1["Implementación<br/>implements"]
+        ValidacionesU1["Validaciones/Excepciones básicas"]
+    end
+
+    subgraph EntitiesU1["Entidades"]
+        direction TB
+        HerenciaU1["Herencia<br/>extends"]
+        ClasesU1["Clases del dominio"]
+    end
+
+    MemoriaU1[("ArrayList / memoria")]
+
+    Main --> InterfaceU1
+    InterfaceU1 ~~~ ImplementacionU1
+    ImplementacionU1 -. implements .-> InterfaceU1
+    InterfaceU1 -.-> EntitiesU1
+    ImplementacionU1 -.-> EntitiesU1
+    HerenciaU1 --> ClasesU1
+    ImplementacionU1 --> MemoriaU1
+```
+
+Nota metodológica: en U1 se trabaja una base elemental de separación de responsabilidades, alineada al principio de responsabilidad única de SOLID. `Main` coordina la ejecución, las entidades representan datos y comportamiento propio del dominio, y el gestor/servicio concentra operaciones CRUD y validaciones del flujo. No se introducen interfaces en entidades porque pueden complicar el modelo sin aportar claridad en esta etapa.
+
+Stack tecnológico U1:
+
+1. Java como lenguaje orientado a objetos.
+2. VS Code como entorno inicial de edición y ejecución.
+3. Proyecto Java simple para clases, objetos y pruebas desde `Main`.
+4. Consola para verificar comportamiento y resultados.
+5. ArrayList para almacenamiento en memoria.
+6. Maven desde S5 para organizar compilación y preparación de entrega.
+7. GraalVM desde S5 para generar ejecutable nativo.
+
+Flujo de trabajo U1:
+
+1. El estudiante crea un proyecto Java simple en VS Code.
+2. Implementa entidades iniciales del dominio y las prueba desde `Main`.
+3. Desde S2 mueve comportamiento y validaciones básicas hacia las clases.
+4. Desde S3 introduce una clase gestora para administrar colecciones y reducir lógica en `Main`.
+5. En S4 usa herencia en entidades cuando el dominio lo justifica y refuerza la separación de responsabilidades.
+6. En S5 formaliza el flujo Main-Gestor-Entidades-ArrayList y prepara la compilación nativa con Maven/GraalVM.
+7. En S6 presenta un producto de consola ejecutable, con modelo de dominio y CRUD en memoria.
+
+## Arquitectura CoMarket POO: U2 y U3
 
 La arquitectura final de CoMarket organiza la aplicación de escritorio en capas simples. La Vista contiene FXML, formularios y tablas; el Controlador atiende eventos de usuario, coordina validaciones y operaciones; las Entidades representan los objetos principales del sistema; y la Persistencia gestiona el acceso a la base de datos mediante DAO y el conector JDBC.
 
@@ -80,9 +134,7 @@ flowchart TB
     end
 
     subgraph Entities["Entidades"]
-        Producto["Producto"]
-        Venta["Venta"]
-        DetalleVenta["DetalleVenta"]
+        EntityNode["Clases del dominio"]
     end
 
     subgraph Persistence["Persistencia"]
@@ -103,9 +155,26 @@ flowchart TB
 
 Convención del diagrama: las flechas muestran el flujo principal entre capas. El Controlador recibe acciones de la Vista, valida datos, arma entidades y coordina las operaciones CRUD. El DAO trabaja con entidades para convertir datos relacionales en objetos y objetos en operaciones de persistencia; la comunicación con SQLite se realiza mediante JDBC.
 
-## 9. Modelo de referencia del proyecto integrador final
+Stack tecnológico U2:
 
-El siguiente diagrama se presenta como referencia del producto final del curso, una vez que el estudiante haya avanzado por modelado básico, encapsulamiento, colecciones, herencia, persistencia e interfaz gráfica.
+1. Java como lenguaje orientado a objetos.
+2. IntelliJ IDEA como entorno base de trabajo para JavaFX.
+3. Maven para dependencias, compilación y ejecución.
+4. JavaFX con FXML y controladores para interfaz gráfica.
+5. Scene Builder para diseño visual de vistas FXML.
+6. JDBC para acceso a datos.
+7. SQLite como base de datos local.
+8. MkDocs Material para documentación y evidencias.
+
+Stack tecnológico U3:
+
+1. Java, Maven, JavaFX, Scene Builder, JDBC y SQLite integrados en el producto final.
+2. GraalVM para generar el ejecutable nativo de CoMarket.
+3. MkDocs Material para documentación, evidencias y preparación de sustentación.
+
+## Detalle del componente Entidades
+
+El siguiente diagrama detalla el componente `Entidades` de la arquitectura CoMarket POO. Estas clases representan los objetos principales que usan el Controlador y el DAO para ejecutar operaciones de interfaz, validación y persistencia.
 
 ```mermaid
 classDiagram
@@ -133,29 +202,18 @@ classDiagram
     DetalleVenta "*" --> "1" Producto
 ```
 
-Durante las primeras sesiones, el modelado debe comenzar con clases simples y cercanas, por ejemplo `Producto` con `Categoria`, o bien `Cliente`, `Proveedor` y `Usuario` como entidades independientes. La generalización con `Persona` y sus clases derivadas se introduce recién en la sesión de herencia.
+En U2 y U3 este modelo se consolida alrededor del flujo comercial principal. La relación entre `Venta`, `DetalleVenta` y `Producto` sirve como referencia para integrar interfaz gráfica, entidades y persistencia relacional.
 
-## Flujo de trabajo
+Flujo de trabajo U2-U3:
 
-1. El alumno construye primero clases simples del dominio, por ejemplo `Producto`, `Categoria`, `Cliente`, `Proveedor` o `Usuario`.
-2. Cada sesión agrega una pieza verificable al proyecto: encapsulamiento, relaciones, colecciones, herencia, CRUD, persistencia o interfaz gráfica.
-3. El proyecto principal se desarrolla como aplicación JavaFX/Maven en IntelliJ IDEA.
-4. La documentación MkDocs funciona como guía del curso, bitácora de evidencias y referencia de avance.
-5. La Unidad 1 valida el modelo en memoria y las operaciones principales del dominio.
-6. La Unidad 2 incorpora arquitectura por capas, JDBC, DAO, base de datos relacional e interfaz gráfica.
-7. La Unidad 3 integra, estabiliza, documenta y prepara la sustentación técnica de CoMarket.
-8. La evaluación considera evidencias de diseño, implementación, funcionamiento y defensa individual del aporte técnico.
-
-## Stack tecnológico
-
-1. Java como lenguaje orientado a objetos.
-2. Maven para dependencias, compilación y ejecución.
-3. IntelliJ IDEA como entorno base de trabajo.
-4. JavaFX con FXML y controladores para interfaz gráfica.
-5. Scene Builder para diseño visual de vistas FXML.
-6. JDBC para acceso a datos.
-7. SQLite como base de datos local.
-8. MkDocs Material para documentación y evidencias.
+1. La Unidad 2 inicia un proyecto JavaFX/Maven en IntelliJ IDEA.
+2. El estudiante diseña vistas FXML con Scene Builder y conecta eventos mediante controladores.
+3. Primero implementa CRUD desde GUI en memoria para reutilizar lo aprendido en U1.
+4. Luego incorpora arquitectura por capas, JDBC, DAO y SQLite para reemplazar el almacenamiento en memoria por persistencia relacional.
+5. Valida formularios, maneja excepciones, prueba el flujo principal y corrige errores funcionales.
+6. La Unidad 3 integra pantallas, controladores, entidades, DAO, base de datos, documentación y evidencias.
+7. En S13 y S14 estabiliza el producto y genera el ejecutable nativo final con GraalVM.
+8. En S15 y S16 sustenta y defiende técnicamente CoMarket.
 
 ## Enlaces
 
@@ -165,11 +223,11 @@ Durante las primeras sesiones, el modelado debe comenzar con clases simples y ce
 - [S4: Herencia y polimorfismo](S04_Herencia_Polimorfismo.md)
 - [S5: CRUD en memoria con ArrayList](S05_CRUD_Memoria_ArrayList.md)
 - [S6: Evaluacion unidad 1](S06_Evaluacion_Unidad_1.md)
-- [S7: Arquitectura por capas y persistencia relacional](S07_JDBC_SQLite_Arquitectura.md)
-- [S8: Patron DAO y operaciones CRUD](S08_DAO_CRUD.md)
-- [S9: Interfaz grafica de usuario](S09_JavaFX_FXML_Eventos.md)
-- [S10: CRUD desde GUI](S10_CRUD_GUI.md)
-- [S11: Validacion e integracion](S11_Validacion_Integracion_Pruebas.md)
+- [S7: Interfaz grafica de usuario](S07_Interfaz_Grafica_Usuario.md)
+- [S8: CRUD desde GUI en memoria](S08_CRUD_GUI_Memoria.md)
+- [S9: Arquitectura por capas y persistencia relacional](S09_Arquitectura_Persistencia.md)
+- [S10: Patron DAO y operaciones CRUD persistentes desde GUI](S10_DAO_CRUD_GUI.md)
+- [S11: Validacion de datos y pruebas](S11_Validacion_Integracion_Pruebas.md)
 - [S12: Evaluacion unidad 2](S12_Evaluacion_Unidad_2.md)
 - [S13: Integracion del sistema](S13_Proyecto_Integrador_Ensamblaje.md)
 - [S14: Validacion y refinamiento](S14_Proyecto_Integrador_Refinamiento.md)

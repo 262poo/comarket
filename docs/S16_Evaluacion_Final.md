@@ -1,25 +1,95 @@
-# Sesión 16: Evaluación final del proyecto integrador
+# S16 - Evaluación final del proyecto integrador
 
-## Propósito
+## 1. Introducción
 
-Evaluar el sistema final considerando calidad del diseño, funcionamiento, integración técnica y capacidad de sustentación.
+Tiempo: según programación.
 
-## Evidencias esperadas
+### 1.1 Propósito
 
-- Proyecto ejecutable en IntelliJ.
-- Flujo principal funcionando de principio a fin.
-- Persistencia operativa con base de datos relacional.
-- GUI consistente y validada.
-- Documentación mínima para revisión.
+Cerrar el curso verificando competencias pendientes, recuperando sustentaciones y consolidando observaciones finales.
 
-## Criterios de evaluación
+### 1.2 Resultado de aprendizaje
 
-- Coherencia del modelo orientado a objetos.
-- Integración entre capas.
-- Calidad funcional del sistema.
-- Claridad en la sustentación técnica.
-- Nivel de refinamiento y cierre del producto.
+El estudiante demuestra individualmente dominio del producto CoMarket y de los conceptos principales del curso.
 
-## Entregable mínimo
+### 1.3 Producto de sesión
 
-Evaluación individual, recuperación de sustentaciones pendientes, corrección de observaciones y cierre académico del proyecto.
+Evaluación final, corrección de observaciones y cierre académico del proyecto.
+
+### 1.4 Ubicación en el curso
+
+- Cierre de U3.
+- Cierre del producto del curso.
+
+## 2. Explica
+
+Tiempo: 20 min.
+
+### 2.1 Criterios de cierre
+
+- Proyecto ejecutable.
+- Flujo principal funcionando.
+- Persistencia operativa.
+- GUI consistente.
+- Evidencias completas.
+- Defensa individual.
+- Correcciones atendidas.
+
+### 2.2 Producto final
+
+```mermaid
+flowchart TB
+    CoMarket["CoMarket"]
+    GUI["GUI JavaFX"]
+    Entidades["Entidades"]
+    Persistencia["DAO + SQLite"]
+    Ejecutable["Ejecutable nativo"]
+    Sustentacion["Sustentación"]
+
+    CoMarket --> GUI
+    CoMarket --> Entidades
+    CoMarket --> Persistencia
+    CoMarket --> Ejecutable
+    CoMarket --> Sustentacion
+```
+
+## 3. Aplica: evaluación final
+
+Tiempo: según programación.
+
+El estudiante puede ser evaluado mediante:
+
+1. Demostración individual.
+2. Preguntas técnicas.
+3. Corrección de observaciones.
+4. Revisión de evidencias.
+5. Recuperación de sustentación pendiente.
+
+## 4. Crea: cierre de evidencias
+
+Entrega final:
+
+- Repositorio actualizado.
+- Evidencias del producto.
+- Ejecutable o evidencia de generación.
+- Breve descripción del aporte individual.
+- Correcciones realizadas.
+
+## 5. Cierre evaluativo
+
+### 5.1 Resultados esperados
+
+- CoMarket se ejecuta correctamente.
+- El estudiante entiende la arquitectura.
+- El flujo principal está validado.
+- La persistencia funciona.
+- Las evidencias son suficientes.
+
+### 5.2 Preguntas de defensa
+
+1. ¿Qué aprendiste al pasar de consola a GUI?
+2. ¿Qué cambió al pasar de memoria a SQLite?
+3. ¿Qué responsabilidad tiene cada capa?
+4. ¿Cómo validarías un error reportado por el usuario?
+5. ¿Qué parte del proyecto demuestra mejor tu aprendizaje?
+
