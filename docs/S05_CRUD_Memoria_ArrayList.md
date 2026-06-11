@@ -53,7 +53,7 @@ Regla metodológica de la sesión:
 ```text
 Main muestra el menú.
 La interface declara las operaciones CRUD.
-La implementación ejecuta las operaciones sobre ArrayList.
+La implementación en memoria ejecuta las operaciones sobre ArrayList.
 Las entidades no almacenan; representan datos y comportamiento del dominio.
 ```
 
@@ -62,8 +62,8 @@ Las entidades no almacenan; representan datos y comportamiento del dominio.
 ```mermaid
 flowchart TB
     Main["Main / menú consola"]
-    Interface["Interface<br/>contrato CRUD"]
-    Gestor["Implementación<br/>implements"]
+    Interface["Interface<br/>contrato de operaciones CRUD"]
+    Gestor["Implementación en memoria<br/>implements"]
     Entidades["Entidades"]
     Lista[("ArrayList")]
     Build["Maven + GraalVM<br/>entrega"]
@@ -82,7 +82,7 @@ Tiempo: 2h.
 
 1. Crear un menú simple en consola.
 2. Definir una interface con operaciones CRUD.
-3. Crear una implementación con `implements`.
+3. Crear una implementación en memoria con `implements`.
 4. Implementar registrar.
 5. Implementar listar.
 6. Implementar buscar.
@@ -101,7 +101,7 @@ Completa el CRUD de una entidad del dominio y prepara evidencia de ejecución.
 
 Entrega evidencia breve con:
 
-- Flujo `Main -> Interface -> Implementación -> ArrayList`.
+- Flujo `Main -> Interface -> Implementación en memoria -> ArrayList`.
 - Capturas o salidas de cada operación CRUD.
 - Evidencia de compilación o preparación con Maven/GraalVM.
 
@@ -112,7 +112,7 @@ Tiempo: 20 min.
 ### 5.1 Resultados esperados
 
 - CRUD funcional en memoria.
-- Interface e implementación separadas de `Main`.
+- Interface e implementación en memoria separadas de `Main`.
 - Entidades encapsuladas.
 - Búsqueda y ordenamiento básicos.
 - Proyecto preparado para entrega ejecutable.
@@ -121,6 +121,6 @@ Tiempo: 20 min.
 
 1. ¿Qué responsabilidad tiene `Main`?
 2. ¿Qué responsabilidad tiene la interface?
-3. ¿Qué responsabilidad tiene la implementación?
+3. ¿Qué responsabilidad tiene la implementación en memoria?
 4. ¿Dónde se almacenan los datos?
 5. ¿Qué cambia al pasar de Java simple a Maven?

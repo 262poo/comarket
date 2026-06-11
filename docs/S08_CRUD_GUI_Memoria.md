@@ -38,7 +38,7 @@ Tiempo: 25 min.
 ### 2.1 Conceptos clave
 
 - Flujo Vista-Controlador-Servicio-Entidades-ArrayList.
-- Interface de servicio como contrato CRUD.
+- Interface de servicio como contrato de operaciones CRUD.
 - Implementación en memoria del contrato.
 - Lectura de datos desde formularios.
 - Delegación de operaciones al servicio CRUD.
@@ -52,7 +52,7 @@ Tiempo: 25 min.
 flowchart TB
     Vista["Formulario + TableView"]
     Controlador["Controlador"]
-    Contrato["Interface Servicio<br/>contrato CRUD"]
+    Contrato["Interface<br/>contrato de operaciones CRUD"]
     Servicio["Implementación en memoria<br/>implements"]
     Entidades["Entidades"]
     Memoria[("ArrayList")]

@@ -53,7 +53,7 @@ Tiempo: 25 min.
 flowchart TB
     Controlador["Controlador"]
     subgraph Servicio["Servicio"]
-        Contrato["Interface<br/>contrato CRUD"]
+        Contrato["Interface<br/>contrato de operaciones CRUD"]
         Implementacion["Implementación persistente<br/>implements"]
     end
 

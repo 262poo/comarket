@@ -43,7 +43,7 @@ flowchart TB
     Vista["Vista JavaFX"]
     Controlador["Controlador"]
     subgraph Servicio["Servicio"]
-        Contrato["Interface<br/>contrato CRUD"]
+        Contrato["Interface<br/>contrato de operaciones CRUD"]
         Implementacion["Implementación persistente<br/>implements"]
         Validaciones["Validaciones/Excepciones"]
     end

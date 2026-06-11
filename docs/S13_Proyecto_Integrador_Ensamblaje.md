@@ -52,7 +52,7 @@ flowchart TB
     Vista["Vistas FXML"]
     Controladores["Controladores"]
     subgraph Servicios["Servicios"]
-        Contrato["Interface<br/>contrato CRUD"]
+        Contrato["Interface<br/>contrato de operaciones CRUD"]
         Implementacion["Implementación persistente<br/>implements"]
         Validaciones["Validaciones/Excepciones"]
     end

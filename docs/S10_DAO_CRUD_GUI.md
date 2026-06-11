@@ -39,7 +39,7 @@ Tiempo: 25 min.
 
 - Patrón DAO.
 - Servicio como coordinador entre controlador y DAO.
-- Implementación persistente del contrato CRUD.
+- Implementación persistente del contrato de operaciones CRUD.
 - Mapeo objeto-relacional básico.
 - `insert`, `select`, `update`, `delete`.
 - Confirmación de eliminación.
@@ -52,7 +52,7 @@ Tiempo: 25 min.
 flowchart TB
     Vista["Vista JavaFX"]
     Controlador["Controlador"]
-    Contrato["Interface Servicio<br/>contrato CRUD"]
+    Contrato["Interface<br/>contrato de operaciones CRUD"]
     Servicio["Implementación persistente<br/>implements"]
     Entidades["Entidades"]
     DAO["DAO"]

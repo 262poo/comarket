@@ -44,7 +44,7 @@ Resultado esperado U2: el estudiante construye aplicaciones de escritorio organi
 | Sesión | Tema | Producto de sesión |
 |---|---|---|
 | S7 | **Interfaz gráfica de usuario:**<br>Aplicación de escritorio con JavaFX, FXML, Scene Builder, controladores, formularios, eventos y navegación básica | Pantallas y controladores integrados con eventos de usuario |
-| S8 | **CRUD desde GUI en memoria:**<br>Flujo Vista-Controlador-Servicio-Entidades-ArrayList, reutilización del contrato CRUD, carga de datos en tablas, registro, consulta, edición y eliminación | Flujo completo de operación desde formularios y tablas JavaFX usando memoria |
+| S8 | **CRUD desde GUI en memoria:**<br>Flujo Vista-Controlador-Servicio-Entidades-ArrayList, reutilización del contrato de operaciones CRUD, carga de datos en tablas, registro, consulta, edición y eliminación | Flujo completo de operación desde formularios y tablas JavaFX usando memoria |
 | S9 | **Arquitectura por capas y persistencia relacional:**<br>Organización por capas, clase de conexión, fundamentos de JDBC, base de datos relacional embebida | Proyecto preparado con paquetes, conexión relacional y separación de responsabilidades |
 | S10 | **Patrón DAO y operaciones CRUD persistentes desde GUI:**<br>Flujo Vista-Controlador-Servicio-Entidades-DAO, carga de datos en tablas, registro, consulta, edición, eliminación, confirmación de eliminación y manejo inicial de excepciones | CRUD persistente funcional desde formularios y tablas JavaFX |
 | S11 | **Validación de datos y pruebas del flujo principal:**<br>Validaciones de formulario, mensajes al usuario, manejo de excepciones, pruebas manuales y corrección de errores funcionales | GUI y persistencia validadas con pruebas del flujo principal |
@@ -65,7 +65,7 @@ Resultado esperado U3: el estudiante integra el modelo orientado a objetos, la i
 
 ## Arquitectura U1: CoMarket en memoria
 
-La arquitectura de la Unidad 1 se concentra en Programación Orientada a Objetos sin interfaz gráfica. El estudiante trabaja con una clase `Main` para probar desde consola, entidades del dominio y colecciones en memoria. Al cierre de la unidad, el proyecto se organiza con Maven y se prepara un ejecutable nativo con GraalVM.
+La arquitectura de la Unidad 1 se concentra en Programación Orientada a Objetos sin interfaz gráfica. El estudiante trabaja con una clase `Main` para probar desde consola, entidades del dominio, un contrato de servicio y una implementación en memoria con colecciones. Al cierre de la unidad, el proyecto se organiza con Maven y se prepara un ejecutable nativo con GraalVM.
 
 ```mermaid
 flowchart TB
@@ -74,7 +74,7 @@ flowchart TB
     subgraph ServiceU1["Gestor / Servicio"]
         direction TB
         InterfaceU1["Interface<br/>contrato de operaciones CRUD"]
-        ImplementacionU1["Implementación<br/>implements"]
+        ImplementacionU1["Implementación en memoria<br/>implements"]
         ValidacionesU1["Validaciones/Excepciones básicas"]
     end
 
@@ -95,7 +95,7 @@ flowchart TB
     ImplementacionU1 --> MemoriaU1
 ```
 
-Nota metodológica: en U1 se trabaja una base elemental de separación de responsabilidades, alineada al principio de responsabilidad única de SOLID. `Main` coordina la ejecución, las entidades representan datos y comportamiento propio del dominio, y el gestor/servicio concentra operaciones CRUD y validaciones del flujo. No se introducen interfaces en entidades porque pueden complicar el modelo sin aportar claridad en esta etapa.
+Nota metodológica: en U1 se trabaja una base elemental de separación de responsabilidades, alineada al principio de responsabilidad única de SOLID. `Main` coordina la ejecución, las entidades representan datos y comportamiento propio del dominio, la interface declara el contrato de operaciones CRUD y la implementación en memoria ejecuta las operaciones sobre `ArrayList`. No se introducen interfaces en entidades porque pueden complicar el modelo sin aportar claridad en esta etapa.
 
 Stack tecnológico U1:
 
@@ -119,7 +119,7 @@ Flujo de trabajo U1:
 
 ## Arquitectura CoMarket POO: U2 y U3
 
-La arquitectura final de CoMarket organiza la aplicación de escritorio en capas simples. La Vista contiene FXML, formularios y tablas; el Controlador atiende eventos de usuario; el Servicio coordina operaciones, validaciones y reglas del flujo; las Entidades representan los objetos principales del sistema; y la Persistencia gestiona el acceso a la base de datos mediante DAO y el conector JDBC.
+La arquitectura final de CoMarket organiza la aplicación de escritorio en capas simples. La Vista contiene FXML, formularios y tablas; el Controlador atiende eventos de usuario; el Servicio conserva el contrato de operaciones CRUD trabajado desde U1, pero en U2-U3 se implementa contra base de datos; las Entidades representan los objetos principales del sistema; y la Persistencia gestiona el acceso mediante DAO y el conector JDBC.
 
 ```mermaid
 flowchart TB
@@ -134,9 +134,9 @@ flowchart TB
     end
 
     subgraph Service["Servicio"]
-        ServiceInterface["Interface<br/>contrato CRUD"]
-        ServiceMemoryImpl["Implementación en memoria<br/>implements"]
-        ServiceDbImpl["Implementación persistente<br/>implements"]
+        direction TB
+        ServiceInterface["Interface<br/>contrato de operaciones CRUD"]
+        ServiceDbImpl["Implementación con base de datos<br/>implements"]
         ServiceValidation["Validaciones/Excepciones"]
     end
 
@@ -148,27 +148,22 @@ flowchart TB
         DAO["DAO"]
     end
 
-    MemoryStore[("ArrayList / memoria")]
     SQLite[("SQLite / comarket.db")]
 
     FXML --> Controllers
     Formularios --> Controllers
     Eventos --> Controllers
     Controllers --> ServiceInterface
-    ServiceMemoryImpl -. implements .-> ServiceInterface
+    ServiceInterface ~~~ ServiceDbImpl
     ServiceDbImpl -. implements .-> ServiceInterface
     ServiceInterface -.-> Entities
-    ServiceMemoryImpl -.-> Entities
     ServiceDbImpl -.-> Entities
-    ServiceMemoryImpl --> MemoryStore
     ServiceDbImpl --> DAO
-    ServiceMemoryImpl -.-> ServiceValidation
-    ServiceDbImpl -.-> ServiceValidation
     DAO --> Entities
     DAO -->|"JDBC"| SQLite
 ```
 
-Convención del diagrama: las flechas muestran el flujo principal entre capas. El Controlador recibe acciones de la Vista y delega operaciones al contrato del Servicio. En S8 se usa una implementación en memoria con `ArrayList`; desde S10 se agrega una implementación persistente que usa DAO y SQLite. Las Entidades se mantienen como las mismas clases del dominio; no se cambian por pasar de memoria a base de datos. El DAO trabaja con entidades para convertir datos relacionales en objetos y objetos en operaciones de persistencia; la comunicación con SQLite se realiza mediante JDBC.
+Convención del diagrama: las flechas muestran el flujo principal entre capas. El Controlador recibe acciones de la Vista y delega operaciones al contrato del Servicio. En U1 ese contrato se implementa en memoria con `ArrayList`; en U2-U3 se implementa contra base de datos mediante DAO y SQLite. Las Entidades se mantienen como las mismas clases del dominio; no se cambian por pasar de memoria a base de datos. El DAO trabaja con entidades para convertir datos relacionales en objetos y objetos en operaciones de persistencia; la comunicación con SQLite se realiza mediante JDBC.
 
 Stack tecnológico U2:
 
