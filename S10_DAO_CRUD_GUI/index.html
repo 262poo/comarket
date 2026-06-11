@@ -1404,11 +1404,11 @@
 <h3 id="11-proposito">1.1 Propósito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
 <p>Implementar el patrón DAO para ejecutar CRUD persistente desde la interfaz gráfica.</p>
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
-<p>El estudiante separa el acceso a datos en DAO, mapea entidades a registros, ejecuta consultas SQL y conecta el flujo GUI-Controlador-Entidades-DAO.</p>
+<p>El estudiante separa el acceso a datos en DAO, mapea entidades a registros, ejecuta consultas SQL y agrega una implementación persistente del mismo contrato de servicio.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
 <p>CRUD persistente funcional desde formularios y tablas JavaFX.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
-<p>La GUI ya funciona con memoria y la base de datos ya existe. Ahora toca unir ambos mundos sin poner SQL directamente en el controlador.</p>
+<p>La GUI ya funciona con memoria y la base de datos ya existe. Ahora toca agregar una implementación persistente del servicio para coordinar DAO y SQLite sin cambiar las entidades ni poner SQL en el controlador.</p>
 <p>Pregunta guía:</p>
 <div class="highlight"><pre><span></span><code>¿Cómo guardamos y recuperamos datos desde la GUI sin mezclar SQL con la pantalla?
 </code></pre></div>
@@ -1422,6 +1422,8 @@
 <h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Patrón DAO.</li>
+<li>Servicio como coordinador entre controlador y DAO.</li>
+<li>Implementación persistente del contrato CRUD.</li>
 <li>Mapeo objeto-relacional básico.</li>
 <li><code>insert</code>, <code>select</code>, <code>update</code>, <code>delete</code>.</li>
 <li>Confirmación de eliminación.</li>
@@ -1432,13 +1434,17 @@
 <pre class="mermaid"><code>flowchart TB
     Vista["Vista JavaFX"]
     Controlador["Controlador"]
+    Contrato["Interface Servicio&lt;br/&gt;contrato CRUD"]
+    Servicio["Implementación persistente&lt;br/&gt;implements"]
     Entidades["Entidades"]
     DAO["DAO"]
     SQLite[("SQLite / comarket.db")]
 
     Vista --&gt; Controlador
-    Controlador --&gt; Entidades
-    Controlador --&gt; DAO
+    Controlador --&gt; Contrato
+    Servicio -. implements .-&gt; Contrato
+    Servicio -.-&gt; Entidades
+    Servicio --&gt; DAO
     DAO --&gt; Entidades
     DAO --&gt;|"JDBC"| SQLite</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
@@ -1450,7 +1456,9 @@
 <li>Implementar <code>actualizar</code>.</li>
 <li>Implementar <code>eliminar</code>.</li>
 <li>Cargar la tabla desde la base de datos.</li>
-<li>Conectar botones de la GUI con el DAO.</li>
+<li>Conectar botones de la GUI con el contrato del servicio, no directamente con SQL.</li>
+<li>Crear o adaptar una implementación persistente del servicio.</li>
+<li>Hacer que la implementación persistente use DAO para guardar y consultar.</li>
 <li>Confirmar eliminación y manejar errores básicos.</li>
 </ol>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
@@ -1458,10 +1466,10 @@
 <p>Completa el CRUD persistente para una entidad adicional o mejora el módulo principal.</p>
 <p>Entrega evidencia breve con:</p>
 <ul>
-<li>Código DAO.</li>
+<li>Código de la interface del servicio, implementación persistente y DAO.</li>
 <li>Capturas de GUI.</li>
 <li>Registros persistidos en SQLite.</li>
-<li>Explicación del flujo Vista-Controlador-Entidades-DAO.</li>
+<li>Explicación del flujo Vista-Controlador-Servicio-Entidades-DAO.</li>
 </ul>
 <h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
@@ -1469,12 +1477,16 @@
 <ul>
 <li>El DAO concentra las consultas SQL.</li>
 <li>El controlador no contiene SQL directo.</li>
+<li>El servicio coordina operaciones, validaciones y DAO.</li>
+<li>Las entidades se mantienen como las mismas clases del dominio.</li>
 <li>La GUI registra, lista, actualiza y elimina datos persistentes.</li>
 <li>La tabla se recarga desde SQLite.</li>
 </ul>
 <h3 id="52-preguntas-de-defensa">5.2 Preguntas de defensa<a class="headerlink" href="#52-preguntas-de-defensa" title="Permanent link">&para;</a></h3>
 <ol>
 <li>¿Qué responsabilidad tiene el DAO?</li>
+<li>¿Qué responsabilidad tiene la interface del servicio?</li>
+<li>¿Qué responsabilidad tiene la implementación persistente?</li>
 <li>¿Por qué no poner SQL en el controlador?</li>
 <li>¿Cómo conviertes un registro en objeto?</li>
 <li>¿Cómo verificas que el dato quedó guardado?</li>

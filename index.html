@@ -1337,7 +1337,7 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
 </tr>
 <tr>
 <td>S8</td>
-<td><strong>CRUD desde GUI en memoria:</strong><br>Flujo Vista-Controlador-Entidades, carga de datos en tablas, registro, consulta, edición, eliminación y uso de ArrayList</td>
+<td><strong>CRUD desde GUI en memoria:</strong><br>Flujo Vista-Controlador-Servicio-Entidades-ArrayList, reutilización del contrato CRUD, carga de datos en tablas, registro, consulta, edición y eliminación</td>
 <td>Flujo completo de operación desde formularios y tablas JavaFX usando memoria</td>
 </tr>
 <tr>
@@ -1347,7 +1347,7 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
 </tr>
 <tr>
 <td>S10</td>
-<td><strong>Patrón DAO y operaciones CRUD persistentes desde GUI:</strong><br>Flujo Vista-Controlador-Entidades-DAO, carga de datos en tablas, registro, consulta, edición, eliminación, confirmación de eliminación y manejo inicial de excepciones</td>
+<td><strong>Patrón DAO y operaciones CRUD persistentes desde GUI:</strong><br>Flujo Vista-Controlador-Servicio-Entidades-DAO, carga de datos en tablas, registro, consulta, edición, eliminación, confirmación de eliminación y manejo inicial de excepciones</td>
 <td>CRUD persistente funcional desde formularios y tablas JavaFX</td>
 </tr>
 <tr>
@@ -1445,7 +1445,7 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
 <li>En S6 presenta un producto de consola ejecutable, con modelo de dominio y CRUD en memoria.</li>
 </ol>
 <h2 id="arquitectura-comarket-poo-u2-y-u3">Arquitectura CoMarket POO: U2 y U3<a class="headerlink" href="#arquitectura-comarket-poo-u2-y-u3" title="Permanent link">&para;</a></h2>
-<p>La arquitectura final de CoMarket organiza la aplicación de escritorio en capas simples. La Vista contiene FXML, formularios y tablas; el Controlador atiende eventos de usuario, coordina validaciones y operaciones; las Entidades representan los objetos principales del sistema; y la Persistencia gestiona el acceso a la base de datos mediante DAO y el conector JDBC.</p>
+<p>La arquitectura final de CoMarket organiza la aplicación de escritorio en capas simples. La Vista contiene FXML, formularios y tablas; el Controlador atiende eventos de usuario; el Servicio coordina operaciones, validaciones y reglas del flujo; las Entidades representan los objetos principales del sistema; y la Persistencia gestiona el acceso a la base de datos mediante DAO y el conector JDBC.</p>
 <pre class="mermaid"><code>flowchart TB
     subgraph View["Vista"]
         FXML["Vistas FXML"]
@@ -1457,6 +1457,13 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
         Controllers["JavaFX Controllers"]
     end
 
+    subgraph Service["Servicio"]
+        ServiceInterface["Interface&lt;br/&gt;contrato CRUD"]
+        ServiceMemoryImpl["Implementación en memoria&lt;br/&gt;implements"]
+        ServiceDbImpl["Implementación persistente&lt;br/&gt;implements"]
+        ServiceValidation["Validaciones/Excepciones"]
+    end
+
     subgraph Entities["Entidades"]
         EntityNode["Clases del dominio"]
     end
@@ -1465,17 +1472,25 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
         DAO["DAO"]
     end
 
+    MemoryStore[("ArrayList / memoria")]
     SQLite[("SQLite / comarket.db")]
 
     FXML --&gt; Controllers
     Formularios --&gt; Controllers
     Eventos --&gt; Controllers
-    Controllers --&gt; Validaciones["Excepciones/Validaciones"]
-    Controllers --&gt; Entities
-    Controllers --&gt; DAO
+    Controllers --&gt; ServiceInterface
+    ServiceMemoryImpl -. implements .-&gt; ServiceInterface
+    ServiceDbImpl -. implements .-&gt; ServiceInterface
+    ServiceInterface -.-&gt; Entities
+    ServiceMemoryImpl -.-&gt; Entities
+    ServiceDbImpl -.-&gt; Entities
+    ServiceMemoryImpl --&gt; MemoryStore
+    ServiceDbImpl --&gt; DAO
+    ServiceMemoryImpl -.-&gt; ServiceValidation
+    ServiceDbImpl -.-&gt; ServiceValidation
     DAO --&gt; Entities
     DAO --&gt;|"JDBC"| SQLite</code></pre>
-<p>Convención del diagrama: las flechas muestran el flujo principal entre capas. El Controlador recibe acciones de la Vista, valida datos, arma entidades y coordina las operaciones CRUD. El DAO trabaja con entidades para convertir datos relacionales en objetos y objetos en operaciones de persistencia; la comunicación con SQLite se realiza mediante JDBC.</p>
+<p>Convención del diagrama: las flechas muestran el flujo principal entre capas. El Controlador recibe acciones de la Vista y delega operaciones al contrato del Servicio. En S8 se usa una implementación en memoria con <code>ArrayList</code>; desde S10 se agrega una implementación persistente que usa DAO y SQLite. Las Entidades se mantienen como las mismas clases del dominio; no se cambian por pasar de memoria a base de datos. El DAO trabaja con entidades para convertir datos relacionales en objetos y objetos en operaciones de persistencia; la comunicación con SQLite se realiza mediante JDBC.</p>
 <p>Stack tecnológico U2:</p>
 <ol>
 <li>Java como lenguaje orientado a objetos.</li>
@@ -1523,10 +1538,10 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
 <ol>
 <li>La Unidad 2 inicia un proyecto JavaFX/Maven en IntelliJ IDEA.</li>
 <li>El estudiante diseña vistas FXML con Scene Builder y conecta eventos mediante controladores.</li>
-<li>Primero implementa CRUD desde GUI en memoria para reutilizar lo aprendido en U1.</li>
-<li>Luego incorpora arquitectura por capas, JDBC, DAO y SQLite para reemplazar el almacenamiento en memoria por persistencia relacional.</li>
+<li>Primero implementa CRUD desde GUI en memoria reutilizando el contrato de servicio y una implementación basada en <code>ArrayList</code>.</li>
+<li>Luego incorpora JDBC, DAO y SQLite agregando una implementación persistente del mismo contrato de servicio.</li>
 <li>Valida formularios, maneja excepciones, prueba el flujo principal y corrige errores funcionales.</li>
-<li>La Unidad 3 integra pantallas, controladores, entidades, DAO, base de datos, documentación y evidencias.</li>
+<li>La Unidad 3 integra pantallas, controladores, servicios, entidades, DAO, base de datos, documentación y evidencias.</li>
 <li>En S13 y S14 estabiliza el producto y genera el ejecutable nativo final con GraalVM.</li>
 <li>En S15 y S16 sustenta y defiende técnicamente CoMarket.</li>
 </ol>

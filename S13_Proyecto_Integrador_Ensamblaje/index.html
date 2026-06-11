@@ -1404,7 +1404,7 @@
 <h3 id="11-proposito">1.1 Propósito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
 <p>Integrar los módulos construidos en U1 y U2 en una versión coherente del proyecto CoMarket.</p>
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
-<p>El estudiante consolida pantallas, controladores, entidades, DAO, base de datos, recursos y dependencias en una sola aplicación ejecutable.</p>
+<p>El estudiante consolida pantallas, controladores, servicios, entidades, DAO, base de datos, recursos y dependencias en una sola aplicación ejecutable.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
 <p>CoMarket ensamblado con flujo principal integrado y preparación inicial para ejecutable nativo.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
@@ -1433,13 +1433,23 @@
 <pre class="mermaid"><code>flowchart TB
     Vista["Vistas FXML"]
     Controladores["Controladores"]
+    subgraph Servicios["Servicios"]
+        Contrato["Interface&lt;br/&gt;contrato CRUD"]
+        Implementacion["Implementación persistente&lt;br/&gt;implements"]
+        Validaciones["Validaciones/Excepciones"]
+    end
+
     Entidades["Entidades"]
     DAO["DAO"]
     SQLite[("SQLite")]
 
     Vista --&gt; Controladores
-    Controladores --&gt; Entidades
-    Controladores --&gt; DAO
+    Controladores --&gt; Contrato
+    Implementacion -. implements .-&gt; Contrato
+    Contrato -.-&gt; Entidades
+    Implementacion -.-&gt; Entidades
+    Implementacion -.-&gt; Validaciones
+    Implementacion --&gt; DAO
     DAO --&gt; Entidades
     DAO --&gt; SQLite</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
@@ -1448,7 +1458,7 @@
 <li>Revisar estructura de paquetes.</li>
 <li>Eliminar duplicidades.</li>
 <li>Integrar pantallas y controladores.</li>
-<li>Revisar entidades usadas por la GUI y el DAO.</li>
+<li>Revisar interface del servicio, implementación persistente, entidades usadas por la GUI y el DAO.</li>
 <li>Verificar conexión con SQLite.</li>
 <li>Ejecutar el flujo principal de punta a punta.</li>
 <li>Revisar configuración Maven y recursos.</li>

@@ -1424,6 +1424,7 @@
 <li>Validación de formularios.</li>
 <li>Mensajes al usuario.</li>
 <li>Excepciones personalizadas o controladas.</li>
+<li>Validaciones del servicio.</li>
 <li>Manejo de errores de persistencia.</li>
 <li>Pruebas manuales.</li>
 <li>Casos válidos, inválidos y límite.</li>
@@ -1433,13 +1434,18 @@
     Usuario["Usuario"]
     Vista["Vista"]
     Controlador["Controlador"]
+    Contrato["Interface Servicio&lt;br/&gt;contrato CRUD"]
+    Servicio["Implementación persistente&lt;br/&gt;implements"]
     Validaciones["Excepciones / Validaciones"]
     DAO["DAO"]
 
     Usuario --&gt; Vista
     Vista --&gt; Controlador
-    Controlador --&gt; Validaciones
-    Controlador --&gt; DAO</code></pre>
+    Controlador --&gt; Contrato
+    Servicio -. implements .-&gt; Contrato
+    Contrato -.-&gt; Validaciones
+    Servicio --&gt; Validaciones
+    Servicio --&gt; DAO</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <ol>
@@ -1448,7 +1454,8 @@
 <li>Validar rangos.</li>
 <li>Mostrar alertas claras.</li>
 <li>Controlar selección nula en tabla.</li>
-<li>Controlar errores de DAO.</li>
+<li>Ubicar validaciones del flujo principal en el servicio.</li>
+<li>Controlar errores de DAO desde la implementación persistente.</li>
 <li>Probar escenarios normales y fallidos.</li>
 <li>Registrar una matriz mínima de pruebas.</li>
 </ol>
@@ -1460,6 +1467,7 @@
 <li>Matriz de pruebas.</li>
 <li>Capturas de alertas.</li>
 <li>Un error controlado.</li>
+<li>Una validación ubicada en el servicio.</li>
 <li>Una corrección aplicada.</li>
 </ul>
 <h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
@@ -1468,12 +1476,14 @@
 <ul>
 <li>La GUI valida datos antes de guardar.</li>
 <li>Los errores se comunican al usuario.</li>
+<li>El servicio concentra validaciones del flujo y excepciones controladas.</li>
 <li>Existen pruebas manuales documentadas.</li>
 <li>El flujo principal queda listo para evaluación U2.</li>
 </ul>
 <h3 id="52-preguntas-de-defensa">5.2 Preguntas de defensa<a class="headerlink" href="#52-preguntas-de-defensa" title="Permanent link">&para;</a></h3>
 <ol>
 <li>¿Qué validaciones implementaste?</li>
+<li>¿Qué validación pertenece al controlador y cuál al servicio?</li>
 <li>¿Qué errores controlaste?</li>
 <li>¿Qué caso límite probaste?</li>
 <li>¿Cómo sabes que el flujo principal funciona?</li>
