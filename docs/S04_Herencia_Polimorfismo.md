@@ -10,11 +10,11 @@ Desarrollar dos mecanismos distintos de POO: herencia con entidades del dominio 
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante crea jerarquías simples con `extends`, define una interface como contrato de operaciones y crea una implementación con `implements`.
+El estudiante crea jerarquías simples con `extends`, define una interface como contrato de operaciones y crea dos implementaciones con `implements`.
 
 ### 1.3 Producto de sesión
 
-Entidades con herencia y un primer contrato polimórfico con interface e implementación, probados desde `Main`.
+Entidades con herencia y un primer contrato polimórfico con dos implementaciones, probados desde `Main`.
 
 ### 1.4 Motivación de la sesión
 
@@ -62,23 +62,26 @@ Las entidades no implementan contratos de servicio; representan el dominio.
 flowchart TB
     subgraph Entidades["Entidades"]
         direction TB
-        Base["Clase base"]
-        SubA["Subclase A<br/>extends"]
-        SubB["Subclase B<br/>extends"]
+        Base["Persona<br/>clase base"]
+        SubA["Cliente<br/>extends"]
+        SubB["Empleado<br/>extends"]
     end
 
     subgraph Polimorfismo["Polimorfismo con implements"]
         direction TB
         Contrato["Interface<br/>contrato de operaciones"]
-        Implementacion["Implementación<br/>implements"]
+        ImplementacionMemoria["Implementación en memoria<br/>implements"]
+        ImplementacionBD["Implementación con base de datos<br/>implements"]
     end
 
     Main["Main / pruebas"]
 
     SubA --> Base
     SubB --> Base
-    Contrato ~~~ Implementacion
-    Implementacion -. implements .-> Contrato
+    Contrato ~~~ ImplementacionMemoria
+    Contrato ~~~ ImplementacionBD
+    ImplementacionMemoria -. implements .-> Contrato
+    ImplementacionBD -. implements .-> Contrato
     Main --> Base
     Main --> Contrato
 ```
@@ -93,22 +96,23 @@ Tiempo: 2h.
 4. Sobrescribir un método relevante en las subclases.
 5. Probar herencia desde `Main` usando una referencia de la clase base.
 6. Definir una interface como contrato de operaciones.
-7. Crear una clase que implemente el contrato con `implements`.
-8. Probar polimorfismo desde `Main` usando una referencia de la interface.
-9. Verificar que herencia e interface resuelven problemas distintos.
+7. Crear una implementación en memoria con `implements`.
+8. Crear una segunda implementación del mismo contrato para evidenciar el polimorfismo.
+9. Probar polimorfismo desde `Main` usando una referencia de la interface.
+10. Verificar que herencia e interface resuelven problemas distintos.
 
 ## 4. Crea: actividad autónoma
 
 Tiempo: 2h fuera del aula.
 
-Aplica herencia en una parte del dominio y define una interface sencilla con una implementación.
+Aplica herencia en una parte del dominio y define una interface sencilla con dos implementaciones.
 
 Entrega evidencia breve con:
 
 - Clases involucradas.
 - Justificación de `extends`.
 - Interface creada.
-- Clase que usa `implements`.
+- Dos clases que usan `implements`.
 - Prueba polimórfica con referencia a la interface.
 - Salida de consola.
 
@@ -121,7 +125,7 @@ Tiempo: 20 min.
 - La herencia tiene sentido en el dominio.
 - Hay sobrescritura o comportamiento especializado.
 - El estudiante diferencia herencia de polimorfismo con interfaces.
-- Existe una implementación que usa `implements`.
+- Existen dos implementaciones que usan `implements` para el mismo contrato.
 - El estudiante evita herencia artificial.
 
 ### 5.2 Preguntas de defensa
@@ -129,5 +133,5 @@ Tiempo: 20 min.
 1. ¿Qué clases participan en la jerarquía?
 2. ¿Por qué esa relación sí justifica `extends`?
 3. ¿Qué declara la interface?
-4. ¿Qué clase usa `implements`?
+4. ¿Qué clases usan `implements`?
 5. ¿Dónde se evidencia el polimorfismo?
