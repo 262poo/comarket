@@ -62,21 +62,21 @@ ClienteServiceBD anticipa la implementación con base de datos que luego usará 
 
 ```mermaid
 flowchart TB
-    subgraph Entidades["Entidades"]
-        direction TB
-        Base["Persona<br/>&lt;&lt;abstract&gt;&gt;"]
-        SubA["Cliente"]
-        SubB["Empleado"]
-    end
+    Main["Main / pruebas"]
 
-    subgraph Polimorfismo["Polimorfismo con interfaces"]
+    subgraph Polimorfismo["Servicios (Polimorfismo)"]
         direction TB
         Contrato["ClienteService<br/>&lt;&lt;interface&gt;&gt;"]
         ImplementacionMemoria["ClienteServiceMemoria"]
         ImplementacionBD["ClienteServiceBD"]
     end
 
-    Main["Main / pruebas"]
+    subgraph Entidades["Entidades (Herencia)"]
+        direction TB
+        Base["Persona<br/>&lt;&lt;abstract&gt;&gt;"]
+        SubA["Cliente"]
+        SubB["Empleado"]
+    end
 
     Base ~~~ SubA
     Base ~~~ SubB

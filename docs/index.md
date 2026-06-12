@@ -114,8 +114,8 @@ Flujo de trabajo U1:
 2. Implementa entidades iniciales del dominio y las prueba desde `Main`.
 3. Desde S2 mueve comportamiento y validaciones básicas hacia las clases.
 4. Desde S3 introduce una clase gestora para administrar colecciones y reducir lógica en `Main`.
-5. En S4 usa herencia en entidades cuando el dominio lo justifica y aplica polimorfismo con interface e `implements`.
-6. En S5 formaliza el flujo Main-Interface-Implementación en memoria-Entidades-ArrayList y prepara la compilación nativa con Maven/GraalVM.
+5. En S4 refuerza el modelo con herencia cuando el dominio lo justifica y aplica polimorfismo con interface e `implements`; este bloque puede trabajarse en paralelo con el avance del gestor.
+6. En S5 integra lo anterior en el flujo Main-Interface-Implementación en memoria-Entidades-ArrayList y prepara la compilación nativa con Maven/GraalVM.
 7. En S6 presenta un producto de consola ejecutable, con modelo de dominio y CRUD en memoria.
 
 ## Arquitectura CoMarket POO: U2 y U3

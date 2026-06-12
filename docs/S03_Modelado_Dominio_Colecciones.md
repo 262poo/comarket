@@ -18,7 +18,7 @@ Modelo inicial con entidades relacionadas y gestor básico sobre una colección.
 
 ### 1.4 Motivación de la sesión
 
-Un sistema comercial no trabaja con objetos aislados. Un producto puede pertenecer a una categoría, una venta puede tener detalles, y un gestor puede administrar varios objetos.
+Un sistema de dominio no trabaja con objetos aislados. Un cliente puede tener ventas, un proveedor puede estar asociado a productos, y un gestor puede administrar varios objetos en memoria.
 
 Pregunta guía:
 
@@ -75,7 +75,7 @@ Tiempo: 2h.
 
 1. Crear dos entidades relacionadas.
 2. Representar una relación uno a muchos con `ArrayList`.
-3. Crear una clase gestora, por ejemplo `GestorProductos` o `Inventario`.
+3. Crear una clase gestora, por ejemplo `GestorClientes`.
 4. Agregar métodos para registrar y listar objetos.
 5. Probar el flujo desde `Main`.
 6. Evitar que `Main` acceda directamente a todos los detalles de la colección.
