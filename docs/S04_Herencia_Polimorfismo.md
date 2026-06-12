@@ -1,36 +1,36 @@
-# S4 - Herencia y polimorfismo
+﻿# S4 - Herencia y polimorfismo
 
-## 1. Introduccion
+## 1. Introducción
 
 Tiempo: 20 min.
 
-### 1.1 Proposito
+### 1.1 Propósito
 
-Diferenciar dos mecanismos de POO que suelen confundirse: herencia para especializar entidades del dominio y polimorfismo con interfaces para programar contra contratos.
+Diferenciar dos mecanismos de POO qué suelen confundirse: herencia para especializar entidades del dominio y polimorfismo con interfaces para programar contra contratos.
 
 ### 1.2 Resultado de aprendizaje
 
 El estudiante crea una clase base abstracta con subclases mediante `extends`, define una interface de servicio y crea dos implementaciones mediante `implements`.
 
-### 1.3 Producto de sesion
+### 1.3 Producto de sesión
 
-Modelo con `Persona`, `Cliente` y `Empleado`, mas un contrato `ClienteService` con `ClienteServiceMemoria` y `ClienteServiceBD` como preparacion para memoria y persistencia.
+Modelo con `Persona`, `Cliente` y `Empleado`, más un contrato `ClienteService` con `ClienteServiceMemoria` y `ClienteServiceBD` cómo preparación para memoria y persistencia.
 
-### 1.4 Motivacion de la sesion
+### 1.4 Motivación de la sesión
 
-En POO no toda reutilizacion se resuelve con herencia. Una entidad puede especializarse porque existe una relacion es-un, mientras que un servicio puede tener varias implementaciones porque se quiere conservar el mismo contrato aunque cambie la forma de ejecutar la operacion.
+En POO no toda reutilizacion se resuelve con herencia. Una entidad puede especializarse porque existe una relación es-un, mientras qué un servicio puede tener varias implementaciones porque se quiere conservar el mismo contrato aunque cambie la forma de ejecutar la operación.
 
-Pregunta guia:
+Pregunta guía:
 
 ```text
-Cuando usamos extends en entidades y cuando usamos implements en servicios?
+Cuándo usamos extends en entidades y cuándo usamos implements en servicios?
 ```
 
-### 1.5 Ubicacion en el curso
+### 1.5 Ubicación en el curso
 
 - Unidad: U1.
-- Producto de unidad: aplicacion de consola en memoria.
-- Avance de sesion: se formaliza la diferencia entre entidades con herencia y servicios polimorficos.
+- Producto de unidad: aplicación de consola en memoria.
+- Avance de sesión: se formaliza la diferencia entre entidades con herencia y servicios polimorficos.
 
 ## 2. Explica
 
@@ -41,22 +41,22 @@ Tiempo: 25 min.
 | Concepto | Idea central | Ejemplo |
 |---|---|---|
 | Herencia | Una clase especializada hereda de una clase base. | `Cliente extends Persona` |
-| Clase abstracta | Clase base que organiza atributos o comportamiento comun. | `abstract class Persona` |
+| Clase abstracta | Clase base qué organiza atributos o comportamiento comun. | `abstract class Persona` |
 | Sobrescritura | Una subclase redefine un comportamiento heredado. | `mostrarPerfil()` |
 | Interface | Contrato de operaciones, sin decidir la implementacion concreta. | `ClienteService` |
 | Implements | Una clase cumple el contrato de una interface. | `ClienteServiceMemoria implements ClienteService` |
 | Polimorfismo | Una misma referencia puede apuntar a implementaciones distintas. | `ClienteService service = new ClienteServiceMemoria()` |
 
-Regla metodologica de la sesion:
+Regla métodológica de la sesión:
 
 ```text
-Herencia: se aplica en entidades cuando existe relacion es-un.
+Herencia: se aplica en entidades cuando existe relación es-un.
 Interface: se aplica en servicios para declarar operaciones esperadas.
 Implementacion: ejecuta el contrato, en memoria o con base de datos.
 Las entidades no implementan contratos de servicio.
 ```
 
-### 2.2 Arquitectura de la sesion
+### 2.2 Arquitectura de la sesión
 
 ```mermaid
 classDiagram
@@ -109,13 +109,13 @@ classDiagram
 
 Convencion del diagrama: flecha continua con triangulo representa `extends`; flecha punteada con triangulo representa `implements`; flecha punteada simple representa dependencia o uso.
 
-## 3. Aplica: actividad practica guiada
+## 3. Aplica: actividad practica guíada
 
 Tiempo: 2h.
 
-### 3.1 Identificar una relacion es-un
+### 3.1 Identificar una relación es-un
 
-Usa una relacion natural del dominio:
+Usa una relación natural del dominio:
 
 ```text
 Cliente es una Persona.
@@ -124,7 +124,7 @@ Producto no es una Persona.
 Venta no es una Persona.
 ```
 
-La herencia se usa solo cuando la frase "es un/a" tiene sentido real.
+La herencia se usa solo cuándo la frase "es un/a" tiene sentido real.
 
 ### 3.2 Crear la clase base abstracta
 
@@ -242,7 +242,7 @@ public class ClienteServiceMemoria implements ClienteService {
 }
 ```
 
-Implementacion con base de datos, aun como preparacion conceptual:
+Implementacion con base de datos, aun cómo preparación conceptual:
 
 ```java
 import java.util.ArrayList;
@@ -282,7 +282,7 @@ public class Main {
 }
 ```
 
-## 4. Crea: actividad autonoma
+## 4. Crea: actividad autónoma
 
 Tiempo: 2h fuera del aula.
 
@@ -292,7 +292,7 @@ Entrega evidencia breve con:
 
 - Una clase base abstracta.
 - Dos subclases con `extends`.
-- Un metodo sobrescrito con `@Override`.
+- Un método sobrescrito con `@Override`.
 - Una interface de servicio.
 - Dos implementaciones con `implements`.
 - Prueba desde `Main` usando una referencia de la clase base y una referencia de la interface.
@@ -303,7 +303,7 @@ Tiempo: 20 min.
 
 ### 5.1 Resultados esperados
 
-- La herencia responde a una relacion es-un.
+- La herencia responde a una relación es-un.
 - La clase base no reemplaza a las entidades concretas.
 - La interface declara operaciones y no guarda datos.
 - Las implementaciones cumplen el contrato con `implements`.
@@ -311,8 +311,8 @@ Tiempo: 20 min.
 
 ### 5.2 Preguntas de defensa
 
-1. Por que `Cliente` puede heredar de `Persona`?
-2. Por que `ClienteService` debe ser interface?
-3. Que clase implementa el contrato en memoria?
-4. Que ventaja da declarar `ClienteService service = new ClienteServiceMemoria()`?
-5. Por que no conviene que una entidad implemente un contrato de servicio?
+1. Por qué `Cliente` puede heredar de `Persona`?
+2. Por qué `ClienteService` debe ser interface?
+3. Qué clase implementa el contrato en memoria?
+4. Qué ventaja da declarar `ClienteService service = new ClienteServiceMemoria()`?
+5. Por qué no conviene qué una entidad implemente un contrato de servicio?

@@ -1,5 +1,5 @@
-site_name: POO - CoMarket
-site_description: Libro digital de apoyo para el curso de Programacion Orientada a Objetos - UPeU 2026
+﻿site_name: POO - CoMarket
+site_description: Libro digital de apoyo para el curso de Programación Orientada a Objetos - UPeU 2026
 site_author: UPeU
 copyright: Angel Sullon @asullom - UPeU 2026
 
@@ -44,14 +44,14 @@ extra_javascript:
 
 nav:
   - Inicio: index.md
-  - 1. Fundamentos de la Programacion Orientada a Objetos:
+  - 1. Fundamentos de la Programación Orientada a Objetos:
     - 1 Clases, objetos y responsabilidad: S01_Clases_Objetos.md
     - 2 Encapsulamiento y constructores: S02_Encapsulamiento_Constructores.md
     - 3 Asociacion, agregacion/composicion y colecciones: S03_Modelado_Dominio_Colecciones.md
     - 4 Herencia y polimorfismo: S04_Herencia_Polimorfismo.md
     - 5 CRUD en memoria con ArrayList: S05_CRUD_Memoria_ArrayList.md
     - 6 Evaluacion unidad 1: S06_Evaluacion_Unidad_1.md
-  - 2. Aplicacion de Escritorio con Persistencia de Datos:
+  - 2. Aplicación de Escritorio con Persistencia de Datos:
     - 7 Interfaz grafica de usuario: S07_Interfaz_Grafica_Usuario.md
     - 8 CRUD desde GUI en memoria: S08_CRUD_GUI_Memoria.md
     - 9 Arquitectura por capas y persistencia relacional: S09_Arquitectura_Persistencia.md

@@ -1,4 +1,4 @@
-# Crear proyecto JavaFX + Maven + SQLite en IntelliJ IDEA
+﻿# Crear proyecto JavaFX + Maven + SQLite en IntelliJ IDEA
 
 ## 1. Crear proyecto JavaFX con Maven
 

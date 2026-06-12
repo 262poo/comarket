@@ -1,46 +1,46 @@
-# S2 - Encapsulamiento, constructores y control del estado
+﻿# S2 - Encapsulamiento, constructores y control del estado
 
-## 1. Introduccion
+## 1. Introducción
 
 Tiempo: 20 min.
 
-### 1.1 Proposito
+### 1.1 Propósito
 
-Proteger el estado de los objetos mediante atributos privados, constructores y getters/setters limpios, e introducir la separacion basica de responsabilidades con `ProductoService`.
+Proteger el estado de los objetos mediante atributos privados, constructores y getters/setters limpios, e introducir la separacion básica de responsabilidades con `ProductoService`.
 
 ### 1.2 Resultado de aprendizaje
 
 El estudiante aplica encapsulamiento, crea constructores simples y sobrecargados, consulta datos mediante getters, usa setters limpios para asignaciones directas, separa operaciones en un servicio inicial y prueba el flujo desde `Main`.
 
-### 1.3 Producto de sesion
+### 1.3 Producto de sesión
 
-Clase `Producto` encapsulada con constructores y getters/setters limpios, mas `ProductoService` inicial con operaciones sobre productos.
+Clase `Producto` encapsulada con constructores y getters/setters limpios, más `ProductoService` inicial con operaciones sobre productos.
 
-### 1.4 Motivacion de la sesion
+### 1.4 Motivación de la sesión
 
-#### 1.4.1 Caso: estado invalido en objetos del dominio
+#### 1.4.1 Caso: estado inválido en objetos del dominio
 
-En S1 se creo una clase simple para entender clase, objeto, atributos, metodos, estado, comportamiento, responsabilidad inicial y abstraccion. Esa version permite aprender rapido, pero tambien permite que `Main` cambie los datos sin control.
+En S1 se creo una clase simple para entender clase, objeto, atributos, métodos, estado, comportamiento, responsabilidad inicial y abstracción. Esa versión permite aprender rapido, pero también permite qué `Main` cambie los datos sin control.
 
 Ejemplos de problemas:
 
 - Un producto creado solo con los datos iniciales disponibles.
-- Un producto al que luego se le completa precio y stock.
+- Un producto al qué luego se le completa precio y stock.
 - Un precio negativo.
 - Un stock negativo.
 - Un cambio de precio sin ninguna regla.
 
-Pregunta guia:
+Pregunta guía:
 
 ```text
-Como hacemos que un objeto proteja su propio estado y no dependa de Main para corregir datos?
+Cómo hacemos que un objeto proteja su propio estado y no dependa de Main para corregir datos?
 ```
 
-### 1.5 Ubicacion en el curso
+### 1.5 Ubicación en el curso
 
-- Unidad: U1 - Fundamentos de la Programacion Orientada a Objetos.
-- Producto de unidad: aplicacion de consola en memoria con entidades, relaciones, colecciones y CRUD.
-- Avance del producto en esta sesion: `Producto` deja de ser una clase con datos expuestos y empieza a controlar su estado.
+- Unidad: U1 - Fundamentos de la Programación Orientada a Objetos.
+- Producto de unidad: aplicación de consola en memoria con entidades, relaciones, colecciones y CRUD.
+- Avance del producto en esta sesión: `Producto` deja de ser una clase con datos expuestos y empieza a controlar su estado.
 
 Roadmap para elaborar el producto de la unidad:
 
@@ -48,7 +48,7 @@ Roadmap para elaborar el producto de la unidad:
 flowchart TB
     S1["S1<br/>Coche, Persona y Producto<br/>clase y objetos"]
     S2["S2<br/>Producto encapsulado<br/>HOY"]
-    S3["S3<br/>Asociacion, agregacion/composicion<br/>y colecciones"]
+    S3["S3<br/>Asociación, agregación/composición<br/>y colecciones"]
     S4["S4<br/>Herencia y polimorfismo<br/>bloque aplicado"]
     S5["S5<br/>Servicio en memoria<br/>CRUD con ArrayList"]
     S6["S6<br/>Producto U1<br/>consola ejecutable"]
@@ -72,28 +72,28 @@ Tiempo: 25 min.
 
 ### 2.1 Conceptos clave
 
-El encapsulamiento evita que cualquier parte del programa modifique directamente el estado interno de un objeto. La clase controla como se crea, como cambia y que reglas debe cumplir.
+El encapsulamiento evita qué cualquier parte del programa modifique directamente el estado interno de un objeto. La clase controla cómo se crea, cómo cambia y qué reglas debe cumplir.
 
-En S1, "responsabilidad" se entendio como caracteristicas y acciones que corresponden a una clase. En S2 esa idea se mejora: la clase tambien debe proteger sus datos para no quedar en un estado invalido.
+En S1, "responsabilidad" se entendio como características y acciones qué corresponden a una clase. En S2 esa idea se mejora: la clase también debe proteger sus datos para no quedar en un estado inválido.
 
-Conceptos de la sesion:
+Conceptos de la sesión:
 
 - `private` para proteger atributos.
 - Constructor para inicializar objetos.
 - Getters para consultar estado.
 - Getters y setters limpios.
-- Metodos de cambio con nombre de accion.
-- Validaciones basicas.
+- Métodos de cambio con nombre de acción.
+- Validaciones básicas.
 - Invariantes simples.
-- Metodo de comportamiento.
+- Método de comportamiento.
 
-Nota metodologica:
+Nota métodológica:
 
 ```text
 S1 permite ver estado y comportamiento de forma directa.
 S2 empieza a controlar el estado con encapsulamiento.
 
-Todavia no se trabajan interfaces como contrato.
+Todavía no se trabajan interfaces como contrato.
 Eso queda para S4.
 ```
 
@@ -109,27 +109,27 @@ Nota sobre getters/setters:
 
 ```text
 Los getters y setters deben quedar simples.
-Mas adelante, en U2 o U3, este codigo mecanico podria reemplazarse
-con Lombok usando anotaciones como @Getter y @Setter.
+Más adelante, en U2 o U3, este código mecánico podría reemplazarse
+con Lombok usando anotaciones cómo @Getter y @Setter.
 
 Las reglas importantes no deben esconderse en getters/setters.
-Esas reglas se expresan mejor en metodos con nombre de accion,
+Esas reglas se expresan mejor en métodos con nombre de acción,
 por ejemplo dentro de ProductoService.
 ```
 
 ### 2.2 S de SOLID: una responsabilidad principal
 
-La S de SOLID se conoce como principio de responsabilidad unica. En esta sesion se aplica de forma basica:
+La S de SOLID se conoce cómo principio de responsabilidad única. En esta sesión se aplica de forma básica:
 
 ```text
-Producto sabe que datos tiene.
-ProductoService sabe que operaciones se hacen sobre un producto.
+Producto sabe qué datos tiene.
+ProductoService sabe qué operaciones se hacen sobre un producto.
 Main solo prueba el flujo.
 ```
 
-No se busca una arquitectura completa todavia. Solo se evita que `Producto` y `Main` hagan todo.
+No se busca una arquitectura completa todavía. Solo se evita qué `Producto` y `Main` hagan todo.
 
-### 2.3 Arquitectura de la sesion
+### 2.3 Arquitectura de la sesión
 
 ```mermaid
 classDiagram
@@ -163,7 +163,7 @@ classDiagram
     ProductoService ..> Producto : usa
 ```
 
-Convencion del diagrama: cada clase muestra sus atributos y metodos principales; `-` indica atributo privado y `..>` indica dependencia o uso temporal desde la prueba.
+Convencion del diagrama: cada clase muestra sus atributos y métodos principales; `-` indica atributo privado y `..>` indica dependencia o uso temporal desde la prueba.
 
 Regla practica:
 
@@ -184,22 +184,22 @@ Regla practica:
 4. Agregar getters y setters limpios.
 5. Crear `ProductoService`.
 6. Mover operaciones con regla hacia `ProductoService`.
-7. Probar casos validos e invalidos desde `Main`.
+7. Probar casos validos e inválidos desde `Main`.
 
-### 2.5 Errores frecuentes y diagnostico
+### 2.5 Errores frecuentes y diagnóstico
 
-| Problema | Causa probable | Solucion |
+| Problema | Causa probable | Solución |
 |---|---|---|
-| No se puede acceder al atributo | El atributo ahora es `private` | Usar getter o metodo de comportamiento |
+| No se puede acceder al atributo | El atributo ahora es `private` | Usar getter o método de comportamiento |
 | El objeto se crea con datos incompletos | No se eligio bien el constructor | Usar sobrecarga de constructores segun el caso |
 | Precio negativo | No se valido el dato | Rechazar valores negativos |
 | Stock negativo | No se valido el dato | Rechazar valores negativos |
-| Setter contiene demasiada logica | Se mezclo codigo mecanico con reglas | Dejar setter limpio y mover la regla a `ProductoService` |
-| `Main` contiene demasiadas reglas | No se separo la operacion | Llevar operaciones simples a `ProductoService` |
+| Setter contiene demasiada lógica | Se mezclo código mecánico con reglas | Dejar setter limpio y mover la regla a `ProductoService` |
+| `Main` contiene demasiadas reglas | No se separo la operación | Llevar operaciones simples a `ProductoService` |
 
-## 3. Aplica: actividad practica guiada
+## 3. Aplica: actividad practica guíada
 
-En el laboratorio, el docente guia la transformacion de `Producto` desde una clase con atributos expuestos hacia una clase encapsulada que controla su propio estado.
+En el laboratorio, el docente guía la transformacion de `Producto` desde una clase con atributos expuestos hacia una clase encapsulada qué controla su propio estado.
 
 Tiempo: 2h.
 
@@ -255,11 +255,11 @@ public class Producto {
 }
 ```
 
-### 3.3 Probar el codigo de S1 y observar el error
+### 3.3 Probar el código de S1 y observar el error
 
-**Producto del paso:** evidencia de que `private` protege el acceso directo al estado.
+**Producto del paso:** evidencia de qué `private` protege el acceso directo al estado.
 
-Volver a probar el codigo usado en S1:
+Volver a probar el código usado en S1:
 
 ```java
 Producto producto1 = new Producto();
@@ -281,23 +281,23 @@ El codigo ya no compila porque codigo, nombre, precio y stock
 ahora son atributos private.
 ```
 
-Lectura metodologica:
+Lectura métodológica:
 
 ```text
 Eso es encapsulamiento:
 el estado interno ya no se modifica directamente desde Main.
 
 Para crear el objeto se usara constructor.
-Para consultar datos se usaran getters.
-Para asignar datos simples se usaran setters.
-Para cambios con regla se usaran metodos con nombre de accion.
+Para consultar datos se usarán getters.
+Para asignar datos simples se usarán setters.
+Para cambios con regla se usarán métodos con nombre de acción.
 ```
 
 ### 3.4 Crear constructores
 
 **Producto del paso:** objetos creados con distintos datos iniciales.
 
-El constructor sirve para inicializar el objeto. En la practica no siempre se reciben todos los campos al crear un objeto; por eso se puede usar sobrecarga de constructores y completar algunos datos despues con setters o metodos con nombre de accion.
+El constructor sirve para inicializar el objeto. En la practica no siempre se reciben todos los campos al crear un objeto; por eso se puede usar sobrecarga de constructores y completar algunos datos después con setters o métodos con nombre de acción.
 
 ```java
 public Producto(String codigo, String nombre, double precio, int stock) {
@@ -315,18 +315,18 @@ public Producto(String codigo, String nombre) {
 }
 ```
 
-Nota metodologica:
+Nota métodológica:
 
 ```text
 Esto se llama sobrecarga de constructores:
 una misma clase puede tener varios constructores con parametros diferentes.
 
-No es polimorfismo todavia; el polimorfismo se trabaja en S4.
+No es polimorfismo todavía; el polimorfismo se trabaja en S4.
 ```
 
 ### 3.5 Agregar getters y setters limpios
 
-**Producto del paso:** consulta y asignacion controlada por acceso, sin logica pesada.
+**Producto del paso:** consulta y asignacion controlada por acceso, sin lógica pesada.
 
 ```java
 public String getCodigo() {
@@ -354,18 +354,18 @@ public void setStock(int stock) {
 }
 ```
 
-Regla metodologica:
+Regla métodológica:
 
 ```text
 Getter devuelve.
 Setter asigna.
 
-Si hay una regla importante, se crea un metodo con nombre de accion.
+Si hay una regla importante, se crea un método con nombre de acción.
 ```
 
 ### 3.6 Probar constructores, getters y setters limpios
 
-**Producto del paso:** evidencia de que el objeto se crea con constructor y se consulta/modifica mediante metodos publicos.
+**Producto del paso:** evidencia de qué el objeto se crea con constructor y se consulta/modifica mediante métodos publicos.
 
 Probar desde `Main`:
 
@@ -389,7 +389,7 @@ public class Main {
 }
 ```
 
-Lectura metodologica:
+Lectura métodológica:
 
 ```text
 Ya no se usa producto.codigo ni producto.precio directamente.
@@ -402,7 +402,7 @@ Los setters completan datos simples.
 
 **Producto del paso:** operaciones sobre productos separadas de la entidad.
 
-Antes de crear el servicio, retirar de `Producto` las operaciones que ahora pasaran a otra responsabilidad:
+Antes de crear el servicio, retirar de `Producto` las operaciones qué ahora pasaran a otra responsabilidad:
 
 ```text
 Salen de Producto:
@@ -411,7 +411,7 @@ Salen de Producto:
 - aumentarStock()
 ```
 
-`Producto` queda como clase de datos encapsulada: atributos privados, constructores, getters y setters limpios. Las operaciones pasan a `ProductoService`.
+`Producto` queda cómo clase de datos encapsulada: atributos privados, constructores, getters y setters limpios. Las operaciones pasan a `ProductoService`.
 
 Crear `ProductoService.java`:
 
@@ -454,18 +454,18 @@ public class ProductoService {
 }
 ```
 
-Regla metodologica:
+Regla métodológica:
 
 ```text
 Producto conserva sus datos.
 ProductoService realiza operaciones sobre Producto.
 Main coordina la prueba.
 
-En esta sesion, Main no debe llamar setters para aplicar reglas del negocio.
+En esta sesión, Main no debe llamar setters para aplicar reglas del negocio.
 Para eso usa ProductoService.
 ```
 
-### 3.8 Agregar validaciones basicas en ProductoService
+### 3.8 Agregar validaciones básicas en ProductoService
 
 **Producto del paso:** reglas simples ubicadas fuera de getters/setters.
 
@@ -482,7 +482,7 @@ public void actualizarPrecio(Producto producto, double nuevoPrecio) {
 
 ### 3.9 Probar desde Main
 
-**Producto del paso:** casos validos e invalidos ejecutados desde consola.
+**Producto del paso:** casos validos e inválidos ejecutados desde consola.
 
 ```java
 public class Main {
@@ -500,24 +500,24 @@ public class Main {
         productoService.disminuirStock(producto, 3);
         productoService.mostrarInformacion(producto);
 
-        // Caso invalido para observar la validacion
+        // Caso inválido para observar la validación
         // productoService.actualizarPrecio(producto, -10.0);
     }
 }
 ```
 
-### 3.10 Registrar decisiones de encapsulamiento y responsabilidad
+### 3.10 Registrar decisiónes de encapsulamiento y responsabilidad
 
-**Producto del paso:** explicacion breve de que sabe cada clase y que hace cada clase.
+**Producto del paso:** explicacion breve de qué sabe cada clase y qué hace cada clase.
 
 Completar una tabla simple:
 
-| Elemento | Decision |
+| Elemento | Decisión |
 |---|---|
-| `codigo` | Se inicializa en constructor porque identifica al producto |
+| `código` | Se inicializa en constructor porque identifica al producto |
 | `nombre` | Se inicializa en constructor porque describe al producto |
 | `Producto` | Sabe sus datos y expone getters/setters limpios |
-| `ProductoService` | Realiza operaciones como actualizar precio y mover stock |
+| `ProductoService` | Realiza operaciones cómo actualizar precio y mover stock |
 | `Main` | Crea objetos y prueba el flujo |
 
 Reglas simples:
@@ -526,10 +526,10 @@ Reglas simples:
 El constructor inicializa.
 Los getters consultan.
 Los setters asignan datos de forma simple.
-ProductoService contiene metodos con nombre de accion.
+ProductoService contiene métodos con nombre de acción.
 ```
 
-## 4. Crea: actividad autonoma
+## 4. Crea: actividad autónoma
 
 Tiempo: 2h fuera del aula.
 
@@ -539,7 +539,7 @@ Entrega evidencia breve con:
 
 - Clase encapsulada.
 - Constructores sobrecargados.
-- Getters o metodos necesarios.
+- Getters o métodos necesarios.
 - Setters limpios.
 - Clase service con al menos dos operaciones.
 - Prueba valida desde `Main`.
@@ -553,19 +553,19 @@ Tiempo: 20 min.
 
 - Las clases no exponen atributos publicos.
 - Los constructores inicializan objetos.
-- Hay sobrecarga de constructores cuando se necesita crear objetos con distintos datos iniciales.
+- Hay sobrecarga de constructores cuándo se necesita crear objetos con distintos datos iniciales.
 - Los getters/setters se mantienen simples.
 - Existe una clase `ProductoService` o equivalente.
-- Las validaciones basicas estan en el service.
-- Los cambios importantes de estado pasan por metodos del service.
+- Las validaciones básicas están en el service.
+- Los cambios importantes de estado pasan por métodos del service.
 - `Main` se usa para probar, no para controlar todas las reglas.
-- El estudiante explica que reglas simples protege su clase mediante setters o metodos.
+- El estudiante explica qué reglas simples protege su clase mediante setters o métodos.
 
 ### 5.2 Preguntas de defensa
 
-1. Por que los atributos deben ser privados?
-2. Para que sirve la sobrecarga de constructores?
-3. Por que los getters/setters deben quedar limpios?
-4. Que responsabilidad tiene `Producto`?
-5. Que responsabilidad tiene `ProductoService`?
-6. Que responsabilidad no deberia tener `Main`?
+1. Por qué los atributos deben ser privados?
+2. Para qué sirve la sobrecarga de constructores?
+3. Por qué los getters/setters deben quedar limpios?
+4. Qué responsabilidad tiene `Producto`?
+5. Qué responsabilidad tiene `ProductoService`?
+6. Qué responsabilidad no deberia tener `Main`?

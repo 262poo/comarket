@@ -1,42 +1,42 @@
-# S3 - Asociacion, agregacion/composicion y colecciones
+﻿# S3 - Asociación, agregación/composición y colecciones
 
-## 1. Introduccion
+## 1. Introducción
 
 Tiempo: 20 min.
 
-### 1.1 Proposito
+### 1.1 Propósito
 
-Representar relaciones basicas entre objetos mediante asociacion, agregacion/composicion y colecciones en memoria, antes de convertir esas ideas en operaciones CRUD.
+Representar relaciones básicas entre objetos mediante asociación, agregación/composición y colecciones en memoria, antes de convertir esas ideas en operaciones CRUD.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante identifica entidades del dominio, representa asociaciones, agregacion y composicion, y usa `ArrayList` para manejar grupos de objetos relacionados.
+El estudiante identifica entidades del dominio, representa asociaciónes, agregación y composición, y usa `ArrayList` para manejar grupos de objetos relacionados.
 
-### 1.3 Producto de sesion
+### 1.3 Producto de sesión
 
-Modelo inicial con varias entidades relacionadas, colecciones administradas desde un servicio inicial y pruebas desde `Main`.
+Modelo inicial con varias entidades relaciónadas, colecciones administradas desde un servicio inicial y pruebas desde `Main`.
 
-### 1.4 Motivacion de la sesion
+### 1.4 Motivación de la sesión
 
-En un sistema real no existe una sola clase. Una venta se relaciona con un cliente, un proveedor puede estar asociado a productos, y una venta puede estar compuesta por detalles. La Programacion Orientada a Objetos ayuda a convertir esas relaciones del problema en clases conectadas.
+En un sistema real no existe una sola clase. Una venta se relacióna con un cliente, un proveedor puede estar asociado a productos, y una venta puede estar compuestá por detalles. La Programación Orientada a Objetos ayuda a convertir esas relaciones del problema en clases conectadas.
 
-Pregunta guia:
+Pregunta guía:
 
 ```text
-Como pasamos de clases aisladas a un modelo de dominio con objetos relacionados?
+Cómo pasamos de clases aisladas a un modelo de dominio con objetos relacionados?
 ```
 
-### 1.5 Ubicacion en el curso
+### 1.5 Ubicación en el curso
 
 - Unidad: U1.
-- Producto de unidad: aplicacion de consola en memoria con entidades, relaciones, colecciones y operaciones principales.
-- Avance de sesion: se construye el mapa inicial del dominio y se prepara la base para herencia, polimorfismo y CRUD.
+- Producto de unidad: aplicación de consola en memoria con entidades, relaciones, colecciones y operaciones principales.
+- Avance de sesión: se construye el mapa inicial del dominio y se prepara la base para herencia, polimorfismo y CRUD.
 
 ```mermaid
 flowchart TB
     S1["S1<br/>Entidad simple<br/>clase y objetos"]
     S2["S2<br/>Entidad encapsulada<br/>constructores y validaciones"]
-    S3["S3<br/>Asociacion, agregacion/composicion<br/>y colecciones"]
+    S3["S3<br/>Asociación, agregación/composición<br/>y colecciones"]
     S4["S4<br/>Herencia y polimorfismo<br/>bloque aplicado"]
     S5["S5<br/>Servicio en memoria<br/>CRUD con ArrayList"]
     S6["S6<br/>Producto U1<br/>consola ejecutable"]
@@ -52,7 +52,7 @@ flowchart TB
     class S3 today;
 ```
 
-Hoy no se busca terminar todo el sistema. Se busca que el estudiante entienda que el dominio se arma con varias clases, cada una con una responsabilidad, y que las relaciones deben aparecer en el codigo de manera clara.
+Hoy no se busca terminar todo el sistema. Se busca qué el estudiante entienda qué el dominio se arma con varias clases, cada una con una responsabilidad, y qué las relaciones deben aparecer en el código de manera clara.
 
 ## 2. Explica
 
@@ -62,23 +62,23 @@ Tiempo: 25 min.
 
 | Concepto | Idea central | Ejemplo |
 |---|---|---|
-| Entidad | Clase que representa un elemento importante del dominio. | `Cliente`, `Proveedor`, `Producto`, `Venta` |
-| Asociacion | Un objeto conoce o usa a otro objeto. | `Venta` tiene un `Cliente` |
-| Agregacion | Un objeto agrupa otros, pero esos objetos pueden existir por separado. | `Proveedor` relacionado con varios `Producto` |
-| Composicion | Un objeto contiene partes que dependen de el. | `Venta` contiene `DetalleVenta` |
-| Coleccion | Estructura para manejar varios objetos del mismo tipo. | `ArrayList<Producto>` |
-| Servicio inicial | Clase que administra una coleccion y evita cargar toda la logica en `Main`. | `ProductoService`, `VentaService` |
+| Entidad | Clase qué representa un elemento importante del dominio. | `Cliente`, `Proveedor`, `Producto`, `Venta` |
+| Asociación | Un objeto conoce o usa a otro objeto. | `Venta` tiene un `Cliente` |
+| Agregación | Un objeto agrupa otros, pero esos objetos pueden existir por separado. | `Proveedor` relaciónado con varios `Producto` |
+| Composición | Un objeto contiene partes qué dependen de el. | `Venta` contiene `DetalleVenta` |
+| Colección | Estructura para manejar varios objetos del mismo tipo. | `ArrayList<Producto>` |
+| Servicio inicial | Clase qué administra una colección y evita cargar toda la lógica en `Main`. | `ProductoService`, `VentaService` |
 
-Regla metodologica de la sesion:
+Regla métodológica de la sesión:
 
 ```text
-Las entidades representan informacion y comportamiento del dominio.
-Las relaciones muestran como colaboran los objetos.
+Las entidades representan información y comportamiento del dominio.
+Las relaciones muestran cómo colaboran los objetos.
 Las colecciones administran grupos de objetos.
 Main solo crea escenarios de prueba.
 ```
 
-### 2.2 Arquitectura de la sesion
+### 2.2 Arquitectura de la sesión
 
 ```mermaid
 classDiagram
@@ -128,16 +128,16 @@ classDiagram
     VentaService o-- "0..*" Venta : ArrayList
 
     Proveedor "1" o-- "0..*" Producto : agrega
-    Venta "1" --> "1" Cliente : asociacion
-    Venta "1" *-- "1..*" DetalleVenta : composicion
-    DetalleVenta "*" --> "1" Producto : asociacion
+    Venta "1" --> "1" Cliente : asociación
+    Venta "1" *-- "1..*" DetalleVenta : composición
+    DetalleVenta "*" --> "1" Producto : asociación
 ```
 
-Convencion del diagrama: `-->` representa asociacion, `o--` representa agregacion, `*--` representa composicion y `..>` representa dependencia de prueba o uso temporal. En esta sesion no se implementa todavia la arquitectura completa de servicio; solo se prepara el dominio para que S5 pueda convertir las operaciones en un CRUD en memoria.
+Convencion del diagrama: `-->` representa asociación, `o--` representa agregación, `*--` representa composición y `..>` representa dependencia de prueba o uso temporal. En esta sesión no se implementa todavía la arquitectura completa de servicio; solo se prepara el dominio para qué S5 pueda convertir las operaciones en un CRUD en memoria.
 
-### 2.3 Tipos de relacion
+### 2.3 Tipos de relación
 
-Asociacion:
+Asociación:
 
 ```java
 public class Venta {
@@ -145,9 +145,9 @@ public class Venta {
 }
 ```
 
-La venta se relaciona con un cliente. El cliente puede existir aunque no tenga ventas registradas.
+La venta se relacióna con un cliente. El cliente puede existir aunque no tenga ventas registradas.
 
-Agregacion:
+Agregación:
 
 ```java
 public class Proveedor {
@@ -155,9 +155,9 @@ public class Proveedor {
 }
 ```
 
-El proveedor agrupa productos. Para la practica inicial se entiende como una relacion de agrupacion: los productos son parte del modelo y pueden administrarse tambien desde un servicio.
+El proveedor agrupa productos. Para la practica inicial se entiende cómo una relación de agrupacion: los productos son parte del modelo y pueden administrarse también desde un servicio.
 
-Composicion:
+Composición:
 
 ```java
 public class Venta {
@@ -169,15 +169,15 @@ Los detalles existen para explicar una venta. Si se elimina la venta, sus detall
 
 ### 2.4 Errores frecuentes
 
-| Error | Correccion esperada |
+| Error | Corrección esperada |
 |---|---|
 | Poner todas las variables en `Main`. | Crear entidades con responsabilidades claras. |
 | Usar solo una clase para todo el dominio. | Separar `Cliente`, `Producto`, `Venta`, `DetalleVenta` y otros conceptos. |
 | Confundir una lista con una entidad. | La lista administra varios objetos; la entidad representa un objeto del dominio. |
-| Crear relaciones sin sentido. | Cada relacion debe responder a una regla del problema. |
+| Crear relaciones sin sentido. | Cada relación debe responder a una regla del problema. |
 | Hacer CRUD completo antes de modelar. | Primero se entiende el dominio; luego se agregan operaciones. |
 
-## 3. Aplica: actividad practica guiada
+## 3. Aplica: actividad practica guíada
 
 Tiempo: 2h.
 
@@ -188,7 +188,7 @@ Parte de un caso simple de comercio:
 ```text
 Un sistema registra clientes, proveedores, productos y ventas.
 Cada venta pertenece a un cliente.
-Cada venta tiene uno o mas detalles.
+Cada venta tiene uno o más detalles.
 Cada detalle indica un producto, cantidad y precio.
 Un proveedor puede estar asociado a varios productos.
 ```
@@ -231,7 +231,7 @@ public class Producto {
 }
 ```
 
-Ejemplo de `Proveedor` con agregacion:
+Ejemplo de `Proveedor` con agregación:
 
 ```java
 import java.util.ArrayList;
@@ -257,7 +257,7 @@ public class Proveedor {
 }
 ```
 
-### 3.3 Representar una venta con composicion
+### 3.3 Representar una venta con composición
 
 `DetalleVenta` representa una parte de la venta:
 
@@ -307,7 +307,7 @@ public class Venta {
 
 ### 3.4 Crear un servicio inicial
 
-El servicio inicial administra una coleccion. Todavia no implementa un contrato CRUD formal; eso se completa en S5.
+El servicio inicial administra una colección. Todavía no implementa un contrato CRUD formal; eso se completa en S5.
 
 ```java
 import java.util.ArrayList;
@@ -361,28 +361,28 @@ public class Main {
 
 ### 3.6 Preguntas durante la practica
 
-1. Que clases son entidades del dominio?
-2. Que relacion existe entre `Venta` y `Cliente`?
-3. Por que `DetalleVenta` depende de `Venta`?
-4. Que clase administra una coleccion?
-5. Que logica ya no deberia quedarse en `Main`?
+1. Qué clases son entidades del dominio?
+2. Qué relación existe entre `Venta` y `Cliente`?
+3. Por qué `DetalleVenta` depende de `Venta`?
+4. Qué clase administra una colección?
+5. Qué lógica ya no deberia quedarse en `Main`?
 
-## 4. Crea: actividad autonoma
+## 4. Crea: actividad autónoma
 
 Tiempo: 2h fuera del aula.
 
-Amplia el modelo con una relacion adicional. Puedes elegir una de estas opciones:
+Amplia el modelo con una relación adicional. Puedes elegir una de estas opciones:
 
-- `Categoria` relacionada con varios `Producto`.
-- `Empleado` relacionado con varias `Venta`.
-- `Proveedor` relacionado con varios `Producto`.
-- `Cliente` relacionado con varias `Venta`.
+- `Categoria` relaciónada con varios `Producto`.
+- `Empleado` relaciónado con varias `Venta`.
+- `Proveedor` relaciónado con varios `Producto`.
+- `Cliente` relaciónado con varias `Venta`.
 
 Entrega evidencia breve con:
 
 - Diagrama simple del modelo.
-- Codigo de al menos tres entidades relacionadas.
-- Uso de una coleccion con `ArrayList`.
+- Código de al menos tres entidades relaciónadas.
+- Uso de una colección con `ArrayList`.
 - Una clase de servicio inicial.
 - Salida de consola mostrando objetos relacionados.
 
@@ -393,15 +393,15 @@ Tiempo: 20 min.
 ### 5.1 Resultados esperados
 
 - El modelo tiene varias entidades del dominio.
-- Las relaciones no estan sueltas; aparecen representadas en atributos o colecciones.
-- Hay al menos una relacion de uno a muchos.
+- Las relaciones no están sueltas; aparecen representadas en atributos o colecciones.
+- Hay al menos una relación de uno a muchos.
 - Se usa `ArrayList` para administrar varios objetos.
-- `Main` solo arma escenarios de prueba y no concentra toda la logica.
+- `Main` solo arma escenarios de prueba y no concentra toda la lógica.
 
 ### 5.2 Preguntas de defensa
 
-1. Que diferencia hay entre entidad y coleccion?
-2. Que relacion modelaste como asociacion?
-3. Que relacion modelaste como agregacion o composicion?
-4. Por que una venta necesita detalles?
-5. Que parte de este modelo se podria convertir en CRUD en S5?
+1. Qué diferencia hay entre entidad y colección?
+2. Qué relación modelaste cómo asociación?
+3. Qué relación modelaste cómo agregación o composición?
+4. Por qué una venta necesita detalles?
+5. Qué parte de este modelo se podría convertir en CRUD en S5?

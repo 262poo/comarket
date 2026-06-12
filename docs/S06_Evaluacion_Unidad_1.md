@@ -1,36 +1,36 @@
-# S6 - Evaluacion de la unidad 1
+﻿# S6 - Evaluación de la unidad 1
 
-## 1. Introduccion
+## 1. Introducción
 
 Tiempo: 20 min.
 
-### 1.1 Proposito
+### 1.1 Propósito
 
-Validar el producto de la Unidad 1: aplicacion de consola en memoria con modelo orientado a objetos, encapsulamiento, relaciones, herencia o interfaces, servicio CRUD y evidencia de ejecucion.
+Validar el producto de la Unidad 1: aplicación de consola en memoria con modelo orientado a objetos, encapsulamiento, relaciones, herencia o interfaces, servicio CRUD y evidencia de ejecución.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante demuestra que puede construir, ejecutar, explicar y defender una aplicacion de consola usando fundamentos de Programacion Orientada a Objetos.
+El estudiante demuestra qué puede construir, ejecutar, explicar y defender una aplicación de consola usando fundamentos de Programación Orientada a Objetos.
 
-### 1.3 Producto de sesion
+### 1.3 Producto de sesión
 
 Producto U1 integrado: entidades, servicios, `ArrayList`, CRUD en memoria, menu de consola, proyecto Maven y evidencia de entrega ejecutable.
 
-### 1.4 Motivacion de la sesion
+### 1.4 Motivación de la sesión
 
-La evaluacion no revisa clases sueltas. Revisa si el estudiante puede explicar como las clases colaboran, donde se guardan los datos en memoria, como se aplica la separacion de responsabilidades y que evidencia demuestra que el producto funciona.
+La evaluación no revisa clases sueltas. Revisa si el estudiante puede explicar cómo las clases colaboran, dónde se guardan los datos en memoria, cómo se aplica la separacion de responsabilidades y qué evidencia demuestra que el producto funcióna.
 
 Preguntas para los estudiantes:
 
-1. Que evidencia demuestra que tu producto U1 funciona?
-2. Que parte puedes defender individualmente?
-3. Que revisarias si una operacion CRUD falla?
+1. Qué evidencia demuestra qué tu producto U1 funcióna?
+2. Qué parte puedes defender individualmente?
+3. Qué revisarias si una operación CRUD falla?
 
-### 1.5 Ubicacion en el curso
+### 1.5 Ubicación en el curso
 
-- Unidad: U1 - Fundamentos de la Programacion Orientada a Objetos.
-- Producto de unidad: aplicacion de consola en memoria.
-- Avance de sesion: evaluacion integradora antes de iniciar JavaFX.
+- Unidad: U1 - Fundamentos de la Programación Orientada a Objetos.
+- Producto de unidad: aplicación de consola en memoria.
+- Avance de sesión: evaluación integradora antes de iniciar JavaFX.
 
 ## 2. Explica
 
@@ -38,10 +38,10 @@ Tiempo: 15 min.
 
 ### 2.1 Conceptos clave
 
-- Integracion: las clases funcionan coordinadamente.
+- Integración: las clases funciónan coordinadamente.
 - Evidencia individual: prueba verificable del aporte de cada estudiante.
-- Diagnostico: capacidad de ubicar fallos en `Main`, entidades, servicio o coleccion.
-- Defensa tecnica: explicacion clara de decisiones de modelado y separacion de responsabilidades.
+- Diagnóstico: capacidad de ubicar fallos en `Main`, entidades, servicio o colección.
+- Defensa técnica: explicacion clara de decisiónes de modelado y separacion de responsabilidades.
 
 ### 2.2 Arquitectura del producto U1
 
@@ -80,19 +80,19 @@ classDiagram
     ClienteServiceMemoria o-- ArrayListClientes : administra
 ```
 
-### 2.3 Criterios minimos de revision
+### 2.3 Criterios mínimos de revisión
 
 - Entidades encapsuladas.
 - Constructores y getters/setters limpios.
-- Relaciones entre objetos cuando corresponde.
+- Relaciones entre objetos cuándo corresponde.
 - Herencia o interface aplicada con sentido.
 - Servicio separado de `Main`.
 - CRUD en memoria completo.
-- Validaciones basicas.
-- Evidencia de ejecucion por consola.
+- Validaciones básicas.
+- Evidencia de ejecución por consola.
 - Proyecto organizado para entrega.
 
-## 3. Aplica: evaluacion practica
+## 3. Aplica: evaluación practica
 
 Tiempo: 3h.
 
@@ -104,8 +104,8 @@ Orden recomendado:
 2. Mostrar estructura de paquetes.
 3. Ejecutar el programa.
 4. Demostrar flujo CRUD completo.
-5. Mostrar codigo clave de entidades y servicio.
-6. Explicar una decision tecnica.
+5. Mostrar código clave de entidades y servicio.
+6. Explicar una decisión técnica.
 
 ### 3.2 Ejecutar pruebas base
 
@@ -115,18 +115,18 @@ El estudiante demuestra:
 2. Listado de datos.
 3. Busqueda por criterio.
 4. Actualizacion.
-5. Eliminacion.
-6. Validacion basica.
-7. Separacion entre `Main`, servicio, entidades y coleccion.
+5. Eliminación.
+6. Validación básica.
+7. Separacion entre `Main`, servicio, entidades y colección.
 
 ### 3.3 Demostracion individual
 
 Cada integrante debe poder responder:
 
-- Que parte implemento.
-- Que clase modifico.
-- Que prueba ejecuto.
-- Que error encontro y como lo corrigio.
+- Qué parte implemento.
+- Qué clase modifico.
+- Qué prueba ejecuto.
+- Qué error encontro y cómo lo corrigio.
 
 ## 4. Crea: evidencia individual
 
@@ -144,7 +144,7 @@ S06_Equipo##_ApellidoNombre.pdf
 
 - Nombre:
 - Equipo:
-- Sesion: S06 - Evaluacion U1
+- Sesión: S06 - Evaluación U1
 - Rol o aporte realizado:
 - Link de GitHub:
 
@@ -152,11 +152,11 @@ S06_Equipo##_ApellidoNombre.pdf
 
 1. Ordenar evidencias de U1.
 2. Corregir observaciones detectadas.
-3. Completar README o descripcion breve del producto.
+3. Completar README o descripción breve del producto.
 4. Preparar defensa individual.
 5. Registrar comandos, capturas o salidas de consola.
 
-#### 4.1.3 Evidencia tecnica
+#### 4.1.3 Evidencia técnica
 
 - Entidades.
 - Encapsulamiento.
@@ -164,24 +164,24 @@ S06_Equipo##_ApellidoNombre.pdf
 - Servicio CRUD.
 - `ArrayList`.
 - Menu de consola.
-- Ejecucion del producto.
+- Ejecución del producto.
 - Aporte individual.
 
 #### 4.1.4 Error o hallazgo
 
-Describe un problema encontrado en U1 y como lo diagnosticaste.
+Describe un problema encontrado en U1 y cómo lo diagnosticaste.
 
-#### 4.1.5 Reflexion tecnica breve
+#### 4.1.5 Reflexión técnica breve
 
-Explica como las clases de tu producto forman una aplicacion orientada a objetos y no solo un conjunto de variables en `Main`.
+Explica cómo las clases de tu producto forman una aplicación orientada a objetos y no solo un conjunto de variables en `Main`.
 
-### 4.2 Criterios minimos de aceptacion
+### 4.2 Criterios mínimos de aceptacion
 
 - PDF con nombre correcto.
-- Evidencia del producto U1 funcionando.
+- Evidencia del producto U1 funciónando.
 - Evidencia de aporte individual.
 - Pruebas por consola.
-- Explicacion tecnica breve.
+- Explicacion técnica breve.
 
 ## 5. Cierre evaluativo
 
@@ -195,7 +195,7 @@ Tiempo: 20 min.
 - Evidencia individual entregada.
 - Base lista para iniciar JavaFX en U2.
 
-### 5.2 Evidencia del producto de sesion
+### 5.2 Evidencia del producto de sesión
 
 Cada estudiante entrega un PDF individual siguiendo la plantilla de la seccion 4.1.
 
@@ -205,33 +205,33 @@ Nombre del archivo:
 S06_Equipo##_ApellidoNombre.pdf
 ```
 
-### 5.3 Preguntas de defensa y reflexion
+### 5.3 Preguntas de defensa y reflexión
 
-1. Cual fue tu aporte concreto en U1?
-2. Como se ejecuta el producto?
-3. Donde se almacenan los datos en memoria?
-4. Como separaste `Main`, servicio y entidades?
-5. Que cambiaria al pasar a GUI en U2?
+1. Cuál fue tu aporte concreto en U1?
+2. Cómo se ejecuta el producto?
+3. Dónde se almacenan los datos en memoria?
+4. Cómo separaste `Main`, servicio y entidades?
+5. Qué cambiaria al pasar a GUI en U2?
 
-### 5.4 Rubrica de evaluacion
+### 5.4 Rúbrica de evaluación
 
 | Dimension | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuacion obtenida |
 |---|---:|---|---|---|---|---:|
 | 1. Modelo orientado a objetos | 2 | Entidades claras, encapsuladas y coherentes con el dominio. | Entidades principales correctas. | Entidades incompletas o mezcladas. | No evidencia modelo OO. | |
-| 2. Relaciones, herencia o interfaces | 2 | Aplica relaciones y contratos con criterio. | Aplica al menos un mecanismo correctamente. | Aplicacion parcial o forzada. | No aplica mecanismos OO. | |
+| 2. Relaciones, herencia o interfaces | 2 | Aplica relaciones y contratos con criterio. | Aplica al menos un mecanismo correctamente. | Aplicación parcial o forzada. | No aplica mecanismos OO. | |
 | 3. CRUD en memoria | 2 | CRUD completo, probado y separado de `Main`. | CRUD principal funcional. | CRUD incompleto. | No hay CRUD funcional. | |
-| 4. Separacion de responsabilidades | 2 | `Main`, servicio, entidades y coleccion tienen roles claros. | Separacion suficiente. | Logica mezclada en varias partes. | Todo esta concentrado sin criterio. | |
+| 4. Separacion de responsabilidades | 2 | `Main`, servicio, entidades y colección tienen roles claros. | Separacion suficiente. | Lógica mezclada en varias partes. | Todo está concentrado sin criterio. | |
 | 5. Evidencia individual | 1 | Evidencia clara, ordenada y verificable. | Evidencia suficiente. | Evidencia incompleta. | No entrega evidencia. | |
-| 6. Defensa tecnica | 1 | Responde con precision y criterio. | Responde adecuadamente. | Responde parcialmente. | No sustenta. | |
+| 6. Defensa técnica | 1 | Responde con precision y criterio. | Responde adecuadamente. | Responde parcialmente. | No sustenta. | |
 
 Puntuacion acumulada = suma de (`Peso` * `Puntuacion obtenida`) = ____.
 
 Nota final = (`Puntuacion acumulada` / 30) * 20 = ____.
 
-Para usar la rubrica con IA, solicita:
+Para usar la rúbrica con IA, solicita:
 
 ```text
-Evalua el PDF usando la rubrica de la sesion.
+Evalua el PDF usando la rúbrica de la sesión.
 Para cada dimension selecciona la puntuacion obtenida usando la escala Inicio=0, Proceso=1, Logro=2, Logro destacado=3.
 Justifica brevemente cada puntuacion.
 Calcula la puntuacion acumulada con la formula: suma de (Peso * Puntuacion obtenida).

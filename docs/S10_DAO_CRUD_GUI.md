@@ -1,35 +1,35 @@
-# S10 - Patron DAO y operaciones CRUD persistentes desde GUI
+﻿# S10 - Patron DAO y operaciones CRUD persistentes desde GUI
 
-## 1. Introduccion
+## 1. Introducción
 
 Tiempo: 20 min.
 
-### 1.1 Proposito
+### 1.1 Propósito
 
-Implementar el patron DAO para ejecutar operaciones CRUD persistentes desde la interfaz grafica.
+Implementar el patron DAO para ejecutar operaciones CRUD persistentes desde la interfaz gráfica.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante separa el acceso a datos en DAO, mapea entidades a registros, ejecuta SQL basico y agrega una implementacion persistente del mismo contrato de servicio.
+El estudiante separa el acceso a datos en DAO, mapea entidades a registros, ejecuta SQL básico y agrega una implementacion persistente del mismo contrato de servicio.
 
-### 1.3 Producto de sesion
+### 1.3 Producto de sesión
 
 CRUD persistente funcional desde formularios y tablas JavaFX.
 
-### 1.4 Motivacion de la sesion
+### 1.4 Motivación de la sesión
 
-La GUI ya funciona con memoria y la base de datos ya existe. Ahora corresponde guardar y recuperar datos desde SQLite sin poner SQL en el controlador.
+La GUI ya funcióna con memoria y la base de datos ya existe. Ahora corresponde guardar y recuperar datos desde SQLite sin poner SQL en el controlador.
 
-Pregunta guia:
+Pregunta guía:
 
 ```text
-Como guardamos y recuperamos datos desde la GUI sin mezclar SQL con la pantalla?
+Cómo guardamos y recuperamos datos desde la GUI sin mezclar SQL con la pantalla?
 ```
 
-### 1.5 Ubicacion en el curso
+### 1.5 Ubicación en el curso
 
 - Unidad: U2.
-- Avance de sesion: integracion de GUI con persistencia.
+- Avance de sesión: integración de GUI con persistencia.
 
 ## 2. Explica
 
@@ -38,15 +38,15 @@ Tiempo: 25 min.
 ### 2.1 Conceptos clave
 
 - Patron DAO.
-- Servicio como coordinador entre controlador y DAO.
+- Servicio cómo coordinador entre controlador y DAO.
 - Implementacion persistente del contrato CRUD.
-- Mapeo objeto-relacional basico.
+- Mapeo objeto-relacional básico.
 - `insert`, `select`, `update`, `delete`.
-- Confirmacion de eliminacion.
+- Confirmación de eliminación.
 - Excepciones de persistencia.
 - Refresco de `TableView` desde base de datos.
 
-Regla metodologica de la sesion:
+Regla métodológica de la sesión:
 
 ```text
 El controlador no escribe SQL.
@@ -56,7 +56,7 @@ JDBC conecta con SQLite.
 La entidad sigue siendo una clase del dominio.
 ```
 
-### 2.2 Arquitectura de la sesion
+### 2.2 Arquitectura de la sesión
 
 ```mermaid
 flowchart TB
@@ -87,7 +87,7 @@ flowchart TB
     DAO -->|"JDBC"| SQLite
 ```
 
-## 3. Aplica: actividad practica guiada
+## 3. Aplica: actividad practica guíada
 
 Tiempo: 2h.
 
@@ -98,20 +98,20 @@ Tiempo: 2h.
 5. Implementar `eliminar` con `delete`.
 6. Mapear cada fila de la base de datos a un objeto `Cliente`.
 7. Crear o adaptar `ClienteServiceBD`.
-8. Hacer que `ClienteServiceBD` use `ClienteDAO`.
+8. Hacer qué `ClienteServiceBD` use `ClienteDAO`.
 9. Conectar botones de la GUI con `ClienteService`, no directamente con SQL.
-10. Recargar la tabla desde la base de datos despues de cada operacion.
-11. Confirmar eliminacion y manejar errores basicos.
+10. Recargar la tabla desde la base de datos después de cada operación.
+11. Confirmar eliminación y manejar errores básicos.
 
-## 4. Crea: actividad autonoma
+## 4. Crea: actividad autónoma
 
 Tiempo: 2h fuera del aula.
 
-Completa el CRUD persistente para una entidad adicional o mejora el modulo principal.
+Completa el CRUD persistente para una entidad adicional o mejora el módulo principal.
 
 Entrega evidencia breve con:
 
-- Codigo de `ClienteService`, `ClienteServiceBD` y `ClienteDAO`.
+- Código de `ClienteService`, `ClienteServiceBD` y `ClienteDAO`.
 - Capturas de GUI.
 - Registros persistidos en SQLite.
 - Explicacion del flujo Vista-Controlador-Servicio-Entidades-DAO.
@@ -125,14 +125,14 @@ Tiempo: 20 min.
 - El DAO concentra las consultas SQL.
 - El controlador no contiene SQL directo.
 - El servicio coordina operaciones, validaciones y DAO.
-- Las entidades se mantienen como clases del dominio.
+- Las entidades se mantienen cómo clases del dominio.
 - La GUI registra, lista, actualiza y elimina datos persistentes.
 
 ### 5.2 Preguntas de defensa
 
-1. Que responsabilidad tiene el DAO?
-2. Que responsabilidad tiene la interface del servicio?
-3. Que responsabilidad tiene la implementacion persistente?
-4. Por que no poner SQL en el controlador?
-5. Como conviertes un registro en objeto?
-6. Como verificas que el dato quedo guardado?
+1. Qué responsabilidad tiene el DAO?
+2. Qué responsabilidad tiene la interface del servicio?
+3. Qué responsabilidad tiene la implementacion persistente?
+4. Por qué no poner SQL en el controlador?
+5. Cómo conviertes un registro en objeto?
+6. Cómo verificas qué el dato quedo guardado?

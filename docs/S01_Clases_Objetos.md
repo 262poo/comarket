@@ -1,43 +1,43 @@
-# S1 - Clases, objetos y responsabilidad de clase
+﻿# S1 - Clases, objetos y responsabilidad de clase
 
-## 1. Introduccion
+## 1. Introducción
 
 Tiempo: 20 min.
 
-### 1.1 Proposito
+### 1.1 Propósito
 
-Iniciar una aplicacion de consola mediante clases simples del dominio, objetos creados desde `Main` y pruebas por salida de texto.
+Iniciar una aplicación de consola mediante clases simples del dominio, objetos creados desde `Main` y pruebas por salida de texto.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante diferencia clase y objeto, define atributos y metodos, crea instancias y explica la responsabilidad basica de una clase del dominio.
+El estudiante diferencia clase y objeto, define atributos y métodos, crea instancias y explica la responsabilidad básica de una clase del dominio.
 
-### 1.3 Producto de sesion
+### 1.3 Producto de sesión
 
 Proyecto Java simple en VS Code con una primera clase del dominio, objetos instanciados desde `Main` y salida por consola.
 
-### 1.4 Motivacion de la sesion
+### 1.4 Motivación de la sesión
 
 #### 1.4.1 Caso: sistema de dominio inicial
 
-Una organizacion necesita ordenar la informacion de un proceso de negocio. Puede tratarse de ventas, biblioteca, reservas, inventario, matriculas, atencion de clientes u otro contexto definido por el docente.
+Una organización necesita ordenar la información de un proceso de negocio. Puede tratarse de ventas, biblioteca, reservas, inventario, matriculas, atencion de clientes u otro contexto definido por el docente.
 
 Antes de construir pantallas, base de datos o reportes, el sistema necesita representar objetos del dominio. En POO, esos objetos nacen a partir de clases.
 
 Preguntas para los estudiantes:
 
-1. Que objetos reales aparecen en el dominio elegido?
-2. Que datos necesita guardar uno de esos objetos?
-3. Que comportamiento podria tener ese objeto?
-4. Por que no conviene escribir todo directamente en `Main`?
+1. Qué objetos reales aparecen en el dominio elegido?
+2. Qué datos necesita guardar uno de esos objetos?
+3. Qué comportamiento podría tener ese objeto?
+4. Por qué no conviene escribir todo directamente en `Main`?
 
-En esta sesion se inicia el proyecto creando el primer objeto del dominio y probandolo desde consola.
+En esta sesión se inicia el proyecto creando el primer objeto del dominio y probandolo desde consola.
 
-### 1.5 Ubicacion en el curso
+### 1.5 Ubicación en el curso
 
-- Unidad: U1 - Fundamentos de la Programacion Orientada a Objetos.
-- Producto de unidad: aplicacion de consola en memoria con entidades, relaciones, colecciones y CRUD.
-- Avance del producto en esta sesion: primeras clases del dominio probadas desde `Main`.
+- Unidad: U1 - Fundamentos de la Programación Orientada a Objetos.
+- Producto de unidad: aplicación de consola en memoria con entidades, relaciones, colecciones y CRUD.
+- Avance del producto en esta sesión: primeras clases del dominio probadas desde `Main`.
 
 Roadmap para elaborar el producto de la unidad:
 
@@ -45,7 +45,7 @@ Roadmap para elaborar el producto de la unidad:
 flowchart TB
     S1["S1<br/>Coche, Persona y Producto<br/>clase y objetos"]
     S2["S2<br/>Producto encapsulado<br/>constructores y validaciones"]
-    S3["S3<br/>Asociacion, agregacion/composicion<br/>y colecciones"]
+    S3["S3<br/>Asociación, agregación/composición<br/>y colecciones"]
     S4["S4<br/>Persona, Cliente, Proveedor<br/>herencia y polimorfismo<br/>bloque aplicado"]
     S5["S5<br/>Servicio en memoria<br/>CRUD con ArrayList"]
     S6["S6<br/>Producto U1<br/>consola ejecutable"]
@@ -61,7 +61,7 @@ flowchart TB
     class S1 today;
 ```
 
-Hoy se inicia con objetos tangibles del mundo real: `Coche` y `Persona`. Luego se trabaja `Producto` como segundo ejemplo preparatorio para S2. La ruta principal avanza hacia encapsulamiento, servicios con colecciones y CRUD en memoria. La herencia y el polimorfismo se trabajan como bloque aplicado entre S3 y S5: refuerzan el modelo y preparan el contrato de servicio, pero no deben sentirse como un adorno aislado.
+Hoy se inicia con objetos tangibles del mundo real: `Coche` y `Persona`. Luego se trabaja `Producto` cómo segundo ejemplo preparatorio para S2. La ruta principal avanza hacia encapsulamiento, servicios con colecciones y CRUD en memoria. La herencia y el polimorfismo se trabajan cómo bloque aplicado entre S3 y S5: refuerzan el modelo y preparan el contrato de servicio, pero no deben sentirse cómo un adorno aislado.
 
 ## 2. Explica
 
@@ -69,33 +69,33 @@ Tiempo: 25 min.
 
 ### 2.1 Conceptos clave
 
-Una clase es un molde para crear objetos. Un objeto es una instancia concreta que tiene estado y comportamiento.
+Una clase es un molde para crear objetos. Un objeto es una instancia concreta qué tiene estado y comportamiento.
 
-Ejemplo base: `Coche` y `Persona` permiten iniciar desde objetos tangibles. Un coche tiene marca y velocidad; una persona tiene nombre y puede conducir. Luego se usa `Producto` para observar cambios naturales de estado como precio y stock, preparando la S2.
+Ejemplo base: `Coche` y `Persona` permiten iniciar desde objetos tangibles. Un coche tiene marca y velocidad; una persona tiene nombre y puede conducir. Luego se usa `Producto` para observar cambios naturales de estado cómo precio y stock, preparando la S2.
 
-Conceptos de la sesion:
+Conceptos de la sesión:
 
-- Clase como molde.
-- Objeto como instancia.
-- Atributos como estado.
-- Metodos como comportamiento.
-- Abstraccion inicial del dominio.
+- Clase cómo molde.
+- Objeto cómo instancia.
+- Atributos cómo estado.
+- Métodos cómo comportamiento.
+- Abstracción inicial del dominio.
 - Responsabilidad de clase.
-- `Main` como punto de prueba inicial.
-- Salida por consola como evidencia de ejecucion.
+- `Main` cómo punto de prueba inicial.
+- Salida por consola cómo evidencia de ejecución.
 
-Alcance metodologico de S1:
+Alcance métodologico de S1:
 
 ```text
-En S1 se llega hasta clase, objeto, atributos, metodos, estado,
-comportamiento, abstraccion inicial y responsabilidad de clase.
+En S1 se llega hasta clase, objeto, atributos, métodos, estado,
+comportamiento, abstracción inicial y responsabilidad de clase.
 
-El constructor no se desarrolla como tema fuerte en esta sesion.
+El constructor no se desarrolla como tema fuerte en esta sesión.
 Se puede mencionar que existe, pero su uso formal queda para S2,
 cuando se trabaje encapsulamiento y control del estado.
 ```
 
-### 2.2 Arquitectura de la sesion
+### 2.2 Arquitectura de la sesión
 
 ```mermaid
 classDiagram
@@ -129,7 +129,7 @@ classDiagram
     Persona ..> Coche : usa
 ```
 
-Convencion del diagrama: cada clase muestra sus atributos y metodos principales; `..>` indica dependencia o uso temporal desde la prueba.
+Convencion del diagrama: cada clase muestra sus atributos y métodos principales; `..>` indica dependencia o uso temporal desde la prueba.
 
 Regla practica:
 
@@ -137,8 +137,8 @@ Regla practica:
 - La clase representa caracteristicas y acciones de un objeto del mundo real.
 - Los objetos son instancias concretas de la clase.
 - Los atributos guardan estado.
-- Los metodos muestran o procesan comportamiento propio del objeto.
-- La abstraccion consiste en elegir solo los datos y comportamientos necesarios para esta primera version.
+- Los métodos muestran o procesan comportamiento propio del objeto.
+- La abstracción consiste en elegir solo los datos y comportamientos necesarios para está primera versión.
 
 ### 2.3 Flujo de trabajo
 
@@ -146,27 +146,27 @@ Regla practica:
 2. Crear un proyecto Java simple.
 3. Abstraer objetos tangibles del mundo real.
 4. Definir la responsabilidad inicial de la clase.
-5. Elegir atributos y metodos coherentes con sus caracteristicas y acciones.
+5. Elegir atributos y métodos coherentes con sus caracteristicas y acciones.
 6. Crear `Coche` y `Persona` para observar colaboracion simple.
-7. Crear `Producto` como ejemplo puente hacia S2.
+7. Crear `Producto` cómo ejemplo puente hacia S2.
 8. Ejecutar el programa por consola.
 9. Registrar evidencia y explicar responsabilidades.
 
-### 2.4 Errores frecuentes y diagnostico
+### 2.4 Errores frecuentes y diagnóstico
 
-| Problema | Causa probable | Solucion |
+| Problema | Causa probable | Solución |
 |---|---|---|
-| No ejecuta `Main` | Falta metodo `public static void main` | Revisar firma del metodo |
+| No ejecuta `Main` | Falta método `public static void main` | Revisar firma del método |
 | No reconoce la clase | Archivo, clase o paquete no coincide | Revisar nombre de archivo y paquete |
 | Los datos salen en cero o `null` | No se asignaron valores al objeto | Inicializar atributos antes de imprimir |
-| Todo esta en `Main` | No se separo la responsabilidad | Mover datos y comportamiento a una clase |
+| Todo está en `Main` | No se separo la responsabilidad | Mover datos y comportamiento a una clase |
 | Salida poco clara | `Main` no imprime datos suficientes | Mejorar la salida desde `Main` sin meter consola en la entidad |
-| La clase tiene metodos de muchas cosas | No se identificaron bien sus caracteristicas y acciones | Volver a la abstraccion inicial del objeto |
+| La clase tiene métodos de muchas cosas | No se identificaron bien sus caracteristicas y acciones | Volver a la abstracción inicial del objeto |
 | Se usan constructores o `private` antes de tiempo | Se adelanto contenido de S2 | En S1 usar clases simples; el control del estado queda para S2 |
 
-## 3. Aplica: actividad practica guiada
+## 3. Aplica: actividad practica guíada
 
-En el laboratorio, el docente guia la creacion del primer objeto del dominio y los estudiantes verifican el resultado ejecutando el programa desde VS Code.
+En el laboratorio, el docente guía la creacion del primer objeto del dominio y los estudiantes verifican el resultado ejecutando el programa desde VS Code.
 
 Tiempo: 2h.
 
@@ -182,7 +182,7 @@ Herramientas necesarias:
 - Extension Pack for Java.
 - Terminal integrada de VS Code.
 
-En esta sesion se usa un proyecto Java simple. Maven se verifica desde el inicio porque sera necesario para organizar la entrega de la U1 en sesiones posteriores.
+En esta sesión se usa un proyecto Java simple. Maven se verifica desde el inicio porque sera necesario para organizar la entrega de la U1 en sesiónes posteriores.
 
 #### 3.1.1 Instalar gestor de paquetes, si hace falta
 
@@ -320,16 +320,16 @@ public class Main {
 
 **Producto del paso:** dos clases candidatas identificadas desde el mundo real.
 
-Antes de escribir codigo, observar objetos tangibles. Para iniciar, se usan `Coche` y `Persona` porque permiten distinguir caracteristicas, acciones y colaboracion entre objetos.
+Antes de escribir código, observar objetos tangibles. Para iniciar, se usan `Coche` y `Persona` porque permiten distinguir caracteristicas, acciones y colaboracion entre objetos.
 
-Completar una tabla de abstraccion inicial:
+Completar una tabla de abstracción inicial:
 
 | Clase | Caracteristicas | Acciones |
 |---|---|---|
 | `Coche` | marca, velocidad | acelerar, frenar, mostrar estado |
 | `Persona` | nombre | conducir |
 
-En S1, responsabilidad de clase no significa responsabilidad legal, vial o moral. Significa identificar que caracteristicas y que acciones le corresponden a una clase dentro del programa.
+En S1, responsabilidad de clase no significa responsabilidad legal, vial o moral. Significa identificar qué caracteristicas y qué acciones le corresponden a una clase dentro del programa.
 
 Ejemplo:
 
@@ -338,19 +338,19 @@ La Persona decide conducir.
 El Coche ejecuta acelerar o frenar y cambia su propia velocidad.
 ```
 
-Nota metodologica:
+Nota métodológica:
 
 ```text
-En S1 todavia no se aplica SOLID de manera formal.
+En S1 todavía no se aplica SOLID de manera formal.
 Tampoco se trabaja encapsulamiento ni constructores como tema fuerte.
 
-El objetivo es entender clase, objeto, atributos, metodos, estado,
-comportamiento, responsabilidad inicial y abstraccion.
+El objetivo es entender clase, objeto, atributos, métodos, estado,
+comportamiento, responsabilidad inicial y abstracción.
 ```
 
 ### 3.4 Crear la clase Coche
 
-**Producto del paso:** clase tangible con atributos, estado y metodos.
+**Producto del paso:** clase tangible con atributos, estado y métodos.
 
 Crear `Coche.java`:
 
@@ -375,17 +375,17 @@ public class Coche {
 
 En este punto ya aparecen los primeros conceptos:
 
-| Elemento del codigo | Concepto POO |
+| Elemento del código | Concepto POO |
 |---|---|
 | `public class Coche` | Clase |
 | `marca`, `velocidad` | Atributos |
 | Valor actual de `velocidad` | Estado |
-| `acelerar()` y `frenar()` | Metodos |
+| `acelerar()` y `frenar()` | Métodos |
 | Cambiar la velocidad | Comportamiento |
 
 ### 3.5 Crear la clase Persona
 
-**Producto del paso:** segunda clase tangible que usa un objeto `Coche`.
+**Producto del paso:** segunda clase tangible qué usa un objeto `Coche`.
 
 Crear `Persona.java`:
 
@@ -401,7 +401,7 @@ public class Persona {
 }
 ```
 
-Lectura metodologica:
+Lectura métodológica:
 
 ```text
 Persona no cambia directamente la velocidad.
@@ -409,7 +409,7 @@ Persona usa acciones disponibles del Coche.
 Coche modifica su propio estado.
 ```
 
-La idea de pedales o volante puede usarse como analogia: la persona no manipula todo el motor; interactua mediante acciones visibles. La interface formal de Java se trabajara despues, en S4.
+La idea de pedales o volante puede usarse cómo analogia: la persona no manipula todo el motor; interactua mediante acciones visibles. La interface formal de Java se trabajara después, en S4.
 
 ### 3.6 Crear objetos desde Main
 
@@ -446,14 +446,14 @@ En este punto se observa la diferencia entre clase y objeto:
 
 ### 3.7 Identificar estado, comportamiento y responsabilidad inicial
 
-**Producto del paso:** explicacion de como los objetos guardan datos, ejecutan acciones y colaboran.
+**Producto del paso:** explicacion de cómo los objetos guardan datos, ejecutan acciones y colaboran.
 
-Analizar el codigo creado:
+Analizar el código creado:
 
 ```text
 El estado de coche1 cambia cuando se ejecuta acelerar o frenar.
-El comportamiento esta en los metodos de cada clase.
-La responsabilidad inicial se entiende como caracteristicas y acciones
+El comportamiento está en los métodos de cada clase.
+La responsabilidad inicial se entiende como características y acciones
 que le corresponden a cada clase.
 ```
 
@@ -464,11 +464,11 @@ Completar:
 | `Coche` | marca, velocidad | acelerar, frenar, mostrar estado |
 | `Persona` | nombre | conducir un coche |
 
-### 3.8 Ejemplo 2: Producto como preparacion para S2
+### 3.8 Ejemplo 2: Producto cómo preparación para S2
 
 **Producto del paso:** clase `Producto` simple con estado cambiante.
 
-Ahora se usa `Producto` como segundo ejemplo porque en S2 se convertira en una clase encapsulada.
+Ahora se usa `Producto` cómo segundo ejemplo porque en S2 se convertira en una clase encapsulada.
 
 Crear `Producto.java`:
 
@@ -512,22 +512,22 @@ Lectura esperada:
 
 ```text
 producto1 sigue siendo el mismo objeto.
-Lo que cambio fue su estado: precio y stock.
+Lo que cambió fue su estado: precio y stock.
 En S2 se controlara mejor este cambio con encapsulamiento,
 constructor, validaciones e invariantes simples.
 ```
 
-## 4. Crea: actividad autonoma
+## 4. Crea: actividad autónoma
 
 Tiempo: 2h fuera del aula.
 
-Extiende el modelo inicial creando otro par de clases tangibles que colaboren entre si, por ejemplo `Estudiante` y `Cuaderno`, `Jugador` y `Pelota`, o `Cliente` y `Carrito`. Luego crea una clase simple similar a `Producto` que pueda prepararse para encapsulamiento en S2.
+Extiende el modelo inicial creando otro par de clases tangibles qué colaboren entre si, por ejemplo `Estudiante` y `Cuaderno`, `Jugador` y `Pelota`, o `Cliente` y `Carrito`. Luego crea una clase simple similar a `Producto` qué pueda prepararse para encapsulamiento en S2.
 
 Entrega evidencia breve con:
 
-- Codigo de dos clases tangibles.
-- Codigo de una clase puente similar a `Producto`.
-- Codigo de prueba desde `Main`.
+- Código de dos clases tangibles.
+- Código de una clase puente similar a `Producto`.
+- Código de prueba desde `Main`.
 - Captura o salida de consola.
 - Explicacion de la responsabilidad de cada clase.
 
@@ -538,23 +538,23 @@ Tiempo: 20 min.
 ### 5.1 Resultados esperados
 
 - El proyecto ejecuta desde VS Code.
-- Existen clases tangibles como `Coche` y `Persona`.
-- Existe una clase puente como `Producto`.
+- Existen clases tangibles cómo `Coche` y `Persona`.
+- Existe una clase puente cómo `Producto`.
 - Se crean objetos desde `Main`.
-- La clase tiene atributos que representan estado.
-- La clase tiene metodos que representan comportamiento basico.
+- La clase tiene atributos qué representan estado.
+- La clase tiene métodos qué representan comportamiento básico.
 - La salida por consola demuestra el estado y comportamiento del objeto.
-- El estudiante explica que datos y comportamientos fueron elegidos por abstraccion inicial.
-- El estudiante explica que responsabilidad tiene cada clase.
-- Los metodos implementados corresponden a las acciones iniciales de la clase.
+- El estudiante explica qué datos y comportamientos fueron elegidos por abstracción inicial.
+- El estudiante explica qué responsabilidad tiene cada clase.
+- Los métodos implementados corresponden a las acciones iniciales de la clase.
 - No se usan constructores ni atributos `private` como tema central; eso queda para S2.
 
 ### 5.2 Preguntas de defensa
 
-1. Cual es la diferencia entre clase y objeto?
-2. Que representa el estado de un objeto?
-3. Que significa responsabilidad de clase en S1?
-4. Que metodo representa comportamiento en tu clase?
-5. Que datos dejaste fuera por abstraccion inicial?
-6. Que caracteristicas y acciones identificaste en tu clase?
-7. Que responsabilidad tiene `Main` en esta primera sesion?
+1. Cuál es la diferencia entre clase y objeto?
+2. Qué representa el estado de un objeto?
+3. Qué significa responsabilidad de clase en S1?
+4. Qué método representa comportamiento en tu clase?
+5. Qué datos dejaste fuera por abstracción inicial?
+6. Qué caracteristicas y acciones identificaste en tu clase?
+7. Qué responsabilidad tiene `Main` en está primera sesión?

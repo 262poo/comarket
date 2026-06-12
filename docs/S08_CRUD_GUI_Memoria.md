@@ -1,35 +1,35 @@
-# S8 - CRUD desde GUI en memoria
+﻿# S8 - CRUD desde GUI en memoria
 
-## 1. Introduccion
+## 1. Introducción
 
 Tiempo: 20 min.
 
-### 1.1 Proposito
+### 1.1 Propósito
 
-Implementar un CRUD desde JavaFX reutilizando el contrato de servicio y la implementacion en memoria, sin base de datos todavia.
+Implementar un CRUD desde JavaFX reutilizando el contrato de servicio y la implementacion en memoria, sin base de datos todavía.
 
 ### 1.2 Resultado de aprendizaje
 
 El estudiante conecta formularios y tablas con un controlador JavaFX, delega operaciones al servicio CRUD y mantiene los datos en memoria con `ArrayList`.
 
-### 1.3 Producto de sesion
+### 1.3 Producto de sesión
 
 CRUD funcional desde formulario y `TableView`, usando vista, controlador, servicio, entidades y almacenamiento en memoria.
 
-### 1.4 Motivacion de la sesion
+### 1.4 Motivación de la sesión
 
-Antes de conectar SQLite, conviene comprobar que la interfaz grafica puede registrar, mostrar, editar y eliminar objetos usando el mismo contrato que antes se probo desde consola.
+Antes de conectar SQLite, conviene comprobar qué la interfaz gráfica puede registrar, mostrar, editar y eliminar objetos usando el mismo contrato qué antes se probo desde consola.
 
-Pregunta guia:
+Pregunta guía:
 
 ```text
-Como pasamos del CRUD de consola al CRUD con formularios y tablas?
+Cómo pasamos del CRUD de consola al CRUD con formularios y tablas?
 ```
 
-### 1.5 Ubicacion en el curso
+### 1.5 Ubicación en el curso
 
 - Unidad: U2.
-- Avance de sesion: transicion de consola a GUI usando memoria.
+- Avance de sesión: transicion de consola a GUI usando memoria.
 
 ## 2. Explica
 
@@ -43,9 +43,9 @@ Tiempo: 25 min.
 - Lectura de datos desde formularios.
 - Carga de datos en `TableView`.
 - Seleccion de filas para editar o eliminar.
-- Refresco de tabla despues de cada operacion.
+- Refresco de tabla después de cada operación.
 
-Regla metodologica de la sesion:
+Regla métodológica de la sesión:
 
 ```text
 La vista captura datos.
@@ -54,7 +54,7 @@ El servicio ejecuta CRUD.
 La implementacion en memoria administra el ArrayList.
 ```
 
-### 2.2 Arquitectura de la sesion
+### 2.2 Arquitectura de la sesión
 
 ```mermaid
 classDiagram
@@ -97,7 +97,7 @@ classDiagram
     ClienteServiceMemoria o-- ArrayListClientes : administra
 ```
 
-## 3. Aplica: actividad practica guiada
+## 3. Aplica: actividad practica guíada
 
 Tiempo: 2h.
 
@@ -110,9 +110,9 @@ Tiempo: 2h.
 7. Mostrar datos en `TableView`.
 8. Cargar datos del elemento seleccionado al formulario.
 9. Actualizar el registro seleccionado.
-10. Eliminar con confirmacion.
+10. Eliminar con confirmación.
 
-## 4. Crea: actividad autonoma
+## 4. Crea: actividad autónoma
 
 Tiempo: 2h fuera del aula.
 
@@ -120,10 +120,10 @@ Completa el CRUD en memoria desde GUI para una entidad del dominio.
 
 Entrega evidencia breve con:
 
-- Capturas de registro, listado, edicion y eliminacion.
-- Codigo del controlador.
-- Codigo o referencia de `ClienteService` y `ClienteServiceMemoria`.
-- Explicacion de como se actualiza la tabla sin duplicar el CRUD en el controlador.
+- Capturas de registro, listado, edición y eliminación.
+- Código del controlador.
+- Código o referencia de `ClienteService` y `ClienteServiceMemoria`.
+- Explicacion de cómo se actualiza la tabla sin duplicar el CRUD en el controlador.
 
 ## 5. Cierre evaluativo
 
@@ -131,16 +131,16 @@ Tiempo: 20 min.
 
 ### 5.1 Resultados esperados
 
-- El CRUD funciona desde la interfaz grafica.
+- El CRUD funcióna desde la interfaz gráfica.
 - El controlador delega operaciones al servicio.
 - Los datos se almacenan en memoria dentro de la implementacion del servicio.
-- Las entidades son las mismas clases del dominio usadas desde U1.
+- Las entidades son las mismás clases del dominio usadas desde U1.
 - La tabla refleja los cambios.
 
 ### 5.2 Preguntas de defensa
 
-1. Donde se almacenan los datos en esta sesion?
-2. Que responsabilidad tiene el controlador?
-3. Que responsabilidad tiene la interface del servicio?
-4. Que responsabilidad tiene la implementacion en memoria?
-5. Que cambiara cuando usemos DAO?
+1. Dónde se almacenan los datos en esta sesión?
+2. Qué responsabilidad tiene el controlador?
+3. Qué responsabilidad tiene la interface del servicio?
+4. Qué responsabilidad tiene la implementacion en memoria?
+5. Qué cambiara cuándo usemos DAO?

@@ -1,35 +1,35 @@
-# S9 - Arquitectura por capas y persistencia relacional
+﻿# S9 - Arquitectura por capas y persistencia relacional
 
-## 1. Introduccion
+## 1. Introducción
 
 Tiempo: 20 min.
 
-### 1.1 Proposito
+### 1.1 Propósito
 
-Preparar la aplicacion de escritorio para reemplazar almacenamiento en memoria por persistencia relacional con SQLite y JDBC.
+Preparar la aplicación de escritorio para reemplazar almacenamiento en memoria por persistencia relacional con SQLite y JDBC.
 
 ### 1.2 Resultado de aprendizaje
 
 El estudiante organiza el proyecto por capas, configura SQLite, comprende JDBC y prepara la estructura para una implementacion persistente del servicio y DAO.
 
-### 1.3 Producto de sesion
+### 1.3 Producto de sesión
 
-Proyecto JavaFX/Maven organizado con vista, controlador, servicio, entidades, persistencia, conexion JDBC y base de datos SQLite.
+Proyecto JavaFX/Maven organizado con vista, controlador, servicio, entidades, persistencia, conexión JDBC y base de datos SQLite.
 
-### 1.4 Motivacion de la sesion
+### 1.4 Motivación de la sesión
 
-El `ArrayList` se borra al cerrar la aplicacion. Para conservar datos, el producto necesita una base de datos local y una capa de persistencia.
+El `ArrayList` se borra al cerrar la aplicación. Para conservar datos, el producto necesita una base de datos local y una capa de persistencia.
 
-Pregunta guia:
+Pregunta guía:
 
 ```text
-Como hacemos que los datos sobrevivan despues de cerrar la aplicacion?
+Cómo hacemos que los datos sobrevivan después de cerrar la aplicación?
 ```
 
-### 1.5 Ubicacion en el curso
+### 1.5 Ubicación en el curso
 
 - Unidad: U2.
-- Avance de sesion: transicion de memoria a persistencia.
+- Avance de sesión: transicion de memoria a persistencia.
 
 ## 2. Explica
 
@@ -43,11 +43,11 @@ Tiempo: 25 min.
 - Implementacion persistente del servicio.
 - Persistencia.
 - DAO.
-- JDBC como conector.
-- SQLite como base de datos local.
-- Clase de conexion.
+- JDBC cómo conector.
+- SQLite cómo base de datos local.
+- Clase de conexión.
 
-Regla metodologica de la sesion:
+Regla métodológica de la sesión:
 
 ```text
 El controlador sigue usando el contrato del servicio.
@@ -57,7 +57,7 @@ JDBC conecta Java con SQLite.
 Las entidades no cambian por usar base de datos.
 ```
 
-### 2.2 Arquitectura de la sesion
+### 2.2 Arquitectura de la sesión
 
 ```mermaid
 flowchart TB
@@ -90,7 +90,7 @@ flowchart TB
     Conexion -->|"JDBC"| SQLite
 ```
 
-## 3. Aplica: actividad practica guiada
+## 3. Aplica: actividad practica guíada
 
 Tiempo: 2h.
 
@@ -99,14 +99,14 @@ Tiempo: 2h.
 3. Crear paquete `persistencia`.
 4. Crear archivo `comarket.db`.
 5. Crear una tabla inicial.
-6. Implementar `ConexionBD`.
-7. Probar conexion con una consulta simple.
-8. Identificar `ClienteService` como contrato que seguira usando el controlador.
-9. Preparar `ClienteServiceBD` como implementacion persistente.
-10. Preparar `ClienteDAO` como componente de persistencia.
-11. Verificar que `Cliente` no cambia por usar base de datos.
+6. Implementar `ConexiónBD`.
+7. Probar conexión con una consulta simple.
+8. Identificar `ClienteService` como contrato qué seguira usando el controlador.
+9. Preparar `ClienteServiceBD` cómo implementacion persistente.
+10. Preparar `ClienteDAO` cómo componente de persistencia.
+11. Verificar qué `Cliente` no cambia por usar base de datos.
 
-## 4. Crea: actividad autonoma
+## 4. Crea: actividad autónoma
 
 Tiempo: 2h fuera del aula.
 
@@ -116,7 +116,7 @@ Entrega evidencia breve con:
 
 - Estructura de paquetes.
 - Script o captura de tabla.
-- Prueba de conexion.
+- Prueba de conexión.
 - Bosquejo del servicio y su implementacion persistente.
 - Explicacion del rol de JDBC.
 
@@ -127,15 +127,15 @@ Tiempo: 20 min.
 ### 5.1 Resultados esperados
 
 - El proyecto mantiene una estructura por capas.
-- SQLite esta disponible.
+- SQLite está disponible.
 - JDBC conecta con la base de datos.
-- El controlador conserva como entrada el contrato del servicio.
-- La aplicacion queda preparada para DAO.
+- El controlador conserva cómo entrada el contrato del servicio.
+- La aplicación queda preparada para DAO.
 
 ### 5.2 Preguntas de defensa
 
-1. Por que `ArrayList` ya no es suficiente?
-2. Que funcion cumple JDBC?
-3. Donde vive la base de datos?
-4. Que capa debe conversar con SQL?
-5. Por que no cambiamos las entidades al pasar de memoria a SQLite?
+1. Por qué `ArrayList` ya no es suficiente?
+2. Qué función cumple JDBC?
+3. Dónde vive la base de datos?
+4. Qué capa debe conversar con SQL?
+5. Por qué no cambiamos las entidades al pasar de memoria a SQLite?

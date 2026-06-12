@@ -1,36 +1,36 @@
-# S5 - CRUD en memoria con ArrayList
+﻿# S5 - CRUD en memoria con ArrayList
 
-## 1. Introduccion
+## 1. Introducción
 
 Tiempo: 20 min.
 
-### 1.1 Proposito
+### 1.1 Propósito
 
-Implementar operaciones CRUD en memoria usando `ArrayList`, una interface de servicio y una implementacion concreta, sin cargar toda la logica en `Main`.
+Implementar operaciones CRUD en memoria usando `ArrayList`, una interface de servicio y una implementacion concreta, sin cargar toda la lógica en `Main`.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante implementa registro, listado, busqueda, actualizacion y eliminacion en memoria, separando `Main`, contrato de servicio, implementacion y entidades.
+El estudiante implementa registro, listado, busqueda, actualizacion y eliminación en memoria, separando `Main`, contrato de servicio, implementacion y entidades.
 
-### 1.3 Producto de sesion
+### 1.3 Producto de sesión
 
-CRUD en consola con `ClienteService`, `ClienteServiceMemoria`, entidades encapsuladas, busqueda por documento y preparacion de entrega con Maven/GraalVM.
+CRUD en consola con `ClienteService`, `ClienteServiceMemoria`, entidades encapsuladas, busqueda por documento y preparación de entrega con Maven/GraalVM.
 
-### 1.4 Motivacion de la sesion
+### 1.4 Motivación de la sesión
 
-Despues de modelar clases, relaciones, herencia e interfaces, el producto necesita operaciones reales. El objetivo es que el menu de consola use un servicio, y que el servicio sea quien administre la coleccion.
+Después de modelar clases, relaciones, herencia e interfaces, el producto necesita operaciones reales. El objetivo es qué el menu de consola use un servicio, y qué el servicio sea quien administre la colección.
 
-Pregunta guia:
+Pregunta guía:
 
 ```text
-Como hacemos un CRUD en memoria sin convertir Main en una clase gigante?
+Cómo hacemos un CRUD en memoria sin convertir Main en una clase gigante?
 ```
 
-### 1.5 Ubicacion en el curso
+### 1.5 Ubicación en el curso
 
 - Unidad: U1.
-- Producto de unidad: aplicacion de consola en memoria.
-- Avance de sesion: version funcional previa a la evaluacion U1.
+- Producto de unidad: aplicación de consola en memoria.
+- Avance de sesión: versión funcional previa a la evaluación U1.
 
 ## 2. Explica
 
@@ -41,14 +41,14 @@ Tiempo: 25 min.
 | Concepto | Idea central |
 |---|---|
 | CRUD | Crear, leer, actualizar y eliminar datos. |
-| Interface de servicio | Contrato que define las operaciones esperadas. |
-| Implementacion en memoria | Clase que cumple el contrato usando `ArrayList`. |
-| Busqueda | Recorrido de la coleccion para ubicar un objeto. |
-| Validaciones basicas | Reglas simples antes de registrar o actualizar. |
-| Maven | Organiza compilacion y estructura del proyecto. |
-| GraalVM | Permite preparar un ejecutable nativo como cierre de U1. |
+| Interface de servicio | Contrato qué define las operaciones esperadas. |
+| Implementacion en memoria | Clase qué cumple el contrato usando `ArrayList`. |
+| Busqueda | Recorrido de la colección para ubicar un objeto. |
+| Validaciones básicas | Reglas simples antes de registrar o actualizar. |
+| Maven | Organiza compilación y estructura del proyecto. |
+| GraalVM | Permite preparar un ejecutable nativo cómo cierre de U1. |
 
-Regla metodologica de la sesion:
+Regla métodológica de la sesión:
 
 ```text
 Main muestra el menu y recibe opciones.
@@ -58,7 +58,7 @@ Las entidades representan datos y comportamiento del dominio.
 Maven/GraalVM son parte de la entrega, no del flujo CRUD.
 ```
 
-### 2.2 Arquitectura de la sesion
+### 2.2 Arquitectura de la sesión
 
 ```mermaid
 classDiagram
@@ -100,7 +100,7 @@ classDiagram
     ClienteServiceMemoria o-- ArrayListClientes : administra
 ```
 
-## 3. Aplica: actividad practica guiada
+## 3. Aplica: actividad practica guíada
 
 Tiempo: 2h.
 
@@ -190,7 +190,7 @@ public class Main {
 
 El menu debe llamar al contrato `ClienteService`, no directamente al `ArrayList`.
 
-Opciones minimas:
+Opciones mínimas:
 
 1. Registrar cliente.
 2. Listar clientes.
@@ -201,9 +201,9 @@ Opciones minimas:
 
 ### 3.5 Organizar con Maven
 
-La migracion a Maven se realiza al cierre de la unidad para preparar compilacion ordenada.
+La migracion a Maven se realiza al cierre de la unidad para preparar compilación ordenada.
 
-Estructura minima:
+Estructura mínima:
 
 ```text
 src/main/java/
@@ -216,9 +216,9 @@ pom.xml
 
 ### 3.6 Preparar entrega con GraalVM
 
-En esta sesion no se ensena GraalVM como arquitectura del sistema. Se usa como mecanismo de entrega para cerrar U1 con un ejecutable demostrable.
+En esta sesión no se ensena GraalVM cómo arquitectura del sistema. Se usa cómo mecanismo de entrega para cerrar U1 con un ejecutable demostrable.
 
-## 4. Crea: actividad autonoma
+## 4. Crea: actividad autónoma
 
 Tiempo: 3h fuera del aula.
 
@@ -231,7 +231,7 @@ Entrega evidencia breve con:
 - Menu de consola.
 - Salida de registrar, listar, buscar, actualizar y eliminar.
 - Evidencia de proyecto organizado con Maven.
-- Evidencia de preparacion o generacion de ejecutable nativo si corresponde.
+- Evidencia de preparación o generacion de ejecutable nativo si corresponde.
 
 ## 5. Cierre evaluativo
 
@@ -242,14 +242,14 @@ Tiempo: 20 min.
 - CRUD funcional en memoria.
 - `Main` no contiene el `ArrayList` principal.
 - La interface declara el contrato.
-- La implementacion en memoria administra la coleccion.
+- La implementacion en memoria administra la colección.
 - Las entidades se mantienen encapsuladas.
-- El proyecto queda listo para evaluacion U1.
+- El proyecto queda listo para evaluación U1.
 
 ### 5.2 Preguntas de defensa
 
-1. Que responsabilidad tiene `Main`?
-2. Que responsabilidad tiene `ClienteService`?
-3. Donde se almacena temporalmente la informacion?
-4. Por que `ArrayList` no debe estar como variable principal en `Main`?
-5. Que cambiaria cuando el almacenamiento sea SQLite?
+1. Qué responsabilidad tiene `Main`?
+2. Qué responsabilidad tiene `ClienteService`?
+3. Dónde se almacena temporalmente la información?
+4. Por qué `ArrayList` no debe estar cómo variable principal en `Main`?
+5. Qué cambiaria cuándo el almacenamiento sea SQLite?

@@ -1,35 +1,35 @@
-# S13 - Integracion del sistema
+﻿# S13 - Integración del sistema
 
-## 1. Introduccion
+## 1. Introducción
 
 Tiempo: 20 min.
 
-### 1.1 Proposito
+### 1.1 Propósito
 
-Integrar los modulos construidos en U1 y U2 en una version coherente del producto final, eliminando duplicidades y dejando un flujo principal ejecutable.
+Integrar los módulos construidos en U1 y U2 en una versión coherente del producto final, eliminando duplicidades y dejando un flujo principal ejecutable.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante consolida pantallas, controladores, servicios, entidades, DAO, base de datos, recursos y dependencias en una sola aplicacion.
+El estudiante consolida pantallas, controladores, servicios, entidades, DAO, base de datos, recursos y dependencias en una sola aplicación.
 
-### 1.3 Producto de sesion
+### 1.3 Producto de sesión
 
-Producto integrado con flujo principal funcional y preparacion para empaquetado final.
+Producto integrado con flujo principal funcional y preparación para empaquetado final.
 
-### 1.4 Motivacion de la sesion
+### 1.4 Motivación de la sesión
 
-Despues de varias sesiones, el proyecto puede tener clases duplicadas, nombres distintos, pantallas sueltas o servicios incompletos. Integrar significa dejar una sola version funcional y defendible.
+Después de varias sesiónes, el proyecto puede tener clases duplicadas, nombres distintos, pantallas sueltas o servicios incompletos. Integrar significa dejar una sola versión funcional y defendible.
 
-Pregunta guia:
+Pregunta guía:
 
 ```text
-Que debe quedar unido para que el producto funcione como aplicacion final?
+Qué debe quedar unido para que el producto funcione como aplicación final?
 ```
 
-### 1.5 Ubicacion en el curso
+### 1.5 Ubicación en el curso
 
 - Unidad: U3 - Proyecto integrador.
-- Avance de sesion: ensamblaje del producto final.
+- Avance de sesión: ensamblaje del producto final.
 
 ## 2. Explica
 
@@ -37,18 +37,18 @@ Tiempo: 25 min.
 
 ### 2.1 Conceptos clave
 
-- Integracion de modulos.
+- Integración de módulos.
 - Consistencia de paquetes.
 - Flujo principal.
 - Dependencias Maven.
 - Recursos FXML.
 - Base de datos.
-- Preparacion para ejecutable nativo.
+- Preparación para ejecutable nativo.
 
-Regla metodologica de la sesion:
+Regla métodológica de la sesión:
 
 ```text
-Integrar no es agregar mas clases.
+Integrar no es agregar más clases.
 Integrar es dejar una sola ruta funcional desde la GUI hasta la base de datos.
 Si hay dos clases que hacen lo mismo, se decide una y se elimina la duplicidad.
 ```
@@ -84,7 +84,7 @@ flowchart TB
     DAO -->|"JDBC"| SQLite
 ```
 
-## 3. Aplica: actividad practica guiada
+## 3. Aplica: actividad practica guíada
 
 Tiempo: 2h.
 
@@ -93,12 +93,12 @@ Tiempo: 2h.
 3. Integrar pantallas y controladores.
 4. Revisar interface de servicio e implementacion persistente.
 5. Revisar entidades usadas por GUI, servicio y DAO.
-6. Verificar conexion con SQLite.
+6. Verificar conexión con SQLite.
 7. Ejecutar el flujo principal de punta a punta.
-8. Revisar configuracion Maven y recursos.
-9. Registrar problemas encontrados y correcciones.
+8. Revisar configuración Maven y recursos.
+9. Registrar problemás encontrados y correcciones.
 
-## 4. Crea: actividad autonoma
+## 4. Crea: actividad autónoma
 
 Tiempo: 3h fuera del aula.
 
@@ -106,11 +106,11 @@ Integra una funcionalidad pendiente o corrige una inconsistencia del proyecto.
 
 Entrega evidencia breve con:
 
-- Antes/despues del cambio.
+- Antes/después del cambio.
 - Flujo probado.
 - Archivos modificados.
-- Error encontrado y solucion.
-- Captura de la aplicacion integrada.
+- Error encontrado y solución.
+- Captura de la aplicación integrada.
 
 ## 5. Cierre evaluativo
 
@@ -126,8 +126,8 @@ Tiempo: 20 min.
 
 ### 5.2 Preguntas de defensa
 
-1. Que modulo integraste?
-2. Que duplicidad o inconsistencia corregiste?
-3. Como verificaste el flujo principal?
-4. Que falta estabilizar antes de sustentar?
-5. Que archivo consideras mas critico en tu modulo?
+1. Qué módulo integraste?
+2. Qué duplicidad o inconsistencia corregiste?
+3. Cómo verificaste el flujo principal?
+4. Qué falta estabilizar antes de sustentar?
+5. Qué archivo consideras más crítico en tu módulo?
