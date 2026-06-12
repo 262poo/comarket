@@ -74,14 +74,14 @@ flowchart TB
     subgraph ServiceU1["Gestor / Servicio"]
         direction TB
         InterfaceU1["Interface<br/>contrato de operaciones CRUD"]
-        ImplementacionU1["Implementación en memoria<br/>implements"]
+        ImplementacionU1["Implementación en memoria"]
         ValidacionesU1["Validaciones/Excepciones básicas"]
     end
 
     subgraph EntitiesU1["Entidades"]
         direction TB
-        HerenciaU1["Herencia<br/>extends"]
-        ClasesU1["Clases del dominio"]
+        ClaseBaseU1["Clase base"]
+        SubclaseU1["Subclase"]
     end
 
     MemoriaU1[("ArrayList / memoria")]
@@ -91,7 +91,8 @@ flowchart TB
     ImplementacionU1 -. implements .-> InterfaceU1
     InterfaceU1 -.-> EntitiesU1
     ImplementacionU1 -.-> EntitiesU1
-    HerenciaU1 --> ClasesU1
+    ClaseBaseU1 ~~~ SubclaseU1
+    SubclaseU1 -- extends --> ClaseBaseU1
     ImplementacionU1 --> MemoriaU1
 ```
 
@@ -136,7 +137,7 @@ flowchart TB
     subgraph Service["Servicio"]
         direction TB
         ServiceInterface["Interface<br/>contrato de operaciones CRUD"]
-        ServiceDbImpl["Implementación con base de datos<br/>implements"]
+        ServiceDbImpl["Implementación con base de datos"]
         ServiceValidation["Validaciones/Excepciones"]
     end
 

@@ -52,10 +52,10 @@ Tiempo: 25 min.
 flowchart TB
     Vista["Vista JavaFX"]
     Controlador["Controlador"]
-    Contrato["Interface<br/>contrato de operaciones CRUD"]
-    Servicio["Implementación persistente<br/>implements"]
-    Entidades["Entidades"]
-    DAO["DAO"]
+    Contrato["ClienteService<br/>&lt;&lt;interface&gt;&gt;"]
+    Servicio["ClienteServiceBD"]
+    Entidades["Cliente"]
+    DAO["ClienteDAO"]
     SQLite[("SQLite / comarket.db")]
 
     Vista --> Controlador
@@ -77,9 +77,9 @@ Tiempo: 2h.
 4. Implementar `actualizar`.
 5. Implementar `eliminar`.
 6. Cargar la tabla desde la base de datos.
-7. Conectar botones de la GUI con el contrato del servicio, no directamente con SQL.
-8. Crear o adaptar una implementación persistente del servicio.
-9. Hacer que la implementación persistente use DAO para guardar y consultar.
+7. Conectar botones de la GUI con `ClienteService`, no directamente con SQL.
+8. Crear o adaptar `ClienteServiceBD` como implementación persistente del servicio.
+9. Hacer que `ClienteServiceBD` use `ClienteDAO` para guardar y consultar.
 10. Confirmar eliminación y manejar errores básicos.
 
 ## 4. Crea: actividad autónoma
@@ -90,7 +90,7 @@ Completa el CRUD persistente para una entidad adicional o mejora el módulo prin
 
 Entrega evidencia breve con:
 
-- Código de la interface del servicio, implementación persistente y DAO.
+- Código de `ClienteService`, `ClienteServiceBD` y `ClienteDAO`.
 - Capturas de GUI.
 - Registros persistidos en SQLite.
 - Explicación del flujo Vista-Controlador-Servicio-Entidades-DAO.

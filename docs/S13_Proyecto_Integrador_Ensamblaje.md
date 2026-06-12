@@ -53,7 +53,7 @@ flowchart TB
     Controladores["Controladores"]
     subgraph Servicios["Servicios"]
         Contrato["Interface<br/>contrato de operaciones CRUD"]
-        Implementacion["Implementación persistente<br/>implements"]
+        Implementacion["Implementación persistente"]
         Validaciones["Validaciones/Excepciones"]
     end
 

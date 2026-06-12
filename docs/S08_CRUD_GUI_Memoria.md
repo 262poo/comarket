@@ -52,9 +52,9 @@ Tiempo: 25 min.
 flowchart TB
     Vista["Formulario + TableView"]
     Controlador["Controlador"]
-    Contrato["Interface<br/>contrato de operaciones CRUD"]
-    Servicio["Implementación en memoria<br/>implements"]
-    Entidades["Entidades"]
+    Contrato["ClienteService<br/>&lt;&lt;interface&gt;&gt;"]
+    Servicio["ClienteServiceMemoria"]
+    Entidades["Cliente"]
     Memoria[("ArrayList")]
 
     Vista --> Controlador
@@ -71,12 +71,12 @@ flowchart TB
 
 Tiempo: 2h.
 
-1. Crear campos para datos de producto u otra entidad.
+1. Crear campos para datos de cliente.
 2. Leer datos desde el formulario.
 3. Validar campos obligatorios y valores numéricos.
 4. Crear objetos o leerlos desde el formulario.
-5. Delegar registro, consulta, actualización y eliminación al contrato del servicio.
-6. Mantener el `ArrayList` dentro de la implementación en memoria.
+5. Delegar registro, consulta, actualización y eliminación a `ClienteService`.
+6. Mantener el `ArrayList` dentro de `ClienteServiceMemoria`.
 7. Mostrar datos en `TableView`.
 8. Editar el elemento seleccionado.
 9. Eliminar con confirmación.
@@ -91,7 +91,7 @@ Entrega evidencia breve con:
 
 - Capturas de registro, edición y eliminación.
 - Código del controlador.
-- Código o referencia de la interface del servicio y su implementación en memoria.
+- Código o referencia de `ClienteService` y `ClienteServiceMemoria`.
 - Explicación de cómo se actualiza la tabla sin duplicar el CRUD en el controlador.
 
 ## 5. Cierre evaluativo

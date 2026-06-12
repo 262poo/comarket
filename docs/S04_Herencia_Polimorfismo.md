@@ -14,7 +14,7 @@ El estudiante crea jerarquías simples con `extends`, define una interface como 
 
 ### 1.3 Producto de sesión
 
-Entidades con herencia y un primer contrato polimórfico con dos implementaciones, probados desde `Main`.
+Entidades con herencia (`Persona`, `Cliente`, `Empleado`) y un primer contrato polimórfico (`ClienteService`) con dos implementaciones, probados desde `Main`.
 
 ### 1.4 Motivación de la sesión
 
@@ -53,7 +53,9 @@ Regla metodológica de la sesión:
 ```text
 Tema 1: Herencia se trabaja en entidades cuando existe una relación es-un.
 Tema 2: Polimorfismo se trabaja con interface e implements para programar contra un contrato.
+En los diagramas, extends e implements se leen en las flechas.
 Las entidades no implementan contratos de servicio; representan el dominio.
+ClienteServiceBD anticipa la implementación con base de datos que luego usará DAO en U2.
 ```
 
 ### 2.2 Arquitectura de la sesión
@@ -62,22 +64,24 @@ Las entidades no implementan contratos de servicio; representan el dominio.
 flowchart TB
     subgraph Entidades["Entidades"]
         direction TB
-        Base["Persona<br/>clase base"]
-        SubA["Cliente<br/>extends"]
-        SubB["Empleado<br/>extends"]
+        Base["Persona<br/>&lt;&lt;abstract&gt;&gt;"]
+        SubA["Cliente"]
+        SubB["Empleado"]
     end
 
-    subgraph Polimorfismo["Polimorfismo con implements"]
+    subgraph Polimorfismo["Polimorfismo con interfaces"]
         direction TB
-        Contrato["Interface<br/>contrato de operaciones"]
-        ImplementacionMemoria["Implementación en memoria<br/>implements"]
-        ImplementacionBD["Implementación con base de datos<br/>implements"]
+        Contrato["ClienteService<br/>&lt;&lt;interface&gt;&gt;"]
+        ImplementacionMemoria["ClienteServiceMemoria"]
+        ImplementacionBD["ClienteServiceBD"]
     end
 
     Main["Main / pruebas"]
 
-    SubA --> Base
-    SubB --> Base
+    Base ~~~ SubA
+    Base ~~~ SubB
+    SubA -- extends --> Base
+    SubB -- extends --> Base
     Contrato ~~~ ImplementacionMemoria
     Contrato ~~~ ImplementacionBD
     ImplementacionMemoria -. implements .-> Contrato
@@ -95,9 +99,9 @@ Tiempo: 2h.
 3. Crear dos subclases con `extends`.
 4. Sobrescribir un método relevante en las subclases.
 5. Probar herencia desde `Main` usando una referencia de la clase base.
-6. Definir una interface como contrato de operaciones.
-7. Crear una implementación en memoria con `implements`.
-8. Crear una segunda implementación del mismo contrato para evidenciar el polimorfismo.
+6. Definir una interface como contrato de operaciones, por ejemplo `ClienteService`.
+7. Crear una implementación en memoria, por ejemplo `ClienteServiceMemoria`.
+8. Crear una segunda implementación del mismo contrato, por ejemplo `ClienteServiceBD`, como preparación conceptual para la arquitectura con DAO.
 9. Probar polimorfismo desde `Main` usando una referencia de la interface.
 10. Verificar que herencia e interface resuelven problemas distintos.
 
@@ -113,6 +117,7 @@ Entrega evidencia breve con:
 - Justificación de `extends`.
 - Interface creada.
 - Dos clases que usan `implements`.
+- Explicación de que `ClienteServiceBD` luego coordinará un DAO.
 - Prueba polimórfica con referencia a la interface.
 - Salida de consola.
 

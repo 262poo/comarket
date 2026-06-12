@@ -53,12 +53,13 @@ Tiempo: 25 min.
 flowchart TB
     Controlador["Controlador"]
     subgraph Servicio["Servicio"]
-        Contrato["Interface<br/>contrato de operaciones CRUD"]
-        Implementacion["Implementación persistente<br/>implements"]
+        Contrato["ClienteService<br/>&lt;&lt;interface&gt;&gt;"]
+        Implementacion["ClienteServiceBD"]
     end
 
-    Entidades["Entidades"]
+    Entidades["Cliente"]
     subgraph Persistencia["Persistencia"]
+        DAO["ClienteDAO"]
         Conexion["ConexionBD"]
         SQLite[("SQLite / comarket.db")]
     end
@@ -67,7 +68,8 @@ flowchart TB
     Implementacion -. implements .-> Contrato
     Contrato -.-> Entidades
     Implementacion -.-> Entidades
-    Implementacion --> Conexion
+    Implementacion --> DAO
+    DAO --> Conexion
     Conexion -->|"JDBC"| SQLite
 ```
 
@@ -82,9 +84,10 @@ Tiempo: 2h.
 5. Crear una tabla inicial.
 6. Implementar una clase de conexión.
 7. Probar conexión con una consulta simple.
-8. Identificar el contrato de servicio que seguirá usando el controlador.
-9. Preparar la implementación persistente que reemplazará a la implementación en memoria.
-10. Verificar que las entidades no cambien por usar base de datos.
+8. Identificar `ClienteService` como contrato que seguirá usando el controlador.
+9. Preparar `ClienteServiceBD` como implementación persistente que reemplazará a `ClienteServiceMemoria`.
+10. Preparar `ClienteDAO` como componente de persistencia que usará la conexión JDBC.
+11. Verificar que las entidades no cambien por usar base de datos.
 
 ## 4. Crea: actividad autónoma
 

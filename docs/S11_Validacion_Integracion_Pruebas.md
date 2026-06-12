@@ -53,7 +53,7 @@ flowchart TB
     Vista["Vista"]
     Controlador["Controlador"]
     Contrato["Interface<br/>contrato de operaciones CRUD"]
-    Servicio["Implementación persistente<br/>implements"]
+    Servicio["Implementación persistente"]
     Validaciones["Excepciones / Validaciones"]
     DAO["DAO"]
 

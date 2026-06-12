@@ -64,7 +64,7 @@ Las entidades no almacenan; representan datos y comportamiento del dominio.
 flowchart TB
     Main["Main / menú consola"]
     Interface["Interface<br/>contrato de operaciones CRUD"]
-    Gestor["Implementación en memoria<br/>implements"]
+    Gestor["Implementación en memoria"]
     Entidades["Entidades"]
     Lista[("ArrayList")]
 
