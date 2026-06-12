@@ -368,7 +368,7 @@
   <span class="md-ellipsis">
     
   
-    3 Modelado del dominio y colecciones
+    3 Asociacion, agregacion/composicion y colecciones
   
 
     
@@ -653,19 +653,19 @@
   <a href="#1-introduccion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Introducción
+        1. Introduccion
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Introducción">
+    <nav class="md-nav" aria-label="1. Introduccion">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#11-proposito" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1 Propósito
+        1.1 Proposito
       
     </span>
   </a>
@@ -687,7 +687,7 @@
   <a href="#13-producto-de-sesion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3 Producto de sesión
+        1.3 Producto de sesion
       
     </span>
   </a>
@@ -698,7 +698,7 @@
   <a href="#14-motivacion-de-la-sesion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4 Motivación de la sesión
+        1.4 Motivacion de la sesion
       
     </span>
   </a>
@@ -709,7 +709,7 @@
   <a href="#15-ubicacion-en-el-curso" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.5 Ubicación en el curso
+        1.5 Ubicacion en el curso
       
     </span>
   </a>
@@ -748,7 +748,7 @@
   <a href="#22-arquitectura-de-la-sesion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 Arquitectura de la sesión
+        2.2 Arquitectura de la sesion
       
     </span>
   </a>
@@ -764,7 +764,7 @@
   <a href="#3-aplica-actividad-practica-guiada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Aplica: actividad práctica guiada
+        3. Aplica: actividad practica guiada
       
     </span>
   </a>
@@ -775,7 +775,7 @@
   <a href="#4-crea-actividad-autonoma" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Crea: actividad autónoma
+        4. Crea: actividad autonoma
       
     </span>
   </a>
@@ -1017,7 +1017,7 @@
   <span class="md-ellipsis">
     
   
-    14 Validacion y refinamiento
+    14 Validacion, refinamiento y ejecutable nativo
   
 
     
@@ -1045,7 +1045,7 @@
   <span class="md-ellipsis">
     
   
-    15 Sustentacion del proyecto CoMarket
+    15 Sustentacion del proyecto
   
 
     
@@ -1213,19 +1213,19 @@
   <a href="#1-introduccion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Introducción
+        1. Introduccion
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Introducción">
+    <nav class="md-nav" aria-label="1. Introduccion">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#11-proposito" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1 Propósito
+        1.1 Proposito
       
     </span>
   </a>
@@ -1247,7 +1247,7 @@
   <a href="#13-producto-de-sesion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3 Producto de sesión
+        1.3 Producto de sesion
       
     </span>
   </a>
@@ -1258,7 +1258,7 @@
   <a href="#14-motivacion-de-la-sesion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4 Motivación de la sesión
+        1.4 Motivacion de la sesion
       
     </span>
   </a>
@@ -1269,7 +1269,7 @@
   <a href="#15-ubicacion-en-el-curso" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.5 Ubicación en el curso
+        1.5 Ubicacion en el curso
       
     </span>
   </a>
@@ -1308,7 +1308,7 @@
   <a href="#22-arquitectura-de-la-sesion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 Arquitectura de la sesión
+        2.2 Arquitectura de la sesion
       
     </span>
   </a>
@@ -1324,7 +1324,7 @@
   <a href="#3-aplica-actividad-practica-guiada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Aplica: actividad práctica guiada
+        3. Aplica: actividad practica guiada
       
     </span>
   </a>
@@ -1335,7 +1335,7 @@
   <a href="#4-crea-actividad-autonoma" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Crea: actividad autónoma
+        4. Crea: actividad autonoma
       
     </span>
   </a>
@@ -1399,104 +1399,117 @@
 
 
 <h1 id="s9-arquitectura-por-capas-y-persistencia-relacional">S9 - Arquitectura por capas y persistencia relacional<a class="headerlink" href="#s9-arquitectura-por-capas-y-persistencia-relacional" title="Permanent link">&para;</a></h1>
-<h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
+<h2 id="1-introduccion">1. Introduccion<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
-<h3 id="11-proposito">1.1 Propósito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
-<p>Preparar CoMarket para reemplazar el almacenamiento en memoria por persistencia relacional con SQLite y JDBC.</p>
+<h3 id="11-proposito">1.1 Proposito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
+<p>Preparar la aplicacion de escritorio para reemplazar almacenamiento en memoria por persistencia relacional con SQLite y JDBC.</p>
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
-<p>El estudiante organiza el proyecto por capas simples, configura SQLite, comprende JDBC y prepara la estructura para una implementación persistente del servicio y DAO.</p>
-<h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>Proyecto JavaFX/Maven organizado con entidades, controladores, servicio, paquete de persistencia, conexión JDBC y base de datos SQLite.</p>
-<h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
-<p>El <code>ArrayList</code> se borra al cerrar la aplicación. Para conservar datos, CoMarket necesita una base de datos local.</p>
-<p>Pregunta guía:</p>
-<div class="highlight"><pre><span></span><code>¿Cómo hacemos que los datos sobrevivan después de cerrar la aplicación?
+<p>El estudiante organiza el proyecto por capas, configura SQLite, comprende JDBC y prepara la estructura para una implementacion persistente del servicio y DAO.</p>
+<h3 id="13-producto-de-sesion">1.3 Producto de sesion<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
+<p>Proyecto JavaFX/Maven organizado con vista, controlador, servicio, entidades, persistencia, conexion JDBC y base de datos SQLite.</p>
+<h3 id="14-motivacion-de-la-sesion">1.4 Motivacion de la sesion<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
+<p>El <code>ArrayList</code> se borra al cerrar la aplicacion. Para conservar datos, el producto necesita una base de datos local y una capa de persistencia.</p>
+<p>Pregunta guia:</p>
+<div class="highlight"><pre><span></span><code>Como hacemos que los datos sobrevivan despues de cerrar la aplicacion?
 </code></pre></div>
-<h3 id="15-ubicacion-en-el-curso">1.5 Ubicación en el curso<a class="headerlink" href="#15-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
+<h3 id="15-ubicacion-en-el-curso">1.5 Ubicacion en el curso<a class="headerlink" href="#15-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Unidad: U2.</li>
-<li>Avance de sesión: transición de memoria a persistencia.</li>
+<li>Avance de sesion: transicion de memoria a persistencia.</li>
 </ul>
 <h2 id="2-explica">2. Explica<a class="headerlink" href="#2-explica" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 25 min.</p>
 <h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Arquitectura por capas.</li>
-<li>Entidades.</li>
-<li>Controladores.</li>
+<li>Vista FXML y controlador JavaFX.</li>
 <li>Servicio como contrato de operaciones.</li>
-<li>Implementación persistente como extensión del servicio.</li>
+<li>Implementacion persistente del servicio.</li>
 <li>Persistencia.</li>
+<li>DAO.</li>
 <li>JDBC como conector.</li>
 <li>SQLite como base de datos local.</li>
-<li>Clase de conexión.</li>
+<li>Clase de conexion.</li>
 </ul>
-<h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
+<p>Regla metodologica de la sesion:</p>
+<div class="highlight"><pre><span></span><code>El controlador sigue usando el contrato del servicio.
+La implementacion persistente coordina reglas y DAO.
+El DAO conversa con SQL.
+JDBC conecta Java con SQLite.
+Las entidades no cambian por usar base de datos.
+</code></pre></div>
+<h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesion<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart TB
-    Controlador["Controlador"]
+    Vista["Vista FXML"]
+    Controlador["JavaFX Controller"]
+
     subgraph Servicio["Servicio"]
         Contrato["ClienteService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
-        Implementacion["ClienteServiceBD"]
+        Implementacion["ClienteServiceBD&lt;br/&gt;implements"]
+        Validaciones["Validaciones/Excepciones"]
     end
 
     Entidades["Cliente"]
+
     subgraph Persistencia["Persistencia"]
         DAO["ClienteDAO"]
         Conexion["ConexionBD"]
         SQLite[("SQLite / comarket.db")]
     end
 
+    Vista --&gt; Controlador
     Controlador --&gt; Contrato
     Implementacion -. implements .-&gt; Contrato
     Contrato -.-&gt; Entidades
     Implementacion -.-&gt; Entidades
     Implementacion --&gt; DAO
+    Implementacion -.-&gt; Validaciones
+    DAO --&gt; Entidades
     DAO --&gt; Conexion
     Conexion --&gt;|"JDBC"| SQLite</code></pre>
-<h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
+<h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad practica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <ol>
 <li>Revisar dependencias Maven.</li>
 <li>Agregar SQLite JDBC si hace falta.</li>
-<li>Crear carpeta o paquete de persistencia.</li>
+<li>Crear paquete <code>persistencia</code>.</li>
 <li>Crear archivo <code>comarket.db</code>.</li>
 <li>Crear una tabla inicial.</li>
-<li>Implementar una clase de conexión.</li>
-<li>Probar conexión con una consulta simple.</li>
-<li>Identificar <code>ClienteService</code> como contrato que seguirá usando el controlador.</li>
-<li>Preparar <code>ClienteServiceBD</code> como implementación persistente que reemplazará a <code>ClienteServiceMemoria</code>.</li>
-<li>Preparar <code>ClienteDAO</code> como componente de persistencia que usará la conexión JDBC.</li>
-<li>Verificar que las entidades no cambien por usar base de datos.</li>
+<li>Implementar <code>ConexionBD</code>.</li>
+<li>Probar conexion con una consulta simple.</li>
+<li>Identificar <code>ClienteService</code> como contrato que seguira usando el controlador.</li>
+<li>Preparar <code>ClienteServiceBD</code> como implementacion persistente.</li>
+<li>Preparar <code>ClienteDAO</code> como componente de persistencia.</li>
+<li>Verificar que <code>Cliente</code> no cambia por usar base de datos.</li>
 </ol>
-<h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
+<h2 id="4-crea-actividad-autonoma">4. Crea: actividad autonoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h fuera del aula.</p>
 <p>Prepara una tabla adicional o mejora la estructura de persistencia.</p>
 <p>Entrega evidencia breve con:</p>
 <ul>
 <li>Estructura de paquetes.</li>
 <li>Script o captura de tabla.</li>
-<li>Prueba de conexión.</li>
-<li>Bosquejo del servicio y su implementación persistente.</li>
-<li>Explicación del rol de JDBC.</li>
+<li>Prueba de conexion.</li>
+<li>Bosquejo del servicio y su implementacion persistente.</li>
+<li>Explicacion del rol de JDBC.</li>
 </ul>
 <h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
 <h3 id="51-resultados-esperados">5.1 Resultados esperados<a class="headerlink" href="#51-resultados-esperados" title="Permanent link">&para;</a></h3>
 <ul>
 <li>El proyecto mantiene una estructura por capas.</li>
-<li>SQLite está disponible.</li>
+<li>SQLite esta disponible.</li>
 <li>JDBC conecta con la base de datos.</li>
 <li>El controlador conserva como entrada el contrato del servicio.</li>
-<li>La aplicación está preparada para DAO.</li>
-<li>Las entidades siguen siendo clases del dominio, no clases de base de datos.</li>
+<li>La aplicacion queda preparada para DAO.</li>
 </ul>
 <h3 id="52-preguntas-de-defensa">5.2 Preguntas de defensa<a class="headerlink" href="#52-preguntas-de-defensa" title="Permanent link">&para;</a></h3>
 <ol>
-<li>¿Por qué <code>ArrayList</code> ya no es suficiente?</li>
-<li>¿Qué función cumple JDBC?</li>
-<li>¿Dónde vive la base de datos?</li>
-<li>¿Qué capa debe conversar con SQL?</li>
-<li>¿Por qué no cambiamos las entidades al pasar de memoria a SQLite?</li>
+<li>Por que <code>ArrayList</code> ya no es suficiente?</li>
+<li>Que funcion cumple JDBC?</li>
+<li>Donde vive la base de datos?</li>
+<li>Que capa debe conversar con SQL?</li>
+<li>Por que no cambiamos las entidades al pasar de memoria a SQLite?</li>
 </ol>
 
 
