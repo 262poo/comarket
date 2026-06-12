@@ -1404,14 +1404,14 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
     subgraph ServiceU1["Gestor / Servicio"]
         direction TB
         InterfaceU1["Interface&lt;br/&gt;contrato de operaciones CRUD"]
-        ImplementacionU1["Implementación en memoria&lt;br/&gt;implements"]
+        ImplementacionU1["Implementación en memoria"]
         ValidacionesU1["Validaciones/Excepciones básicas"]
     end
 
     subgraph EntitiesU1["Entidades"]
         direction TB
-        HerenciaU1["Herencia&lt;br/&gt;extends"]
-        ClasesU1["Clases del dominio"]
+        ClaseBaseU1["Clase base"]
+        SubclaseU1["Subclase"]
     end
 
     MemoriaU1[("ArrayList / memoria")]
@@ -1421,7 +1421,8 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
     ImplementacionU1 -. implements .-&gt; InterfaceU1
     InterfaceU1 -.-&gt; EntitiesU1
     ImplementacionU1 -.-&gt; EntitiesU1
-    HerenciaU1 --&gt; ClasesU1
+    ClaseBaseU1 ~~~ SubclaseU1
+    SubclaseU1 -- extends --&gt; ClaseBaseU1
     ImplementacionU1 --&gt; MemoriaU1</code></pre>
 <p>Nota metodológica: en U1 se trabaja una base elemental de separación de responsabilidades, alineada al principio de responsabilidad única de SOLID. <code>Main</code> coordina la ejecución, las entidades representan datos y comportamiento propio del dominio, la interface declara el contrato de operaciones CRUD y la implementación en memoria ejecuta las operaciones sobre <code>ArrayList</code>. No se introducen interfaces en entidades porque pueden complicar el modelo sin aportar claridad en esta etapa.</p>
 <p>Stack tecnológico U1:</p>
@@ -1460,7 +1461,7 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
     subgraph Service["Servicio"]
         direction TB
         ServiceInterface["Interface&lt;br/&gt;contrato de operaciones CRUD"]
-        ServiceDbImpl["Implementación con base de datos&lt;br/&gt;implements"]
+        ServiceDbImpl["Implementación con base de datos"]
         ServiceValidation["Validaciones/Excepciones"]
     end
 

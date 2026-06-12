@@ -1435,12 +1435,13 @@
 <pre class="mermaid"><code>flowchart TB
     Controlador["Controlador"]
     subgraph Servicio["Servicio"]
-        Contrato["Interface&lt;br/&gt;contrato de operaciones CRUD"]
-        Implementacion["Implementación persistente&lt;br/&gt;implements"]
+        Contrato["ClienteService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
+        Implementacion["ClienteServiceBD"]
     end
 
-    Entidades["Entidades"]
+    Entidades["Cliente"]
     subgraph Persistencia["Persistencia"]
+        DAO["ClienteDAO"]
         Conexion["ConexionBD"]
         SQLite[("SQLite / comarket.db")]
     end
@@ -1449,7 +1450,8 @@
     Implementacion -. implements .-&gt; Contrato
     Contrato -.-&gt; Entidades
     Implementacion -.-&gt; Entidades
-    Implementacion --&gt; Conexion
+    Implementacion --&gt; DAO
+    DAO --&gt; Conexion
     Conexion --&gt;|"JDBC"| SQLite</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
@@ -1461,8 +1463,9 @@
 <li>Crear una tabla inicial.</li>
 <li>Implementar una clase de conexión.</li>
 <li>Probar conexión con una consulta simple.</li>
-<li>Identificar el contrato de servicio que seguirá usando el controlador.</li>
-<li>Preparar la implementación persistente que reemplazará a la implementación en memoria.</li>
+<li>Identificar <code>ClienteService</code> como contrato que seguirá usando el controlador.</li>
+<li>Preparar <code>ClienteServiceBD</code> como implementación persistente que reemplazará a <code>ClienteServiceMemoria</code>.</li>
+<li>Preparar <code>ClienteDAO</code> como componente de persistencia que usará la conexión JDBC.</li>
 <li>Verificar que las entidades no cambien por usar base de datos.</li>
 </ol>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>

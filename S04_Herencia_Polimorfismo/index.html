@@ -1406,7 +1406,7 @@
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
 <p>El estudiante crea jerarquías simples con <code>extends</code>, define una interface como contrato de operaciones y crea dos implementaciones con <code>implements</code>.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>Entidades con herencia y un primer contrato polimórfico con dos implementaciones, probados desde <code>Main</code>.</p>
+<p>Entidades con herencia (<code>Persona</code>, <code>Cliente</code>, <code>Empleado</code>) y un primer contrato polimórfico (<code>ClienteService</code>) con dos implementaciones, probados desde <code>Main</code>.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
 <p>Cuando varias entidades tienen una relación es-un, puede tener sentido usar herencia. Cuando queremos programar contra un contrato y permitir distintas implementaciones, usamos polimorfismo con interface e <code>implements</code>.</p>
 <p>Pregunta guía:</p>
@@ -1435,28 +1435,32 @@
 <p>Regla metodológica de la sesión:</p>
 <div class="highlight"><pre><span></span><code>Tema 1: Herencia se trabaja en entidades cuando existe una relación es-un.
 Tema 2: Polimorfismo se trabaja con interface e implements para programar contra un contrato.
+En los diagramas, extends e implements se leen en las flechas.
 Las entidades no implementan contratos de servicio; representan el dominio.
+ClienteServiceBD anticipa la implementación con base de datos que luego usará DAO en U2.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart TB
     subgraph Entidades["Entidades"]
         direction TB
-        Base["Persona&lt;br/&gt;clase base"]
-        SubA["Cliente&lt;br/&gt;extends"]
-        SubB["Empleado&lt;br/&gt;extends"]
+        Base["Persona&lt;br/&gt;&amp;lt;&amp;lt;abstract&amp;gt;&amp;gt;"]
+        SubA["Cliente"]
+        SubB["Empleado"]
     end
 
-    subgraph Polimorfismo["Polimorfismo con implements"]
+    subgraph Polimorfismo["Polimorfismo con interfaces"]
         direction TB
-        Contrato["Interface&lt;br/&gt;contrato de operaciones"]
-        ImplementacionMemoria["Implementación en memoria&lt;br/&gt;implements"]
-        ImplementacionBD["Implementación con base de datos&lt;br/&gt;implements"]
+        Contrato["ClienteService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
+        ImplementacionMemoria["ClienteServiceMemoria"]
+        ImplementacionBD["ClienteServiceBD"]
     end
 
     Main["Main / pruebas"]
 
-    SubA --&gt; Base
-    SubB --&gt; Base
+    Base ~~~ SubA
+    Base ~~~ SubB
+    SubA -- extends --&gt; Base
+    SubB -- extends --&gt; Base
     Contrato ~~~ ImplementacionMemoria
     Contrato ~~~ ImplementacionBD
     ImplementacionMemoria -. implements .-&gt; Contrato
@@ -1471,9 +1475,9 @@ Las entidades no implementan contratos de servicio; representan el dominio.
 <li>Crear dos subclases con <code>extends</code>.</li>
 <li>Sobrescribir un método relevante en las subclases.</li>
 <li>Probar herencia desde <code>Main</code> usando una referencia de la clase base.</li>
-<li>Definir una interface como contrato de operaciones.</li>
-<li>Crear una implementación en memoria con <code>implements</code>.</li>
-<li>Crear una segunda implementación del mismo contrato para evidenciar el polimorfismo.</li>
+<li>Definir una interface como contrato de operaciones, por ejemplo <code>ClienteService</code>.</li>
+<li>Crear una implementación en memoria, por ejemplo <code>ClienteServiceMemoria</code>.</li>
+<li>Crear una segunda implementación del mismo contrato, por ejemplo <code>ClienteServiceBD</code>, como preparación conceptual para la arquitectura con DAO.</li>
 <li>Probar polimorfismo desde <code>Main</code> usando una referencia de la interface.</li>
 <li>Verificar que herencia e interface resuelven problemas distintos.</li>
 </ol>
@@ -1486,6 +1490,7 @@ Las entidades no implementan contratos de servicio; representan el dominio.
 <li>Justificación de <code>extends</code>.</li>
 <li>Interface creada.</li>
 <li>Dos clases que usan <code>implements</code>.</li>
+<li>Explicación de que <code>ClienteServiceBD</code> luego coordinará un DAO.</li>
 <li>Prueba polimórfica con referencia a la interface.</li>
 <li>Salida de consola.</li>
 </ul>

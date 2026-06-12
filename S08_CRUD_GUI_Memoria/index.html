@@ -1434,9 +1434,9 @@
 <pre class="mermaid"><code>flowchart TB
     Vista["Formulario + TableView"]
     Controlador["Controlador"]
-    Contrato["Interface&lt;br/&gt;contrato de operaciones CRUD"]
-    Servicio["Implementación en memoria&lt;br/&gt;implements"]
-    Entidades["Entidades"]
+    Contrato["ClienteService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
+    Servicio["ClienteServiceMemoria"]
+    Entidades["Cliente"]
     Memoria[("ArrayList")]
 
     Vista --&gt; Controlador
@@ -1450,12 +1450,12 @@
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <ol>
-<li>Crear campos para datos de producto u otra entidad.</li>
+<li>Crear campos para datos de cliente.</li>
 <li>Leer datos desde el formulario.</li>
 <li>Validar campos obligatorios y valores numéricos.</li>
 <li>Crear objetos o leerlos desde el formulario.</li>
-<li>Delegar registro, consulta, actualización y eliminación al contrato del servicio.</li>
-<li>Mantener el <code>ArrayList</code> dentro de la implementación en memoria.</li>
+<li>Delegar registro, consulta, actualización y eliminación a <code>ClienteService</code>.</li>
+<li>Mantener el <code>ArrayList</code> dentro de <code>ClienteServiceMemoria</code>.</li>
 <li>Mostrar datos en <code>TableView</code>.</li>
 <li>Editar el elemento seleccionado.</li>
 <li>Eliminar con confirmación.</li>
@@ -1467,7 +1467,7 @@
 <ul>
 <li>Capturas de registro, edición y eliminación.</li>
 <li>Código del controlador.</li>
-<li>Código o referencia de la interface del servicio y su implementación en memoria.</li>
+<li>Código o referencia de <code>ClienteService</code> y <code>ClienteServiceMemoria</code>.</li>
 <li>Explicación de cómo se actualiza la tabla sin duplicar el CRUD en el controlador.</li>
 </ul>
 <h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>

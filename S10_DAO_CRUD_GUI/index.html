@@ -1434,10 +1434,10 @@
 <pre class="mermaid"><code>flowchart TB
     Vista["Vista JavaFX"]
     Controlador["Controlador"]
-    Contrato["Interface&lt;br/&gt;contrato de operaciones CRUD"]
-    Servicio["Implementación persistente&lt;br/&gt;implements"]
-    Entidades["Entidades"]
-    DAO["DAO"]
+    Contrato["ClienteService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
+    Servicio["ClienteServiceBD"]
+    Entidades["Cliente"]
+    DAO["ClienteDAO"]
     SQLite[("SQLite / comarket.db")]
 
     Vista --&gt; Controlador
@@ -1456,9 +1456,9 @@
 <li>Implementar <code>actualizar</code>.</li>
 <li>Implementar <code>eliminar</code>.</li>
 <li>Cargar la tabla desde la base de datos.</li>
-<li>Conectar botones de la GUI con el contrato del servicio, no directamente con SQL.</li>
-<li>Crear o adaptar una implementación persistente del servicio.</li>
-<li>Hacer que la implementación persistente use DAO para guardar y consultar.</li>
+<li>Conectar botones de la GUI con <code>ClienteService</code>, no directamente con SQL.</li>
+<li>Crear o adaptar <code>ClienteServiceBD</code> como implementación persistente del servicio.</li>
+<li>Hacer que <code>ClienteServiceBD</code> use <code>ClienteDAO</code> para guardar y consultar.</li>
 <li>Confirmar eliminación y manejar errores básicos.</li>
 </ol>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
@@ -1466,7 +1466,7 @@
 <p>Completa el CRUD persistente para una entidad adicional o mejora el módulo principal.</p>
 <p>Entrega evidencia breve con:</p>
 <ul>
-<li>Código de la interface del servicio, implementación persistente y DAO.</li>
+<li>Código de <code>ClienteService</code>, <code>ClienteServiceBD</code> y <code>ClienteDAO</code>.</li>
 <li>Capturas de GUI.</li>
 <li>Registros persistidos en SQLite.</li>
 <li>Explicación del flujo Vista-Controlador-Servicio-Entidades-DAO.</li>
