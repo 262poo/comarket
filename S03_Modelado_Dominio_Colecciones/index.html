@@ -1408,7 +1408,7 @@
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
 <p>Modelo inicial con entidades relacionadas y gestor básico sobre una colección.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
-<p>Un sistema comercial no trabaja con objetos aislados. Un producto puede pertenecer a una categoría, una venta puede tener detalles, y un gestor puede administrar varios objetos.</p>
+<p>Un sistema de dominio no trabaja con objetos aislados. Un cliente puede tener ventas, un proveedor puede estar asociado a productos, y un gestor puede administrar varios objetos en memoria.</p>
 <p>Pregunta guía:</p>
 <div class="highlight"><pre><span></span><code>¿Cómo representamos varios objetos relacionados sin cargar todo en Main?
 </code></pre></div>
@@ -1451,7 +1451,7 @@ Las entidades representan el dominio.
 <ol>
 <li>Crear dos entidades relacionadas.</li>
 <li>Representar una relación uno a muchos con <code>ArrayList</code>.</li>
-<li>Crear una clase gestora, por ejemplo <code>GestorProductos</code> o <code>Inventario</code>.</li>
+<li>Crear una clase gestora, por ejemplo <code>GestorClientes</code>.</li>
 <li>Agregar métodos para registrar y listar objetos.</li>
 <li>Probar el flujo desde <code>Main</code>.</li>
 <li>Evitar que <code>Main</code> acceda directamente a todos los detalles de la colección.</li>
