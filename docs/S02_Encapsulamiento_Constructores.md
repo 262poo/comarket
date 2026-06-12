@@ -531,27 +531,106 @@ ProductoService contiene métodos con nombre de acción.
 
 ## 4. Crea: actividad autónoma
 
+Fuera del aula, cada estudiante consolida el aprendizaje encapsulando otra entidad del dominio y preparando una evidencia individual.
+
 Tiempo: 2h fuera del aula.
 
-Mejora otra entidad del dominio aplicando encapsulamiento, constructores sobrecargados, getters/setters limpios y una clase service inicial. Puede ser `Proveedor`, `Empleado`, `Usuario`, `Cliente` u otra entidad del proyecto elegido.
+### 4.1 Plantilla de evidencia individual
 
-Entrega evidencia breve con:
+Entrega un PDF con el siguiente nombre:
+
+```text
+S02_Equipo##_ApellidoNombre.pdf
+```
+
+Ejemplo:
+
+```text
+S02_Equipo03_QuispeAna.pdf
+```
+
+El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.
+
+#### 4.1.1 Datos del estudiante
+
+- Nombre:
+- Equipo:
+- Sesión: S02 - Encapsulamiento, constructores y control del estado
+- Rol o aporte realizado:
+- Link de GitHub:
+
+#### 4.1.2 Trabajo autónomo realizado
+
+Completa y evidencia estas tareas:
+
+1. Elegir una entidad del dominio, por ejemplo `Proveedor`, `Empleado`, `Usuario`, `Cliente` u otra entidad del proyecto elegido.
+2. Convertir sus atributos a `private`.
+3. Crear al menos dos constructores sobrecargados.
+4. Crear getters y setters limpios.
+5. Crear una clase service inicial para operaciones con regla.
+6. Probar un caso válido desde `Main`.
+7. Probar un caso inválido controlado desde `Main`.
+8. Explicar qué responsabilidad tiene la entidad y qué responsabilidad tiene el service.
+
+#### 4.1.3 Evidencia técnica
+
+Incluye capturas o salidas de consola con una breve explicación debajo de cada una:
 
 - Clase encapsulada.
 - Constructores sobrecargados.
 - Getters o métodos necesarios.
 - Setters limpios.
 - Clase service con al menos dos operaciones.
-- Prueba valida desde `Main`.
-- Prueba invalida controlada.
+- Prueba válida desde `Main`.
+- Prueba inválida controlada.
+- Tabla breve que compare responsabilidad de entidad, service y `Main`.
+
+#### 4.1.4 Error o hallazgo
+
+Describe al menos un error, diferencia o hallazgo técnico:
+
+- Qué ocurrió.
+- Cómo lo diagnosticaste.
+- Cómo lo corregiste o qué aprendiste.
+
+Ejemplos válidos:
+
+- El código de S1 ya no compila al volver privados los atributos.
+- Se eligió mal un constructor.
+- Una regla quedó en `Main` y luego se movió al service.
+- Una validación no controlaba el caso inválido esperado.
+
+#### 4.1.5 Reflexión técnica breve
+
+Responde en 5 a 8 líneas:
+
+```text
+Por qué encapsular no significa esconder todo, sino controlar cómo cambia el estado?
+```
+
+### 4.2 Criterios mínimos de aceptación
+
+La evidencia individual se considera completa si:
+
+- El archivo respeta el nombre `S02_Equipo##_ApellidoNombre.pdf`.
+- Incluye evidencias técnicas legibles.
+- Muestra atributos `private`.
+- Muestra constructores sobrecargados.
+- Muestra getters/setters limpios.
+- Muestra una clase service con operaciones de cambio.
+- Muestra una prueba válida y una prueba inválida.
+- Explica un aporte individual verificable.
+- No contiene solo pantallazos: cada evidencia tiene una descripción breve.
 
 ## 5. Cierre evaluativo
 
 Tiempo: 20 min.
 
+Esta sección conecta el resultado de aprendizaje de la sesión con el producto que debe evidenciar cada estudiante.
+
 ### 5.1 Resultados esperados
 
-- Las clases no exponen atributos publicos.
+- Las clases no exponen atributos públicos.
 - Los constructores inicializan objetos.
 - Hay sobrecarga de constructores cuándo se necesita crear objetos con distintos datos iniciales.
 - Los getters/setters se mantienen simples.
@@ -561,11 +640,58 @@ Tiempo: 20 min.
 - `Main` se usa para probar, no para controlar todas las reglas.
 - El estudiante explica qué reglas simples protege su clase mediante setters o métodos.
 
-### 5.2 Preguntas de defensa
+### 5.2 Evidencia del producto de sesión
+
+Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.
+
+Nombre del archivo:
+
+```text
+S02_Equipo##_ApellidoNombre.pdf
+```
+
+La evidencia debe demostrar:
+
+- Producto de sesión construido.
+- Aporte individual verificable.
+- Pruebas válidas e inválidas realizadas.
+- Reflexión técnica breve.
+
+La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.
+
+### 5.3 Preguntas de defensa y reflexión
 
 1. Por qué los atributos deben ser privados?
 2. Para qué sirve la sobrecarga de constructores?
 3. Por qué los getters/setters deben quedar limpios?
 4. Qué responsabilidad tiene `Producto`?
 5. Qué responsabilidad tiene `ProductoService`?
-6. Qué responsabilidad no deberia tener `Main`?
+6. Qué responsabilidad no debería tener `Main`?
+7. Qué validación ubicaste en el service y por qué?
+8. Qué evidencia demuestra que el estado ya no se cambia directamente?
+
+### 5.4 Rúbrica de evaluación
+
+| Dimensión | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuación obtenida |
+|---|---:|---|---|---|---|---:|
+| 1. Encapsulamiento | 2 | Atributos privados, acceso controlado y explicación clara del cambio desde S1. | Atributos privados y acceso por métodos. | Encapsulamiento parcial. | No evidencia encapsulamiento. | |
+| 2. Constructores y sobrecarga | 2 | Usa constructores sobrecargados con criterio realista. | Usa constructores funcionales. | Constructores incompletos o poco justificados. | No usa constructores. | |
+| 3. Getters/setters limpios | 1 | Mantiene getters/setters simples y separa reglas. | Getters/setters funcionales. | Getters/setters con mezcla de responsabilidades. | No evidencia acceso controlado. | |
+| 4. Service y responsabilidad | 2 | Separa entidad, service y `Main` con responsabilidades claras. | Service funcional con operaciones principales. | Separación parcial o confusa. | Toda la lógica queda mezclada. | |
+| 5. Validaciones y pruebas | 2 | Evidencia caso válido, caso inválido y control de error. | Evidencia pruebas principales. | Pruebas incompletas. | No evidencia pruebas. | |
+| 6. Reflexión y orden | 1 | PDF ordenado, evidencias legibles y reflexión precisa. | Evidencias suficientes y reflexión clara. | Evidencias incompletas o reflexión superficial. | PDF desordenado o sin reflexión. | |
+
+Puntuación acumulada = suma de (`Peso` * `Puntuación obtenida`) = ____.
+
+Nota final = (`Puntuación acumulada` / 30) * 20 = ____.
+
+Para usar la rúbrica con IA, solicita:
+
+```text
+Evalúa el PDF usando la rúbrica de la sesión.
+Para cada dimensión selecciona la puntuación obtenida usando la escala Inicio=0, Proceso=1, Logro=2, Logro destacado=3.
+Justifica brevemente cada puntuación.
+Calcula la puntuación acumulada con la fórmula: suma de (Peso * Puntuación obtenida).
+Calcula la nota final sobre 20 con la fórmula: (Puntuación acumulada / 30) * 20.
+Indica 2 fortalezas y 2 recomendaciones.
+```

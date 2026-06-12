@@ -519,42 +519,166 @@ constructor, validaciones e invariantes simples.
 
 ## 4. Crea: actividad autónoma
 
+Fuera del aula, cada estudiante consolida el aprendizaje creando clases propias del dominio y preparando una evidencia individual.
+
 Tiempo: 2h fuera del aula.
 
-Extiende el modelo inicial creando otro par de clases tangibles qué colaboren entre si, por ejemplo `Estudiante` y `Cuaderno`, `Jugador` y `Pelota`, o `Cliente` y `Carrito`. Luego crea una clase simple similar a `Producto` qué pueda prepararse para encapsulamiento en S2.
+### 4.1 Plantilla de evidencia individual
 
-Entrega evidencia breve con:
+Entrega un PDF con el siguiente nombre:
+
+```text
+S01_Equipo##_ApellidoNombre.pdf
+```
+
+Ejemplo:
+
+```text
+S01_Equipo03_QuispeAna.pdf
+```
+
+El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.
+
+#### 4.1.1 Datos del estudiante
+
+- Nombre:
+- Equipo:
+- Sesión: S01 - Clases, objetos y responsabilidad de clase
+- Rol o aporte realizado:
+- Link de GitHub:
+
+#### 4.1.2 Trabajo autónomo realizado
+
+Completa y evidencia estas tareas:
+
+1. Crear otro par de clases tangibles que colaboren entre sí, por ejemplo `Estudiante` y `Cuaderno`, `Jugador` y `Pelota`, o `Cliente` y `Carrito`.
+2. Crear una clase simple similar a `Producto` que pueda prepararse para encapsulamiento en S2.
+3. Instanciar objetos desde `Main`.
+4. Mostrar por consola el estado inicial de al menos un objeto.
+5. Ejecutar métodos que cambien o muestren comportamiento.
+6. Explicar qué datos y acciones pertenecen a cada clase.
+7. Explicar qué parte del código demuestra abstracción inicial.
+
+#### 4.1.3 Evidencia técnica
+
+Incluye capturas o salidas de consola con una breve explicación debajo de cada una:
 
 - Código de dos clases tangibles.
 - Código de una clase puente similar a `Producto`.
 - Código de prueba desde `Main`.
-- Captura o salida de consola.
-- Explicacion de la responsabilidad de cada clase.
+- Salida de consola antes y después de ejecutar un método.
+- Tabla breve con clase, atributos, métodos y responsabilidad inicial.
+
+#### 4.1.4 Error o hallazgo
+
+Describe al menos un error, diferencia o hallazgo técnico:
+
+- Qué ocurrió.
+- Cómo lo diagnosticaste.
+- Cómo lo corregiste o qué aprendiste.
+
+Ejemplos válidos:
+
+- El archivo no coincidía con el nombre de la clase.
+- `Main` no encontraba una clase.
+- Un atributo salía `null` o `0` porque no fue inicializado.
+- Un método no cambiaba el estado esperado.
+
+#### 4.1.5 Reflexión técnica breve
+
+Responde en 5 a 8 líneas:
+
+```text
+Por qué una clase no debe ser solo una lista de variables?
+```
+
+### 4.2 Criterios mínimos de aceptación
+
+La evidencia individual se considera completa si:
+
+- El archivo respeta el nombre `S01_Equipo##_ApellidoNombre.pdf`.
+- Incluye evidencias técnicas legibles.
+- Muestra al menos dos clases tangibles que colaboran.
+- Muestra una clase puente preparada para S2.
+- Muestra objetos creados desde `Main`.
+- Muestra salida de consola.
+- Explica responsabilidad inicial, estado y comportamiento.
+- No contiene solo pantallazos: cada evidencia tiene una descripción breve.
 
 ## 5. Cierre evaluativo
 
 Tiempo: 20 min.
 
+Esta sección conecta el resultado de aprendizaje de la sesión con el producto que debe evidenciar cada estudiante.
+
 ### 5.1 Resultados esperados
 
+Al finalizar la sesión, el estudiante debe demostrar que:
+
 - El proyecto ejecuta desde VS Code.
-- Existen clases tangibles cómo `Coche` y `Persona`.
-- Existe una clase puente cómo `Producto`.
+- Existen clases tangibles como `Coche` y `Persona`, o equivalentes del dominio elegido.
+- Existe una clase puente como `Producto`, preparada para S2.
 - Se crean objetos desde `Main`.
-- La clase tiene atributos qué representan estado.
-- La clase tiene métodos qué representan comportamiento básico.
-- La salida por consola demuestra el estado y comportamiento del objeto.
+- La clase tiene atributos que representan estado.
+- La clase tiene métodos que representan comportamiento básico.
+- La salida por consola demuestra estado y comportamiento del objeto.
 - El estudiante explica qué datos y comportamientos fueron elegidos por abstracción inicial.
 - El estudiante explica qué responsabilidad tiene cada clase.
 - Los métodos implementados corresponden a las acciones iniciales de la clase.
 - No se usan constructores ni atributos `private` como tema central; eso queda para S2.
 
-### 5.2 Preguntas de defensa
+### 5.2 Evidencia del producto de sesión
+
+Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.
+
+Nombre del archivo:
+
+```text
+S01_Equipo##_ApellidoNombre.pdf
+```
+
+La evidencia debe demostrar:
+
+- Producto de sesión construido.
+- Aporte individual verificable.
+- Pruebas por consola realizadas.
+- Reflexión técnica breve.
+
+La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.
+
+### 5.3 Preguntas de defensa y reflexión
 
 1. Cuál es la diferencia entre clase y objeto?
 2. Qué representa el estado de un objeto?
 3. Qué significa responsabilidad de clase en S1?
 4. Qué método representa comportamiento en tu clase?
 5. Qué datos dejaste fuera por abstracción inicial?
-6. Qué caracteristicas y acciones identificaste en tu clase?
-7. Qué responsabilidad tiene `Main` en está primera sesión?
+6. Qué características y acciones identificaste en tu clase?
+7. Qué responsabilidad tiene `Main` en esta primera sesión?
+8. Qué cambiará en S2 cuando aparezca encapsulamiento?
+
+### 5.4 Rúbrica de evaluación
+
+| Dimensión | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuación obtenida |
+|---|---:|---|---|---|---|---:|
+| 1. Clases y objetos | 2 | Define clases claras, crea objetos y explica la diferencia con precisión. | Define clases y crea objetos funcionales. | Presenta clases incompletas o confunde clase con objeto. | No evidencia clases y objetos funcionales. | |
+| 2. Estado y comportamiento | 2 | Atributos y métodos representan correctamente estado y comportamiento. | Atributos y métodos principales son coherentes. | Hay atributos o métodos poco claros. | No evidencia estado ni comportamiento. | |
+| 3. Responsabilidad y abstracción | 2 | Explica qué pertenece a cada clase y qué se dejó fuera por abstracción. | Explica responsabilidad básica de las clases. | Explicación parcial o confusa. | No explica responsabilidad ni abstracción. | |
+| 4. Prueba desde `Main` | 2 | `Main` crea objetos, ejecuta métodos y muestra salida clara. | `Main` prueba el flujo principal. | Prueba incompleta o salida poco clara. | No hay prueba desde `Main`. | |
+| 5. Error o hallazgo | 1 | Analiza error/hallazgo, causa, solución y aprendizaje técnico. | Explica un problema y una solución. | Menciona un problema sin análisis. | No presenta error ni hallazgo. | |
+| 6. Reflexión y orden | 1 | PDF ordenado, evidencias legibles y reflexión precisa. | Evidencias suficientes y reflexión clara. | Evidencias incompletas o reflexión superficial. | PDF desordenado o sin reflexión. | |
+
+Puntuación acumulada = suma de (`Peso` * `Puntuación obtenida`) = ____.
+
+Nota final = (`Puntuación acumulada` / 30) * 20 = ____.
+
+Para usar la rúbrica con IA, solicita:
+
+```text
+Evalúa el PDF usando la rúbrica de la sesión.
+Para cada dimensión selecciona la puntuación obtenida usando la escala Inicio=0, Proceso=1, Logro=2, Logro destacado=3.
+Justifica brevemente cada puntuación.
+Calcula la puntuación acumulada con la fórmula: suma de (Peso * Puntuación obtenida).
+Calcula la nota final sobre 20 con la fórmula: (Puntuación acumulada / 30) * 20.
+Indica 2 fortalezas y 2 recomendaciones.
+```
