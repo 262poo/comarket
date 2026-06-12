@@ -1,35 +1,35 @@
 # S8 - CRUD desde GUI en memoria
 
-## 1. Introducción
+## 1. Introduccion
 
 Tiempo: 20 min.
 
-### 1.1 Propósito
+### 1.1 Proposito
 
-Implementar un CRUD desde JavaFX reutilizando el servicio en memoria construido en U1, sin base de datos todavía.
+Implementar un CRUD desde JavaFX reutilizando el contrato de servicio y la implementacion en memoria, sin base de datos todavia.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante conecta formularios y tablas con un controlador JavaFX, delega operaciones al contrato del servicio CRUD y usa una implementación en memoria basada en `ArrayList`.
+El estudiante conecta formularios y tablas con un controlador JavaFX, delega operaciones al servicio CRUD y mantiene los datos en memoria con `ArrayList`.
 
-### 1.3 Producto de sesión
+### 1.3 Producto de sesion
 
-CRUD funcional desde formularios y `TableView`, usando controlador, servicio, entidades y almacenamiento en memoria.
+CRUD funcional desde formulario y `TableView`, usando vista, controlador, servicio, entidades y almacenamiento en memoria.
 
-### 1.4 Motivación de la sesión
+### 1.4 Motivacion de la sesion
 
-Antes de conectar SQLite, conviene comprobar que la interfaz gráfica puede registrar, mostrar, editar y eliminar objetos usando el mismo servicio que antes se probaba desde consola.
+Antes de conectar SQLite, conviene comprobar que la interfaz grafica puede registrar, mostrar, editar y eliminar objetos usando el mismo contrato que antes se probo desde consola.
 
-Pregunta guía:
+Pregunta guia:
 
 ```text
-¿Cómo pasamos del CRUD de consola al CRUD con formularios y tablas?
+Como pasamos del CRUD de consola al CRUD con formularios y tablas?
 ```
 
-### 1.5 Ubicación en el curso
+### 1.5 Ubicacion en el curso
 
 - Unidad: U2.
-- Avance de sesión: transición de U1 a GUI usando memoria.
+- Avance de sesion: transicion de consola a GUI usando memoria.
 
 ## 2. Explica
 
@@ -39,60 +39,91 @@ Tiempo: 25 min.
 
 - Flujo Vista-Controlador-Servicio-Entidades-ArrayList.
 - Interface de servicio como contrato de operaciones CRUD.
-- Implementación en memoria del contrato.
+- Implementacion en memoria del contrato.
 - Lectura de datos desde formularios.
-- Delegación de operaciones al servicio CRUD.
 - Carga de datos en `TableView`.
-- Selección de filas.
-- Actualización y eliminación.
+- Seleccion de filas para editar o eliminar.
+- Refresco de tabla despues de cada operacion.
 
-### 2.2 Arquitectura de la sesión
+Regla metodologica de la sesion:
 
-```mermaid
-flowchart TB
-    Vista["Formulario + TableView"]
-    Controlador["Controlador"]
-    Contrato["ClienteService<br/>&lt;&lt;interface&gt;&gt;"]
-    Servicio["ClienteServiceMemoria"]
-    Entidades["Cliente"]
-    Memoria[("ArrayList")]
-
-    Vista --> Controlador
-    Controlador --> Contrato
-    Servicio -. implements .-> Contrato
-    Servicio -.-> Entidades
-    Servicio --> Memoria
-    Memoria --> Servicio
-    Servicio --> Controlador
-    Controlador --> Vista
+```text
+La vista captura datos.
+El controlador traduce eventos en llamadas al servicio.
+El servicio ejecuta CRUD.
+La implementacion en memoria administra el ArrayList.
 ```
 
-## 3. Aplica: actividad práctica guiada
+### 2.2 Arquitectura de la sesion
+
+```mermaid
+classDiagram
+    class VistaFXML {
+        formulario
+        TableView
+    }
+    class ClienteController {
+        onRegistrar()
+        onActualizar()
+        onEliminar()
+        cargarTabla()
+    }
+    class ClienteService {
+        <<interface>>
+        registrar(cliente)
+        listar()
+        actualizar(cliente)
+        eliminar(documento)
+    }
+    class ClienteServiceMemoria {
+        -clientes
+        CRUD sobre ArrayList
+    }
+    class Cliente {
+        -nombre
+        -documento
+        -telefono
+    }
+    class ArrayListClientes {
+        datos en memoria
+    }
+
+    VistaFXML ..> ClienteController : eventos
+    ClienteController ..> ClienteService : usa contrato
+    ClienteController ..> Cliente : crea/lee
+    ClienteService <|.. ClienteServiceMemoria : implements
+    ClienteService ..> Cliente : usa
+    ClienteServiceMemoria ..> Cliente : usa
+    ClienteServiceMemoria o-- ArrayListClientes : administra
+```
+
+## 3. Aplica: actividad practica guiada
 
 Tiempo: 2h.
 
 1. Crear campos para datos de cliente.
-2. Leer datos desde el formulario.
-3. Validar campos obligatorios y valores numéricos.
-4. Crear objetos o leerlos desde el formulario.
-5. Delegar registro, consulta, actualización y eliminación a `ClienteService`.
+2. Crear columnas de `TableView`.
+3. Leer datos desde el formulario.
+4. Crear objeto `Cliente`.
+5. Delegar registro a `ClienteService`.
 6. Mantener el `ArrayList` dentro de `ClienteServiceMemoria`.
 7. Mostrar datos en `TableView`.
-8. Editar el elemento seleccionado.
-9. Eliminar con confirmación.
+8. Cargar datos del elemento seleccionado al formulario.
+9. Actualizar el registro seleccionado.
+10. Eliminar con confirmacion.
 
-## 4. Crea: actividad autónoma
+## 4. Crea: actividad autonoma
 
 Tiempo: 2h fuera del aula.
 
-Completa el CRUD en memoria desde GUI para otra entidad o mejora el flujo principal.
+Completa el CRUD en memoria desde GUI para una entidad del dominio.
 
 Entrega evidencia breve con:
 
-- Capturas de registro, edición y eliminación.
-- Código del controlador.
-- Código o referencia de `ClienteService` y `ClienteServiceMemoria`.
-- Explicación de cómo se actualiza la tabla sin duplicar el CRUD en el controlador.
+- Capturas de registro, listado, edicion y eliminacion.
+- Codigo del controlador.
+- Codigo o referencia de `ClienteService` y `ClienteServiceMemoria`.
+- Explicacion de como se actualiza la tabla sin duplicar el CRUD en el controlador.
 
 ## 5. Cierre evaluativo
 
@@ -100,18 +131,16 @@ Tiempo: 20 min.
 
 ### 5.1 Resultados esperados
 
-- El CRUD funciona desde la interfaz gráfica.
+- El CRUD funciona desde la interfaz grafica.
 - El controlador delega operaciones al servicio.
-- Los datos se almacenan en memoria dentro de la implementación del servicio.
+- Los datos se almacenan en memoria dentro de la implementacion del servicio.
 - Las entidades son las mismas clases del dominio usadas desde U1.
 - La tabla refleja los cambios.
-- El controlador no concentra toda la lógica CRUD.
 
 ### 5.2 Preguntas de defensa
 
-1. ¿Dónde se almacenan los datos en esta sesión?
-2. ¿Qué responsabilidad tiene el controlador?
-3. ¿Qué responsabilidad tiene la interface del servicio?
-4. ¿Qué responsabilidad tiene la implementación en memoria?
-5. ¿Cómo se refresca la tabla?
-6. ¿Qué cambiará cuando usemos DAO?
+1. Donde se almacenan los datos en esta sesion?
+2. Que responsabilidad tiene el controlador?
+3. Que responsabilidad tiene la interface del servicio?
+4. Que responsabilidad tiene la implementacion en memoria?
+5. Que cambiara cuando usemos DAO?

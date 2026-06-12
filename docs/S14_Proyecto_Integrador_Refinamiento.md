@@ -1,35 +1,35 @@
-# S14 - Validación y refinamiento
+# S14 - Validacion, refinamiento y ejecutable nativo
 
-## 1. Introducción
+## 1. Introduccion
 
 Tiempo: 20 min.
 
-### 1.1 Propósito
+### 1.1 Proposito
 
-Refinar CoMarket, corregir observaciones, validar el flujo crítico y generar el ejecutable nativo final.
+Refinar el producto, corregir observaciones, validar el flujo critico y preparar el ejecutable nativo final.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante estabiliza una aplicación de escritorio, mejora organización y mensajes, verifica el flujo crítico y prepara la entrega ejecutable.
+El estudiante estabiliza una aplicacion de escritorio, mejora organizacion y mensajes, verifica el flujo critico y prepara la entrega ejecutable.
 
-### 1.3 Producto de sesión
+### 1.3 Producto de sesion
 
-CoMarket refinado, validado y con ejecutable nativo preparado.
+Producto refinado, validado y con evidencia de preparacion o generacion de ejecutable nativo.
 
-### 1.4 Motivación de la sesión
+### 1.4 Motivacion de la sesion
 
 Un producto no solo debe funcionar una vez. Debe ser comprensible, estable, presentable y ejecutable en otro equipo.
 
-Pregunta guía:
+Pregunta guia:
 
 ```text
-¿Qué falta para que CoMarket pueda presentarse como producto final?
+Que falta para que el producto pueda presentarse como version final?
 ```
 
-### 1.5 Ubicación en el curso
+### 1.5 Ubicacion en el curso
 
 - Unidad: U3.
-- Avance de sesión: versión candidata a sustentación.
+- Avance de sesion: version candidata a sustentacion.
 
 ## 2. Explica
 
@@ -37,53 +37,65 @@ Tiempo: 25 min.
 
 ### 2.1 Conceptos clave
 
-- Corrección de fallos.
-- Limpieza de código.
+- Correccion de fallos.
+- Limpieza de codigo.
 - Consistencia visual.
 - Validaciones finales.
-- Flujo crítico.
+- Flujo critico.
 - Empaquetado.
 - Ejecutable nativo con GraalVM.
+
+Regla metodologica de la sesion:
+
+```text
+Primero se prueba el flujo critico.
+Luego se corrigen fallos reales.
+Despues se prepara el ejecutable.
+El ejecutable no compensa una arquitectura rota.
+```
 
 ### 2.2 Flujo de refinamiento
 
 ```mermaid
 flowchart TB
-    Pruebas["Pruebas del flujo"]
+    Pruebas["Pruebas del flujo critico"]
     Fallos["Fallos / observaciones"]
     Correccion["Correcciones"]
+    Revision["Revision de capas"]
     Ejecutable["Ejecutable nativo"]
-    Evidencias["Evidencias"]
+    Evidencias["Evidencias finales"]
 
     Pruebas --> Fallos
     Fallos --> Correccion
-    Correccion --> Ejecutable
+    Correccion --> Revision
+    Revision --> Ejecutable
     Ejecutable --> Evidencias
 ```
 
-## 3. Aplica: actividad práctica guiada
+## 3. Aplica: actividad practica guiada
 
 Tiempo: 2h.
 
-1. Ejecutar el flujo crítico.
+1. Ejecutar el flujo critico.
 2. Registrar fallos.
-3. Corregir validaciones, mensajes o navegación.
+3. Corregir validaciones, mensajes o navegacion.
 4. Revisar nombres, paquetes y responsabilidades.
 5. Verificar persistencia.
-6. Generar o preparar el ejecutable nativo.
-7. Registrar evidencias.
+6. Revisar recursos FXML.
+7. Preparar o generar ejecutable nativo.
+8. Registrar evidencias.
 
-## 4. Crea: actividad autónoma
+## 4. Crea: actividad autonoma
 
 Tiempo: 3h fuera del aula.
 
-Entrega una versión candidata del proyecto final.
+Entrega una version candidata del proyecto final.
 
 Incluye:
 
-- Flujo crítico probado.
+- Flujo critico probado.
 - Lista de correcciones.
-- Evidencia del ejecutable o preparación de empaquetado.
+- Evidencia del ejecutable o preparacion de empaquetado.
 - Capturas finales.
 - Observaciones pendientes.
 
@@ -95,14 +107,14 @@ Tiempo: 20 min.
 
 - Producto estable.
 - Errores principales corregidos.
-- Flujo crítico validado.
+- Flujo critico validado.
 - Ejecutable nativo preparado.
-- Evidencias listas para sustentación.
+- Evidencias listas para sustentacion.
 
 ### 5.2 Preguntas de defensa
 
-1. ¿Qué fallos corregiste?
-2. ¿Cuál es el flujo crítico?
-3. ¿Cómo generaste o preparaste el ejecutable?
-4. ¿Qué evidencia demuestra estabilidad?
-
+1. Que fallos corregiste?
+2. Cual es el flujo critico?
+3. Como generaste o preparaste el ejecutable?
+4. Que evidencia demuestra estabilidad?
+5. Que riesgo queda pendiente?

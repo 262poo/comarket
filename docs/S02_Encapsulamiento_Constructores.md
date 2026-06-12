@@ -6,31 +6,31 @@ Tiempo: 20 min.
 
 ### 1.1 Proposito
 
-Proteger el estado de los objetos mediante atributos privados, constructores, validaciones basicas y metodos de comportamiento.
+Proteger el estado de los objetos mediante atributos privados, constructores y getters/setters limpios, e introducir la separacion basica de responsabilidades con `ProductoService`.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante aplica modificadores de acceso, crea constructores, usa getters y setters con criterio, valida datos simples y mueve reglas desde `Main` hacia la clase del dominio.
+El estudiante aplica encapsulamiento, crea constructores simples y sobrecargados, consulta datos mediante getters, usa setters limpios para asignaciones directas, separa operaciones en un servicio inicial y prueba el flujo desde `Main`.
 
 ### 1.3 Producto de sesion
 
-Clase `Cliente` encapsulada con constructor, validaciones, metodo `calcularEdad` y pruebas desde `Main`.
+Clase `Producto` encapsulada con constructores y getters/setters limpios, mas `ProductoService` inicial con operaciones sobre productos.
 
 ### 1.4 Motivacion de la sesion
 
-#### 1.4.1 Caso: datos invalidos en objetos del dominio
+#### 1.4.1 Caso: estado invalido en objetos del dominio
 
-En la sesion anterior se creo una clase simple y se asignaron valores directamente desde `Main`. Esa forma permite aprender rapido, pero tambien deja abierta la puerta a estados invalidos.
+En S1 se creo una clase simple para entender clase, objeto, atributos, metodos, estado, comportamiento, responsabilidad inicial y abstraccion. Esa version permite aprender rapido, pero tambien permite que `Main` cambie los datos sin control.
 
 Ejemplos de problemas:
 
-- Un cliente sin nombre.
-- Un documento vacio.
-- Un telefono con muy pocos digitos.
-- Una fecha de nacimiento futura.
-- Una edad calculada manualmente y desactualizada.
+- Un producto creado solo con los datos iniciales disponibles.
+- Un producto al que luego se le completa precio y stock.
+- Un precio negativo.
+- Un stock negativo.
+- Un cambio de precio sin ninguna regla.
 
-La pregunta que guia esta sesion es:
+Pregunta guia:
 
 ```text
 Como hacemos que un objeto proteja su propio estado y no dependa de Main para corregir datos?
@@ -40,17 +40,17 @@ Como hacemos que un objeto proteja su propio estado y no dependa de Main para co
 
 - Unidad: U1 - Fundamentos de la Programacion Orientada a Objetos.
 - Producto de unidad: aplicacion de consola en memoria con entidades, relaciones, colecciones y CRUD.
-- Avance del producto en esta sesion: `Cliente` deja de ser una bolsa de datos y empieza a controlar su estado.
+- Avance del producto en esta sesion: `Producto` deja de ser una clase con datos expuestos y empieza a controlar su estado.
 
 Roadmap para elaborar el producto de la unidad:
 
 ```mermaid
 flowchart TB
-    S1["S1<br/>Cliente simple<br/>con objetos"]
-    S2["S2<br/>Cliente encapsulado<br/>HOY"]
-    S3["S3<br/>GestorClientes<br/>relaciones y ArrayList"]
+    S1["S1<br/>Coche, Persona y Producto<br/>clase y objetos"]
+    S2["S2<br/>Producto encapsulado<br/>HOY"]
+    S3["S3<br/>Asociacion, agregacion/composicion<br/>y colecciones"]
     S4["S4<br/>Herencia y polimorfismo<br/>bloque aplicado"]
-    S5["S5<br/>ClienteServiceMemoria<br/>CRUD en memoria"]
+    S5["S5<br/>Servicio en memoria<br/>CRUD con ArrayList"]
     S6["S6<br/>Producto U1<br/>consola ejecutable"]
 
     S1 --> S2
@@ -74,91 +74,158 @@ Tiempo: 25 min.
 
 El encapsulamiento evita que cualquier parte del programa modifique directamente el estado interno de un objeto. La clase controla como se crea, como cambia y que reglas debe cumplir.
 
+En S1, "responsabilidad" se entendio como caracteristicas y acciones que corresponden a una clase. En S2 esa idea se mejora: la clase tambien debe proteger sus datos para no quedar en un estado invalido.
+
 Conceptos de la sesion:
 
 - `private` para proteger atributos.
-- Constructor para crear objetos validos.
+- Constructor para inicializar objetos.
 - Getters para consultar estado.
-- Setters con validacion cuando el cambio es permitido.
-- Invariante simple del dominio.
+- Getters y setters limpios.
+- Metodos de cambio con nombre de accion.
+- Validaciones basicas.
+- Invariantes simples.
 - Metodo de comportamiento.
-- Responsabilidad de clase.
 
-Ejemplo de responsabilidad:
+Nota metodologica:
 
 ```text
-Cliente no solo guarda nombre, documento, telefono y fechaNacimiento.
-Cliente tambien valida esos datos y calcula su edad.
+S1 permite ver estado y comportamiento de forma directa.
+S2 empieza a controlar el estado con encapsulamiento.
+
+Todavia no se trabajan interfaces como contrato.
+Eso queda para S4.
 ```
 
-### 2.2 Arquitectura de la sesion
+Ejemplo de responsabilidad mejorada:
+
+```text
+Producto guarda codigo, nombre, precio y stock.
+ProductoService agrupa operaciones sobre productos.
+Main no debe modificar los atributos directamente ni concentrar las reglas.
+```
+
+Nota sobre getters/setters:
+
+```text
+Los getters y setters deben quedar simples.
+Mas adelante, en U2 o U3, este codigo mecanico podria reemplazarse
+con Lombok usando anotaciones como @Getter y @Setter.
+
+Las reglas importantes no deben esconderse en getters/setters.
+Esas reglas se expresan mejor en metodos con nombre de accion,
+por ejemplo dentro de ProductoService.
+```
+
+### 2.2 S de SOLID: una responsabilidad principal
+
+La S de SOLID se conoce como principio de responsabilidad unica. En esta sesion se aplica de forma basica:
+
+```text
+Producto sabe que datos tiene.
+ProductoService sabe que operaciones se hacen sobre un producto.
+Main solo prueba el flujo.
+```
+
+No se busca una arquitectura completa todavia. Solo se evita que `Producto` y `Main` hagan todo.
+
+### 2.3 Arquitectura de la sesion
 
 ```mermaid
-flowchart TB
-    Main["Main<br/>pruebas"]
-    Cliente["Cliente<br/>clase encapsulada"]
-    Atributos["Atributos privados<br/>nombre / documento / telefono / fechaNacimiento"]
-    Constructor["Constructor<br/>estado inicial valido"]
-    Metodos["Metodos<br/>actualizarTelefono / calcularEdad"]
-    Validaciones["Validaciones internas"]
+classDiagram
+    class Main {
+        main(String[] args)
+    }
+    class Producto {
+        -codigo
+        -nombre
+        -precio
+        -stock
+        Producto(codigo, nombre, precio, stock)
+        Producto(codigo, nombre)
+        getCodigo()
+        getNombre()
+        getPrecio()
+        getStock()
+        setPrecio()
+        setStock()
+    }
+    class ProductoService {
+        actualizarPrecio()
+        aumentarStock()
+        disminuirStock()
+        mostrarInformacion()
+        validarCantidadPositiva()
+    }
 
-    Main --> Cliente
-    Cliente --> Atributos
-    Cliente --> Constructor
-    Cliente --> Metodos
-    Constructor --> Validaciones
-    Metodos --> Validaciones
+    Main ..> Producto : depende de
+    Main ..> ProductoService : depende de
+    ProductoService ..> Producto : usa
 ```
+
+Convencion del diagrama: cada clase muestra sus atributos y metodos principales; `-` indica atributo privado y `..>` indica dependencia o uso temporal desde la prueba.
 
 Regla practica:
 
 - `Main` prueba escenarios.
-- `Cliente` protege su estado.
-- El constructor evita crear objetos incompletos.
-- Los setters no deben ser automaticos: solo existen si el cambio tiene sentido.
-- La edad no se guarda manualmente; se calcula desde `fechaNacimiento`.
+- `Producto` protege su estado.
+- El constructor inicializa el objeto.
+- La sobrecarga de constructores permite crear objetos con distintos datos iniciales.
+- Los atributos no se modifican directamente desde fuera.
+- Los getters y setters se mantienen limpios.
+- Los cambios con regla pasan por `ProductoService`.
+- El precio y el stock no deben ser negativos.
 
-### 2.3 Flujo de trabajo
+### 2.4 Flujo de trabajo
 
-1. Partir de la clase `Cliente` creada en S1.
-2. Cambiar atributos publicos o de paquete por `private`.
-3. Crear constructor parametrizado.
-4. Agregar getters necesarios.
-5. Agregar setters solo para cambios permitidos.
-6. Validar nombre, documento, telefono y fecha de nacimiento.
-7. Crear `calcularEdad`.
-8. Probar casos validos e invalidos desde `Main`.
+1. Partir de la clase `Producto` creada en S1.
+2. Cambiar atributos de acceso directo a `private`.
+3. Crear constructores simples y sobrecargados.
+4. Agregar getters y setters limpios.
+5. Crear `ProductoService`.
+6. Mover operaciones con regla hacia `ProductoService`.
+7. Probar casos validos e invalidos desde `Main`.
 
-### 2.4 Errores frecuentes y diagnostico
+### 2.5 Errores frecuentes y diagnostico
 
 | Problema | Causa probable | Solucion |
 |---|---|---|
 | No se puede acceder al atributo | El atributo ahora es `private` | Usar getter o metodo de comportamiento |
-| El objeto se crea con datos vacios | Constructor sin validacion | Validar dentro del constructor |
-| La edad queda desactualizada | Se guardo edad como atributo editable | Calcularla desde `fechaNacimiento` |
-| Setter permite datos invalidos | Setter sin reglas | Validar antes de asignar |
-| `Main` contiene demasiadas reglas | No se movio la responsabilidad a la clase | Llevar validaciones simples a `Cliente` |
+| El objeto se crea con datos incompletos | No se eligio bien el constructor | Usar sobrecarga de constructores segun el caso |
+| Precio negativo | No se valido el dato | Rechazar valores negativos |
+| Stock negativo | No se valido el dato | Rechazar valores negativos |
+| Setter contiene demasiada logica | Se mezclo codigo mecanico con reglas | Dejar setter limpio y mover la regla a `ProductoService` |
+| `Main` contiene demasiadas reglas | No se separo la operacion | Llevar operaciones simples a `ProductoService` |
 
 ## 3. Aplica: actividad practica guiada
 
-En el laboratorio, el docente guia la transformacion de `Cliente` desde una clase con atributos expuestos hacia una clase encapsulada que controla su propio estado.
+En el laboratorio, el docente guia la transformacion de `Producto` desde una clase con atributos expuestos hacia una clase encapsulada que controla su propio estado.
 
 Tiempo: 2h.
 
-### 3.1 Revisar la clase Cliente creada en S1
+### 3.1 Revisar la clase Producto creada en S1
 
-**Producto del paso:** clase `Cliente` inicial identificada.
+**Producto del paso:** clase `Producto` inicial identificada.
 
 Punto de partida esperado:
 
 ```java
-public class Cliente {
+public class Producto {
+    String codigo;
     String nombre;
-    String documento;
-    String telefono;
+    double precio;
+    int stock;
 
     void mostrarInformacion() {
-        System.out.println(nombre + " - Doc: " + documento + " - Tel: " + telefono);
+        System.out.println(codigo + " - " + nombre + " - S/ " + precio + " - Stock: " + stock);
+    }
+
+    void actualizarPrecio(double nuevoPrecio) {
+        precio = nuevoPrecio;
+    }
+
+    void aumentarStock(int cantidad) {
+        stock = stock + cantidad;
     }
 }
 ```
@@ -168,118 +235,313 @@ public class Cliente {
 **Producto del paso:** atributos protegidos con `private`.
 
 ```java
-import java.time.LocalDate;
-
-public class Cliente {
+public class Producto {
+    private String codigo;
     private String nombre;
-    private String documento;
-    private String telefono;
-    private LocalDate fechaNacimiento;
+    private double precio;
+    private int stock;
+
+    void mostrarInformacion() {
+        System.out.println(codigo + " - " + nombre + " - S/ " + precio + " - Stock: " + stock);
+    }
+
+    void actualizarPrecio(double nuevoPrecio) {
+        precio = nuevoPrecio;
+    }
+
+    void aumentarStock(int cantidad) {
+        stock = stock + cantidad;
+    }
 }
 ```
 
-### 3.3 Crear constructor con validaciones
+### 3.3 Probar el codigo de S1 y observar el error
 
-**Producto del paso:** objetos creados con estado inicial valido.
+**Producto del paso:** evidencia de que `private` protege el acceso directo al estado.
+
+Volver a probar el codigo usado en S1:
 
 ```java
-public Cliente(String nombre, String documento, String telefono, LocalDate fechaNacimiento) {
-    if (nombre == null || nombre.isBlank()) {
-        throw new IllegalArgumentException("El nombre es obligatorio");
-    }
-    if (documento == null || documento.isBlank()) {
-        throw new IllegalArgumentException("El documento es obligatorio");
-    }
-    if (fechaNacimiento == null || fechaNacimiento.isAfter(LocalDate.now())) {
-        throw new IllegalArgumentException("La fecha de nacimiento no es valida");
-    }
+Producto producto1 = new Producto();
+producto1.codigo = "P001";
+producto1.nombre = "Teclado";
+producto1.precio = 80.0;
+producto1.stock = 10;
 
+producto1.mostrarInformacion();
+producto1.actualizarPrecio(75.0);
+producto1.aumentarStock(5);
+producto1.mostrarInformacion();
+```
+
+Resultado esperado:
+
+```text
+El codigo ya no compila porque codigo, nombre, precio y stock
+ahora son atributos private.
+```
+
+Lectura metodologica:
+
+```text
+Eso es encapsulamiento:
+el estado interno ya no se modifica directamente desde Main.
+
+Para crear el objeto se usara constructor.
+Para consultar datos se usaran getters.
+Para asignar datos simples se usaran setters.
+Para cambios con regla se usaran metodos con nombre de accion.
+```
+
+### 3.4 Crear constructores
+
+**Producto del paso:** objetos creados con distintos datos iniciales.
+
+El constructor sirve para inicializar el objeto. En la practica no siempre se reciben todos los campos al crear un objeto; por eso se puede usar sobrecarga de constructores y completar algunos datos despues con setters o metodos con nombre de accion.
+
+```java
+public Producto(String codigo, String nombre, double precio, int stock) {
+    this.codigo = codigo;
     this.nombre = nombre;
-    this.documento = documento;
-    this.telefono = telefono;
-    this.fechaNacimiento = fechaNacimiento;
+    this.precio = precio;
+    this.stock = stock;
+}
+
+public Producto(String codigo, String nombre) {
+    this.codigo = codigo;
+    this.nombre = nombre;
+    this.precio = 0;
+    this.stock = 0;
 }
 ```
 
-### 3.4 Agregar getters y metodos de comportamiento
+Nota metodologica:
 
-**Producto del paso:** consulta controlada del estado y comportamiento dentro de la clase.
+```text
+Esto se llama sobrecarga de constructores:
+una misma clase puede tener varios constructores con parametros diferentes.
+
+No es polimorfismo todavia; el polimorfismo se trabaja en S4.
+```
+
+### 3.5 Agregar getters y setters limpios
+
+**Producto del paso:** consulta y asignacion controlada por acceso, sin logica pesada.
 
 ```java
+public String getCodigo() {
+    return codigo;
+}
+
 public String getNombre() {
     return nombre;
 }
 
-public String getDocumento() {
-    return documento;
+public double getPrecio() {
+    return precio;
 }
 
-public int calcularEdad() {
-    return java.time.Period.between(fechaNacimiento, LocalDate.now()).getYears();
+public int getStock() {
+    return stock;
 }
 
-public void actualizarTelefono(String nuevoTelefono) {
-    if (nuevoTelefono == null || nuevoTelefono.length() < 6) {
-        throw new IllegalArgumentException("El telefono no es valido");
-    }
-    this.telefono = nuevoTelefono;
+public void setPrecio(double precio) {
+    this.precio = precio;
 }
 
-public void mostrarInformacion() {
-    System.out.println(nombre + " - Doc: " + documento + " - Edad: " + calcularEdad());
+public void setStock(int stock) {
+    this.stock = stock;
 }
 ```
 
-### 3.5 Probar desde Main
+Regla metodologica:
+
+```text
+Getter devuelve.
+Setter asigna.
+
+Si hay una regla importante, se crea un metodo con nombre de accion.
+```
+
+### 3.6 Probar constructores, getters y setters limpios
+
+**Producto del paso:** evidencia de que el objeto se crea con constructor y se consulta/modifica mediante metodos publicos.
+
+Probar desde `Main`:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Producto producto1 = new Producto("P001", "Teclado", 80.0, 10);
+        Producto producto2 = new Producto("P002", "Mouse");
+
+        producto2.setPrecio(45.0);
+        producto2.setStock(20);
+
+        System.out.println(producto1.getCodigo() + " - " + producto1.getNombre());
+        System.out.println("Precio: " + producto1.getPrecio());
+        System.out.println("Stock: " + producto1.getStock());
+
+        System.out.println(producto2.getCodigo() + " - " + producto2.getNombre());
+        System.out.println("Precio: " + producto2.getPrecio());
+        System.out.println("Stock: " + producto2.getStock());
+    }
+}
+```
+
+Lectura metodologica:
+
+```text
+Ya no se usa producto.codigo ni producto.precio directamente.
+El constructor inicializa.
+Los getters consultan.
+Los setters completan datos simples.
+```
+
+### 3.7 Segunda parte: crear ProductoService
+
+**Producto del paso:** operaciones sobre productos separadas de la entidad.
+
+Antes de crear el servicio, retirar de `Producto` las operaciones que ahora pasaran a otra responsabilidad:
+
+```text
+Salen de Producto:
+- mostrarInformacion()
+- actualizarPrecio()
+- aumentarStock()
+```
+
+`Producto` queda como clase de datos encapsulada: atributos privados, constructores, getters y setters limpios. Las operaciones pasan a `ProductoService`.
+
+Crear `ProductoService.java`:
+
+```java
+public class ProductoService {
+    public void actualizarPrecio(Producto producto, double nuevoPrecio) {
+        if (nuevoPrecio < 0) {
+            throw new IllegalArgumentException("El precio no puede ser negativo");
+        }
+        producto.setPrecio(nuevoPrecio);
+    }
+
+    public void aumentarStock(Producto producto, int cantidad) {
+        validarCantidadPositiva(cantidad);
+        producto.setStock(producto.getStock() + cantidad);
+    }
+
+    public void disminuirStock(Producto producto, int cantidad) {
+        validarCantidadPositiva(cantidad);
+        if (cantidad > producto.getStock()) {
+            throw new IllegalArgumentException("No hay stock suficiente");
+        }
+        producto.setStock(producto.getStock() - cantidad);
+    }
+
+    public void mostrarInformacion(Producto producto) {
+        System.out.println(
+                producto.getCodigo() + " - " +
+                producto.getNombre() + " - S/ " +
+                producto.getPrecio() + " - Stock: " +
+                producto.getStock()
+        );
+    }
+
+    private void validarCantidadPositiva(int cantidad) {
+        if (cantidad <= 0) {
+            throw new IllegalArgumentException("La cantidad debe ser positiva");
+        }
+    }
+}
+```
+
+Regla metodologica:
+
+```text
+Producto conserva sus datos.
+ProductoService realiza operaciones sobre Producto.
+Main coordina la prueba.
+
+En esta sesion, Main no debe llamar setters para aplicar reglas del negocio.
+Para eso usa ProductoService.
+```
+
+### 3.8 Agregar validaciones basicas en ProductoService
+
+**Producto del paso:** reglas simples ubicadas fuera de getters/setters.
+
+Ejemplo:
+
+```java
+public void actualizarPrecio(Producto producto, double nuevoPrecio) {
+    if (nuevoPrecio < 0) {
+        throw new IllegalArgumentException("El precio no puede ser negativo");
+    }
+    producto.setPrecio(nuevoPrecio);
+}
+```
+
+### 3.9 Probar desde Main
 
 **Producto del paso:** casos validos e invalidos ejecutados desde consola.
 
 ```java
-import java.time.LocalDate;
-
 public class Main {
     public static void main(String[] args) {
-        Cliente cliente = new Cliente(
-                "Ana Torres",
-                "76543210",
-                "987654321",
-                LocalDate.of(2000, 5, 10)
-        );
+        Producto producto = new Producto("P001", "Teclado", 80.0, 10);
+        Producto productoNuevo = new Producto("P002", "Mouse");
+        ProductoService productoService = new ProductoService();
 
-        cliente.mostrarInformacion();
-        cliente.actualizarTelefono("912345678");
+        productoNuevo.setPrecio(45.0);
+        productoNuevo.setStock(20);
+
+        productoService.mostrarInformacion(producto);
+        productoService.actualizarPrecio(producto, 75.0);
+        productoService.aumentarStock(producto, 5);
+        productoService.disminuirStock(producto, 3);
+        productoService.mostrarInformacion(producto);
 
         // Caso invalido para observar la validacion
-        // Cliente invalido = new Cliente("", "", "123", LocalDate.now().plusDays(1));
+        // productoService.actualizarPrecio(producto, -10.0);
     }
 }
 ```
 
-### 3.6 Registrar decisiones de encapsulamiento
+### 3.10 Registrar decisiones de encapsulamiento y responsabilidad
 
-**Producto del paso:** explicacion breve de por que cada dato se protege.
+**Producto del paso:** explicacion breve de que sabe cada clase y que hace cada clase.
 
 Completar una tabla simple:
 
 | Elemento | Decision |
 |---|---|
-| `nombre` | Se valida en constructor porque identifica al cliente |
-| `documento` | Se valida en constructor y no se cambia libremente |
-| `telefono` | Puede cambiar mediante `actualizarTelefono` |
-| `fechaNacimiento` | Se usa para calcular edad; no se reemplaza por un atributo edad |
+| `codigo` | Se inicializa en constructor porque identifica al producto |
+| `nombre` | Se inicializa en constructor porque describe al producto |
+| `Producto` | Sabe sus datos y expone getters/setters limpios |
+| `ProductoService` | Realiza operaciones como actualizar precio y mover stock |
+| `Main` | Crea objetos y prueba el flujo |
+
+Reglas simples:
+
+```text
+El constructor inicializa.
+Los getters consultan.
+Los setters asignan datos de forma simple.
+ProductoService contiene metodos con nombre de accion.
+```
 
 ## 4. Crea: actividad autonoma
 
 Tiempo: 2h fuera del aula.
 
-Mejora otra entidad del dominio aplicando encapsulamiento, constructor y validaciones. Puede ser `Proveedor`, `Empleado`, `Usuario` u otra entidad del proyecto elegido.
+Mejora otra entidad del dominio aplicando encapsulamiento, constructores sobrecargados, getters/setters limpios y una clase service inicial. Puede ser `Proveedor`, `Empleado`, `Usuario`, `Cliente` u otra entidad del proyecto elegido.
 
 Entrega evidencia breve con:
 
 - Clase encapsulada.
-- Constructor con validaciones.
+- Constructores sobrecargados.
 - Getters o metodos necesarios.
-- Un metodo de comportamiento.
+- Setters limpios.
+- Clase service con al menos dos operaciones.
 - Prueba valida desde `Main`.
 - Prueba invalida controlada.
 
@@ -290,15 +552,20 @@ Tiempo: 20 min.
 ### 5.1 Resultados esperados
 
 - Las clases no exponen atributos publicos.
-- Los constructores inicializan objetos validos.
-- Las validaciones basicas estan dentro de la clase.
+- Los constructores inicializan objetos.
+- Hay sobrecarga de constructores cuando se necesita crear objetos con distintos datos iniciales.
+- Los getters/setters se mantienen simples.
+- Existe una clase `ProductoService` o equivalente.
+- Las validaciones basicas estan en el service.
+- Los cambios importantes de estado pasan por metodos del service.
 - `Main` se usa para probar, no para controlar todas las reglas.
-- El estudiante explica que comportamiento pertenece a la entidad.
+- El estudiante explica que reglas simples protege su clase mediante setters o metodos.
 
 ### 5.2 Preguntas de defensa
 
 1. Por que los atributos deben ser privados?
-2. Que ventaja tiene validar dentro del constructor?
-3. Cuando usarias un setter?
-4. Por que la edad se calcula y no se guarda manualmente?
-5. Que responsabilidad no deberia tener `Main`?
+2. Para que sirve la sobrecarga de constructores?
+3. Por que los getters/setters deben quedar limpios?
+4. Que responsabilidad tiene `Producto`?
+5. Que responsabilidad tiene `ProductoService`?
+6. Que responsabilidad no deberia tener `Main`?

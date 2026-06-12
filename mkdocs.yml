@@ -47,7 +47,7 @@ nav:
   - 1. Fundamentos de la Programacion Orientada a Objetos:
     - 1 Clases, objetos y responsabilidad: S01_Clases_Objetos.md
     - 2 Encapsulamiento y constructores: S02_Encapsulamiento_Constructores.md
-    - 3 Modelado del dominio y colecciones: S03_Modelado_Dominio_Colecciones.md
+    - 3 Asociacion, agregacion/composicion y colecciones: S03_Modelado_Dominio_Colecciones.md
     - 4 Herencia y polimorfismo: S04_Herencia_Polimorfismo.md
     - 5 CRUD en memoria con ArrayList: S05_CRUD_Memoria_ArrayList.md
     - 6 Evaluacion unidad 1: S06_Evaluacion_Unidad_1.md
@@ -60,8 +60,8 @@ nav:
     - 12 Evaluacion unidad 2: S12_Evaluacion_Unidad_2.md
   - 3. Proyecto Integrador CoMarket:
     - 13 Integracion del sistema: S13_Proyecto_Integrador_Ensamblaje.md
-    - 14 Validacion y refinamiento: S14_Proyecto_Integrador_Refinamiento.md
-    - 15 Sustentacion del proyecto CoMarket: S15_Documentacion_Demo.md
+    - 14 Validacion, refinamiento y ejecutable nativo: S14_Proyecto_Integrador_Refinamiento.md
+    - 15 Sustentacion del proyecto: S15_Documentacion_Demo.md
     - 16 Evaluacion final: S16_Evaluacion_Final.md
   - 4. Anexos:
       - Taller POO 01: POOTaller01.md

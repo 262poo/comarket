@@ -1,35 +1,36 @@
 # S4 - Herencia y polimorfismo
 
-## 1. Introducción
+## 1. Introduccion
 
 Tiempo: 20 min.
 
-### 1.1 Propósito
+### 1.1 Proposito
 
-Desarrollar dos mecanismos distintos de POO: herencia con entidades del dominio e interfaces con `implements` para aplicar polimorfismo.
+Diferenciar dos mecanismos de POO que suelen confundirse: herencia para especializar entidades del dominio y polimorfismo con interfaces para programar contra contratos.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante crea jerarquías simples con `extends`, define una interface como contrato de operaciones y crea dos implementaciones con `implements`.
+El estudiante crea una clase base abstracta con subclases mediante `extends`, define una interface de servicio y crea dos implementaciones mediante `implements`.
 
-### 1.3 Producto de sesión
+### 1.3 Producto de sesion
 
-Entidades con herencia (`Persona`, `Cliente`, `Empleado`) y un primer contrato polimórfico (`ClienteService`) con dos implementaciones, probados desde `Main`.
+Modelo con `Persona`, `Cliente` y `Empleado`, mas un contrato `ClienteService` con `ClienteServiceMemoria` y `ClienteServiceBD` como preparacion para memoria y persistencia.
 
-### 1.4 Motivación de la sesión
+### 1.4 Motivacion de la sesion
 
-Cuando varias entidades tienen una relación es-un, puede tener sentido usar herencia. Cuando queremos programar contra un contrato y permitir distintas implementaciones, usamos polimorfismo con interface e `implements`.
+En POO no toda reutilizacion se resuelve con herencia. Una entidad puede especializarse porque existe una relacion es-un, mientras que un servicio puede tener varias implementaciones porque se quiere conservar el mismo contrato aunque cambie la forma de ejecutar la operacion.
 
-Pregunta guía:
+Pregunta guia:
 
 ```text
-¿Cuándo usamos extends en entidades y cuándo usamos implements para trabajar con un contrato?
+Cuando usamos extends en entidades y cuando usamos implements en servicios?
 ```
 
-### 1.5 Ubicación en el curso
+### 1.5 Ubicacion en el curso
 
 - Unidad: U1.
-- Avance de sesión: las entidades incorporan herencia y el gestor/servicio se prepara para usar contratos con implementaciones.
+- Producto de unidad: aplicacion de consola en memoria.
+- Avance de sesion: se formaliza la diferencia entre entidades con herencia y servicios polimorficos.
 
 ## 2. Explica
 
@@ -37,89 +38,264 @@ Tiempo: 25 min.
 
 ### 2.1 Conceptos clave
 
-- Herencia en entidades.
-- Relación es-un.
-- Clase base y subclases.
-- `extends`.
-- Sobrescritura de métodos en entidades.
-- Polimorfismo con interface.
-- `implements`.
-- Contrato e implementación.
-- Separación de responsabilidades.
-- Principio de responsabilidad única como idea base de SOLID.
+| Concepto | Idea central | Ejemplo |
+|---|---|---|
+| Herencia | Una clase especializada hereda de una clase base. | `Cliente extends Persona` |
+| Clase abstracta | Clase base que organiza atributos o comportamiento comun. | `abstract class Persona` |
+| Sobrescritura | Una subclase redefine un comportamiento heredado. | `mostrarPerfil()` |
+| Interface | Contrato de operaciones, sin decidir la implementacion concreta. | `ClienteService` |
+| Implements | Una clase cumple el contrato de una interface. | `ClienteServiceMemoria implements ClienteService` |
+| Polimorfismo | Una misma referencia puede apuntar a implementaciones distintas. | `ClienteService service = new ClienteServiceMemoria()` |
 
-Regla metodológica de la sesión:
+Regla metodologica de la sesion:
 
 ```text
-Tema 1: Herencia se trabaja en entidades cuando existe una relación es-un.
-Tema 2: Polimorfismo se trabaja con interface e implements para programar contra un contrato.
-En los diagramas, extends e implements se leen en las flechas.
-Las entidades no implementan contratos de servicio; representan el dominio.
-ClienteServiceBD anticipa la implementación con base de datos que luego usará DAO en U2.
+Herencia: se aplica en entidades cuando existe relacion es-un.
+Interface: se aplica en servicios para declarar operaciones esperadas.
+Implementacion: ejecuta el contrato, en memoria o con base de datos.
+Las entidades no implementan contratos de servicio.
 ```
 
-### 2.2 Arquitectura de la sesión
+### 2.2 Arquitectura de la sesion
 
 ```mermaid
-flowchart TB
-    Main["Main / pruebas"]
+classDiagram
+    class Main {
+        main(String[] args)
+    }
 
-    subgraph Polimorfismo["Servicios (Polimorfismo)"]
-        direction TB
-        Contrato["ClienteService<br/>&lt;&lt;interface&gt;&gt;"]
-        ImplementacionMemoria["ClienteServiceMemoria"]
-        ImplementacionBD["ClienteServiceBD"]
-    end
+    class Persona {
+        <<abstract>>
+        -nombre
+        -documento
+        mostrarPerfil()
+    }
+    class Cliente {
+        -telefono
+        mostrarPerfil()
+    }
+    class Empleado {
+        -cargo
+        mostrarPerfil()
+    }
 
-    subgraph Entidades["Entidades (Herencia)"]
-        direction TB
-        Base["Persona<br/>&lt;&lt;abstract&gt;&gt;"]
-        SubA["Cliente"]
-        SubB["Empleado"]
-    end
+    class ClienteService {
+        <<interface>>
+        registrar(cliente)
+        listar()
+        buscarPorDocumento(documento)
+    }
+    class ClienteServiceMemoria {
+        -clientes
+        registrar(cliente)
+        listar()
+        buscarPorDocumento(documento)
+    }
+    class ClienteServiceBD {
+        registrar(cliente)
+        listar()
+        buscarPorDocumento(documento)
+    }
 
-    Base ~~~ SubA
-    Base ~~~ SubB
-    SubA -- extends --> Base
-    SubB -- extends --> Base
-    Contrato ~~~ ImplementacionMemoria
-    Contrato ~~~ ImplementacionBD
-    ImplementacionMemoria -. implements .-> Contrato
-    ImplementacionBD -. implements .-> Contrato
-    Main --> Base
-    Main --> Contrato
+    Main ..> Persona : prueba
+    Main ..> ClienteService : prueba
+    Persona <|-- Cliente : extends
+    Persona <|-- Empleado : extends
+    ClienteService <|.. ClienteServiceMemoria : implements
+    ClienteService <|.. ClienteServiceBD : implements
+    ClienteServiceMemoria ..> Cliente : usa
+    ClienteServiceBD ..> Cliente : usa
 ```
 
-## 3. Aplica: actividad práctica guiada
+Convencion del diagrama: flecha continua con triangulo representa `extends`; flecha punteada con triangulo representa `implements`; flecha punteada simple representa dependencia o uso.
+
+## 3. Aplica: actividad practica guiada
 
 Tiempo: 2h.
 
-1. Identificar entidades con relación es-un.
-2. Crear una clase base del dominio.
-3. Crear dos subclases con `extends`.
-4. Sobrescribir un método relevante en las subclases.
-5. Probar herencia desde `Main` usando una referencia de la clase base.
-6. Definir una interface como contrato de operaciones, por ejemplo `ClienteService`.
-7. Crear una implementación en memoria, por ejemplo `ClienteServiceMemoria`.
-8. Crear una segunda implementación del mismo contrato, por ejemplo `ClienteServiceBD`, como preparación conceptual para la arquitectura con DAO.
-9. Probar polimorfismo desde `Main` usando una referencia de la interface.
-10. Verificar que herencia e interface resuelven problemas distintos.
+### 3.1 Identificar una relacion es-un
 
-## 4. Crea: actividad autónoma
+Usa una relacion natural del dominio:
+
+```text
+Cliente es una Persona.
+Empleado es una Persona.
+Producto no es una Persona.
+Venta no es una Persona.
+```
+
+La herencia se usa solo cuando la frase "es un/a" tiene sentido real.
+
+### 3.2 Crear la clase base abstracta
+
+```java
+public abstract class Persona {
+    private String nombre;
+    private String documento;
+
+    public Persona(String nombre, String documento) {
+        this.nombre = nombre;
+        this.documento = documento;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public abstract void mostrarPerfil();
+}
+```
+
+### 3.3 Crear subclases con extends
+
+```java
+public class Cliente extends Persona {
+    private String telefono;
+
+    public Cliente(String nombre, String documento, String telefono) {
+        super(nombre, documento);
+        this.telefono = telefono;
+    }
+
+    @Override
+    public void mostrarPerfil() {
+        System.out.println("Cliente: " + getNombre() + " - " + telefono);
+    }
+}
+```
+
+```java
+public class Empleado extends Persona {
+    private String cargo;
+
+    public Empleado(String nombre, String documento, String cargo) {
+        super(nombre, documento);
+        this.cargo = cargo;
+    }
+
+    @Override
+    public void mostrarPerfil() {
+        System.out.println("Empleado: " + getNombre() + " - " + cargo);
+    }
+}
+```
+
+### 3.4 Probar herencia desde Main
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Persona cliente = new Cliente("Ana Torres", "71234567", "999888777");
+        Persona empleado = new Empleado("Luis Ramos", "73456789", "Vendedor");
+
+        cliente.mostrarPerfil();
+        empleado.mostrarPerfil();
+    }
+}
+```
+
+### 3.5 Definir el contrato del servicio
+
+```java
+import java.util.ArrayList;
+
+public interface ClienteService {
+    void registrar(Cliente cliente);
+    ArrayList<Cliente> listar();
+    Cliente buscarPorDocumento(String documento);
+}
+```
+
+### 3.6 Crear dos implementaciones
+
+Implementacion en memoria:
+
+```java
+import java.util.ArrayList;
+
+public class ClienteServiceMemoria implements ClienteService {
+    private ArrayList<Cliente> clientes = new ArrayList<>();
+
+    @Override
+    public void registrar(Cliente cliente) {
+        clientes.add(cliente);
+    }
+
+    @Override
+    public ArrayList<Cliente> listar() {
+        return clientes;
+    }
+
+    @Override
+    public Cliente buscarPorDocumento(String documento) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getDocumento().equals(documento)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+}
+```
+
+Implementacion con base de datos, aun como preparacion conceptual:
+
+```java
+import java.util.ArrayList;
+
+public class ClienteServiceBD implements ClienteService {
+    @Override
+    public void registrar(Cliente cliente) {
+        System.out.println("Luego guardara usando DAO");
+    }
+
+    @Override
+    public ArrayList<Cliente> listar() {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public Cliente buscarPorDocumento(String documento) {
+        return null;
+    }
+}
+```
+
+### 3.7 Probar polimorfismo con interface
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        ClienteService service = new ClienteServiceMemoria();
+
+        service.registrar(new Cliente("Ana Torres", "71234567", "999888777"));
+        service.registrar(new Cliente("Marco Ruiz", "72345678", "988777666"));
+
+        for (Cliente cliente : service.listar()) {
+            cliente.mostrarPerfil();
+        }
+    }
+}
+```
+
+## 4. Crea: actividad autonoma
 
 Tiempo: 2h fuera del aula.
 
-Aplica herencia en una parte del dominio y define una interface sencilla con dos implementaciones.
+Aplica herencia e interfaces en una parte del dominio.
 
 Entrega evidencia breve con:
 
-- Clases involucradas.
-- Justificación de `extends`.
-- Interface creada.
-- Dos clases que usan `implements`.
-- Explicación de que `ClienteServiceBD` luego coordinará un DAO.
-- Prueba polimórfica con referencia a la interface.
-- Salida de consola.
+- Una clase base abstracta.
+- Dos subclases con `extends`.
+- Un metodo sobrescrito con `@Override`.
+- Una interface de servicio.
+- Dos implementaciones con `implements`.
+- Prueba desde `Main` usando una referencia de la clase base y una referencia de la interface.
 
 ## 5. Cierre evaluativo
 
@@ -127,16 +303,16 @@ Tiempo: 20 min.
 
 ### 5.1 Resultados esperados
 
-- La herencia tiene sentido en el dominio.
-- Hay sobrescritura o comportamiento especializado.
-- El estudiante diferencia herencia de polimorfismo con interfaces.
-- Existen dos implementaciones que usan `implements` para el mismo contrato.
-- El estudiante evita herencia artificial.
+- La herencia responde a una relacion es-un.
+- La clase base no reemplaza a las entidades concretas.
+- La interface declara operaciones y no guarda datos.
+- Las implementaciones cumplen el contrato con `implements`.
+- El estudiante diferencia `extends` de `implements`.
 
 ### 5.2 Preguntas de defensa
 
-1. ¿Qué clases participan en la jerarquía?
-2. ¿Por qué esa relación sí justifica `extends`?
-3. ¿Qué declara la interface?
-4. ¿Qué clases usan `implements`?
-5. ¿Dónde se evidencia el polimorfismo?
+1. Por que `Cliente` puede heredar de `Persona`?
+2. Por que `ClienteService` debe ser interface?
+3. Que clase implementa el contrato en memoria?
+4. Que ventaja da declarar `ClienteService service = new ClienteServiceMemoria()`?
+5. Por que no conviene que una entidad implemente un contrato de servicio?
