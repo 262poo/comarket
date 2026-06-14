@@ -18,11 +18,11 @@ Producto U1 integrado: entidades, servicios, `ArrayList`, CRUD en memoria, menu 
 
 ### 1.4 Motivación de la sesión
 
-La evaluación no revisa clases sueltas. Revisa si el estudiante puede explicar cómo las clases colaboran, dónde se guardan los datos en memoria, cómo se aplica la separacion de responsabilidades y qué evidencia demuestra que el producto funcióna.
+La evaluación no revisa clases sueltas. Revisa si el estudiante puede explicar cómo las clases colaboran, dónde se guardan los datos en memoria, cómo se aplica la separacion de responsabilidades y qué evidencia demuestra que el producto funciona.
 
 Preguntas para los estudiantes:
 
-1. Qué evidencia demuestra qué tu producto U1 funcióna?
+1. Qué evidencia demuestra qué tu producto U1 funciona?
 2. Qué parte puedes defender individualmente?
 3. Qué revisarias si una operación CRUD falla?
 
@@ -38,7 +38,7 @@ Tiempo: 15 min.
 
 ### 2.1 Conceptos clave
 
-- Integración: las clases funciónan coordinadamente.
+- Integración: las clases funcionan coordinadamente.
 - Evidencia individual: prueba verificable del aporte de cada estudiante.
 - Diagnóstico: capacidad de ubicar fallos en `Main`, entidades, servicio o colección.
 - Defensa técnica: explicacion clara de decisiónes de modelado y separacion de responsabilidades.
@@ -175,10 +175,10 @@ Describe un problema encontrado en U1 y cómo lo diagnosticaste.
 
 Explica cómo las clases de tu producto forman una aplicación orientada a objetos y no solo un conjunto de variables en `Main`.
 
-### 4.2 Criterios mínimos de aceptacion
+### 4.2 Criterios mínimos de aceptación
 
 - PDF con nombre correcto.
-- Evidencia del producto U1 funciónando.
+- Evidencia del producto U1 funcionando.
 - Evidencia de aporte individual.
 - Pruebas por consola.
 - Explicacion técnica breve.
@@ -238,3 +238,4 @@ Calcula la puntuacion acumulada con la formula: suma de (Peso * Puntuacion obten
 Calcula la nota final sobre 20 con la formula: (Puntuacion acumulada / 30) * 20.
 Indica 2 fortalezas y 2 recomendaciones.
 ```
+

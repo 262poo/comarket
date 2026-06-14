@@ -164,7 +164,7 @@ Regla practica:
 | La clase tiene métodos de muchas cosas | No se identificaron bien sus caracteristicas y acciones | Volver a la abstracción inicial del objeto |
 | Se usan constructores o `private` antes de tiempo | Se adelanto contenido de S2 | En S1 usar clases simples; el control del estado queda para S2 |
 
-## 3. Aplica: actividad practica guíada
+## 3. Aplica: actividad práctica guiada
 
 En el laboratorio, el docente guía la creacion del primer objeto del dominio y los estudiantes verifican el resultado ejecutando el programa desde VS Code.
 
@@ -682,3 +682,4 @@ Calcula la puntuación acumulada con la fórmula: suma de (Peso * Puntuación ob
 Calcula la nota final sobre 20 con la fórmula: (Puntuación acumulada / 30) * 20.
 Indica 2 fortalezas y 2 recomendaciones.
 ```
+

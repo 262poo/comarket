@@ -14,7 +14,7 @@ El estudiante demuestra qué puede construir, ejecutar, probar y defender una ap
 
 ### 1.3 Producto de sesión
 
-Producto U2 integrado: GUI JavaFX, controladores, contrato de servicio, implementacion persistente, DAO, SQLite, validaciones y evidencia de pruebas.
+Producto U2 integrado: GUI JavaFX, controladores, contrato de servicio, implementación persistente, DAO, SQLite, validaciones y evidencia de pruebas.
 
 ### 1.4 Motivación de la sesión
 
@@ -22,7 +22,7 @@ Una aplicación de escritorio se evalua por el flujo completo: el usuario opera 
 
 Preguntas para los estudiantes:
 
-1. Qué evidencia demuestra qué la GUI funcióna integrada con SQLite?
+1. Qué evidencia demuestra qué la GUI funciona integrada con SQLite?
 2. Qué parte puedes defender individualmente?
 3. Qué revisas cuándo un dato no aparece en la tabla?
 
@@ -156,7 +156,7 @@ S12_Equipo##_ApellidoNombre.pdf
 - Capturas de GUI.
 - Evidencia de registros en SQLite.
 - Código o descripción del DAO.
-- Código o descripción de la interface del servicio y su implementacion persistente.
+- Código o descripción de la interface del servicio y su implementación persistente.
 - Matriz mínima de pruebas.
 - Aporte individual.
 
@@ -168,10 +168,10 @@ Describe un problema de integración GUI-persistencia y cómo lo diagnosticaste.
 
 Explica cómo fluye una operación desde la vista hasta SQLite.
 
-### 4.2 Criterios mínimos de aceptacion
+### 4.2 Criterios mínimos de aceptación
 
 - PDF con nombre correcto.
-- Evidencia de aplicación JavaFX funciónando.
+- Evidencia de aplicación JavaFX funcionando.
 - CRUD persistente demostrado.
 - Validaciones demostradas.
 - Aporte individual verificable.
@@ -232,3 +232,4 @@ Calcula la puntuacion acumulada con la formula: suma de (Peso * Puntuacion obten
 Calcula la nota final sobre 20 con la formula: (Puntuacion acumulada / 30) * 20.
 Indica 2 fortalezas y 2 recomendaciones.
 ```
+

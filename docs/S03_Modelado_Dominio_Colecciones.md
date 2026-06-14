@@ -52,7 +52,7 @@ flowchart TB
     class S3 today;
 ```
 
-Hoy no se busca terminar todo el sistema. Se busca qué el estudiante entienda qué el dominio se arma con varias clases, cada una con una responsabilidad, y qué las relaciones deben aparecer en el código de manera clara.
+Hoy no se busca terminar todo el sistema. Se busca que el estudiante entienda qué el dominio se arma con varias clases, cada una con una responsabilidad, y qué las relaciones deben aparecer en el código de manera clara.
 
 ## 2. Explica
 
@@ -177,7 +177,7 @@ Los detalles existen para explicar una venta. Si se elimina la venta, sus detall
 | Crear relaciones sin sentido. | Cada relación debe responder a una regla del problema. |
 | Hacer CRUD completo antes de modelar. | Primero se entiende el dominio; luego se agregan operaciones. |
 
-## 3. Aplica: actividad practica guíada
+## 3. Aplica: actividad práctica guiada
 
 Tiempo: 2h.
 
@@ -369,39 +369,169 @@ public class Main {
 
 ## 4. Crea: actividad autónoma
 
+Fuera del aula, cada estudiante consolida el aprendizaje ampliando el modelo del dominio y preparando una evidencia individual.
+
 Tiempo: 2h fuera del aula.
 
-Amplia el modelo con una relación adicional. Puedes elegir una de estas opciones:
+### 4.1 Plantilla de evidencia individual
 
-- `Categoria` relaciónada con varios `Producto`.
-- `Empleado` relaciónado con varias `Venta`.
-- `Proveedor` relaciónado con varios `Producto`.
-- `Cliente` relaciónado con varias `Venta`.
+Entrega un PDF con el siguiente nombre:
 
-Entrega evidencia breve con:
+```text
+S03_Equipo##_ApellidoNombre.pdf
+```
+
+Ejemplo:
+
+```text
+S03_Equipo03_QuispeAna.pdf
+```
+
+El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.
+
+#### 4.1.1 Datos del estudiante
+
+- Nombre:
+- Equipo:
+- Sesión: S03 - Asociación, agregación/composición y colecciones
+- Rol o aporte realizado:
+- Link de GitHub:
+
+#### 4.1.2 Trabajo autónomo realizado
+
+Completa y evidencia estas tareas:
+
+1. Ampliar el modelo con una relación adicional.
+2. Crear o mejorar al menos tres entidades relacionadas.
+3. Representar una asociación, agregación o composición.
+4. Usar `ArrayList` para una relación de uno a muchos.
+5. Crear un servicio inicial que administre una colección.
+6. Probar desde `Main` la creación de objetos relacionados.
+7. Explicar qué relación existe entre las clases.
+
+Puedes elegir una de estas opciones:
+
+- `Categoria` relacionada con varios `Producto`.
+- `Empleado` relacionado con varias `Venta`.
+- `Proveedor` relacionado con varios `Producto`.
+- `Cliente` relacionado con varias `Venta`.
+
+#### 4.1.3 Evidencia técnica
+
+Incluye capturas o salidas de consola con una breve explicación debajo de cada una:
 
 - Diagrama simple del modelo.
-- Código de al menos tres entidades relaciónadas.
+- Código de al menos tres entidades relacionadas.
 - Uso de una colección con `ArrayList`.
 - Una clase de servicio inicial.
 - Salida de consola mostrando objetos relacionados.
+- Explicación de la relación modelada.
+
+#### 4.1.4 Error o hallazgo
+
+Describe al menos un error, diferencia o hallazgo técnico:
+
+- Qué ocurrió.
+- Cómo lo diagnosticaste.
+- Cómo lo corregiste o qué aprendiste.
+
+Ejemplos válidos:
+
+- Una relación no tenía sentido en el dominio.
+- Se confundió una colección con una entidad.
+- `Main` estaba administrando demasiada lógica.
+- Una lista no fue inicializada antes de usarla.
+
+#### 4.1.5 Reflexión técnica breve
+
+Responde en 5 a 8 líneas:
+
+```text
+Por qué un sistema orientado a objetos necesita relaciones entre clases y no solo clases aisladas?
+```
+
+### 4.2 Criterios mínimos de aceptación
+
+La evidencia individual se considera completa si:
+
+- El archivo respeta el nombre `S03_Equipo##_ApellidoNombre.pdf`.
+- Incluye evidencias técnicas legibles.
+- Muestra al menos tres entidades relacionadas.
+- Usa `ArrayList` para administrar varios objetos.
+- Representa una relación de uno a muchos.
+- Incluye una prueba desde `Main`.
+- Explica si la relación es asociación, agregación o composición.
+- No contiene solo pantallazos: cada evidencia tiene una descripción breve.
 
 ## 5. Cierre evaluativo
 
 Tiempo: 20 min.
 
+Esta sección conecta el resultado de aprendizaje de la sesión con el producto que debe evidenciar cada estudiante.
+
 ### 5.1 Resultados esperados
+
+Al finalizar la sesión, el estudiante debe demostrar que:
 
 - El modelo tiene varias entidades del dominio.
 - Las relaciones no están sueltas; aparecen representadas en atributos o colecciones.
 - Hay al menos una relación de uno a muchos.
 - Se usa `ArrayList` para administrar varios objetos.
+- Existe un servicio inicial que administra una colección.
 - `Main` solo arma escenarios de prueba y no concentra toda la lógica.
 
-### 5.2 Preguntas de defensa
+### 5.2 Evidencia del producto de sesión
+
+Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.
+
+Nombre del archivo:
+
+```text
+S03_Equipo##_ApellidoNombre.pdf
+```
+
+La evidencia debe demostrar:
+
+- Producto de sesión construido.
+- Aporte individual verificable.
+- Modelo con entidades relacionadas.
+- Pruebas por consola realizadas.
+- Reflexión técnica breve.
+
+La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.
+
+### 5.3 Preguntas de defensa y reflexión
 
 1. Qué diferencia hay entre entidad y colección?
-2. Qué relación modelaste cómo asociación?
-3. Qué relación modelaste cómo agregación o composición?
+2. Qué relación modelaste como asociación?
+3. Qué relación modelaste como agregación o composición?
 4. Por qué una venta necesita detalles?
-5. Qué parte de este modelo se podría convertir en CRUD en S5?
+5. Qué clase administra la colección?
+6. Qué parte de este modelo se podría convertir en CRUD en S5?
+
+### 5.4 Rúbrica de evaluación
+
+| Dimensión | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuación obtenida |
+|---|---:|---|---|---|---|---:|
+| 1. Modelo de dominio | 2 | Presenta entidades coherentes y relacionadas con claridad. | Presenta entidades principales correctas. | Modelo incompleto o poco claro. | No evidencia modelo de dominio. | |
+| 2. Relaciones entre objetos | 2 | Distingue y justifica asociación, agregación o composición. | Representa al menos una relación correcta. | Relación parcial o confusa. | No evidencia relaciones. | |
+| 3. Colecciones | 2 | Usa `ArrayList` correctamente en una relación de uno a muchos. | Usa colección funcional. | Uso parcial o mal ubicado. | No usa colecciones. | |
+| 4. Servicio inicial y `Main` | 2 | Servicio administra colección y `Main` solo prueba escenarios. | Servicio funcional con prueba básica. | Lógica mezclada en `Main`. | No separa responsabilidades. | |
+| 5. Error o hallazgo | 1 | Analiza error/hallazgo, causa, solución y aprendizaje técnico. | Explica un problema y una solución. | Menciona un problema sin análisis. | No presenta error ni hallazgo. | |
+| 6. Reflexión y orden | 1 | PDF ordenado, evidencias legibles y reflexión precisa. | Evidencias suficientes y reflexión clara. | Evidencias incompletas o reflexión superficial. | PDF desordenado o sin reflexión. | |
+
+Puntuación acumulada = suma de (`Peso` * `Puntuación obtenida`) = ____.
+
+Nota final = (`Puntuación acumulada` / 30) * 20 = ____.
+
+Para usar la rúbrica con IA, solicita:
+
+```text
+Evalúa el PDF usando la rúbrica de la sesión.
+Para cada dimensión selecciona la puntuación obtenida usando la escala Inicio=0, Proceso=1, Logro=2, Logro destacado=3.
+Justifica brevemente cada puntuación.
+Calcula la puntuación acumulada con la fórmula: suma de (Peso * Puntuación obtenida).
+Calcula la nota final sobre 20 con la fórmula: (Puntuación acumulada / 30) * 20.
+Indica 2 fortalezas y 2 recomendaciones.
+```
+

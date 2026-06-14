@@ -197,7 +197,7 @@ Regla practica:
 | Setter contiene demasiada lógica | Se mezclo código mecánico con reglas | Dejar setter limpio y mover la regla a `ProductoService` |
 | `Main` contiene demasiadas reglas | No se separo la operación | Llevar operaciones simples a `ProductoService` |
 
-## 3. Aplica: actividad practica guíada
+## 3. Aplica: actividad práctica guiada
 
 En el laboratorio, el docente guía la transformacion de `Producto` desde una clase con atributos expuestos hacia una clase encapsulada qué controla su propio estado.
 
@@ -695,3 +695,4 @@ Calcula la puntuación acumulada con la fórmula: suma de (Peso * Puntuación ob
 Calcula la nota final sobre 20 con la fórmula: (Puntuación acumulada / 30) * 20.
 Indica 2 fortalezas y 2 recomendaciones.
 ```
+

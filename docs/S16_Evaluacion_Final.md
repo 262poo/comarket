@@ -18,7 +18,7 @@ Evaluación final, corrección de observaciones y cierre académico del proyecto
 
 ### 1.4 Motivación de la sesión
 
-La evaluación final no solo confirma que el producto abre. Confirma qué el estudiante entiende el flujo, las capas, las entidades, la persistencia y las decisiónes tomadas durante el desarrollo.
+La evaluación final no solo confirma que el producto abre. Confirma que el estudiante entiende el flujo, las capas, las entidades, la persistencia y las decisiónes tomadas durante el desarrollo.
 
 ### 1.5 Ubicación en el curso
 
@@ -32,7 +32,7 @@ Tiempo: 20 min.
 ### 2.1 Criterios de cierre
 
 - Proyecto ejecutable.
-- Flujo principal funciónando.
+- Flujo principal funcionando.
 - Persistencia operativa.
 - GUI consistente.
 - Validaciones y errores controlados.
@@ -60,7 +60,7 @@ flowchart TB
     Producto --> Sustentacion
 ```
 
-### 2.3 Criterios mínimos de aceptacion
+### 2.3 Criterios mínimos de aceptación
 
 - El proyecto se ejecuta.
 - El flujo principal se puede demostrar.
@@ -106,7 +106,7 @@ Incluye:
 
 - Repositorio actualizado.
 - Evidencias del producto.
-- Ejecutable o evidencia de generacion.
+- Ejecutable o evidencia de generación.
 - Breve descripción del aporte individual.
 - Correcciones realizadas.
 - Reflexión técnica final.
@@ -127,7 +127,7 @@ Responde brevemente:
 - El producto se ejecuta correctamente.
 - El estudiante entiende la arquitectura.
 - El flujo principal está validado.
-- La persistencia funcióna.
+- La persistencia funciona.
 - Las evidencias son suficientes.
 
 ### 5.2 Preguntas de defensa
@@ -152,3 +152,4 @@ Responde brevemente:
 Puntuacion acumulada = suma de (`Peso` * `Puntuacion obtenida`) = ____.
 
 Nota final = (`Puntuacion acumulada` / 30) * 20 = ____.
+
