@@ -52,6 +52,7 @@ Regla métodológica de la sesión:
 ```text
 La vista muestra controles.
 El controlador atiende eventos.
+El controlador se prepara para delegar operaciones al contrato `ProductoService` construido en U1.
 Las entidades siguen representando el dominio.
 El CRUD completo se conecta en la siguiente sesión.
 ```
@@ -63,11 +64,14 @@ flowchart TB
     Main["Main<br/>Application"]
     FXML["Vista FXML<br/>TextField / Button / TableView"]
     Controller["ProductoController<br/>initialize / eventos"]
+    Service["ProductoService<br/>&lt;&lt;interface&gt;&gt;<br/>contrato U1"]
     Entity["Producto<br/>entidad del dominio"]
 
     Main -->|"carga FXML"| FXML
     FXML -->|"fx controller"| Controller
-    Controller -. "crea / usa" .-> Entity
+    Controller -. "prepara uso" .-> Service
+    Controller -. "crea / lee" .-> Entity
+    Service -. "usa" .-> Entity
 ```
 
 ## 3. Aplica: actividad práctica guiada
@@ -306,12 +310,13 @@ public class ProductoController {
 
 ### 3.5 Probar eventos
 
-La prueba de esta sesión no busca guardar datos todavía. Busca comprobar que:
+La prueba de esta sesión no busca guardar datos todavía. Busca comprobar que la GUI ya puede leer datos y queda lista para llamar a `ProductoService` en S8:
 
 - La ventana abre.
 - El FXML carga.
 - El botón ejecuta el método del controlador.
 - Los textos escritos se pueden leer desde Java.
+- El controlador no duplica CRUD; solo prepara la delegación al servicio.
 
 ## 4. Crea: actividad autónoma
 
