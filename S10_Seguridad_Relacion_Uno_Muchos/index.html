@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../S08_Arquitectura_DAO_CRUD_Persistente/">
+        <link rel="prev" href="../S09_Operaciones_Persistentes_Muchos_Muchos/">
       
       
-        <link rel="next" href="../S10_Seguridad_CRUD_Uno_Muchos/">
+        <link rel="next" href="../S11_Consultas_Integradas_Pruebas/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>9 Operaciones CRUD para tablas con relaciones muchos a muchos - POO - CoMarket</title>
+        <title>10 Seguridad basica y relacion uno a muchos - POO - CoMarket</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#s9-arquitectura-por-capas-y-persistencia-relacional" class="md-skip">
+        <a href="#s10-patron-dao-y-operaciones-crud-persistentes-desde-gui" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              9 Operaciones CRUD para tablas con relaciones muchos a muchos
+              10 Seguridad basica y relacion uno a muchos
             
           </span>
         </div>
@@ -587,6 +587,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../S09_Operaciones_Persistentes_Muchos_Muchos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9 Operaciones persistentes con relacion muchos a muchos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -606,7 +634,7 @@
   <span class="md-ellipsis">
     
   
-    9 Operaciones CRUD para tablas con relaciones muchos a muchos
+    10 Seguridad basica y relacion uno a muchos
   
 
     
@@ -624,7 +652,7 @@
   <span class="md-ellipsis">
     
   
-    9 Operaciones CRUD para tablas con relaciones muchos a muchos
+    10 Seguridad basica y relacion uno a muchos
   
 
     
@@ -936,34 +964,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../S10_Seguridad_CRUD_Uno_Muchos/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    10 Seguridad y CRUD para tablas con relaciones uno a muchos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1620,54 +1620,53 @@
 
 
 
-<h1 id="s9-arquitectura-por-capas-y-persistencia-relacional">S9 - Arquitectura por capas y persistencia relacional<a class="headerlink" href="#s9-arquitectura-por-capas-y-persistencia-relacional" title="Permanent link">&para;</a></h1>
+<h1 id="s10-patron-dao-y-operaciones-crud-persistentes-desde-gui">S10 - Patron DAO y operaciones CRUD persistentes desde GUI<a class="headerlink" href="#s10-patron-dao-y-operaciones-crud-persistentes-desde-gui" title="Permanent link">&para;</a></h1>
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
 <h3 id="11-proposito">1.1 Propósito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
-<p>Preparar la aplicación de escritorio para reemplazar almacenamiento en memoria por persistencia relacional con SQLite y JDBC.</p>
+<p>Implementar el patron DAO para ejecutar operaciones CRUD persistentes desde la interfaz gráfica.</p>
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
-<p>El estudiante organiza el proyecto por capas, configura SQLite, comprende JDBC y prepara la estructura para una implementación persistente del servicio y DAO.</p>
+<p>El estudiante separa el acceso a datos en DAO, mapea entidades a registros, ejecuta SQL básico y agrega una implementación persistente del mismo contrato de servicio.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>Proyecto JavaFX/Maven organizado con vista, controlador, servicio, entidades, persistencia, conexión JDBC y base de datos SQLite.</p>
+<p>CRUD persistente funcional desde formularios y tablas JavaFX.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
-<p>El <code>ArrayList</code> se borra al cerrar la aplicación. Para conservar datos, el producto necesita una base de datos local y una capa de persistencia.</p>
+<p>La GUI ya funciona con memoria y la base de datos ya existe. Ahora corresponde guardar y recuperar datos desde SQLite sin poner SQL en el controlador.</p>
 <p>Pregunta guía:</p>
-<div class="highlight"><pre><span></span><code>Cómo hacemos que los datos sobrevivan después de cerrar la aplicación?
+<div class="highlight"><pre><span></span><code>Cómo guardamos y recuperamos datos desde la GUI sin mezclar SQL con la pantalla?
 </code></pre></div>
 <h3 id="15-ubicacion-en-el-curso">1.5 Ubicación en el curso<a class="headerlink" href="#15-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Unidad: U2.</li>
-<li>Avance de sesión: transicion de memoria a persistencia.</li>
+<li>Avance de sesión: integración de GUI con persistencia.</li>
 </ul>
 <h2 id="2-explica">2. Explica<a class="headerlink" href="#2-explica" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 25 min.</p>
 <h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Arquitectura por capas.</li>
-<li>Vista FXML y controlador JavaFX.</li>
-<li>Servicio como contrato de operaciones.</li>
-<li>Implementación persistente del servicio.</li>
-<li>Persistencia.</li>
-<li>DAO.</li>
-<li>JDBC cómo conector.</li>
-<li>SQLite cómo base de datos local.</li>
-<li>Clase de conexión.</li>
+<li>Patron DAO.</li>
+<li>Servicio cómo coordinador entre controlador y DAO.</li>
+<li>Implementación persistente del contrato CRUD.</li>
+<li>Mapeo objeto-relacional básico.</li>
+<li><code>insert</code>, <code>select</code>, <code>update</code>, <code>delete</code>.</li>
+<li>Confirmación de eliminación.</li>
+<li>Excepciones de persistencia.</li>
+<li>Refresco de <code>TableView</code> desde base de datos.</li>
 </ul>
 <p>Regla métodológica de la sesión:</p>
-<div class="highlight"><pre><span></span><code>El controlador sigue usando el contrato del servicio.
-La implementación persistente coordina reglas y DAO.
-El DAO conversa con SQL.
-JDBC conecta Java con SQLite.
-Las entidades no cambian por usar base de datos.
+<div class="highlight"><pre><span></span><code>El controlador no escribe SQL.
+El servicio valida y coordina.
+El DAO ejecuta SQL.
+JDBC conecta con SQLite.
+La entidad sigue siendo una clase del dominio.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart TB
-    Vista["Vista FXML"]
-    Controlador["JavaFX Controller"]
+    Vista["Vista JavaFX"]
+    Controlador["Controlador"]
 
     subgraph Servicio["Servicio"]
         Contrato["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
-        Implementacion["ProductoServiceBD&lt;br/&gt;implements"]
+        ServicioBD["ProductoServiceBD&lt;br/&gt;implements"]
         Validaciones["Validaciones/Excepciones"]
     end
 
@@ -1675,74 +1674,71 @@ Las entidades no cambian por usar base de datos.
 
     subgraph Persistencia["Persistencia"]
         DAO["ProductoDAO"]
-        Conexion["ConexionBD"]
         SQLite[("SQLite / comarket.db")]
     end
 
     Vista --&gt; Controlador
     Controlador --&gt; Contrato
-    Implementacion -. implements .-&gt; Contrato
+    ServicioBD -. implements .-&gt; Contrato
     Contrato -.-&gt; Entidades
-    Implementacion -.-&gt; Entidades
-    Implementacion --&gt; DAO
-    Implementacion -.-&gt; Validaciones
+    ServicioBD -.-&gt; Entidades
+    ServicioBD -.-&gt; Validaciones
+    ServicioBD --&gt; DAO
     DAO --&gt; Entidades
-    DAO --&gt; Conexion
-    Conexion --&gt;|"JDBC"| SQLite</code></pre>
+    DAO --&gt;|"JDBC"| SQLite</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <ol>
-<li>Revisar dependencias Maven.</li>
-<li>Agregar SQLite JDBC si hace falta.</li>
-<li>Crear paquete <code>persistencia</code>.</li>
-<li>Crear archivo <code>comarket.db</code>.</li>
-<li>Crear una tabla inicial.</li>
-<li>Implementar <code>ConexionBD</code>.</li>
-<li>Probar conexión con una consulta simple.</li>
-<li>Identificar <code>ProductoService</code> como contrato qué seguira usando el controlador.</li>
-<li>Preparar <code>ProductoServiceBD</code> cómo implementación persistente.</li>
-<li>Preparar <code>ProductoDAO</code> cómo componente de persistencia.</li>
-<li>Verificar qué <code>Producto</code> no cambia por usar base de datos.</li>
+<li>Crear <code>ProductoDAO</code>.</li>
+<li>Implementar <code>registrar</code> con <code>insert</code>.</li>
+<li>Implementar <code>listar</code> con <code>select</code>.</li>
+<li>Implementar <code>actualizar</code> con <code>update</code>.</li>
+<li>Implementar <code>eliminar</code> con <code>delete</code>.</li>
+<li>Mapear cada fila de la base de datos a un objeto <code>Producto</code>.</li>
+<li>Crear o adaptar <code>ProductoServiceBD</code>.</li>
+<li>Hacer qué <code>ProductoServiceBD</code> use <code>ProductoDAO</code>.</li>
+<li>Conectar botones de la GUI con <code>ProductoService</code>, no directamente con SQL.</li>
+<li>Recargar la tabla desde la base de datos después de cada operación.</li>
+<li>Confirmar eliminación y manejar errores básicos.</li>
 </ol>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
-<p>Fuera del aula, cada estudiante consolida el aprendizaje preparando la estructura de persistencia y una evidencia individual.</p>
+<p>Fuera del aula, cada estudiante consolida el aprendizaje completando un CRUD persistente y preparando una evidencia individual.</p>
 <p>Tiempo: 2h fuera del aula.</p>
 <h3 id="41-plantilla-de-evidencia-individual">4.1 Plantilla de evidencia individual<a class="headerlink" href="#41-plantilla-de-evidencia-individual" title="Permanent link">&para;</a></h3>
 <p>Entrega un PDF con el siguiente nombre:</p>
-<div class="highlight"><pre><span></span><code>S09_Equipo##_ApellidoNombre.pdf
+<div class="highlight"><pre><span></span><code>S10_Equipo##_ApellidoNombre.pdf
 </code></pre></div>
 <p>Ejemplo:</p>
-<div class="highlight"><pre><span></span><code>S09_Equipo03_QuispeAna.pdf
+<div class="highlight"><pre><span></span><code>S10_Equipo03_QuispeAna.pdf
 </code></pre></div>
 <p>El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.</p>
 <h4 id="411-datos-del-estudiante">4.1.1 Datos del estudiante<a class="headerlink" href="#411-datos-del-estudiante" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Nombre:</li>
 <li>Equipo:</li>
-<li>Sesión: S09 - Arquitectura por capas y persistencia relacional</li>
+<li>Sesión: S10 - Patrón DAO y operaciones CRUD persistentes desde GUI</li>
 <li>Rol o aporte realizado:</li>
 <li>Link de GitHub:</li>
 </ul>
 <h4 id="412-trabajo-autonomo-realizado">4.1.2 Trabajo autónomo realizado<a class="headerlink" href="#412-trabajo-autonomo-realizado" title="Permanent link">&para;</a></h4>
 <p>Completa y evidencia estas tareas:</p>
 <ol>
-<li>Preparar una tabla adicional o mejorar la estructura de persistencia.</li>
-<li>Crear o verificar el archivo <code>comarket.db</code>.</li>
-<li>Implementar o ajustar la clase <code>ConexionBD</code>.</li>
-<li>Probar una conexión simple con SQLite.</li>
-<li>Preparar el paquete de persistencia.</li>
-<li>Explicar qué parte corresponde a servicio, entidades y persistencia.</li>
-<li>Explicar por qué las entidades no deben cambiar al pasar de memoria a SQLite.</li>
+<li>Completar el CRUD persistente para una entidad adicional o mejorar el módulo principal.</li>
+<li>Implementar operaciones <code>insert</code>, <code>select</code>, <code>update</code> y <code>delete</code>.</li>
+<li>Hacer que la implementación persistente use el DAO.</li>
+<li>Conectar la GUI con el contrato del servicio.</li>
+<li>Verificar que el controlador no tenga SQL.</li>
+<li>Verificar registros en SQLite.</li>
+<li>Explicar el flujo Vista-Controlador-Servicio-Entidades-DAO.</li>
 </ol>
 <h4 id="413-evidencia-tecnica">4.1.3 Evidencia técnica<a class="headerlink" href="#413-evidencia-tecnica" title="Permanent link">&para;</a></h4>
 <p>Incluye capturas o salidas con una breve explicación debajo de cada una:</p>
 <ul>
-<li>Estructura de paquetes.</li>
-<li>Script o captura de tabla.</li>
-<li>Prueba de conexión.</li>
-<li>Bosquejo del servicio y su implementación persistente.</li>
-<li>Explicación del rol de JDBC.</li>
-<li>Evidencia del archivo SQLite o tabla creada.</li>
+<li>Código de <code>ProductoService</code>, <code>ProductoServiceBD</code> y <code>ProductoDAO</code>.</li>
+<li>Capturas de GUI.</li>
+<li>Registros persistidos en SQLite.</li>
+<li>Explicación del flujo Vista-Controlador-Servicio-Entidades-DAO.</li>
+<li>Evidencia de que el controlador no contiene SQL directo.</li>
 </ul>
 <h4 id="414-error-o-hallazgo">4.1.4 Error o hallazgo<a class="headerlink" href="#414-error-o-hallazgo" title="Permanent link">&para;</a></h4>
 <p>Describe al menos un error, diferencia o hallazgo técnico:</p>
@@ -1753,59 +1749,58 @@ Las entidades no cambian por usar base de datos.
 </ul>
 <p>Ejemplos válidos:</p>
 <ul>
-<li>La ruta de la base de datos no era correcta.</li>
-<li>Faltaba el driver JDBC.</li>
-<li>La tabla no coincidía con la entidad.</li>
-<li>Se intentó poner SQL en el controlador.</li>
+<li>Un <code>insert</code> no guardaba por error de parámetros.</li>
+<li>El <code>select</code> no mapeaba bien la entidad.</li>
+<li>La tabla no refrescaba desde SQLite.</li>
+<li>El controlador estaba llamando directamente al DAO.</li>
 </ul>
 <h4 id="415-reflexion-tecnica-breve">4.1.5 Reflexión técnica breve<a class="headerlink" href="#415-reflexion-tecnica-breve" title="Permanent link">&para;</a></h4>
 <p>Responde en 5 a 8 líneas:</p>
-<div class="highlight"><pre><span></span><code>Por qué una aplicación necesita una capa de persistencia cuando deja de usar ArrayList?
+<div class="highlight"><pre><span></span><code>Por qué el DAO debe concentrar SQL y no el controlador?
 </code></pre></div>
 <h3 id="42-criterios-minimos-de-aceptacion">4.2 Criterios mínimos de aceptación<a class="headerlink" href="#42-criterios-minimos-de-aceptacion" title="Permanent link">&para;</a></h3>
 <p>La evidencia individual se considera completa si:</p>
 <ul>
-<li>El archivo respeta el nombre <code>S09_Equipo##_ApellidoNombre.pdf</code>.</li>
+<li>El archivo respeta el nombre <code>S10_Equipo##_ApellidoNombre.pdf</code>.</li>
 <li>Incluye evidencias técnicas legibles.</li>
-<li>Muestra estructura por capas.</li>
-<li>Muestra SQLite disponible.</li>
-<li>Muestra prueba de conexión con JDBC.</li>
-<li>Explica el rol de persistencia y DAO.</li>
+<li>Muestra DAO funcional.</li>
+<li>Muestra CRUD persistente desde GUI.</li>
+<li>Muestra registros guardados en SQLite.</li>
+<li>Explica el flujo por capas.</li>
 <li>No contiene solo pantallazos: cada evidencia tiene una descripción breve.</li>
 </ul>
 <h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
 <p>Esta sección conecta el resultado de aprendizaje de la sesión con el producto que debe evidenciar cada estudiante.</p>
 <h3 id="51-resultados-esperados">5.1 Resultados esperados<a class="headerlink" href="#51-resultados-esperados" title="Permanent link">&para;</a></h3>
-<p>Al finalizar la sesión, el estudiante debe demostrar que:</p>
 <ul>
-<li>El proyecto mantiene una estructura por capas.</li>
-<li>SQLite está disponible.</li>
-<li>JDBC conecta con la base de datos.</li>
-<li>El controlador conserva como entrada el contrato del servicio.</li>
-<li>La aplicación queda preparada para DAO.</li>
+<li>El DAO concentra las consultas SQL.</li>
+<li>El controlador no contiene SQL directo.</li>
+<li>El servicio coordina operaciones, validaciones y DAO.</li>
+<li>Las entidades se mantienen como clases del dominio.</li>
+<li>La GUI registra, lista, actualiza y elimina datos persistentes.</li>
 </ul>
 <h3 id="52-evidencia-del-producto-de-sesion">5.2 Evidencia del producto de sesión<a class="headerlink" href="#52-evidencia-del-producto-de-sesion" title="Permanent link">&para;</a></h3>
 <p>Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.</p>
 <p>Nombre del archivo:</p>
-<div class="highlight"><pre><span></span><code>S09_Equipo##_ApellidoNombre.pdf
+<div class="highlight"><pre><span></span><code>S10_Equipo##_ApellidoNombre.pdf
 </code></pre></div>
 <p>La evidencia debe demostrar:</p>
 <ul>
 <li>Producto de sesión construido.</li>
 <li>Aporte individual verificable.</li>
-<li>Estructura de persistencia preparada.</li>
+<li>CRUD persistente probado.</li>
 <li>Reflexión técnica breve.</li>
 </ul>
 <p>La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.</p>
 <h3 id="53-preguntas-de-defensa-y-reflexion">5.3 Preguntas de defensa y reflexión<a class="headerlink" href="#53-preguntas-de-defensa-y-reflexion" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Por qué <code>ArrayList</code> ya no es suficiente?</li>
-<li>Qué función cumple JDBC?</li>
-<li>Dónde vive la base de datos?</li>
-<li>Qué capa debe conversar con SQL?</li>
-<li>Por qué no cambiamos las entidades al pasar de memoria a SQLite?</li>
-<li>Qué evidencia demuestra que la conexión funciona?</li>
+<li>Qué responsabilidad tiene el DAO?</li>
+<li>Qué responsabilidad tiene la interface del servicio?</li>
+<li>Qué responsabilidad tiene la implementación persistente?</li>
+<li>Por qué no poner SQL en el controlador?</li>
+<li>Cómo conviertes un registro en objeto?</li>
+<li>Cómo verificas que el dato quedó guardado?</li>
 </ol>
 <h3 id="54-rubrica-de-evaluacion">5.4 Rúbrica de evaluación<a class="headerlink" href="#54-rubrica-de-evaluacion" title="Permanent link">&para;</a></h3>
 <table>
@@ -1822,39 +1817,39 @@ Las entidades no cambian por usar base de datos.
 </thead>
 <tbody>
 <tr>
-<td>1. Arquitectura por capas</td>
+<td>1. DAO</td>
 <td style="text-align: right;">2</td>
-<td>Paquetes y responsabilidades claros.</td>
-<td>Estructura suficiente.</td>
-<td>Estructura parcial.</td>
+<td>DAO concentra SQL y mapea entidades correctamente.</td>
+<td>DAO funcional.</td>
+<td>DAO incompleto.</td>
+<td>No evidencia DAO.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>2. Servicio persistente</td>
+<td style="text-align: right;">2</td>
+<td>Implementación persistente coordina DAO y contrato.</td>
+<td>Servicio funcional.</td>
+<td>Servicio parcial.</td>
+<td>No usa servicio persistente.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>3. CRUD persistente</td>
+<td style="text-align: right;">2</td>
+<td>CRUD completo desde GUI y verificado en SQLite.</td>
+<td>CRUD principal funcional.</td>
+<td>CRUD incompleto.</td>
+<td>No persiste datos.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>4. Separación de capas</td>
+<td style="text-align: right;">2</td>
+<td>Controlador, servicio, DAO y entidades tienen roles claros.</td>
+<td>Separación suficiente.</td>
+<td>Mezcla responsabilidades.</td>
 <td>No evidencia capas.</td>
-<td style="text-align: right;"></td>
-</tr>
-<tr>
-<td>2. SQLite</td>
-<td style="text-align: right;">2</td>
-<td>Base de datos y tabla disponibles y evidenciadas.</td>
-<td>SQLite disponible.</td>
-<td>Configuración incompleta.</td>
-<td>No evidencia base de datos.</td>
-<td style="text-align: right;"></td>
-</tr>
-<tr>
-<td>3. JDBC y conexión</td>
-<td style="text-align: right;">2</td>
-<td>Conexión probada y explicada.</td>
-<td>Conexión funcional.</td>
-<td>Conexión parcial.</td>
-<td>No conecta.</td>
-<td style="text-align: right;"></td>
-</tr>
-<tr>
-<td>4. Preparación para DAO</td>
-<td style="text-align: right;">2</td>
-<td>Servicio, entidad y persistencia quedan listos para DAO.</td>
-<td>Preparación suficiente.</td>
-<td>Preparación confusa.</td>
-<td>No prepara DAO.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
