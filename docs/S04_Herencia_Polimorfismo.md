@@ -14,7 +14,7 @@ El estudiante crea una clase base abstracta con subclases mediante `extends`, de
 
 ### 1.3 Producto de sesión
 
-Modelo con una jerarquía simple de productos, más un contrato `ProductoService` con `ProductoServiceMemoria` y `ProductoServiceBD` cómo preparación para memoria y persistencia.
+Modelo con `Persona`, `Cliente` y `Empleado` para herencia, más un contrato `ProductoService` con `ProductoServiceMemoria` y `ProductoServiceBD` cómo preparación para memoria y persistencia.
 
 ### 1.4 Motivación de la sesión
 
@@ -40,9 +40,9 @@ Tiempo: 25 min.
 
 | Concepto | Idea central | Ejemplo |
 |---|---|---|
-| Herencia | Una clase especializada hereda de una clase base. | `ProductoPerecible extends Producto` |
-| Clase abstracta | Clase base qué organiza atributos o comportamiento comun. | `abstract class Producto` |
-| Sobrescritura | Una subclase redefine un comportamiento heredado. | `mostrarResumen()` |
+| Herencia | Una clase especializada hereda de una clase base. | `Cliente extends Persona` |
+| Clase abstracta | Clase base qué organiza atributos o comportamiento comun. | `abstract class Persona` |
+| Sobrescritura | Una subclase redefine un comportamiento heredado. | `mostrarPerfil()` |
 | Interface | Contrato de operaciones, sin decidir la implementación concreta. | `ProductoService` |
 | Implements | Una clase cumple el contrato de una interface. | `ProductoServiceMemoria implements ProductoService` |
 | Polimorfismo | Una misma referencia puede apuntar a implementaciones distintas. | `ProductoService service = new ProductoServiceMemoria()` |
@@ -64,20 +64,19 @@ classDiagram
         main(String[] args)
     }
 
-    class Producto {
+    class Persona {
         <<abstract>>
-        -codigo
         -nombre
-        -precio
-        mostrarResumen()
+        -documento
+        mostrarPerfil()
     }
-    class ProductoPerecible {
-        -fechaVencimiento
-        mostrarResumen()
+    class Cliente {
+        -telefono
+        mostrarPerfil()
     }
-    class ProductoDigital {
-        -urlDescarga
-        mostrarResumen()
+    class Empleado {
+        -cargo
+        mostrarPerfil()
     }
 
     class ProductoService {
@@ -98,10 +97,10 @@ classDiagram
         buscarPorCodigo(codigo)
     }
 
-    Main ..> Producto : prueba
+    Main ..> Persona : prueba
     Main ..> ProductoService : prueba
-    Producto <|-- ProductoPerecible : extends
-    Producto <|-- ProductoDigital : extends
+    Persona <|-- Cliente : extends
+    Persona <|-- Empleado : extends
     ProductoService <|.. ProductoServiceMemoria : implements
     ProductoService <|.. ProductoServiceBD : implements
     ProductoServiceMemoria ..> Producto : usa
@@ -119,10 +118,10 @@ Tiempo: 2h.
 Usa una relación natural del dominio:
 
 ```text
-ProductoPerecible es un Producto.
-ProductoDigital es un Producto.
-DetalleVenta no es un Producto.
-Venta no es un Producto.
+Cliente es una Persona.
+Empleado es una Persona.
+Producto no es una Persona.
+Venta no es una Persona.
 ```
 
 La herencia se usa solo cuándo la frase "es un/a" tiene sentido real.
@@ -130,63 +129,57 @@ La herencia se usa solo cuándo la frase "es un/a" tiene sentido real.
 ### 3.2 Crear la clase base abstracta
 
 ```java
-public abstract class Producto {
-    private String codigo;
+public abstract class Persona {
     private String nombre;
-    private double precio;
+    private String documento;
 
-    public Producto(String codigo, String nombre, double precio) {
-        this.codigo = codigo;
+    public Persona(String nombre, String documento) {
         this.nombre = nombre;
-        this.precio = precio;
-    }
-
-    public String getCodigo() {
-        return codigo;
+        this.documento = documento;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public double getPrecio() {
-        return precio;
+    public String getDocumento() {
+        return documento;
     }
 
-    public abstract void mostrarResumen();
+    public abstract void mostrarPerfil();
 }
 ```
 
 ### 3.3 Crear subclases con extends
 
 ```java
-public class ProductoPerecible extends Producto {
-    private String fechaVencimiento;
+public class Cliente extends Persona {
+    private String telefono;
 
-    public ProductoPerecible(String codigo, String nombre, double precio, String fechaVencimiento) {
-        super(codigo, nombre, precio);
-        this.fechaVencimiento = fechaVencimiento;
+    public Cliente(String nombre, String documento, String telefono) {
+        super(nombre, documento);
+        this.telefono = telefono;
     }
 
     @Override
-    public void mostrarResumen() {
-        System.out.println(getCodigo() + " - " + getNombre() + " - vence: " + fechaVencimiento);
+    public void mostrarPerfil() {
+        System.out.println("Cliente: " + getNombre() + " - " + telefono);
     }
 }
 ```
 
 ```java
-public class ProductoDigital extends Producto {
-    private String urlDescarga;
+public class Empleado extends Persona {
+    private String cargo;
 
-    public ProductoDigital(String codigo, String nombre, double precio, String urlDescarga) {
-        super(codigo, nombre, precio);
-        this.urlDescarga = urlDescarga;
+    public Empleado(String nombre, String documento, String cargo) {
+        super(nombre, documento);
+        this.cargo = cargo;
     }
 
     @Override
-    public void mostrarResumen() {
-        System.out.println(getCodigo() + " - " + getNombre() + " - descarga: " + urlDescarga);
+    public void mostrarPerfil() {
+        System.out.println("Empleado: " + getNombre() + " - " + cargo);
     }
 }
 ```
@@ -196,11 +189,11 @@ public class ProductoDigital extends Producto {
 ```java
 public class Main {
     public static void main(String[] args) {
-        Producto leche = new ProductoPerecible("P001", "Leche", 4.50, "2026-08-10");
-        Producto curso = new ProductoDigital("P002", "Curso Java", 40.00, "https://descarga.local/java");
+        Persona cliente = new Cliente("Ana Torres", "71234567", "999888777");
+        Persona empleado = new Empleado("Luis Ramos", "73456789", "Vendedor");
 
-        leche.mostrarResumen();
-        curso.mostrarResumen();
+        cliente.mostrarPerfil();
+        empleado.mostrarPerfil();
     }
 }
 ```
@@ -279,11 +272,11 @@ public class Main {
     public static void main(String[] args) {
         ProductoService service = new ProductoServiceMemoria();
 
-        service.registrar(new ProductoPerecible("P001", "Leche", 4.50, "2026-08-10"));
-        service.registrar(new ProductoDigital("P002", "Curso Java", 40.00, "https://descarga.local/java"));
+        service.registrar(new Producto("P001", "Teclado", 80.0, 10));
+        service.registrar(new Producto("P002", "Mouse", 45.0, 15));
 
         for (Producto producto : service.listar()) {
-            producto.mostrarResumen();
+            producto.mostrarInformacion();
         }
     }
 }
@@ -418,7 +411,7 @@ La revisión se realiza con los criterios mínimos de aceptación de la sección
 
 ### 5.3 Preguntas de defensa y reflexión
 
-1. Por qué `ProductoPerecible` puede heredar de `Producto`?
+1. Por qué `Cliente` puede heredar de `Persona`?
 2. Por qué `ProductoService` debe ser interface?
 3. Qué clase implementa el contrato en memoria?
 4. Qué ventaja da declarar `ProductoService service = new ProductoServiceMemoria()`?
