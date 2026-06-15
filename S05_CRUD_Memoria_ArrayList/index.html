@@ -1854,23 +1854,19 @@ Maven/GraalVM son parte de la entrega, no del flujo CRUD.
         eliminar(codigo)
     }
     class ProductoServiceMemoria {
-        -productos
+        -productos: ArrayList
         registrar(producto)
         listar()
         buscarPorCodigo(codigo)
         actualizar(producto)
         eliminar(codigo)
     }
-    class ArrayListProductos {
-        ArrayList de productos
-    }
 
     Main ..&gt; ProductoService : usa contrato
     Main ..&gt; Producto : crea datos
     ProductoService &lt;|.. ProductoServiceMemoria : implements
     ProductoService ..&gt; Producto : usa
-    ProductoServiceMemoria ..&gt; Producto : usa
-    ProductoServiceMemoria o-- ArrayListProductos : administra</code></pre>
+    ProductoServiceMemoria ..&gt; Producto : usa</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <h3 id="31-definir-contrato-crud">3.1 Definir contrato CRUD<a class="headerlink" href="#31-definir-contrato-crud" title="Permanent link">&para;</a></h3>
@@ -2009,7 +2005,7 @@ pom.xml
 <li>Salida de registrar, listar, buscar, actualizar y eliminar.</li>
 <li>Evidencia de proyecto organizado con Maven.</li>
 <li>Evidencia de preparación o generación de ejecutable nativo si corresponde.</li>
-<li>Explicación del flujo <code>Main -&gt; Interface -&gt; Implementación en memoria -&gt; Entidades -&gt; ArrayList</code>.</li>
+<li>Explicación del flujo <code>Main -&gt; Interface -&gt; Implementación en memoria -&gt; Entidades</code>, indicando que el <code>ArrayList</code> es un atributo interno de la implementación.</li>
 </ul>
 <h4 id="414-error-o-hallazgo">4.1.4 Error o hallazgo<a class="headerlink" href="#414-error-o-hallazgo" title="Permanent link">&para;</a></h4>
 <p>Describe al menos un error, diferencia o hallazgo técnico:</p>

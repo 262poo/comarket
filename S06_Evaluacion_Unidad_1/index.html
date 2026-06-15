@@ -1773,19 +1773,15 @@
         eliminar(codigo)
     }
     class ProductoServiceMemoria {
-        -productos
+        -productos: ArrayList
         CRUD sobre ArrayList
-    }
-    class ArrayListProductos {
-        datos en memoria
     }
 
     Main ..&gt; ProductoService : usa contrato
     Main ..&gt; Producto : crea datos
     ProductoService &lt;|.. ProductoServiceMemoria : implements
     ProductoService ..&gt; Producto : usa
-    ProductoServiceMemoria ..&gt; Producto : usa
-    ProductoServiceMemoria o-- ArrayListProductos : administra</code></pre>
+    ProductoServiceMemoria ..&gt; Producto : usa</code></pre>
 <h3 id="23-criterios-minimos-de-revision">2.3 Criterios mínimos de revisión<a class="headerlink" href="#23-criterios-minimos-de-revision" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Entidades encapsuladas.</li>

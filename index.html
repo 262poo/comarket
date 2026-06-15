@@ -1308,8 +1308,8 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
 </tr>
 <tr>
 <td>S5</td>
-<td><strong>CRUD en memoria con ArrayList:</strong><br>Registro, listado, busqueda, actualizacion, eliminación, flujo Main-Interface-Implementacion en memoria-Entidades-ArrayList, introducción a Maven y compilación nativa con GraalVM para la entrega</td>
-<td>CRUD en memoria organizado con contrato, implementacion en memoria, entidades y ArrayList, preparado para ejecutable nativo</td>
+<td><strong>CRUD en memoria con ArrayList:</strong><br>Registro, listado, busqueda, actualizacion, eliminación, flujo Main-Interface-Implementacion en memoria-Entidades, <code>ArrayList</code> como atributo interno de la implementación, introducción a Maven y compilación nativa con GraalVM para la entrega</td>
+<td>CRUD en memoria organizado con contrato, implementacion en memoria y entidades, preparado para ejecutable nativo</td>
 </tr>
 <tr>
 <td>S6</td>
@@ -1337,7 +1337,7 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
 </tr>
 <tr>
 <td>S8</td>
-<td><strong>CRUD desde GUI en memoria:</strong><br>Flujo Vista-Controlador-Servicio-Entidades-ArrayList, reutilizacion del contrato de operaciones CRUD, carga de datos en tablas, registro, consulta, edición y eliminación</td>
+<td><strong>CRUD desde GUI en memoria:</strong><br>Flujo Vista-Controlador-Servicio-Entidades, <code>ArrayList</code> como atributo interno de la implementación en memoria, reutilizacion del contrato de operaciones CRUD, carga de datos en tablas, registro, consulta, edición y eliminación</td>
 <td>Flujo completo de operación desde formularios y tablas JavaFX usando memoria</td>
 </tr>
 <tr>
@@ -1404,7 +1404,7 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
     subgraph ServiceU1["Servicio"]
         direction TB
         InterfaceU1["Interface&lt;br/&gt;contrato de operaciones CRUD"]
-        ImplementacionU1["Implementacion en memoria"]
+        ImplementacionU1["Implementacion en memoria&lt;br/&gt;-productos: ArrayList&amp;lt;Producto&amp;gt;"]
         ValidacionesU1["Validaciones/Excepciones básicas"]
     end
 
@@ -1414,16 +1414,13 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
         SubclaseU1["Subclase"]
     end
 
-    MemoriaU1[("ArrayList / memoria")]
-
     Main --&gt; InterfaceU1
     InterfaceU1 ~~~ ImplementacionU1
     ImplementacionU1 -. implements .-&gt; InterfaceU1
     InterfaceU1 -.-&gt; EntitiesU1
     ImplementacionU1 -.-&gt; EntitiesU1
     ClaseBaseU1 ~~~ SubclaseU1
-    SubclaseU1 -- extends --&gt; ClaseBaseU1
-    ImplementacionU1 --&gt; MemoriaU1</code></pre>
+    SubclaseU1 -- extends --&gt; ClaseBaseU1</code></pre>
 <p>Nota métodológica: en U1 la separacion de responsabilidades se trabaja de forma progresiva. En S1, responsabilidad significa reconocer caracteristicas y acciones de una clase; no se exige SOLID todavía. Desde S2 se controla mejor el estado con encapsulamiento y se introduce la S de SOLID separando <code>Producto</code> de <code>ProductoService</code>. Más adelante, la interface declara el contrato de operaciones CRUD y la implementacion en memoria ejecuta las operaciones sobre <code>ArrayList</code>. No se introducen interfaces en entidades porque pueden complicar el modelo sin aportar claridad en está etapa.</p>
 <p>Stack tecnologico U1:</p>
 <ol>
@@ -1442,7 +1439,7 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
 <li>Desde S2 controla mejor el estado con encapsulamiento e introduce <code>ProductoService</code>.</li>
 <li>Desde S3 relacióna varias entidades y usa servicios iniciales para administrar colecciones.</li>
 <li>En S4 refuerza el modelo con herencia cuándo el dominio lo justifica y aplica polimorfismo con interface e <code>implements</code>.</li>
-<li>En S5 integra lo anterior en el flujo Main-Interface-Implementacion en memoria-Entidades-ArrayList y prepara la compilación nativa con Maven/GraalVM.</li>
+<li>En S5 integra lo anterior en el flujo Main-Interface-Implementacion en memoria-Entidades, con <code>ArrayList</code> como atributo interno de la implementación, y prepara la compilación nativa con Maven/GraalVM.</li>
 <li>En S6 presenta un producto de consola ejecutable, con modelo de dominio y CRUD en memoria.</li>
 </ol>
 <h2 id="arquitectura-comarket-poo-u2-y-u3">Arquitectura CoMarket POO: U2 y U3<a class="headerlink" href="#arquitectura-comarket-poo-u2-y-u3" title="Permanent link">&para;</a></h2>

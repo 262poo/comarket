@@ -1643,7 +1643,7 @@
 <p>Tiempo: 25 min.</p>
 <h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Flujo Vista-Controlador-Servicio-Entidades-ArrayList.</li>
+<li>Flujo Vista-Controlador-Servicio-Entidades, con <code>ArrayList</code> como atributo interno de la implementación en memoria.</li>
 <li>Interface de servicio como contrato de operaciones CRUD.</li>
 <li>Implementación en memoria del contrato.</li>
 <li>Lectura de datos desde formularios.</li>
@@ -1677,7 +1677,7 @@ La implementación en memoria administra el ArrayList.
         eliminar(codigo)
     }
     class ProductoServiceMemoria {
-        -productos
+        -productos: ArrayList
         CRUD sobre ArrayList
     }
     class Producto {
@@ -1686,17 +1686,13 @@ La implementación en memoria administra el ArrayList.
         -precio
         -stock
     }
-    class ArrayListProductos {
-        datos en memoria
-    }
 
     VistaFXML ..&gt; ProductoController : eventos
     ProductoController ..&gt; ProductoService : usa contrato
     ProductoController ..&gt; Producto : crea/lee
     ProductoService &lt;|.. ProductoServiceMemoria : implements
     ProductoService ..&gt; Producto : usa
-    ProductoServiceMemoria ..&gt; Producto : usa
-    ProductoServiceMemoria o-- ArrayListProductos : administra</code></pre>
+    ProductoServiceMemoria ..&gt; Producto : usa</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <ol>
