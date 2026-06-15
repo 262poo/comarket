@@ -1758,33 +1758,34 @@
         main(String[] args)
         menu()
     }
-    class Cliente {
+    class Producto {
+        -codigo
         -nombre
-        -documento
-        -telefono
+        -precio
+        -stock
     }
-    class ClienteService {
+    class ProductoService {
         &lt;&lt;interface&gt;&gt;
-        registrar(cliente)
+        registrar(producto)
         listar()
-        buscarPorDocumento(documento)
-        actualizar(cliente)
-        eliminar(documento)
+        buscarPorCodigo(codigo)
+        actualizar(producto)
+        eliminar(codigo)
     }
-    class ClienteServiceMemoria {
-        -clientes
+    class ProductoServiceMemoria {
+        -productos
         CRUD sobre ArrayList
     }
-    class ArrayListClientes {
+    class ArrayListProductos {
         datos en memoria
     }
 
-    Main ..&gt; ClienteService : usa contrato
-    Main ..&gt; Cliente : crea datos
-    ClienteService &lt;|.. ClienteServiceMemoria : implements
-    ClienteService ..&gt; Cliente : usa
-    ClienteServiceMemoria ..&gt; Cliente : usa
-    ClienteServiceMemoria o-- ArrayListClientes : administra</code></pre>
+    Main ..&gt; ProductoService : usa contrato
+    Main ..&gt; Producto : crea datos
+    ProductoService &lt;|.. ProductoServiceMemoria : implements
+    ProductoService ..&gt; Producto : usa
+    ProductoServiceMemoria ..&gt; Producto : usa
+    ProductoServiceMemoria o-- ArrayListProductos : administra</code></pre>
 <h3 id="23-criterios-minimos-de-revision">2.3 Criterios mínimos de revisión<a class="headerlink" href="#23-criterios-minimos-de-revision" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Entidades encapsuladas.</li>

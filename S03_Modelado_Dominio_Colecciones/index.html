@@ -1818,7 +1818,7 @@
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
 <p>Modelo inicial con varias entidades relaciónadas, colecciones administradas desde un servicio inicial y pruebas desde <code>Main</code>.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
-<p>En un sistema real no existe una sola clase. Una venta se relacióna con un cliente, un proveedor puede estar asociado a productos, y una venta puede estar compuestá por detalles. La Programación Orientada a Objetos ayuda a convertir esas relaciones del problema en clases conectadas.</p>
+<p>En un sistema real no existe una sola clase. Una venta registra el nombre del cliente, un proveedor puede estar asociado a productos, y una venta puede estar compuestá por detalles. La Programación Orientada a Objetos ayuda a convertir esas relaciones del problema en clases conectadas.</p>
 <p>Pregunta guía:</p>
 <div class="highlight"><pre><span></span><code>Cómo pasamos de clases aisladas a un modelo de dominio con objetos relacionados?
 </code></pre></div>
@@ -1861,12 +1861,12 @@
 <tr>
 <td>Entidad</td>
 <td>Clase qué representa un elemento importante del dominio.</td>
-<td><code>Cliente</code>, <code>Proveedor</code>, <code>Producto</code>, <code>Venta</code></td>
+<td><code>Proveedor</code>, <code>Producto</code>, <code>Venta</code>, <code>DetalleVenta</code></td>
 </tr>
 <tr>
 <td>Asociación</td>
 <td>Un objeto conoce o usa a otro objeto.</td>
-<td><code>Venta</code> tiene un <code>Cliente</code></td>
+<td><code>DetalleVenta</code> usa un <code>Producto</code></td>
 </tr>
 <tr>
 <td>Agregación</td>
@@ -1911,10 +1911,6 @@ Main solo crea escenarios de prueba.
         registrar(venta)
         listar()
     }
-    class Cliente {
-        -nombre
-        -dni
-    }
     class Proveedor {
         -ruc
         -razonSocial
@@ -1944,17 +1940,16 @@ Main solo crea escenarios de prueba.
     VentaService o-- "0..*" Venta : ArrayList
 
     Proveedor "1" o-- "0..*" Producto : agrega
-    Venta "1" --&gt; "1" Cliente : asociación
     Venta "1" *-- "1..*" DetalleVenta : composición
     DetalleVenta "*" --&gt; "1" Producto : asociación</code></pre>
 <p>Convencion del diagrama: <code>--&gt;</code> representa asociación, <code>o--</code> representa agregación, <code>*--</code> representa composición y <code>..&gt;</code> representa dependencia de prueba o uso temporal. En esta sesión no se implementa todavía la arquitectura completa de servicio; solo se prepara el dominio para qué S5 pueda convertir las operaciones en un CRUD en memoria.</p>
 <h3 id="23-tipos-de-relacion">2.3 Tipos de relación<a class="headerlink" href="#23-tipos-de-relacion" title="Permanent link">&para;</a></h3>
 <p>Asociación:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Venta</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cliente</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>La venta se relacióna con un cliente. El cliente puede existir aunque no tenga ventas registradas.</p>
+<p>La venta registra el nombre o referencia textual del comprador. En este curso se evita abrir otra entidad en este punto para mantener el foco en <code>Producto</code>, <code>DetalleVenta</code> y <code>Venta</code>.</p>
 <p>Agregación:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Proveedor</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Producto</span><span class="o">&gt;</span><span class="w"> </span><span class="n">productos</span><span class="p">;</span>
@@ -1982,7 +1977,7 @@ Main solo crea escenarios de prueba.
 </tr>
 <tr>
 <td>Usar solo una clase para todo el dominio.</td>
-<td>Separar <code>Cliente</code>, <code>Producto</code>, <code>Venta</code>, <code>DetalleVenta</code> y otros conceptos.</td>
+<td>Separar <code>Producto</code>, <code>Venta</code>, <code>DetalleVenta</code>, <code>Proveedor</code> y otros conceptos necesarios.</td>
 </tr>
 <tr>
 <td>Confundir una lista con una entidad.</td>
@@ -2002,15 +1997,14 @@ Main solo crea escenarios de prueba.
 <p>Tiempo: 2h.</p>
 <h3 id="31-identificar-entidades-del-dominio">3.1 Identificar entidades del dominio<a class="headerlink" href="#31-identificar-entidades-del-dominio" title="Permanent link">&para;</a></h3>
 <p>Parte de un caso simple de comercio:</p>
-<div class="highlight"><pre><span></span><code>Un sistema registra clientes, proveedores, productos y ventas.
-Cada venta pertenece a un cliente.
+<div class="highlight"><pre><span></span><code>Un sistema registra proveedores, productos y ventas.
+Cada venta registra el nombre del cliente.
 Cada venta tiene uno o más detalles.
 Cada detalle indica un producto, cantidad y precio.
 Un proveedor puede estar asociado a varios productos.
 </code></pre></div>
 <p>Entidades iniciales:</p>
 <ul>
-<li><code>Cliente</code></li>
 <li><code>Proveedor</code></li>
 <li><code>Producto</code></li>
 <li><code>Venta</code></li>
@@ -2085,10 +2079,10 @@ Un proveedor puede estar asociado a varios productos.
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
 
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Venta</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cliente</span><span class="p">;</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">DetalleVenta</span><span class="o">&gt;</span><span class="w"> </span><span class="n">detalles</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Venta</span><span class="p">(</span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Venta</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">cliente</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cliente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cliente</span><span class="p">;</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">detalles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
@@ -2131,13 +2125,6 @@ Un proveedor puede estar asociado a varios productos.
 <h3 id="35-probar-desde-main">3.5 Probar desde Main<a class="headerlink" href="#35-probar-desde-main" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cliente</span><span class="p">(</span>
-<span class="w">                </span><span class="s">&quot;Ana Torres&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="s">&quot;71234567&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="s">&quot;999888777&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="n">java</span><span class="p">.</span><span class="na">time</span><span class="p">.</span><span class="na">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
-<span class="w">        </span><span class="p">);</span>
-
 <span class="w">        </span><span class="n">Producto</span><span class="w"> </span><span class="n">teclado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Producto</span><span class="p">(</span><span class="s">&quot;P001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Teclado&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">80.0</span><span class="p">);</span>
 <span class="w">        </span><span class="n">Producto</span><span class="w"> </span><span class="n">mouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Producto</span><span class="p">(</span><span class="s">&quot;P002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mouse&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">45.0</span><span class="p">);</span>
 
@@ -2145,7 +2132,7 @@ Un proveedor puede estar asociado a varios productos.
 <span class="w">        </span><span class="n">proveedor</span><span class="p">.</span><span class="na">agregarProducto</span><span class="p">(</span><span class="n">teclado</span><span class="p">);</span>
 <span class="w">        </span><span class="n">proveedor</span><span class="p">.</span><span class="na">agregarProducto</span><span class="p">(</span><span class="n">mouse</span><span class="p">);</span>
 
-<span class="w">        </span><span class="n">Venta</span><span class="w"> </span><span class="n">venta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Venta</span><span class="p">(</span><span class="n">cliente</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Venta</span><span class="w"> </span><span class="n">venta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Venta</span><span class="p">(</span><span class="s">&quot;Ana Torres&quot;</span><span class="p">);</span>
 <span class="w">        </span><span class="n">venta</span><span class="p">.</span><span class="na">agregarDetalle</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DetalleVenta</span><span class="p">(</span><span class="n">teclado</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
 <span class="w">        </span><span class="n">venta</span><span class="p">.</span><span class="na">agregarDetalle</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DetalleVenta</span><span class="p">(</span><span class="n">mouse</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">));</span>
 
@@ -2156,7 +2143,7 @@ Un proveedor puede estar asociado a varios productos.
 <h3 id="36-preguntas-durante-la-practica">3.6 Preguntas durante la practica<a class="headerlink" href="#36-preguntas-durante-la-practica" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Qué clases son entidades del dominio?</li>
-<li>Qué relación existe entre <code>Venta</code> y <code>Cliente</code>?</li>
+<li>Qué relación existe entre <code>Venta</code> y <code>DetalleVenta</code>?</li>
 <li>Por qué <code>DetalleVenta</code> depende de <code>Venta</code>?</li>
 <li>Qué clase administra una colección?</li>
 <li>Qué lógica ya no deberia quedarse en <code>Main</code>?</li>
@@ -2196,7 +2183,7 @@ Un proveedor puede estar asociado a varios productos.
 <li><code>Categoria</code> relacionada con varios <code>Producto</code>.</li>
 <li><code>Empleado</code> relacionado con varias <code>Venta</code>.</li>
 <li><code>Proveedor</code> relacionado con varios <code>Producto</code>.</li>
-<li><code>Cliente</code> relacionado con varias <code>Venta</code>.</li>
+<li><code>Venta</code> relacionada con varios <code>DetalleVenta</code>.</li>
 </ul>
 <h4 id="413-evidencia-tecnica">4.1.3 Evidencia técnica<a class="headerlink" href="#413-evidencia-tecnica" title="Permanent link">&para;</a></h4>
 <p>Incluye capturas o salidas de consola con una breve explicación debajo de cada una:</p>

@@ -1662,25 +1662,25 @@ Si hay dos clases que hacen lo mismo, se decide una y se elimina la duplicidad.
     Controladores["Controladores"]
 
     subgraph Servicios["Servicios"]
-        Contrato["Interface&lt;br/&gt;contrato de operaciones CRUD"]
-        Implementación["Implementación persistente&lt;br/&gt;implements"]
+        Contrato["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
+        Implementacion["ProductoServiceBD&lt;br/&gt;implements"]
         Validaciones["Validaciones/Excepciones"]
     end
 
-    Entidades["Entidades"]
+    Entidades["Producto / Venta / DetalleVenta"]
 
     subgraph Persistencia["Persistencia"]
-        DAO["DAO"]
+        DAO["ProductoDAO / VentaDAO"]
         SQLite[("SQLite / comarket.db")]
     end
 
     Vista --&gt; Controladores
     Controladores --&gt; Contrato
-    Implementación -. implements .-&gt; Contrato
+    Implementacion -. implements .-&gt; Contrato
     Contrato -.-&gt; Entidades
-    Implementación -.-&gt; Entidades
-    Implementación -.-&gt; Validaciones
-    Implementación --&gt; DAO
+    Implementacion -.-&gt; Entidades
+    Implementacion -.-&gt; Validaciones
+    Implementacion --&gt; DAO
     DAO --&gt; Entidades
     DAO --&gt;|"JDBC"| SQLite</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>

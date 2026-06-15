@@ -1794,7 +1794,7 @@
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
 <p>El estudiante crea una clase base abstracta con subclases mediante <code>extends</code>, define una interface de servicio y crea dos implementaciones mediante <code>implements</code>.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>Modelo con <code>Persona</code>, <code>Cliente</code> y <code>Empleado</code>, más un contrato <code>ClienteService</code> con <code>ClienteServiceMemoria</code> y <code>ClienteServiceBD</code> cómo preparación para memoria y persistencia.</p>
+<p>Modelo con una jerarquía simple de productos, más un contrato <code>ProductoService</code> con <code>ProductoServiceMemoria</code> y <code>ProductoServiceBD</code> cómo preparación para memoria y persistencia.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
 <p>En POO no toda reutilización se resuelve con herencia. Una entidad puede especializarse porque existe una relación es-un, mientras que un servicio puede tener varias implementaciones porque se quiere conservar el mismo contrato aunque cambie la forma de ejecutar la operación.</p>
 <p>Pregunta guía:</p>
@@ -1821,32 +1821,32 @@
 <tr>
 <td>Herencia</td>
 <td>Una clase especializada hereda de una clase base.</td>
-<td><code>Cliente extends Persona</code></td>
+<td><code>ProductoPerecible extends Producto</code></td>
 </tr>
 <tr>
 <td>Clase abstracta</td>
 <td>Clase base qué organiza atributos o comportamiento comun.</td>
-<td><code>abstract class Persona</code></td>
+<td><code>abstract class Producto</code></td>
 </tr>
 <tr>
 <td>Sobrescritura</td>
 <td>Una subclase redefine un comportamiento heredado.</td>
-<td><code>mostrarPerfil()</code></td>
+<td><code>mostrarResumen()</code></td>
 </tr>
 <tr>
 <td>Interface</td>
 <td>Contrato de operaciones, sin decidir la implementación concreta.</td>
-<td><code>ClienteService</code></td>
+<td><code>ProductoService</code></td>
 </tr>
 <tr>
 <td>Implements</td>
 <td>Una clase cumple el contrato de una interface.</td>
-<td><code>ClienteServiceMemoria implements ClienteService</code></td>
+<td><code>ProductoServiceMemoria implements ProductoService</code></td>
 </tr>
 <tr>
 <td>Polimorfismo</td>
 <td>Una misma referencia puede apuntar a implementaciones distintas.</td>
-<td><code>ClienteService service = new ClienteServiceMemoria()</code></td>
+<td><code>ProductoService service = new ProductoServiceMemoria()</code></td>
 </tr>
 </tbody>
 </table>
@@ -1862,150 +1862,157 @@ Las entidades no implementan contratos de servicio.
         main(String[] args)
     }
 
-    class Persona {
+    class Producto {
         &lt;&lt;abstract&gt;&gt;
+        -codigo
         -nombre
-        -documento
-        mostrarPerfil()
+        -precio
+        mostrarResumen()
     }
-    class Cliente {
-        -telefono
-        mostrarPerfil()
+    class ProductoPerecible {
+        -fechaVencimiento
+        mostrarResumen()
     }
-    class Empleado {
-        -cargo
-        mostrarPerfil()
+    class ProductoDigital {
+        -urlDescarga
+        mostrarResumen()
     }
 
-    class ClienteService {
+    class ProductoService {
         &lt;&lt;interface&gt;&gt;
-        registrar(cliente)
+        registrar(producto)
         listar()
-        buscarPorDocumento(documento)
+        buscarPorCodigo(codigo)
     }
-    class ClienteServiceMemoria {
-        -clientes
-        registrar(cliente)
+    class ProductoServiceMemoria {
+        -productos
+        registrar(producto)
         listar()
-        buscarPorDocumento(documento)
+        buscarPorCodigo(codigo)
     }
-    class ClienteServiceBD {
-        registrar(cliente)
+    class ProductoServiceBD {
+        registrar(producto)
         listar()
-        buscarPorDocumento(documento)
+        buscarPorCodigo(codigo)
     }
 
-    Main ..&gt; Persona : prueba
-    Main ..&gt; ClienteService : prueba
-    Persona &lt;|-- Cliente : extends
-    Persona &lt;|-- Empleado : extends
-    ClienteService &lt;|.. ClienteServiceMemoria : implements
-    ClienteService &lt;|.. ClienteServiceBD : implements
-    ClienteServiceMemoria ..&gt; Cliente : usa
-    ClienteServiceBD ..&gt; Cliente : usa</code></pre>
+    Main ..&gt; Producto : prueba
+    Main ..&gt; ProductoService : prueba
+    Producto &lt;|-- ProductoPerecible : extends
+    Producto &lt;|-- ProductoDigital : extends
+    ProductoService &lt;|.. ProductoServiceMemoria : implements
+    ProductoService &lt;|.. ProductoServiceBD : implements
+    ProductoServiceMemoria ..&gt; Producto : usa
+    ProductoServiceBD ..&gt; Producto : usa</code></pre>
 <p>Convencion del diagrama: flecha continua con triangulo representa <code>extends</code>; flecha punteada con triangulo representa <code>implements</code>; flecha punteada simple representa dependencia o uso.</p>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <h3 id="31-identificar-una-relacion-es-un">3.1 Identificar una relación es-un<a class="headerlink" href="#31-identificar-una-relacion-es-un" title="Permanent link">&para;</a></h3>
 <p>Usa una relación natural del dominio:</p>
-<div class="highlight"><pre><span></span><code>Cliente es una Persona.
-Empleado es una Persona.
-Producto no es una Persona.
-Venta no es una Persona.
+<div class="highlight"><pre><span></span><code>ProductoPerecible es un Producto.
+ProductoDigital es un Producto.
+DetalleVenta no es un Producto.
+Venta no es un Producto.
 </code></pre></div>
 <p>La herencia se usa solo cuándo la frase "es un/a" tiene sentido real.</p>
 <h3 id="32-crear-la-clase-base-abstracta">3.2 Crear la clase base abstracta<a class="headerlink" href="#32-crear-la-clase-base-abstracta" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Persona</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Producto</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">;</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">precio</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Persona</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Producto</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">precio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">codigo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">codigo</span><span class="p">;</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">documento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">documento</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">precio</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getCodigo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">codigo</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getNombre</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getDocumento</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">documento</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getPrecio</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">precio</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mostrarPerfil</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mostrarResumen</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="33-crear-subclases-con-extends">3.3 Crear subclases con extends<a class="headerlink" href="#33-crear-subclases-con-extends" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Cliente</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Persona</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">telefono</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProductoPerecible</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Producto</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fechaVencimiento</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Cliente</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">telefono</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">documento</span><span class="p">);</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">telefono</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">telefono</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ProductoPerecible</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">precio</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fechaVencimiento</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">codigo</span><span class="p">,</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">precio</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">fechaVencimiento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fechaVencimiento</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mostrarPerfil</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Cliente: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">getNombre</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">telefono</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mostrarResumen</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">getCodigo</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">getNombre</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - vence: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fechaVencimiento</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Empleado</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Persona</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cargo</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProductoDigital</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Producto</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">urlDescarga</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Empleado</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cargo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">documento</span><span class="p">);</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cargo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cargo</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ProductoDigital</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">precio</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">urlDescarga</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">codigo</span><span class="p">,</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">precio</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">urlDescarga</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">urlDescarga</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mostrarPerfil</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Empleado: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">getNombre</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cargo</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mostrarResumen</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">getCodigo</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">getNombre</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - descarga: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">urlDescarga</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="34-probar-herencia-desde-main">3.4 Probar herencia desde Main<a class="headerlink" href="#34-probar-herencia-desde-main" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Persona</span><span class="w"> </span><span class="n">cliente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cliente</span><span class="p">(</span><span class="s">&quot;Ana Torres&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;71234567&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;999888777&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">Persona</span><span class="w"> </span><span class="n">empleado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Empleado</span><span class="p">(</span><span class="s">&quot;Luis Ramos&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;73456789&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Vendedor&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Producto</span><span class="w"> </span><span class="n">leche</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProductoPerecible</span><span class="p">(</span><span class="s">&quot;P001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Leche&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">4.50</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2026-08-10&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Producto</span><span class="w"> </span><span class="n">curso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProductoDigital</span><span class="p">(</span><span class="s">&quot;P002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Curso Java&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">40.00</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://descarga.local/java&quot;</span><span class="p">);</span>
 
-<span class="w">        </span><span class="n">cliente</span><span class="p">.</span><span class="na">mostrarPerfil</span><span class="p">();</span>
-<span class="w">        </span><span class="n">empleado</span><span class="p">.</span><span class="na">mostrarPerfil</span><span class="p">();</span>
+<span class="w">        </span><span class="n">leche</span><span class="p">.</span><span class="na">mostrarResumen</span><span class="p">();</span>
+<span class="w">        </span><span class="n">curso</span><span class="p">.</span><span class="na">mostrarResumen</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="35-definir-el-contrato-del-servicio">3.5 Definir el contrato del servicio<a class="headerlink" href="#35-definir-el-contrato-del-servicio" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
 
-<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ClienteService</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">registrar</span><span class="p">(</span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">);</span>
-<span class="w">    </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Cliente</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">listar</span><span class="p">();</span>
-<span class="w">    </span><span class="n">Cliente</span><span class="w"> </span><span class="nf">buscarPorDocumento</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">);</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ProductoService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">registrar</span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Producto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">listar</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Producto</span><span class="w"> </span><span class="nf">buscarPorCodigo</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="36-crear-dos-implementaciones">3.6 Crear dos implementaciones<a class="headerlink" href="#36-crear-dos-implementaciones" title="Permanent link">&para;</a></h3>
 <p>Implementación en memoria:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
 
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ClienteServiceMemoria</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ClienteService</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Cliente</span><span class="o">&gt;</span><span class="w"> </span><span class="n">clientes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProductoServiceMemoria</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ProductoService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Producto</span><span class="o">&gt;</span><span class="w"> </span><span class="n">productos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">registrar</span><span class="p">(</span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">clientes</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">cliente</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">registrar</span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">productos</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">producto</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Cliente</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">listar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientes</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Producto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">listar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">productos</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Cliente</span><span class="w"> </span><span class="nf">buscarPorDocumento</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">clientes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cliente</span><span class="p">.</span><span class="na">getDocumento</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">documento</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">cliente</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Producto</span><span class="w"> </span><span class="nf">buscarPorCodigo</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">productos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">producto</span><span class="p">.</span><span class="na">getCodigo</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">codigo</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">producto</span><span class="p">;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
@@ -2015,19 +2022,19 @@ Venta no es una Persona.
 <p>Implementación con base de datos, aun cómo preparación conceptual:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
 
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ClienteServiceBD</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ClienteService</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProductoServiceBD</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ProductoService</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">registrar</span><span class="p">(</span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">registrar</span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Luego guardara usando DAO&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Cliente</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">listar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Producto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">listar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Cliente</span><span class="w"> </span><span class="nf">buscarPorDocumento</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Producto</span><span class="w"> </span><span class="nf">buscarPorCodigo</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -2035,13 +2042,13 @@ Venta no es una Persona.
 <h3 id="37-probar-polimorfismo-con-interface">3.7 Probar polimorfismo con interface<a class="headerlink" href="#37-probar-polimorfismo-con-interface" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">ClienteService</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClienteServiceMemoria</span><span class="p">();</span>
+<span class="w">        </span><span class="n">ProductoService</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProductoServiceMemoria</span><span class="p">();</span>
 
-<span class="w">        </span><span class="n">service</span><span class="p">.</span><span class="na">registrar</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Cliente</span><span class="p">(</span><span class="s">&quot;Ana Torres&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;71234567&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;999888777&quot;</span><span class="p">));</span>
-<span class="w">        </span><span class="n">service</span><span class="p">.</span><span class="na">registrar</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Cliente</span><span class="p">(</span><span class="s">&quot;Marco Ruiz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;72345678&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;988777666&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">service</span><span class="p">.</span><span class="na">registrar</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ProductoPerecible</span><span class="p">(</span><span class="s">&quot;P001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Leche&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">4.50</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2026-08-10&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">service</span><span class="p">.</span><span class="na">registrar</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ProductoDigital</span><span class="p">(</span><span class="s">&quot;P002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Curso Java&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">40.00</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://descarga.local/java&quot;</span><span class="p">));</span>
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">service</span><span class="p">.</span><span class="na">listar</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">cliente</span><span class="p">.</span><span class="na">mostrarPerfil</span><span class="p">();</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">service</span><span class="p">.</span><span class="na">listar</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">producto</span><span class="p">.</span><span class="na">mostrarResumen</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -2146,10 +2153,10 @@ Venta no es una Persona.
 <p>La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.</p>
 <h3 id="53-preguntas-de-defensa-y-reflexion">5.3 Preguntas de defensa y reflexión<a class="headerlink" href="#53-preguntas-de-defensa-y-reflexion" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Por qué <code>Cliente</code> puede heredar de <code>Persona</code>?</li>
-<li>Por qué <code>ClienteService</code> debe ser interface?</li>
+<li>Por qué <code>ProductoPerecible</code> puede heredar de <code>Producto</code>?</li>
+<li>Por qué <code>ProductoService</code> debe ser interface?</li>
 <li>Qué clase implementa el contrato en memoria?</li>
-<li>Qué ventaja da declarar <code>ClienteService service = new ClienteServiceMemoria()</code>?</li>
+<li>Qué ventaja da declarar <code>ProductoService service = new ProductoServiceMemoria()</code>?</li>
 <li>Por qué no conviene que una entidad implemente un contrato de servicio?</li>
 <li>Cuándo no conviene usar herencia?</li>
 </ol>

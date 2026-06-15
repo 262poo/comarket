@@ -1661,10 +1661,10 @@ El usuario debe recibir mensajes claros.
 <pre class="mermaid"><code>flowchart TB
     Vista["Vista JavaFX"]
     Controlador["Controlador"]
-    Contrato["ClienteService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
-    ServicioBD["ClienteServiceBD&lt;br/&gt;implements"]
+    Contrato["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
+    ServicioBD["ProductoServiceBD&lt;br/&gt;implements"]
     Validaciones["Validaciones/Excepciones"]
-    DAO["ClienteDAO"]
+    DAO["ProductoDAO"]
     SQLite[("SQLite")]
 
     Vista --&gt; Controlador

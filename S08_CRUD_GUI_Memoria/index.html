@@ -1663,48 +1663,49 @@ La implementación en memoria administra el ArrayList.
         formulario
         TableView
     }
-    class ClienteController {
+    class ProductoController {
         onRegistrar()
         onActualizar()
         onEliminar()
         cargarTabla()
     }
-    class ClienteService {
+    class ProductoService {
         &lt;&lt;interface&gt;&gt;
-        registrar(cliente)
+        registrar(producto)
         listar()
-        actualizar(cliente)
-        eliminar(documento)
+        actualizar(producto)
+        eliminar(codigo)
     }
-    class ClienteServiceMemoria {
-        -clientes
+    class ProductoServiceMemoria {
+        -productos
         CRUD sobre ArrayList
     }
-    class Cliente {
+    class Producto {
+        -codigo
         -nombre
-        -documento
-        -telefono
+        -precio
+        -stock
     }
-    class ArrayListClientes {
+    class ArrayListProductos {
         datos en memoria
     }
 
-    VistaFXML ..&gt; ClienteController : eventos
-    ClienteController ..&gt; ClienteService : usa contrato
-    ClienteController ..&gt; Cliente : crea/lee
-    ClienteService &lt;|.. ClienteServiceMemoria : implements
-    ClienteService ..&gt; Cliente : usa
-    ClienteServiceMemoria ..&gt; Cliente : usa
-    ClienteServiceMemoria o-- ArrayListClientes : administra</code></pre>
+    VistaFXML ..&gt; ProductoController : eventos
+    ProductoController ..&gt; ProductoService : usa contrato
+    ProductoController ..&gt; Producto : crea/lee
+    ProductoService &lt;|.. ProductoServiceMemoria : implements
+    ProductoService ..&gt; Producto : usa
+    ProductoServiceMemoria ..&gt; Producto : usa
+    ProductoServiceMemoria o-- ArrayListProductos : administra</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <ol>
-<li>Crear campos para datos de cliente.</li>
+<li>Crear campos para datos de producto.</li>
 <li>Crear columnas de <code>TableView</code>.</li>
 <li>Leer datos desde el formulario.</li>
-<li>Crear objeto <code>Cliente</code>.</li>
-<li>Delegar registro a <code>ClienteService</code>.</li>
-<li>Mantener el <code>ArrayList</code> dentro de <code>ClienteServiceMemoria</code>.</li>
+<li>Crear objeto <code>Producto</code>.</li>
+<li>Delegar registro a <code>ProductoService</code>.</li>
+<li>Mantener el <code>ArrayList</code> dentro de <code>ProductoServiceMemoria</code>.</li>
 <li>Mostrar datos en <code>TableView</code>.</li>
 <li>Cargar datos del elemento seleccionado al formulario.</li>
 <li>Actualizar el registro seleccionado.</li>
@@ -1745,7 +1746,7 @@ La implementación en memoria administra el ArrayList.
 <ul>
 <li>Capturas de registro, listado, edición y eliminación.</li>
 <li>Código del controlador.</li>
-<li>Código o referencia de <code>ClienteService</code> y <code>ClienteServiceMemoria</code>.</li>
+<li>Código o referencia de <code>ProductoService</code> y <code>ProductoServiceMemoria</code>.</li>
 <li>Explicación de cómo se actualiza la tabla sin duplicar el CRUD en el controlador.</li>
 <li>Evidencia de que el <code>ArrayList</code> queda dentro de la implementación en memoria.</li>
 </ul>
@@ -1773,7 +1774,7 @@ La implementación en memoria administra el ArrayList.
 <li>El archivo respeta el nombre <code>S08_Equipo##_ApellidoNombre.pdf</code>.</li>
 <li>Incluye evidencias técnicas legibles.</li>
 <li>Muestra registro, listado, edición y eliminación desde GUI.</li>
-<li>Usa <code>ClienteService</code> o contrato equivalente.</li>
+<li>Usa <code>ProductoService</code> o contrato equivalente.</li>
 <li>Mantiene <code>ArrayList</code> dentro de la implementación en memoria.</li>
 <li>Explica cómo se actualiza <code>TableView</code>.</li>
 <li>No contiene solo pantallazos: cada evidencia tiene una descripción breve.</li>

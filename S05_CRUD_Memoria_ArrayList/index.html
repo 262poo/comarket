@@ -1772,7 +1772,7 @@
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
 <p>El estudiante implementa registro, listado, búsqueda, actualización y eliminación en memoria, separando <code>Main</code>, contrato de servicio, implementación y entidades.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>CRUD en consola con <code>ClienteService</code>, <code>ClienteServiceMemoria</code>, entidades encapsuladas, búsqueda por documento y preparación de entrega con Maven/GraalVM.</p>
+<p>CRUD en consola con <code>ProductoService</code>, <code>ProductoServiceMemoria</code>, entidades encapsuladas, búsqueda por código y preparación de entrega con Maven/GraalVM.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
 <p>Después de modelar clases, relaciones, herencia e interfaces, el producto necesita operaciones reales. El objetivo es qué el menu de consola use un servicio, y qué el servicio sea quien administre la colección.</p>
 <p>Pregunta guía:</p>
@@ -1838,91 +1838,93 @@ Maven/GraalVM son parte de la entrega, no del flujo CRUD.
         main(String[] args)
         mostrarMenu()
     }
-    class Cliente {
+    class Producto {
+        -codigo
         -nombre
-        -documento
-        -telefono
-        mostrarPerfil()
+        -precio
+        -stock
+        mostrarInformacion()
     }
-    class ClienteService {
+    class ProductoService {
         &lt;&lt;interface&gt;&gt;
-        registrar(cliente)
+        registrar(producto)
         listar()
-        buscarPorDocumento(documento)
-        actualizar(cliente)
-        eliminar(documento)
+        buscarPorCodigo(codigo)
+        actualizar(producto)
+        eliminar(codigo)
     }
-    class ClienteServiceMemoria {
-        -clientes
-        registrar(cliente)
+    class ProductoServiceMemoria {
+        -productos
+        registrar(producto)
         listar()
-        buscarPorDocumento(documento)
-        actualizar(cliente)
-        eliminar(documento)
+        buscarPorCodigo(codigo)
+        actualizar(producto)
+        eliminar(codigo)
     }
-    class ArrayListClientes {
-        ArrayList de clientes
+    class ArrayListProductos {
+        ArrayList de productos
     }
 
-    Main ..&gt; ClienteService : usa contrato
-    Main ..&gt; Cliente : crea datos
-    ClienteService &lt;|.. ClienteServiceMemoria : implements
-    ClienteService ..&gt; Cliente : usa
-    ClienteServiceMemoria ..&gt; Cliente : usa
-    ClienteServiceMemoria o-- ArrayListClientes : administra</code></pre>
+    Main ..&gt; ProductoService : usa contrato
+    Main ..&gt; Producto : crea datos
+    ProductoService &lt;|.. ProductoServiceMemoria : implements
+    ProductoService ..&gt; Producto : usa
+    ProductoServiceMemoria ..&gt; Producto : usa
+    ProductoServiceMemoria o-- ArrayListProductos : administra</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <h3 id="31-definir-contrato-crud">3.1 Definir contrato CRUD<a class="headerlink" href="#31-definir-contrato-crud" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
 
-<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ClienteService</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">registrar</span><span class="p">(</span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">);</span>
-<span class="w">    </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Cliente</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">listar</span><span class="p">();</span>
-<span class="w">    </span><span class="n">Cliente</span><span class="w"> </span><span class="nf">buscarPorDocumento</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">);</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">actualizar</span><span class="p">(</span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">);</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">eliminar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">);</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ProductoService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">registrar</span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Producto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">listar</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Producto</span><span class="w"> </span><span class="nf">buscarPorCodigo</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">actualizar</span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">eliminar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="32-crear-implementacion-en-memoria">3.2 Crear implementación en memoria<a class="headerlink" href="#32-crear-implementacion-en-memoria" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
 
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ClienteServiceMemoria</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ClienteService</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Cliente</span><span class="o">&gt;</span><span class="w"> </span><span class="n">clientes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProductoServiceMemoria</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ProductoService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Producto</span><span class="o">&gt;</span><span class="w"> </span><span class="n">productos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">registrar</span><span class="p">(</span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">clientes</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">cliente</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">registrar</span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">productos</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">producto</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Cliente</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">listar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientes</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Producto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">listar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">productos</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Cliente</span><span class="w"> </span><span class="nf">buscarPorDocumento</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">clientes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cliente</span><span class="p">.</span><span class="na">getDocumento</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">documento</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">cliente</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Producto</span><span class="w"> </span><span class="nf">buscarPorCodigo</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">productos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">producto</span><span class="p">.</span><span class="na">getCodigo</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">codigo</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">producto</span><span class="p">;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">actualizar</span><span class="p">(</span><span class="n">Cliente</span><span class="w"> </span><span class="n">clienteActualizado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscarPorDocumento</span><span class="p">(</span><span class="n">clienteActualizado</span><span class="p">.</span><span class="na">getDocumento</span><span class="p">());</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cliente</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">cliente</span><span class="p">.</span><span class="na">setNombre</span><span class="p">(</span><span class="n">clienteActualizado</span><span class="p">.</span><span class="na">getNombre</span><span class="p">());</span>
-<span class="w">            </span><span class="n">cliente</span><span class="p">.</span><span class="na">setTelefono</span><span class="p">(</span><span class="n">clienteActualizado</span><span class="p">.</span><span class="na">getTelefono</span><span class="p">());</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">actualizar</span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">productoActualizado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscarPorCodigo</span><span class="p">(</span><span class="n">productoActualizado</span><span class="p">.</span><span class="na">getCodigo</span><span class="p">());</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">producto</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">producto</span><span class="p">.</span><span class="na">setNombre</span><span class="p">(</span><span class="n">productoActualizado</span><span class="p">.</span><span class="na">getNombre</span><span class="p">());</span>
+<span class="w">            </span><span class="n">producto</span><span class="p">.</span><span class="na">setPrecio</span><span class="p">(</span><span class="n">productoActualizado</span><span class="p">.</span><span class="na">getPrecio</span><span class="p">());</span>
+<span class="w">            </span><span class="n">producto</span><span class="p">.</span><span class="na">setStock</span><span class="p">(</span><span class="n">productoActualizado</span><span class="p">.</span><span class="na">getStock</span><span class="p">());</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eliminar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscarPorDocumento</span><span class="p">(</span><span class="n">documento</span><span class="p">);</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cliente</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">clientes</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">cliente</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eliminar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscarPorCodigo</span><span class="p">(</span><span class="n">codigo</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">producto</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">productos</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">producto</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -1930,30 +1932,30 @@ Maven/GraalVM son parte de la entrega, no del flujo CRUD.
 <h3 id="33-probar-operaciones-desde-main">3.3 Probar operaciones desde Main<a class="headerlink" href="#33-probar-operaciones-desde-main" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">ClienteService</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClienteServiceMemoria</span><span class="p">();</span>
+<span class="w">        </span><span class="n">ProductoService</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProductoServiceMemoria</span><span class="p">();</span>
 
-<span class="w">        </span><span class="n">service</span><span class="p">.</span><span class="na">registrar</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Cliente</span><span class="p">(</span><span class="s">&quot;Ana Torres&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;71234567&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;999888777&quot;</span><span class="p">));</span>
-<span class="w">        </span><span class="n">service</span><span class="p">.</span><span class="na">registrar</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Cliente</span><span class="p">(</span><span class="s">&quot;Marco Ruiz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;72345678&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;988777666&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">service</span><span class="p">.</span><span class="na">registrar</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Producto</span><span class="p">(</span><span class="s">&quot;P001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Teclado&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">80.0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">));</span>
+<span class="w">        </span><span class="n">service</span><span class="p">.</span><span class="na">registrar</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Producto</span><span class="p">(</span><span class="s">&quot;P002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mouse&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">45.0</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">));</span>
 
-<span class="w">        </span><span class="n">Cliente</span><span class="w"> </span><span class="n">encontrado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">service</span><span class="p">.</span><span class="na">buscarPorDocumento</span><span class="p">(</span><span class="s">&quot;71234567&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Producto</span><span class="w"> </span><span class="n">encontrado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">service</span><span class="p">.</span><span class="na">buscarPorCodigo</span><span class="p">(</span><span class="s">&quot;P001&quot;</span><span class="p">);</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">encontrado</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">encontrado</span><span class="p">.</span><span class="na">mostrarPerfil</span><span class="p">();</span>
+<span class="w">            </span><span class="n">encontrado</span><span class="p">.</span><span class="na">mostrarInformacion</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="n">service</span><span class="p">.</span><span class="na">eliminar</span><span class="p">(</span><span class="s">&quot;72345678&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Total clientes: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">service</span><span class="p">.</span><span class="na">listar</span><span class="p">().</span><span class="na">size</span><span class="p">());</span>
+<span class="w">        </span><span class="n">service</span><span class="p">.</span><span class="na">eliminar</span><span class="p">(</span><span class="s">&quot;P002&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Total productos: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">service</span><span class="p">.</span><span class="na">listar</span><span class="p">().</span><span class="na">size</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="34-agregar-menu-de-consola">3.4 Agregar menu de consola<a class="headerlink" href="#34-agregar-menu-de-consola" title="Permanent link">&para;</a></h3>
-<p>El menu debe llamar al contrato <code>ClienteService</code>, no directamente al <code>ArrayList</code>.</p>
+<p>El menu debe llamar al contrato <code>ProductoService</code>, no directamente al <code>ArrayList</code>.</p>
 <p>Opciones mínimas:</p>
 <ol>
-<li>Registrar cliente.</li>
-<li>Listar clientes.</li>
-<li>Buscar cliente.</li>
-<li>Actualizar cliente.</li>
-<li>Eliminar cliente.</li>
+<li>Registrar producto.</li>
+<li>Listar productos.</li>
+<li>Buscar producto.</li>
+<li>Actualizar producto.</li>
+<li>Eliminar producto.</li>
 <li>Salir.</li>
 </ol>
 <h3 id="35-organizar-con-maven">3.5 Organizar con Maven<a class="headerlink" href="#35-organizar-con-maven" title="Permanent link">&para;</a></h3>
@@ -1961,9 +1963,9 @@ Maven/GraalVM son parte de la entrega, no del flujo CRUD.
 <p>Estructura mínima:</p>
 <div class="highlight"><pre><span></span><code>src/main/java/
     Main.java
-    entidad/Cliente.java
-    servicio/ClienteService.java
-    servicio/ClienteServiceMemoria.java
+    entidad/Producto.java
+    servicio/ProductoService.java
+    servicio/ProductoServiceMemoria.java
 pom.xml
 </code></pre></div>
 <h3 id="36-preparar-entrega-con-graalvm">3.6 Preparar entrega con GraalVM<a class="headerlink" href="#36-preparar-entrega-con-graalvm" title="Permanent link">&para;</a></h3>
@@ -2068,7 +2070,7 @@ pom.xml
 <h3 id="53-preguntas-de-defensa-y-reflexion">5.3 Preguntas de defensa y reflexión<a class="headerlink" href="#53-preguntas-de-defensa-y-reflexion" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Qué responsabilidad tiene <code>Main</code>?</li>
-<li>Qué responsabilidad tiene <code>ClienteService</code>?</li>
+<li>Qué responsabilidad tiene <code>ProductoService</code>?</li>
 <li>Dónde se almacena temporalmente la información?</li>
 <li>Por qué <code>ArrayList</code> no debe estar como variable principal en <code>Main</code>?</li>
 <li>Qué cambiaría cuando el almacenamiento sea SQLite?</li>

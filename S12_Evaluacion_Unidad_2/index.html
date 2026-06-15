@@ -1759,15 +1759,15 @@
     Controlador["Controlador"]
 
     subgraph Servicio["Servicio"]
-        Contrato["ClienteService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
-        ServicioBD["ClienteServiceBD&lt;br/&gt;implements"]
+        Contrato["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
+        ServicioBD["ProductoServiceBD&lt;br/&gt;implements"]
         Validaciones["Validaciones/Excepciones"]
     end
 
-    Entidades["Cliente"]
+    Entidades["Producto"]
 
     subgraph Persistencia["Persistencia"]
-        DAO["ClienteDAO"]
+        DAO["ProductoDAO"]
         SQLite[("SQLite / comarket.db")]
     end
 

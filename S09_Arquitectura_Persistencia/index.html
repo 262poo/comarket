@@ -1666,26 +1666,26 @@ Las entidades no cambian por usar base de datos.
     Controlador["JavaFX Controller"]
 
     subgraph Servicio["Servicio"]
-        Contrato["ClienteService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
-        Implementación["ClienteServiceBD&lt;br/&gt;implements"]
+        Contrato["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
+        Implementacion["ProductoServiceBD&lt;br/&gt;implements"]
         Validaciones["Validaciones/Excepciones"]
     end
 
-    Entidades["Cliente"]
+    Entidades["Producto"]
 
     subgraph Persistencia["Persistencia"]
-        DAO["ClienteDAO"]
+        DAO["ProductoDAO"]
         Conexion["ConexionBD"]
         SQLite[("SQLite / comarket.db")]
     end
 
     Vista --&gt; Controlador
     Controlador --&gt; Contrato
-    Implementación -. implements .-&gt; Contrato
+    Implementacion -. implements .-&gt; Contrato
     Contrato -.-&gt; Entidades
-    Implementación -.-&gt; Entidades
-    Implementación --&gt; DAO
-    Implementación -.-&gt; Validaciones
+    Implementacion -.-&gt; Entidades
+    Implementacion --&gt; DAO
+    Implementacion -.-&gt; Validaciones
     DAO --&gt; Entidades
     DAO --&gt; Conexion
     Conexion --&gt;|"JDBC"| SQLite</code></pre>
@@ -1699,10 +1699,10 @@ Las entidades no cambian por usar base de datos.
 <li>Crear una tabla inicial.</li>
 <li>Implementar <code>ConexionBD</code>.</li>
 <li>Probar conexión con una consulta simple.</li>
-<li>Identificar <code>ClienteService</code> como contrato qué seguira usando el controlador.</li>
-<li>Preparar <code>ClienteServiceBD</code> cómo implementación persistente.</li>
-<li>Preparar <code>ClienteDAO</code> cómo componente de persistencia.</li>
-<li>Verificar qué <code>Cliente</code> no cambia por usar base de datos.</li>
+<li>Identificar <code>ProductoService</code> como contrato qué seguira usando el controlador.</li>
+<li>Preparar <code>ProductoServiceBD</code> cómo implementación persistente.</li>
+<li>Preparar <code>ProductoDAO</code> cómo componente de persistencia.</li>
+<li>Verificar qué <code>Producto</code> no cambia por usar base de datos.</li>
 </ol>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
 <p>Fuera del aula, cada estudiante consolida el aprendizaje preparando la estructura de persistencia y una evidencia individual.</p>
