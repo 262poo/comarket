@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#s8-crud-desde-gui-en-memoria" class="md-skip">
+        <a href="#s8-arquitectura-por-capas-dao-y-crud-persistente-desde-gui" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -1620,55 +1620,55 @@
 
 
 
-<h1 id="s8-crud-desde-gui-en-memoria">S8 - CRUD desde GUI en memoria<a class="headerlink" href="#s8-crud-desde-gui-en-memoria" title="Permanent link">&para;</a></h1>
+<h1 id="s8-arquitectura-por-capas-dao-y-crud-persistente-desde-gui">S8 - Arquitectura por capas, DAO y CRUD persistente desde GUI<a class="headerlink" href="#s8-arquitectura-por-capas-dao-y-crud-persistente-desde-gui" title="Permanent link">&para;</a></h1>
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
 <h3 id="11-proposito">1.1 Propósito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
-<p>Implementar un CRUD desde JavaFX reutilizando el contrato de servicio y la implementación en memoria, sin base de datos todavía.</p>
+<p>Implementar una primera versión persistente de la aplicación de escritorio usando arquitectura por capas, patrón DAO, JDBC, SQLite y CRUD desde JavaFX.</p>
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
-<p>El estudiante conecta formularios y tablas con un controlador JavaFX, delega operaciones al servicio CRUD y mantiene los datos en memoria con <code>ArrayList</code>.</p>
+<p>El estudiante separa vista, controlador, servicio, entidades y persistencia; crea un DAO para una tabla simple y conecta el CRUD persistente con la interfaz gráfica.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>CRUD funcional desde formulario y <code>TableView</code>, usando vista, controlador, servicio, entidades y almacenamiento en memoria.</p>
+<p>CRUD persistente de una entidad simple desde GUI, usando <code>ProductoServiceBD</code>, <code>ProductoDAO</code>, SQLite y validaciones básicas.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
-<p>Antes de conectar SQLite, conviene comprobar qué la interfaz gráfica puede registrar, mostrar, editar y eliminar objetos usando el mismo contrato qué antes se probo desde consola.</p>
+<p>En S7 el CRUD funcionó en memoria. En esta sesión se reemplaza la implementación en memoria por una implementación persistente sin cambiar la responsabilidad del controlador ni de la entidad.</p>
 <p>Pregunta guía:</p>
-<div class="highlight"><pre><span></span><code>Cómo pasamos del CRUD de consola al CRUD con formularios y tablas?
+<div class="highlight"><pre><span></span><code>Cómo guardamos datos desde la GUI sin poner SQL en el controlador?
 </code></pre></div>
 <h3 id="15-ubicacion-en-el-curso">1.5 Ubicación en el curso<a class="headerlink" href="#15-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Unidad: U2.</li>
-<li>Avance de sesión: transicion de consola a GUI usando memoria.</li>
+<li>Avance de sesión: primera persistencia real con DAO y una tabla simple.</li>
 </ul>
 <h2 id="2-explica">2. Explica<a class="headerlink" href="#2-explica" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 25 min.</p>
 <h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Flujo Vista-Controlador-Servicio-Entidades, con <code>ArrayList</code> como atributo interno de la implementación en memoria.</li>
-<li>Interface de servicio como contrato de operaciones CRUD.</li>
-<li>Implementación en memoria del contrato.</li>
-<li>Lectura de datos desde formularios.</li>
-<li>Carga de datos en <code>TableView</code>.</li>
-<li>Seleccion de filas para editar o eliminar.</li>
-<li>Refresco de tabla después de cada operación.</li>
+<li>Arquitectura por capas.</li>
+<li>Vista FXML y controlador JavaFX.</li>
+<li>Servicio como contrato de operaciones.</li>
+<li>Implementación persistente del servicio.</li>
+<li>Patrón DAO.</li>
+<li>JDBC como conector.</li>
+<li>SQLite como base de datos local.</li>
+<li>Validaciones básicas y manejo inicial de errores.</li>
 </ul>
-<p>Regla métodológica de la sesión:</p>
-<div class="highlight"><pre><span></span><code>La vista captura datos.
-El controlador traduce eventos en llamadas al servicio.
-El servicio ejecuta CRUD.
-La implementación en memoria administra el ArrayList.
+<p>Regla metodológica de la sesión:</p>
+<div class="highlight"><pre><span></span><code>El controlador no escribe SQL.
+El controlador llama al contrato del servicio.
+La implementación persistente coordina validaciones y DAO.
+El DAO ejecuta SQL y mapea filas a objetos.
+JDBC conecta Java con SQLite.
+La entidad sigue siendo clase del dominio.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>classDiagram
-    class VistaFXML {
-        formulario
-        TableView
-    }
     class ProductoController {
         onRegistrar()
         onActualizar()
         onEliminar()
         cargarTabla()
     }
+
     class ProductoService {
         &lt;&lt;interface&gt;&gt;
         registrar(producto)
@@ -1676,10 +1676,27 @@ La implementación en memoria administra el ArrayList.
         actualizar(producto)
         eliminar(codigo)
     }
-    class ProductoServiceMemoria {
-        -productos: ArrayList
-        CRUD sobre ArrayList
+
+    class ProductoServiceBD {
+        -dao: ProductoDAO
+        CRUD con DAO
     }
+
+    class ProductoDAO {
+        insertar(producto)
+        listar()
+        actualizar(producto)
+        eliminar(codigo)
+    }
+
+    class ConexionBD {
+        obtenerConexion()
+    }
+
+    class SQLite {
+        producto
+    }
+
     class Producto {
         -codigo
         -nombre
@@ -1687,126 +1704,110 @@ La implementación en memoria administra el ArrayList.
         -stock
     }
 
-    VistaFXML ..&gt; ProductoController : eventos
     ProductoController ..&gt; ProductoService : usa contrato
     ProductoController ..&gt; Producto : crea/lee
-    ProductoService &lt;|.. ProductoServiceMemoria : implements
+    ProductoService &lt;|.. ProductoServiceBD : implements
     ProductoService ..&gt; Producto : usa
-    ProductoServiceMemoria ..&gt; Producto : usa</code></pre>
+    ProductoServiceBD ..&gt; Producto : usa
+    ProductoServiceBD --&gt; ProductoDAO : usa
+    ProductoDAO ..&gt; Producto : mapea
+    ProductoDAO --&gt; ConexionBD : usa
+    ConexionBD --&gt; SQLite : JDBC</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <ol>
-<li>Crear campos para datos de producto.</li>
-<li>Crear columnas de <code>TableView</code>.</li>
-<li>Leer datos desde el formulario.</li>
-<li>Crear objeto <code>Producto</code>.</li>
-<li>Delegar registro a <code>ProductoService</code>.</li>
-<li>Mantener el <code>ArrayList</code> dentro de <code>ProductoServiceMemoria</code>.</li>
-<li>Mostrar datos en <code>TableView</code>.</li>
-<li>Cargar datos del elemento seleccionado al formulario.</li>
-<li>Actualizar el registro seleccionado.</li>
-<li>Eliminar con confirmación.</li>
+<li>Revisar el proyecto JavaFX/Maven creado en S7.</li>
+<li>Agregar dependencia SQLite JDBC.</li>
+<li>Crear paquetes <code>servicio</code>, <code>persistencia</code>, <code>modelo</code> y <code>controlador</code> si faltan.</li>
+<li>Crear <code>ConexionBD</code>.</li>
+<li>Crear tabla <code>producto</code>.</li>
+<li>Crear <code>ProductoDAO</code>.</li>
+<li>Implementar <code>insert</code>, <code>select</code>, <code>update</code> y <code>delete</code>.</li>
+<li>Crear <code>ProductoServiceBD implements ProductoService</code>.</li>
+<li>Hacer que <code>ProductoController</code> use <code>ProductoService</code>, no el DAO directamente.</li>
+<li>Cargar <code>TableView</code> desde SQLite.</li>
+<li>Validar campos obligatorios, precio y stock.</li>
+<li>Mostrar mensajes de error claros.</li>
 </ol>
+<p>Tabla mínima:</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">producto</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">codigo</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">nombre</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">precio</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">stock</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+</code></pre></div>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
-<p>Fuera del aula, cada estudiante consolida el aprendizaje completando un CRUD desde GUI en memoria y preparando una evidencia individual.</p>
+<p>Fuera del aula, cada estudiante consolida el CRUD persistente y prepara una evidencia individual.</p>
 <p>Tiempo: 2h fuera del aula.</p>
 <h3 id="41-plantilla-de-evidencia-individual">4.1 Plantilla de evidencia individual<a class="headerlink" href="#41-plantilla-de-evidencia-individual" title="Permanent link">&para;</a></h3>
 <p>Entrega un PDF con el siguiente nombre:</p>
 <div class="highlight"><pre><span></span><code>S08_Equipo##_ApellidoNombre.pdf
 </code></pre></div>
-<p>Ejemplo:</p>
-<div class="highlight"><pre><span></span><code>S08_Equipo03_QuispeAna.pdf
-</code></pre></div>
-<p>El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.</p>
 <h4 id="411-datos-del-estudiante">4.1.1 Datos del estudiante<a class="headerlink" href="#411-datos-del-estudiante" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Nombre:</li>
 <li>Equipo:</li>
-<li>Sesión: S08 - CRUD desde GUI en memoria</li>
+<li>Sesión: S08 - Arquitectura por capas, DAO y CRUD persistente desde GUI</li>
 <li>Rol o aporte realizado:</li>
 <li>Link de GitHub:</li>
 </ul>
 <h4 id="412-trabajo-autonomo-realizado">4.1.2 Trabajo autónomo realizado<a class="headerlink" href="#412-trabajo-autonomo-realizado" title="Permanent link">&para;</a></h4>
-<p>Completa y evidencia estas tareas:</p>
 <ol>
-<li>Completar el CRUD en memoria desde GUI para una entidad del dominio.</li>
-<li>Leer datos desde el formulario.</li>
-<li>Registrar objetos usando el contrato del servicio.</li>
-<li>Mostrar datos en <code>TableView</code>.</li>
-<li>Editar el elemento seleccionado.</li>
-<li>Eliminar con confirmación.</li>
-<li>Explicar cómo se refresca la tabla sin duplicar el CRUD en el controlador.</li>
+<li>Completar CRUD persistente de producto.</li>
+<li>Evidenciar estructura por capas.</li>
+<li>Mostrar <code>ProductoDAO</code>.</li>
+<li>Mostrar <code>ProductoServiceBD</code>.</li>
+<li>Ejecutar la GUI y registrar datos.</li>
+<li>Verificar registros en SQLite.</li>
+<li>Documentar una validación aplicada.</li>
 </ol>
 <h4 id="413-evidencia-tecnica">4.1.3 Evidencia técnica<a class="headerlink" href="#413-evidencia-tecnica" title="Permanent link">&para;</a></h4>
-<p>Incluye capturas o salidas con una breve explicación debajo de cada una:</p>
 <ul>
-<li>Capturas de registro, listado, edición y eliminación.</li>
-<li>Código del controlador.</li>
-<li>Código o referencia de <code>ProductoService</code> y <code>ProductoServiceMemoria</code>.</li>
-<li>Explicación de cómo se actualiza la tabla sin duplicar el CRUD en el controlador.</li>
-<li>Evidencia de que el <code>ArrayList</code> queda dentro de la implementación en memoria.</li>
+<li>Captura de la GUI.</li>
+<li>Código o fragmento de DAO.</li>
+<li>Código o fragmento de servicio persistente.</li>
+<li>Captura de registros en SQLite.</li>
+<li>Evidencia de validación o mensaje de error.</li>
+<li>Explicación del flujo <code>Vista -&gt; Controlador -&gt; Servicio -&gt; DAO -&gt; SQLite</code>.</li>
 </ul>
 <h4 id="414-error-o-hallazgo">4.1.4 Error o hallazgo<a class="headerlink" href="#414-error-o-hallazgo" title="Permanent link">&para;</a></h4>
-<p>Describe al menos un error, diferencia o hallazgo técnico:</p>
-<ul>
-<li>Qué ocurrió.</li>
-<li>Cómo lo diagnosticaste.</li>
-<li>Cómo lo corregiste o qué aprendiste.</li>
-</ul>
-<p>Ejemplos válidos:</p>
-<ul>
-<li>La tabla no refrescaba después de registrar.</li>
-<li>La fila seleccionada no cargaba al formulario.</li>
-<li>El controlador empezó a duplicar lógica del service.</li>
-<li>Se perdió información al editar un registro.</li>
-</ul>
+<p>Describe un problema técnico y cómo lo corregiste.</p>
 <h4 id="415-reflexion-tecnica-breve">4.1.5 Reflexión técnica breve<a class="headerlink" href="#415-reflexion-tecnica-breve" title="Permanent link">&para;</a></h4>
 <p>Responde en 5 a 8 líneas:</p>
-<div class="highlight"><pre><span></span><code>Por qué el controlador debe delegar el CRUD al servicio aunque la aplicación todavía use memoria?
+<div class="highlight"><pre><span></span><code>Por qué el controlador no debe ejecutar SQL directamente?
 </code></pre></div>
 <h3 id="42-criterios-minimos-de-aceptacion">4.2 Criterios mínimos de aceptación<a class="headerlink" href="#42-criterios-minimos-de-aceptacion" title="Permanent link">&para;</a></h3>
-<p>La evidencia individual se considera completa si:</p>
 <ul>
-<li>El archivo respeta el nombre <code>S08_Equipo##_ApellidoNombre.pdf</code>.</li>
-<li>Incluye evidencias técnicas legibles.</li>
-<li>Muestra registro, listado, edición y eliminación desde GUI.</li>
-<li>Usa <code>ProductoService</code> o contrato equivalente.</li>
-<li>Mantiene <code>ArrayList</code> dentro de la implementación en memoria.</li>
-<li>Explica cómo se actualiza <code>TableView</code>.</li>
-<li>No contiene solo pantallazos: cada evidencia tiene una descripción breve.</li>
+<li>PDF con nombre correcto.</li>
+<li>CRUD persistente funcional desde GUI.</li>
+<li>DAO separado del controlador.</li>
+<li>Servicio persistente usando el DAO.</li>
+<li>SQLite con datos verificables.</li>
+<li>Validaciones básicas evidenciadas.</li>
 </ul>
 <h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
-<p>Esta sección conecta el resultado de aprendizaje de la sesión con el producto que debe evidenciar cada estudiante.</p>
 <h3 id="51-resultados-esperados">5.1 Resultados esperados<a class="headerlink" href="#51-resultados-esperados" title="Permanent link">&para;</a></h3>
 <ul>
-<li>El CRUD funciona desde la interfaz gráfica.</li>
-<li>El controlador delega operaciones al servicio.</li>
-<li>Los datos se almacenan en memoria dentro de la implementación del servicio.</li>
-<li>Las entidades son las mismas clases del dominio usadas desde U1.</li>
-<li>La tabla refleja los cambios.</li>
+<li>El estudiante explica las capas principales.</li>
+<li>El controlador delega al servicio.</li>
+<li>El servicio persistente usa DAO.</li>
+<li>El DAO concentra SQL.</li>
+<li>La tabla se refresca desde SQLite.</li>
+<li>Hay validaciones básicas al registrar o actualizar.</li>
 </ul>
 <h3 id="52-evidencia-del-producto-de-sesion">5.2 Evidencia del producto de sesión<a class="headerlink" href="#52-evidencia-del-producto-de-sesion" title="Permanent link">&para;</a></h3>
 <p>Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.</p>
-<p>Nombre del archivo:</p>
-<div class="highlight"><pre><span></span><code>S08_Equipo##_ApellidoNombre.pdf
-</code></pre></div>
-<p>La evidencia debe demostrar:</p>
-<ul>
-<li>Producto de sesión construido.</li>
-<li>Aporte individual verificable.</li>
-<li>CRUD desde GUI en memoria.</li>
-<li>Reflexión técnica breve.</li>
-</ul>
-<p>La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.</p>
 <h3 id="53-preguntas-de-defensa-y-reflexion">5.3 Preguntas de defensa y reflexión<a class="headerlink" href="#53-preguntas-de-defensa-y-reflexion" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Dónde se almacenan los datos en esta sesión?</li>
 <li>Qué responsabilidad tiene el controlador?</li>
-<li>Qué responsabilidad tiene la interface del servicio?</li>
-<li>Qué responsabilidad tiene la implementación en memoria?</li>
-<li>Qué cambiará cuando usemos DAO?</li>
-<li>Cómo se refresca la tabla después de una operación?</li>
+<li>Qué responsabilidad tiene el servicio?</li>
+<li>Qué responsabilidad tiene el DAO?</li>
+<li>Cómo se conecta Java con SQLite?</li>
+<li>Qué validación implementaste?</li>
+<li>Cómo verificas que el dato quedó persistido?</li>
 </ol>
 <h3 id="54-rubrica-de-evaluacion">5.4 Rúbrica de evaluación<a class="headerlink" href="#54-rubrica-de-evaluacion" title="Permanent link">&para;</a></h3>
 <table>
@@ -1823,71 +1824,61 @@ La implementación en memoria administra el ArrayList.
 </thead>
 <tbody>
 <tr>
-<td>1. CRUD desde GUI</td>
+<td>1. Capas</td>
 <td style="text-align: right;">2</td>
-<td>Registro, listado, edición y eliminación funcionan desde la interfaz.</td>
+<td>Vista, controlador, servicio, entidad y DAO claramente separados.</td>
+<td>Capas funcionales.</td>
+<td>Separación parcial.</td>
+<td>No separa capas.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>2. DAO</td>
+<td style="text-align: right;">2</td>
+<td>DAO ejecuta SQL y mapea objetos correctamente.</td>
+<td>DAO funcional.</td>
+<td>DAO incompleto.</td>
+<td>No evidencia DAO.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>3. CRUD persistente</td>
+<td style="text-align: right;">2</td>
+<td>CRUD completo desde GUI y verificado en SQLite.</td>
 <td>CRUD principal funcional.</td>
-<td>CRUD incompleto.</td>
-<td>No evidencia CRUD.</td>
+<td>CRUD parcial.</td>
+<td>No persiste.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>2. Controlador</td>
+<td>4. Validaciones</td>
 <td style="text-align: right;">2</td>
-<td>Controlador lee vista y delega sin duplicar lógica.</td>
-<td>Controlador funcional.</td>
-<td>Controlador mezcla responsabilidades.</td>
-<td>No evidencia controlador funcional.</td>
-<td style="text-align: right;"></td>
-</tr>
-<tr>
-<td>3. Servicio en memoria</td>
-<td style="text-align: right;">2</td>
-<td>Contrato e implementación en memoria bien separados.</td>
-<td>Servicio funcional.</td>
-<td>Servicio parcial.</td>
-<td>No usa servicio.</td>
-<td style="text-align: right;"></td>
-</tr>
-<tr>
-<td>4. TableView</td>
-<td style="text-align: right;">2</td>
-<td>Tabla se carga, selecciona y refresca correctamente.</td>
-<td>Tabla muestra datos principales.</td>
-<td>Tabla incompleta o no refresca.</td>
-<td>No evidencia tabla funcional.</td>
+<td>Valida datos y muestra mensajes claros.</td>
+<td>Validaciones básicas.</td>
+<td>Validación parcial.</td>
+<td>No valida.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
 <td>5. Error o hallazgo</td>
 <td style="text-align: right;">1</td>
-<td>Analiza error/hallazgo, causa, solución y aprendizaje técnico.</td>
-<td>Explica un problema y una solución.</td>
-<td>Menciona un problema sin análisis.</td>
-<td>No presenta error ni hallazgo.</td>
+<td>Analiza causa y solución.</td>
+<td>Explica un problema.</td>
+<td>Menciona un problema.</td>
+<td>No presenta.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>6. Reflexión y orden</td>
+<td>6. Orden y reflexión</td>
 <td style="text-align: right;">1</td>
-<td>PDF ordenado, evidencias legibles y reflexión precisa.</td>
-<td>Evidencias suficientes y reflexión clara.</td>
-<td>Evidencias incompletas o reflexión superficial.</td>
-<td>PDF desordenado o sin reflexión.</td>
+<td>Evidencia clara y reflexión precisa.</td>
+<td>Evidencia suficiente.</td>
+<td>Evidencia incompleta.</td>
+<td>No sustenta.</td>
 <td style="text-align: right;"></td>
 </tr>
 </tbody>
 </table>
-<p>Puntuación acumulada = suma de (<code>Peso</code> * <code>Puntuación obtenida</code>) = ____.</p>
-<p>Nota final = (<code>Puntuación acumulada</code> / 30) * 20 = ____.</p>
-<p>Para usar la rúbrica con IA, solicita:</p>
-<div class="highlight"><pre><span></span><code>Evalúa el PDF usando la rúbrica de la sesión.
-Para cada dimensión selecciona la puntuación obtenida usando la escala Inicio=0, Proceso=1, Logro=2, Logro destacado=3.
-Justifica brevemente cada puntuación.
-Calcula la puntuación acumulada con la fórmula: suma de (Peso * Puntuación obtenida).
-Calcula la nota final sobre 20 con la fórmula: (Puntuación acumulada / 30) * 20.
-Indica 2 fortalezas y 2 recomendaciones.
-</code></pre></div>
 
 
 

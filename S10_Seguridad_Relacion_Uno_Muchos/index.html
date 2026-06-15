@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#s10-patron-dao-y-operaciones-crud-persistentes-desde-gui" class="md-skip">
+        <a href="#s10-seguridad-basica-y-relacion-uno-a-muchos" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -1620,187 +1620,192 @@
 
 
 
-<h1 id="s10-patron-dao-y-operaciones-crud-persistentes-desde-gui">S10 - Patron DAO y operaciones CRUD persistentes desde GUI<a class="headerlink" href="#s10-patron-dao-y-operaciones-crud-persistentes-desde-gui" title="Permanent link">&para;</a></h1>
+<h1 id="s10-seguridad-basica-y-relacion-uno-a-muchos">S10 - Seguridad básica y relación uno a muchos<a class="headerlink" href="#s10-seguridad-basica-y-relacion-uno-a-muchos" title="Permanent link">&para;</a></h1>
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
 <h3 id="11-proposito">1.1 Propósito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
-<p>Implementar el patron DAO para ejecutar operaciones CRUD persistentes desde la interfaz gráfica.</p>
+<p>Incorporar seguridad básica mediante usuarios, autenticación simple y operaciones persistentes asociadas a una relación uno a muchos.</p>
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
-<p>El estudiante separa el acceso a datos en DAO, mapea entidades a registros, ejecuta SQL básico y agrega una implementación persistente del mismo contrato de servicio.</p>
+<p>El estudiante crea una tabla de usuarios, implementa un login básico, mantiene una sesión activa y asocia operaciones persistentes al usuario autenticado.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>CRUD persistente funcional desde formularios y tablas JavaFX.</p>
+<p>Autenticación básica y registro de operaciones asociadas a un usuario, usando GUI, servicio, DAO, SQLite y validaciones de acceso.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
-<p>La GUI ya funciona con memoria y la base de datos ya existe. Ahora corresponde guardar y recuperar datos desde SQLite sin poner SQL en el controlador.</p>
+<p>Una aplicación de escritorio no solo guarda datos; también debe saber quién realiza una operación. Esta sesión agrega usuario y seguridad básica sin convertir el curso en seguridad avanzada.</p>
 <p>Pregunta guía:</p>
-<div class="highlight"><pre><span></span><code>Cómo guardamos y recuperamos datos desde la GUI sin mezclar SQL con la pantalla?
+<div class="highlight"><pre><span></span><code>Cómo asociamos operaciones persistentes a un usuario autenticado?
 </code></pre></div>
 <h3 id="15-ubicacion-en-el-curso">1.5 Ubicación en el curso<a class="headerlink" href="#15-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Unidad: U2.</li>
-<li>Avance de sesión: integración de GUI con persistencia.</li>
+<li>Avance de sesión: seguridad básica y relación simple uno a muchos.</li>
 </ul>
 <h2 id="2-explica">2. Explica<a class="headerlink" href="#2-explica" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 25 min.</p>
 <h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Patron DAO.</li>
-<li>Servicio cómo coordinador entre controlador y DAO.</li>
-<li>Implementación persistente del contrato CRUD.</li>
-<li>Mapeo objeto-relacional básico.</li>
-<li><code>insert</code>, <code>select</code>, <code>update</code>, <code>delete</code>.</li>
-<li>Confirmación de eliminación.</li>
-<li>Excepciones de persistencia.</li>
-<li>Refresco de <code>TableView</code> desde base de datos.</li>
+<li>Usuario.</li>
+<li>Autenticación básica.</li>
+<li>Sesión activa.</li>
+<li>Relación uno a muchos.</li>
+<li>Operaciones asociadas al usuario.</li>
+<li>Validación de acceso.</li>
+<li>DAO para usuario.</li>
+<li>Manejo básico de errores.</li>
 </ul>
-<p>Regla métodológica de la sesión:</p>
-<div class="highlight"><pre><span></span><code>El controlador no escribe SQL.
-El servicio valida y coordina.
-El DAO ejecuta SQL.
-JDBC conecta con SQLite.
-La entidad sigue siendo una clase del dominio.
+<p>Regla metodológica de la sesión:</p>
+<div class="highlight"><pre><span></span><code>La seguridad se trabaja de forma básica.
+Usuario no reemplaza al dominio principal.
+Usuario permite asociar operaciones a quien las registra.
+La relación uno a muchos se entiende como un usuario con varias operaciones.
+Las validaciones de acceso se aplican antes de ejecutar la operación.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>flowchart TB
-    Vista["Vista JavaFX"]
-    Controlador["Controlador"]
+<pre class="mermaid"><code>classDiagram
+    class LoginController {
+        onIngresar()
+    }
 
-    subgraph Servicio["Servicio"]
-        Contrato["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
-        ServicioBD["ProductoServiceBD&lt;br/&gt;implements"]
-        Validaciones["Validaciones/Excepciones"]
-    end
+    class VentaController {
+        onGuardarVenta()
+    }
 
-    Entidades["Producto"]
+    class UsuarioService {
+        &lt;&lt;interface&gt;&gt;
+        autenticar(username, password)
+    }
 
-    subgraph Persistencia["Persistencia"]
-        DAO["ProductoDAO"]
-        SQLite[("SQLite / comarket.db")]
-    end
+    class UsuarioServiceBD {
+        autenticar(username, password)
+    }
 
-    Vista --&gt; Controlador
-    Controlador --&gt; Contrato
-    ServicioBD -. implements .-&gt; Contrato
-    Contrato -.-&gt; Entidades
-    ServicioBD -.-&gt; Entidades
-    ServicioBD -.-&gt; Validaciones
-    ServicioBD --&gt; DAO
-    DAO --&gt; Entidades
-    DAO --&gt;|"JDBC"| SQLite</code></pre>
+    class UsuarioDAO {
+        buscarPorUsername(username)
+    }
+
+    class Sesion {
+        -usuarioActual
+    }
+
+    class Usuario {
+        -username
+        -passwordHash
+        -rol
+    }
+
+    class Venta {
+        -cliente
+        -fecha
+        -usuario
+    }
+
+    LoginController ..&gt; UsuarioService : usa contrato
+    UsuarioService &lt;|.. UsuarioServiceBD : implements
+    UsuarioServiceBD --&gt; UsuarioDAO : usa
+    UsuarioDAO ..&gt; Usuario : retorna
+    LoginController --&gt; Sesion : guarda usuario
+    VentaController ..&gt; Sesion : consulta
+    Venta "*" --&gt; "1" Usuario : registrada por</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <ol>
-<li>Crear <code>ProductoDAO</code>.</li>
-<li>Implementar <code>registrar</code> con <code>insert</code>.</li>
-<li>Implementar <code>listar</code> con <code>select</code>.</li>
-<li>Implementar <code>actualizar</code> con <code>update</code>.</li>
-<li>Implementar <code>eliminar</code> con <code>delete</code>.</li>
-<li>Mapear cada fila de la base de datos a un objeto <code>Producto</code>.</li>
-<li>Crear o adaptar <code>ProductoServiceBD</code>.</li>
-<li>Hacer qué <code>ProductoServiceBD</code> use <code>ProductoDAO</code>.</li>
-<li>Conectar botones de la GUI con <code>ProductoService</code>, no directamente con SQL.</li>
-<li>Recargar la tabla desde la base de datos después de cada operación.</li>
-<li>Confirmar eliminación y manejar errores básicos.</li>
+<li>Crear tabla <code>usuario</code>.</li>
+<li>Crear entidad <code>Usuario</code>.</li>
+<li>Crear <code>UsuarioDAO</code>.</li>
+<li>Crear <code>UsuarioService</code>.</li>
+<li>Crear <code>UsuarioServiceBD</code>.</li>
+<li>Crear una clase simple <code>Sesion</code>.</li>
+<li>Diseñar vista de login.</li>
+<li>Validar usuario y contraseña.</li>
+<li>Guardar usuario autenticado en sesión.</li>
+<li>Asociar la venta u operación al usuario actual.</li>
+<li>Validar que no se pueda operar sin sesión activa.</li>
+<li>Mostrar mensajes claros de acceso denegado o credenciales incorrectas.</li>
 </ol>
+<p>Tablas de referencia:</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">usuario</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">password_hash</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rol</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">venta</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">usuario_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">usuario</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+</code></pre></div>
+<p>Nota metodológica:</p>
+<div class="highlight"><pre><span></span><code>Para el curso basta seguridad básica.
+No se exige implementar seguridad empresarial.
+La contraseña no debe guardarse como texto plano en una aplicación real.
+</code></pre></div>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
-<p>Fuera del aula, cada estudiante consolida el aprendizaje completando un CRUD persistente y preparando una evidencia individual.</p>
+<p>Fuera del aula, cada estudiante consolida la autenticación y la relación con operaciones persistentes.</p>
 <p>Tiempo: 2h fuera del aula.</p>
 <h3 id="41-plantilla-de-evidencia-individual">4.1 Plantilla de evidencia individual<a class="headerlink" href="#41-plantilla-de-evidencia-individual" title="Permanent link">&para;</a></h3>
 <p>Entrega un PDF con el siguiente nombre:</p>
 <div class="highlight"><pre><span></span><code>S10_Equipo##_ApellidoNombre.pdf
 </code></pre></div>
-<p>Ejemplo:</p>
-<div class="highlight"><pre><span></span><code>S10_Equipo03_QuispeAna.pdf
-</code></pre></div>
-<p>El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.</p>
 <h4 id="411-datos-del-estudiante">4.1.1 Datos del estudiante<a class="headerlink" href="#411-datos-del-estudiante" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Nombre:</li>
 <li>Equipo:</li>
-<li>Sesión: S10 - Patrón DAO y operaciones CRUD persistentes desde GUI</li>
+<li>Sesión: S10 - Seguridad básica y relación uno a muchos</li>
 <li>Rol o aporte realizado:</li>
 <li>Link de GitHub:</li>
 </ul>
 <h4 id="412-trabajo-autonomo-realizado">4.1.2 Trabajo autónomo realizado<a class="headerlink" href="#412-trabajo-autonomo-realizado" title="Permanent link">&para;</a></h4>
-<p>Completa y evidencia estas tareas:</p>
 <ol>
-<li>Completar el CRUD persistente para una entidad adicional o mejorar el módulo principal.</li>
-<li>Implementar operaciones <code>insert</code>, <code>select</code>, <code>update</code> y <code>delete</code>.</li>
-<li>Hacer que la implementación persistente use el DAO.</li>
-<li>Conectar la GUI con el contrato del servicio.</li>
-<li>Verificar que el controlador no tenga SQL.</li>
-<li>Verificar registros en SQLite.</li>
-<li>Explicar el flujo Vista-Controlador-Servicio-Entidades-DAO.</li>
+<li>Crear usuario de prueba.</li>
+<li>Implementar login básico.</li>
+<li>Mantener sesión activa.</li>
+<li>Asociar una operación al usuario.</li>
+<li>Evidenciar relación uno a muchos.</li>
+<li>Validar credenciales incorrectas.</li>
+<li>Validar operación sin sesión.</li>
 </ol>
 <h4 id="413-evidencia-tecnica">4.1.3 Evidencia técnica<a class="headerlink" href="#413-evidencia-tecnica" title="Permanent link">&para;</a></h4>
-<p>Incluye capturas o salidas con una breve explicación debajo de cada una:</p>
 <ul>
-<li>Código de <code>ProductoService</code>, <code>ProductoServiceBD</code> y <code>ProductoDAO</code>.</li>
-<li>Capturas de GUI.</li>
-<li>Registros persistidos en SQLite.</li>
-<li>Explicación del flujo Vista-Controlador-Servicio-Entidades-DAO.</li>
-<li>Evidencia de que el controlador no contiene SQL directo.</li>
+<li>Captura de login.</li>
+<li>Código o fragmento de <code>UsuarioDAO</code>.</li>
+<li>Código o fragmento de <code>UsuarioServiceBD</code>.</li>
+<li>Evidencia de usuario autenticado.</li>
+<li>Evidencia de operación asociada al usuario.</li>
+<li>Validación de acceso o credenciales.</li>
 </ul>
 <h4 id="414-error-o-hallazgo">4.1.4 Error o hallazgo<a class="headerlink" href="#414-error-o-hallazgo" title="Permanent link">&para;</a></h4>
-<p>Describe al menos un error, diferencia o hallazgo técnico:</p>
-<ul>
-<li>Qué ocurrió.</li>
-<li>Cómo lo diagnosticaste.</li>
-<li>Cómo lo corregiste o qué aprendiste.</li>
-</ul>
-<p>Ejemplos válidos:</p>
-<ul>
-<li>Un <code>insert</code> no guardaba por error de parámetros.</li>
-<li>El <code>select</code> no mapeaba bien la entidad.</li>
-<li>La tabla no refrescaba desde SQLite.</li>
-<li>El controlador estaba llamando directamente al DAO.</li>
-</ul>
+<p>Describe un problema encontrado al controlar sesión o acceso.</p>
 <h4 id="415-reflexion-tecnica-breve">4.1.5 Reflexión técnica breve<a class="headerlink" href="#415-reflexion-tecnica-breve" title="Permanent link">&para;</a></h4>
 <p>Responde en 5 a 8 líneas:</p>
-<div class="highlight"><pre><span></span><code>Por qué el DAO debe concentrar SQL y no el controlador?
+<div class="highlight"><pre><span></span><code>Por qué una operación persistente debe registrar qué usuario la realizó?
 </code></pre></div>
 <h3 id="42-criterios-minimos-de-aceptacion">4.2 Criterios mínimos de aceptación<a class="headerlink" href="#42-criterios-minimos-de-aceptacion" title="Permanent link">&para;</a></h3>
-<p>La evidencia individual se considera completa si:</p>
 <ul>
-<li>El archivo respeta el nombre <code>S10_Equipo##_ApellidoNombre.pdf</code>.</li>
-<li>Incluye evidencias técnicas legibles.</li>
-<li>Muestra DAO funcional.</li>
-<li>Muestra CRUD persistente desde GUI.</li>
-<li>Muestra registros guardados en SQLite.</li>
-<li>Explica el flujo por capas.</li>
-<li>No contiene solo pantallazos: cada evidencia tiene una descripción breve.</li>
+<li>PDF con nombre correcto.</li>
+<li>Login básico funcional.</li>
+<li>Usuario persistido en SQLite.</li>
+<li>Sesión activa controlada.</li>
+<li>Operación asociada al usuario.</li>
+<li>Validación de acceso.</li>
 </ul>
 <h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
-<p>Esta sección conecta el resultado de aprendizaje de la sesión con el producto que debe evidenciar cada estudiante.</p>
 <h3 id="51-resultados-esperados">5.1 Resultados esperados<a class="headerlink" href="#51-resultados-esperados" title="Permanent link">&para;</a></h3>
 <ul>
-<li>El DAO concentra las consultas SQL.</li>
-<li>El controlador no contiene SQL directo.</li>
-<li>El servicio coordina operaciones, validaciones y DAO.</li>
-<li>Las entidades se mantienen como clases del dominio.</li>
-<li>La GUI registra, lista, actualiza y elimina datos persistentes.</li>
+<li>El estudiante explica autenticación básica.</li>
+<li>Usuario se persiste mediante DAO.</li>
+<li>La sesión activa se consulta desde controladores.</li>
+<li>Las operaciones se asocian al usuario.</li>
+<li>Se evidencia relación uno a muchos.</li>
+<li>Se aplican validaciones de acceso.</li>
 </ul>
 <h3 id="52-evidencia-del-producto-de-sesion">5.2 Evidencia del producto de sesión<a class="headerlink" href="#52-evidencia-del-producto-de-sesion" title="Permanent link">&para;</a></h3>
 <p>Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.</p>
-<p>Nombre del archivo:</p>
-<div class="highlight"><pre><span></span><code>S10_Equipo##_ApellidoNombre.pdf
-</code></pre></div>
-<p>La evidencia debe demostrar:</p>
-<ul>
-<li>Producto de sesión construido.</li>
-<li>Aporte individual verificable.</li>
-<li>CRUD persistente probado.</li>
-<li>Reflexión técnica breve.</li>
-</ul>
-<p>La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.</p>
 <h3 id="53-preguntas-de-defensa-y-reflexion">5.3 Preguntas de defensa y reflexión<a class="headerlink" href="#53-preguntas-de-defensa-y-reflexion" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Qué responsabilidad tiene el DAO?</li>
-<li>Qué responsabilidad tiene la interface del servicio?</li>
-<li>Qué responsabilidad tiene la implementación persistente?</li>
-<li>Por qué no poner SQL en el controlador?</li>
-<li>Cómo conviertes un registro en objeto?</li>
-<li>Cómo verificas que el dato quedó guardado?</li>
+<li>Qué responsabilidad tiene <code>UsuarioDAO</code>?</li>
+<li>Qué responsabilidad tiene <code>UsuarioService</code>?</li>
+<li>Dónde se guarda el usuario autenticado durante la ejecución?</li>
+<li>Qué significa relación uno a muchos en esta sesión?</li>
+<li>Qué validación evita operar sin sesión?</li>
+<li>Por qué no debe guardarse contraseña en texto plano?</li>
 </ol>
 <h3 id="54-rubrica-de-evaluacion">5.4 Rúbrica de evaluación<a class="headerlink" href="#54-rubrica-de-evaluacion" title="Permanent link">&para;</a></h3>
 <table>
@@ -1817,71 +1822,61 @@ La entidad sigue siendo una clase del dominio.
 </thead>
 <tbody>
 <tr>
-<td>1. DAO</td>
+<td>1. Usuario y login</td>
 <td style="text-align: right;">2</td>
-<td>DAO concentra SQL y mapea entidades correctamente.</td>
-<td>DAO funcional.</td>
-<td>DAO incompleto.</td>
-<td>No evidencia DAO.</td>
+<td>Login funcional y usuario persistido correctamente.</td>
+<td>Login funcional.</td>
+<td>Login parcial.</td>
+<td>No evidencia login.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>2. Servicio persistente</td>
+<td>2. Sesión activa</td>
 <td style="text-align: right;">2</td>
-<td>Implementación persistente coordina DAO y contrato.</td>
-<td>Servicio funcional.</td>
-<td>Servicio parcial.</td>
-<td>No usa servicio persistente.</td>
+<td>Controla sesión y acceso con claridad.</td>
+<td>Sesión funcional.</td>
+<td>Sesión parcial.</td>
+<td>No controla sesión.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>3. CRUD persistente</td>
+<td>3. Relación uno a muchos</td>
 <td style="text-align: right;">2</td>
-<td>CRUD completo desde GUI y verificado en SQLite.</td>
-<td>CRUD principal funcional.</td>
-<td>CRUD incompleto.</td>
-<td>No persiste datos.</td>
+<td>Operaciones asociadas al usuario correctamente.</td>
+<td>Asociación funcional.</td>
+<td>Asociación parcial.</td>
+<td>No evidencia relación.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>4. Separación de capas</td>
+<td>4. Capas</td>
 <td style="text-align: right;">2</td>
-<td>Controlador, servicio, DAO y entidades tienen roles claros.</td>
+<td>Controlador, servicio y DAO separados.</td>
 <td>Separación suficiente.</td>
 <td>Mezcla responsabilidades.</td>
-<td>No evidencia capas.</td>
+<td>No separa.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
 <td>5. Error o hallazgo</td>
 <td style="text-align: right;">1</td>
-<td>Analiza error/hallazgo, causa, solución y aprendizaje técnico.</td>
-<td>Explica un problema y una solución.</td>
-<td>Menciona un problema sin análisis.</td>
-<td>No presenta error ni hallazgo.</td>
+<td>Analiza causa y solución.</td>
+<td>Explica un problema.</td>
+<td>Menciona un problema.</td>
+<td>No presenta.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>6. Reflexión y orden</td>
+<td>6. Orden y reflexión</td>
 <td style="text-align: right;">1</td>
-<td>PDF ordenado, evidencias legibles y reflexión precisa.</td>
-<td>Evidencias suficientes y reflexión clara.</td>
-<td>Evidencias incompletas o reflexión superficial.</td>
-<td>PDF desordenado o sin reflexión.</td>
+<td>Evidencia clara y reflexión precisa.</td>
+<td>Evidencia suficiente.</td>
+<td>Evidencia incompleta.</td>
+<td>No sustenta.</td>
 <td style="text-align: right;"></td>
 </tr>
 </tbody>
 </table>
-<p>Puntuación acumulada = suma de (<code>Peso</code> * <code>Puntuación obtenida</code>) = ____.</p>
-<p>Nota final = (<code>Puntuación acumulada</code> / 30) * 20 = ____.</p>
-<p>Para usar la rúbrica con IA, solicita:</p>
-<div class="highlight"><pre><span></span><code>Evalúa el PDF usando la rúbrica de la sesión.
-Para cada dimensión selecciona la puntuación obtenida usando la escala Inicio=0, Proceso=1, Logro=2, Logro destacado=3.
-Justifica brevemente cada puntuación.
-Calcula la puntuación acumulada con la fórmula: suma de (Peso * Puntuación obtenida).
-Calcula la nota final sobre 20 con la fórmula: (Puntuación acumulada / 30) * 20.
-Indica 2 fortalezas y 2 recomendaciones.
-</code></pre></div>
 
 
 

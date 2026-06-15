@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#s11-validacion-de-datos-y-pruebas-del-flujo-principal" class="md-skip">
+        <a href="#s11-consultas-integradas-y-pruebas" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -801,10 +801,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-flujo-de-validacion" class="md-nav__link">
+  <a href="#22-arquitectura-de-consulta" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 Flujo de validación
+        2.2 Arquitectura de consulta
       
     </span>
   </a>
@@ -1416,10 +1416,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-flujo-de-validacion" class="md-nav__link">
+  <a href="#22-arquitectura-de-consulta" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 Flujo de validación
+        2.2 Arquitectura de consulta
       
     </span>
   </a>
@@ -1620,73 +1620,82 @@
 
 
 
-<h1 id="s11-validacion-de-datos-y-pruebas-del-flujo-principal">S11 - Validación de datos y pruebas del flujo principal<a class="headerlink" href="#s11-validacion-de-datos-y-pruebas-del-flujo-principal" title="Permanent link">&para;</a></h1>
+<h1 id="s11-consultas-integradas-y-pruebas">S11 - Consultas integradas y pruebas<a class="headerlink" href="#s11-consultas-integradas-y-pruebas" title="Permanent link">&para;</a></h1>
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
 <h3 id="11-proposito">1.1 Propósito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
-<p>Fortalecer la calidad del producto mediante validaciones, excepciones controladas y pruebas manuales del flujo principal.</p>
+<p>Implementar consultas integradas sobre datos persistentes y probar el flujo principal de la aplicación de escritorio.</p>
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
-<p>El estudiante valida entradas desde la GUI, controla errores frecuentes y prueba escenarios normales, inválidos y límite.</p>
+<p>El estudiante consulta información relacionada, muestra resultados maestro-detalle, filtra datos y documenta pruebas funcionales del flujo principal.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>GUI y persistencia validadas con matriz mínima de pruebas del flujo principal.</p>
+<p>Consultas integradas con filtros, vista de detalle, totales y matriz de pruebas del flujo principal.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
-<p>Un CRUD que solo funciona con datos perfectos todavía no está listo. El usuario puede dejar campos vacíos, escribir texto dónde va un número o intentar eliminar sin seleccionar.</p>
+<p>Registrar información no es suficiente. Una aplicación debe permitir buscar, revisar, filtrar y explicar los datos que ya fueron guardados.</p>
 <p>Pregunta guía:</p>
-<div class="highlight"><pre><span></span><code>Cómo hacemos que la aplicación falle menos y avise mejor?
+<div class="highlight"><pre><span></span><code>Cómo consultamos información relacionada y verificamos que el flujo completo funciona?
 </code></pre></div>
 <h3 id="15-ubicacion-en-el-curso">1.5 Ubicación en el curso<a class="headerlink" href="#15-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Unidad: U2.</li>
-<li>Avance de sesión: estabilizacion previa a la evaluación U2.</li>
+<li>Avance de sesión: consultas, pruebas y correcciones antes de la evaluación.</li>
 </ul>
 <h2 id="2-explica">2. Explica<a class="headerlink" href="#2-explica" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 25 min.</p>
 <h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Validación de formularios.</li>
-<li>Mensajes al usuario.</li>
-<li>Excepciones personalizadas o controladas.</li>
-<li>Validaciones del servicio.</li>
-<li>Manejo de errores de persistencia.</li>
-<li>Pruebas manuales.</li>
-<li>Casos validos, inválidos y límite.</li>
+<li>Consulta integrada.</li>
+<li>Búsqueda por criterio.</li>
+<li>Filtro por fecha o usuario.</li>
+<li>Vista maestro-detalle.</li>
+<li>Totales simples.</li>
+<li>Pruebas funcionales.</li>
+<li>Manejo de errores.</li>
+<li>Corrección de observaciones.</li>
 </ul>
-<p>Regla métodológica de la sesión:</p>
-<div class="highlight"><pre><span></span><code>El controlador valida presencia y formato inmediato de la vista.
-El servicio valida reglas del flujo.
-El DAO reporta errores de persistencia.
-El usuario debe recibir mensajes claros.
+<p>Regla metodológica de la sesión:</p>
+<div class="highlight"><pre><span></span><code>La validación se aplica en cada sesión.
+En S11 no se introduce un patrón nuevo.
+S11 consolida consultas y pruebas del flujo principal.
+El estudiante debe poder explicar cómo viaja la información entre capas.
 </code></pre></div>
-<h3 id="22-flujo-de-validacion">2.2 Flujo de validación<a class="headerlink" href="#22-flujo-de-validacion" title="Permanent link">&para;</a></h3>
+<h3 id="22-arquitectura-de-consulta">2.2 Arquitectura de consulta<a class="headerlink" href="#22-arquitectura-de-consulta" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart TB
-    Vista["Vista JavaFX"]
-    Controlador["Controlador"]
-    Contrato["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
-    ServicioBD["ProductoServiceBD&lt;br/&gt;implements"]
-    Validaciones["Validaciones/Excepciones"]
-    DAO["ProductoDAO"]
-    SQLite[("SQLite")]
+    Vista["Vista de consultas&lt;br/&gt;filtros / tabla / detalle"]
+    Controlador["ConsultaController"]
+
+    subgraph Servicio["Servicio"]
+        ConsultaService["ConsultaService"]
+        Validaciones["Validaciones/Excepciones"]
+    end
+
+    subgraph Persistencia["Persistencia"]
+        ConsultaDAO["ConsultaDAO"]
+        SQLite[("SQLite")]
+    end
+
+    Entidades["Venta / DetalleVenta / Producto / Usuario"]
 
     Vista --&gt; Controlador
-    Controlador --&gt; Contrato
-    ServicioBD -. implements .-&gt; Contrato
-    Controlador -.-&gt; Validaciones
-    ServicioBD -.-&gt; Validaciones
-    ServicioBD --&gt; DAO
-    DAO --&gt;|"JDBC"| SQLite</code></pre>
+    Controlador --&gt; ConsultaService
+    ConsultaService -.-&gt; Validaciones
+    ConsultaService --&gt; ConsultaDAO
+    ConsultaDAO --&gt; Entidades
+    ConsultaDAO --&gt;|"JDBC"| SQLite</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <ol>
-<li>Validar campos obligatorios.</li>
-<li>Validar tipos numéricos cuándo corresponda.</li>
-<li>Validar rangos.</li>
-<li>Mostrar alertas claras.</li>
-<li>Controlar seleccion nula en tabla.</li>
-<li>Ubicar reglas del flujo principal en el servicio.</li>
-<li>Controlar errores de DAO desde la implementación persistente.</li>
-<li>Probar escenarios normales.</li>
-<li>Probar escenarios inválidos.</li>
-<li>Registrar una matriz mínima de pruebas.</li>
+<li>Crear una vista de consultas.</li>
+<li>Agregar filtros por fecha, usuario o texto.</li>
+<li>Crear <code>ConsultaDAO</code> o métodos de consulta en DAO existentes.</li>
+<li>Crear <code>ConsultaService</code> si el flujo lo requiere.</li>
+<li>Listar operaciones registradas.</li>
+<li>Mostrar detalle de la operación seleccionada.</li>
+<li>Calcular total mostrado.</li>
+<li>Verificar consistencia entre cabecera y detalle.</li>
+<li>Probar casos válidos.</li>
+<li>Probar casos inválidos.</li>
+<li>Registrar matriz de pruebas.</li>
+<li>Corregir observaciones encontradas.</li>
 </ol>
 <p>Matriz sugerida:</p>
 <table>
@@ -1700,139 +1709,107 @@ El usuario debe recibir mensajes claros.
 </thead>
 <tbody>
 <tr>
-<td>Registro valido</td>
-<td>Campos completos</td>
-<td>Guarda y refresca tabla</td>
+<td>Consulta por fecha</td>
+<td>Fecha con registros</td>
+<td>Lista operaciones</td>
 <td></td>
 </tr>
 <tr>
-<td>Registro inválido</td>
-<td>Nombre vacio</td>
+<td>Consulta sin resultados</td>
+<td>Fecha sin registros</td>
+<td>Mensaje claro</td>
+<td></td>
+</tr>
+<tr>
+<td>Ver detalle</td>
+<td>Operación seleccionada</td>
+<td>Muestra detalles</td>
+<td></td>
+</tr>
+<tr>
+<td>Sin selección</td>
+<td>Ninguna fila</td>
 <td>Muestra alerta</td>
 <td></td>
 </tr>
 <tr>
-<td>Edición valida</td>
-<td>Fila seleccionada</td>
-<td>Actualiza SQLite</td>
-<td></td>
-</tr>
-<tr>
-<td>Eliminación sin seleccionar</td>
-<td>Sin fila</td>
-<td>Muestra alerta</td>
-<td></td>
-</tr>
-<tr>
-<td>Error de persistencia</td>
-<td>BD no disponible</td>
-<td>Mensaje controlado</td>
+<td>Total</td>
+<td>Operación con detalles</td>
+<td>Total correcto</td>
 <td></td>
 </tr>
 </tbody>
 </table>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
-<p>Fuera del aula, cada estudiante consolida el aprendizaje documentando pruebas del flujo principal y preparando una evidencia individual.</p>
+<p>Fuera del aula, cada estudiante consolida consultas y pruebas del flujo principal.</p>
 <p>Tiempo: 2h fuera del aula.</p>
 <h3 id="41-plantilla-de-evidencia-individual">4.1 Plantilla de evidencia individual<a class="headerlink" href="#41-plantilla-de-evidencia-individual" title="Permanent link">&para;</a></h3>
 <p>Entrega un PDF con el siguiente nombre:</p>
 <div class="highlight"><pre><span></span><code>S11_Equipo##_ApellidoNombre.pdf
 </code></pre></div>
-<p>Ejemplo:</p>
-<div class="highlight"><pre><span></span><code>S11_Equipo03_QuispeAna.pdf
-</code></pre></div>
-<p>El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.</p>
 <h4 id="411-datos-del-estudiante">4.1.1 Datos del estudiante<a class="headerlink" href="#411-datos-del-estudiante" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Nombre:</li>
 <li>Equipo:</li>
-<li>Sesión: S11 - Validación de datos y pruebas del flujo principal</li>
+<li>Sesión: S11 - Consultas integradas y pruebas</li>
 <li>Rol o aporte realizado:</li>
 <li>Link de GitHub:</li>
 </ul>
 <h4 id="412-trabajo-autonomo-realizado">4.1.2 Trabajo autónomo realizado<a class="headerlink" href="#412-trabajo-autonomo-realizado" title="Permanent link">&para;</a></h4>
-<p>Completa y evidencia estas tareas:</p>
 <ol>
-<li>Documentar pruebas del flujo principal.</li>
-<li>Probar al menos dos casos válidos.</li>
-<li>Probar al menos dos casos inválidos.</li>
-<li>Evidenciar una alerta o mensaje al usuario.</li>
-<li>Evidenciar una validación ubicada en el servicio.</li>
-<li>Evidenciar un error controlado de persistencia o selección.</li>
+<li>Implementar al menos una consulta con filtro.</li>
+<li>Mostrar resultado en tabla.</li>
+<li>Mostrar detalle del registro seleccionado.</li>
+<li>Verificar totales.</li>
+<li>Documentar pruebas.</li>
 <li>Registrar una corrección aplicada.</li>
+<li>Explicar el flujo entre capas.</li>
 </ol>
 <h4 id="413-evidencia-tecnica">4.1.3 Evidencia técnica<a class="headerlink" href="#413-evidencia-tecnica" title="Permanent link">&para;</a></h4>
-<p>Incluye capturas o salidas con una breve explicación debajo de cada una:</p>
 <ul>
+<li>Captura de consulta.</li>
+<li>Captura de detalle.</li>
+<li>Código o fragmento de consulta.</li>
 <li>Matriz de pruebas.</li>
-<li>Capturas de alertas.</li>
-<li>Un error controlado.</li>
-<li>Una validación ubicada en el servicio.</li>
-<li>Una corrección aplicada.</li>
-<li>Evidencia de que el flujo principal queda operativo.</li>
+<li>Evidencia de corrección aplicada.</li>
+<li>Explicación del flujo <code>Vista -&gt; Controlador -&gt; Servicio -&gt; DAO -&gt; SQLite</code>.</li>
 </ul>
 <h4 id="414-error-o-hallazgo">4.1.4 Error o hallazgo<a class="headerlink" href="#414-error-o-hallazgo" title="Permanent link">&para;</a></h4>
-<p>Describe al menos un error, diferencia o hallazgo técnico:</p>
-<ul>
-<li>Qué ocurrió.</li>
-<li>Cómo lo diagnosticaste.</li>
-<li>Cómo lo corregiste o qué aprendiste.</li>
-</ul>
-<p>Ejemplos válidos:</p>
-<ul>
-<li>El formulario aceptaba datos vacíos.</li>
-<li>La tabla permitía eliminar sin selección.</li>
-<li>El DAO lanzaba un error sin mensaje claro.</li>
-<li>Una validación estaba duplicada en controlador y servicio.</li>
-</ul>
+<p>Describe un problema encontrado al consultar o mostrar detalle.</p>
 <h4 id="415-reflexion-tecnica-breve">4.1.5 Reflexión técnica breve<a class="headerlink" href="#415-reflexion-tecnica-breve" title="Permanent link">&para;</a></h4>
 <p>Responde en 5 a 8 líneas:</p>
-<div class="highlight"><pre><span></span><code>Por qué probar casos inválidos es tan importante como probar casos correctos?
+<div class="highlight"><pre><span></span><code>Por qué consultar datos relacionados es diferente de listar una sola tabla?
 </code></pre></div>
 <h3 id="42-criterios-minimos-de-aceptacion">4.2 Criterios mínimos de aceptación<a class="headerlink" href="#42-criterios-minimos-de-aceptacion" title="Permanent link">&para;</a></h3>
-<p>La evidencia individual se considera completa si:</p>
 <ul>
-<li>El archivo respeta el nombre <code>S11_Equipo##_ApellidoNombre.pdf</code>.</li>
-<li>Incluye evidencias técnicas legibles.</li>
-<li>Presenta matriz de pruebas.</li>
-<li>Muestra casos válidos e inválidos.</li>
-<li>Muestra alertas o mensajes al usuario.</li>
-<li>Muestra una validación ubicada en el servicio.</li>
-<li>Explica una corrección aplicada.</li>
-<li>No contiene solo pantallazos: cada evidencia tiene una descripción breve.</li>
+<li>PDF con nombre correcto.</li>
+<li>Consulta con filtro.</li>
+<li>Vista maestro-detalle o equivalente.</li>
+<li>Totales verificados.</li>
+<li>Matriz de pruebas.</li>
+<li>Corrección aplicada o hallazgo técnico.</li>
 </ul>
 <h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
-<p>Esta sección conecta el resultado de aprendizaje de la sesión con el producto que debe evidenciar cada estudiante.</p>
 <h3 id="51-resultados-esperados">5.1 Resultados esperados<a class="headerlink" href="#51-resultados-esperados" title="Permanent link">&para;</a></h3>
 <ul>
-<li>La GUI valida datos antes de guardar.</li>
-<li>Los errores se comunican al usuario.</li>
-<li>El servicio concentra validaciones del flujo y excepciones controladas.</li>
-<li>Existen pruebas manuales documentadas.</li>
-<li>El flujo principal queda listo para evaluación U2.</li>
+<li>El estudiante consulta información persistente relacionada.</li>
+<li>El resultado se muestra en GUI.</li>
+<li>El detalle se muestra al seleccionar un registro.</li>
+<li>Los totales son consistentes.</li>
+<li>Existe matriz de pruebas.</li>
+<li>Las validaciones trabajadas en sesiones previas se mantienen.</li>
 </ul>
 <h3 id="52-evidencia-del-producto-de-sesion">5.2 Evidencia del producto de sesión<a class="headerlink" href="#52-evidencia-del-producto-de-sesion" title="Permanent link">&para;</a></h3>
 <p>Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.</p>
-<p>Nombre del archivo:</p>
-<div class="highlight"><pre><span></span><code>S11_Equipo##_ApellidoNombre.pdf
-</code></pre></div>
-<p>La evidencia debe demostrar:</p>
-<ul>
-<li>Producto de sesión construido.</li>
-<li>Aporte individual verificable.</li>
-<li>Validaciones y pruebas documentadas.</li>
-<li>Reflexión técnica breve.</li>
-</ul>
-<p>La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.</p>
 <h3 id="53-preguntas-de-defensa-y-reflexion">5.3 Preguntas de defensa y reflexión<a class="headerlink" href="#53-preguntas-de-defensa-y-reflexion" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Qué validaciones implementaste?</li>
-<li>Qué validación pertenece al controlador y cuál al servicio?</li>
-<li>Qué errores controlaste?</li>
-<li>Qué caso límite probaste?</li>
-<li>Cómo sabes que el flujo principal funciona?</li>
-<li>Qué caso inválido te ayudó a encontrar un problema real?</li>
+<li>Qué consulta implementaste?</li>
+<li>Qué filtros usaste?</li>
+<li>Qué DAO participa en la consulta?</li>
+<li>Cómo muestras el detalle?</li>
+<li>Cómo verificas el total?</li>
+<li>Qué corrección aplicaste?</li>
 </ol>
 <h3 id="54-rubrica-de-evaluacion">5.4 Rúbrica de evaluación<a class="headerlink" href="#54-rubrica-de-evaluacion" title="Permanent link">&para;</a></h3>
 <table>
@@ -1849,71 +1826,61 @@ El usuario debe recibir mensajes claros.
 </thead>
 <tbody>
 <tr>
-<td>1. Validaciones</td>
+<td>1. Consulta integrada</td>
 <td style="text-align: right;">2</td>
-<td>Validaciones claras en controlador y servicio según responsabilidad.</td>
-<td>Validaciones principales funcionales.</td>
-<td>Validaciones parciales.</td>
-<td>No evidencia validaciones.</td>
+<td>Consulta relacionada, filtrada y funcional.</td>
+<td>Consulta funcional.</td>
+<td>Consulta parcial.</td>
+<td>No consulta.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>2. Manejo de errores</td>
+<td>2. Vista de resultados</td>
 <td style="text-align: right;">2</td>
-<td>Errores controlados con mensajes claros al usuario.</td>
-<td>Errores principales controlados.</td>
-<td>Control parcial de errores.</td>
-<td>No controla errores.</td>
+<td>Tabla y detalle claros.</td>
+<td>Resultado funcional.</td>
+<td>Vista parcial.</td>
+<td>No muestra resultados.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>3. Matriz de pruebas</td>
+<td>3. Consistencia</td>
 <td style="text-align: right;">2</td>
-<td>Matriz cubre casos válidos, inválidos y límite.</td>
-<td>Matriz cubre casos principales.</td>
-<td>Matriz incompleta.</td>
-<td>No presenta matriz.</td>
+<td>Totales y detalles coherentes con BD.</td>
+<td>Consistencia suficiente.</td>
+<td>Inconsistencias menores.</td>
+<td>No verifica.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>4. Corrección aplicada</td>
+<td>4. Pruebas</td>
 <td style="text-align: right;">2</td>
-<td>Evidencia problema, causa y corrección funcional.</td>
-<td>Evidencia corrección principal.</td>
-<td>Corrección poco clara.</td>
-<td>No evidencia corrección.</td>
+<td>Matriz cubre casos válidos e inválidos.</td>
+<td>Pruebas principales.</td>
+<td>Pruebas parciales.</td>
+<td>No prueba.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
 <td>5. Error o hallazgo</td>
 <td style="text-align: right;">1</td>
-<td>Analiza error/hallazgo, causa, solución y aprendizaje técnico.</td>
-<td>Explica un problema y una solución.</td>
-<td>Menciona un problema sin análisis.</td>
-<td>No presenta error ni hallazgo.</td>
+<td>Analiza causa y solución.</td>
+<td>Explica un problema.</td>
+<td>Menciona un problema.</td>
+<td>No presenta.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>6. Reflexión y orden</td>
+<td>6. Orden y reflexión</td>
 <td style="text-align: right;">1</td>
-<td>PDF ordenado, evidencias legibles y reflexión precisa.</td>
-<td>Evidencias suficientes y reflexión clara.</td>
-<td>Evidencias incompletas o reflexión superficial.</td>
-<td>PDF desordenado o sin reflexión.</td>
+<td>Evidencia clara y reflexión precisa.</td>
+<td>Evidencia suficiente.</td>
+<td>Evidencia incompleta.</td>
+<td>No sustenta.</td>
 <td style="text-align: right;"></td>
 </tr>
 </tbody>
 </table>
-<p>Puntuación acumulada = suma de (<code>Peso</code> * <code>Puntuación obtenida</code>) = ____.</p>
-<p>Nota final = (<code>Puntuación acumulada</code> / 30) * 20 = ____.</p>
-<p>Para usar la rúbrica con IA, solicita:</p>
-<div class="highlight"><pre><span></span><code>Evalúa el PDF usando la rúbrica de la sesión.
-Para cada dimensión selecciona la puntuación obtenida usando la escala Inicio=0, Proceso=1, Logro=2, Logro destacado=3.
-Justifica brevemente cada puntuación.
-Calcula la puntuación acumulada con la fórmula: suma de (Peso * Puntuación obtenida).
-Calcula la nota final sobre 20 con la fórmula: (Puntuación acumulada / 30) * 20.
-Indica 2 fortalezas y 2 recomendaciones.
-</code></pre></div>
 
 
 
