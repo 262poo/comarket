@@ -14,7 +14,7 @@ El estudiante implementa registro, listado, búsqueda, actualización y eliminac
 
 ### 1.3 Producto de sesión
 
-CRUD en consola con `ClienteService`, `ClienteServiceMemoria`, entidades encapsuladas, búsqueda por documento y preparación de entrega con Maven/GraalVM.
+CRUD en consola con `ProductoService`, `ProductoServiceMemoria`, entidades encapsuladas, búsqueda por código y preparación de entrega con Maven/GraalVM.
 
 ### 1.4 Motivación de la sesión
 
@@ -66,38 +66,39 @@ classDiagram
         main(String[] args)
         mostrarMenu()
     }
-    class Cliente {
+    class Producto {
+        -codigo
         -nombre
-        -documento
-        -telefono
-        mostrarPerfil()
+        -precio
+        -stock
+        mostrarInformacion()
     }
-    class ClienteService {
+    class ProductoService {
         <<interface>>
-        registrar(cliente)
+        registrar(producto)
         listar()
-        buscarPorDocumento(documento)
-        actualizar(cliente)
-        eliminar(documento)
+        buscarPorCodigo(codigo)
+        actualizar(producto)
+        eliminar(codigo)
     }
-    class ClienteServiceMemoria {
-        -clientes
-        registrar(cliente)
+    class ProductoServiceMemoria {
+        -productos
+        registrar(producto)
         listar()
-        buscarPorDocumento(documento)
-        actualizar(cliente)
-        eliminar(documento)
+        buscarPorCodigo(codigo)
+        actualizar(producto)
+        eliminar(codigo)
     }
-    class ArrayListClientes {
-        ArrayList de clientes
+    class ArrayListProductos {
+        ArrayList de productos
     }
 
-    Main ..> ClienteService : usa contrato
-    Main ..> Cliente : crea datos
-    ClienteService <|.. ClienteServiceMemoria : implements
-    ClienteService ..> Cliente : usa
-    ClienteServiceMemoria ..> Cliente : usa
-    ClienteServiceMemoria o-- ArrayListClientes : administra
+    Main ..> ProductoService : usa contrato
+    Main ..> Producto : crea datos
+    ProductoService <|.. ProductoServiceMemoria : implements
+    ProductoService ..> Producto : usa
+    ProductoServiceMemoria ..> Producto : usa
+    ProductoServiceMemoria o-- ArrayListProductos : administra
 ```
 
 ## 3. Aplica: actividad práctica guiada
@@ -109,12 +110,12 @@ Tiempo: 2h.
 ```java
 import java.util.ArrayList;
 
-public interface ClienteService {
-    void registrar(Cliente cliente);
-    ArrayList<Cliente> listar();
-    Cliente buscarPorDocumento(String documento);
-    void actualizar(Cliente cliente);
-    void eliminar(String documento);
+public interface ProductoService {
+    void registrar(Producto producto);
+    ArrayList<Producto> listar();
+    Producto buscarPorCodigo(String codigo);
+    void actualizar(Producto producto);
+    void eliminar(String codigo);
 }
 ```
 
@@ -123,43 +124,44 @@ public interface ClienteService {
 ```java
 import java.util.ArrayList;
 
-public class ClienteServiceMemoria implements ClienteService {
-    private ArrayList<Cliente> clientes = new ArrayList<>();
+public class ProductoServiceMemoria implements ProductoService {
+    private ArrayList<Producto> productos = new ArrayList<>();
 
     @Override
-    public void registrar(Cliente cliente) {
-        clientes.add(cliente);
+    public void registrar(Producto producto) {
+        productos.add(producto);
     }
 
     @Override
-    public ArrayList<Cliente> listar() {
-        return clientes;
+    public ArrayList<Producto> listar() {
+        return productos;
     }
 
     @Override
-    public Cliente buscarPorDocumento(String documento) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getDocumento().equals(documento)) {
-                return cliente;
+    public Producto buscarPorCodigo(String codigo) {
+        for (Producto producto : productos) {
+            if (producto.getCodigo().equals(codigo)) {
+                return producto;
             }
         }
         return null;
     }
 
     @Override
-    public void actualizar(Cliente clienteActualizado) {
-        Cliente cliente = buscarPorDocumento(clienteActualizado.getDocumento());
-        if (cliente != null) {
-            cliente.setNombre(clienteActualizado.getNombre());
-            cliente.setTelefono(clienteActualizado.getTelefono());
+    public void actualizar(Producto productoActualizado) {
+        Producto producto = buscarPorCodigo(productoActualizado.getCodigo());
+        if (producto != null) {
+            producto.setNombre(productoActualizado.getNombre());
+            producto.setPrecio(productoActualizado.getPrecio());
+            producto.setStock(productoActualizado.getStock());
         }
     }
 
     @Override
-    public void eliminar(String documento) {
-        Cliente cliente = buscarPorDocumento(documento);
-        if (cliente != null) {
-            clientes.remove(cliente);
+    public void eliminar(String codigo) {
+        Producto producto = buscarPorCodigo(codigo);
+        if (producto != null) {
+            productos.remove(producto);
         }
     }
 }
@@ -170,33 +172,33 @@ public class ClienteServiceMemoria implements ClienteService {
 ```java
 public class Main {
     public static void main(String[] args) {
-        ClienteService service = new ClienteServiceMemoria();
+        ProductoService service = new ProductoServiceMemoria();
 
-        service.registrar(new Cliente("Ana Torres", "71234567", "999888777"));
-        service.registrar(new Cliente("Marco Ruiz", "72345678", "988777666"));
+        service.registrar(new Producto("P001", "Teclado", 80.0, 10));
+        service.registrar(new Producto("P002", "Mouse", 45.0, 15));
 
-        Cliente encontrado = service.buscarPorDocumento("71234567");
+        Producto encontrado = service.buscarPorCodigo("P001");
         if (encontrado != null) {
-            encontrado.mostrarPerfil();
+            encontrado.mostrarInformacion();
         }
 
-        service.eliminar("72345678");
-        System.out.println("Total clientes: " + service.listar().size());
+        service.eliminar("P002");
+        System.out.println("Total productos: " + service.listar().size());
     }
 }
 ```
 
 ### 3.4 Agregar menu de consola
 
-El menu debe llamar al contrato `ClienteService`, no directamente al `ArrayList`.
+El menu debe llamar al contrato `ProductoService`, no directamente al `ArrayList`.
 
 Opciones mínimas:
 
-1. Registrar cliente.
-2. Listar clientes.
-3. Buscar cliente.
-4. Actualizar cliente.
-5. Eliminar cliente.
+1. Registrar producto.
+2. Listar productos.
+3. Buscar producto.
+4. Actualizar producto.
+5. Eliminar producto.
 6. Salir.
 
 ### 3.5 Organizar con Maven
@@ -208,9 +210,9 @@ Estructura mínima:
 ```text
 src/main/java/
     Main.java
-    entidad/Cliente.java
-    servicio/ClienteService.java
-    servicio/ClienteServiceMemoria.java
+    entidad/Producto.java
+    servicio/ProductoService.java
+    servicio/ProductoServiceMemoria.java
 pom.xml
 ```
 
@@ -347,7 +349,7 @@ La revisión se realiza con los criterios mínimos de aceptación de la sección
 ### 5.3 Preguntas de defensa y reflexión
 
 1. Qué responsabilidad tiene `Main`?
-2. Qué responsabilidad tiene `ClienteService`?
+2. Qué responsabilidad tiene `ProductoService`?
 3. Dónde se almacena temporalmente la información?
 4. Por qué `ArrayList` no debe estar como variable principal en `Main`?
 5. Qué cambiaría cuando el almacenamiento sea SQLite?

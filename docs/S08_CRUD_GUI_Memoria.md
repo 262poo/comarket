@@ -62,51 +62,52 @@ classDiagram
         formulario
         TableView
     }
-    class ClienteController {
+    class ProductoController {
         onRegistrar()
         onActualizar()
         onEliminar()
         cargarTabla()
     }
-    class ClienteService {
+    class ProductoService {
         <<interface>>
-        registrar(cliente)
+        registrar(producto)
         listar()
-        actualizar(cliente)
-        eliminar(documento)
+        actualizar(producto)
+        eliminar(codigo)
     }
-    class ClienteServiceMemoria {
-        -clientes
+    class ProductoServiceMemoria {
+        -productos
         CRUD sobre ArrayList
     }
-    class Cliente {
+    class Producto {
+        -codigo
         -nombre
-        -documento
-        -telefono
+        -precio
+        -stock
     }
-    class ArrayListClientes {
+    class ArrayListProductos {
         datos en memoria
     }
 
-    VistaFXML ..> ClienteController : eventos
-    ClienteController ..> ClienteService : usa contrato
-    ClienteController ..> Cliente : crea/lee
-    ClienteService <|.. ClienteServiceMemoria : implements
-    ClienteService ..> Cliente : usa
-    ClienteServiceMemoria ..> Cliente : usa
-    ClienteServiceMemoria o-- ArrayListClientes : administra
+    VistaFXML ..> ProductoController : eventos
+    ProductoController ..> ProductoService : usa contrato
+    ProductoController ..> Producto : crea/lee
+    ProductoService <|.. ProductoServiceMemoria : implements
+    ProductoService ..> Producto : usa
+    ProductoServiceMemoria ..> Producto : usa
+    ProductoServiceMemoria o-- ArrayListProductos : administra
 ```
 
 ## 3. Aplica: actividad práctica guiada
 
 Tiempo: 2h.
 
-1. Crear campos para datos de cliente.
+1. Crear campos para datos de producto.
 2. Crear columnas de `TableView`.
 3. Leer datos desde el formulario.
-4. Crear objeto `Cliente`.
-5. Delegar registro a `ClienteService`.
-6. Mantener el `ArrayList` dentro de `ClienteServiceMemoria`.
+4. Crear objeto `Producto`.
+5. Delegar registro a `ProductoService`.
+6. Mantener el `ArrayList` dentro de `ProductoServiceMemoria`.
 7. Mostrar datos en `TableView`.
 8. Cargar datos del elemento seleccionado al formulario.
 9. Actualizar el registro seleccionado.
@@ -160,7 +161,7 @@ Incluye capturas o salidas con una breve explicación debajo de cada una:
 
 - Capturas de registro, listado, edición y eliminación.
 - Código del controlador.
-- Código o referencia de `ClienteService` y `ClienteServiceMemoria`.
+- Código o referencia de `ProductoService` y `ProductoServiceMemoria`.
 - Explicación de cómo se actualiza la tabla sin duplicar el CRUD en el controlador.
 - Evidencia de que el `ArrayList` queda dentro de la implementación en memoria.
 
@@ -194,7 +195,7 @@ La evidencia individual se considera completa si:
 - El archivo respeta el nombre `S08_Equipo##_ApellidoNombre.pdf`.
 - Incluye evidencias técnicas legibles.
 - Muestra registro, listado, edición y eliminación desde GUI.
-- Usa `ClienteService` o contrato equivalente.
+- Usa `ProductoService` o contrato equivalente.
 - Mantiene `ArrayList` dentro de la implementación en memoria.
 - Explica cómo se actualiza `TableView`.
 - No contiene solo pantallazos: cada evidencia tiene una descripción breve.

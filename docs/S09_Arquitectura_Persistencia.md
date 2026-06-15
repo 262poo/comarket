@@ -65,26 +65,26 @@ flowchart TB
     Controlador["JavaFX Controller"]
 
     subgraph Servicio["Servicio"]
-        Contrato["ClienteService<br/>&lt;&lt;interface&gt;&gt;"]
-        Implementación["ClienteServiceBD<br/>implements"]
+        Contrato["ProductoService<br/>&lt;&lt;interface&gt;&gt;"]
+        Implementacion["ProductoServiceBD<br/>implements"]
         Validaciones["Validaciones/Excepciones"]
     end
 
-    Entidades["Cliente"]
+    Entidades["Producto"]
 
     subgraph Persistencia["Persistencia"]
-        DAO["ClienteDAO"]
+        DAO["ProductoDAO"]
         Conexion["ConexionBD"]
         SQLite[("SQLite / comarket.db")]
     end
 
     Vista --> Controlador
     Controlador --> Contrato
-    Implementación -. implements .-> Contrato
+    Implementacion -. implements .-> Contrato
     Contrato -.-> Entidades
-    Implementación -.-> Entidades
-    Implementación --> DAO
-    Implementación -.-> Validaciones
+    Implementacion -.-> Entidades
+    Implementacion --> DAO
+    Implementacion -.-> Validaciones
     DAO --> Entidades
     DAO --> Conexion
     Conexion -->|"JDBC"| SQLite
@@ -101,10 +101,10 @@ Tiempo: 2h.
 5. Crear una tabla inicial.
 6. Implementar `ConexionBD`.
 7. Probar conexión con una consulta simple.
-8. Identificar `ClienteService` como contrato qué seguira usando el controlador.
-9. Preparar `ClienteServiceBD` cómo implementación persistente.
-10. Preparar `ClienteDAO` cómo componente de persistencia.
-11. Verificar qué `Cliente` no cambia por usar base de datos.
+8. Identificar `ProductoService` como contrato qué seguira usando el controlador.
+9. Preparar `ProductoServiceBD` cómo implementación persistente.
+10. Preparar `ProductoDAO` cómo componente de persistencia.
+11. Verificar qué `Producto` no cambia por usar base de datos.
 
 ## 4. Crea: actividad autónoma
 

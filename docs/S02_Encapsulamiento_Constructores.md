@@ -563,7 +563,7 @@ El PDF debe usar esta estructura. La primera sección define el trabajo autónom
 
 Completa y evidencia estas tareas:
 
-1. Elegir una entidad del dominio, por ejemplo `Proveedor`, `Empleado`, `Usuario`, `Cliente` u otra entidad del proyecto elegido.
+1. Elegir una entidad del dominio, por ejemplo `Producto`, `Proveedor`, `Venta`, `DetalleVenta` u otra entidad del proyecto elegido.
 2. Convertir sus atributos a `private`.
 3. Crear al menos dos constructores sobrecargados.
 4. Crear getters y setters limpios.

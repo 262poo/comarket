@@ -51,33 +51,34 @@ classDiagram
         main(String[] args)
         menu()
     }
-    class Cliente {
+    class Producto {
+        -codigo
         -nombre
-        -documento
-        -telefono
+        -precio
+        -stock
     }
-    class ClienteService {
+    class ProductoService {
         <<interface>>
-        registrar(cliente)
+        registrar(producto)
         listar()
-        buscarPorDocumento(documento)
-        actualizar(cliente)
-        eliminar(documento)
+        buscarPorCodigo(codigo)
+        actualizar(producto)
+        eliminar(codigo)
     }
-    class ClienteServiceMemoria {
-        -clientes
+    class ProductoServiceMemoria {
+        -productos
         CRUD sobre ArrayList
     }
-    class ArrayListClientes {
+    class ArrayListProductos {
         datos en memoria
     }
 
-    Main ..> ClienteService : usa contrato
-    Main ..> Cliente : crea datos
-    ClienteService <|.. ClienteServiceMemoria : implements
-    ClienteService ..> Cliente : usa
-    ClienteServiceMemoria ..> Cliente : usa
-    ClienteServiceMemoria o-- ArrayListClientes : administra
+    Main ..> ProductoService : usa contrato
+    Main ..> Producto : crea datos
+    ProductoService <|.. ProductoServiceMemoria : implements
+    ProductoService ..> Producto : usa
+    ProductoServiceMemoria ..> Producto : usa
+    ProductoServiceMemoria o-- ArrayListProductos : administra
 ```
 
 ### 2.3 Criterios mínimos de revisión

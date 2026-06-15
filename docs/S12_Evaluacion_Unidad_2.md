@@ -52,15 +52,15 @@ flowchart TB
     Controlador["Controlador"]
 
     subgraph Servicio["Servicio"]
-        Contrato["ClienteService<br/>&lt;&lt;interface&gt;&gt;"]
-        ServicioBD["ClienteServiceBD<br/>implements"]
+        Contrato["ProductoService<br/>&lt;&lt;interface&gt;&gt;"]
+        ServicioBD["ProductoServiceBD<br/>implements"]
         Validaciones["Validaciones/Excepciones"]
     end
 
-    Entidades["Cliente"]
+    Entidades["Producto"]
 
     subgraph Persistencia["Persistencia"]
-        DAO["ClienteDAO"]
+        DAO["ProductoDAO"]
         SQLite[("SQLite / comarket.db")]
     end
 

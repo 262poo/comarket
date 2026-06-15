@@ -61,25 +61,25 @@ flowchart TB
     Controladores["Controladores"]
 
     subgraph Servicios["Servicios"]
-        Contrato["Interface<br/>contrato de operaciones CRUD"]
-        Implementación["Implementación persistente<br/>implements"]
+        Contrato["ProductoService<br/>&lt;&lt;interface&gt;&gt;"]
+        Implementacion["ProductoServiceBD<br/>implements"]
         Validaciones["Validaciones/Excepciones"]
     end
 
-    Entidades["Entidades"]
+    Entidades["Producto / Venta / DetalleVenta"]
 
     subgraph Persistencia["Persistencia"]
-        DAO["DAO"]
+        DAO["ProductoDAO / VentaDAO"]
         SQLite[("SQLite / comarket.db")]
     end
 
     Vista --> Controladores
     Controladores --> Contrato
-    Implementación -. implements .-> Contrato
+    Implementacion -. implements .-> Contrato
     Contrato -.-> Entidades
-    Implementación -.-> Entidades
-    Implementación -.-> Validaciones
-    Implementación --> DAO
+    Implementacion -.-> Entidades
+    Implementacion -.-> Validaciones
+    Implementacion --> DAO
     DAO --> Entidades
     DAO -->|"JDBC"| SQLite
 ```

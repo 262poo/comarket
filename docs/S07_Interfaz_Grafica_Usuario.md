@@ -39,12 +39,12 @@ Tiempo: 25 min.
 
 | Concepto | Idea central |
 |---|---|
-| JavaFX | Libreria para construir interfaces gráficas en Java. |
+| JavaFX | Librería para construir interfaces gráficas en Java. |
 | FXML | Archivo qué describe la estructura visual de la pantalla. |
 | Scene Builder | Herramienta visual para editar FXML. |
 | Controller | Clase Java qué recibe eventos de la vista. |
 | `fx:id` | Nombre qué permite conectar un control FXML con Java. |
-| Evento | Accion del usuario, cómo presionar un boton. |
+| Evento | Acción del usuario, como presionar un botón. |
 | `TableView` | Control para mostrar listas de objetos. |
 
 Regla métodológica de la sesión:
@@ -59,29 +59,15 @@ El CRUD completo se conecta en la siguiente sesión.
 ### 2.2 Arquitectura de la sesión
 
 ```mermaid
-classDiagram
-    class MainApp {
-        start(stage)
-    }
-    class VistaFXML {
-        TextField
-        Button
-        TableView
-    }
-    class ClienteController {
-        initialize()
-        onRegistrar()
-        onLimpiar()
-    }
-    class Cliente {
-        -nombre
-        -documento
-        -telefono
-    }
+flowchart TB
+    Main["Main<br/>Application"]
+    FXML["Vista FXML<br/>TextField / Button / TableView"]
+    Controller["ProductoController<br/>initialize / eventos"]
+    Entity["Producto<br/>entidad del dominio"]
 
-    MainApp ..> VistaFXML : carga FXML
-    VistaFXML ..> ClienteController : fx:controller
-    ClienteController ..> Cliente : crea objeto
+    Main -->|"carga FXML"| FXML
+    FXML -->|"fx controller"| Controller
+    Controller -. "crea / usa" .-> Entity
 ```
 
 ## 3. Aplica: actividad práctica guiada
@@ -90,15 +76,196 @@ Tiempo: 2h.
 
 ### 3.1 Crear proyecto JavaFX con Maven
 
-Usa el IDE qué soporte JavaFX y Scene Builder. Para U2 se recomienda IntelliJ IDEA o un entorno equivalente con Maven configurado.
+Usa un IDE que soporte JavaFX, Maven y Scene Builder. Para U2 se recomienda IntelliJ IDEA o un entorno equivalente con Maven configurado.
+
+**Producto del paso:** proyecto JavaFX/Maven creado, con estructura inicial, paquetes base y clase `Main` preparada para cargar una vista FXML.
+
+#### 3.1.1 Crear proyecto en IntelliJ IDEA
+
+Abrir IntelliJ IDEA:
+
+```text
+New Project
+-> JavaFX
+```
+
+Configurar:
+
+```text
+Name: comarket
+Location: C:\262\262poo
+Language: Java
+Build system: Maven
+Group: com.upeu
+Artifact: comarket
+JDK: temurin-17
+```
+
+Presionar:
+
+```text
+Next
+```
+
+En la ventana de librerías adicionales:
+
+```text
+Additional libraries:
+-> No seleccionar ninguna librería
+```
+
+Finalizar:
+
+```text
+Create
+```
+
+#### 3.1.2 Revisar estructura inicial
+
+Estructura esperada:
+
+```text
+comarket/
+├── pom.xml
+└── src/
+    └── main/
+        ├── java/
+        └── resources/
+```
+
+#### 3.1.3 Crear paquetes base para S7
+
+Dentro de:
+
+```text
+src/main/java/
+```
+
+crear:
+
+```text
+app
+modelo
+controlador
+```
+
+Dentro de:
+
+```text
+src/main/resources/
+```
+
+crear:
+
+```text
+vista
+css
+img
+```
+
+La persistencia (`dao`, `data`, SQLite) se trabajará más adelante, desde S9 y S10. En S7 el foco es abrir una ventana, cargar FXML y conectar eventos.
+
+#### 3.1.4 Configurar dependencias JavaFX
+
+Abrir:
+
+```text
+pom.xml
+```
+
+Verificar o agregar:
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-controls</artifactId>
+        <version>21</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-fxml</artifactId>
+        <version>21</version>
+    </dependency>
+</dependencies>
+```
+
+#### 3.1.5 Configurar plugin JavaFX
+
+Agregar dentro de `pom.xml`:
+
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-maven-plugin</artifactId>
+            <version>0.0.8</version>
+            <configuration>
+                <mainClass>app.Main</mainClass>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+
+#### 3.1.6 Crear `Main.java`
+
+Ruta:
+
+```text
+src/main/java/app/Main.java
+```
+
+Código inicial:
+
+```java
+package app;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(
+                Main.class.getResource("/vista/ProductoView.fxml")
+        );
+
+        Scene scene = new Scene(loader.load());
+        stage.setTitle("CoMarket");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+}
+```
+
+#### 3.1.7 Ejecutar el proyecto
+
+Desde la terminal del proyecto:
+
+```bash
+mvn javafx:run
+```
+
+Si todavía no existe `ProductoView.fxml`, el error esperado será que no se encuentra el recurso FXML. Ese error se corrige en el paso 3.2 creando la vista dentro de `src/main/resources/vista`.
 
 ### 3.2 Crear vista FXML
 
 Controles mínimos:
 
+- `TextField` para código.
 - `TextField` para nombre.
-- `TextField` para documento.
-- `TextField` para telefono.
+- `TextField` para precio.
+- `TextField` para stock.
 - `Button` para registrar.
 - `Button` para limpiar.
 - `TableView` cómo preparación para S8.
@@ -117,15 +284,18 @@ Ejemplo:
 ### 3.4 Crear controlador
 
 ```java
-public class ClienteController {
+public class ProductoController {
+    @FXML
+    private TextField txtCodigo;
+
     @FXML
     private TextField txtNombre;
 
     @FXML
-    private TextField txtDocumento;
+    private TextField txtPrecio;
 
     @FXML
-    private TextField txtTelefono;
+    private TextField txtStock;
 
     @FXML
     private void onRegistrar() {
@@ -140,7 +310,7 @@ La prueba de esta sesión no busca guardar datos todavía. Busca comprobar que:
 
 - La ventana abre.
 - El FXML carga.
-- El boton ejecuta el método del controlador.
+- El botón ejecuta el método del controlador.
 - Los textos escritos se pueden leer desde Java.
 
 ## 4. Crea: actividad autónoma

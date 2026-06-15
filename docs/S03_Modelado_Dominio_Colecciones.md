@@ -18,7 +18,7 @@ Modelo inicial con varias entidades relaciónadas, colecciones administradas des
 
 ### 1.4 Motivación de la sesión
 
-En un sistema real no existe una sola clase. Una venta se relacióna con un cliente, un proveedor puede estar asociado a productos, y una venta puede estar compuestá por detalles. La Programación Orientada a Objetos ayuda a convertir esas relaciones del problema en clases conectadas.
+En un sistema real no existe una sola clase. Una venta registra el nombre del cliente, un proveedor puede estar asociado a productos, y una venta puede estar compuestá por detalles. La Programación Orientada a Objetos ayuda a convertir esas relaciones del problema en clases conectadas.
 
 Pregunta guía:
 
@@ -62,8 +62,8 @@ Tiempo: 25 min.
 
 | Concepto | Idea central | Ejemplo |
 |---|---|---|
-| Entidad | Clase qué representa un elemento importante del dominio. | `Cliente`, `Proveedor`, `Producto`, `Venta` |
-| Asociación | Un objeto conoce o usa a otro objeto. | `Venta` tiene un `Cliente` |
+| Entidad | Clase qué representa un elemento importante del dominio. | `Proveedor`, `Producto`, `Venta`, `DetalleVenta` |
+| Asociación | Un objeto conoce o usa a otro objeto. | `DetalleVenta` usa un `Producto` |
 | Agregación | Un objeto agrupa otros, pero esos objetos pueden existir por separado. | `Proveedor` relaciónado con varios `Producto` |
 | Composición | Un objeto contiene partes qué dependen de el. | `Venta` contiene `DetalleVenta` |
 | Colección | Estructura para manejar varios objetos del mismo tipo. | `ArrayList<Producto>` |
@@ -95,10 +95,6 @@ classDiagram
         registrar(venta)
         listar()
     }
-    class Cliente {
-        -nombre
-        -dni
-    }
     class Proveedor {
         -ruc
         -razonSocial
@@ -128,7 +124,6 @@ classDiagram
     VentaService o-- "0..*" Venta : ArrayList
 
     Proveedor "1" o-- "0..*" Producto : agrega
-    Venta "1" --> "1" Cliente : asociación
     Venta "1" *-- "1..*" DetalleVenta : composición
     DetalleVenta "*" --> "1" Producto : asociación
 ```
@@ -141,11 +136,11 @@ Asociación:
 
 ```java
 public class Venta {
-    private Cliente cliente;
+    private String cliente;
 }
 ```
 
-La venta se relacióna con un cliente. El cliente puede existir aunque no tenga ventas registradas.
+La venta registra el nombre o referencia textual del comprador. En este curso se evita abrir otra entidad en este punto para mantener el foco en `Producto`, `DetalleVenta` y `Venta`.
 
 Agregación:
 
@@ -172,7 +167,7 @@ Los detalles existen para explicar una venta. Si se elimina la venta, sus detall
 | Error | Corrección esperada |
 |---|---|
 | Poner todas las variables en `Main`. | Crear entidades con responsabilidades claras. |
-| Usar solo una clase para todo el dominio. | Separar `Cliente`, `Producto`, `Venta`, `DetalleVenta` y otros conceptos. |
+| Usar solo una clase para todo el dominio. | Separar `Producto`, `Venta`, `DetalleVenta`, `Proveedor` y otros conceptos necesarios. |
 | Confundir una lista con una entidad. | La lista administra varios objetos; la entidad representa un objeto del dominio. |
 | Crear relaciones sin sentido. | Cada relación debe responder a una regla del problema. |
 | Hacer CRUD completo antes de modelar. | Primero se entiende el dominio; luego se agregan operaciones. |
@@ -186,8 +181,8 @@ Tiempo: 2h.
 Parte de un caso simple de comercio:
 
 ```text
-Un sistema registra clientes, proveedores, productos y ventas.
-Cada venta pertenece a un cliente.
+Un sistema registra proveedores, productos y ventas.
+Cada venta registra el nombre del cliente.
 Cada venta tiene uno o más detalles.
 Cada detalle indica un producto, cantidad y precio.
 Un proveedor puede estar asociado a varios productos.
@@ -195,7 +190,6 @@ Un proveedor puede estar asociado a varios productos.
 
 Entidades iniciales:
 
-- `Cliente`
 - `Proveedor`
 - `Producto`
 - `Venta`
@@ -283,10 +277,10 @@ public class DetalleVenta {
 import java.util.ArrayList;
 
 public class Venta {
-    private Cliente cliente;
+    private String cliente;
     private ArrayList<DetalleVenta> detalles;
 
-    public Venta(Cliente cliente) {
+    public Venta(String cliente) {
         this.cliente = cliente;
         this.detalles = new ArrayList<>();
     }
@@ -336,13 +330,6 @@ public class ProductoService {
 ```java
 public class Main {
     public static void main(String[] args) {
-        Cliente cliente = new Cliente(
-                "Ana Torres",
-                "71234567",
-                "999888777",
-                java.time.LocalDate.of(2000, 5, 10)
-        );
-
         Producto teclado = new Producto("P001", "Teclado", 80.0);
         Producto mouse = new Producto("P002", "Mouse", 45.0);
 
@@ -350,7 +337,7 @@ public class Main {
         proveedor.agregarProducto(teclado);
         proveedor.agregarProducto(mouse);
 
-        Venta venta = new Venta(cliente);
+        Venta venta = new Venta("Ana Torres");
         venta.agregarDetalle(new DetalleVenta(teclado, 1));
         venta.agregarDetalle(new DetalleVenta(mouse, 2));
 
@@ -362,7 +349,7 @@ public class Main {
 ### 3.6 Preguntas durante la practica
 
 1. Qué clases son entidades del dominio?
-2. Qué relación existe entre `Venta` y `Cliente`?
+2. Qué relación existe entre `Venta` y `DetalleVenta`?
 3. Por qué `DetalleVenta` depende de `Venta`?
 4. Qué clase administra una colección?
 5. Qué lógica ya no deberia quedarse en `Main`?
@@ -414,7 +401,7 @@ Puedes elegir una de estas opciones:
 - `Categoria` relacionada con varios `Producto`.
 - `Empleado` relacionado con varias `Venta`.
 - `Proveedor` relacionado con varios `Producto`.
-- `Cliente` relacionado con varias `Venta`.
+- `Venta` relacionada con varios `DetalleVenta`.
 
 #### 4.1.3 Evidencia técnica
 

@@ -14,7 +14,7 @@ El estudiante crea una clase base abstracta con subclases mediante `extends`, de
 
 ### 1.3 Producto de sesión
 
-Modelo con `Persona`, `Cliente` y `Empleado`, más un contrato `ClienteService` con `ClienteServiceMemoria` y `ClienteServiceBD` cómo preparación para memoria y persistencia.
+Modelo con una jerarquía simple de productos, más un contrato `ProductoService` con `ProductoServiceMemoria` y `ProductoServiceBD` cómo preparación para memoria y persistencia.
 
 ### 1.4 Motivación de la sesión
 
@@ -40,12 +40,12 @@ Tiempo: 25 min.
 
 | Concepto | Idea central | Ejemplo |
 |---|---|---|
-| Herencia | Una clase especializada hereda de una clase base. | `Cliente extends Persona` |
-| Clase abstracta | Clase base qué organiza atributos o comportamiento comun. | `abstract class Persona` |
-| Sobrescritura | Una subclase redefine un comportamiento heredado. | `mostrarPerfil()` |
-| Interface | Contrato de operaciones, sin decidir la implementación concreta. | `ClienteService` |
-| Implements | Una clase cumple el contrato de una interface. | `ClienteServiceMemoria implements ClienteService` |
-| Polimorfismo | Una misma referencia puede apuntar a implementaciones distintas. | `ClienteService service = new ClienteServiceMemoria()` |
+| Herencia | Una clase especializada hereda de una clase base. | `ProductoPerecible extends Producto` |
+| Clase abstracta | Clase base qué organiza atributos o comportamiento comun. | `abstract class Producto` |
+| Sobrescritura | Una subclase redefine un comportamiento heredado. | `mostrarResumen()` |
+| Interface | Contrato de operaciones, sin decidir la implementación concreta. | `ProductoService` |
+| Implements | Una clase cumple el contrato de una interface. | `ProductoServiceMemoria implements ProductoService` |
+| Polimorfismo | Una misma referencia puede apuntar a implementaciones distintas. | `ProductoService service = new ProductoServiceMemoria()` |
 
 Regla métodológica de la sesión:
 
@@ -64,47 +64,48 @@ classDiagram
         main(String[] args)
     }
 
-    class Persona {
+    class Producto {
         <<abstract>>
+        -codigo
         -nombre
-        -documento
-        mostrarPerfil()
+        -precio
+        mostrarResumen()
     }
-    class Cliente {
-        -telefono
-        mostrarPerfil()
+    class ProductoPerecible {
+        -fechaVencimiento
+        mostrarResumen()
     }
-    class Empleado {
-        -cargo
-        mostrarPerfil()
+    class ProductoDigital {
+        -urlDescarga
+        mostrarResumen()
     }
 
-    class ClienteService {
+    class ProductoService {
         <<interface>>
-        registrar(cliente)
+        registrar(producto)
         listar()
-        buscarPorDocumento(documento)
+        buscarPorCodigo(codigo)
     }
-    class ClienteServiceMemoria {
-        -clientes
-        registrar(cliente)
+    class ProductoServiceMemoria {
+        -productos
+        registrar(producto)
         listar()
-        buscarPorDocumento(documento)
+        buscarPorCodigo(codigo)
     }
-    class ClienteServiceBD {
-        registrar(cliente)
+    class ProductoServiceBD {
+        registrar(producto)
         listar()
-        buscarPorDocumento(documento)
+        buscarPorCodigo(codigo)
     }
 
-    Main ..> Persona : prueba
-    Main ..> ClienteService : prueba
-    Persona <|-- Cliente : extends
-    Persona <|-- Empleado : extends
-    ClienteService <|.. ClienteServiceMemoria : implements
-    ClienteService <|.. ClienteServiceBD : implements
-    ClienteServiceMemoria ..> Cliente : usa
-    ClienteServiceBD ..> Cliente : usa
+    Main ..> Producto : prueba
+    Main ..> ProductoService : prueba
+    Producto <|-- ProductoPerecible : extends
+    Producto <|-- ProductoDigital : extends
+    ProductoService <|.. ProductoServiceMemoria : implements
+    ProductoService <|.. ProductoServiceBD : implements
+    ProductoServiceMemoria ..> Producto : usa
+    ProductoServiceBD ..> Producto : usa
 ```
 
 Convencion del diagrama: flecha continua con triangulo representa `extends`; flecha punteada con triangulo representa `implements`; flecha punteada simple representa dependencia o uso.
@@ -118,10 +119,10 @@ Tiempo: 2h.
 Usa una relación natural del dominio:
 
 ```text
-Cliente es una Persona.
-Empleado es una Persona.
-Producto no es una Persona.
-Venta no es una Persona.
+ProductoPerecible es un Producto.
+ProductoDigital es un Producto.
+DetalleVenta no es un Producto.
+Venta no es un Producto.
 ```
 
 La herencia se usa solo cuándo la frase "es un/a" tiene sentido real.
@@ -129,57 +130,63 @@ La herencia se usa solo cuándo la frase "es un/a" tiene sentido real.
 ### 3.2 Crear la clase base abstracta
 
 ```java
-public abstract class Persona {
+public abstract class Producto {
+    private String codigo;
     private String nombre;
-    private String documento;
+    private double precio;
 
-    public Persona(String nombre, String documento) {
+    public Producto(String codigo, String nombre, double precio) {
+        this.codigo = codigo;
         this.nombre = nombre;
-        this.documento = documento;
+        this.precio = precio;
+    }
+
+    public String getCodigo() {
+        return codigo;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getDocumento() {
-        return documento;
+    public double getPrecio() {
+        return precio;
     }
 
-    public abstract void mostrarPerfil();
+    public abstract void mostrarResumen();
 }
 ```
 
 ### 3.3 Crear subclases con extends
 
 ```java
-public class Cliente extends Persona {
-    private String telefono;
+public class ProductoPerecible extends Producto {
+    private String fechaVencimiento;
 
-    public Cliente(String nombre, String documento, String telefono) {
-        super(nombre, documento);
-        this.telefono = telefono;
+    public ProductoPerecible(String codigo, String nombre, double precio, String fechaVencimiento) {
+        super(codigo, nombre, precio);
+        this.fechaVencimiento = fechaVencimiento;
     }
 
     @Override
-    public void mostrarPerfil() {
-        System.out.println("Cliente: " + getNombre() + " - " + telefono);
+    public void mostrarResumen() {
+        System.out.println(getCodigo() + " - " + getNombre() + " - vence: " + fechaVencimiento);
     }
 }
 ```
 
 ```java
-public class Empleado extends Persona {
-    private String cargo;
+public class ProductoDigital extends Producto {
+    private String urlDescarga;
 
-    public Empleado(String nombre, String documento, String cargo) {
-        super(nombre, documento);
-        this.cargo = cargo;
+    public ProductoDigital(String codigo, String nombre, double precio, String urlDescarga) {
+        super(codigo, nombre, precio);
+        this.urlDescarga = urlDescarga;
     }
 
     @Override
-    public void mostrarPerfil() {
-        System.out.println("Empleado: " + getNombre() + " - " + cargo);
+    public void mostrarResumen() {
+        System.out.println(getCodigo() + " - " + getNombre() + " - descarga: " + urlDescarga);
     }
 }
 ```
@@ -189,11 +196,11 @@ public class Empleado extends Persona {
 ```java
 public class Main {
     public static void main(String[] args) {
-        Persona cliente = new Cliente("Ana Torres", "71234567", "999888777");
-        Persona empleado = new Empleado("Luis Ramos", "73456789", "Vendedor");
+        Producto leche = new ProductoPerecible("P001", "Leche", 4.50, "2026-08-10");
+        Producto curso = new ProductoDigital("P002", "Curso Java", 40.00, "https://descarga.local/java");
 
-        cliente.mostrarPerfil();
-        empleado.mostrarPerfil();
+        leche.mostrarResumen();
+        curso.mostrarResumen();
     }
 }
 ```
@@ -203,10 +210,10 @@ public class Main {
 ```java
 import java.util.ArrayList;
 
-public interface ClienteService {
-    void registrar(Cliente cliente);
-    ArrayList<Cliente> listar();
-    Cliente buscarPorDocumento(String documento);
+public interface ProductoService {
+    void registrar(Producto producto);
+    ArrayList<Producto> listar();
+    Producto buscarPorCodigo(String codigo);
 }
 ```
 
@@ -217,24 +224,24 @@ Implementación en memoria:
 ```java
 import java.util.ArrayList;
 
-public class ClienteServiceMemoria implements ClienteService {
-    private ArrayList<Cliente> clientes = new ArrayList<>();
+public class ProductoServiceMemoria implements ProductoService {
+    private ArrayList<Producto> productos = new ArrayList<>();
 
     @Override
-    public void registrar(Cliente cliente) {
-        clientes.add(cliente);
+    public void registrar(Producto producto) {
+        productos.add(producto);
     }
 
     @Override
-    public ArrayList<Cliente> listar() {
-        return clientes;
+    public ArrayList<Producto> listar() {
+        return productos;
     }
 
     @Override
-    public Cliente buscarPorDocumento(String documento) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getDocumento().equals(documento)) {
-                return cliente;
+    public Producto buscarPorCodigo(String codigo) {
+        for (Producto producto : productos) {
+            if (producto.getCodigo().equals(codigo)) {
+                return producto;
             }
         }
         return null;
@@ -247,19 +254,19 @@ Implementación con base de datos, aun cómo preparación conceptual:
 ```java
 import java.util.ArrayList;
 
-public class ClienteServiceBD implements ClienteService {
+public class ProductoServiceBD implements ProductoService {
     @Override
-    public void registrar(Cliente cliente) {
+    public void registrar(Producto producto) {
         System.out.println("Luego guardara usando DAO");
     }
 
     @Override
-    public ArrayList<Cliente> listar() {
+    public ArrayList<Producto> listar() {
         return new ArrayList<>();
     }
 
     @Override
-    public Cliente buscarPorDocumento(String documento) {
+    public Producto buscarPorCodigo(String codigo) {
         return null;
     }
 }
@@ -270,13 +277,13 @@ public class ClienteServiceBD implements ClienteService {
 ```java
 public class Main {
     public static void main(String[] args) {
-        ClienteService service = new ClienteServiceMemoria();
+        ProductoService service = new ProductoServiceMemoria();
 
-        service.registrar(new Cliente("Ana Torres", "71234567", "999888777"));
-        service.registrar(new Cliente("Marco Ruiz", "72345678", "988777666"));
+        service.registrar(new ProductoPerecible("P001", "Leche", 4.50, "2026-08-10"));
+        service.registrar(new ProductoDigital("P002", "Curso Java", 40.00, "https://descarga.local/java"));
 
-        for (Cliente cliente : service.listar()) {
-            cliente.mostrarPerfil();
+        for (Producto producto : service.listar()) {
+            producto.mostrarResumen();
         }
     }
 }
@@ -411,10 +418,10 @@ La revisión se realiza con los criterios mínimos de aceptación de la sección
 
 ### 5.3 Preguntas de defensa y reflexión
 
-1. Por qué `Cliente` puede heredar de `Persona`?
-2. Por qué `ClienteService` debe ser interface?
+1. Por qué `ProductoPerecible` puede heredar de `Producto`?
+2. Por qué `ProductoService` debe ser interface?
 3. Qué clase implementa el contrato en memoria?
-4. Qué ventaja da declarar `ClienteService service = new ClienteServiceMemoria()`?
+4. Qué ventaja da declarar `ProductoService service = new ProductoServiceMemoria()`?
 5. Por qué no conviene que una entidad implemente un contrato de servicio?
 6. Cuándo no conviene usar herencia?
 

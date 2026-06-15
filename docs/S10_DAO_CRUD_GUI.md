@@ -64,15 +64,15 @@ flowchart TB
     Controlador["Controlador"]
 
     subgraph Servicio["Servicio"]
-        Contrato["ClienteService<br/>&lt;&lt;interface&gt;&gt;"]
-        ServicioBD["ClienteServiceBD<br/>implements"]
+        Contrato["ProductoService<br/>&lt;&lt;interface&gt;&gt;"]
+        ServicioBD["ProductoServiceBD<br/>implements"]
         Validaciones["Validaciones/Excepciones"]
     end
 
-    Entidades["Cliente"]
+    Entidades["Producto"]
 
     subgraph Persistencia["Persistencia"]
-        DAO["ClienteDAO"]
+        DAO["ProductoDAO"]
         SQLite[("SQLite / comarket.db")]
     end
 
@@ -91,15 +91,15 @@ flowchart TB
 
 Tiempo: 2h.
 
-1. Crear `ClienteDAO`.
+1. Crear `ProductoDAO`.
 2. Implementar `registrar` con `insert`.
 3. Implementar `listar` con `select`.
 4. Implementar `actualizar` con `update`.
 5. Implementar `eliminar` con `delete`.
-6. Mapear cada fila de la base de datos a un objeto `Cliente`.
-7. Crear o adaptar `ClienteServiceBD`.
-8. Hacer qué `ClienteServiceBD` use `ClienteDAO`.
-9. Conectar botones de la GUI con `ClienteService`, no directamente con SQL.
+6. Mapear cada fila de la base de datos a un objeto `Producto`.
+7. Crear o adaptar `ProductoServiceBD`.
+8. Hacer qué `ProductoServiceBD` use `ProductoDAO`.
+9. Conectar botones de la GUI con `ProductoService`, no directamente con SQL.
 10. Recargar la tabla desde la base de datos después de cada operación.
 11. Confirmar eliminación y manejar errores básicos.
 
@@ -149,7 +149,7 @@ Completa y evidencia estas tareas:
 
 Incluye capturas o salidas con una breve explicación debajo de cada una:
 
-- Código de `ClienteService`, `ClienteServiceBD` y `ClienteDAO`.
+- Código de `ProductoService`, `ProductoServiceBD` y `ProductoDAO`.
 - Capturas de GUI.
 - Registros persistidos en SQLite.
 - Explicación del flujo Vista-Controlador-Servicio-Entidades-DAO.

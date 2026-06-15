@@ -60,10 +60,10 @@ El usuario debe recibir mensajes claros.
 flowchart TB
     Vista["Vista JavaFX"]
     Controlador["Controlador"]
-    Contrato["ClienteService<br/>&lt;&lt;interface&gt;&gt;"]
-    ServicioBD["ClienteServiceBD<br/>implements"]
+    Contrato["ProductoService<br/>&lt;&lt;interface&gt;&gt;"]
+    ServicioBD["ProductoServiceBD<br/>implements"]
     Validaciones["Validaciones/Excepciones"]
-    DAO["ClienteDAO"]
+    DAO["ProductoDAO"]
     SQLite[("SQLite")]
 
     Vista --> Controlador

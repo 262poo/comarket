@@ -46,7 +46,7 @@ flowchart TB
     S1["S1<br/>Coche, Persona y Producto<br/>clase y objetos"]
     S2["S2<br/>Producto encapsulado<br/>constructores y validaciones"]
     S3["S3<br/>Asociación, agregación/composición<br/>y colecciones"]
-    S4["S4<br/>Persona, Cliente, Proveedor<br/>herencia y polimorfismo<br/>bloque aplicado"]
+    S4["S4<br/>Producto, ProductoPerecible<br/>herencia y polimorfismo<br/>bloque aplicado"]
     S5["S5<br/>Servicio en memoria<br/>CRUD con ArrayList"]
     S6["S6<br/>Producto U1<br/>consola ejecutable"]
 
@@ -551,7 +551,7 @@ El PDF debe usar esta estructura. La primera sección define el trabajo autónom
 
 Completa y evidencia estas tareas:
 
-1. Crear otro par de clases tangibles que colaboren entre sí, por ejemplo `Estudiante` y `Cuaderno`, `Jugador` y `Pelota`, o `Cliente` y `Carrito`.
+1. Crear otro par de clases tangibles que colaboren entre sí, por ejemplo `Estudiante` y `Cuaderno`, `Jugador` y `Pelota`, o `Vendedor` y `Pedido`.
 2. Crear una clase simple similar a `Producto` que pueda prepararse para encapsulamiento en S2.
 3. Instanciar objetos desde `Main`.
 4. Mostrar por consola el estado inicial de al menos un objeto.
