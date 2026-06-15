@@ -1852,9 +1852,15 @@
 </table>
 <p>Regla métodológica de la sesión:</p>
 <div class="highlight"><pre><span></span><code>Herencia: se aplica en entidades cuando existe relación es-un.
+En herencia, el trabajo funcional suele hacerse con clases concretas/hijas.
+Si Persona es abstracta, no se registra &quot;una Persona&quot;; se trabaja con Cliente o Empleado.
+La herencia no es una asociación normal uno a uno entre dos objetos separados.
+En memoria, un Cliente es una Persona especializada; no son dos objetos independientes.
 Interface: se aplica en servicios para declarar operaciones esperadas.
 Implementación: ejecuta el contrato, en memoria o con base de datos.
 Las entidades no implementan contratos de servicio.
+En polimorfismo, el código consumidor accede por el padre/contrato.
+Si una implementación agrega métodos propios, esos métodos no forman parte del contrato y no deben ser necesarios para el flujo principal.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>classDiagram
@@ -1904,6 +1910,18 @@ Las entidades no implementan contratos de servicio.
     ProductoServiceMemoria ..&gt; Producto : usa
     ProductoServiceBD ..&gt; Producto : usa</code></pre>
 <p>Convencion del diagrama: flecha continua con triangulo representa <code>extends</code>; flecha punteada con triangulo representa <code>implements</code>; flecha punteada simple representa dependencia o uso.</p>
+<p>Lectura importante del diagrama:</p>
+<div class="highlight"><pre><span></span><code>Herencia:
+Persona organiza lo común, pero el sistema crea objetos concretos: Cliente y Empleado.
+Si se hiciera CRUD de personas, normalmente se haria sobre las clases hijas o casos de uso concretos.
+En base de datos puede mapearse parecido a una relación uno a uno, pero no significa lo mismo.
+Si se usa tabla padre y tabla hija, la fila hija depende de la fila padre: al eliminar el hijo normalmente se elimina también su parte padre.
+
+Polimorfismo:
+Main usa ProductoService, no ProductoServiceMemoria directamente.
+El contrato define qué operaciones se pueden llamar.
+Las implementaciones pueden cambiar, pero el flujo principal no debe depender de métodos que no estén en la interface.
+</code></pre></div>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <h3 id="31-identificar-una-relacion-es-un">3.1 Identificar una relación es-un<a class="headerlink" href="#31-identificar-una-relacion-es-un" title="Permanent link">&para;</a></h3>
@@ -1914,6 +1932,28 @@ Producto no es una Persona.
 Venta no es una Persona.
 </code></pre></div>
 <p>La herencia se usa solo cuándo la frase "es un/a" tiene sentido real.</p>
+<p>Nota de diseño:</p>
+<div class="highlight"><pre><span></span><code>Persona es una clase base para compartir datos y comportamiento común.
+Cliente y Empleado son clases concretas.
+Por eso, en una aplicación real, el CRUD se diseña sobre el caso concreto: ClienteService, EmpleadoService o el módulo que corresponda.
+</code></pre></div>
+<p>Importante para no confundir con base de datos:</p>
+<div class="highlight"><pre><span></span><code>Herencia en POO:
+Cliente es una Persona especializada.
+No representa dos objetos separados relacionados uno a uno.
+
+Asociación uno a uno:
+Dos objetos existen con identidad propia.
+Si eliminas uno, el otro podría seguir existiendo según la regla del negocio.
+
+Herencia mapeada a BD con tabla padre + tabla hija:
+persona(id, nombre, documento)
+cliente(id_persona, telefono)
+
+Aquí la tabla hija extiende a la tabla padre.
+Si eliminas el cliente, también debe eliminarse la parte persona que le pertenece.
+Por eso se parece a uno a uno en tablas, pero conceptualmente sigue siendo herencia.
+</code></pre></div>
 <h3 id="32-crear-la-clase-base-abstracta">3.2 Crear la clase base abstracta<a class="headerlink" href="#32-crear-la-clase-base-abstracta" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Persona</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
@@ -1984,6 +2024,11 @@ Venta no es una Persona.
 <span class="w">    </span><span class="n">Producto</span><span class="w"> </span><span class="nf">buscarPorCodigo</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
+<p>En polimorfismo se programa contra el contrato. Eso significa que el resto del sistema conoce <code>ProductoService</code> y no necesita saber si la implementación trabaja en memoria o con base de datos.</p>
+<p>Regla práctica:</p>
+<div class="highlight"><pre><span></span><code>Si un método no está declarado en ProductoService, Main no debe depender de ese método.
+Así se puede cambiar ProductoServiceMemoria por ProductoServiceBD sin romper el flujo principal.
+</code></pre></div>
 <h3 id="36-crear-dos-implementaciones">3.6 Crear dos implementaciones<a class="headerlink" href="#36-crear-dos-implementaciones" title="Permanent link">&para;</a></h3>
 <p>Implementación en memoria:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
@@ -2046,6 +2091,10 @@ Venta no es una Persona.
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<p>Observa que la variable es de tipo <code>ProductoService</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ProductoService</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProductoServiceMemoria</span><span class="p">();</span>
+</code></pre></div>
+<p>La implementación concreta es <code>ProductoServiceMemoria</code>, pero el acceso se hace por el contrato. Esta es la idea central del polimorfismo con interfaces.</p>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
 <p>Fuera del aula, cada estudiante consolida el aprendizaje aplicando herencia e interfaces en una parte del dominio y preparando una evidencia individual.</p>
 <p>Tiempo: 2h fuera del aula.</p>
@@ -2125,9 +2174,13 @@ Venta no es una Persona.
 <ul>
 <li>La herencia responde a una relación <code>es-un</code>.</li>
 <li>La clase base no reemplaza a las entidades concretas.</li>
+<li>En herencia, los casos funcionales se trabajan sobre clases concretas cuándo la clase base es abstracta.</li>
+<li>El estudiante diferencia herencia de una asociación uno a uno.</li>
+<li>Comprende que la estrategia tabla padre + tabla hija es una forma de persistir herencia, no una asociación común.</li>
 <li>Hay sobrescritura de comportamiento cuando corresponde.</li>
 <li>La interface declara operaciones y no guarda datos.</li>
 <li>Las implementaciones cumplen el contrato con <code>implements</code>.</li>
+<li>En polimorfismo, el acceso se realiza por el contrato y no por métodos propios de una implementación.</li>
 <li>El estudiante diferencia <code>extends</code> de <code>implements</code>.</li>
 </ul>
 <h3 id="52-evidencia-del-producto-de-sesion">5.2 Evidencia del producto de sesión<a class="headerlink" href="#52-evidencia-del-producto-de-sesion" title="Permanent link">&para;</a></h3>
@@ -2151,6 +2204,9 @@ Venta no es una Persona.
 <li>Qué clase implementa el contrato en memoria?</li>
 <li>Qué ventaja da declarar <code>ProductoService service = new ProductoServiceMemoria()</code>?</li>
 <li>Por qué no conviene que una entidad implemente un contrato de servicio?</li>
+<li>Por qué <code>Main</code> no debe depender de métodos que solo existan en <code>ProductoServiceMemoria</code>?</li>
+<li>Por qué herencia no es igual que una asociación uno a uno?</li>
+<li>Qué pasaría en BD si se elimina un <code>Cliente</code> guardado con tabla padre <code>persona</code> y tabla hija <code>cliente</code>?</li>
 <li>Cuándo no conviene usar herencia?</li>
 </ol>
 <h3 id="54-rubrica-de-evaluacion">5.4 Rúbrica de evaluación<a class="headerlink" href="#54-rubrica-de-evaluacion" title="Permanent link">&para;</a></h3>
