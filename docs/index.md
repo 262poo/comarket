@@ -45,8 +45,8 @@ Resultado esperado U2: el estudiante construye aplicaciónes de escritorio organ
 |---|---|---|
 | S7 | **Interfaz gráfica y CRUD desde GUI en memoria:**<br>Aplicación de escritorio con JavaFX, FXML, Scene Builder, controladores, formularios, eventos, tablas y CRUD en memoria de una entidad ya trabajada en U1. Validación básica al cierre de la sesión | Flujo Vista-Controlador-Servicio-Entidades funcionando desde GUI con memoria |
 | S8 | **Arquitectura por capas, patrón DAO y CRUD persistente desde GUI:**<br>Organización por capas, JDBC, SQLite, DAO, servicio persistente, formularios, tablas, operaciones CRUD persistentes y validación de datos de una tabla simple | CRUD persistente desde GUI con arquitectura por capas y DAO |
-| S9 | **Operaciones CRUD para tablas con relaciones muchos a muchos:**<br>Modelo relacional con tabla intermedia, operaciones sobre entidades relacionadas, registro de cabecera y detalle, cálculo de subtotales/totales, control de stock y validaciones del flujo | Flujo persistente con relación muchos a muchos y tabla intermedia |
-| S10 | **Seguridad y operaciones CRUD para tablas con relaciones uno a muchos:**<br>Tabla de usuarios, autenticación básica, sesión activa, relación uno a muchos, operaciones persistentes asociadas al usuario y validaciones de acceso | Seguridad básica y operaciones persistentes con relación uno a muchos |
+| S9 | **Operaciones persistentes con relación muchos a muchos:**<br>Modelo de dominio con cabecera, detalle y entidad relacionada; tabla intermedia con atributos, cálculo de subtotales/totales, control de stock, persistencia y validaciones del flujo | Flujo persistente con relación muchos a muchos y tabla intermedia |
+| S10 | **Seguridad básica y relación uno a muchos:**<br>Usuario, autenticación básica, sesión activa, relación uno a muchos, operaciones persistentes asociadas al usuario, validaciones de acceso y manejo básico de errores | Seguridad básica y operaciones persistentes con relación uno a muchos |
 | S11 | **Consultas integradas y pruebas del flujo principal:**<br>Búsquedas, filtros, consultas maestro-detalle, consultas por fecha/usuario, totales, verificación de consistencia, manejo de errores y pruebas funcionales por capas | Consultas integradas y flujo principal probado |
 | S12 | **Evaluación de la unidad 2:**<br>GUI operativa, arquitectura por capas, DAO, SQLite, CRUD persistente, relación muchos a muchos, relación uno a muchos, seguridad básica, consultas, validaciones y pruebas | Producto U2 validado con interfaz gráfica, persistencia, relaciones y seguridad básica |
 
@@ -242,8 +242,8 @@ Flujo de trabajo U2-U3:
 - [S6: Evaluacion unidad 1](S06_Evaluacion_Unidad_1.md)
 - [S7: Interfaz grafica y CRUD desde GUI en memoria](S07_GUI_CRUD_Memoria.md)
 - [S8: Arquitectura por capas, DAO y CRUD persistente desde GUI](S08_Arquitectura_DAO_CRUD_Persistente.md)
-- [S9: Operaciones CRUD para tablas con relaciones muchos a muchos](S09_CRUD_Relaciones_Muchos_Muchos.md)
-- [S10: Seguridad y CRUD para tablas con relaciones uno a muchos](S10_Seguridad_CRUD_Uno_Muchos.md)
+- [S9: Operaciones persistentes con relación muchos a muchos](S09_Operaciones_Persistentes_Muchos_Muchos.md)
+- [S10: Seguridad básica y relación uno a muchos](S10_Seguridad_Relacion_Uno_Muchos.md)
 - [S11: Consultas integradas y pruebas](S11_Consultas_Integradas_Pruebas.md)
 - [S12: Evaluacion unidad 2](S12_Evaluacion_Unidad_2.md)
 - [S13: Integracion del sistema](S13_Proyecto_Integrador_Ensamblaje.md)

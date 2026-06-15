@@ -54,8 +54,8 @@ nav:
   - 2. Aplicación de Escritorio con Persistencia de Datos:
     - 7 Interfaz grafica y CRUD desde GUI en memoria: S07_GUI_CRUD_Memoria.md
     - 8 Arquitectura por capas, DAO y CRUD persistente desde GUI: S08_Arquitectura_DAO_CRUD_Persistente.md
-    - 9 Operaciones CRUD para tablas con relaciones muchos a muchos: S09_CRUD_Relaciones_Muchos_Muchos.md
-    - 10 Seguridad y CRUD para tablas con relaciones uno a muchos: S10_Seguridad_CRUD_Uno_Muchos.md
+    - 9 Operaciones persistentes con relacion muchos a muchos: S09_Operaciones_Persistentes_Muchos_Muchos.md
+    - 10 Seguridad basica y relacion uno a muchos: S10_Seguridad_Relacion_Uno_Muchos.md
     - 11 Consultas integradas y pruebas: S11_Consultas_Integradas_Pruebas.md
     - 12 Evaluacion unidad 2: S12_Evaluacion_Unidad_2.md
   - 3. Proyecto Integrador CoMarket:
