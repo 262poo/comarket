@@ -1971,6 +1971,7 @@
 <p>Regla métodológica de la sesión:</p>
 <div class="highlight"><pre><span></span><code>La vista muestra controles.
 El controlador atiende eventos.
+El controlador se prepara para delegar operaciones al contrato `ProductoService` construido en U1.
 Las entidades siguen representando el dominio.
 El CRUD completo se conecta en la siguiente sesión.
 </code></pre></div>
@@ -1979,11 +1980,14 @@ El CRUD completo se conecta en la siguiente sesión.
     Main["Main&lt;br/&gt;Application"]
     FXML["Vista FXML&lt;br/&gt;TextField / Button / TableView"]
     Controller["ProductoController&lt;br/&gt;initialize / eventos"]
+    Service["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br/&gt;contrato U1"]
     Entity["Producto&lt;br/&gt;entidad del dominio"]
 
     Main --&gt;|"carga FXML"| FXML
     FXML --&gt;|"fx controller"| Controller
-    Controller -. "crea / usa" .-&gt; Entity</code></pre>
+    Controller -. "prepara uso" .-&gt; Service
+    Controller -. "crea / lee" .-&gt; Entity
+    Service -. "usa" .-&gt; Entity</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <h3 id="31-crear-proyecto-javafx-con-maven">3.1 Crear proyecto JavaFX con Maven<a class="headerlink" href="#31-crear-proyecto-javafx-con-maven" title="Permanent link">&para;</a></h3>
@@ -2148,12 +2152,13 @@ img
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="35-probar-eventos">3.5 Probar eventos<a class="headerlink" href="#35-probar-eventos" title="Permanent link">&para;</a></h3>
-<p>La prueba de esta sesión no busca guardar datos todavía. Busca comprobar que:</p>
+<p>La prueba de esta sesión no busca guardar datos todavía. Busca comprobar que la GUI ya puede leer datos y queda lista para llamar a <code>ProductoService</code> en S8:</p>
 <ul>
 <li>La ventana abre.</li>
 <li>El FXML carga.</li>
 <li>El botón ejecuta el método del controlador.</li>
 <li>Los textos escritos se pueden leer desde Java.</li>
+<li>El controlador no duplica CRUD; solo prepara la delegación al servicio.</li>
 </ul>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
 <p>Fuera del aula, cada estudiante consolida el aprendizaje diseñando una vista JavaFX propia y preparando una evidencia individual.</p>
