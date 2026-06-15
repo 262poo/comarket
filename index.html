@@ -684,14 +684,14 @@
   
   
     <li class="md-nav__item">
-      <a href="S07_Interfaz_Grafica_Usuario/" class="md-nav__link">
+      <a href="S07_GUI_CRUD_Memoria/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    7 Interfaz grafica de usuario
+    7 Interfaz grafica y CRUD desde GUI en memoria
   
 
     
@@ -712,14 +712,14 @@
   
   
     <li class="md-nav__item">
-      <a href="S08_CRUD_GUI_Memoria/" class="md-nav__link">
+      <a href="S08_Arquitectura_DAO_CRUD_Persistente/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    8 CRUD desde GUI en memoria
+    8 Arquitectura por capas, DAO y CRUD persistente desde GUI
   
 
     
@@ -740,14 +740,14 @@
   
   
     <li class="md-nav__item">
-      <a href="S09_Arquitectura_Persistencia/" class="md-nav__link">
+      <a href="S09_CRUD_Relaciones_Muchos_Muchos/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    9 Arquitectura por capas y persistencia relacional
+    9 Operaciones CRUD para tablas con relaciones muchos a muchos
   
 
     
@@ -768,14 +768,14 @@
   
   
     <li class="md-nav__item">
-      <a href="S10_DAO_CRUD_GUI/" class="md-nav__link">
+      <a href="S10_Seguridad_CRUD_Uno_Muchos/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    10 Patron DAO y CRUD persistente desde GUI
+    10 Seguridad y CRUD para tablas con relaciones uno a muchos
   
 
     
@@ -796,14 +796,14 @@
   
   
     <li class="md-nav__item">
-      <a href="S11_Validacion_Integracion_Pruebas/" class="md-nav__link">
+      <a href="S11_Consultas_Integradas_Pruebas/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    11 Validacion de datos y pruebas
+    11 Consultas integradas y pruebas
   
 
     
@@ -1332,33 +1332,33 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
 <tbody>
 <tr>
 <td>S7</td>
-<td><strong>Interfaz gráfica de usuario:</strong><br>Aplicación de escritorio con JavaFX, FXML, Scene Builder, controladores, formularios, eventos y navegacion básica</td>
-<td>Pantallas y controladores integrados con eventos de usuario</td>
+<td><strong>Interfaz gráfica y CRUD desde GUI en memoria:</strong><br>Aplicación de escritorio con JavaFX, FXML, Scene Builder, controladores, formularios, eventos, tablas y CRUD en memoria de una entidad ya trabajada en U1. Validación básica al cierre de la sesión</td>
+<td>Flujo Vista-Controlador-Servicio-Entidades funcionando desde GUI con memoria</td>
 </tr>
 <tr>
 <td>S8</td>
-<td><strong>CRUD desde GUI en memoria:</strong><br>Flujo Vista-Controlador-Servicio-Entidades, <code>ArrayList</code> como atributo interno de la implementación en memoria, reutilizacion del contrato de operaciones CRUD, carga de datos en tablas, registro, consulta, edición y eliminación</td>
-<td>Flujo completo de operación desde formularios y tablas JavaFX usando memoria</td>
+<td><strong>Arquitectura por capas, patrón DAO y CRUD persistente desde GUI:</strong><br>Organización por capas, JDBC, SQLite, DAO, servicio persistente, formularios, tablas, operaciones CRUD persistentes y validación de datos de una tabla simple</td>
+<td>CRUD persistente desde GUI con arquitectura por capas y DAO</td>
 </tr>
 <tr>
 <td>S9</td>
-<td><strong>Arquitectura por capas y persistencia relacional:</strong><br>Organización por capas, clase de conexión, fundamentos de JDBC, base de datos relacional embebida</td>
-<td>Proyecto preparado con paquetes, conexión relacional y separacion de responsabilidades</td>
+<td><strong>Operaciones CRUD para tablas con relaciones muchos a muchos:</strong><br>Modelo relacional con tabla intermedia, operaciones sobre entidades relacionadas, registro de cabecera y detalle, cálculo de subtotales/totales, control de stock y validaciones del flujo</td>
+<td>Flujo persistente con relación muchos a muchos y tabla intermedia</td>
 </tr>
 <tr>
 <td>S10</td>
-<td><strong>Patron DAO y operaciones CRUD persistentes desde GUI:</strong><br>Flujo Vista-Controlador-Servicio-Entidades-DAO, carga de datos en tablas, registro, consulta, edición, eliminación, confirmación de eliminación y manejo inicial de excepciones</td>
-<td>CRUD persistente funcional desde formularios y tablas JavaFX</td>
+<td><strong>Seguridad y operaciones CRUD para tablas con relaciones uno a muchos:</strong><br>Tabla de usuarios, autenticación básica, sesión activa, relación uno a muchos, operaciones persistentes asociadas al usuario y validaciones de acceso</td>
+<td>Seguridad básica y operaciones persistentes con relación uno a muchos</td>
 </tr>
 <tr>
 <td>S11</td>
-<td><strong>Validación de datos y pruebas del flujo principal:</strong><br>Validaciones de formulario, mensajes al usuario, manejo de excepciones, pruebas manuales y corrección de errores funcionales</td>
-<td>GUI y persistencia validadas con pruebas del flujo principal</td>
+<td><strong>Consultas integradas y pruebas del flujo principal:</strong><br>Búsquedas, filtros, consultas maestro-detalle, consultas por fecha/usuario, totales, verificación de consistencia, manejo de errores y pruebas funcionales por capas</td>
+<td>Consultas integradas y flujo principal probado</td>
 </tr>
 <tr>
 <td>S12</td>
-<td><strong>Evaluación de la unidad 2:</strong><br>Conexión a base de datos, DAO funcional, GUI operativa, validaciones, manejo básico de errores, flujo funcional completo</td>
-<td>Producto U2 validado con arquitectura, persistencia e interfaz gráfica</td>
+<td><strong>Evaluación de la unidad 2:</strong><br>GUI operativa, arquitectura por capas, DAO, SQLite, CRUD persistente, relación muchos a muchos, relación uno a muchos, seguridad básica, consultas, validaciones y pruebas</td>
+<td>Producto U2 validado con interfaz gráfica, persistencia, relaciones y seguridad básica</td>
 </tr>
 </tbody>
 </table>
@@ -1508,6 +1508,7 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
     class Venta {
         -String cliente
         -Date fecha
+        -Usuario usuario
         -List~DetalleVenta~ detalles
         +calcularTotal()
     }
@@ -1524,19 +1525,27 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
         -int stock
     }
 
-    Venta "1" *-- "*" DetalleVenta
-    DetalleVenta "*" --&gt; "1" Producto</code></pre>
-<p>En U2 y U3 este modelo se consolida alrededor del flujo comercial principal. La relación entre <code>Venta</code>, <code>DetalleVenta</code> y <code>Producto</code> sirve cómo referencia para integrar interfaz gráfica, entidades y persistencia relacional.</p>
+    class Usuario {
+        -String username
+        -String passwordHash
+        -String rol
+    }
+
+    Venta "*" --&gt; "1" Usuario : registrada por
+    Venta "1" *-- "*" DetalleVenta : contiene
+    DetalleVenta "*" --&gt; "1" Producto : referencia</code></pre>
+<p>En U2 y U3 este modelo se consolida alrededor del flujo comercial principal. La relación entre <code>Venta</code>, <code>DetalleVenta</code>, <code>Producto</code> y <code>Usuario</code> sirve cómo referencia para integrar interfaz gráfica, entidades, seguridad básica y persistencia relacional.</p>
 <p>Flujo de trabajo U2-U3:</p>
 <ol>
 <li>La Unidad 2 inicia un proyecto JavaFX/Maven en IntelliJ IDEA.</li>
-<li>El estudiante diseña vistas FXML con Scene Builder y conecta eventos mediante controladores.</li>
-<li>Primero implementa CRUD desde GUI en memoria reutilizando el contrato de servicio y una implementacion basada en <code>ArrayList</code>.</li>
-<li>Luego incorpora JDBC, DAO y SQLite agregando una implementacion persistente del mismo contrato de servicio.</li>
-<li>Valida formularios, maneja excepciones, prueba el flujo principal y corrige errores funcionales.</li>
+<li>En S7 pasa de consola a GUI y reutiliza el servicio en memoria de una entidad simple.</li>
+<li>En S8 incorpora arquitectura por capas, DAO, JDBC y SQLite con CRUD persistente para una tabla simple.</li>
+<li>En S9 implementa operaciones persistentes con relación muchos a muchos mediante cabecera, detalle y tabla intermedia.</li>
+<li>En S10 agrega seguridad básica y una relación uno a muchos asociada al usuario.</li>
+<li>En S11 desarrolla consultas integradas, filtros, pruebas funcionales y correcciones por sesión.</li>
 <li>La Unidad 3 integra pantallas, controladores, servicios, entidades, DAO, base de datos, documentacion y evidencias.</li>
 <li>En S13 y S14 estabiliza el producto y genera el ejecutable nativo final con GraalVM.</li>
-<li>En S15 y S16 sustenta y defiende técnicamente CoMarket.</li>
+<li>En S15 y S16 sustenta y defiende técnicamente el producto.</li>
 </ol>
 <h2 id="enlaces">Enlaces<a class="headerlink" href="#enlaces" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1546,11 +1555,11 @@ gráfica funcional, evidencias de funcionamiento y sustentación técnica.
 <li><a href="S04_Herencia_Polimorfismo/">S4: Herencia y polimorfismo</a></li>
 <li><a href="S05_CRUD_Memoria_ArrayList/">S5: CRUD en memoria con ArrayList</a></li>
 <li><a href="S06_Evaluacion_Unidad_1/">S6: Evaluacion unidad 1</a></li>
-<li><a href="S07_Interfaz_Grafica_Usuario/">S7: Interfaz grafica de usuario</a></li>
-<li><a href="S08_CRUD_GUI_Memoria/">S8: CRUD desde GUI en memoria</a></li>
-<li><a href="S09_Arquitectura_Persistencia/">S9: Arquitectura por capas y persistencia relacional</a></li>
-<li><a href="S10_DAO_CRUD_GUI/">S10: Patron DAO y operaciones CRUD persistentes desde GUI</a></li>
-<li><a href="S11_Validacion_Integracion_Pruebas/">S11: Validacion de datos y pruebas</a></li>
+<li><a href="S07_GUI_CRUD_Memoria/">S7: Interfaz grafica y CRUD desde GUI en memoria</a></li>
+<li><a href="S08_Arquitectura_DAO_CRUD_Persistente/">S8: Arquitectura por capas, DAO y CRUD persistente desde GUI</a></li>
+<li><a href="S09_CRUD_Relaciones_Muchos_Muchos/">S9: Operaciones CRUD para tablas con relaciones muchos a muchos</a></li>
+<li><a href="S10_Seguridad_CRUD_Uno_Muchos/">S10: Seguridad y CRUD para tablas con relaciones uno a muchos</a></li>
+<li><a href="S11_Consultas_Integradas_Pruebas/">S11: Consultas integradas y pruebas</a></li>
 <li><a href="S12_Evaluacion_Unidad_2/">S12: Evaluacion unidad 2</a></li>
 <li><a href="S13_Proyecto_Integrador_Ensamblaje/">S13: Integracion del sistema</a></li>
 <li><a href="S14_Proyecto_Integrador_Refinamiento/">S14: Validacion y refinamiento</a></li>

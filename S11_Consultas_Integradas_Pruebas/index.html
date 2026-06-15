@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../S09_Arquitectura_Persistencia/">
+        <link rel="prev" href="../S10_Seguridad_CRUD_Uno_Muchos/">
       
       
-        <link rel="next" href="../S11_Validacion_Integracion_Pruebas/">
+        <link rel="next" href="../S12_Evaluacion_Unidad_2/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>10 Patron DAO y CRUD persistente desde GUI - POO - CoMarket</title>
+        <title>11 Consultas integradas y pruebas - POO - CoMarket</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#s10-patron-dao-y-operaciones-crud-persistentes-desde-gui" class="md-skip">
+        <a href="#s11-validacion-de-datos-y-pruebas-del-flujo-principal" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              10 Patron DAO y CRUD persistente desde GUI
+              11 Consultas integradas y pruebas
             
           </span>
         </div>
@@ -534,14 +534,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../S07_Interfaz_Grafica_Usuario/" class="md-nav__link">
+      <a href="../S07_GUI_CRUD_Memoria/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    7 Interfaz grafica de usuario
+    7 Interfaz grafica y CRUD desde GUI en memoria
   
 
     
@@ -562,14 +562,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../S08_CRUD_GUI_Memoria/" class="md-nav__link">
+      <a href="../S08_Arquitectura_DAO_CRUD_Persistente/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    8 CRUD desde GUI en memoria
+    8 Arquitectura por capas, DAO y CRUD persistente desde GUI
   
 
     
@@ -590,14 +590,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../S09_Arquitectura_Persistencia/" class="md-nav__link">
+      <a href="../S09_CRUD_Relaciones_Muchos_Muchos/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    9 Arquitectura por capas y persistencia relacional
+    9 Operaciones CRUD para tablas con relaciones muchos a muchos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S10_Seguridad_CRUD_Uno_Muchos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 Seguridad y CRUD para tablas con relaciones uno a muchos
   
 
     
@@ -634,7 +662,7 @@
   <span class="md-ellipsis">
     
   
-    10 Patron DAO y CRUD persistente desde GUI
+    11 Consultas integradas y pruebas
   
 
     
@@ -652,7 +680,7 @@
   <span class="md-ellipsis">
     
   
-    10 Patron DAO y CRUD persistente desde GUI
+    11 Consultas integradas y pruebas
   
 
     
@@ -773,10 +801,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-arquitectura-de-la-sesion" class="md-nav__link">
+  <a href="#22-flujo-de-validacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 Arquitectura de la sesión
+        2.2 Flujo de validación
       
     </span>
   </a>
@@ -964,34 +992,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../S11_Validacion_Integracion_Pruebas/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    11 Validacion de datos y pruebas
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1416,10 +1416,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-arquitectura-de-la-sesion" class="md-nav__link">
+  <a href="#22-flujo-de-validacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 Arquitectura de la sesión
+        2.2 Flujo de validación
       
     </span>
   </a>
@@ -1620,125 +1620,156 @@
 
 
 
-<h1 id="s10-patron-dao-y-operaciones-crud-persistentes-desde-gui">S10 - Patron DAO y operaciones CRUD persistentes desde GUI<a class="headerlink" href="#s10-patron-dao-y-operaciones-crud-persistentes-desde-gui" title="Permanent link">&para;</a></h1>
+<h1 id="s11-validacion-de-datos-y-pruebas-del-flujo-principal">S11 - Validación de datos y pruebas del flujo principal<a class="headerlink" href="#s11-validacion-de-datos-y-pruebas-del-flujo-principal" title="Permanent link">&para;</a></h1>
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
 <h3 id="11-proposito">1.1 Propósito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
-<p>Implementar el patron DAO para ejecutar operaciones CRUD persistentes desde la interfaz gráfica.</p>
+<p>Fortalecer la calidad del producto mediante validaciones, excepciones controladas y pruebas manuales del flujo principal.</p>
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
-<p>El estudiante separa el acceso a datos en DAO, mapea entidades a registros, ejecuta SQL básico y agrega una implementación persistente del mismo contrato de servicio.</p>
+<p>El estudiante valida entradas desde la GUI, controla errores frecuentes y prueba escenarios normales, inválidos y límite.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>CRUD persistente funcional desde formularios y tablas JavaFX.</p>
+<p>GUI y persistencia validadas con matriz mínima de pruebas del flujo principal.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
-<p>La GUI ya funciona con memoria y la base de datos ya existe. Ahora corresponde guardar y recuperar datos desde SQLite sin poner SQL en el controlador.</p>
+<p>Un CRUD que solo funciona con datos perfectos todavía no está listo. El usuario puede dejar campos vacíos, escribir texto dónde va un número o intentar eliminar sin seleccionar.</p>
 <p>Pregunta guía:</p>
-<div class="highlight"><pre><span></span><code>Cómo guardamos y recuperamos datos desde la GUI sin mezclar SQL con la pantalla?
+<div class="highlight"><pre><span></span><code>Cómo hacemos que la aplicación falle menos y avise mejor?
 </code></pre></div>
 <h3 id="15-ubicacion-en-el-curso">1.5 Ubicación en el curso<a class="headerlink" href="#15-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Unidad: U2.</li>
-<li>Avance de sesión: integración de GUI con persistencia.</li>
+<li>Avance de sesión: estabilizacion previa a la evaluación U2.</li>
 </ul>
 <h2 id="2-explica">2. Explica<a class="headerlink" href="#2-explica" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 25 min.</p>
 <h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Patron DAO.</li>
-<li>Servicio cómo coordinador entre controlador y DAO.</li>
-<li>Implementación persistente del contrato CRUD.</li>
-<li>Mapeo objeto-relacional básico.</li>
-<li><code>insert</code>, <code>select</code>, <code>update</code>, <code>delete</code>.</li>
-<li>Confirmación de eliminación.</li>
-<li>Excepciones de persistencia.</li>
-<li>Refresco de <code>TableView</code> desde base de datos.</li>
+<li>Validación de formularios.</li>
+<li>Mensajes al usuario.</li>
+<li>Excepciones personalizadas o controladas.</li>
+<li>Validaciones del servicio.</li>
+<li>Manejo de errores de persistencia.</li>
+<li>Pruebas manuales.</li>
+<li>Casos validos, inválidos y límite.</li>
 </ul>
 <p>Regla métodológica de la sesión:</p>
-<div class="highlight"><pre><span></span><code>El controlador no escribe SQL.
-El servicio valida y coordina.
-El DAO ejecuta SQL.
-JDBC conecta con SQLite.
-La entidad sigue siendo una clase del dominio.
+<div class="highlight"><pre><span></span><code>El controlador valida presencia y formato inmediato de la vista.
+El servicio valida reglas del flujo.
+El DAO reporta errores de persistencia.
+El usuario debe recibir mensajes claros.
 </code></pre></div>
-<h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
+<h3 id="22-flujo-de-validacion">2.2 Flujo de validación<a class="headerlink" href="#22-flujo-de-validacion" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart TB
     Vista["Vista JavaFX"]
     Controlador["Controlador"]
-
-    subgraph Servicio["Servicio"]
-        Contrato["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
-        ServicioBD["ProductoServiceBD&lt;br/&gt;implements"]
-        Validaciones["Validaciones/Excepciones"]
-    end
-
-    Entidades["Producto"]
-
-    subgraph Persistencia["Persistencia"]
-        DAO["ProductoDAO"]
-        SQLite[("SQLite / comarket.db")]
-    end
+    Contrato["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;"]
+    ServicioBD["ProductoServiceBD&lt;br/&gt;implements"]
+    Validaciones["Validaciones/Excepciones"]
+    DAO["ProductoDAO"]
+    SQLite[("SQLite")]
 
     Vista --&gt; Controlador
     Controlador --&gt; Contrato
     ServicioBD -. implements .-&gt; Contrato
-    Contrato -.-&gt; Entidades
-    ServicioBD -.-&gt; Entidades
+    Controlador -.-&gt; Validaciones
     ServicioBD -.-&gt; Validaciones
     ServicioBD --&gt; DAO
-    DAO --&gt; Entidades
     DAO --&gt;|"JDBC"| SQLite</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <ol>
-<li>Crear <code>ProductoDAO</code>.</li>
-<li>Implementar <code>registrar</code> con <code>insert</code>.</li>
-<li>Implementar <code>listar</code> con <code>select</code>.</li>
-<li>Implementar <code>actualizar</code> con <code>update</code>.</li>
-<li>Implementar <code>eliminar</code> con <code>delete</code>.</li>
-<li>Mapear cada fila de la base de datos a un objeto <code>Producto</code>.</li>
-<li>Crear o adaptar <code>ProductoServiceBD</code>.</li>
-<li>Hacer qué <code>ProductoServiceBD</code> use <code>ProductoDAO</code>.</li>
-<li>Conectar botones de la GUI con <code>ProductoService</code>, no directamente con SQL.</li>
-<li>Recargar la tabla desde la base de datos después de cada operación.</li>
-<li>Confirmar eliminación y manejar errores básicos.</li>
+<li>Validar campos obligatorios.</li>
+<li>Validar tipos numéricos cuándo corresponda.</li>
+<li>Validar rangos.</li>
+<li>Mostrar alertas claras.</li>
+<li>Controlar seleccion nula en tabla.</li>
+<li>Ubicar reglas del flujo principal en el servicio.</li>
+<li>Controlar errores de DAO desde la implementación persistente.</li>
+<li>Probar escenarios normales.</li>
+<li>Probar escenarios inválidos.</li>
+<li>Registrar una matriz mínima de pruebas.</li>
 </ol>
+<p>Matriz sugerida:</p>
+<table>
+<thead>
+<tr>
+<th>Caso</th>
+<th>Datos</th>
+<th>Resultado esperado</th>
+<th>Resultado obtenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Registro valido</td>
+<td>Campos completos</td>
+<td>Guarda y refresca tabla</td>
+<td></td>
+</tr>
+<tr>
+<td>Registro inválido</td>
+<td>Nombre vacio</td>
+<td>Muestra alerta</td>
+<td></td>
+</tr>
+<tr>
+<td>Edición valida</td>
+<td>Fila seleccionada</td>
+<td>Actualiza SQLite</td>
+<td></td>
+</tr>
+<tr>
+<td>Eliminación sin seleccionar</td>
+<td>Sin fila</td>
+<td>Muestra alerta</td>
+<td></td>
+</tr>
+<tr>
+<td>Error de persistencia</td>
+<td>BD no disponible</td>
+<td>Mensaje controlado</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
-<p>Fuera del aula, cada estudiante consolida el aprendizaje completando un CRUD persistente y preparando una evidencia individual.</p>
+<p>Fuera del aula, cada estudiante consolida el aprendizaje documentando pruebas del flujo principal y preparando una evidencia individual.</p>
 <p>Tiempo: 2h fuera del aula.</p>
 <h3 id="41-plantilla-de-evidencia-individual">4.1 Plantilla de evidencia individual<a class="headerlink" href="#41-plantilla-de-evidencia-individual" title="Permanent link">&para;</a></h3>
 <p>Entrega un PDF con el siguiente nombre:</p>
-<div class="highlight"><pre><span></span><code>S10_Equipo##_ApellidoNombre.pdf
+<div class="highlight"><pre><span></span><code>S11_Equipo##_ApellidoNombre.pdf
 </code></pre></div>
 <p>Ejemplo:</p>
-<div class="highlight"><pre><span></span><code>S10_Equipo03_QuispeAna.pdf
+<div class="highlight"><pre><span></span><code>S11_Equipo03_QuispeAna.pdf
 </code></pre></div>
 <p>El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.</p>
 <h4 id="411-datos-del-estudiante">4.1.1 Datos del estudiante<a class="headerlink" href="#411-datos-del-estudiante" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Nombre:</li>
 <li>Equipo:</li>
-<li>Sesión: S10 - Patrón DAO y operaciones CRUD persistentes desde GUI</li>
+<li>Sesión: S11 - Validación de datos y pruebas del flujo principal</li>
 <li>Rol o aporte realizado:</li>
 <li>Link de GitHub:</li>
 </ul>
 <h4 id="412-trabajo-autonomo-realizado">4.1.2 Trabajo autónomo realizado<a class="headerlink" href="#412-trabajo-autonomo-realizado" title="Permanent link">&para;</a></h4>
 <p>Completa y evidencia estas tareas:</p>
 <ol>
-<li>Completar el CRUD persistente para una entidad adicional o mejorar el módulo principal.</li>
-<li>Implementar operaciones <code>insert</code>, <code>select</code>, <code>update</code> y <code>delete</code>.</li>
-<li>Hacer que la implementación persistente use el DAO.</li>
-<li>Conectar la GUI con el contrato del servicio.</li>
-<li>Verificar que el controlador no tenga SQL.</li>
-<li>Verificar registros en SQLite.</li>
-<li>Explicar el flujo Vista-Controlador-Servicio-Entidades-DAO.</li>
+<li>Documentar pruebas del flujo principal.</li>
+<li>Probar al menos dos casos válidos.</li>
+<li>Probar al menos dos casos inválidos.</li>
+<li>Evidenciar una alerta o mensaje al usuario.</li>
+<li>Evidenciar una validación ubicada en el servicio.</li>
+<li>Evidenciar un error controlado de persistencia o selección.</li>
+<li>Registrar una corrección aplicada.</li>
 </ol>
 <h4 id="413-evidencia-tecnica">4.1.3 Evidencia técnica<a class="headerlink" href="#413-evidencia-tecnica" title="Permanent link">&para;</a></h4>
 <p>Incluye capturas o salidas con una breve explicación debajo de cada una:</p>
 <ul>
-<li>Código de <code>ProductoService</code>, <code>ProductoServiceBD</code> y <code>ProductoDAO</code>.</li>
-<li>Capturas de GUI.</li>
-<li>Registros persistidos en SQLite.</li>
-<li>Explicación del flujo Vista-Controlador-Servicio-Entidades-DAO.</li>
-<li>Evidencia de que el controlador no contiene SQL directo.</li>
+<li>Matriz de pruebas.</li>
+<li>Capturas de alertas.</li>
+<li>Un error controlado.</li>
+<li>Una validación ubicada en el servicio.</li>
+<li>Una corrección aplicada.</li>
+<li>Evidencia de que el flujo principal queda operativo.</li>
 </ul>
 <h4 id="414-error-o-hallazgo">4.1.4 Error o hallazgo<a class="headerlink" href="#414-error-o-hallazgo" title="Permanent link">&para;</a></h4>
 <p>Describe al menos un error, diferencia o hallazgo técnico:</p>
@@ -1749,24 +1780,25 @@ La entidad sigue siendo una clase del dominio.
 </ul>
 <p>Ejemplos válidos:</p>
 <ul>
-<li>Un <code>insert</code> no guardaba por error de parámetros.</li>
-<li>El <code>select</code> no mapeaba bien la entidad.</li>
-<li>La tabla no refrescaba desde SQLite.</li>
-<li>El controlador estaba llamando directamente al DAO.</li>
+<li>El formulario aceptaba datos vacíos.</li>
+<li>La tabla permitía eliminar sin selección.</li>
+<li>El DAO lanzaba un error sin mensaje claro.</li>
+<li>Una validación estaba duplicada en controlador y servicio.</li>
 </ul>
 <h4 id="415-reflexion-tecnica-breve">4.1.5 Reflexión técnica breve<a class="headerlink" href="#415-reflexion-tecnica-breve" title="Permanent link">&para;</a></h4>
 <p>Responde en 5 a 8 líneas:</p>
-<div class="highlight"><pre><span></span><code>Por qué el DAO debe concentrar SQL y no el controlador?
+<div class="highlight"><pre><span></span><code>Por qué probar casos inválidos es tan importante como probar casos correctos?
 </code></pre></div>
 <h3 id="42-criterios-minimos-de-aceptacion">4.2 Criterios mínimos de aceptación<a class="headerlink" href="#42-criterios-minimos-de-aceptacion" title="Permanent link">&para;</a></h3>
 <p>La evidencia individual se considera completa si:</p>
 <ul>
-<li>El archivo respeta el nombre <code>S10_Equipo##_ApellidoNombre.pdf</code>.</li>
+<li>El archivo respeta el nombre <code>S11_Equipo##_ApellidoNombre.pdf</code>.</li>
 <li>Incluye evidencias técnicas legibles.</li>
-<li>Muestra DAO funcional.</li>
-<li>Muestra CRUD persistente desde GUI.</li>
-<li>Muestra registros guardados en SQLite.</li>
-<li>Explica el flujo por capas.</li>
+<li>Presenta matriz de pruebas.</li>
+<li>Muestra casos válidos e inválidos.</li>
+<li>Muestra alertas o mensajes al usuario.</li>
+<li>Muestra una validación ubicada en el servicio.</li>
+<li>Explica una corrección aplicada.</li>
 <li>No contiene solo pantallazos: cada evidencia tiene una descripción breve.</li>
 </ul>
 <h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
@@ -1774,33 +1806,33 @@ La entidad sigue siendo una clase del dominio.
 <p>Esta sección conecta el resultado de aprendizaje de la sesión con el producto que debe evidenciar cada estudiante.</p>
 <h3 id="51-resultados-esperados">5.1 Resultados esperados<a class="headerlink" href="#51-resultados-esperados" title="Permanent link">&para;</a></h3>
 <ul>
-<li>El DAO concentra las consultas SQL.</li>
-<li>El controlador no contiene SQL directo.</li>
-<li>El servicio coordina operaciones, validaciones y DAO.</li>
-<li>Las entidades se mantienen como clases del dominio.</li>
-<li>La GUI registra, lista, actualiza y elimina datos persistentes.</li>
+<li>La GUI valida datos antes de guardar.</li>
+<li>Los errores se comunican al usuario.</li>
+<li>El servicio concentra validaciones del flujo y excepciones controladas.</li>
+<li>Existen pruebas manuales documentadas.</li>
+<li>El flujo principal queda listo para evaluación U2.</li>
 </ul>
 <h3 id="52-evidencia-del-producto-de-sesion">5.2 Evidencia del producto de sesión<a class="headerlink" href="#52-evidencia-del-producto-de-sesion" title="Permanent link">&para;</a></h3>
 <p>Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.</p>
 <p>Nombre del archivo:</p>
-<div class="highlight"><pre><span></span><code>S10_Equipo##_ApellidoNombre.pdf
+<div class="highlight"><pre><span></span><code>S11_Equipo##_ApellidoNombre.pdf
 </code></pre></div>
 <p>La evidencia debe demostrar:</p>
 <ul>
 <li>Producto de sesión construido.</li>
 <li>Aporte individual verificable.</li>
-<li>CRUD persistente probado.</li>
+<li>Validaciones y pruebas documentadas.</li>
 <li>Reflexión técnica breve.</li>
 </ul>
 <p>La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.</p>
 <h3 id="53-preguntas-de-defensa-y-reflexion">5.3 Preguntas de defensa y reflexión<a class="headerlink" href="#53-preguntas-de-defensa-y-reflexion" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Qué responsabilidad tiene el DAO?</li>
-<li>Qué responsabilidad tiene la interface del servicio?</li>
-<li>Qué responsabilidad tiene la implementación persistente?</li>
-<li>Por qué no poner SQL en el controlador?</li>
-<li>Cómo conviertes un registro en objeto?</li>
-<li>Cómo verificas que el dato quedó guardado?</li>
+<li>Qué validaciones implementaste?</li>
+<li>Qué validación pertenece al controlador y cuál al servicio?</li>
+<li>Qué errores controlaste?</li>
+<li>Qué caso límite probaste?</li>
+<li>Cómo sabes que el flujo principal funciona?</li>
+<li>Qué caso inválido te ayudó a encontrar un problema real?</li>
 </ol>
 <h3 id="54-rubrica-de-evaluacion">5.4 Rúbrica de evaluación<a class="headerlink" href="#54-rubrica-de-evaluacion" title="Permanent link">&para;</a></h3>
 <table>
@@ -1817,39 +1849,39 @@ La entidad sigue siendo una clase del dominio.
 </thead>
 <tbody>
 <tr>
-<td>1. DAO</td>
+<td>1. Validaciones</td>
 <td style="text-align: right;">2</td>
-<td>DAO concentra SQL y mapea entidades correctamente.</td>
-<td>DAO funcional.</td>
-<td>DAO incompleto.</td>
-<td>No evidencia DAO.</td>
+<td>Validaciones claras en controlador y servicio según responsabilidad.</td>
+<td>Validaciones principales funcionales.</td>
+<td>Validaciones parciales.</td>
+<td>No evidencia validaciones.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>2. Servicio persistente</td>
+<td>2. Manejo de errores</td>
 <td style="text-align: right;">2</td>
-<td>Implementación persistente coordina DAO y contrato.</td>
-<td>Servicio funcional.</td>
-<td>Servicio parcial.</td>
-<td>No usa servicio persistente.</td>
+<td>Errores controlados con mensajes claros al usuario.</td>
+<td>Errores principales controlados.</td>
+<td>Control parcial de errores.</td>
+<td>No controla errores.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>3. CRUD persistente</td>
+<td>3. Matriz de pruebas</td>
 <td style="text-align: right;">2</td>
-<td>CRUD completo desde GUI y verificado en SQLite.</td>
-<td>CRUD principal funcional.</td>
-<td>CRUD incompleto.</td>
-<td>No persiste datos.</td>
+<td>Matriz cubre casos válidos, inválidos y límite.</td>
+<td>Matriz cubre casos principales.</td>
+<td>Matriz incompleta.</td>
+<td>No presenta matriz.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>4. Separación de capas</td>
+<td>4. Corrección aplicada</td>
 <td style="text-align: right;">2</td>
-<td>Controlador, servicio, DAO y entidades tienen roles claros.</td>
-<td>Separación suficiente.</td>
-<td>Mezcla responsabilidades.</td>
-<td>No evidencia capas.</td>
+<td>Evidencia problema, causa y corrección funcional.</td>
+<td>Evidencia corrección principal.</td>
+<td>Corrección poco clara.</td>
+<td>No evidencia corrección.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
