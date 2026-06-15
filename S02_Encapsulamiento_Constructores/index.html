@@ -16,7 +16,7 @@
         <link rel="prev" href="../S01_Clases_Objetos/">
       
       
-        <link rel="next" href="../S03_Modelado_Dominio_Colecciones/">
+        <link rel="next" href="../S03_Asociacion_Colecciones/">
       
       
         
@@ -857,7 +857,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../S03_Modelado_Dominio_Colecciones/" class="md-nav__link">
+      <a href="../S03_Asociacion_Colecciones/" class="md-nav__link">
         
   
   
@@ -2024,6 +2024,11 @@ S2 empieza a controlar el estado con encapsulamiento.
 Todavía no se trabajan interfaces como contrato.
 Eso queda para S4.
 </code></pre></div>
+<p>Desde esta sesión se empieza a usar una separación mínima de carpetas:</p>
+<div class="highlight"><pre><span></span><code>entity   -&gt; clases del dominio, por ejemplo Producto, Cliente, Venta, DetalleVenta
+service  -&gt; clases que administran operaciones del dominio
+</code></pre></div>
+<p>Todavía no se trabaja <code>controller</code>, <code>repository</code>, <code>util</code> ni base de datos. Esas capas aparecen cuando la aplicación pase a GUI y persistencia.</p>
 <p>Ejemplo de responsabilidad mejorada:</p>
 <div class="highlight"><pre><span></span><code>Producto guarda codigo, nombre, precio y stock.
 ProductoService agrupa operaciones sobre productos.

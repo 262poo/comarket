@@ -361,7 +361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../S03_Modelado_Dominio_Colecciones/" class="md-nav__link">
+      <a href="../S03_Asociacion_Colecciones/" class="md-nav__link">
         
   
   
@@ -1870,15 +1870,24 @@ La persistencia con DAO y SQLite se trabaja en S8.
 <p>Tiempo: 2h.</p>
 <h3 id="31-crear-proyecto-javafx-con-maven">3.1 Crear proyecto JavaFX con Maven<a class="headerlink" href="#31-crear-proyecto-javafx-con-maven" title="Permanent link">&para;</a></h3>
 <p>Usa un IDE que soporte JavaFX, Maven y Scene Builder. Para U2 se recomienda IntelliJ IDEA o un entorno equivalente con Maven configurado.</p>
-<p>Producto del paso: proyecto JavaFX/Maven creado, con estructura inicial, paquetes base y clase <code>Main</code> preparada para cargar una vista FXML.</p>
-<p>Paquetes base:</p>
-<div class="highlight"><pre><span></span><code>app
-modelo
-controlador
-servicio
-vista
+<p>Producto del paso: proyecto JavaFX/Maven creado, con estructura inicial, carpetas base y clase <code>Main</code> preparada para cargar una vista FXML.</p>
+<p>Estructura base:</p>
+<div class="highlight"><pre><span></span><code>src/main/java/
+    app/
+        ProductoApplication.java
+    controller/
+        ProductoController.java
+    entity/
+        Producto.java
+    service/
+        ProductoService.java
+        ProductoServiceMemoria.java
+
+src/main/resources/
+    view/
+        ProductoView.fxml
 </code></pre></div>
-<p>La persistencia (<code>dao</code>, <code>data</code>, SQLite) se trabajará en S8. En S7 el foco es abrir una ventana, cargar FXML, conectar eventos y ejecutar CRUD en memoria desde la GUI.</p>
+<p>La persistencia (<code>repository</code>, <code>util</code>, SQLite) se trabajará en S8. En S7 el foco es abrir una ventana, cargar FXML, conectar eventos y ejecutar CRUD en memoria desde la GUI.</p>
 <h3 id="32-crear-vista-fxml">3.2 Crear vista FXML<a class="headerlink" href="#32-crear-vista-fxml" title="Permanent link">&para;</a></h3>
 <p>Controles mínimos:</p>
 <ul>

@@ -361,7 +361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../S03_Modelado_Dominio_Colecciones/" class="md-nav__link">
+      <a href="../S03_Asociacion_Colecciones/" class="md-nav__link">
         
   
   
@@ -1659,6 +1659,9 @@ La implementación persistente coordina validaciones y DAO.
 El DAO ejecuta SQL y mapea filas a objetos.
 JDBC conecta Java con SQLite.
 La entidad sigue siendo clase del dominio.
+No se usa JPA ni ORM.
+La conexión a la base de datos se centraliza en util/ConexionBD.
+repository cumple el rol de DAO en este curso.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>classDiagram
@@ -1718,10 +1721,10 @@ La entidad sigue siendo clase del dominio.
 <ol>
 <li>Revisar el proyecto JavaFX/Maven creado en S7.</li>
 <li>Agregar dependencia SQLite JDBC.</li>
-<li>Crear paquetes <code>servicio</code>, <code>persistencia</code>, <code>modelo</code> y <code>controlador</code> si faltan.</li>
-<li>Crear <code>ConexionBD</code>.</li>
+<li>Crear o verificar las carpetas de capas.</li>
+<li>Crear <code>ConexionBD</code> dentro de <code>util</code>.</li>
 <li>Crear tabla <code>producto</code>.</li>
-<li>Crear <code>ProductoDAO</code>.</li>
+<li>Crear <code>ProductoDAO</code> dentro de <code>repository</code>.</li>
 <li>Implementar <code>insert</code>, <code>select</code>, <code>update</code> y <code>delete</code>.</li>
 <li>Crear <code>ProductoServiceBD implements ProductoService</code>.</li>
 <li>Hacer que <code>ProductoController</code> use <code>ProductoService</code>, no el DAO directamente.</li>
@@ -1729,6 +1732,33 @@ La entidad sigue siendo clase del dominio.
 <li>Validar campos obligatorios, precio y stock.</li>
 <li>Mostrar mensajes de error claros.</li>
 </ol>
+<p>Estructura sugerida:</p>
+<div class="highlight"><pre><span></span><code>src/main/java/
+    app/
+        ProductoApplication.java
+    controller/
+        ProductoController.java
+    entity/
+        Producto.java
+    exception/
+        ValidacionException.java
+        PersistenciaException.java
+    repository/
+        ProductoDAO.java
+    service/
+        ProductoService.java
+        ProductoServiceBD.java
+    util/
+        ConexionBD.java
+src/main/resources/
+    view/
+        ProductoView.fxml
+</code></pre></div>
+<p>Nota metodológica:</p>
+<div class="highlight"><pre><span></span><code>repository se usa como carpeta para DAO.
+util contiene clases técnicas compartidas, como ConexionBD.
+No se agrega mapper, dto ni filter todavía porque no aportan al nivel de esta sesión.
+</code></pre></div>
 <p>Tabla mínima:</p>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">producto</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>

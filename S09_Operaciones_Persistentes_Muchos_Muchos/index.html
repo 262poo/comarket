@@ -361,7 +361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../S03_Modelado_Dominio_Colecciones/" class="md-nav__link">
+      <a href="../S03_Asociacion_Colecciones/" class="md-nav__link">
         
   
   
@@ -1657,6 +1657,7 @@
 La base de datos persiste esa relación mediante tablas.
 El detalle no es una pantalla CRUD independiente.
 El detalle nace dentro del flujo de la cabecera.
+Los DAO se ubican en repository y reutilizan util/ConexionBD para conectarse a SQLite.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>classDiagram
@@ -1685,6 +1686,16 @@ El detalle nace dentro del flujo de la cabecera.
         insertar(detalle, ventaId)
     }
 
+    class ConexionBD {
+        obtenerConexion()
+    }
+
+    class SQLite {
+        venta
+        detalle_venta
+        producto
+    }
+
     class Venta {
         -cliente
         -fecha
@@ -1708,6 +1719,9 @@ El detalle nace dentro del flujo de la cabecera.
     VentaService &lt;|.. VentaServiceBD : implements
     VentaServiceBD --&gt; VentaDAO : usa
     VentaServiceBD --&gt; DetalleVentaDAO : usa
+    VentaDAO --&gt; ConexionBD : usa
+    DetalleVentaDAO --&gt; ConexionBD : usa
+    ConexionBD --&gt; SQLite : JDBC
     VentaServiceBD ..&gt; Venta : usa
     Venta "1" *-- "*" DetalleVenta : contiene
     DetalleVenta "*" --&gt; "1" Producto : referencia</code></pre>
@@ -1723,6 +1737,7 @@ El detalle nace dentro del flujo de la cabecera.
 <li>Calcular subtotal y total.</li>
 <li>Crear <code>VentaDAO</code>.</li>
 <li>Crear <code>DetalleVentaDAO</code>.</li>
+<li>Reutilizar <code>ConexionBD</code> desde <code>util</code>.</li>
 <li>Crear <code>VentaServiceBD</code>.</li>
 <li>Guardar primero la cabecera y luego los detalles.</li>
 <li>Validar cantidad, stock, venta sin detalles y errores de persistencia.</li>
