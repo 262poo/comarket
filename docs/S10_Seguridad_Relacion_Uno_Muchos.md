@@ -1,4 +1,4 @@
-﻿# S10 - Patron DAO y operaciones CRUD persistentes desde GUI
+# S10 - Seguridad básica y relación uno a muchos
 
 ## 1. Introducción
 
@@ -6,30 +6,30 @@ Tiempo: 20 min.
 
 ### 1.1 Propósito
 
-Implementar el patron DAO para ejecutar operaciones CRUD persistentes desde la interfaz gráfica.
+Incorporar seguridad básica mediante usuarios, autenticación simple y operaciones persistentes asociadas a una relación uno a muchos.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante separa el acceso a datos en DAO, mapea entidades a registros, ejecuta SQL básico y agrega una implementación persistente del mismo contrato de servicio.
+El estudiante crea una tabla de usuarios, implementa un login básico, mantiene una sesión activa y asocia operaciones persistentes al usuario autenticado.
 
 ### 1.3 Producto de sesión
 
-CRUD persistente funcional desde formularios y tablas JavaFX.
+Autenticación básica y registro de operaciones asociadas a un usuario, usando GUI, servicio, DAO, SQLite y validaciones de acceso.
 
 ### 1.4 Motivación de la sesión
 
-La GUI ya funciona con memoria y la base de datos ya existe. Ahora corresponde guardar y recuperar datos desde SQLite sin poner SQL en el controlador.
+Una aplicación de escritorio no solo guarda datos; también debe saber quién realiza una operación. Esta sesión agrega usuario y seguridad básica sin convertir el curso en seguridad avanzada.
 
 Pregunta guía:
 
 ```text
-Cómo guardamos y recuperamos datos desde la GUI sin mezclar SQL con la pantalla?
+Cómo asociamos operaciones persistentes a un usuario autenticado?
 ```
 
 ### 1.5 Ubicación en el curso
 
 - Unidad: U2.
-- Avance de sesión: integración de GUI con persistencia.
+- Avance de sesión: seguridad básica y relación simple uno a muchos.
 
 ## 2. Explica
 
@@ -37,75 +37,116 @@ Tiempo: 25 min.
 
 ### 2.1 Conceptos clave
 
-- Patron DAO.
-- Servicio cómo coordinador entre controlador y DAO.
-- Implementación persistente del contrato CRUD.
-- Mapeo objeto-relacional básico.
-- `insert`, `select`, `update`, `delete`.
-- Confirmación de eliminación.
-- Excepciones de persistencia.
-- Refresco de `TableView` desde base de datos.
+- Usuario.
+- Autenticación básica.
+- Sesión activa.
+- Relación uno a muchos.
+- Operaciones asociadas al usuario.
+- Validación de acceso.
+- DAO para usuario.
+- Manejo básico de errores.
 
-Regla métodológica de la sesión:
+Regla metodológica de la sesión:
 
 ```text
-El controlador no escribe SQL.
-El servicio valida y coordina.
-El DAO ejecuta SQL.
-JDBC conecta con SQLite.
-La entidad sigue siendo una clase del dominio.
+La seguridad se trabaja de forma básica.
+Usuario no reemplaza al dominio principal.
+Usuario permite asociar operaciones a quien las registra.
+La relación uno a muchos se entiende como un usuario con varias operaciones.
+Las validaciones de acceso se aplican antes de ejecutar la operación.
 ```
 
 ### 2.2 Arquitectura de la sesión
 
 ```mermaid
-flowchart TB
-    Vista["Vista JavaFX"]
-    Controlador["Controlador"]
+classDiagram
+    class LoginController {
+        onIngresar()
+    }
 
-    subgraph Servicio["Servicio"]
-        Contrato["ProductoService<br/>&lt;&lt;interface&gt;&gt;"]
-        ServicioBD["ProductoServiceBD<br/>implements"]
-        Validaciones["Validaciones/Excepciones"]
-    end
+    class VentaController {
+        onGuardarVenta()
+    }
 
-    Entidades["Producto"]
+    class UsuarioService {
+        <<interface>>
+        autenticar(username, password)
+    }
 
-    subgraph Persistencia["Persistencia"]
-        DAO["ProductoDAO"]
-        SQLite[("SQLite / comarket.db")]
-    end
+    class UsuarioServiceBD {
+        autenticar(username, password)
+    }
 
-    Vista --> Controlador
-    Controlador --> Contrato
-    ServicioBD -. implements .-> Contrato
-    Contrato -.-> Entidades
-    ServicioBD -.-> Entidades
-    ServicioBD -.-> Validaciones
-    ServicioBD --> DAO
-    DAO --> Entidades
-    DAO -->|"JDBC"| SQLite
+    class UsuarioDAO {
+        buscarPorUsername(username)
+    }
+
+    class Sesion {
+        -usuarioActual
+    }
+
+    class Usuario {
+        -username
+        -passwordHash
+        -rol
+    }
+
+    class Venta {
+        -cliente
+        -fecha
+        -usuario
+    }
+
+    LoginController ..> UsuarioService : usa contrato
+    UsuarioService <|.. UsuarioServiceBD : implements
+    UsuarioServiceBD --> UsuarioDAO : usa
+    UsuarioDAO ..> Usuario : retorna
+    LoginController --> Sesion : guarda usuario
+    VentaController ..> Sesion : consulta
+    Venta "*" --> "1" Usuario : registrada por
 ```
 
 ## 3. Aplica: actividad práctica guiada
 
 Tiempo: 2h.
 
-1. Crear `ProductoDAO`.
-2. Implementar `registrar` con `insert`.
-3. Implementar `listar` con `select`.
-4. Implementar `actualizar` con `update`.
-5. Implementar `eliminar` con `delete`.
-6. Mapear cada fila de la base de datos a un objeto `Producto`.
-7. Crear o adaptar `ProductoServiceBD`.
-8. Hacer qué `ProductoServiceBD` use `ProductoDAO`.
-9. Conectar botones de la GUI con `ProductoService`, no directamente con SQL.
-10. Recargar la tabla desde la base de datos después de cada operación.
-11. Confirmar eliminación y manejar errores básicos.
+1. Crear tabla `usuario`.
+2. Crear entidad `Usuario`.
+3. Crear `UsuarioDAO`.
+4. Crear `UsuarioService`.
+5. Crear `UsuarioServiceBD`.
+6. Crear una clase simple `Sesion`.
+7. Diseñar vista de login.
+8. Validar usuario y contraseña.
+9. Guardar usuario autenticado en sesión.
+10. Asociar la venta u operación al usuario actual.
+11. Validar que no se pueda operar sin sesión activa.
+12. Mostrar mensajes claros de acceso denegado o credenciales incorrectas.
+
+Tablas de referencia:
+
+```sql
+CREATE TABLE usuario (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    rol TEXT NOT NULL
+);
+
+ALTER TABLE venta ADD COLUMN usuario_id INTEGER REFERENCES usuario(id);
+```
+
+Nota metodológica:
+
+```text
+Para el curso basta seguridad básica.
+No se exige implementar seguridad empresarial.
+La contraseña no debe guardarse como texto plano en una aplicación real.
+```
 
 ## 4. Crea: actividad autónoma
 
-Fuera del aula, cada estudiante consolida el aprendizaje completando un CRUD persistente y preparando una evidencia individual.
+Fuera del aula, cada estudiante consolida la autenticación y la relación con operaciones persistentes.
 
 Tiempo: 2h fuera del aula.
 
@@ -117,144 +158,87 @@ Entrega un PDF con el siguiente nombre:
 S10_Equipo##_ApellidoNombre.pdf
 ```
 
-Ejemplo:
-
-```text
-S10_Equipo03_QuispeAna.pdf
-```
-
-El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.
-
 #### 4.1.1 Datos del estudiante
 
 - Nombre:
 - Equipo:
-- Sesión: S10 - Patrón DAO y operaciones CRUD persistentes desde GUI
+- Sesión: S10 - Seguridad básica y relación uno a muchos
 - Rol o aporte realizado:
 - Link de GitHub:
 
 #### 4.1.2 Trabajo autónomo realizado
 
-Completa y evidencia estas tareas:
-
-1. Completar el CRUD persistente para una entidad adicional o mejorar el módulo principal.
-2. Implementar operaciones `insert`, `select`, `update` y `delete`.
-3. Hacer que la implementación persistente use el DAO.
-4. Conectar la GUI con el contrato del servicio.
-5. Verificar que el controlador no tenga SQL.
-6. Verificar registros en SQLite.
-7. Explicar el flujo Vista-Controlador-Servicio-Entidades-DAO.
+1. Crear usuario de prueba.
+2. Implementar login básico.
+3. Mantener sesión activa.
+4. Asociar una operación al usuario.
+5. Evidenciar relación uno a muchos.
+6. Validar credenciales incorrectas.
+7. Validar operación sin sesión.
 
 #### 4.1.3 Evidencia técnica
 
-Incluye capturas o salidas con una breve explicación debajo de cada una:
-
-- Código de `ProductoService`, `ProductoServiceBD` y `ProductoDAO`.
-- Capturas de GUI.
-- Registros persistidos en SQLite.
-- Explicación del flujo Vista-Controlador-Servicio-Entidades-DAO.
-- Evidencia de que el controlador no contiene SQL directo.
+- Captura de login.
+- Código o fragmento de `UsuarioDAO`.
+- Código o fragmento de `UsuarioServiceBD`.
+- Evidencia de usuario autenticado.
+- Evidencia de operación asociada al usuario.
+- Validación de acceso o credenciales.
 
 #### 4.1.4 Error o hallazgo
 
-Describe al menos un error, diferencia o hallazgo técnico:
-
-- Qué ocurrió.
-- Cómo lo diagnosticaste.
-- Cómo lo corregiste o qué aprendiste.
-
-Ejemplos válidos:
-
-- Un `insert` no guardaba por error de parámetros.
-- El `select` no mapeaba bien la entidad.
-- La tabla no refrescaba desde SQLite.
-- El controlador estaba llamando directamente al DAO.
+Describe un problema encontrado al controlar sesión o acceso.
 
 #### 4.1.5 Reflexión técnica breve
 
 Responde en 5 a 8 líneas:
 
 ```text
-Por qué el DAO debe concentrar SQL y no el controlador?
+Por qué una operación persistente debe registrar qué usuario la realizó?
 ```
 
 ### 4.2 Criterios mínimos de aceptación
 
-La evidencia individual se considera completa si:
-
-- El archivo respeta el nombre `S10_Equipo##_ApellidoNombre.pdf`.
-- Incluye evidencias técnicas legibles.
-- Muestra DAO funcional.
-- Muestra CRUD persistente desde GUI.
-- Muestra registros guardados en SQLite.
-- Explica el flujo por capas.
-- No contiene solo pantallazos: cada evidencia tiene una descripción breve.
+- PDF con nombre correcto.
+- Login básico funcional.
+- Usuario persistido en SQLite.
+- Sesión activa controlada.
+- Operación asociada al usuario.
+- Validación de acceso.
 
 ## 5. Cierre evaluativo
 
 Tiempo: 20 min.
 
-Esta sección conecta el resultado de aprendizaje de la sesión con el producto que debe evidenciar cada estudiante.
-
 ### 5.1 Resultados esperados
 
-- El DAO concentra las consultas SQL.
-- El controlador no contiene SQL directo.
-- El servicio coordina operaciones, validaciones y DAO.
-- Las entidades se mantienen como clases del dominio.
-- La GUI registra, lista, actualiza y elimina datos persistentes.
+- El estudiante explica autenticación básica.
+- Usuario se persiste mediante DAO.
+- La sesión activa se consulta desde controladores.
+- Las operaciones se asocian al usuario.
+- Se evidencia relación uno a muchos.
+- Se aplican validaciones de acceso.
 
 ### 5.2 Evidencia del producto de sesión
 
 Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.
 
-Nombre del archivo:
-
-```text
-S10_Equipo##_ApellidoNombre.pdf
-```
-
-La evidencia debe demostrar:
-
-- Producto de sesión construido.
-- Aporte individual verificable.
-- CRUD persistente probado.
-- Reflexión técnica breve.
-
-La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.
-
 ### 5.3 Preguntas de defensa y reflexión
 
-1. Qué responsabilidad tiene el DAO?
-2. Qué responsabilidad tiene la interface del servicio?
-3. Qué responsabilidad tiene la implementación persistente?
-4. Por qué no poner SQL en el controlador?
-5. Cómo conviertes un registro en objeto?
-6. Cómo verificas que el dato quedó guardado?
+1. Qué responsabilidad tiene `UsuarioDAO`?
+2. Qué responsabilidad tiene `UsuarioService`?
+3. Dónde se guarda el usuario autenticado durante la ejecución?
+4. Qué significa relación uno a muchos en esta sesión?
+5. Qué validación evita operar sin sesión?
+6. Por qué no debe guardarse contraseña en texto plano?
 
 ### 5.4 Rúbrica de evaluación
 
 | Dimensión | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuación obtenida |
 |---|---:|---|---|---|---|---:|
-| 1. DAO | 2 | DAO concentra SQL y mapea entidades correctamente. | DAO funcional. | DAO incompleto. | No evidencia DAO. | |
-| 2. Servicio persistente | 2 | Implementación persistente coordina DAO y contrato. | Servicio funcional. | Servicio parcial. | No usa servicio persistente. | |
-| 3. CRUD persistente | 2 | CRUD completo desde GUI y verificado en SQLite. | CRUD principal funcional. | CRUD incompleto. | No persiste datos. | |
-| 4. Separación de capas | 2 | Controlador, servicio, DAO y entidades tienen roles claros. | Separación suficiente. | Mezcla responsabilidades. | No evidencia capas. | |
-| 5. Error o hallazgo | 1 | Analiza error/hallazgo, causa, solución y aprendizaje técnico. | Explica un problema y una solución. | Menciona un problema sin análisis. | No presenta error ni hallazgo. | |
-| 6. Reflexión y orden | 1 | PDF ordenado, evidencias legibles y reflexión precisa. | Evidencias suficientes y reflexión clara. | Evidencias incompletas o reflexión superficial. | PDF desordenado o sin reflexión. | |
-
-Puntuación acumulada = suma de (`Peso` * `Puntuación obtenida`) = ____.
-
-Nota final = (`Puntuación acumulada` / 30) * 20 = ____.
-
-Para usar la rúbrica con IA, solicita:
-
-```text
-Evalúa el PDF usando la rúbrica de la sesión.
-Para cada dimensión selecciona la puntuación obtenida usando la escala Inicio=0, Proceso=1, Logro=2, Logro destacado=3.
-Justifica brevemente cada puntuación.
-Calcula la puntuación acumulada con la fórmula: suma de (Peso * Puntuación obtenida).
-Calcula la nota final sobre 20 con la fórmula: (Puntuación acumulada / 30) * 20.
-Indica 2 fortalezas y 2 recomendaciones.
-```
-
+| 1. Usuario y login | 2 | Login funcional y usuario persistido correctamente. | Login funcional. | Login parcial. | No evidencia login. | |
+| 2. Sesión activa | 2 | Controla sesión y acceso con claridad. | Sesión funcional. | Sesión parcial. | No controla sesión. | |
+| 3. Relación uno a muchos | 2 | Operaciones asociadas al usuario correctamente. | Asociación funcional. | Asociación parcial. | No evidencia relación. | |
+| 4. Capas | 2 | Controlador, servicio y DAO separados. | Separación suficiente. | Mezcla responsabilidades. | No separa. | |
+| 5. Error o hallazgo | 1 | Analiza causa y solución. | Explica un problema. | Menciona un problema. | No presenta. | |
+| 6. Orden y reflexión | 1 | Evidencia clara y reflexión precisa. | Evidencia suficiente. | Evidencia incompleta. | No sustenta. | |

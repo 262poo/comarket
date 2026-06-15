@@ -1,4 +1,4 @@
-﻿# S9 - Arquitectura por capas y persistencia relacional
+# S9 - Operaciones persistentes con relación muchos a muchos
 
 ## 1. Introducción
 
@@ -6,30 +6,30 @@ Tiempo: 20 min.
 
 ### 1.1 Propósito
 
-Preparar la aplicación de escritorio para reemplazar almacenamiento en memoria por persistencia relacional con SQLite y JDBC.
+Implementar operaciones persistentes sobre un modelo con relación muchos a muchos usando una clase de detalle con atributos propios.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante organiza el proyecto por capas, configura SQLite, comprende JDBC y prepara la estructura para una implementación persistente del servicio y DAO.
+El estudiante modela una operación con cabecera y detalle, persiste datos relacionados mediante DAO y mantiene la separación entre controlador, servicio, entidades y persistencia.
 
 ### 1.3 Producto de sesión
 
-Proyecto JavaFX/Maven organizado con vista, controlador, servicio, entidades, persistencia, conexión JDBC y base de datos SQLite.
+Registro persistente de una operación con detalles: cabecera, lista de detalles, entidad relacionada, cálculo de subtotal y total.
 
 ### 1.4 Motivación de la sesión
 
-El `ArrayList` se borra al cerrar la aplicación. Para conservar datos, el producto necesita una base de datos local y una capa de persistencia.
+Después de persistir una tabla simple, el siguiente reto es registrar una operación real donde una cabecera contiene varios detalles y cada detalle referencia una entidad existente.
 
 Pregunta guía:
 
 ```text
-Cómo hacemos que los datos sobrevivan después de cerrar la aplicación?
+Cómo guardamos una operación con varios detalles sin perder la separación por capas?
 ```
 
 ### 1.5 Ubicación en el curso
 
 - Unidad: U2.
-- Avance de sesión: transicion de memoria a persistencia.
+- Avance de sesión: persistencia de una relación avanzada muchos a muchos desde objetos.
 
 ## 2. Explica
 
@@ -37,78 +37,123 @@ Tiempo: 25 min.
 
 ### 2.1 Conceptos clave
 
-- Arquitectura por capas.
-- Vista FXML y controlador JavaFX.
-- Servicio como contrato de operaciones.
-- Implementación persistente del servicio.
-- Persistencia.
-- DAO.
-- JDBC cómo conector.
-- SQLite cómo base de datos local.
-- Clase de conexión.
+- Relación muchos a muchos desde el modelo de objetos.
+- Cabecera y detalle.
+- Clase intermedia con atributos propios.
+- Composición entre cabecera y detalle.
+- Asociación entre detalle y entidad relacionada.
+- DAO para cabecera y DAO para detalle.
+- Transacción o secuencia controlada de guardado.
+- Validaciones del flujo.
 
-Regla métodológica de la sesión:
+Regla metodológica de la sesión:
 
 ```text
-El controlador sigue usando el contrato del servicio.
-La implementación persistente coordina reglas y DAO.
-El DAO conversa con SQL.
-JDBC conecta Java con SQLite.
-Las entidades no cambian por usar base de datos.
+La relación se entiende primero como relación entre objetos.
+La base de datos persiste esa relación mediante tablas.
+El detalle no es una pantalla CRUD independiente.
+El detalle nace dentro del flujo de la cabecera.
 ```
 
 ### 2.2 Arquitectura de la sesión
 
 ```mermaid
-flowchart TB
-    Vista["Vista FXML"]
-    Controlador["JavaFX Controller"]
+classDiagram
+    class VentaController {
+        onAgregarDetalle()
+        onGuardarVenta()
+        cargarProductos()
+    }
 
-    subgraph Servicio["Servicio"]
-        Contrato["ProductoService<br/>&lt;&lt;interface&gt;&gt;"]
-        Implementacion["ProductoServiceBD<br/>implements"]
-        Validaciones["Validaciones/Excepciones"]
-    end
+    class VentaService {
+        <<interface>>
+        registrar(venta)
+        calcularTotal(venta)
+    }
 
-    Entidades["Producto"]
+    class VentaServiceBD {
+        registrar(venta)
+        calcularTotal(venta)
+    }
 
-    subgraph Persistencia["Persistencia"]
-        DAO["ProductoDAO"]
-        Conexion["ConexionBD"]
-        SQLite[("SQLite / comarket.db")]
-    end
+    class VentaDAO {
+        insertar(venta)
+    }
 
-    Vista --> Controlador
-    Controlador --> Contrato
-    Implementacion -. implements .-> Contrato
-    Contrato -.-> Entidades
-    Implementacion -.-> Entidades
-    Implementacion --> DAO
-    Implementacion -.-> Validaciones
-    DAO --> Entidades
-    DAO --> Conexion
-    Conexion -->|"JDBC"| SQLite
+    class DetalleVentaDAO {
+        insertar(detalle, ventaId)
+    }
+
+    class Venta {
+        -cliente
+        -fecha
+        -detalles
+        calcularTotal()
+    }
+
+    class DetalleVenta {
+        -cantidad
+        -precioUnitario
+        calcularSubtotal()
+    }
+
+    class Producto {
+        -nombre
+        -precio
+        -stock
+    }
+
+    VentaController ..> VentaService : usa contrato
+    VentaService <|.. VentaServiceBD : implements
+    VentaServiceBD --> VentaDAO : usa
+    VentaServiceBD --> DetalleVentaDAO : usa
+    VentaServiceBD ..> Venta : usa
+    Venta "1" *-- "*" DetalleVenta : contiene
+    DetalleVenta "*" --> "1" Producto : referencia
 ```
 
 ## 3. Aplica: actividad práctica guiada
 
 Tiempo: 2h.
 
-1. Revisar dependencias Maven.
-2. Agregar SQLite JDBC si hace falta.
-3. Crear paquete `persistencia`.
-4. Crear archivo `comarket.db`.
-5. Crear una tabla inicial.
-6. Implementar `ConexionBD`.
-7. Probar conexión con una consulta simple.
-8. Identificar `ProductoService` como contrato qué seguira usando el controlador.
-9. Preparar `ProductoServiceBD` cómo implementación persistente.
-10. Preparar `ProductoDAO` cómo componente de persistencia.
-11. Verificar qué `Producto` no cambia por usar base de datos.
+1. Crear o revisar entidades `Venta`, `DetalleVenta` y `Producto`.
+2. Diseñar vista de registro de venta.
+3. Cargar productos existentes desde la base de datos.
+4. Seleccionar producto y cantidad.
+5. Crear `DetalleVenta`.
+6. Agregar detalles a la venta.
+7. Calcular subtotal y total.
+8. Crear `VentaDAO`.
+9. Crear `DetalleVentaDAO`.
+10. Crear `VentaServiceBD`.
+11. Guardar primero la cabecera y luego los detalles.
+12. Validar cantidad, stock, venta sin detalles y errores de persistencia.
+
+Tablas de referencia:
+
+```sql
+CREATE TABLE venta (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cliente TEXT NOT NULL,
+    fecha TEXT NOT NULL,
+    total REAL NOT NULL
+);
+
+CREATE TABLE detalle_venta (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    venta_id INTEGER NOT NULL,
+    producto_id INTEGER NOT NULL,
+    cantidad INTEGER NOT NULL,
+    precio_unitario REAL NOT NULL,
+    subtotal REAL NOT NULL,
+    FOREIGN KEY (venta_id) REFERENCES venta(id),
+    FOREIGN KEY (producto_id) REFERENCES producto(id)
+);
+```
 
 ## 4. Crea: actividad autónoma
 
-Fuera del aula, cada estudiante consolida el aprendizaje preparando la estructura de persistencia y una evidencia individual.
+Fuera del aula, cada estudiante consolida el registro persistente con detalle y prepara una evidencia individual.
 
 Tiempo: 2h fuera del aula.
 
@@ -120,147 +165,85 @@ Entrega un PDF con el siguiente nombre:
 S09_Equipo##_ApellidoNombre.pdf
 ```
 
-Ejemplo:
-
-```text
-S09_Equipo03_QuispeAna.pdf
-```
-
-El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.
-
 #### 4.1.1 Datos del estudiante
 
 - Nombre:
 - Equipo:
-- Sesión: S09 - Arquitectura por capas y persistencia relacional
+- Sesión: S09 - Operaciones persistentes con relación muchos a muchos
 - Rol o aporte realizado:
 - Link de GitHub:
 
 #### 4.1.2 Trabajo autónomo realizado
 
-Completa y evidencia estas tareas:
-
-1. Preparar una tabla adicional o mejorar la estructura de persistencia.
-2. Crear o verificar el archivo `comarket.db`.
-3. Implementar o ajustar la clase `ConexionBD`.
-4. Probar una conexión simple con SQLite.
-5. Preparar el paquete de persistencia.
-6. Explicar qué parte corresponde a servicio, entidades y persistencia.
-7. Explicar por qué las entidades no deben cambiar al pasar de memoria a SQLite.
+1. Completar registro de cabecera y detalle.
+2. Evidenciar `Venta`, `DetalleVenta` y `Producto`.
+3. Evidenciar DAO de cabecera y DAO de detalle.
+4. Mostrar cálculo de total.
+5. Verificar registros en SQLite.
+6. Documentar validaciones aplicadas.
 
 #### 4.1.3 Evidencia técnica
 
-Incluye capturas o salidas con una breve explicación debajo de cada una:
-
-- Estructura de paquetes.
-- Script o captura de tabla.
-- Prueba de conexión.
-- Bosquejo del servicio y su implementación persistente.
-- Explicación del rol de JDBC.
-- Evidencia del archivo SQLite o tabla creada.
+- Captura de la pantalla de registro.
+- Código o fragmento de `VentaServiceBD`.
+- Código o fragmento de `VentaDAO` y `DetalleVentaDAO`.
+- Captura de tablas persistidas.
+- Evidencia de validación de cantidad, stock o venta sin detalles.
 
 #### 4.1.4 Error o hallazgo
 
-Describe al menos un error, diferencia o hallazgo técnico:
-
-- Qué ocurrió.
-- Cómo lo diagnosticaste.
-- Cómo lo corregiste o qué aprendiste.
-
-Ejemplos válidos:
-
-- La ruta de la base de datos no era correcta.
-- Faltaba el driver JDBC.
-- La tabla no coincidía con la entidad.
-- Se intentó poner SQL en el controlador.
+Describe un problema encontrado al guardar cabecera y detalle.
 
 #### 4.1.5 Reflexión técnica breve
 
 Responde en 5 a 8 líneas:
 
 ```text
-Por qué una aplicación necesita una capa de persistencia cuando deja de usar ArrayList?
+Por qué DetalleVenta no debe manejarse como un CRUD independiente?
 ```
 
 ### 4.2 Criterios mínimos de aceptación
 
-La evidencia individual se considera completa si:
-
-- El archivo respeta el nombre `S09_Equipo##_ApellidoNombre.pdf`.
-- Incluye evidencias técnicas legibles.
-- Muestra estructura por capas.
-- Muestra SQLite disponible.
-- Muestra prueba de conexión con JDBC.
-- Explica el rol de persistencia y DAO.
-- No contiene solo pantallazos: cada evidencia tiene una descripción breve.
+- PDF con nombre correcto.
+- Registro de cabecera y detalles.
+- Cálculo de subtotal y total.
+- Persistencia en tablas relacionadas.
+- Validaciones del flujo.
+- Evidencia de separación por capas.
 
 ## 5. Cierre evaluativo
 
 Tiempo: 20 min.
 
-Esta sección conecta el resultado de aprendizaje de la sesión con el producto que debe evidenciar cada estudiante.
-
 ### 5.1 Resultados esperados
 
-Al finalizar la sesión, el estudiante debe demostrar que:
-
-- El proyecto mantiene una estructura por capas.
-- SQLite está disponible.
-- JDBC conecta con la base de datos.
-- El controlador conserva como entrada el contrato del servicio.
-- La aplicación queda preparada para DAO.
+- El estudiante explica la relación cabecera-detalle.
+- El detalle referencia una entidad existente.
+- El servicio coordina el guardado.
+- El DAO persiste cabecera y detalle.
+- La GUI muestra detalles y total.
+- Hay validaciones al cierre de la sesión.
 
 ### 5.2 Evidencia del producto de sesión
 
 Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.
 
-Nombre del archivo:
-
-```text
-S09_Equipo##_ApellidoNombre.pdf
-```
-
-La evidencia debe demostrar:
-
-- Producto de sesión construido.
-- Aporte individual verificable.
-- Estructura de persistencia preparada.
-- Reflexión técnica breve.
-
-La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.
-
 ### 5.3 Preguntas de defensa y reflexión
 
-1. Por qué `ArrayList` ya no es suficiente?
-2. Qué función cumple JDBC?
-3. Dónde vive la base de datos?
-4. Qué capa debe conversar con SQL?
-5. Por qué no cambiamos las entidades al pasar de memoria a SQLite?
-6. Qué evidencia demuestra que la conexión funciona?
+1. Qué representa la cabecera?
+2. Qué representa el detalle?
+3. Por qué el detalle tiene atributos propios?
+4. Qué DAO guarda la cabecera?
+5. Qué DAO guarda los detalles?
+6. Qué validación evita vender una cantidad inválida?
 
 ### 5.4 Rúbrica de evaluación
 
 | Dimensión | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuación obtenida |
 |---|---:|---|---|---|---|---:|
-| 1. Arquitectura por capas | 2 | Paquetes y responsabilidades claros. | Estructura suficiente. | Estructura parcial. | No evidencia capas. | |
-| 2. SQLite | 2 | Base de datos y tabla disponibles y evidenciadas. | SQLite disponible. | Configuración incompleta. | No evidencia base de datos. | |
-| 3. JDBC y conexión | 2 | Conexión probada y explicada. | Conexión funcional. | Conexión parcial. | No conecta. | |
-| 4. Preparación para DAO | 2 | Servicio, entidad y persistencia quedan listos para DAO. | Preparación suficiente. | Preparación confusa. | No prepara DAO. | |
-| 5. Error o hallazgo | 1 | Analiza error/hallazgo, causa, solución y aprendizaje técnico. | Explica un problema y una solución. | Menciona un problema sin análisis. | No presenta error ni hallazgo. | |
-| 6. Reflexión y orden | 1 | PDF ordenado, evidencias legibles y reflexión precisa. | Evidencias suficientes y reflexión clara. | Evidencias incompletas o reflexión superficial. | PDF desordenado o sin reflexión. | |
-
-Puntuación acumulada = suma de (`Peso` * `Puntuación obtenida`) = ____.
-
-Nota final = (`Puntuación acumulada` / 30) * 20 = ____.
-
-Para usar la rúbrica con IA, solicita:
-
-```text
-Evalúa el PDF usando la rúbrica de la sesión.
-Para cada dimensión selecciona la puntuación obtenida usando la escala Inicio=0, Proceso=1, Logro=2, Logro destacado=3.
-Justifica brevemente cada puntuación.
-Calcula la puntuación acumulada con la fórmula: suma de (Peso * Puntuación obtenida).
-Calcula la nota final sobre 20 con la fórmula: (Puntuación acumulada / 30) * 20.
-Indica 2 fortalezas y 2 recomendaciones.
-```
-
+| 1. Modelo cabecera-detalle | 2 | Modelo claro y coherente. | Modelo funcional. | Modelo parcial. | No evidencia modelo. | |
+| 2. Persistencia relacionada | 2 | Guarda cabecera y detalles correctamente. | Persistencia principal funcional. | Persistencia parcial. | No persiste relación. | |
+| 3. Servicio y DAO | 2 | Servicio coordina y DAO separa SQL. | Separación funcional. | Mezcla responsabilidades. | No separa. | |
+| 4. Validaciones | 2 | Valida cantidad, stock y venta sin detalles. | Validaciones básicas. | Validaciones parciales. | No valida. | |
+| 5. Error o hallazgo | 1 | Analiza causa y solución. | Explica un problema. | Menciona un problema. | No presenta. | |
+| 6. Orden y reflexión | 1 | Evidencia clara y reflexión precisa. | Evidencia suficiente. | Evidencia incompleta. | No sustenta. | |

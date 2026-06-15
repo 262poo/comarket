@@ -1,4 +1,4 @@
-﻿# S12 - Evaluación de la unidad 2
+# S12 - Evaluación de la unidad 2
 
 ## 1. Introducción
 
@@ -6,31 +6,31 @@ Tiempo: 20 min.
 
 ### 1.1 Propósito
 
-Validar la aplicación de escritorio con GUI, controladores, servicios, entidades, DAO, SQLite, validaciones y pruebas del flujo principal.
+Evaluar la aplicación de escritorio con GUI, arquitectura por capas, DAO, SQLite, operaciones persistentes, relaciones entre objetos, seguridad básica, consultas y pruebas.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante demuestra qué puede construir, ejecutar, probar y defender una aplicación JavaFX con persistencia relacional y CRUD funcional desde la interfaz gráfica.
+El estudiante demuestra que puede construir, ejecutar, probar y defender una aplicación JavaFX organizada por capas, con persistencia relacional y operaciones sobre objetos relacionados.
 
 ### 1.3 Producto de sesión
 
-Producto U2 integrado: GUI JavaFX, controladores, contrato de servicio, implementación persistente, DAO, SQLite, validaciones y evidencia de pruebas.
+Producto U2 integrado: GUI JavaFX, controladores, servicios, entidades, DAO, SQLite, relación muchos a muchos, relación uno a muchos, seguridad básica, consultas y evidencias de pruebas.
 
 ### 1.4 Motivación de la sesión
 
-Una aplicación de escritorio se evalua por el flujo completo: el usuario opera una pantalla, el controlador delega, el servicio coordina, el DAO persiste y la tabla refleja los cambios.
+Una aplicación de escritorio se evalúa por el flujo completo: el usuario ingresa, opera pantallas, el controlador delega, el servicio coordina, el DAO persiste y las consultas muestran información consistente.
 
 Preguntas para los estudiantes:
 
-1. Qué evidencia demuestra qué la GUI funciona integrada con SQLite?
+1. Qué evidencia demuestra que la GUI funciona integrada con SQLite?
 2. Qué parte puedes defender individualmente?
-3. Qué revisas cuándo un dato no aparece en la tabla?
+3. Qué revisas cuando una operación no aparece en una consulta?
 
 ### 1.5 Ubicación en el curso
 
 - Unidad: U2 - Aplicación de escritorio con persistencia de datos.
-- Producto de unidad: aplicación JavaFX con CRUD persistente.
-- Avance de sesión: evaluación integradora antes del refinamiento final en U3.
+- Producto de unidad: aplicación JavaFX con persistencia, relaciones y seguridad básica.
+- Avance de sesión: evaluación integradora antes de la integración final en U3.
 
 ## 2. Explica
 
@@ -39,9 +39,12 @@ Tiempo: 15 min.
 ### 2.1 Conceptos clave
 
 - Integración GUI-persistencia.
-- Evidencia individual.
-- Diagnóstico del flujo Vista-Controlador-Servicio-DAO-BD.
-- Validaciones y excepciones controladas.
+- Arquitectura por capas.
+- DAO y JDBC.
+- Relación muchos a muchos mediante detalle.
+- Relación uno a muchos asociada al usuario.
+- Seguridad básica.
+- Consultas integradas.
 - Pruebas manuales.
 
 ### 2.2 Arquitectura del producto U2
@@ -49,79 +52,105 @@ Tiempo: 15 min.
 ```mermaid
 flowchart TB
     Vista["Vista JavaFX"]
-    Controlador["Controlador"]
+    Controlador["Controladores"]
 
     subgraph Servicio["Servicio"]
-        Contrato["ProductoService<br/>&lt;&lt;interface&gt;&gt;"]
-        ServicioBD["ProductoServiceBD<br/>implements"]
+        ProductoService["ProductoServiceBD"]
+        VentaService["VentaServiceBD"]
+        UsuarioService["UsuarioServiceBD"]
+        ConsultaService["ConsultaService"]
         Validaciones["Validaciones/Excepciones"]
     end
 
-    Entidades["Producto"]
+    Entidades["Producto / Venta / DetalleVenta / Usuario"]
 
     subgraph Persistencia["Persistencia"]
-        DAO["ProductoDAO"]
-        SQLite[("SQLite / comarket.db")]
+        ProductoDAO["ProductoDAO"]
+        VentaDAO["VentaDAO"]
+        DetalleDAO["DetalleVentaDAO"]
+        UsuarioDAO["UsuarioDAO"]
+        ConsultaDAO["ConsultaDAO"]
+        SQLite[("SQLite")]
     end
 
     Vista --> Controlador
-    Controlador --> Contrato
-    ServicioBD -. implements .-> Contrato
-    Contrato -.-> Entidades
-    ServicioBD -.-> Entidades
-    ServicioBD -.-> Validaciones
-    ServicioBD --> DAO
-    DAO --> Entidades
-    DAO -->|"JDBC"| SQLite
+    Controlador --> ProductoService
+    Controlador --> VentaService
+    Controlador --> UsuarioService
+    Controlador --> ConsultaService
+    ProductoService -.-> Validaciones
+    VentaService -.-> Validaciones
+    UsuarioService -.-> Validaciones
+    ProductoService --> ProductoDAO
+    VentaService --> VentaDAO
+    VentaService --> DetalleDAO
+    UsuarioService --> UsuarioDAO
+    ConsultaService --> ConsultaDAO
+    ProductoDAO --> Entidades
+    VentaDAO --> Entidades
+    DetalleDAO --> Entidades
+    UsuarioDAO --> Entidades
+    ConsultaDAO --> Entidades
+    ProductoDAO -->|"JDBC"| SQLite
+    VentaDAO -->|"JDBC"| SQLite
+    DetalleDAO -->|"JDBC"| SQLite
+    UsuarioDAO -->|"JDBC"| SQLite
+    ConsultaDAO -->|"JDBC"| SQLite
 ```
 
 ### 2.3 Criterios mínimos de revisión
 
 - GUI operativa.
 - Controladores conectados.
-- Servicios CRUD funcionales.
-- Entidades coherentes.
-- DAO funcional.
-- SQLite con datos persistentes.
-- Validaciones.
+- CRUD persistente de una tabla simple.
+- Operación persistente con cabecera y detalle.
+- Seguridad básica con usuario.
+- Relación uno a muchos asociada al usuario.
+- Consultas integradas.
+- Validaciones por sesión.
 - Pruebas del flujo principal.
 
-## 3. Aplica: evaluación practica
+## 3. Aplica: evaluación práctica
 
 Tiempo: 3h.
 
-### 3.1 Preparar demostracion
+### 3.1 Preparar demostración
 
 Orden recomendado:
 
 1. Abrir el proyecto.
 2. Mostrar estructura de capas.
 3. Ejecutar la aplicación JavaFX.
-4. Demostrar CRUD persistente.
-5. Verificar registros en SQLite.
-6. Mostrar matriz de pruebas.
-7. Explicar una decisión técnica.
+4. Iniciar sesión.
+5. Demostrar CRUD persistente de una tabla simple.
+6. Registrar una operación con detalles.
+7. Verificar registros en SQLite.
+8. Ejecutar una consulta integrada.
+9. Mostrar matriz de pruebas.
+10. Explicar una decisión técnica.
 
 ### 3.2 Ejecutar pruebas base
 
 El estudiante demuestra:
 
-1. Registro desde GUI.
-2. Listado en tabla.
-3. Edición.
-4. Eliminación.
-5. Persistencia en SQLite.
-6. Validaciones.
-7. Manejo básico de errores.
+1. Login correcto e incorrecto.
+2. Registro persistente desde GUI.
+3. Edición y eliminación de una tabla simple.
+4. Registro de cabecera y detalle.
+5. Validación de cantidad, stock o venta sin detalles.
+6. Asociación de operación a usuario.
+7. Consulta por filtro y vista de detalle.
+8. Manejo básico de errores.
 
-### 3.3 Demostracion individual
+### 3.3 Demostración individual
 
 Cada integrante debe poder responder:
 
-- Qué parte implemento.
-- Qué clase o archivo modifico.
-- Qué prueba ejecuto.
-- Qué error diagnóstico.
+- Qué parte implementó.
+- Qué clase o archivo modificó.
+- Qué prueba ejecutó.
+- Qué error diagnosticó.
+- Qué decisión técnica puede defender.
 
 ## 4. Crea: evidencia individual
 
@@ -143,7 +172,7 @@ S12_Equipo##_ApellidoNombre.pdf
 - Rol o aporte realizado:
 - Link de GitHub:
 
-#### 4.1.2 Trabajo autonomo realizado
+#### 4.1.2 Trabajo autónomo realizado
 
 1. Ordenar evidencias de U2.
 2. Registrar aporte individual.
@@ -155,14 +184,18 @@ S12_Equipo##_ApellidoNombre.pdf
 
 - Capturas de GUI.
 - Evidencia de registros en SQLite.
-- Código o descripción del DAO.
-- Código o descripción de la interface del servicio y su implementación persistente.
+- Código o descripción de DAO.
+- Código o descripción de servicios.
+- Evidencia de seguridad básica.
+- Evidencia de relación muchos a muchos.
+- Evidencia de relación uno a muchos.
+- Consulta integrada.
 - Matriz mínima de pruebas.
 - Aporte individual.
 
 #### 4.1.4 Error o hallazgo
 
-Describe un problema de integración GUI-persistencia y cómo lo diagnosticaste.
+Describe un problema de integración y cómo lo diagnosticaste.
 
 #### 4.1.5 Reflexión técnica breve
 
@@ -173,6 +206,9 @@ Explica cómo fluye una operación desde la vista hasta SQLite.
 - PDF con nombre correcto.
 - Evidencia de aplicación JavaFX funcionando.
 - CRUD persistente demostrado.
+- Operación con detalle demostrada.
+- Seguridad básica demostrada.
+- Consulta integrada demostrada.
 - Validaciones demostradas.
 - Aporte individual verificable.
 
@@ -183,53 +219,35 @@ Tiempo: 20 min.
 ### 5.1 Resultados esperados
 
 - Producto U2 ejecutado.
-- CRUD persistente demostrado.
-- Flujo por capas explicado.
+- Persistencia demostrada.
+- Relaciones entre objetos explicadas.
+- Seguridad básica operativa.
+- Consultas integradas funcionando.
 - Validaciones y pruebas documentadas.
 - Evidencia individual entregada.
 
 ### 5.2 Evidencia del producto de sesión
 
-Cada estudiante entrega un PDF individual siguiendo la plantilla de la seccion 4.1.
-
-Nombre del archivo:
-
-```text
-S12_Equipo##_ApellidoNombre.pdf
-```
+Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.
 
 ### 5.3 Preguntas de defensa y reflexión
 
 1. Cómo fluye una operación desde la vista hasta SQLite?
 2. Qué responsabilidad tiene el controlador?
-3. Qué responsabilidad tiene la interface del servicio?
+3. Qué responsabilidad tiene el servicio?
 4. Qué responsabilidad tiene el DAO?
-5. Qué validación evita un error frecuente?
-6. Qué mejoraras en U3?
+5. Cómo se guarda una operación con detalles?
+6. Qué relación se asocia al usuario?
+7. Qué consulta integrada implementaste?
+8. Qué mejorarás en U3?
 
 ### 5.4 Rúbrica de evaluación
 
-| Dimension | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuacion obtenida |
+| Dimensión | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuación obtenida |
 |---|---:|---|---|---|---|---:|
 | 1. GUI funcional | 2 | GUI completa, clara y conectada al flujo principal. | GUI principal funcional. | GUI parcial o inestable. | No ejecuta GUI. | |
-| 2. Capas y responsabilidades | 2 | Vista, controlador, servicio, entidades y DAO bien separados. | Separacion suficiente. | Mezclas importantes de responsabilidades. | No hay separacion clara. | |
-| 3. DAO y persistencia | 2 | CRUD persistente completo y verificable en SQLite. | Persistencia principal funcional. | Persistencia incompleta. | No persiste datos. | |
-| 4. Validaciones y pruebas | 2 | Validaciones y matriz de pruebas completas. | Validaciones principales presentes. | Validaciones parciales. | No evidencia validaciones. | |
-| 5. Evidencia individual | 1 | Evidencia clara, ordenada y verificable. | Evidencia suficiente. | Evidencia incompleta. | No entrega evidencia. | |
-| 6. Defensa técnica | 1 | Responde con precision y criterio. | Responde adecuadamente. | Responde parcialmente. | No sustenta. | |
-
-Puntuacion acumulada = suma de (`Peso` * `Puntuacion obtenida`) = ____.
-
-Nota final = (`Puntuacion acumulada` / 30) * 20 = ____.
-
-Para usar la rúbrica con IA, solicita:
-
-```text
-Evalua el PDF usando la rúbrica de la sesión.
-Para cada dimension selecciona la puntuacion obtenida usando la escala Inicio=0, Proceso=1, Logro=2, Logro destacado=3.
-Justifica brevemente cada puntuacion.
-Calcula la puntuacion acumulada con la formula: suma de (Peso * Puntuacion obtenida).
-Calcula la nota final sobre 20 con la formula: (Puntuacion acumulada / 30) * 20.
-Indica 2 fortalezas y 2 recomendaciones.
-```
-
+| 2. Capas y responsabilidades | 2 | Controlador, servicio, entidades y DAO bien separados. | Separación suficiente. | Mezclas importantes. | No separa. | |
+| 3. Persistencia y relaciones | 2 | CRUD simple, detalle y relaciones persistentes funcionando. | Persistencia principal funcional. | Persistencia incompleta. | No persiste. | |
+| 4. Seguridad y consultas | 2 | Login, usuario asociado y consultas integradas funcionando. | Funcionalidad principal presente. | Funcionalidad parcial. | No evidencia. | |
+| 5. Evidencia individual | 1 | Evidencia clara, ordenada y verificable. | Evidencia suficiente. | Evidencia incompleta. | No entrega. | |
+| 6. Defensa técnica | 1 | Responde con precisión y criterio. | Responde adecuadamente. | Responde parcialmente. | No sustenta. | |

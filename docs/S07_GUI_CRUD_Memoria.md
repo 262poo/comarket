@@ -1,4 +1,4 @@
-﻿# S7 - Interfaz gráfica de usuario
+# S7 - Interfaz gráfica y CRUD desde GUI en memoria
 
 ## 1. Introducción
 
@@ -6,30 +6,30 @@ Tiempo: 20 min.
 
 ### 1.1 Propósito
 
-Iniciar la aplicación de escritorio con JavaFX, FXML, Scene Builder y controladores, manteniendo la separacion entre vista y código Java.
+Iniciar una aplicación de escritorio con JavaFX, FXML, Scene Builder y controladores, conectando un CRUD en memoria desde la GUI.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante crea una ventana JavaFX, diseña una vista FXML, conecta controles con un controlador y atiende eventos básicos.
+El estudiante crea una ventana JavaFX, diseña una vista FXML, conecta controles con un controlador y ejecuta operaciones CRUD en memoria usando el servicio trabajado en U1.
 
 ### 1.3 Producto de sesión
 
-Proyecto JavaFX con Maven, vista FXML, controlador y formulario inicial.
+Proyecto JavaFX con Maven, vista FXML, controlador, formulario, tabla y CRUD en memoria de una entidad simple.
 
 ### 1.4 Motivación de la sesión
 
-El producto deja la consola y empieza a operar como aplicación de escritorio. La GUI no reemplaza la POO construida en U1; solo cambia la forma de interactuar con el usuario.
+La aplicación deja la consola y empieza a operar como aplicación de escritorio. La GUI no reemplaza la POO construida en U1; reutiliza el contrato de servicio y la implementación en memoria desde una pantalla.
 
 Pregunta guía:
 
 ```text
-Cómo conectamos una pantalla JavaFX con código Java sin mezclarlo todo?
+Cómo conectamos una pantalla JavaFX con el servicio en memoria sin duplicar el CRUD en el controlador?
 ```
 
 ### 1.5 Ubicación en el curso
 
-- Unidad: U2 - Aplicación de escritorio con persistencia de datos.
-- Avance de sesión: base visual del producto.
+- Unidad: U2.
+- Avance de sesión: transición de consola a GUI con CRUD en memoria.
 
 ## 2. Explica
 
@@ -44,34 +44,56 @@ Tiempo: 25 min.
 | Scene Builder | Herramienta visual para editar FXML. |
 | Controller | Clase Java qué recibe eventos de la vista. |
 | `fx:id` | Nombre qué permite conectar un control FXML con Java. |
-| Evento | Acción del usuario, como presionar un botón. |
 | `TableView` | Control para mostrar listas de objetos. |
+| Servicio en memoria | Implementación que conserva datos temporalmente durante la ejecución. |
 
-Regla métodológica de la sesión:
+Regla metodológica de la sesión:
 
 ```text
 La vista muestra controles.
 El controlador atiende eventos.
-El controlador se prepara para delegar operaciones al contrato `ProductoService` construido en U1.
-Las entidades siguen representando el dominio.
-El CRUD completo se conecta en la siguiente sesión.
+El controlador delega operaciones al contrato del servicio.
+La implementación en memoria conserva los datos durante la ejecución.
+El ArrayList no va en el controlador; vive dentro de la implementación en memoria.
+La persistencia con DAO y SQLite se trabaja en S8.
 ```
 
 ### 2.2 Arquitectura de la sesión
 
 ```mermaid
-flowchart TB
-    Main["Main<br/>Application"]
-    FXML["Vista FXML<br/>TextField / Button / TableView"]
-    Controller["ProductoController<br/>initialize / eventos"]
-    Service["ProductoService<br/>&lt;&lt;interface&gt;&gt;<br/>contrato U1"]
-    Entity["Producto<br/>entidad del dominio"]
+classDiagram
+    class ProductoController {
+        onRegistrar()
+        onActualizar()
+        onEliminar()
+        cargarTabla()
+    }
 
-    Main -->|"carga FXML"| FXML
-    FXML -->|"fx controller"| Controller
-    Controller -. "prepara uso" .-> Service
-    Controller -. "crea / lee" .-> Entity
-    Service -. "usa" .-> Entity
+    class ProductoService {
+        <<interface>>
+        registrar(producto)
+        listar()
+        actualizar(producto)
+        eliminar(codigo)
+    }
+
+    class ProductoServiceMemoria {
+        -productos: ArrayList
+        CRUD sobre ArrayList
+    }
+
+    class Producto {
+        -codigo
+        -nombre
+        -precio
+        -stock
+    }
+
+    ProductoController ..> ProductoService : usa contrato
+    ProductoController ..> Producto : crea/lee
+    ProductoService <|.. ProductoServiceMemoria : implements
+    ProductoService ..> Producto : usa
+    ProductoServiceMemoria ..> Producto : usa
 ```
 
 ## 3. Aplica: actividad práctica guiada
@@ -82,185 +104,19 @@ Tiempo: 2h.
 
 Usa un IDE que soporte JavaFX, Maven y Scene Builder. Para U2 se recomienda IntelliJ IDEA o un entorno equivalente con Maven configurado.
 
-**Producto del paso:** proyecto JavaFX/Maven creado, con estructura inicial, paquetes base y clase `Main` preparada para cargar una vista FXML.
+Producto del paso: proyecto JavaFX/Maven creado, con estructura inicial, paquetes base y clase `Main` preparada para cargar una vista FXML.
 
-#### 3.1.1 Crear proyecto en IntelliJ IDEA
-
-Abrir IntelliJ IDEA:
-
-```text
-New Project
--> JavaFX
-```
-
-Configurar:
-
-```text
-Name: comarket
-Location: C:\262\262poo
-Language: Java
-Build system: Maven
-Group: com.upeu
-Artifact: comarket
-JDK: temurin-17
-```
-
-Presionar:
-
-```text
-Next
-```
-
-En la ventana de librerías adicionales:
-
-```text
-Additional libraries:
--> No seleccionar ninguna librería
-```
-
-Finalizar:
-
-```text
-Create
-```
-
-#### 3.1.2 Revisar estructura inicial
-
-Estructura esperada:
-
-```text
-comarket/
-├── pom.xml
-└── src/
-    └── main/
-        ├── java/
-        └── resources/
-```
-
-#### 3.1.3 Crear paquetes base para S7
-
-Dentro de:
-
-```text
-src/main/java/
-```
-
-crear:
+Paquetes base:
 
 ```text
 app
 modelo
 controlador
-```
-
-Dentro de:
-
-```text
-src/main/resources/
-```
-
-crear:
-
-```text
+servicio
 vista
-css
-img
 ```
 
-La persistencia (`dao`, `data`, SQLite) se trabajará más adelante, desde S9 y S10. En S7 el foco es abrir una ventana, cargar FXML y conectar eventos.
-
-#### 3.1.4 Configurar dependencias JavaFX
-
-Abrir:
-
-```text
-pom.xml
-```
-
-Verificar o agregar:
-
-```xml
-<dependencies>
-    <dependency>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-controls</artifactId>
-        <version>21</version>
-    </dependency>
-
-    <dependency>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-fxml</artifactId>
-        <version>21</version>
-    </dependency>
-</dependencies>
-```
-
-#### 3.1.5 Configurar plugin JavaFX
-
-Agregar dentro de `pom.xml`:
-
-```xml
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-maven-plugin</artifactId>
-            <version>0.0.8</version>
-            <configuration>
-                <mainClass>app.Main</mainClass>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
-```
-
-#### 3.1.6 Crear `Main.java`
-
-Ruta:
-
-```text
-src/main/java/app/Main.java
-```
-
-Código inicial:
-
-```java
-package app;
-
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-public class Main extends Application {
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(
-                Main.class.getResource("/vista/ProductoView.fxml")
-        );
-
-        Scene scene = new Scene(loader.load());
-        stage.setTitle("CoMarket");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
-    }
-}
-```
-
-#### 3.1.7 Ejecutar el proyecto
-
-Desde la terminal del proyecto:
-
-```bash
-mvn javafx:run
-```
-
-Si todavía no existe `ProductoView.fxml`, el error esperado será que no se encuentra el recurso FXML. Ese error se corrige en el paso 3.2 creando la vista dentro de `src/main/resources/vista`.
+La persistencia (`dao`, `data`, SQLite) se trabajará en S8. En S7 el foco es abrir una ventana, cargar FXML, conectar eventos y ejecutar CRUD en memoria desde la GUI.
 
 ### 3.2 Crear vista FXML
 
@@ -271,12 +127,14 @@ Controles mínimos:
 - `TextField` para precio.
 - `TextField` para stock.
 - `Button` para registrar.
+- `Button` para actualizar.
+- `Button` para eliminar.
 - `Button` para limpiar.
-- `TableView` cómo preparación para S8.
+- `TableView` para listar productos.
 
 ### 3.3 Conectar controles con `fx:id`
 
-Cada control qué el controlador necesita manipular debe tener `fx:id`.
+Cada control que el controlador necesita manipular debe tener `fx:id`.
 
 Ejemplo:
 
@@ -301,26 +159,41 @@ public class ProductoController {
     @FXML
     private TextField txtStock;
 
+    private ProductoService productoService = new ProductoServiceMemoria();
+
     @FXML
     private void onRegistrar() {
-        System.out.println(txtNombre.getText());
+        // Leer formulario, crear Producto y delegar al servicio.
     }
 }
 ```
 
-### 3.5 Probar eventos
+### 3.5 Conectar CRUD en memoria
 
-La prueba de esta sesión no busca guardar datos todavía. Busca comprobar que la GUI ya puede leer datos y queda lista para llamar a `ProductoService` en S8:
+Flujo mínimo:
+
+1. Leer datos del formulario.
+2. Crear un objeto `Producto`.
+3. Llamar a `productoService.registrar(producto)`.
+4. Refrescar la tabla con `productoService.listar()`.
+5. Cargar el producto seleccionado al formulario.
+6. Actualizar usando el servicio.
+7. Eliminar con confirmación.
+
+### 3.6 Probar eventos y validaciones
+
+La prueba de esta sesión busca comprobar que:
 
 - La ventana abre.
 - El FXML carga.
 - El botón ejecuta el método del controlador.
-- Los textos escritos se pueden leer desde Java.
-- El controlador no duplica CRUD; solo prepara la delegación al servicio.
+- El controlador delega el CRUD al servicio.
+- La tabla se refresca después de registrar, editar o eliminar.
+- Se validan campos obligatorios, precio y stock.
 
 ## 4. Crea: actividad autónoma
 
-Fuera del aula, cada estudiante consolida el aprendizaje diseñando una vista JavaFX propia y preparando una evidencia individual.
+Fuera del aula, cada estudiante consolida el CRUD desde GUI en memoria y prepara una evidencia individual.
 
 Tiempo: 2h fuera del aula.
 
@@ -332,122 +205,83 @@ Entrega un PDF con el siguiente nombre:
 S07_Equipo##_ApellidoNombre.pdf
 ```
 
-Ejemplo:
-
-```text
-S07_Equipo03_QuispeAna.pdf
-```
-
-El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.
-
 #### 4.1.1 Datos del estudiante
 
 - Nombre:
 - Equipo:
-- Sesión: S07 - Interfaz gráfica de usuario
+- Sesión: S07 - Interfaz gráfica y CRUD desde GUI en memoria
 - Rol o aporte realizado:
 - Link de GitHub:
 
 #### 4.1.2 Trabajo autónomo realizado
 
-Completa y evidencia estas tareas:
-
 1. Diseñar una vista inicial para una entidad del dominio.
 2. Crear controles con `fx:id`.
-3. Conectar al menos un botón con un método del controlador.
-4. Leer datos escritos en la vista desde el controlador.
-5. Ejecutar la aplicación JavaFX.
-6. Explicar qué responsabilidad tiene FXML y qué responsabilidad tiene el controlador.
+3. Conectar botones con métodos del controlador.
+4. Registrar, listar, actualizar y eliminar desde GUI.
+5. Usar el contrato de servicio.
+6. Mantener el `ArrayList` dentro de la implementación en memoria.
+7. Validar campos obligatorios y datos numéricos.
+8. Explicar qué responsabilidad tiene FXML, controlador y servicio.
 
 #### 4.1.3 Evidencia técnica
-
-Incluye capturas o salidas con una breve explicación debajo de cada una:
 
 - Captura de Scene Builder.
 - Captura de la aplicación ejecutando.
 - Código del controlador.
-- Explicación de un evento conectado desde FXML.
+- Código o referencia del servicio en memoria.
+- Capturas de registrar, listar, actualizar y eliminar.
+- Evidencia de validación.
 - Fragmento FXML con `fx:id` y `onAction`.
 
 #### 4.1.4 Error o hallazgo
 
-Describe al menos un error, diferencia o hallazgo técnico:
-
-- Qué ocurrió.
-- Cómo lo diagnosticaste.
-- Cómo lo corregiste o qué aprendiste.
-
-Ejemplos válidos:
-
-- El `fx:id` no coincidía con el atributo del controlador.
-- El método `onAction` no existía o tenía mal nombre.
-- La vista no cargaba por error de ruta FXML.
-- El controlador no estaba declarado en el FXML.
+Describe un error técnico y cómo lo corregiste.
 
 #### 4.1.5 Reflexión técnica breve
 
 Responde en 5 a 8 líneas:
 
 ```text
-Por qué FXML y Controller deben tener responsabilidades diferentes?
+Por qué el controlador debe delegar el CRUD al servicio aunque la aplicación todavía use memoria?
 ```
 
 ### 4.2 Criterios mínimos de aceptación
 
-La evidencia individual se considera completa si:
-
-- El archivo respeta el nombre `S07_Equipo##_ApellidoNombre.pdf`.
-- Incluye evidencias técnicas legibles.
-- Muestra la vista en Scene Builder.
-- Muestra la aplicación ejecutando.
-- Muestra controles conectados con `fx:id`.
-- Muestra al menos un evento funcionando.
-- Explica la separación entre vista y controlador.
-- No contiene solo pantallazos: cada evidencia tiene una descripción breve.
+- PDF con nombre correcto.
+- Vista en Scene Builder.
+- Aplicación ejecutando.
+- Registro, listado, edición y eliminación desde GUI.
+- Servicio en memoria usado desde el controlador.
+- Validaciones básicas.
+- Separación entre vista, controlador, servicio y entidad.
 
 ## 5. Cierre evaluativo
 
 Tiempo: 20 min.
 
-Esta sección conecta el resultado de aprendizaje de la sesión con el producto que debe evidenciar cada estudiante.
-
 ### 5.1 Resultados esperados
-
-Al finalizar la sesión, el estudiante debe demostrar que:
 
 - Proyecto JavaFX ejecuta correctamente.
 - La vista FXML abre sin errores.
-- Los controles tienen `fx:id` cuando corresponde.
+- Los controles tienen `fx:id`.
 - El controlador recibe eventos.
-- La GUI queda lista para conectarse al servicio en S8.
+- El CRUD en memoria funciona desde la GUI.
+- La GUI queda lista para reemplazar memoria por DAO y SQLite en S8.
 
 ### 5.2 Evidencia del producto de sesión
 
 Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.
-
-Nombre del archivo:
-
-```text
-S07_Equipo##_ApellidoNombre.pdf
-```
-
-La evidencia debe demostrar:
-
-- Producto de sesión construido.
-- Aporte individual verificable.
-- Vista y controlador conectados.
-- Reflexión técnica breve.
-
-La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.
 
 ### 5.3 Preguntas de defensa y reflexión
 
 1. Qué función cumple FXML?
 2. Qué función cumple Scene Builder?
 3. Qué función cumple el controlador?
-4. Cómo se conecta un botón con un método Java?
+4. Qué responsabilidad tiene el servicio?
 5. Por qué el controlador no debe contener todo el CRUD?
-6. Qué error tuviste al conectar la vista con el controlador?
+6. Dónde se almacena temporalmente la información?
+7. Qué cambiará en S8 cuando se use DAO y SQLite?
 
 ### 5.4 Rúbrica de evaluación
 
@@ -455,23 +289,7 @@ La revisión se realiza con los criterios mínimos de aceptación de la sección
 |---|---:|---|---|---|---|---:|
 | 1. Vista FXML | 2 | Vista clara, controles adecuados y estructura coherente. | Vista funcional. | Vista incompleta. | No evidencia vista. | |
 | 2. Conexión con controlador | 2 | `fx:id` y eventos conectados correctamente. | Conexión principal funcional. | Conexión parcial. | No conecta controlador. | |
-| 3. Ejecución JavaFX | 2 | Aplicación ejecuta y demuestra interacción. | Aplicación abre correctamente. | Ejecución parcial o inestable. | No ejecuta. | |
-| 4. Separación de responsabilidades | 2 | Explica con claridad vista, controlador y entidad. | Explicación suficiente. | Explicación confusa. | No explica responsabilidades. | |
-| 5. Error o hallazgo | 1 | Analiza error/hallazgo, causa, solución y aprendizaje técnico. | Explica un problema y una solución. | Menciona un problema sin análisis. | No presenta error ni hallazgo. | |
-| 6. Reflexión y orden | 1 | PDF ordenado, evidencias legibles y reflexión precisa. | Evidencias suficientes y reflexión clara. | Evidencias incompletas o reflexión superficial. | PDF desordenado o sin reflexión. | |
-
-Puntuación acumulada = suma de (`Peso` * `Puntuación obtenida`) = ____.
-
-Nota final = (`Puntuación acumulada` / 30) * 20 = ____.
-
-Para usar la rúbrica con IA, solicita:
-
-```text
-Evalúa el PDF usando la rúbrica de la sesión.
-Para cada dimensión selecciona la puntuación obtenida usando la escala Inicio=0, Proceso=1, Logro=2, Logro destacado=3.
-Justifica brevemente cada puntuación.
-Calcula la puntuación acumulada con la fórmula: suma de (Peso * Puntuación obtenida).
-Calcula la nota final sobre 20 con la fórmula: (Puntuación acumulada / 30) * 20.
-Indica 2 fortalezas y 2 recomendaciones.
-```
-
+| 3. CRUD en memoria | 2 | Registro, listado, edición y eliminación funcionan desde GUI. | CRUD principal funcional. | CRUD parcial. | No evidencia CRUD. | |
+| 4. Separación de responsabilidades | 2 | Explica vista, controlador, servicio y entidad. | Explicación suficiente. | Explicación confusa. | No explica responsabilidades. | |
+| 5. Error o hallazgo | 1 | Analiza causa y solución. | Explica un problema. | Menciona un problema. | No presenta. | |
+| 6. Orden y reflexión | 1 | Evidencia clara y reflexión precisa. | Evidencia suficiente. | Evidencia incompleta. | No sustenta. | |
