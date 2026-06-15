@@ -51,9 +51,15 @@ Regla métodológica de la sesión:
 
 ```text
 Herencia: se aplica en entidades cuando existe relación es-un.
+En herencia, el trabajo funcional suele hacerse con clases concretas/hijas.
+Si Persona es abstracta, no se registra "una Persona"; se trabaja con Cliente o Empleado.
+La herencia no es una asociación normal uno a uno entre dos objetos separados.
+En memoria, un Cliente es una Persona especializada; no son dos objetos independientes.
 Interface: se aplica en servicios para declarar operaciones esperadas.
 Implementación: ejecuta el contrato, en memoria o con base de datos.
 Las entidades no implementan contratos de servicio.
+En polimorfismo, el código consumidor accede por el padre/contrato.
+Si una implementación agrega métodos propios, esos métodos no forman parte del contrato y no deben ser necesarios para el flujo principal.
 ```
 
 ### 2.2 Arquitectura de la sesión
@@ -109,6 +115,21 @@ classDiagram
 
 Convencion del diagrama: flecha continua con triangulo representa `extends`; flecha punteada con triangulo representa `implements`; flecha punteada simple representa dependencia o uso.
 
+Lectura importante del diagrama:
+
+```text
+Herencia:
+Persona organiza lo común, pero el sistema crea objetos concretos: Cliente y Empleado.
+Si se hiciera CRUD de personas, normalmente se haria sobre las clases hijas o casos de uso concretos.
+En base de datos puede mapearse parecido a una relación uno a uno, pero no significa lo mismo.
+Si se usa tabla padre y tabla hija, la fila hija depende de la fila padre: al eliminar el hijo normalmente se elimina también su parte padre.
+
+Polimorfismo:
+Main usa ProductoService, no ProductoServiceMemoria directamente.
+El contrato define qué operaciones se pueden llamar.
+Las implementaciones pueden cambiar, pero el flujo principal no debe depender de métodos que no estén en la interface.
+```
+
 ## 3. Aplica: actividad práctica guiada
 
 Tiempo: 2h.
@@ -125,6 +146,34 @@ Venta no es una Persona.
 ```
 
 La herencia se usa solo cuándo la frase "es un/a" tiene sentido real.
+
+Nota de diseño:
+
+```text
+Persona es una clase base para compartir datos y comportamiento común.
+Cliente y Empleado son clases concretas.
+Por eso, en una aplicación real, el CRUD se diseña sobre el caso concreto: ClienteService, EmpleadoService o el módulo que corresponda.
+```
+
+Importante para no confundir con base de datos:
+
+```text
+Herencia en POO:
+Cliente es una Persona especializada.
+No representa dos objetos separados relacionados uno a uno.
+
+Asociación uno a uno:
+Dos objetos existen con identidad propia.
+Si eliminas uno, el otro podría seguir existiendo según la regla del negocio.
+
+Herencia mapeada a BD con tabla padre + tabla hija:
+persona(id, nombre, documento)
+cliente(id_persona, telefono)
+
+Aquí la tabla hija extiende a la tabla padre.
+Si eliminas el cliente, también debe eliminarse la parte persona que le pertenece.
+Por eso se parece a uno a uno en tablas, pero conceptualmente sigue siendo herencia.
+```
 
 ### 3.2 Crear la clase base abstracta
 
@@ -210,6 +259,15 @@ public interface ProductoService {
 }
 ```
 
+En polimorfismo se programa contra el contrato. Eso significa que el resto del sistema conoce `ProductoService` y no necesita saber si la implementación trabaja en memoria o con base de datos.
+
+Regla práctica:
+
+```text
+Si un método no está declarado en ProductoService, Main no debe depender de ese método.
+Así se puede cambiar ProductoServiceMemoria por ProductoServiceBD sin romper el flujo principal.
+```
+
 ### 3.6 Crear dos implementaciones
 
 Implementación en memoria:
@@ -281,6 +339,14 @@ public class Main {
     }
 }
 ```
+
+Observa que la variable es de tipo `ProductoService`:
+
+```java
+ProductoService service = new ProductoServiceMemoria();
+```
+
+La implementación concreta es `ProductoServiceMemoria`, pero el acceso se hace por el contrato. Esta es la idea central del polimorfismo con interfaces.
 
 ## 4. Crea: actividad autónoma
 
@@ -384,9 +450,13 @@ Al finalizar la sesión, el estudiante debe demostrar que:
 
 - La herencia responde a una relación `es-un`.
 - La clase base no reemplaza a las entidades concretas.
+- En herencia, los casos funcionales se trabajan sobre clases concretas cuándo la clase base es abstracta.
+- El estudiante diferencia herencia de una asociación uno a uno.
+- Comprende que la estrategia tabla padre + tabla hija es una forma de persistir herencia, no una asociación común.
 - Hay sobrescritura de comportamiento cuando corresponde.
 - La interface declara operaciones y no guarda datos.
 - Las implementaciones cumplen el contrato con `implements`.
+- En polimorfismo, el acceso se realiza por el contrato y no por métodos propios de una implementación.
 - El estudiante diferencia `extends` de `implements`.
 
 ### 5.2 Evidencia del producto de sesión
@@ -416,7 +486,10 @@ La revisión se realiza con los criterios mínimos de aceptación de la sección
 3. Qué clase implementa el contrato en memoria?
 4. Qué ventaja da declarar `ProductoService service = new ProductoServiceMemoria()`?
 5. Por qué no conviene que una entidad implemente un contrato de servicio?
-6. Cuándo no conviene usar herencia?
+6. Por qué `Main` no debe depender de métodos que solo existan en `ProductoServiceMemoria`?
+7. Por qué herencia no es igual que una asociación uno a uno?
+8. Qué pasaría en BD si se elimina un `Cliente` guardado con tabla padre `persona` y tabla hija `cliente`?
+9. Cuándo no conviene usar herencia?
 
 ### 5.4 Rúbrica de evaluación
 
