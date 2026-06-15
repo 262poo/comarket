@@ -70,37 +70,46 @@ classDiagram
         main(String[] args)
     }
 
-    class Persona {
-        <<abstract>>
-        -nombre
-        -documento
-        mostrarPerfil()
-    }
-    class Cliente {
-        -telefono
-        mostrarPerfil()
-    }
-    class Empleado {
-        -cargo
-        mostrarPerfil()
+    namespace entity {
+        class Persona {
+            <<abstract>>
+            -nombre
+            -documento
+            mostrarPerfil()
+        }
+        class Cliente {
+            -telefono
+            mostrarPerfil()
+        }
+        class Empleado {
+            -cargo
+            mostrarPerfil()
+        }
+        class Producto {
+            -codigo
+            -nombre
+            -precio
+        }
     }
 
-    class ProductoService {
-        <<interface>>
-        registrar(producto)
-        listar()
-        buscarPorCodigo(codigo)
-    }
-    class ProductoServiceMemoria {
-        -productos
-        registrar(producto)
-        listar()
-        buscarPorCodigo(codigo)
-    }
-    class ProductoServiceBD {
-        registrar(producto)
-        listar()
-        buscarPorCodigo(codigo)
+    namespace service {
+        class ProductoService {
+            <<interface>>
+            registrar(producto)
+            listar()
+            buscarPorCodigo(codigo)
+        }
+        class ProductoServiceMemoria {
+            -productos
+            registrar(producto)
+            listar()
+            buscarPorCodigo(codigo)
+        }
+        class ProductoServiceBD {
+            registrar(producto)
+            listar()
+            buscarPorCodigo(codigo)
+        }
     }
 
     Main ..> Cliente : prueba
