@@ -206,9 +206,9 @@ Estructura mínima:
 ```text
 src/main/java/
     Main.java
-    entidad/Producto.java
-    servicio/ProductoService.java
-    servicio/ProductoServiceMemoria.java
+    entity/Producto.java
+    service/ProductoService.java
+    service/ProductoServiceMemoria.java
 pom.xml
 ```
 

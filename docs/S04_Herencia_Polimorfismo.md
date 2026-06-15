@@ -103,7 +103,8 @@ classDiagram
         buscarPorCodigo(codigo)
     }
 
-    Main ..> Persona : prueba
+    Main ..> Cliente : prueba
+    Main ..> Empleado : prueba
     Main ..> ProductoService : prueba
     Persona <|-- Cliente : extends
     Persona <|-- Empleado : extends
@@ -120,6 +121,7 @@ Lectura importante del diagrama:
 ```text
 Herencia:
 Persona organiza lo común, pero el sistema crea objetos concretos: Cliente y Empleado.
+Main prueba Cliente y Empleado; no instancia Persona cuando Persona es abstracta.
 Si se hiciera CRUD de personas, normalmente se haria sobre las clases hijas o casos de uso concretos.
 En base de datos puede mapearse parecido a una relación uno a uno, pero no significa lo mismo.
 Si se usa tabla padre y tabla hija, la fila hija depende de la fila padre: al eliminar el hijo normalmente se elimina también su parte padre.
@@ -152,7 +154,7 @@ Nota de diseño:
 ```text
 Persona es una clase base para compartir datos y comportamiento común.
 Cliente y Empleado son clases concretas.
-Por eso, en una aplicación real, el CRUD se diseña sobre el caso concreto: ClienteService, EmpleadoService o el módulo que corresponda.
+El servicio se diseña para el módulo que se va a operar. En esta ruta se usa ProductoService para mantener continuidad con el CRUD del curso.
 ```
 
 Importante para no confundir con base de datos:

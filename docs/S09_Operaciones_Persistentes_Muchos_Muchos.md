@@ -53,6 +53,7 @@ La relación se entiende primero como relación entre objetos.
 La base de datos persiste esa relación mediante tablas.
 El detalle no es una pantalla CRUD independiente.
 El detalle nace dentro del flujo de la cabecera.
+Los DAO se ubican en repository y reutilizan util/ConexionBD para conectarse a SQLite.
 ```
 
 ### 2.2 Arquitectura de la sesión
@@ -84,6 +85,16 @@ classDiagram
         insertar(detalle, ventaId)
     }
 
+    class ConexionBD {
+        obtenerConexion()
+    }
+
+    class SQLite {
+        venta
+        detalle_venta
+        producto
+    }
+
     class Venta {
         -cliente
         -fecha
@@ -107,6 +118,9 @@ classDiagram
     VentaService <|.. VentaServiceBD : implements
     VentaServiceBD --> VentaDAO : usa
     VentaServiceBD --> DetalleVentaDAO : usa
+    VentaDAO --> ConexionBD : usa
+    DetalleVentaDAO --> ConexionBD : usa
+    ConexionBD --> SQLite : JDBC
     VentaServiceBD ..> Venta : usa
     Venta "1" *-- "*" DetalleVenta : contiene
     DetalleVenta "*" --> "1" Producto : referencia
@@ -125,9 +139,10 @@ Tiempo: 2h.
 7. Calcular subtotal y total.
 8. Crear `VentaDAO`.
 9. Crear `DetalleVentaDAO`.
-10. Crear `VentaServiceBD`.
-11. Guardar primero la cabecera y luego los detalles.
-12. Validar cantidad, stock, venta sin detalles y errores de persistencia.
+10. Reutilizar `ConexionBD` desde `util`.
+11. Crear `VentaServiceBD`.
+12. Guardar primero la cabecera y luego los detalles.
+13. Validar cantidad, stock, venta sin detalles y errores de persistencia.
 
 Tablas de referencia:
 

@@ -1,4 +1,4 @@
-﻿# S3 - Asociación, agregación/composición y colecciones
+# S3 - Asociación, agregación/composición y colecciones
 
 ## 1. Introducción
 
@@ -14,11 +14,11 @@ El estudiante identifica entidades del dominio, representa asociaciónes, agrega
 
 ### 1.3 Producto de sesión
 
-Modelo inicial con varias entidades relaciónadas, colecciones administradas desde un servicio inicial y pruebas desde `Main`.
+Modelo inicial con varias entidades relacionadas, asociaciones, agregación, composición, colecciones y pruebas desde `Main`.
 
 ### 1.4 Motivación de la sesión
 
-En un sistema real no existe una sola clase. Una venta registra el nombre del cliente, un proveedor puede estar asociado a productos, y una venta puede estar compuestá por detalles. La Programación Orientada a Objetos ayuda a convertir esas relaciones del problema en clases conectadas.
+En un sistema real no existe una sola clase. Un cliente puede tener ventas, una venta puede estar compuesta por detalles, y cada detalle referencia un producto. La Programación Orientada a Objetos ayuda a convertir esas relaciones del problema en clases conectadas.
 
 Pregunta guía:
 
@@ -62,12 +62,11 @@ Tiempo: 25 min.
 
 | Concepto | Idea central | Ejemplo |
 |---|---|---|
-| Entidad | Clase qué representa un elemento importante del dominio. | `Proveedor`, `Producto`, `Venta`, `DetalleVenta` |
+| Entidad | Clase qué representa un elemento importante del dominio. | `Cliente`, `Producto`, `Venta`, `DetalleVenta` |
 | Asociación | Un objeto conoce o usa a otro objeto. | `DetalleVenta` usa un `Producto` |
-| Agregación | Un objeto agrupa otros, pero esos objetos pueden existir por separado. | `Proveedor` relaciónado con varios `Producto` |
+| Agregación | Un objeto agrupa otros, pero esos objetos pueden existir por separado. | `Cliente` relacionado con varias `Venta` |
 | Composición | Un objeto contiene partes qué dependen de el. | `Venta` contiene `DetalleVenta` |
 | Colección | Estructura para manejar varios objetos del mismo tipo. | `ArrayList<Producto>` |
-| Servicio inicial | Clase qué administra una colección y evita cargar toda la lógica en `Main`. | `ProductoService`, `VentaService` |
 
 Regla métodológica de la sesión:
 
@@ -76,6 +75,8 @@ Las entidades representan información y comportamiento del dominio.
 Las relaciones muestran cómo colaboran los objetos.
 Las colecciones administran grupos de objetos.
 Main solo crea escenarios de prueba.
+Todavía no se separan servicios ni controladores.
+La asociación, agregación, composición y multiplicidad se representan en las entidades.
 ```
 
 ### 2.2 Arquitectura de la sesión
@@ -85,50 +86,42 @@ classDiagram
     class Main {
         main(String[] args)
     }
-    class ProductoService {
-        -productos
-        registrar(producto)
-        listar()
-    }
-    class VentaService {
-        -ventas
-        registrar(venta)
-        listar()
-    }
-    class Proveedor {
-        -ruc
-        -razonSocial
-        -productos
-        agregarProducto(producto)
-    }
-    class Producto {
-        -codigo
-        -nombre
-        -precio
-    }
-    class Venta {
-        -cliente
-        -detalles
-        agregarDetalle(detalle)
-        calcularTotal()
-    }
-    class DetalleVenta {
-        -producto
-        -cantidad
-        calcularSubtotal()
+
+    namespace entity {
+        class Cliente {
+            -String documento
+            -String nombre
+            -ArrayList~Venta~ ventas
+            agregarVenta(venta)
+        }
+        class Producto {
+            -String codigo
+            -String nombre
+            -double precio
+        }
+        class Venta {
+            -Cliente cliente
+            -ArrayList~DetalleVenta~ detalles
+            agregarDetalle(detalle)
+            calcularTotal()
+        }
+        class DetalleVenta {
+            -Producto producto
+            -int cantidad
+            calcularSubtotal()
+        }
     }
 
-    Main ..> ProductoService : prueba
-    Main ..> VentaService : prueba
-    ProductoService o-- "0..*" Producto : ArrayList
-    VentaService o-- "0..*" Venta : ArrayList
+    Main ..> Cliente : prueba
+    Main ..> Venta : prueba
+    Main ..> Producto : prueba
 
-    Proveedor "1" o-- "0..*" Producto : agrega
+    Cliente "1" o-- "0..*" Venta : agrega
     Venta "1" *-- "1..*" DetalleVenta : composición
     DetalleVenta "*" --> "1" Producto : asociación
 ```
 
-Convencion del diagrama: `-->` representa asociación, `o--` representa agregación, `*--` representa composición y `..>` representa dependencia de prueba o uso temporal. En esta sesión no se implementa todavía la arquitectura completa de servicio; solo se prepara el dominio para qué S5 pueda convertir las operaciones en un CRUD en memoria.
+Convencion del diagrama: `-->` representa asociación, `o--` representa agregación, `*--` representa composición y `..>` representa dependencia de prueba o uso temporal. En esta sesión la multiplicidad se trabaja dentro de las entidades; no se agregan services ni controllers al diagrama.
 
 ### 2.3 Tipos de relación
 
@@ -136,21 +129,21 @@ Asociación:
 
 ```java
 public class Venta {
-    private String cliente;
+    private Cliente cliente;
 }
 ```
 
-La venta registra el nombre o referencia textual del comprador. En este curso se evita abrir otra entidad en este punto para mantener el foco en `Producto`, `DetalleVenta` y `Venta`.
+La venta conoce al cliente que realiza la operación. Esta asociación ayuda a preparar el modelo para consultar ventas por cliente.
 
 Agregación:
 
 ```java
-public class Proveedor {
-    private ArrayList<Producto> productos;
+public class Cliente {
+    private ArrayList<Venta> ventas;
 }
 ```
 
-El proveedor agrupa productos. Para la practica inicial se entiende cómo una relación de agrupacion: los productos son parte del modelo y pueden administrarse también desde un servicio.
+El cliente agrupa ventas. Para la practica inicial se entiende cómo una relación de agrupación: las ventas son objetos del sistema y pueden consultarse desde el cliente.
 
 Composición:
 
@@ -167,7 +160,7 @@ Los detalles existen para explicar una venta. Si se elimina la venta, sus detall
 | Error | Corrección esperada |
 |---|---|
 | Poner todas las variables en `Main`. | Crear entidades con responsabilidades claras. |
-| Usar solo una clase para todo el dominio. | Separar `Producto`, `Venta`, `DetalleVenta`, `Proveedor` y otros conceptos necesarios. |
+| Usar solo una clase para todo el dominio. | Separar `Cliente`, `Producto`, `Venta`, `DetalleVenta` y otros conceptos necesarios. |
 | Confundir una lista con una entidad. | La lista administra varios objetos; la entidad representa un objeto del dominio. |
 | Crear relaciones sin sentido. | Cada relación debe responder a una regla del problema. |
 | Hacer CRUD completo antes de modelar. | Primero se entiende el dominio; luego se agregan operaciones. |
@@ -181,19 +174,27 @@ Tiempo: 2h.
 Parte de un caso simple de comercio:
 
 ```text
-Un sistema registra proveedores, productos y ventas.
-Cada venta registra el nombre del cliente.
+Un sistema registra clientes, productos y ventas.
+Cada venta pertenece a un cliente.
 Cada venta tiene uno o más detalles.
 Cada detalle indica un producto, cantidad y precio.
-Un proveedor puede estar asociado a varios productos.
 ```
 
 Entidades iniciales:
 
-- `Proveedor`
+- `Cliente`
 - `Producto`
 - `Venta`
 - `DetalleVenta`
+
+Ubicación sugerida:
+
+```text
+src/main/java/entity/Cliente.java
+src/main/java/entity/Producto.java
+src/main/java/entity/Venta.java
+src/main/java/entity/DetalleVenta.java
+```
 
 ### 3.2 Crear entidades base
 
@@ -225,28 +226,28 @@ public class Producto {
 }
 ```
 
-Ejemplo de `Proveedor` con agregación:
+Ejemplo de `Cliente` con agregación:
 
 ```java
 import java.util.ArrayList;
 
-public class Proveedor {
-    private String ruc;
-    private String razonSocial;
-    private ArrayList<Producto> productos;
+public class Cliente {
+    private String documento;
+    private String nombre;
+    private ArrayList<Venta> ventas;
 
-    public Proveedor(String ruc, String razonSocial) {
-        this.ruc = ruc;
-        this.razonSocial = razonSocial;
-        this.productos = new ArrayList<>();
+    public Cliente(String documento, String nombre) {
+        this.documento = documento;
+        this.nombre = nombre;
+        this.ventas = new ArrayList<>();
     }
 
-    public void agregarProducto(Producto producto) {
-        productos.add(producto);
+    public void agregarVenta(Venta venta) {
+        ventas.add(venta);
     }
 
-    public ArrayList<Producto> getProductos() {
-        return productos;
+    public ArrayList<Venta> getVentas() {
+        return ventas;
     }
 }
 ```
@@ -277,10 +278,10 @@ public class DetalleVenta {
 import java.util.ArrayList;
 
 public class Venta {
-    private String cliente;
+    private Cliente cliente;
     private ArrayList<DetalleVenta> detalles;
 
-    public Venta(String cliente) {
+    public Venta(Cliente cliente) {
         this.cliente = cliente;
         this.detalles = new ArrayList<>();
     }
@@ -299,60 +300,34 @@ public class Venta {
 }
 ```
 
-### 3.4 Crear un servicio inicial
-
-El servicio inicial administra una colección. Todavía no implementa un contrato CRUD formal; eso se completa en S5.
-
-```java
-import java.util.ArrayList;
-
-public class ProductoService {
-    private ArrayList<Producto> productos;
-
-    public ProductoService() {
-        this.productos = new ArrayList<>();
-    }
-
-    public void registrar(Producto producto) {
-        productos.add(producto);
-    }
-
-    public void listar() {
-        for (Producto producto : productos) {
-            System.out.println(producto.getCodigo() + " - " + producto.getNombre());
-        }
-    }
-}
-```
-
-### 3.5 Probar desde Main
+### 3.4 Probar desde Main
 
 ```java
 public class Main {
     public static void main(String[] args) {
+        Cliente cliente = new Cliente("DNI001", "Ana Torres");
+
         Producto teclado = new Producto("P001", "Teclado", 80.0);
         Producto mouse = new Producto("P002", "Mouse", 45.0);
 
-        Proveedor proveedor = new Proveedor("20456789123", "Tecno Peru SAC");
-        proveedor.agregarProducto(teclado);
-        proveedor.agregarProducto(mouse);
-
-        Venta venta = new Venta("Ana Torres");
+        Venta venta = new Venta(cliente);
         venta.agregarDetalle(new DetalleVenta(teclado, 1));
         venta.agregarDetalle(new DetalleVenta(mouse, 2));
+        cliente.agregarVenta(venta);
 
         System.out.println("Total: " + venta.calcularTotal());
+        System.out.println("Ventas del cliente: " + cliente.getVentas().size());
     }
 }
 ```
 
-### 3.6 Preguntas durante la practica
+### 3.5 Preguntas durante la practica
 
 1. Qué clases son entidades del dominio?
 2. Qué relación existe entre `Venta` y `DetalleVenta`?
 3. Por qué `DetalleVenta` depende de `Venta`?
-4. Qué clase administra una colección?
-5. Qué lógica ya no deberia quedarse en `Main`?
+4. Dónde se ubica la colección en este modelo?
+5. Qué relación se representa con `ArrayList`?
 
 ## 4. Crea: actividad autónoma
 
@@ -392,15 +367,14 @@ Completa y evidencia estas tareas:
 2. Crear o mejorar al menos tres entidades relacionadas.
 3. Representar una asociación, agregación o composición.
 4. Usar `ArrayList` para una relación de uno a muchos.
-5. Crear un servicio inicial que administre una colección.
-6. Probar desde `Main` la creación de objetos relacionados.
-7. Explicar qué relación existe entre las clases.
+5. Probar desde `Main` la creación de objetos relacionados.
+6. Explicar qué relación existe entre las clases.
 
 Puedes elegir una de estas opciones:
 
 - `Categoria` relacionada con varios `Producto`.
 - `Empleado` relacionado con varias `Venta`.
-- `Proveedor` relacionado con varios `Producto`.
+- `Cliente` relacionado con varias `Venta`.
 - `Venta` relacionada con varios `DetalleVenta`.
 
 #### 4.1.3 Evidencia técnica
@@ -410,7 +384,6 @@ Incluye capturas o salidas de consola con una breve explicación debajo de cada 
 - Diagrama simple del modelo.
 - Código de al menos tres entidades relacionadas.
 - Uso de una colección con `ArrayList`.
-- Una clase de servicio inicial.
 - Salida de consola mostrando objetos relacionados.
 - Explicación de la relación modelada.
 
@@ -426,7 +399,6 @@ Ejemplos válidos:
 
 - Una relación no tenía sentido en el dominio.
 - Se confundió una colección con una entidad.
-- `Main` estaba administrando demasiada lógica.
 - Una lista no fue inicializada antes de usarla.
 
 #### 4.1.5 Reflexión técnica breve
@@ -464,7 +436,7 @@ Al finalizar la sesión, el estudiante debe demostrar que:
 - Las relaciones no están sueltas; aparecen representadas en atributos o colecciones.
 - Hay al menos una relación de uno a muchos.
 - Se usa `ArrayList` para administrar varios objetos.
-- Existe un servicio inicial que administra una colección.
+- La colección está ubicada dentro de una entidad del dominio.
 - `Main` solo arma escenarios de prueba y no concentra toda la lógica.
 
 ### 5.2 Evidencia del producto de sesión
@@ -493,7 +465,7 @@ La revisión se realiza con los criterios mínimos de aceptación de la sección
 2. Qué relación modelaste como asociación?
 3. Qué relación modelaste como agregación o composición?
 4. Por qué una venta necesita detalles?
-5. Qué clase administra la colección?
+5. En qué entidad está ubicada la colección?
 6. Qué parte de este modelo se podría convertir en CRUD en S5?
 
 ### 5.4 Rúbrica de evaluación
@@ -503,7 +475,7 @@ La revisión se realiza con los criterios mínimos de aceptación de la sección
 | 1. Modelo de dominio | 2 | Presenta entidades coherentes y relacionadas con claridad. | Presenta entidades principales correctas. | Modelo incompleto o poco claro. | No evidencia modelo de dominio. | |
 | 2. Relaciones entre objetos | 2 | Distingue y justifica asociación, agregación o composición. | Representa al menos una relación correcta. | Relación parcial o confusa. | No evidencia relaciones. | |
 | 3. Colecciones | 2 | Usa `ArrayList` correctamente en una relación de uno a muchos. | Usa colección funcional. | Uso parcial o mal ubicado. | No usa colecciones. | |
-| 4. Servicio inicial y `Main` | 2 | Servicio administra colección y `Main` solo prueba escenarios. | Servicio funcional con prueba básica. | Lógica mezclada en `Main`. | No separa responsabilidades. | |
+| 4. Prueba desde `Main` | 2 | `Main` crea un escenario claro sin reemplazar el modelo. | Prueba funcional básica. | Prueba parcial o confusa. | No prueba el modelo. | |
 | 5. Error o hallazgo | 1 | Analiza error/hallazgo, causa, solución y aprendizaje técnico. | Explica un problema y una solución. | Menciona un problema sin análisis. | No presenta error ni hallazgo. | |
 | 6. Reflexión y orden | 1 | PDF ordenado, evidencias legibles y reflexión precisa. | Evidencias suficientes y reflexión clara. | Evidencias incompletas o reflexión superficial. | PDF desordenado o sin reflexión. | |
 

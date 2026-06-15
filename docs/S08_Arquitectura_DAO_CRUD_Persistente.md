@@ -55,6 +55,9 @@ La implementación persistente coordina validaciones y DAO.
 El DAO ejecuta SQL y mapea filas a objetos.
 JDBC conecta Java con SQLite.
 La entidad sigue siendo clase del dominio.
+No se usa JPA ni ORM.
+La conexión a la base de datos se centraliza en util/ConexionBD.
+repository cumple el rol de DAO en este curso.
 ```
 
 ### 2.2 Arquitectura de la sesión
@@ -120,16 +123,49 @@ Tiempo: 2h.
 
 1. Revisar el proyecto JavaFX/Maven creado en S7.
 2. Agregar dependencia SQLite JDBC.
-3. Crear paquetes `servicio`, `persistencia`, `modelo` y `controlador` si faltan.
-4. Crear `ConexionBD`.
+3. Crear o verificar las carpetas de capas.
+4. Crear `ConexionBD` dentro de `util`.
 5. Crear tabla `producto`.
-6. Crear `ProductoDAO`.
+6. Crear `ProductoDAO` dentro de `repository`.
 7. Implementar `insert`, `select`, `update` y `delete`.
 8. Crear `ProductoServiceBD implements ProductoService`.
 9. Hacer que `ProductoController` use `ProductoService`, no el DAO directamente.
 10. Cargar `TableView` desde SQLite.
 11. Validar campos obligatorios, precio y stock.
 12. Mostrar mensajes de error claros.
+
+Estructura sugerida:
+
+```text
+src/main/java/
+    app/
+        ProductoApplication.java
+    controller/
+        ProductoController.java
+    entity/
+        Producto.java
+    exception/
+        ValidacionException.java
+        PersistenciaException.java
+    repository/
+        ProductoDAO.java
+    service/
+        ProductoService.java
+        ProductoServiceBD.java
+    util/
+        ConexionBD.java
+src/main/resources/
+    view/
+        ProductoView.fxml
+```
+
+Nota metodológica:
+
+```text
+repository se usa como carpeta para DAO.
+util contiene clases técnicas compartidas, como ConexionBD.
+No se agrega mapper, dto ni filter todavía porque no aportan al nivel de esta sesión.
+```
 
 Tabla mínima:
 

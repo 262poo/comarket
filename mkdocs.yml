@@ -47,7 +47,7 @@ nav:
   - 1. Fundamentos de la Programación Orientada a Objetos:
     - 1 Clases, objetos y responsabilidad: S01_Clases_Objetos.md
     - 2 Encapsulamiento y constructores: S02_Encapsulamiento_Constructores.md
-    - 3 Asociacion, agregacion/composicion y colecciones: S03_Modelado_Dominio_Colecciones.md
+    - 3 Asociacion, agregacion/composicion y colecciones: S03_Asociacion_Colecciones.md
     - 4 Herencia y polimorfismo: S04_Herencia_Polimorfismo.md
     - 5 CRUD en memoria con ArrayList: S05_CRUD_Memoria_ArrayList.md
     - 6 Evaluacion unidad 1: S06_Evaluacion_Unidad_1.md

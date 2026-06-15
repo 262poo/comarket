@@ -104,19 +104,28 @@ Tiempo: 2h.
 
 Usa un IDE que soporte JavaFX, Maven y Scene Builder. Para U2 se recomienda IntelliJ IDEA o un entorno equivalente con Maven configurado.
 
-Producto del paso: proyecto JavaFX/Maven creado, con estructura inicial, paquetes base y clase `Main` preparada para cargar una vista FXML.
+Producto del paso: proyecto JavaFX/Maven creado, con estructura inicial, carpetas base y clase `Main` preparada para cargar una vista FXML.
 
-Paquetes base:
+Estructura base:
 
 ```text
-app
-modelo
-controlador
-servicio
-vista
+src/main/java/
+    app/
+        ProductoApplication.java
+    controller/
+        ProductoController.java
+    entity/
+        Producto.java
+    service/
+        ProductoService.java
+        ProductoServiceMemoria.java
+
+src/main/resources/
+    view/
+        ProductoView.fxml
 ```
 
-La persistencia (`dao`, `data`, SQLite) se trabajará en S8. En S7 el foco es abrir una ventana, cargar FXML, conectar eventos y ejecutar CRUD en memoria desde la GUI.
+La persistencia (`repository`, `util`, SQLite) se trabajará en S8. En S7 el foco es abrir una ventana, cargar FXML, conectar eventos y ejecutar CRUD en memoria desde la GUI.
 
 ### 3.2 Crear vista FXML
 

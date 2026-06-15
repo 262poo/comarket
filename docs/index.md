@@ -30,7 +30,7 @@ Resultado esperado U1: el estudiante modela y construye objetos de software apli
 |---|---|---|
 | S1 | **Clases, objetos y responsabilidad de clase:**<br>Proyecto Java simple en VS Code, objetos tangibles cómo `Coche` y `Persona`, ejemplo puente con `Producto`, diferencia entre clase y objeto, atributos, métodos, estado, comportamiento, abstracción inicial y responsabilidad como características y acciones de una clase | Clases base del dominio con atributos, métodos y objetos instanciados desde `Main` |
 | S2 | **Encapsulamiento, constructores y responsabilidad única:**<br>Modificadores de acceso, constructores, sobrecarga de constructores, getters/setters limpios, separacion básica con `ProductoService`, validaciones básicas y pruebas desde `Main` | `Producto` encapsulado y `ProductoService` inicial con operaciones sobre productos |
-| S3 | **Asociación, agregación/composición y colecciones:**<br>Relaciones entre objetos, asociación, agregación, composición, colecciones de objetos, navegacion entre objetos, relaciones uno a muchos y servicio inicial para administrar colecciones | Modelo inicial con varias entidades relaciónadas, colecciones y servicio inicial |
+| S3 | **Asociación, agregación/composición y colecciones:**<br>Relaciones entre entidades, asociación, agregación, composición, colecciones de objetos, navegacion entre objetos y relaciones uno a muchos representadas dentro de las entidades | Modelo inicial con varias entidades relacionadas, multiplicidad y colecciones dentro del dominio |
 | S4 | **Herencia y polimorfismo:**<br>Herencia con entidades usando `extends`, clase base abstracta, subclases, sobrescritura de métodos, polimorfismo con interface e `implements`, separacion de responsabilidades | Entidades con herencia y contrato polimorfico con dos implementaciones |
 | S5 | **CRUD en memoria con ArrayList:**<br>Registro, listado, busqueda, actualizacion, eliminación, flujo Main-Interface-Implementacion en memoria-Entidades, `ArrayList` como atributo interno de la implementación, introducción a Maven y compilación nativa con GraalVM para la entrega | CRUD en memoria organizado con contrato, implementacion en memoria y entidades, preparado para ejecutable nativo |
 | S6 | **Evaluación de la unidad 1:**<br>Clases del dominio, encapsulamiento, constructores, relaciones entre objetos, CRUD en memoria, busquedas, validaciones básicas y ejecución del producto | Producto U1 validado con modelo de dominio, CRUD en memoria y ejecución demostrable |
@@ -93,7 +93,7 @@ flowchart TB
     SubclaseU1 -- extends --> ClaseBaseU1
 ```
 
-Nota métodológica: en U1 la separacion de responsabilidades se trabaja de forma progresiva. En S1, responsabilidad significa reconocer caracteristicas y acciones de una clase; no se exige SOLID todavía. Desde S2 se controla mejor el estado con encapsulamiento y se introduce la S de SOLID separando `Producto` de `ProductoService`. Más adelante, la interface declara el contrato de operaciones CRUD y la implementacion en memoria ejecuta las operaciones sobre `ArrayList`. No se introducen interfaces en entidades porque pueden complicar el modelo sin aportar claridad en está etapa.
+Nota métodológica: en U1 la separacion de responsabilidades se trabaja de forma progresiva. En S1, responsabilidad significa reconocer caracteristicas y acciones de una clase; no se exige SOLID todavía. Desde S2 se controla mejor el estado con encapsulamiento y se introduce la S de SOLID separando `Producto` de `ProductoService`. En S3 se modelan relaciones entre entidades, porque asociación, agregación, composición y multiplicidad pertenecen al dominio. Más adelante, la interface declara el contrato de operaciones CRUD y la implementacion en memoria ejecuta las operaciones sobre `ArrayList`. No se introducen interfaces en entidades porque pueden complicar el modelo sin aportar claridad en está etapa.
 
 Stack tecnologico U1:
 
@@ -110,7 +110,7 @@ Flujo de trabajo U1:
 1. El estudiante crea un proyecto Java simple en VS Code.
 2. Implementa entidades iniciales del dominio y las prueba desde `Main`.
 3. Desde S2 controla mejor el estado con encapsulamiento e introduce `ProductoService`.
-4. Desde S3 relacióna varias entidades y usa servicios iniciales para administrar colecciones.
+4. En S3 relaciona entidades y representa multiplicidad dentro del modelo del dominio.
 5. En S4 refuerza el modelo con herencia cuándo el dominio lo justifica y aplica polimorfismo con interface e `implements`.
 6. En S5 integra lo anterior en el flujo Main-Interface-Implementacion en memoria-Entidades, con `ArrayList` como atributo interno de la implementación, y prepara la compilación nativa con Maven/GraalVM.
 7. En S6 presenta un producto de consola ejecutable, con modelo de dominio y CRUD en memoria.
@@ -236,7 +236,7 @@ Flujo de trabajo U2-U3:
 
 - [S1: Clases, objetos y responsabilidad](S01_Clases_Objetos.md)
 - [S2: Encapsulamiento y constructores](S02_Encapsulamiento_Constructores.md)
-- [S3: Asociacion, agregacion/composicion y colecciones](S03_Modelado_Dominio_Colecciones.md)
+- [S3: Asociacion, agregacion/composicion y colecciones](S03_Asociacion_Colecciones.md)
 - [S4: Herencia y polimorfismo](S04_Herencia_Polimorfismo.md)
 - [S5: CRUD en memoria con ArrayList](S05_CRUD_Memoria_ArrayList.md)
 - [S6: Evaluacion unidad 1](S06_Evaluacion_Unidad_1.md)

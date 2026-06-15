@@ -53,6 +53,7 @@ La validación se aplica en cada sesión.
 En S11 no se introduce un patrón nuevo.
 S11 consolida consultas y pruebas del flujo principal.
 El estudiante debe poder explicar cómo viaja la información entre capas.
+Las consultas reutilizan los DAO existentes o un ConsultaDAO, siempre usando util/ConexionBD para conectarse a SQLite.
 ```
 
 ### 2.2 Arquitectura de consulta
@@ -69,6 +70,7 @@ flowchart TB
 
     subgraph Persistencia["Persistencia"]
         ConsultaDAO["ConsultaDAO"]
+        ConexionBD["util/ConexionBD"]
         SQLite[("SQLite")]
     end
 
@@ -79,7 +81,8 @@ flowchart TB
     ConsultaService -.-> Validaciones
     ConsultaService --> ConsultaDAO
     ConsultaDAO --> Entidades
-    ConsultaDAO -->|"JDBC"| SQLite
+    ConsultaDAO --> ConexionBD
+    ConexionBD -->|"JDBC"| SQLite
 ```
 
 ## 3. Aplica: actividad práctica guiada
@@ -89,15 +92,16 @@ Tiempo: 2h.
 1. Crear una vista de consultas.
 2. Agregar filtros por fecha, usuario o texto.
 3. Crear `ConsultaDAO` o métodos de consulta en DAO existentes.
-4. Crear `ConsultaService` si el flujo lo requiere.
-5. Listar operaciones registradas.
-6. Mostrar detalle de la operación seleccionada.
-7. Calcular total mostrado.
-8. Verificar consistencia entre cabecera y detalle.
-9. Probar casos válidos.
-10. Probar casos inválidos.
-11. Registrar matriz de pruebas.
-12. Corregir observaciones encontradas.
+4. Reutilizar `ConexionBD` desde `util`.
+5. Crear `ConsultaService` si el flujo lo requiere.
+6. Listar operaciones registradas.
+7. Mostrar detalle de la operación seleccionada.
+8. Calcular total mostrado.
+9. Verificar consistencia entre cabecera y detalle.
+10. Probar casos válidos.
+11. Probar casos inválidos.
+12. Registrar matriz de pruebas.
+13. Corregir observaciones encontradas.
 
 Matriz sugerida:
 

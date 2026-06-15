@@ -1,4 +1,4 @@
-﻿# S2 - Encapsulamiento, constructores y control del estado
+# S2 - Encapsulamiento, constructores y control del estado
 
 ## 1. Introducción
 
@@ -96,6 +96,15 @@ S2 empieza a controlar el estado con encapsulamiento.
 Todavía no se trabajan interfaces como contrato.
 Eso queda para S4.
 ```
+
+Desde esta sesión se empieza a usar una separación mínima de carpetas:
+
+```text
+entity   -> clases del dominio, por ejemplo Producto, Cliente, Venta, DetalleVenta
+service  -> clases que administran operaciones del dominio
+```
+
+Todavía no se trabaja `controller`, `repository`, `util` ni base de datos. Esas capas aparecen cuando la aplicación pase a GUI y persistencia.
 
 Ejemplo de responsabilidad mejorada:
 
