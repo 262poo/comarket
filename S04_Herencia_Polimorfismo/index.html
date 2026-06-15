@@ -1868,37 +1868,46 @@ Si una implementación agrega métodos propios, esos métodos no forman parte de
         main(String[] args)
     }
 
-    class Persona {
-        &lt;&lt;abstract&gt;&gt;
-        -nombre
-        -documento
-        mostrarPerfil()
-    }
-    class Cliente {
-        -telefono
-        mostrarPerfil()
-    }
-    class Empleado {
-        -cargo
-        mostrarPerfil()
+    namespace entity {
+        class Persona {
+            &lt;&lt;abstract&gt;&gt;
+            -nombre
+            -documento
+            mostrarPerfil()
+        }
+        class Cliente {
+            -telefono
+            mostrarPerfil()
+        }
+        class Empleado {
+            -cargo
+            mostrarPerfil()
+        }
+        class Producto {
+            -codigo
+            -nombre
+            -precio
+        }
     }
 
-    class ProductoService {
-        &lt;&lt;interface&gt;&gt;
-        registrar(producto)
-        listar()
-        buscarPorCodigo(codigo)
-    }
-    class ProductoServiceMemoria {
-        -productos
-        registrar(producto)
-        listar()
-        buscarPorCodigo(codigo)
-    }
-    class ProductoServiceBD {
-        registrar(producto)
-        listar()
-        buscarPorCodigo(codigo)
+    namespace service {
+        class ProductoService {
+            &lt;&lt;interface&gt;&gt;
+            registrar(producto)
+            listar()
+            buscarPorCodigo(codigo)
+        }
+        class ProductoServiceMemoria {
+            -productos
+            registrar(producto)
+            listar()
+            buscarPorCodigo(codigo)
+        }
+        class ProductoServiceBD {
+            registrar(producto)
+            listar()
+            buscarPorCodigo(codigo)
+        }
     }
 
     Main ..&gt; Cliente : prueba
