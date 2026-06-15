@@ -82,15 +82,12 @@ classDiagram
         eliminar(codigo)
     }
     class ProductoServiceMemoria {
-        -productos
+        -productos: ArrayList
         registrar(producto)
         listar()
         buscarPorCodigo(codigo)
         actualizar(producto)
         eliminar(codigo)
-    }
-    class ArrayListProductos {
-        ArrayList de productos
     }
 
     Main ..> ProductoService : usa contrato
@@ -98,7 +95,6 @@ classDiagram
     ProductoService <|.. ProductoServiceMemoria : implements
     ProductoService ..> Producto : usa
     ProductoServiceMemoria ..> Producto : usa
-    ProductoServiceMemoria o-- ArrayListProductos : administra
 ```
 
 ## 3. Aplica: actividad práctica guiada
@@ -272,7 +268,7 @@ Incluye capturas o salidas de consola con una breve explicación debajo de cada 
 - Salida de registrar, listar, buscar, actualizar y eliminar.
 - Evidencia de proyecto organizado con Maven.
 - Evidencia de preparación o generación de ejecutable nativo si corresponde.
-- Explicación del flujo `Main -> Interface -> Implementación en memoria -> Entidades -> ArrayList`.
+- Explicación del flujo `Main -> Interface -> Implementación en memoria -> Entidades`, indicando que el `ArrayList` es un atributo interno de la implementación.
 
 #### 4.1.4 Error o hallazgo
 

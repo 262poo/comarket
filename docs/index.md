@@ -32,7 +32,7 @@ Resultado esperado U1: el estudiante modela y construye objetos de software apli
 | S2 | **Encapsulamiento, constructores y responsabilidad única:**<br>Modificadores de acceso, constructores, sobrecarga de constructores, getters/setters limpios, separacion básica con `ProductoService`, validaciones básicas y pruebas desde `Main` | `Producto` encapsulado y `ProductoService` inicial con operaciones sobre productos |
 | S3 | **Asociación, agregación/composición y colecciones:**<br>Relaciones entre objetos, asociación, agregación, composición, colecciones de objetos, navegacion entre objetos, relaciones uno a muchos y servicio inicial para administrar colecciones | Modelo inicial con varias entidades relaciónadas, colecciones y servicio inicial |
 | S4 | **Herencia y polimorfismo:**<br>Herencia con entidades usando `extends`, clase base abstracta, subclases, sobrescritura de métodos, polimorfismo con interface e `implements`, separacion de responsabilidades | Entidades con herencia y contrato polimorfico con dos implementaciones |
-| S5 | **CRUD en memoria con ArrayList:**<br>Registro, listado, busqueda, actualizacion, eliminación, flujo Main-Interface-Implementacion en memoria-Entidades-ArrayList, introducción a Maven y compilación nativa con GraalVM para la entrega | CRUD en memoria organizado con contrato, implementacion en memoria, entidades y ArrayList, preparado para ejecutable nativo |
+| S5 | **CRUD en memoria con ArrayList:**<br>Registro, listado, busqueda, actualizacion, eliminación, flujo Main-Interface-Implementacion en memoria-Entidades, `ArrayList` como atributo interno de la implementación, introducción a Maven y compilación nativa con GraalVM para la entrega | CRUD en memoria organizado con contrato, implementacion en memoria y entidades, preparado para ejecutable nativo |
 | S6 | **Evaluación de la unidad 1:**<br>Clases del dominio, encapsulamiento, constructores, relaciones entre objetos, CRUD en memoria, busquedas, validaciones básicas y ejecución del producto | Producto U1 validado con modelo de dominio, CRUD en memoria y ejecución demostrable |
 
 ### U2: Aplicación de escritorio con persistencia de datos
@@ -44,7 +44,7 @@ Resultado esperado U2: el estudiante construye aplicaciónes de escritorio organ
 | Sesión | Tema | Producto de sesión |
 |---|---|---|
 | S7 | **Interfaz gráfica de usuario:**<br>Aplicación de escritorio con JavaFX, FXML, Scene Builder, controladores, formularios, eventos y navegacion básica | Pantallas y controladores integrados con eventos de usuario |
-| S8 | **CRUD desde GUI en memoria:**<br>Flujo Vista-Controlador-Servicio-Entidades-ArrayList, reutilizacion del contrato de operaciones CRUD, carga de datos en tablas, registro, consulta, edición y eliminación | Flujo completo de operación desde formularios y tablas JavaFX usando memoria |
+| S8 | **CRUD desde GUI en memoria:**<br>Flujo Vista-Controlador-Servicio-Entidades, `ArrayList` como atributo interno de la implementación en memoria, reutilizacion del contrato de operaciones CRUD, carga de datos en tablas, registro, consulta, edición y eliminación | Flujo completo de operación desde formularios y tablas JavaFX usando memoria |
 | S9 | **Arquitectura por capas y persistencia relacional:**<br>Organización por capas, clase de conexión, fundamentos de JDBC, base de datos relacional embebida | Proyecto preparado con paquetes, conexión relacional y separacion de responsabilidades |
 | S10 | **Patron DAO y operaciones CRUD persistentes desde GUI:**<br>Flujo Vista-Controlador-Servicio-Entidades-DAO, carga de datos en tablas, registro, consulta, edición, eliminación, confirmación de eliminación y manejo inicial de excepciones | CRUD persistente funcional desde formularios y tablas JavaFX |
 | S11 | **Validación de datos y pruebas del flujo principal:**<br>Validaciones de formulario, mensajes al usuario, manejo de excepciones, pruebas manuales y corrección de errores funcionales | GUI y persistencia validadas con pruebas del flujo principal |
@@ -74,7 +74,7 @@ flowchart TB
     subgraph ServiceU1["Servicio"]
         direction TB
         InterfaceU1["Interface<br/>contrato de operaciones CRUD"]
-        ImplementacionU1["Implementacion en memoria"]
+        ImplementacionU1["Implementacion en memoria<br/>-productos: ArrayList&lt;Producto&gt;"]
         ValidacionesU1["Validaciones/Excepciones básicas"]
     end
 
@@ -84,8 +84,6 @@ flowchart TB
         SubclaseU1["Subclase"]
     end
 
-    MemoriaU1[("ArrayList / memoria")]
-
     Main --> InterfaceU1
     InterfaceU1 ~~~ ImplementacionU1
     ImplementacionU1 -. implements .-> InterfaceU1
@@ -93,7 +91,6 @@ flowchart TB
     ImplementacionU1 -.-> EntitiesU1
     ClaseBaseU1 ~~~ SubclaseU1
     SubclaseU1 -- extends --> ClaseBaseU1
-    ImplementacionU1 --> MemoriaU1
 ```
 
 Nota métodológica: en U1 la separacion de responsabilidades se trabaja de forma progresiva. En S1, responsabilidad significa reconocer caracteristicas y acciones de una clase; no se exige SOLID todavía. Desde S2 se controla mejor el estado con encapsulamiento y se introduce la S de SOLID separando `Producto` de `ProductoService`. Más adelante, la interface declara el contrato de operaciones CRUD y la implementacion en memoria ejecuta las operaciones sobre `ArrayList`. No se introducen interfaces en entidades porque pueden complicar el modelo sin aportar claridad en está etapa.
@@ -115,7 +112,7 @@ Flujo de trabajo U1:
 3. Desde S2 controla mejor el estado con encapsulamiento e introduce `ProductoService`.
 4. Desde S3 relacióna varias entidades y usa servicios iniciales para administrar colecciones.
 5. En S4 refuerza el modelo con herencia cuándo el dominio lo justifica y aplica polimorfismo con interface e `implements`.
-6. En S5 integra lo anterior en el flujo Main-Interface-Implementacion en memoria-Entidades-ArrayList y prepara la compilación nativa con Maven/GraalVM.
+6. En S5 integra lo anterior en el flujo Main-Interface-Implementacion en memoria-Entidades, con `ArrayList` como atributo interno de la implementación, y prepara la compilación nativa con Maven/GraalVM.
 7. En S6 presenta un producto de consola ejecutable, con modelo de dominio y CRUD en memoria.
 
 ## Arquitectura CoMarket POO: U2 y U3

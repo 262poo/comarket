@@ -37,7 +37,7 @@ Tiempo: 25 min.
 
 ### 2.1 Conceptos clave
 
-- Flujo Vista-Controlador-Servicio-Entidades-ArrayList.
+- Flujo Vista-Controlador-Servicio-Entidades, con `ArrayList` como atributo interno de la implementación en memoria.
 - Interface de servicio como contrato de operaciones CRUD.
 - Implementación en memoria del contrato.
 - Lectura de datos desde formularios.
@@ -76,7 +76,7 @@ classDiagram
         eliminar(codigo)
     }
     class ProductoServiceMemoria {
-        -productos
+        -productos: ArrayList
         CRUD sobre ArrayList
     }
     class Producto {
@@ -85,9 +85,6 @@ classDiagram
         -precio
         -stock
     }
-    class ArrayListProductos {
-        datos en memoria
-    }
 
     VistaFXML ..> ProductoController : eventos
     ProductoController ..> ProductoService : usa contrato
@@ -95,7 +92,6 @@ classDiagram
     ProductoService <|.. ProductoServiceMemoria : implements
     ProductoService ..> Producto : usa
     ProductoServiceMemoria ..> Producto : usa
-    ProductoServiceMemoria o-- ArrayListProductos : administra
 ```
 
 ## 3. Aplica: actividad práctica guiada

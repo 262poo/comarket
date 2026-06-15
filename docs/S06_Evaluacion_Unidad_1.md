@@ -66,11 +66,8 @@ classDiagram
         eliminar(codigo)
     }
     class ProductoServiceMemoria {
-        -productos
+        -productos: ArrayList
         CRUD sobre ArrayList
-    }
-    class ArrayListProductos {
-        datos en memoria
     }
 
     Main ..> ProductoService : usa contrato
@@ -78,7 +75,6 @@ classDiagram
     ProductoService <|.. ProductoServiceMemoria : implements
     ProductoService ..> Producto : usa
     ProductoServiceMemoria ..> Producto : usa
-    ProductoServiceMemoria o-- ArrayListProductos : administra
 ```
 
 ### 2.3 Criterios mínimos de revisión
