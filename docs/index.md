@@ -43,12 +43,12 @@ Resultado esperado U2: el estudiante construye aplicaciónes de escritorio organ
 
 | Sesión | Tema | Producto de sesión |
 |---|---|---|
-| S7 | **Interfaz gráfica de usuario:**<br>Aplicación de escritorio con JavaFX, FXML, Scene Builder, controladores, formularios, eventos y navegacion básica | Pantallas y controladores integrados con eventos de usuario |
-| S8 | **CRUD desde GUI en memoria:**<br>Flujo Vista-Controlador-Servicio-Entidades, `ArrayList` como atributo interno de la implementación en memoria, reutilizacion del contrato de operaciones CRUD, carga de datos en tablas, registro, consulta, edición y eliminación | Flujo completo de operación desde formularios y tablas JavaFX usando memoria |
-| S9 | **Arquitectura por capas y persistencia relacional:**<br>Organización por capas, clase de conexión, fundamentos de JDBC, base de datos relacional embebida | Proyecto preparado con paquetes, conexión relacional y separacion de responsabilidades |
-| S10 | **Patron DAO y operaciones CRUD persistentes desde GUI:**<br>Flujo Vista-Controlador-Servicio-Entidades-DAO, carga de datos en tablas, registro, consulta, edición, eliminación, confirmación de eliminación y manejo inicial de excepciones | CRUD persistente funcional desde formularios y tablas JavaFX |
-| S11 | **Validación de datos y pruebas del flujo principal:**<br>Validaciones de formulario, mensajes al usuario, manejo de excepciones, pruebas manuales y corrección de errores funcionales | GUI y persistencia validadas con pruebas del flujo principal |
-| S12 | **Evaluación de la unidad 2:**<br>Conexión a base de datos, DAO funcional, GUI operativa, validaciones, manejo básico de errores, flujo funcional completo | Producto U2 validado con arquitectura, persistencia e interfaz gráfica |
+| S7 | **Interfaz gráfica y CRUD desde GUI en memoria:**<br>Aplicación de escritorio con JavaFX, FXML, Scene Builder, controladores, formularios, eventos, tablas y CRUD en memoria de una entidad ya trabajada en U1. Validación básica al cierre de la sesión | Flujo Vista-Controlador-Servicio-Entidades funcionando desde GUI con memoria |
+| S8 | **Arquitectura por capas, patrón DAO y CRUD persistente desde GUI:**<br>Organización por capas, JDBC, SQLite, DAO, servicio persistente, formularios, tablas, operaciones CRUD persistentes y validación de datos de una tabla simple | CRUD persistente desde GUI con arquitectura por capas y DAO |
+| S9 | **Operaciones CRUD para tablas con relaciones muchos a muchos:**<br>Modelo relacional con tabla intermedia, operaciones sobre entidades relacionadas, registro de cabecera y detalle, cálculo de subtotales/totales, control de stock y validaciones del flujo | Flujo persistente con relación muchos a muchos y tabla intermedia |
+| S10 | **Seguridad y operaciones CRUD para tablas con relaciones uno a muchos:**<br>Tabla de usuarios, autenticación básica, sesión activa, relación uno a muchos, operaciones persistentes asociadas al usuario y validaciones de acceso | Seguridad básica y operaciones persistentes con relación uno a muchos |
+| S11 | **Consultas integradas y pruebas del flujo principal:**<br>Búsquedas, filtros, consultas maestro-detalle, consultas por fecha/usuario, totales, verificación de consistencia, manejo de errores y pruebas funcionales por capas | Consultas integradas y flujo principal probado |
+| S12 | **Evaluación de la unidad 2:**<br>GUI operativa, arquitectura por capas, DAO, SQLite, CRUD persistente, relación muchos a muchos, relación uno a muchos, seguridad básica, consultas, validaciones y pruebas | Producto U2 validado con interfaz gráfica, persistencia, relaciones y seguridad básica |
 
 ### U3: Proyecto Integrador CoMarket
 
@@ -190,6 +190,7 @@ classDiagram
     class Venta {
         -String cliente
         -Date fecha
+        -Usuario usuario
         -List~DetalleVenta~ detalles
         +calcularTotal()
     }
@@ -206,22 +207,30 @@ classDiagram
         -int stock
     }
 
-    Venta "1" *-- "*" DetalleVenta
-    DetalleVenta "*" --> "1" Producto
+    class Usuario {
+        -String username
+        -String passwordHash
+        -String rol
+    }
+
+    Venta "*" --> "1" Usuario : registrada por
+    Venta "1" *-- "*" DetalleVenta : contiene
+    DetalleVenta "*" --> "1" Producto : referencia
 ```
 
-En U2 y U3 este modelo se consolida alrededor del flujo comercial principal. La relación entre `Venta`, `DetalleVenta` y `Producto` sirve cómo referencia para integrar interfaz gráfica, entidades y persistencia relacional.
+En U2 y U3 este modelo se consolida alrededor del flujo comercial principal. La relación entre `Venta`, `DetalleVenta`, `Producto` y `Usuario` sirve cómo referencia para integrar interfaz gráfica, entidades, seguridad básica y persistencia relacional.
 
 Flujo de trabajo U2-U3:
 
 1. La Unidad 2 inicia un proyecto JavaFX/Maven en IntelliJ IDEA.
-2. El estudiante diseña vistas FXML con Scene Builder y conecta eventos mediante controladores.
-3. Primero implementa CRUD desde GUI en memoria reutilizando el contrato de servicio y una implementacion basada en `ArrayList`.
-4. Luego incorpora JDBC, DAO y SQLite agregando una implementacion persistente del mismo contrato de servicio.
-5. Valida formularios, maneja excepciones, prueba el flujo principal y corrige errores funcionales.
-6. La Unidad 3 integra pantallas, controladores, servicios, entidades, DAO, base de datos, documentacion y evidencias.
-7. En S13 y S14 estabiliza el producto y genera el ejecutable nativo final con GraalVM.
-8. En S15 y S16 sustenta y defiende técnicamente CoMarket.
+2. En S7 pasa de consola a GUI y reutiliza el servicio en memoria de una entidad simple.
+3. En S8 incorpora arquitectura por capas, DAO, JDBC y SQLite con CRUD persistente para una tabla simple.
+4. En S9 implementa operaciones persistentes con relación muchos a muchos mediante cabecera, detalle y tabla intermedia.
+5. En S10 agrega seguridad básica y una relación uno a muchos asociada al usuario.
+6. En S11 desarrolla consultas integradas, filtros, pruebas funcionales y correcciones por sesión.
+7. La Unidad 3 integra pantallas, controladores, servicios, entidades, DAO, base de datos, documentacion y evidencias.
+8. En S13 y S14 estabiliza el producto y genera el ejecutable nativo final con GraalVM.
+9. En S15 y S16 sustenta y defiende técnicamente el producto.
 
 ## Enlaces
 
@@ -231,11 +240,11 @@ Flujo de trabajo U2-U3:
 - [S4: Herencia y polimorfismo](S04_Herencia_Polimorfismo.md)
 - [S5: CRUD en memoria con ArrayList](S05_CRUD_Memoria_ArrayList.md)
 - [S6: Evaluacion unidad 1](S06_Evaluacion_Unidad_1.md)
-- [S7: Interfaz grafica de usuario](S07_Interfaz_Grafica_Usuario.md)
-- [S8: CRUD desde GUI en memoria](S08_CRUD_GUI_Memoria.md)
-- [S9: Arquitectura por capas y persistencia relacional](S09_Arquitectura_Persistencia.md)
-- [S10: Patron DAO y operaciones CRUD persistentes desde GUI](S10_DAO_CRUD_GUI.md)
-- [S11: Validacion de datos y pruebas](S11_Validacion_Integracion_Pruebas.md)
+- [S7: Interfaz grafica y CRUD desde GUI en memoria](S07_GUI_CRUD_Memoria.md)
+- [S8: Arquitectura por capas, DAO y CRUD persistente desde GUI](S08_Arquitectura_DAO_CRUD_Persistente.md)
+- [S9: Operaciones CRUD para tablas con relaciones muchos a muchos](S09_CRUD_Relaciones_Muchos_Muchos.md)
+- [S10: Seguridad y CRUD para tablas con relaciones uno a muchos](S10_Seguridad_CRUD_Uno_Muchos.md)
+- [S11: Consultas integradas y pruebas](S11_Consultas_Integradas_Pruebas.md)
 - [S12: Evaluacion unidad 2](S12_Evaluacion_Unidad_2.md)
 - [S13: Integracion del sistema](S13_Proyecto_Integrador_Ensamblaje.md)
 - [S14: Validacion y refinamiento](S14_Proyecto_Integrador_Refinamiento.md)
