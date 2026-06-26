@@ -29,6 +29,7 @@ Qué debe quedar unido para que el producto funcione como aplicación final?
 ### 1.5 Ubicación en el curso
 
 - Unidad: U3 - Proyecto integrador.
+- Carpeta de trabajo: `comarket-desk`.
 - Avance de sesión: ensamblaje del producto final.
 
 ## 2. Explica
@@ -57,20 +58,20 @@ Si hay dos clases que hacen lo mismo, se decide una y se elimina la duplicidad.
 
 ```mermaid
 flowchart TB
-    Vista["Vistas FXML"]
-    Controladores["Controladores"]
+    Vista["view<br/>Vistas FXML"]
+    Controladores["controller"]
 
-    subgraph Servicios["Servicios"]
+    subgraph Servicios["service"]
         Contrato["ProductoService<br/>&lt;&lt;interface&gt;&gt;"]
-        Implementacion["ProductoServiceBD<br/>implements"]
+        Implementacion["ProductoServiceImplDB<br/>implements"]
         Validaciones["Validaciones/Excepciones"]
     end
 
-    Entidades["Producto / Venta / DetalleVenta"]
+    Entidades["entity<br/>Producto / Venta / DetalleVenta"]
 
-    subgraph Persistencia["Persistencia"]
+    subgraph Persistencia["dao"]
         DAO["ProductoDAO / VentaDAO"]
-        SQLite[("SQLite / comarket.db")]
+        SQLite[("SQLite / proyecto.db")]
     end
 
     Vista --> Controladores
@@ -82,6 +83,9 @@ flowchart TB
     Implementacion --> DAO
     DAO --> Entidades
     DAO -->|"JDBC"| SQLite
+
+    classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    class Implementacion serviceImpl;
 ```
 
 ## 3. Aplica: actividad práctica guiada

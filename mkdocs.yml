@@ -1,4 +1,4 @@
-﻿site_name: POO - CoMarket
+site_name: Programación Orientada a Objetos
 site_description: Libro digital de apoyo para el curso de Programación Orientada a Objetos - UPeU 2026
 site_author: UPeU
 copyright: Angel Sullon @asullom - UPeU 2026
@@ -45,23 +45,23 @@ extra_javascript:
 nav:
   - Inicio: index.md
   - 1. Fundamentos de la Programación Orientada a Objetos:
-    - 1 Clases, objetos y responsabilidad: S01_Clases_Objetos.md
-    - 2 Encapsulamiento y constructores: S02_Encapsulamiento_Constructores.md
-    - 3 Asociacion, agregacion/composicion y colecciones: S03_Asociacion_Colecciones.md
-    - 4 Herencia y polimorfismo: S04_Herencia_Polimorfismo.md
-    - 5 CRUD en memoria con ArrayList: S05_CRUD_Memoria_ArrayList.md
-    - 6 Evaluacion unidad 1: S06_Evaluacion_Unidad_1.md
+    - 1 Entorno, estructuras de control, metodos y estructuras de datos lineales: S01_Fundamentos_Estructuras_Datos.md
+    - 2 Clases, objetos, constructores y comunicacion entre objetos: S02_Clases_Objetos.md
+    - 3 Encapsulamiento, separacion de responsabilidades y relaciones entre objetos: S03_Encapsulamiento_Relaciones.md
+    - 4 Herencia, interfaces y polimorfismo: S04_Herencia_Polimorfismo.md
+    - 5 Operaciones CRUD, validaciones y responsabilidad unica: S05_CRUD_Memoria_ArrayList.md
+    - 6 Modelado orientado a objetos y gestion de datos en memoria: S06_Evaluacion_Unidad_1.md
   - 2. Aplicación de Escritorio con Persistencia de Datos:
     - 7 Interfaz grafica y CRUD desde GUI en memoria: S07_GUI_CRUD_Memoria.md
     - 8 Arquitectura por capas, DAO y CRUD persistente desde GUI: S08_Arquitectura_DAO_CRUD_Persistente.md
     - 9 Operaciones persistentes con relacion muchos a muchos: S09_Operaciones_Persistentes_Muchos_Muchos.md
     - 10 Seguridad basica y relacion uno a muchos: S10_Seguridad_Relacion_Uno_Muchos.md
     - 11 Consultas integradas y pruebas: S11_Consultas_Integradas_Pruebas.md
-    - 12 Evaluacion unidad 2: S12_Evaluacion_Unidad_2.md
-  - 3. Proyecto Integrador CoMarket:
+    - 12 Aplicaciones de escritorio por capas y gestion de datos persistentes: S12_Evaluacion_Unidad_2.md
+  - 3. Proyecto Integrador:
     - 13 Integracion del sistema: S13_Proyecto_Integrador_Ensamblaje.md
     - 14 Validacion, refinamiento y ejecutable nativo: S14_Proyecto_Integrador_Refinamiento.md
-    - 15 Sustentacion del proyecto: S15_Documentacion_Demo.md
-    - 16 Evaluacion final: S16_Evaluacion_Final.md
+    - 15 Sistema orientado a objetos integrado: S15_Documentacion_Demo.md
+    - 16 Evaluacion final individual: S16_Evaluacion_Final.md
   - 4. Anexos:
       - Taller POO 01: POOTaller01.md

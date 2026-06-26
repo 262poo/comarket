@@ -29,6 +29,7 @@ Qué falta para que el producto pueda presentarse como versión final?
 ### 1.5 Ubicación en el curso
 
 - Unidad: U3.
+- Carpeta de trabajo: `comarket-desk`.
 - Avance de sesión: versión candidata a sustentación.
 
 ## 2. Explica

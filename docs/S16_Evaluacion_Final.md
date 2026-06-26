@@ -1,4 +1,4 @@
-﻿# S16 - Evaluación final del proyecto integrador
+# S16 - Evaluación final individual
 
 ## 1. Introducción
 
@@ -14,7 +14,7 @@ El estudiante demuestra individualmente dominio del producto y de los conceptos 
 
 ### 1.3 Producto de sesión
 
-Evaluación final, corrección de observaciones y cierre académico del proyecto.
+Evaluación final individual, recuperación de sustentaciones pendientes, corrección de observaciones y cierre académico del curso.
 
 ### 1.4 Motivación de la sesión
 
@@ -24,6 +24,7 @@ La evaluación final no solo confirma que el producto abre. Confirma que el estu
 
 - Cierre de U3.
 - Cierre del producto del curso.
+- Carpeta de trabajo: `comarket-desk`.
 
 ## 2. Explica
 
@@ -45,9 +46,9 @@ Tiempo: 20 min.
 ```mermaid
 flowchart TB
     Producto["Producto final"]
-    GUI["GUI JavaFX"]
-    Capas["Controlador + Servicio + DAO"]
-    Entidades["Entidades"]
+    GUI["view<br/>GUI JavaFX"]
+    Capas["controller + service + dao"]
+    Entidades["entity"]
     BD[("SQLite")]
     Ejecutable["Ejecutable nativo"]
     Sustentacion["Sustentacion individual"]

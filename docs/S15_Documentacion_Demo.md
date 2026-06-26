@@ -1,4 +1,4 @@
-﻿# S15 - Sustentación del proyecto
+# S15 - Sistema orientado a objetos integrado (Evaluación U3)
 
 ## 1. Introducción
 
@@ -6,7 +6,7 @@ Tiempo: 20 min.
 
 ### 1.1 Propósito
 
-Sustentar el producto mediante una demostracion funcional y una explicacion técnica clara.
+Validar el Producto U3 mediante la sustentación de un sistema orientado a objetos integrado, con demostracion funcional y explicacion técnica clara de su arquitectura, modelo, persistencia y flujo principal.
 
 ### 1.2 Resultado de aprendizaje
 
@@ -14,7 +14,7 @@ El estudiante presenta el producto, explica su arquitectura, defiende decisióne
 
 ### 1.3 Producto de sesión
 
-Sustentación grupal del proyecto con defensa técnica individual.
+Producto U3 validado: sistema orientado a objetos integrado, funcional, documentado y sustentado técnicamente.
 
 ### 1.4 Motivación de la sesión
 
@@ -29,6 +29,7 @@ Puedes explicar y defender técnicamente el producto que construiste?
 ### 1.5 Ubicación en el curso
 
 - Unidad: U3.
+- Carpeta de trabajo: `comarket-desk`.
 - Avance de sesión: defensa técnica del producto.
 
 ## 2. Explica
@@ -39,10 +40,10 @@ Tiempo: 20 min.
 
 - Demostracion funcional.
 - Arquitectura por capas.
-- Entidades.
-- Controladores.
-- Servicios.
-- DAO y persistencia.
+- `entity`.
+- `controller`.
+- `service`.
+- `dao` y persistencia.
 - Validaciones.
 - Ejecutable.
 - Aporte individual.
@@ -70,7 +71,7 @@ Tiempo: 2h.
 1. Ejecutar el producto.
 2. Mostrar el flujo principal.
 3. Explicar arquitectura por capas.
-4. Mostrar entidades, servicios y DAO.
+4. Mostrar `entity`, `service` y `dao`.
 5. Mostrar persistencia en SQLite.
 6. Explicar validaciones.
 7. Presentar evidencias.
@@ -102,7 +103,7 @@ El PDF debe usar esta estructura. La primera sección define el trabajo autónom
 
 - Nombre:
 - Equipo:
-- Sesión: S15 - Sustentación del proyecto
+- Sesión: S15 - Sistema orientado a objetos integrado (Evaluación U3)
 - Rol o aporte realizado:
 - Link de GitHub:
 
@@ -113,7 +114,7 @@ Completa y evidencia estas tareas:
 1. Preparar un guion de demostración breve.
 2. Definir el flujo principal que se mostrará.
 3. Preparar una explicación de arquitectura por capas.
-4. Identificar clases clave: entidad, controlador, service y DAO.
+4. Identificar clases clave: `entity`, `controller`, `service` y `dao`.
 5. Preparar evidencias de persistencia.
 6. Preparar explicación del aporte individual.
 7. Preparar respuestas a posibles preguntas de defensa.
@@ -211,7 +212,7 @@ La revisión se realiza con los criterios mínimos de aceptación de la sección
 | Dimensión | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuación obtenida |
 |---|---:|---|---|---|---|---:|
 | 1. Demostración funcional | 2 | Demuestra flujo claro, ordenado y sin bloqueos. | Demuestra flujo principal. | Demo parcial o poco clara. | No demuestra producto. | |
-| 2. Arquitectura explicada | 2 | Explica vista, controlador, servicio, entidades, DAO y BD con precisión. | Explica capas principales. | Explicación incompleta. | No explica arquitectura. | |
+| 2. Arquitectura explicada | 2 | Explica `view`, `controller`, `service`, `entity`, `dao` y BD con precisión. | Explica capas principales. | Explicación incompleta. | No explica arquitectura. | |
 | 3. Código clave | 2 | Muestra clases clave y justifica responsabilidades. | Muestra código relevante. | Código poco conectado a la explicación. | No muestra código clave. | |
 | 4. Aporte individual | 2 | Aporte verificable y defendido con evidencia. | Aporte identificable. | Aporte general. | No identifica aporte. | |
 | 5. Defensa técnica | 1 | Responde preguntas con criterio y claridad. | Responde adecuadamente. | Responde parcialmente. | No sustenta. | |

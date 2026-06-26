@@ -29,6 +29,7 @@ Cómo consultamos información relacionada y verificamos que el flujo completo f
 ### 1.5 Ubicación en el curso
 
 - Unidad: U2.
+- Carpeta de trabajo: `comarket-desk`.
 - Avance de sesión: consultas, pruebas y correcciones antes de la evaluación.
 
 ## 2. Explica
@@ -60,21 +61,21 @@ Las consultas reutilizan los DAO existentes o un ConsultaDAO, siempre usando uti
 
 ```mermaid
 flowchart TB
-    Vista["Vista de consultas<br/>filtros / tabla / detalle"]
-    Controlador["ConsultaController"]
+    Vista["view<br/>consultas / filtros / tabla / detalle"]
+    Controlador["controller<br/>ConsultaController"]
 
-    subgraph Servicio["Servicio"]
+    subgraph Servicio["service"]
         ConsultaService["ConsultaService"]
         Validaciones["Validaciones/Excepciones"]
     end
 
-    subgraph Persistencia["Persistencia"]
+    subgraph Persistencia["dao"]
         ConsultaDAO["ConsultaDAO"]
         ConexionBD["util/ConexionBD"]
         SQLite[("SQLite")]
     end
 
-    Entidades["Venta / DetalleVenta / Producto / Usuario"]
+    Entidades["entity<br/>Venta / DetalleVenta / Producto / Usuario"]
 
     Vista --> Controlador
     Controlador --> ConsultaService

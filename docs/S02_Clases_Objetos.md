@@ -1,4 +1,4 @@
-﻿# S1 - Clases, objetos y responsabilidad de clase
+# S2 - Clases, objetos, constructores y comunicación entre objetos
 
 ## 1. Introducción
 
@@ -6,15 +6,15 @@ Tiempo: 20 min.
 
 ### 1.1 Propósito
 
-Iniciar una aplicación de consola mediante clases simples del dominio, objetos creados desde `Main` y pruebas por salida de texto.
+Construir clases simples del dominio, crear objetos mediante constructores, reconocer su estado y comportamiento, y observar la comunicación básica entre objetos desde una aplicación de consola.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante diferencia clase y objeto, define atributos y métodos, crea instancias y explica la responsabilidad básica de una clase del dominio.
+El estudiante diferencia clase y objeto, define atributos, métodos y constructores, crea instancias, explica la responsabilidad básica de una clase del dominio y reconoce cómo un objeto puede colaborar con otro.
 
 ### 1.3 Producto de sesión
 
-Proyecto Java simple en VS Code con una primera clase del dominio, objetos instanciados desde `Main` y salida por consola.
+Proyecto Java simple con clases del dominio, objetos instanciados mediante constructores, comunicación básica entre objetos y salida por consola.
 
 ### 1.4 Motivación de la sesión
 
@@ -31,37 +31,37 @@ Preguntas para los estudiantes:
 3. Qué comportamiento podría tener ese objeto?
 4. Por qué no conviene escribir todo directamente en `Main`?
 
-En esta sesión se inicia el proyecto creando el primer objeto del dominio y probandolo desde consola.
+En esta sesión se retoman las estructuras trabajadas en S1 y se reorganizan como objetos del dominio, probandolos desde consola.
 
 ### 1.5 Ubicación en el curso
 
 - Unidad: U1 - Fundamentos de la Programación Orientada a Objetos.
 - Producto de unidad: aplicación de consola en memoria con entidades, relaciones, colecciones y CRUD.
-- Avance del producto en esta sesión: primeras clases del dominio probadas desde `Main`.
+- Carpeta de trabajo: `comarket-cli`.
+- Avance del producto en esta sesión: primeras clases del dominio, constructores y comunicación básica entre objetos probadas desde `Main`.
 
 Roadmap para elaborar el producto de la unidad:
 
 ```mermaid
 flowchart TB
-    S1["S1<br/>Coche, Persona y Producto<br/>clase y objetos"]
-    S2["S2<br/>Producto encapsulado<br/>constructores y validaciones"]
-    S3["S3<br/>Asociación, agregación/composición<br/>y colecciones"]
-    S4["S4<br/>Persona, Cliente, Empleado<br/>herencia y polimorfismo<br/>bloque aplicado"]
-    S5["S5<br/>Servicio en memoria<br/>CRUD con ArrayList"]
+    S1["S1<br/>Estructuras de control, métodos,<br/>arrays y ArrayList"]
+    S2["S2<br/>Coche, Persona y Producto<br/>clases, objetos y constructores"]
+    S3["S3<br/>Encapsulamiento, responsabilidades<br/>y relaciones entre objetos"]
+    S4["S4<br/>Herencia, interfaces<br/>y polimorfismo"]
+    S5["S5<br/>CRUD, validaciones<br/>y responsabilidad única"]
     S6["S6<br/>Producto U1<br/>consola ejecutable"]
 
     S1 --> S2
     S2 --> S3
-    S3 --> S5
-    S3 -. refuerza modelo .-> S4
-    S4 -. se aplica en .-> S5
+    S3 --> S4
+    S4 --> S5
     S5 --> S6
 
     classDef today fill:#ffe08a,stroke:#9a6b00,stroke-width:2px,color:#111;
-    class S1 today;
+    class S2 today;
 ```
 
-Hoy se inicia con objetos tangibles del mundo real: `Coche` y `Persona`. Luego se trabaja `Producto` cómo segundo ejemplo preparatorio para S2. La ruta principal avanza hacia encapsulamiento, servicios con colecciones y CRUD en memoria. La herencia y el polimorfismo se trabajan cómo bloque aplicado entre S3 y S5: refuerzan el modelo y preparan el contrato de servicio, pero no deben sentirse cómo un adorno aislado.
+Hoy se trabaja con objetos tangibles del mundo real: `Coche` y `Persona`. Luego se usa `Producto` cómo ejemplo puente hacia el dominio de CoMarket. La ruta principal avanza hacia encapsulamiento, separación de responsabilidades, relaciones entre objetos y CRUD en memoria. La herencia, las interfaces y el polimorfismo se trabajan después, cuando el modelo ya tenga más contexto.
 
 ## 2. Explica
 
@@ -71,7 +71,7 @@ Tiempo: 25 min.
 
 Una clase es un molde para crear objetos. Un objeto es una instancia concreta qué tiene estado y comportamiento.
 
-Ejemplo base: `Coche` y `Persona` permiten iniciar desde objetos tangibles. Un coche tiene marca y velocidad; una persona tiene nombre y puede conducir. Luego se usa `Producto` para observar cambios naturales de estado cómo precio y stock, preparando la S2.
+Ejemplo base: `Coche` y `Persona` permiten iniciar desde objetos tangibles. Un coche tiene marca y velocidad; una persona tiene nombre y puede conducir. Luego se usa `Producto` para observar cambios naturales de estado cómo precio y stock, preparando el trabajo de encapsulamiento y relaciones de S3.
 
 Conceptos de la sesión:
 
@@ -79,20 +79,22 @@ Conceptos de la sesión:
 - Objeto cómo instancia.
 - Atributos cómo estado.
 - Métodos cómo comportamiento.
+- Constructores cómo forma inicial de crear objetos con datos.
 - Abstracción inicial del dominio.
 - Responsabilidad de clase.
+- Comunicación entre objetos.
 - `Main` cómo punto de prueba inicial.
 - Salida por consola cómo evidencia de ejecución.
 
-Alcance métodologico de S1:
+Alcance métodologico de S2:
 
 ```text
-En S1 se llega hasta clase, objeto, atributos, métodos, estado,
-comportamiento, abstracción inicial y responsabilidad de clase.
+En S2 se llega hasta clase, objeto, atributos, métodos, constructores,
+estado, comportamiento, abstracción inicial, responsabilidad de clase
+y comunicación básica entre objetos.
 
-El constructor no se desarrolla como tema fuerte en esta sesión.
-Se puede mencionar que existe, pero su uso formal queda para S2,
-cuando se trabaje encapsulamiento y control del estado.
+El encapsulamiento formal, las validaciones internas y la separación
+por responsabilidades se desarrollan en S3.
 ```
 
 ### 2.2 Arquitectura de la sesión
@@ -142,13 +144,13 @@ Regla practica:
 
 ### 2.3 Flujo de trabajo
 
-1. Preparar VS Code y Java.
-2. Crear un proyecto Java simple.
-3. Abstraer objetos tangibles del mundo real.
-4. Definir la responsabilidad inicial de la clase.
-5. Elegir atributos y métodos coherentes con sus caracteristicas y acciones.
+1. Retomar el proyecto Java simple preparado en S1.
+2. Abstraer objetos tangibles del mundo real.
+3. Definir la responsabilidad inicial de la clase.
+4. Elegir atributos y métodos coherentes con sus caracteristicas y acciones.
+5. Crear constructores para inicializar objetos.
 6. Crear `Coche` y `Persona` para observar colaboracion simple.
-7. Crear `Producto` cómo ejemplo puente hacia S2.
+7. Crear `Producto` cómo ejemplo puente hacia el dominio.
 8. Ejecutar el programa por consola.
 9. Registrar evidencia y explicar responsabilidades.
 
@@ -162,141 +164,15 @@ Regla practica:
 | Todo está en `Main` | No se separo la responsabilidad | Mover datos y comportamiento a una clase |
 | Salida poco clara | `Main` no imprime datos suficientes | Mejorar la salida desde `Main` sin meter consola en la entidad |
 | La clase tiene métodos de muchas cosas | No se identificaron bien sus caracteristicas y acciones | Volver a la abstracción inicial del objeto |
-| Se usan constructores o `private` antes de tiempo | Se adelanto contenido de S2 | En S1 usar clases simples; el control del estado queda para S2 |
+| Se usan `private`, getters/setters o validaciones complejas antes de tiempo | Se adelanto contenido de S3 | En S2 usar constructores simples; el encapsulamiento formal queda para S3 |
 
 ## 3. Aplica: actividad práctica guiada
 
-En el laboratorio, el docente guía la creacion del primer objeto del dominio y los estudiantes verifican el resultado ejecutando el programa desde VS Code.
+En el laboratorio, el docente guía la creacion de objetos del dominio y los estudiantes verifican el resultado ejecutando el programa desde consola.
 
 Tiempo: 2h.
 
-### 3.1 Preparar ambiente local: Java 17, Maven y VS Code
-
-**Producto del paso:** ambiente local con Java 17, Maven y VS Code verificados, listo para crear y ejecutar clases Java desde consola.
-
-Herramientas necesarias:
-
-- Java 17.
-- Maven 3.x.
-- VS Code.
-- Extension Pack for Java.
-- Terminal integrada de VS Code.
-
-En esta sesión se usa un proyecto Java simple. Maven se verifica desde el inicio porque sera necesario para organizar la entrega de la U1 en sesiónes posteriores.
-
-#### 3.1.1 Instalar gestor de paquetes, si hace falta
-
-Windows PowerShell, si no tienes Chocolatey:
-
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-```
-
-Luego cierra y vuelve a abrir PowerShell.
-
-macOS bash/zsh, si no tienes Homebrew:
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-Luego cierra y vuelve a abrir Terminal.
-
-#### 3.1.2 Instalar Java 17
-
-Windows PowerShell con Chocolatey:
-
-```powershell
-choco install temurin17 -y
-```
-
-macOS bash/zsh con Homebrew:
-
-```bash
-brew install --cask temurin@17
-```
-
-Linux Debian/Ubuntu bash:
-
-```bash
-sudo apt update
-sudo apt install -y openjdk-17-jdk
-```
-
-#### 3.1.3 Instalar Maven 3.x
-
-Windows PowerShell con Chocolatey:
-
-```powershell
-choco install maven -y
-```
-
-macOS bash/zsh con Homebrew:
-
-```bash
-brew install maven
-```
-
-Linux Debian/Ubuntu bash:
-
-```bash
-sudo apt update
-sudo apt install -y maven
-```
-
-#### 3.1.4 Instalar VS Code y Extension Pack for Java
-
-Windows PowerShell con Chocolatey:
-
-```powershell
-choco install vscode -y
-```
-
-macOS bash/zsh con Homebrew:
-
-```bash
-brew install --cask visual-studio-code
-```
-
-Linux Debian/Ubuntu bash:
-
-```bash
-sudo snap install code --classic
-```
-
-En VS Code, instalar la extension:
-
-```text
-Extension Pack for Java
-```
-
-#### 3.1.5 Verificar instalacion
-
-Verificar Java 17:
-
-```bash
-java -version
-```
-
-Resultado esperado:
-
-```text
-version 17
-```
-
-Verificar Maven:
-
-```bash
-mvn -version
-```
-
-Resultado esperado:
-
-```text
-Apache Maven 3.x
-```
-
-### 3.2 Crear proyecto Java simple
+### 3.1 Retomar el proyecto Java simple
 
 **Producto del paso:** carpeta de trabajo con estructura inicial.
 
@@ -316,7 +192,7 @@ public class Main {
 }
 ```
 
-### 3.3 Abstraer objetos tangibles: Coche y Persona
+### 3.2 Abstraer objetos tangibles: Coche y Persona
 
 **Producto del paso:** dos clases candidatas identificadas desde el mundo real.
 
@@ -329,7 +205,7 @@ Completar una tabla de abstracción inicial:
 | `Coche` | marca, velocidad | acelerar, frenar, mostrar estado |
 | `Persona` | nombre | conducir |
 
-En S1, responsabilidad de clase no significa responsabilidad legal, vial o moral. Significa identificar qué caracteristicas y qué acciones le corresponden a una clase dentro del programa.
+En S2, responsabilidad de clase no significa responsabilidad legal, vial o moral. Significa identificar qué caracteristicas y qué acciones le corresponden a una clase dentro del programa.
 
 Ejemplo:
 
@@ -341,14 +217,14 @@ El Coche ejecuta acelerar o frenar y cambia su propia velocidad.
 Nota métodológica:
 
 ```text
-En S1 todavía no se aplica SOLID de manera formal.
-Tampoco se trabaja encapsulamiento ni constructores como tema fuerte.
+En S2 todavía no se aplica SOLID de manera formal.
+Tampoco se trabaja encapsulamiento como tema fuerte.
 
 El objetivo es entender clase, objeto, atributos, métodos, estado,
-comportamiento, responsabilidad inicial y abstracción.
+comportamiento, constructores, responsabilidad inicial y abstracción.
 ```
 
-### 3.4 Crear la clase Coche
+### 3.3 Crear la clase Coche
 
 **Producto del paso:** clase tangible con atributos, estado y métodos.
 
@@ -358,6 +234,11 @@ Crear `Coche.java`:
 public class Coche {
     String marca;
     int velocidad;
+
+    Coche(String marca, int velocidadInicial) {
+        this.marca = marca;
+        this.velocidad = velocidadInicial;
+    }
 
     void acelerar() {
         velocidad = velocidad + 10;
@@ -379,11 +260,12 @@ En este punto ya aparecen los primeros conceptos:
 |---|---|
 | `public class Coche` | Clase |
 | `marca`, `velocidad` | Atributos |
+| `Coche(String marca, int velocidadInicial)` | Constructor |
 | Valor actual de `velocidad` | Estado |
 | `acelerar()` y `frenar()` | Métodos |
 | Cambiar la velocidad | Comportamiento |
 
-### 3.5 Crear la clase Persona
+### 3.4 Crear la clase Persona
 
 **Producto del paso:** segunda clase tangible qué usa un objeto `Coche`.
 
@@ -392,6 +274,10 @@ Crear `Persona.java`:
 ```java
 public class Persona {
     String nombre;
+
+    Persona(String nombre) {
+        this.nombre = nombre;
+    }
 
     void conducir(Coche coche) {
         System.out.println(nombre + " conduce el coche");
@@ -411,7 +297,7 @@ Coche modifica su propio estado.
 
 La idea de pedales o volante puede usarse cómo analogia: la persona no manipula todo el motor; interactua mediante acciones visibles. La interface formal de Java se trabajara después, en S4.
 
-### 3.6 Crear objetos desde Main
+### 3.5 Crear objetos desde Main
 
 **Producto del paso:** objetos `coche1` y `persona1` instanciados y visibles por consola.
 
@@ -420,12 +306,8 @@ Actualizar `Main.java`:
 ```java
 public class Main {
     public static void main(String[] args) {
-        Coche coche1 = new Coche();
-        coche1.marca = "Toyota";
-        coche1.velocidad = 0;
-
-        Persona persona1 = new Persona();
-        persona1.nombre = "Ana";
+        Coche coche1 = new Coche("Toyota", 0);
+        Persona persona1 = new Persona("Ana");
 
         coche1.mostrarEstado();
         persona1.conducir(coche1);
@@ -439,12 +321,12 @@ En este punto se observa la diferencia entre clase y objeto:
 | Elemento | Explicacion |
 |---|---|
 | `Coche` | Molde o definicion general |
-| `coche1` | Objeto creado desde la clase `Coche` |
+| `coche1` | Objeto creado desde la clase `Coche` mediante constructor |
 | `Persona` | Molde o definicion general |
-| `persona1` | Objeto creado desde la clase `Persona` |
+| `persona1` | Objeto creado desde la clase `Persona` mediante constructor |
 | Estado de `coche1` | Toyota, velocidad actual |
 
-### 3.7 Identificar estado, comportamiento y responsabilidad inicial
+### 3.6 Identificar estado, comportamiento y responsabilidad inicial
 
 **Producto del paso:** explicacion de cómo los objetos guardan datos, ejecutan acciones y colaboran.
 
@@ -464,11 +346,11 @@ Completar:
 | `Coche` | marca, velocidad | acelerar, frenar, mostrar estado |
 | `Persona` | nombre | conducir un coche |
 
-### 3.8 Ejemplo 2: Producto cómo preparación para S2
+### 3.7 Ejemplo 2: Producto cómo puente hacia el dominio
 
-**Producto del paso:** clase `Producto` simple con estado cambiante.
+**Producto del paso:** clase `Producto` simple con constructor, estado cambiante y comportamiento propio.
 
-Ahora se usa `Producto` cómo segundo ejemplo porque en S2 se convertira en una clase encapsulada.
+Ahora se usa `Producto` cómo segundo ejemplo porque conecta los objetos tangibles con el dominio comercial de CoMarket.
 
 Crear `Producto.java`:
 
@@ -478,6 +360,13 @@ public class Producto {
     String nombre;
     double precio;
     int stock;
+
+    Producto(String codigo, String nombre, double precio, int stock) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+    }
 
     void mostrarInformacion() {
         System.out.println(codigo + " - " + nombre + " - S/ " + precio + " - Stock: " + stock);
@@ -496,11 +385,7 @@ public class Producto {
 Probar desde `Main`:
 
 ```java
-Producto producto1 = new Producto();
-producto1.codigo = "P001";
-producto1.nombre = "Teclado";
-producto1.precio = 80.0;
-producto1.stock = 10;
+Producto producto1 = new Producto("P001", "Teclado", 80.0, 10);
 
 producto1.mostrarInformacion();
 producto1.actualizarPrecio(75.0);
@@ -513,8 +398,8 @@ Lectura esperada:
 ```text
 producto1 sigue siendo el mismo objeto.
 Lo que cambió fue su estado: precio y stock.
-En S2 se controlara mejor este cambio con encapsulamiento,
-constructor, validaciones e invariantes simples.
+En S3 se controlara mejor este cambio con encapsulamiento,
+validaciones e invariantes simples.
 ```
 
 ## 4. Crea: actividad autónoma
@@ -528,13 +413,13 @@ Tiempo: 2h fuera del aula.
 Entrega un PDF con el siguiente nombre:
 
 ```text
-S01_Equipo##_ApellidoNombre.pdf
+S02_Equipo##_ApellidoNombre.pdf
 ```
 
 Ejemplo:
 
 ```text
-S01_Equipo03_QuispeAna.pdf
+S02_Equipo03_QuispeAna.pdf
 ```
 
 El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.
@@ -543,7 +428,7 @@ El PDF debe usar esta estructura. La primera sección define el trabajo autónom
 
 - Nombre:
 - Equipo:
-- Sesión: S01 - Clases, objetos y responsabilidad de clase
+- Sesión: S02 - Clases, objetos, constructores y comunicación entre objetos
 - Rol o aporte realizado:
 - Link de GitHub:
 
@@ -552,7 +437,7 @@ El PDF debe usar esta estructura. La primera sección define el trabajo autónom
 Completa y evidencia estas tareas:
 
 1. Crear otro par de clases tangibles que colaboren entre sí, por ejemplo `Estudiante` y `Cuaderno`, `Jugador` y `Pelota`, o `Vendedor` y `Pedido`.
-2. Crear una clase simple similar a `Producto` que pueda prepararse para encapsulamiento en S2.
+2. Crear una clase simple similar a `Producto` que pueda prepararse para encapsulamiento en S3.
 3. Instanciar objetos desde `Main`.
 4. Mostrar por consola el estado inicial de al menos un objeto.
 5. Ejecutar métodos que cambien o muestren comportamiento.
@@ -596,10 +481,10 @@ Por qué una clase no debe ser solo una lista de variables?
 
 La evidencia individual se considera completa si:
 
-- El archivo respeta el nombre `S01_Equipo##_ApellidoNombre.pdf`.
+- El archivo respeta el nombre `S02_Equipo##_ApellidoNombre.pdf`.
 - Incluye evidencias técnicas legibles.
 - Muestra al menos dos clases tangibles que colaboran.
-- Muestra una clase puente preparada para S2.
+- Muestra una clase puente preparada para S3.
 - Muestra objetos creados desde `Main`.
 - Muestra salida de consola.
 - Explica responsabilidad inicial, estado y comportamiento.
@@ -617,7 +502,7 @@ Al finalizar la sesión, el estudiante debe demostrar que:
 
 - El proyecto ejecuta desde VS Code.
 - Existen clases tangibles como `Coche` y `Persona`, o equivalentes del dominio elegido.
-- Existe una clase puente como `Producto`, preparada para S2.
+- Existe una clase puente como `Producto`, preparada para S3.
 - Se crean objetos desde `Main`.
 - La clase tiene atributos que representan estado.
 - La clase tiene métodos que representan comportamiento básico.
@@ -625,7 +510,7 @@ Al finalizar la sesión, el estudiante debe demostrar que:
 - El estudiante explica qué datos y comportamientos fueron elegidos por abstracción inicial.
 - El estudiante explica qué responsabilidad tiene cada clase.
 - Los métodos implementados corresponden a las acciones iniciales de la clase.
-- No se usan constructores ni atributos `private` como tema central; eso queda para S2.
+- No se usan atributos `private`, getters/setters ni validaciones complejas como tema central; eso queda para S3.
 
 ### 5.2 Evidencia del producto de sesión
 
@@ -634,7 +519,7 @@ Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 
 Nombre del archivo:
 
 ```text
-S01_Equipo##_ApellidoNombre.pdf
+S02_Equipo##_ApellidoNombre.pdf
 ```
 
 La evidencia debe demostrar:
@@ -650,12 +535,12 @@ La revisión se realiza con los criterios mínimos de aceptación de la sección
 
 1. Cuál es la diferencia entre clase y objeto?
 2. Qué representa el estado de un objeto?
-3. Qué significa responsabilidad de clase en S1?
+3. Qué significa responsabilidad de clase en S2?
 4. Qué método representa comportamiento en tu clase?
 5. Qué datos dejaste fuera por abstracción inicial?
 6. Qué características y acciones identificaste en tu clase?
-7. Qué responsabilidad tiene `Main` en esta primera sesión?
-8. Qué cambiará en S2 cuando aparezca encapsulamiento?
+7. Qué responsabilidad tiene `Main` en esta sesión?
+8. Qué cambiará en S3 cuando aparezca encapsulamiento?
 
 ### 5.4 Rúbrica de evaluación
 
