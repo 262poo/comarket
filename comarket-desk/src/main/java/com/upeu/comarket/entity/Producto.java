@@ -1,24 +1,24 @@
-package com.upeu.comarket;
+package com.upeu.comarket.entity;
 
 public class Producto {
-    private int id;
+    private String codigo;
     private String nombre;
     private double precio;
     private int stock;
 
-    public Producto(int id, String nombre, double precio, int stock) {
-        this.id = id;
+    public Producto(String codigo, String nombre, double precio, int stock) {
+        this.codigo = codigo;
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
     }
 
-    public int getId() {
-        return id;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getNombre() {
@@ -43,5 +43,10 @@ public class Producto {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    @Override
+    public String toString() {
+        return codigo + " | " + nombre + " | S/ " + precio + " | stock: " + stock;
     }
 }

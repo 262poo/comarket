@@ -7,12 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class CoMarketApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 760, 520);
-        stage.setTitle("CRUD Producto");
+        FXMLLoader fxmlLoader = new FXMLLoader(CoMarketApplication.class.getResource("view/ProductoView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 820, 560);
+        stage.setTitle("CoMarket Desk - Productos");
         stage.setScene(scene);
         stage.show();
     }
