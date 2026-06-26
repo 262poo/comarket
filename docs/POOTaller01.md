@@ -1,357 +1,184 @@
-﻿# Crear proyecto JavaFX + Maven + SQLite en IntelliJ IDEA
+# Taller POO 01 - Construir el producto U1 en consola
 
-## 1. Crear proyecto JavaFX con Maven
+Este taller guía la construcción del producto de la Unidad 1 en `comarket-cli`: una aplicación de consola orientada a objetos, con entidades del dominio, herencia, servicio CRUD, `ArrayList`, validaciones básicas y menú de ejecución.
 
-Abrir IntelliJ IDEA:
+## 1. Objetivo del taller
 
-```text
-New Project
--> JavaFX
+Al finalizar, el estudiante tendrá un producto U1 ejecutable desde consola con esta arquitectura:
+
+```mermaid
+flowchart TB
+    Main["Main / Consola"]
+
+    subgraph ServiceU1["service"]
+        direction TB
+        ProductoService["ProductoService<br/>&lt;&lt;interface&gt;&gt;"]
+        ProductoServiceImplMemoria["ProductoServiceImplMemoria<br/>ArrayList&lt;Producto&gt;"]
+    end
+
+    subgraph EntityU1["entity"]
+        direction TB
+        Producto["Producto"]
+        Persona["Persona<br/>clase base"]
+        Cliente["Cliente<br/>extends Persona"]
+        Usuario["Usuario<br/>extends Persona"]
+    end
+
+    Main --> ProductoService
+    ProductoServiceImplMemoria -. implements .-> ProductoService
+    ProductoService -.-> Producto
+    ProductoServiceImplMemoria -. usa .-> Producto
+    Main -. prueba .-> Cliente
+    Main -. prueba .-> Usuario
+    Cliente -- extends --> Persona
+    Usuario -- extends --> Persona
+
+    classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    classDef personaRole fill:#fef3c7,stroke:#d97706,stroke-width:3px,color:#78350f;
+    class ProductoServiceImplMemoria serviceImpl;
+    class Cliente,Usuario personaRole;
 ```
 
-Configurar:
+## 2. Carpeta de trabajo
+
+Trabajar dentro de:
 
 ```text
-Name: comarket
-Location: C:\262\262poo
-Language: Java
-Build system: Maven
-Group: com.upeu
-Artifact: comarket
-JDK: temurin-17
+comarket-cli/
 ```
 
-Presionar:
+Estructura esperada:
 
 ```text
-Next
-```
-
-En la ventana de librerias adicionales:
-
-```text
-Additional libraries:
--> No seleccionar ninguna libreria
-```
-
-Finalizar el proyecto:
-
-```text
-Create
-```
-
----
-
-## 2. Estructura inicial del proyecto
-
-```text
-comarket-poo/
+comarket-cli/
 ├── pom.xml
 └── src/
     └── main/
-        ├── java/
-        └── resources/
+        └── java/
+            └── com/upeu/comarket/
+                ├── app/Main.java
+                ├── entity/Persona.java
+                ├── entity/Cliente.java
+                ├── entity/Usuario.java
+                ├── entity/Producto.java
+                ├── service/ProductoService.java
+                └── service/ProductoServiceImplMemoria.java
 ```
 
----
+## 3. Crear el proyecto Maven
 
-## 3. Crear paquetes principales
+El proyecto usa Java 17 y ejecuta `com.upeu.comarket.app.Main`.
 
-Dentro de:
+Desde `comarket-cli`:
 
-```text
-src/main/java/
+```bash
+mvn compile
+mvn exec:java
 ```
 
-crear:
+## 4. Entidades del dominio
 
-```text
-app
-modelo
-controlador
-dao
-util
-```
+El modelo mínimo tiene cuatro clases:
 
-Dentro de:
+| Clase | Responsabilidad |
+|---|---|
+| `Persona` | Reúne datos comunes: DNI, nombre y email. |
+| `Cliente` | Hereda de `Persona` y representa al cliente del negocio. |
+| `Usuario` | Hereda de `Persona` y representa al usuario interno del sistema. |
+| `Producto` | Entidad principal para registrar, listar, buscar, actualizar y eliminar. |
 
-```text
-src/main/resources/
-```
+## 5. Servicio CRUD
 
-crear:
-
-```text
-vista
-css
-img
-```
-
-Crear también una carpeta externa para la base de datos:
-
-```text
-data
-```
-
----
-
-## 4. Estructura final recomendada
-
-```text
-comarket-poo/
-├── pom.xml
-├── data/
-│   └── comarket.db
-└── src/
-    └── main/
-        ├── java/
-        │   ├── app/
-        │   │   └── Main.java
-        │   ├── modelo/
-        │   │   ├── Producto.java
-        │   │   ├── Venta.java
-        │   │   └── DetalleVenta.java
-        │   ├── controlador/
-        │   │   ├── ProductoController.java
-        │   │   └── VentaController.java
-        │   ├── dao/
-        │   │   ├── ConexionSQLite.java
-        │   │   ├── ProductoDAO.java
-        │   │   └── VentaDAO.java
-        │   └── util/
-        │       ├── AlertUtil.java
-        │       └── ValidacionUtil.java
-        └── resources/
-            ├── vista/
-            │   ├── ProductoView.fxml
-            │   └── VentaView.fxml
-            ├── css/
-            │   └── styles.css
-            └── img/
-                └── logo.png
-```
-
----
-
-## 5. Configurar JavaFX y SQLite en pom.xml
-
-Abrir:
-
-```text
-pom.xml
-```
-
-Agregar:
-
-```xml
-<dependencies>
-
-    <dependency>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-controls</artifactId>
-        <version>21</version>
-    </dependency>
-
-    <dependency>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-fxml</artifactId>
-        <version>21</version>
-    </dependency>
-
-    <dependency>
-        <groupId>org.xerial</groupId>
-        <artifactId>sqlite-jdbc</artifactId>
-        <version>3.50.3.0</version>
-    </dependency>
-
-</dependencies>
-```
-
----
-
-## 6. Configurar plugin JavaFX
-
-Agregar dentro de `pom.xml`:
-
-```xml
-<build>
-    <plugins>
-
-        <plugin>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-maven-plugin</artifactId>
-            <version>0.0.8</version>
-
-            <configuration>
-                <mainClass>
-                    app.Main
-                </mainClass>
-            </configuration>
-
-        </plugin>
-
-    </plugins>
-</build>
-```
-
----
-
-## 7. Configurar plugin GraalVM / GluonFX (opcional)
-
-Permite generar ejecutables nativos más adelante.
-
-Agregar dentro de `<plugins>`:
-
-```xml
-<plugin>
-    <groupId>com.gluonhq</groupId>
-    <artifactId>gluonfx-maven-plugin</artifactId>
-    <version>1.0.28</version>
-
-    <configuration>
-        <mainClass>app.Main</mainClass>
-
-        <reflectionList>
-            <list>controlador.ProductoController</list>
-            <list>controlador.VentaController</list>
-        </reflectionList>
-
-    </configuration>
-</plugin>
-```
-
----
-
-## 8. Crear Main.java
-
-Ruta:
-
-```text
-src/main/java/app/Main.java
-```
-
-Código:
+`ProductoService` define el contrato:
 
 ```java
-package app;
-
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-public class Main extends Application {
-
-    @Override
-    public void start(Stage stage) throws Exception {
-
-        FXMLLoader loader = new FXMLLoader(
-                Main.class.getResource("/vista/VentaView.fxml")
-        );
-
-        Scene scene = new Scene(loader.load());
-
-        scene.getStylesheets().add(
-                Main.class.getResource("/css/styles.css")
-                        .toExternalForm()
-        );
-
-        stage.setTitle("CoMarket");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
-    }
-}
+void registrar(Producto producto);
+List<Producto> listar();
+Producto buscarPorCodigo(String codigo);
+boolean actualizar(Producto producto);
+boolean eliminar(String codigo);
 ```
 
----
-
-## 9. Conexión SQLite recomendada
-
-Ruta:
-
-```text
-src/main/java/dao/ConexionSQLite.java
-```
-
-Código:
+`ProductoServiceImplMemoria` implementa el contrato usando:
 
 ```java
-package dao;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-
-public class ConexionSQLite {
-
-    private static final String URL =
-            "jdbc:sqlite:data/comarket.db";
-
-    public static Connection conectar() throws Exception {
-        return DriverManager.getConnection(URL);
-    }
-}
+private final List<Producto> productos = new ArrayList<>();
 ```
 
----
+Reglas mínimas:
 
-## 10. Ejecutar proyecto
+1. No registrar códigos repetidos.
+2. No permitir nombre vacío.
+3. No permitir precio negativo.
+4. No permitir stock negativo.
+5. Buscar, actualizar y eliminar por código.
 
-Desde IntelliJ IDEA:
+## 6. Menú de consola
+
+`Main` debe usar el contrato, no depender directamente de la implementación:
+
+```java
+ProductoService service = new ProductoServiceImplMemoria();
+```
+
+Opciones mínimas:
 
 ```text
-Run -> Main
+1. Registrar producto
+2. Listar productos
+3. Buscar producto
+4. Actualizar producto
+5. Eliminar producto
+6. Ver personas de prueba
+0. Salir
 ```
 
-o desde terminal:
+## 7. Pruebas mínimas
 
-```bash
-mvn javafx:run
-```
-
----
-
-## 11. Compilar nativo (opcional)
-
-```bash
-mvn gluonfx:build
-```
-
-Ejecutar nativo:
-
-```bash
-mvn gluonfx:nativerun
-```
-
----
-
-# Stack del curso
+Registrar:
 
 ```text
-Java
-+ JavaFX
-+ Scene Builder
-+ Controladores JavaFX
-+ DAO
-+ SQLite
-+ Maven
-+ IntelliJ IDEA
-+ GraalVM (opcional)
+Codigo: P001
+Nombre: Arroz
+Precio: 4.50
+Stock: 20
 ```
 
----
+Probar:
 
-# Organización conceptual
+1. Listar productos.
+2. Buscar `P001`.
+3. Actualizar precio y stock.
+4. Eliminar `P001`.
+5. Intentar registrar un código repetido.
+6. Intentar registrar precio negativo.
+
+## 8. Evidencia de entrega
+
+Entregar un PDF con:
+
+1. Captura de estructura de paquetes.
+2. Captura de `Producto`, `Persona`, `Cliente` y `Usuario`.
+3. Captura de `ProductoService`.
+4. Captura de `ProductoServiceImplMemoria`.
+5. Captura del menú ejecutándose.
+6. Evidencia de registrar, listar, buscar, actualizar y eliminar.
+7. Explicación breve de dónde se aplica encapsulamiento, herencia, interface, polimorfismo y `ArrayList`.
+
+Nombre sugerido:
 
 ```text
-modelo       -> clases y objetos
-vista        -> interfaces FXML
-controlador  -> eventos y acciones
-dao          -> persistencia SQLite
-util         -> reutilización
-resources    -> recursos externos
-data         -> base de datos local
+Taller01_Equipo##_ApellidoNombre.pdf
 ```
+
+## 9. Criterios de revisión
+
+| Criterio | Logro esperado |
+|---|---|
+| Entidades | `Producto`, `Persona`, `Cliente` y `Usuario` están encapsuladas. |
+| Herencia | `Cliente` y `Usuario` extienden de `Persona`. |
+| Servicio | `ProductoService` define el contrato CRUD. |
+| Polimorfismo | `Main` usa `ProductoService`, no la implementación directamente. |
+| Memoria | `ProductoServiceImplMemoria` usa `ArrayList<Producto>`. |
+| Menú | El CRUD se prueba desde consola. |
+| Validación | Hay controles básicos de datos obligatorios, precio, stock y código repetido. |

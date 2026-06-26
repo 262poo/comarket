@@ -278,4 +278,5 @@ Flujo de trabajo U2-U3:
 - [S14: Validacion y refinamiento](S14_Proyecto_Integrador_Refinamiento.md)
 - [S15: Sistema orientado a objetos integrado](S15_Documentacion_Demo.md)
 - [S16: Evaluación final individual](S16_Evaluacion_Final.md)
-- [Taller POO 01](POOTaller01.md)
+- [Taller POO 01: construir el producto U1 en consola](POOTaller01.md)
+- [Taller POO 02: construir el proyecto U2 con JavaFX, Maven y SQLite](POOTaller02.md)
