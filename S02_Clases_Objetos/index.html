@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../S02_Encapsulamiento_Constructores/">
+        <link rel="prev" href="../S01_Fundamentos_Estructuras_Datos/">
       
       
-        <link rel="next" href="../S04_Herencia_Polimorfismo/">
+        <link rel="next" href="../S03_Encapsulamiento_Relaciones/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>3 Asociacion, agregacion/composicion y colecciones - POO - CoMarket</title>
+        <title>2 Clases, objetos, constructores y comunicacion entre objetos - Programación Orientada a Objetos</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#s3-asociacion-agregacioncomposicion-y-colecciones" class="md-skip">
+        <a href="#s2-clases-objetos-constructores-y-comunicacion-entre-objetos" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -94,7 +94,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href=".." title="POO - CoMarket" class="md-header__button md-logo" aria-label="POO - CoMarket" data-md-component="logo">
+    <a href=".." title="Programación Orientada a Objetos" class="md-header__button md-logo" aria-label="Programación Orientada a Objetos" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -108,13 +108,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            POO - CoMarket
+            Programación Orientada a Objetos
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              3 Asociacion, agregacion/composicion y colecciones
+              2 Clases, objetos, constructores y comunicacion entre objetos
             
           </span>
         </div>
@@ -206,13 +206,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="POO - CoMarket" class="md-nav__button md-logo" aria-label="POO - CoMarket" data-md-component="logo">
+    <a href=".." title="Programación Orientada a Objetos" class="md-nav__button md-logo" aria-label="Programación Orientada a Objetos" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    POO - CoMarket
+    Programación Orientada a Objetos
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -305,42 +305,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../S01_Clases_Objetos/" class="md-nav__link">
+      <a href="../S01_Fundamentos_Estructuras_Datos/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    1 Clases, objetos y responsabilidad
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../S02_Encapsulamiento_Constructores/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    2 Encapsulamiento y constructores
+    1 Entorno, estructuras de control, metodos y estructuras de datos lineales
   
 
     
@@ -377,7 +349,7 @@
   <span class="md-ellipsis">
     
   
-    3 Asociacion, agregacion/composicion y colecciones
+    2 Clases, objetos, constructores y comunicacion entre objetos
   
 
     
@@ -395,7 +367,7 @@
   <span class="md-ellipsis">
     
   
-    3 Asociacion, agregacion/composicion y colecciones
+    2 Clases, objetos, constructores y comunicacion entre objetos
   
 
     
@@ -474,6 +446,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="1.4 Motivación de la sesión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-caso-sistema-de-dominio-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4.1 Caso: sistema de dominio inicial
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -527,10 +516,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-tipos-de-relacion" class="md-nav__link">
+  <a href="#23-flujo-de-trabajo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3 Tipos de relación
+        2.3 Flujo de trabajo
       
     </span>
   </a>
@@ -538,10 +527,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-errores-frecuentes" class="md-nav__link">
+  <a href="#24-errores-frecuentes-y-diagnostico" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4 Errores frecuentes
+        2.4 Errores frecuentes y diagnóstico
       
     </span>
   </a>
@@ -566,10 +555,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-identificar-entidades-del-dominio" class="md-nav__link">
+  <a href="#31-retomar-el-proyecto-java-simple" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1 Identificar entidades del dominio
+        3.1 Retomar el proyecto Java simple
       
     </span>
   </a>
@@ -577,10 +566,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-crear-entidades-base" class="md-nav__link">
+  <a href="#32-abstraer-objetos-tangibles-coche-y-persona" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2 Crear entidades base
+        3.2 Abstraer objetos tangibles: Coche y Persona
       
     </span>
   </a>
@@ -588,10 +577,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-representar-una-venta-con-composicion" class="md-nav__link">
+  <a href="#33-crear-la-clase-coche" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3 Representar una venta con composición
+        3.3 Crear la clase Coche
       
     </span>
   </a>
@@ -599,10 +588,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-probar-desde-main" class="md-nav__link">
+  <a href="#34-crear-la-clase-persona" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4 Probar desde Main
+        3.4 Crear la clase Persona
       
     </span>
   </a>
@@ -610,10 +599,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-preguntas-durante-la-practica" class="md-nav__link">
+  <a href="#35-crear-objetos-desde-main" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5 Preguntas durante la practica
+        3.5 Crear objetos desde Main
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-identificar-estado-comportamiento-y-responsabilidad-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Identificar estado, comportamiento y responsabilidad inicial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-ejemplo-2-producto-como-puente-hacia-el-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Ejemplo 2: Producto cómo puente hacia el dominio
       
     </span>
   </a>
@@ -802,6 +813,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../S03_Encapsulamiento_Relaciones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 Encapsulamiento, separacion de responsabilidades y relaciones entre objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../S04_Herencia_Polimorfismo/" class="md-nav__link">
         
   
@@ -809,7 +848,7 @@
   <span class="md-ellipsis">
     
   
-    4 Herencia y polimorfismo
+    4 Herencia, interfaces y polimorfismo
   
 
     
@@ -837,7 +876,7 @@
   <span class="md-ellipsis">
     
   
-    5 CRUD en memoria con ArrayList
+    5 Operaciones CRUD, validaciones y responsabilidad unica
   
 
     
@@ -865,7 +904,7 @@
   <span class="md-ellipsis">
     
   
-    6 Evaluacion unidad 1
+    6 Modelado orientado a objetos y gestion de datos en memoria
   
 
     
@@ -1094,7 +1133,7 @@
   <span class="md-ellipsis">
     
   
-    12 Evaluacion unidad 2
+    12 Aplicaciones de escritorio por capas y gestion de datos persistentes
   
 
     
@@ -1147,7 +1186,7 @@
   <span class="md-ellipsis">
     
   
-    3. Proyecto Integrador CoMarket
+    3. Proyecto Integrador
   
 
     
@@ -1163,7 +1202,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    3. Proyecto Integrador CoMarket
+    3. Proyecto Integrador
   
 
           </label>
@@ -1239,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    15 Sustentacion del proyecto
+    15 Sistema orientado a objetos integrado
   
 
     
@@ -1267,7 +1306,7 @@
   <span class="md-ellipsis">
     
   
-    16 Evaluacion final
+    16 Evaluacion final individual
   
 
     
@@ -1457,6 +1496,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="1.4 Motivación de la sesión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-caso-sistema-de-dominio-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4.1 Caso: sistema de dominio inicial
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1510,10 +1566,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-tipos-de-relacion" class="md-nav__link">
+  <a href="#23-flujo-de-trabajo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3 Tipos de relación
+        2.3 Flujo de trabajo
       
     </span>
   </a>
@@ -1521,10 +1577,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-errores-frecuentes" class="md-nav__link">
+  <a href="#24-errores-frecuentes-y-diagnostico" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4 Errores frecuentes
+        2.4 Errores frecuentes y diagnóstico
       
     </span>
   </a>
@@ -1549,10 +1605,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-identificar-entidades-del-dominio" class="md-nav__link">
+  <a href="#31-retomar-el-proyecto-java-simple" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1 Identificar entidades del dominio
+        3.1 Retomar el proyecto Java simple
       
     </span>
   </a>
@@ -1560,10 +1616,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-crear-entidades-base" class="md-nav__link">
+  <a href="#32-abstraer-objetos-tangibles-coche-y-persona" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2 Crear entidades base
+        3.2 Abstraer objetos tangibles: Coche y Persona
       
     </span>
   </a>
@@ -1571,10 +1627,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-representar-una-venta-con-composicion" class="md-nav__link">
+  <a href="#33-crear-la-clase-coche" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3 Representar una venta con composición
+        3.3 Crear la clase Coche
       
     </span>
   </a>
@@ -1582,10 +1638,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-probar-desde-main" class="md-nav__link">
+  <a href="#34-crear-la-clase-persona" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4 Probar desde Main
+        3.4 Crear la clase Persona
       
     </span>
   </a>
@@ -1593,10 +1649,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-preguntas-durante-la-practica" class="md-nav__link">
+  <a href="#35-crear-objetos-desde-main" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5 Preguntas durante la practica
+        3.5 Crear objetos desde Main
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-identificar-estado-comportamiento-y-responsabilidad-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Identificar estado, comportamiento y responsabilidad inicial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-ejemplo-2-producto-como-puente-hacia-el-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Ejemplo 2: Producto cómo puente hacia el dominio
       
     </span>
   </a>
@@ -1786,362 +1864,473 @@
 
 
 
-<h1 id="s3-asociacion-agregacioncomposicion-y-colecciones">S3 - Asociación, agregación/composición y colecciones<a class="headerlink" href="#s3-asociacion-agregacioncomposicion-y-colecciones" title="Permanent link">&para;</a></h1>
+<h1 id="s2-clases-objetos-constructores-y-comunicacion-entre-objetos">S2 - Clases, objetos, constructores y comunicación entre objetos<a class="headerlink" href="#s2-clases-objetos-constructores-y-comunicacion-entre-objetos" title="Permanent link">&para;</a></h1>
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
 <h3 id="11-proposito">1.1 Propósito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
-<p>Representar relaciones básicas entre objetos mediante asociación, agregación/composición y colecciones en memoria, antes de convertir esas ideas en operaciones CRUD.</p>
+<p>Construir clases simples del dominio, crear objetos mediante constructores, reconocer su estado y comportamiento, y observar la comunicación básica entre objetos desde una aplicación de consola.</p>
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
-<p>El estudiante identifica entidades del dominio, representa asociaciónes, agregación y composición, y usa <code>ArrayList</code> para manejar grupos de objetos relacionados.</p>
+<p>El estudiante diferencia clase y objeto, define atributos, métodos y constructores, crea instancias, explica la responsabilidad básica de una clase del dominio y reconoce cómo un objeto puede colaborar con otro.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>Modelo inicial con varias entidades relacionadas, asociaciones, agregación, composición, colecciones y pruebas desde <code>Main</code>.</p>
+<p>Proyecto Java simple con clases del dominio, objetos instanciados mediante constructores, comunicación básica entre objetos y salida por consola.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
-<p>En un sistema real no existe una sola clase. Un cliente puede tener ventas, una venta puede estar compuesta por detalles, y cada detalle referencia un producto. La Programación Orientada a Objetos ayuda a convertir esas relaciones del problema en clases conectadas.</p>
-<p>Pregunta guía:</p>
-<div class="highlight"><pre><span></span><code>Cómo pasamos de clases aisladas a un modelo de dominio con objetos relacionados?
-</code></pre></div>
+<h4 id="141-caso-sistema-de-dominio-inicial">1.4.1 Caso: sistema de dominio inicial<a class="headerlink" href="#141-caso-sistema-de-dominio-inicial" title="Permanent link">&para;</a></h4>
+<p>Una organización necesita ordenar la información de un proceso de negocio. Puede tratarse de ventas, biblioteca, reservas, inventario, matriculas, atencion de clientes u otro contexto definido por el docente.</p>
+<p>Antes de construir pantallas, base de datos o reportes, el sistema necesita representar objetos del dominio. En POO, esos objetos nacen a partir de clases.</p>
+<p>Preguntas para los estudiantes:</p>
+<ol>
+<li>Qué objetos reales aparecen en el dominio elegido?</li>
+<li>Qué datos necesita guardar uno de esos objetos?</li>
+<li>Qué comportamiento podría tener ese objeto?</li>
+<li>Por qué no conviene escribir todo directamente en <code>Main</code>?</li>
+</ol>
+<p>En esta sesión se retoman las estructuras trabajadas en S1 y se reorganizan como objetos del dominio, probandolos desde consola.</p>
 <h3 id="15-ubicacion-en-el-curso">1.5 Ubicación en el curso<a class="headerlink" href="#15-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Unidad: U1.</li>
-<li>Producto de unidad: aplicación de consola en memoria con entidades, relaciones, colecciones y operaciones principales.</li>
-<li>Avance de sesión: se construye el mapa inicial del dominio y se prepara la base para herencia, polimorfismo y CRUD.</li>
+<li>Unidad: U1 - Fundamentos de la Programación Orientada a Objetos.</li>
+<li>Producto de unidad: aplicación de consola en memoria con entidades, relaciones, colecciones y CRUD.</li>
+<li>Carpeta de trabajo: <code>comarket-cli</code>.</li>
+<li>Avance del producto en esta sesión: primeras clases del dominio, constructores y comunicación básica entre objetos probadas desde <code>Main</code>.</li>
 </ul>
+<p>Roadmap para elaborar el producto de la unidad:</p>
 <pre class="mermaid"><code>flowchart TB
-    S1["S1&lt;br/&gt;Entidad simple&lt;br/&gt;clase y objetos"]
-    S2["S2&lt;br/&gt;Entidad encapsulada&lt;br/&gt;constructores y validaciones"]
-    S3["S3&lt;br/&gt;Asociación, agregación/composición&lt;br/&gt;y colecciones"]
-    S4["S4&lt;br/&gt;Herencia y polimorfismo&lt;br/&gt;bloque aplicado"]
-    S5["S5&lt;br/&gt;Servicio en memoria&lt;br/&gt;CRUD con ArrayList"]
+    S1["S1&lt;br/&gt;Estructuras de control, métodos,&lt;br/&gt;arrays y ArrayList"]
+    S2["S2&lt;br/&gt;Coche, Persona y Producto&lt;br/&gt;clases, objetos y constructores"]
+    S3["S3&lt;br/&gt;Encapsulamiento, responsabilidades&lt;br/&gt;y relaciones entre objetos"]
+    S4["S4&lt;br/&gt;Herencia, interfaces&lt;br/&gt;y polimorfismo"]
+    S5["S5&lt;br/&gt;CRUD, validaciones&lt;br/&gt;y responsabilidad única"]
     S6["S6&lt;br/&gt;Producto U1&lt;br/&gt;consola ejecutable"]
 
     S1 --&gt; S2
     S2 --&gt; S3
-    S3 --&gt; S5
-    S3 -. refuerza modelo .-&gt; S4
-    S4 -. se aplica en .-&gt; S5
+    S3 --&gt; S4
+    S4 --&gt; S5
     S5 --&gt; S6
 
     classDef today fill:#ffe08a,stroke:#9a6b00,stroke-width:2px,color:#111;
-    class S3 today;</code></pre>
-<p>Hoy no se busca terminar todo el sistema. Se busca que el estudiante entienda qué el dominio se arma con varias clases, cada una con una responsabilidad, y qué las relaciones deben aparecer en el código de manera clara.</p>
+    class S2 today;</code></pre>
+<p>Hoy se trabaja con objetos tangibles del mundo real: <code>Coche</code> y <code>Persona</code>. Luego se usa <code>Producto</code> cómo ejemplo puente hacia el dominio de CoMarket. La ruta principal avanza hacia encapsulamiento, separación de responsabilidades, relaciones entre objetos y CRUD en memoria. La herencia, las interfaces y el polimorfismo se trabajan después, cuando el modelo ya tenga más contexto.</p>
 <h2 id="2-explica">2. Explica<a class="headerlink" href="#2-explica" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 25 min.</p>
 <h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Concepto</th>
-<th>Idea central</th>
-<th>Ejemplo</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Entidad</td>
-<td>Clase qué representa un elemento importante del dominio.</td>
-<td><code>Cliente</code>, <code>Producto</code>, <code>Venta</code>, <code>DetalleVenta</code></td>
-</tr>
-<tr>
-<td>Asociación</td>
-<td>Un objeto conoce o usa a otro objeto.</td>
-<td><code>DetalleVenta</code> usa un <code>Producto</code></td>
-</tr>
-<tr>
-<td>Agregación</td>
-<td>Un objeto agrupa otros, pero esos objetos pueden existir por separado.</td>
-<td><code>Cliente</code> relacionado con varias <code>Venta</code></td>
-</tr>
-<tr>
-<td>Composición</td>
-<td>Un objeto contiene partes qué dependen de el.</td>
-<td><code>Venta</code> contiene <code>DetalleVenta</code></td>
-</tr>
-<tr>
-<td>Colección</td>
-<td>Estructura para manejar varios objetos del mismo tipo.</td>
-<td><code>ArrayList&lt;Producto&gt;</code></td>
-</tr>
-</tbody>
-</table>
-<p>Regla métodológica de la sesión:</p>
-<div class="highlight"><pre><span></span><code>Las entidades representan información y comportamiento del dominio.
-Las relaciones muestran cómo colaboran los objetos.
-Las colecciones administran grupos de objetos.
-Main solo crea escenarios de prueba.
-Todavía no se separan servicios ni controladores.
-La asociación, agregación, composición y multiplicidad se representan en las entidades.
+<p>Una clase es un molde para crear objetos. Un objeto es una instancia concreta qué tiene estado y comportamiento.</p>
+<p>Ejemplo base: <code>Coche</code> y <code>Persona</code> permiten iniciar desde objetos tangibles. Un coche tiene marca y velocidad; una persona tiene nombre y puede conducir. Luego se usa <code>Producto</code> para observar cambios naturales de estado cómo precio y stock, preparando el trabajo de encapsulamiento y relaciones de S3.</p>
+<p>Conceptos de la sesión:</p>
+<ul>
+<li>Clase cómo molde.</li>
+<li>Objeto cómo instancia.</li>
+<li>Atributos cómo estado.</li>
+<li>Métodos cómo comportamiento.</li>
+<li>Constructores cómo forma inicial de crear objetos con datos.</li>
+<li>Abstracción inicial del dominio.</li>
+<li>Responsabilidad de clase.</li>
+<li>Comunicación entre objetos.</li>
+<li><code>Main</code> cómo punto de prueba inicial.</li>
+<li>Salida por consola cómo evidencia de ejecución.</li>
+</ul>
+<p>Alcance métodologico de S2:</p>
+<div class="highlight"><pre><span></span><code>En S2 se llega hasta clase, objeto, atributos, métodos, constructores,
+estado, comportamiento, abstracción inicial, responsabilidad de clase
+y comunicación básica entre objetos.
+
+El encapsulamiento formal, las validaciones internas y la separación
+por responsabilidades se desarrollan en S3.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>classDiagram
     class Main {
         main(String[] args)
     }
-
-    namespace entity {
-        class Cliente {
-            -String documento
-            -String nombre
-            -ArrayList~Venta~ ventas
-            agregarVenta(venta)
-        }
-        class Producto {
-            -String codigo
-            -String nombre
-            -double precio
-        }
-        class Venta {
-            -Cliente cliente
-            -ArrayList~DetalleVenta~ detalles
-            agregarDetalle(detalle)
-            calcularTotal()
-        }
-        class DetalleVenta {
-            -Producto producto
-            -int cantidad
-            calcularSubtotal()
-        }
+    class Coche {
+        marca
+        velocidad
+        acelerar()
+        frenar()
+        mostrarEstado()
+    }
+    class Persona {
+        nombre
+        conducir(coche)
+    }
+    class Producto {
+        codigo
+        nombre
+        precio
+        stock
+        mostrarInformacion()
+        actualizarPrecio()
+        aumentarStock()
     }
 
-    Main ..&gt; Cliente : prueba
-    Main ..&gt; Venta : prueba
-    Main ..&gt; Producto : prueba
-
-    Cliente "1" o-- "0..*" Venta : agrega
-    Venta "1" *-- "1..*" DetalleVenta : composición
-    DetalleVenta "*" --&gt; "1" Producto : asociación</code></pre>
-<p>Convencion del diagrama: <code>--&gt;</code> representa asociación, <code>o--</code> representa agregación, <code>*--</code> representa composición y <code>..&gt;</code> representa dependencia de prueba o uso temporal. En esta sesión la multiplicidad se trabaja dentro de las entidades; no se agregan services ni controllers al diagrama.</p>
-<h3 id="23-tipos-de-relacion">2.3 Tipos de relación<a class="headerlink" href="#23-tipos-de-relacion" title="Permanent link">&para;</a></h3>
-<p>Asociación:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Venta</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>La venta conoce al cliente que realiza la operación. Esta asociación ayuda a preparar el modelo para consultar ventas por cliente.</p>
-<p>Agregación:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Cliente</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Venta</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ventas</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>El cliente agrupa ventas. Para la practica inicial se entiende cómo una relación de agrupación: las ventas son objetos del sistema y pueden consultarse desde el cliente.</p>
-<p>Composición:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Venta</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">DetalleVenta</span><span class="o">&gt;</span><span class="w"> </span><span class="n">detalles</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>Los detalles existen para explicar una venta. Si se elimina la venta, sus detalles ya no tienen sentido dentro del sistema.</p>
-<h3 id="24-errores-frecuentes">2.4 Errores frecuentes<a class="headerlink" href="#24-errores-frecuentes" title="Permanent link">&para;</a></h3>
+    Main ..&gt; Coche : crea/prueba
+    Main ..&gt; Persona : crea/prueba
+    Main ..&gt; Producto : crea/prueba
+    Persona ..&gt; Coche : usa</code></pre>
+<p>Convencion del diagrama: cada clase muestra sus atributos y métodos principales; <code>..&gt;</code> indica dependencia o uso temporal desde la prueba.</p>
+<p>Regla practica:</p>
+<ul>
+<li><code>Main</code> se usa para probar.</li>
+<li>La clase representa caracteristicas y acciones de un objeto del mundo real.</li>
+<li>Los objetos son instancias concretas de la clase.</li>
+<li>Los atributos guardan estado.</li>
+<li>Los métodos muestran o procesan comportamiento propio del objeto.</li>
+<li>La abstracción consiste en elegir solo los datos y comportamientos necesarios para está primera versión.</li>
+</ul>
+<h3 id="23-flujo-de-trabajo">2.3 Flujo de trabajo<a class="headerlink" href="#23-flujo-de-trabajo" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Retomar el proyecto Java simple preparado en S1.</li>
+<li>Abstraer objetos tangibles del mundo real.</li>
+<li>Definir la responsabilidad inicial de la clase.</li>
+<li>Elegir atributos y métodos coherentes con sus caracteristicas y acciones.</li>
+<li>Crear constructores para inicializar objetos.</li>
+<li>Crear <code>Coche</code> y <code>Persona</code> para observar colaboracion simple.</li>
+<li>Crear <code>Producto</code> cómo ejemplo puente hacia el dominio.</li>
+<li>Ejecutar el programa por consola.</li>
+<li>Registrar evidencia y explicar responsabilidades.</li>
+</ol>
+<h3 id="24-errores-frecuentes-y-diagnostico">2.4 Errores frecuentes y diagnóstico<a class="headerlink" href="#24-errores-frecuentes-y-diagnostico" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Error</th>
-<th>Corrección esperada</th>
+<th>Problema</th>
+<th>Causa probable</th>
+<th>Solución</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Poner todas las variables en <code>Main</code>.</td>
-<td>Crear entidades con responsabilidades claras.</td>
+<td>No ejecuta <code>Main</code></td>
+<td>Falta método <code>public static void main</code></td>
+<td>Revisar firma del método</td>
 </tr>
 <tr>
-<td>Usar solo una clase para todo el dominio.</td>
-<td>Separar <code>Cliente</code>, <code>Producto</code>, <code>Venta</code>, <code>DetalleVenta</code> y otros conceptos necesarios.</td>
+<td>No reconoce la clase</td>
+<td>Archivo, clase o paquete no coincide</td>
+<td>Revisar nombre de archivo y paquete</td>
 </tr>
 <tr>
-<td>Confundir una lista con una entidad.</td>
-<td>La lista administra varios objetos; la entidad representa un objeto del dominio.</td>
+<td>Los datos salen en cero o <code>null</code></td>
+<td>No se asignaron valores al objeto</td>
+<td>Inicializar atributos antes de imprimir</td>
 </tr>
 <tr>
-<td>Crear relaciones sin sentido.</td>
-<td>Cada relación debe responder a una regla del problema.</td>
+<td>Todo está en <code>Main</code></td>
+<td>No se separo la responsabilidad</td>
+<td>Mover datos y comportamiento a una clase</td>
 </tr>
 <tr>
-<td>Hacer CRUD completo antes de modelar.</td>
-<td>Primero se entiende el dominio; luego se agregan operaciones.</td>
+<td>Salida poco clara</td>
+<td><code>Main</code> no imprime datos suficientes</td>
+<td>Mejorar la salida desde <code>Main</code> sin meter consola en la entidad</td>
+</tr>
+<tr>
+<td>La clase tiene métodos de muchas cosas</td>
+<td>No se identificaron bien sus caracteristicas y acciones</td>
+<td>Volver a la abstracción inicial del objeto</td>
+</tr>
+<tr>
+<td>Se usan <code>private</code>, getters/setters o validaciones complejas antes de tiempo</td>
+<td>Se adelanto contenido de S3</td>
+<td>En S2 usar constructores simples; el encapsulamiento formal queda para S3</td>
 </tr>
 </tbody>
 </table>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
+<p>En el laboratorio, el docente guía la creacion de objetos del dominio y los estudiantes verifican el resultado ejecutando el programa desde consola.</p>
 <p>Tiempo: 2h.</p>
-<h3 id="31-identificar-entidades-del-dominio">3.1 Identificar entidades del dominio<a class="headerlink" href="#31-identificar-entidades-del-dominio" title="Permanent link">&para;</a></h3>
-<p>Parte de un caso simple de comercio:</p>
-<div class="highlight"><pre><span></span><code>Un sistema registra clientes, productos y ventas.
-Cada venta pertenece a un cliente.
-Cada venta tiene uno o más detalles.
-Cada detalle indica un producto, cantidad y precio.
+<h3 id="31-retomar-el-proyecto-java-simple">3.1 Retomar el proyecto Java simple<a class="headerlink" href="#31-retomar-el-proyecto-java-simple" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> carpeta de trabajo con estructura inicial.</p>
+<ol>
+<li>Crear una carpeta para el proyecto.</li>
+<li>Abrir la carpeta en VS Code.</li>
+<li>Crear una carpeta <code>src</code>.</li>
+<li>Crear el archivo <code>Main.java</code>.</li>
+<li>Ejecutar un mensaje simple para comprobar el entorno.</li>
+</ol>
+<p>Ejemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Proyecto iniciado&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>Entidades iniciales:</p>
-<ul>
-<li><code>Cliente</code></li>
-<li><code>Producto</code></li>
-<li><code>Venta</code></li>
-<li><code>DetalleVenta</code></li>
-</ul>
-<p>Ubicación sugerida:</p>
-<div class="highlight"><pre><span></span><code>src/main/java/entity/Cliente.java
-src/main/java/entity/Producto.java
-src/main/java/entity/Venta.java
-src/main/java/entity/DetalleVenta.java
+<h3 id="32-abstraer-objetos-tangibles-coche-y-persona">3.2 Abstraer objetos tangibles: Coche y Persona<a class="headerlink" href="#32-abstraer-objetos-tangibles-coche-y-persona" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> dos clases candidatas identificadas desde el mundo real.</p>
+<p>Antes de escribir código, observar objetos tangibles. Para iniciar, se usan <code>Coche</code> y <code>Persona</code> porque permiten distinguir caracteristicas, acciones y colaboracion entre objetos.</p>
+<p>Completar una tabla de abstracción inicial:</p>
+<table>
+<thead>
+<tr>
+<th>Clase</th>
+<th>Caracteristicas</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Coche</code></td>
+<td>marca, velocidad</td>
+<td>acelerar, frenar, mostrar estado</td>
+</tr>
+<tr>
+<td><code>Persona</code></td>
+<td>nombre</td>
+<td>conducir</td>
+</tr>
+</tbody>
+</table>
+<p>En S2, responsabilidad de clase no significa responsabilidad legal, vial o moral. Significa identificar qué caracteristicas y qué acciones le corresponden a una clase dentro del programa.</p>
+<p>Ejemplo:</p>
+<div class="highlight"><pre><span></span><code>La Persona decide conducir.
+El Coche ejecuta acelerar o frenar y cambia su propia velocidad.
 </code></pre></div>
-<h3 id="32-crear-entidades-base">3.2 Crear entidades base<a class="headerlink" href="#32-crear-entidades-base" title="Permanent link">&para;</a></h3>
-<p>Ejemplo de <code>Producto</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Producto</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">precio</span><span class="p">;</span>
+<p>Nota métodológica:</p>
+<div class="highlight"><pre><span></span><code>En S2 todavía no se aplica SOLID de manera formal.
+Tampoco se trabaja encapsulamiento como tema fuerte.
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Producto</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">precio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+El objetivo es entender clase, objeto, atributos, métodos, estado,
+comportamiento, constructores, responsabilidad inicial y abstracción.
+</code></pre></div>
+<h3 id="33-crear-la-clase-coche">3.3 Crear la clase Coche<a class="headerlink" href="#33-crear-la-clase-coche" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> clase tangible con atributos, estado y métodos.</p>
+<p>Crear <code>Coche.java</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Coche</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">marca</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">velocidad</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Coche</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">marca</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">velocidadInicial</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">marca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marca</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">velocidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">velocidadInicial</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">acelerar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">velocidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">velocidad</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">frenar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">velocidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">velocidad</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">mostrarEstado</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">marca</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - Velocidad: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">velocidad</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>En este punto ya aparecen los primeros conceptos:</p>
+<table>
+<thead>
+<tr>
+<th>Elemento del código</th>
+<th>Concepto POO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public class Coche</code></td>
+<td>Clase</td>
+</tr>
+<tr>
+<td><code>marca</code>, <code>velocidad</code></td>
+<td>Atributos</td>
+</tr>
+<tr>
+<td><code>Coche(String marca, int velocidadInicial)</code></td>
+<td>Constructor</td>
+</tr>
+<tr>
+<td>Valor actual de <code>velocidad</code></td>
+<td>Estado</td>
+</tr>
+<tr>
+<td><code>acelerar()</code> y <code>frenar()</code></td>
+<td>Métodos</td>
+</tr>
+<tr>
+<td>Cambiar la velocidad</td>
+<td>Comportamiento</td>
+</tr>
+</tbody>
+</table>
+<h3 id="34-crear-la-clase-persona">3.4 Crear la clase Persona<a class="headerlink" href="#34-crear-la-clase-persona" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> segunda clase tangible qué usa un objeto <code>Coche</code>.</p>
+<p>Crear <code>Persona.java</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Persona</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Persona</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">conducir</span><span class="p">(</span><span class="n">Coche</span><span class="w"> </span><span class="n">coche</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">nombre</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; conduce el coche&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">coche</span><span class="p">.</span><span class="na">acelerar</span><span class="p">();</span>
+<span class="w">        </span><span class="n">coche</span><span class="p">.</span><span class="na">frenar</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Lectura métodológica:</p>
+<div class="highlight"><pre><span></span><code>Persona no cambia directamente la velocidad.
+Persona usa acciones disponibles del Coche.
+Coche modifica su propio estado.
+</code></pre></div>
+<p>La idea de pedales o volante puede usarse cómo analogia: la persona no manipula todo el motor; interactua mediante acciones visibles. La interface formal de Java se trabajara después, en S4.</p>
+<h3 id="35-crear-objetos-desde-main">3.5 Crear objetos desde Main<a class="headerlink" href="#35-crear-objetos-desde-main" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> objetos <code>coche1</code> y <code>persona1</code> instanciados y visibles por consola.</p>
+<p>Actualizar <code>Main.java</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Coche</span><span class="w"> </span><span class="n">coche1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Coche</span><span class="p">(</span><span class="s">&quot;Toyota&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Persona</span><span class="w"> </span><span class="n">persona1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Persona</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">coche1</span><span class="p">.</span><span class="na">mostrarEstado</span><span class="p">();</span>
+<span class="w">        </span><span class="n">persona1</span><span class="p">.</span><span class="na">conducir</span><span class="p">(</span><span class="n">coche1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">coche1</span><span class="p">.</span><span class="na">mostrarEstado</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>En este punto se observa la diferencia entre clase y objeto:</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Explicacion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Coche</code></td>
+<td>Molde o definicion general</td>
+</tr>
+<tr>
+<td><code>coche1</code></td>
+<td>Objeto creado desde la clase <code>Coche</code> mediante constructor</td>
+</tr>
+<tr>
+<td><code>Persona</code></td>
+<td>Molde o definicion general</td>
+</tr>
+<tr>
+<td><code>persona1</code></td>
+<td>Objeto creado desde la clase <code>Persona</code> mediante constructor</td>
+</tr>
+<tr>
+<td>Estado de <code>coche1</code></td>
+<td>Toyota, velocidad actual</td>
+</tr>
+</tbody>
+</table>
+<h3 id="36-identificar-estado-comportamiento-y-responsabilidad-inicial">3.6 Identificar estado, comportamiento y responsabilidad inicial<a class="headerlink" href="#36-identificar-estado-comportamiento-y-responsabilidad-inicial" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> explicacion de cómo los objetos guardan datos, ejecutan acciones y colaboran.</p>
+<p>Analizar el código creado:</p>
+<div class="highlight"><pre><span></span><code>El estado de coche1 cambia cuando se ejecuta acelerar o frenar.
+El comportamiento está en los métodos de cada clase.
+La responsabilidad inicial se entiende como características y acciones
+que le corresponden a cada clase.
+</code></pre></div>
+<p>Completar:</p>
+<table>
+<thead>
+<tr>
+<th>Clase</th>
+<th>Sabe</th>
+<th>Puede</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Coche</code></td>
+<td>marca, velocidad</td>
+<td>acelerar, frenar, mostrar estado</td>
+</tr>
+<tr>
+<td><code>Persona</code></td>
+<td>nombre</td>
+<td>conducir un coche</td>
+</tr>
+</tbody>
+</table>
+<h3 id="37-ejemplo-2-producto-como-puente-hacia-el-dominio">3.7 Ejemplo 2: Producto cómo puente hacia el dominio<a class="headerlink" href="#37-ejemplo-2-producto-como-puente-hacia-el-dominio" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> clase <code>Producto</code> simple con constructor, estado cambiante y comportamiento propio.</p>
+<p>Ahora se usa <code>Producto</code> cómo segundo ejemplo porque conecta los objetos tangibles con el dominio comercial de CoMarket.</p>
+<p>Crear <code>Producto.java</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Producto</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">;</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">precio</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">stock</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Producto</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">precio</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">stock</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">codigo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">codigo</span><span class="p">;</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">precio</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stock</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getCodigo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">codigo</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">mostrarInformacion</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">codigo</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - S/ &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">precio</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - Stock: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stock</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getNombre</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">actualizarPrecio</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">nuevoPrecio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuevoPrecio</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getPrecio</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">precio</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>Ejemplo de <code>Cliente</code> con agregación:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
-
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Cliente</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Venta</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ventas</span><span class="p">;</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Cliente</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">documento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">documento</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">ventas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">agregarVenta</span><span class="p">(</span><span class="n">Venta</span><span class="w"> </span><span class="n">venta</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">ventas</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">venta</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Venta</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getVentas</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ventas</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">aumentarStock</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">cantidad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stock</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cantidad</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="33-representar-una-venta-con-composicion">3.3 Representar una venta con composición<a class="headerlink" href="#33-representar-una-venta-con-composicion" title="Permanent link">&para;</a></h3>
-<p><code>DetalleVenta</code> representa una parte de la venta:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DetalleVenta</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cantidad</span><span class="p">;</span>
+<p>Probar desde <code>Main</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Producto</span><span class="w"> </span><span class="n">producto1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Producto</span><span class="p">(</span><span class="s">&quot;P001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Teclado&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">80.0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">DetalleVenta</span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cantidad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">producto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">producto</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cantidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cantidad</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">calcularSubtotal</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">producto</span><span class="p">.</span><span class="na">getPrecio</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cantidad</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
+<span class="n">producto1</span><span class="p">.</span><span class="na">mostrarInformacion</span><span class="p">();</span>
+<span class="n">producto1</span><span class="p">.</span><span class="na">actualizarPrecio</span><span class="p">(</span><span class="mf">75.0</span><span class="p">);</span>
+<span class="n">producto1</span><span class="p">.</span><span class="na">aumentarStock</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="n">producto1</span><span class="p">.</span><span class="na">mostrarInformacion</span><span class="p">();</span>
 </code></pre></div>
-<p><code>Venta</code> contiene sus detalles:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
-
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Venta</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">DetalleVenta</span><span class="o">&gt;</span><span class="w"> </span><span class="n">detalles</span><span class="p">;</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Venta</span><span class="p">(</span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cliente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cliente</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">detalles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">agregarDetalle</span><span class="p">(</span><span class="n">DetalleVenta</span><span class="w"> </span><span class="n">detalle</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">detalles</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">detalle</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">calcularTotal</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">DetalleVenta</span><span class="w"> </span><span class="n">detalle</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">detalles</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">total</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">detalle</span><span class="p">.</span><span class="na">calcularSubtotal</span><span class="p">();</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">total</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
+<p>Lectura esperada:</p>
+<div class="highlight"><pre><span></span><code>producto1 sigue siendo el mismo objeto.
+Lo que cambió fue su estado: precio y stock.
+En S3 se controlara mejor este cambio con encapsulamiento,
+validaciones e invariantes simples.
 </code></pre></div>
-<h3 id="34-probar-desde-main">3.4 Probar desde Main<a class="headerlink" href="#34-probar-desde-main" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cliente</span><span class="p">(</span><span class="s">&quot;DNI001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Ana Torres&quot;</span><span class="p">);</span>
-
-<span class="w">        </span><span class="n">Producto</span><span class="w"> </span><span class="n">teclado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Producto</span><span class="p">(</span><span class="s">&quot;P001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Teclado&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">80.0</span><span class="p">);</span>
-<span class="w">        </span><span class="n">Producto</span><span class="w"> </span><span class="n">mouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Producto</span><span class="p">(</span><span class="s">&quot;P002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mouse&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">45.0</span><span class="p">);</span>
-
-<span class="w">        </span><span class="n">Venta</span><span class="w"> </span><span class="n">venta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Venta</span><span class="p">(</span><span class="n">cliente</span><span class="p">);</span>
-<span class="w">        </span><span class="n">venta</span><span class="p">.</span><span class="na">agregarDetalle</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DetalleVenta</span><span class="p">(</span><span class="n">teclado</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
-<span class="w">        </span><span class="n">venta</span><span class="p">.</span><span class="na">agregarDetalle</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DetalleVenta</span><span class="p">(</span><span class="n">mouse</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">));</span>
-<span class="w">        </span><span class="n">cliente</span><span class="p">.</span><span class="na">agregarVenta</span><span class="p">(</span><span class="n">venta</span><span class="p">);</span>
-
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Total: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">venta</span><span class="p">.</span><span class="na">calcularTotal</span><span class="p">());</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ventas del cliente: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cliente</span><span class="p">.</span><span class="na">getVentas</span><span class="p">().</span><span class="na">size</span><span class="p">());</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<h3 id="35-preguntas-durante-la-practica">3.5 Preguntas durante la practica<a class="headerlink" href="#35-preguntas-durante-la-practica" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Qué clases son entidades del dominio?</li>
-<li>Qué relación existe entre <code>Venta</code> y <code>DetalleVenta</code>?</li>
-<li>Por qué <code>DetalleVenta</code> depende de <code>Venta</code>?</li>
-<li>Dónde se ubica la colección en este modelo?</li>
-<li>Qué relación se representa con <code>ArrayList</code>?</li>
-</ol>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
-<p>Fuera del aula, cada estudiante consolida el aprendizaje ampliando el modelo del dominio y preparando una evidencia individual.</p>
+<p>Fuera del aula, cada estudiante consolida el aprendizaje creando clases propias del dominio y preparando una evidencia individual.</p>
 <p>Tiempo: 2h fuera del aula.</p>
 <h3 id="41-plantilla-de-evidencia-individual">4.1 Plantilla de evidencia individual<a class="headerlink" href="#41-plantilla-de-evidencia-individual" title="Permanent link">&para;</a></h3>
 <p>Entrega un PDF con el siguiente nombre:</p>
-<div class="highlight"><pre><span></span><code>S03_Equipo##_ApellidoNombre.pdf
+<div class="highlight"><pre><span></span><code>S02_Equipo##_ApellidoNombre.pdf
 </code></pre></div>
 <p>Ejemplo:</p>
-<div class="highlight"><pre><span></span><code>S03_Equipo03_QuispeAna.pdf
+<div class="highlight"><pre><span></span><code>S02_Equipo03_QuispeAna.pdf
 </code></pre></div>
 <p>El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.</p>
 <h4 id="411-datos-del-estudiante">4.1.1 Datos del estudiante<a class="headerlink" href="#411-datos-del-estudiante" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Nombre:</li>
 <li>Equipo:</li>
-<li>Sesión: S03 - Asociación, agregación/composición y colecciones</li>
+<li>Sesión: S02 - Clases, objetos, constructores y comunicación entre objetos</li>
 <li>Rol o aporte realizado:</li>
 <li>Link de GitHub:</li>
 </ul>
 <h4 id="412-trabajo-autonomo-realizado">4.1.2 Trabajo autónomo realizado<a class="headerlink" href="#412-trabajo-autonomo-realizado" title="Permanent link">&para;</a></h4>
 <p>Completa y evidencia estas tareas:</p>
 <ol>
-<li>Ampliar el modelo con una relación adicional.</li>
-<li>Crear o mejorar al menos tres entidades relacionadas.</li>
-<li>Representar una asociación, agregación o composición.</li>
-<li>Usar <code>ArrayList</code> para una relación de uno a muchos.</li>
-<li>Probar desde <code>Main</code> la creación de objetos relacionados.</li>
-<li>Explicar qué relación existe entre las clases.</li>
+<li>Crear otro par de clases tangibles que colaboren entre sí, por ejemplo <code>Estudiante</code> y <code>Cuaderno</code>, <code>Jugador</code> y <code>Pelota</code>, o <code>Vendedor</code> y <code>Pedido</code>.</li>
+<li>Crear una clase simple similar a <code>Producto</code> que pueda prepararse para encapsulamiento en S3.</li>
+<li>Instanciar objetos desde <code>Main</code>.</li>
+<li>Mostrar por consola el estado inicial de al menos un objeto.</li>
+<li>Ejecutar métodos que cambien o muestren comportamiento.</li>
+<li>Explicar qué datos y acciones pertenecen a cada clase.</li>
+<li>Explicar qué parte del código demuestra abstracción inicial.</li>
 </ol>
-<p>Puedes elegir una de estas opciones:</p>
-<ul>
-<li><code>Categoria</code> relacionada con varios <code>Producto</code>.</li>
-<li><code>Empleado</code> relacionado con varias <code>Venta</code>.</li>
-<li><code>Cliente</code> relacionado con varias <code>Venta</code>.</li>
-<li><code>Venta</code> relacionada con varios <code>DetalleVenta</code>.</li>
-</ul>
 <h4 id="413-evidencia-tecnica">4.1.3 Evidencia técnica<a class="headerlink" href="#413-evidencia-tecnica" title="Permanent link">&para;</a></h4>
 <p>Incluye capturas o salidas de consola con una breve explicación debajo de cada una:</p>
 <ul>
-<li>Diagrama simple del modelo.</li>
-<li>Código de al menos tres entidades relacionadas.</li>
-<li>Uso de una colección con <code>ArrayList</code>.</li>
-<li>Salida de consola mostrando objetos relacionados.</li>
-<li>Explicación de la relación modelada.</li>
+<li>Código de dos clases tangibles.</li>
+<li>Código de una clase puente similar a <code>Producto</code>.</li>
+<li>Código de prueba desde <code>Main</code>.</li>
+<li>Salida de consola antes y después de ejecutar un método.</li>
+<li>Tabla breve con clase, atributos, métodos y responsabilidad inicial.</li>
 </ul>
 <h4 id="414-error-o-hallazgo">4.1.4 Error o hallazgo<a class="headerlink" href="#414-error-o-hallazgo" title="Permanent link">&para;</a></h4>
 <p>Describe al menos un error, diferencia o hallazgo técnico:</p>
@@ -2152,24 +2341,25 @@ src/main/java/entity/DetalleVenta.java
 </ul>
 <p>Ejemplos válidos:</p>
 <ul>
-<li>Una relación no tenía sentido en el dominio.</li>
-<li>Se confundió una colección con una entidad.</li>
-<li>Una lista no fue inicializada antes de usarla.</li>
+<li>El archivo no coincidía con el nombre de la clase.</li>
+<li><code>Main</code> no encontraba una clase.</li>
+<li>Un atributo salía <code>null</code> o <code>0</code> porque no fue inicializado.</li>
+<li>Un método no cambiaba el estado esperado.</li>
 </ul>
 <h4 id="415-reflexion-tecnica-breve">4.1.5 Reflexión técnica breve<a class="headerlink" href="#415-reflexion-tecnica-breve" title="Permanent link">&para;</a></h4>
 <p>Responde en 5 a 8 líneas:</p>
-<div class="highlight"><pre><span></span><code>Por qué un sistema orientado a objetos necesita relaciones entre clases y no solo clases aisladas?
+<div class="highlight"><pre><span></span><code>Por qué una clase no debe ser solo una lista de variables?
 </code></pre></div>
 <h3 id="42-criterios-minimos-de-aceptacion">4.2 Criterios mínimos de aceptación<a class="headerlink" href="#42-criterios-minimos-de-aceptacion" title="Permanent link">&para;</a></h3>
 <p>La evidencia individual se considera completa si:</p>
 <ul>
-<li>El archivo respeta el nombre <code>S03_Equipo##_ApellidoNombre.pdf</code>.</li>
+<li>El archivo respeta el nombre <code>S02_Equipo##_ApellidoNombre.pdf</code>.</li>
 <li>Incluye evidencias técnicas legibles.</li>
-<li>Muestra al menos tres entidades relacionadas.</li>
-<li>Usa <code>ArrayList</code> para administrar varios objetos.</li>
-<li>Representa una relación de uno a muchos.</li>
-<li>Incluye una prueba desde <code>Main</code>.</li>
-<li>Explica si la relación es asociación, agregación o composición.</li>
+<li>Muestra al menos dos clases tangibles que colaboran.</li>
+<li>Muestra una clase puente preparada para S3.</li>
+<li>Muestra objetos creados desde <code>Main</code>.</li>
+<li>Muestra salida de consola.</li>
+<li>Explica responsabilidad inicial, estado y comportamiento.</li>
 <li>No contiene solo pantallazos: cada evidencia tiene una descripción breve.</li>
 </ul>
 <h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
@@ -2178,35 +2368,41 @@ src/main/java/entity/DetalleVenta.java
 <h3 id="51-resultados-esperados">5.1 Resultados esperados<a class="headerlink" href="#51-resultados-esperados" title="Permanent link">&para;</a></h3>
 <p>Al finalizar la sesión, el estudiante debe demostrar que:</p>
 <ul>
-<li>El modelo tiene varias entidades del dominio.</li>
-<li>Las relaciones no están sueltas; aparecen representadas en atributos o colecciones.</li>
-<li>Hay al menos una relación de uno a muchos.</li>
-<li>Se usa <code>ArrayList</code> para administrar varios objetos.</li>
-<li>La colección está ubicada dentro de una entidad del dominio.</li>
-<li><code>Main</code> solo arma escenarios de prueba y no concentra toda la lógica.</li>
+<li>El proyecto ejecuta desde VS Code.</li>
+<li>Existen clases tangibles como <code>Coche</code> y <code>Persona</code>, o equivalentes del dominio elegido.</li>
+<li>Existe una clase puente como <code>Producto</code>, preparada para S3.</li>
+<li>Se crean objetos desde <code>Main</code>.</li>
+<li>La clase tiene atributos que representan estado.</li>
+<li>La clase tiene métodos que representan comportamiento básico.</li>
+<li>La salida por consola demuestra estado y comportamiento del objeto.</li>
+<li>El estudiante explica qué datos y comportamientos fueron elegidos por abstracción inicial.</li>
+<li>El estudiante explica qué responsabilidad tiene cada clase.</li>
+<li>Los métodos implementados corresponden a las acciones iniciales de la clase.</li>
+<li>No se usan atributos <code>private</code>, getters/setters ni validaciones complejas como tema central; eso queda para S3.</li>
 </ul>
 <h3 id="52-evidencia-del-producto-de-sesion">5.2 Evidencia del producto de sesión<a class="headerlink" href="#52-evidencia-del-producto-de-sesion" title="Permanent link">&para;</a></h3>
 <p>Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.</p>
 <p>Nombre del archivo:</p>
-<div class="highlight"><pre><span></span><code>S03_Equipo##_ApellidoNombre.pdf
+<div class="highlight"><pre><span></span><code>S02_Equipo##_ApellidoNombre.pdf
 </code></pre></div>
 <p>La evidencia debe demostrar:</p>
 <ul>
 <li>Producto de sesión construido.</li>
 <li>Aporte individual verificable.</li>
-<li>Modelo con entidades relacionadas.</li>
 <li>Pruebas por consola realizadas.</li>
 <li>Reflexión técnica breve.</li>
 </ul>
 <p>La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.</p>
 <h3 id="53-preguntas-de-defensa-y-reflexion">5.3 Preguntas de defensa y reflexión<a class="headerlink" href="#53-preguntas-de-defensa-y-reflexion" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Qué diferencia hay entre entidad y colección?</li>
-<li>Qué relación modelaste como asociación?</li>
-<li>Qué relación modelaste como agregación o composición?</li>
-<li>Por qué una venta necesita detalles?</li>
-<li>En qué entidad está ubicada la colección?</li>
-<li>Qué parte de este modelo se podría convertir en CRUD en S5?</li>
+<li>Cuál es la diferencia entre clase y objeto?</li>
+<li>Qué representa el estado de un objeto?</li>
+<li>Qué significa responsabilidad de clase en S2?</li>
+<li>Qué método representa comportamiento en tu clase?</li>
+<li>Qué datos dejaste fuera por abstracción inicial?</li>
+<li>Qué características y acciones identificaste en tu clase?</li>
+<li>Qué responsabilidad tiene <code>Main</code> en esta sesión?</li>
+<li>Qué cambiará en S3 cuando aparezca encapsulamiento?</li>
 </ol>
 <h3 id="54-rubrica-de-evaluacion">5.4 Rúbrica de evaluación<a class="headerlink" href="#54-rubrica-de-evaluacion" title="Permanent link">&para;</a></h3>
 <table>
@@ -2223,39 +2419,39 @@ src/main/java/entity/DetalleVenta.java
 </thead>
 <tbody>
 <tr>
-<td>1. Modelo de dominio</td>
+<td>1. Clases y objetos</td>
 <td style="text-align: right;">2</td>
-<td>Presenta entidades coherentes y relacionadas con claridad.</td>
-<td>Presenta entidades principales correctas.</td>
-<td>Modelo incompleto o poco claro.</td>
-<td>No evidencia modelo de dominio.</td>
+<td>Define clases claras, crea objetos y explica la diferencia con precisión.</td>
+<td>Define clases y crea objetos funcionales.</td>
+<td>Presenta clases incompletas o confunde clase con objeto.</td>
+<td>No evidencia clases y objetos funcionales.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>2. Relaciones entre objetos</td>
+<td>2. Estado y comportamiento</td>
 <td style="text-align: right;">2</td>
-<td>Distingue y justifica asociación, agregación o composición.</td>
-<td>Representa al menos una relación correcta.</td>
-<td>Relación parcial o confusa.</td>
-<td>No evidencia relaciones.</td>
+<td>Atributos y métodos representan correctamente estado y comportamiento.</td>
+<td>Atributos y métodos principales son coherentes.</td>
+<td>Hay atributos o métodos poco claros.</td>
+<td>No evidencia estado ni comportamiento.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>3. Colecciones</td>
+<td>3. Responsabilidad y abstracción</td>
 <td style="text-align: right;">2</td>
-<td>Usa <code>ArrayList</code> correctamente en una relación de uno a muchos.</td>
-<td>Usa colección funcional.</td>
-<td>Uso parcial o mal ubicado.</td>
-<td>No usa colecciones.</td>
+<td>Explica qué pertenece a cada clase y qué se dejó fuera por abstracción.</td>
+<td>Explica responsabilidad básica de las clases.</td>
+<td>Explicación parcial o confusa.</td>
+<td>No explica responsabilidad ni abstracción.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
 <td>4. Prueba desde <code>Main</code></td>
 <td style="text-align: right;">2</td>
-<td><code>Main</code> crea un escenario claro sin reemplazar el modelo.</td>
-<td>Prueba funcional básica.</td>
-<td>Prueba parcial o confusa.</td>
-<td>No prueba el modelo.</td>
+<td><code>Main</code> crea objetos, ejecuta métodos y muestra salida clara.</td>
+<td><code>Main</code> prueba el flujo principal.</td>
+<td>Prueba incompleta o salida poco clara.</td>
+<td>No hay prueba desde <code>Main</code>.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>

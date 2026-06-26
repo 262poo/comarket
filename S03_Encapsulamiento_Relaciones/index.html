@@ -1,0 +1,2813 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Libro digital de apoyo para el curso de Programación Orientada a Objetos - UPeU 2026">
+      
+      
+        <meta name="author" content="UPeU">
+      
+      
+      
+        <link rel="prev" href="../S02_Clases_Objetos/">
+      
+      
+        <link rel="next" href="../S04_Herencia_Polimorfismo/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>3 Encapsulamiento, separacion de responsabilidades y relaciones entre objetos - Programación Orientada a Objetos</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#s3-encapsulamiento-separacion-de-responsabilidades-y-relaciones-entre-objetos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Programación Orientada a Objetos" class="md-header__button md-logo" aria-label="Programación Orientada a Objetos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Programación Orientada a Objetos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3 Encapsulamiento, separacion de responsabilidades y relaciones entre objetos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Programación Orientada a Objetos" class="md-nav__button md-logo" aria-label="Programación Orientada a Objetos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Programación Orientada a Objetos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Fundamentos de la Programación Orientada a Objetos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. Fundamentos de la Programación Orientada a Objetos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S01_Fundamentos_Estructuras_Datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Entorno, estructuras de control, metodos y estructuras de datos lineales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S02_Clases_Objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 Clases, objetos, constructores y comunicacion entre objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 Encapsulamiento, separacion de responsabilidades y relaciones entre objetos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 Encapsulamiento, separacion de responsabilidades y relaciones entre objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introducción
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introducción">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-proposito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Propósito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-resultado-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Resultado de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-producto-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Producto de sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-motivacion-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Motivación de la sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-ubicacion-en-el-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Ubicación en el curso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-explica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Explica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Explica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-conceptos-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Conceptos clave
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-separacion-inicial-de-responsabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Separación inicial de responsabilidades
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-arquitectura-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Arquitectura de la sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-encapsulamiento-y-comportamiento-basico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Encapsulamiento y comportamiento básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-tipos-de-relacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Tipos de relación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-errores-frecuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Errores frecuentes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-aplica-actividad-practica-guiada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Aplica: actividad práctica guiada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Aplica: actividad práctica guiada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-identificar-entidades-del-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Identificar entidades del dominio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-encapsular-producto-y-proteger-su-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Encapsular Producto y proteger su estado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-crear-productoservice-como-separacion-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Crear ProductoService como separación inicial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-crear-cliente-con-agregacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Crear Cliente con agregación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-representar-una-venta-con-composicion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Representar una venta con composición
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-probar-desde-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Probar desde Main
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-registrar-decisiones-de-encapsulamiento-responsabilidad-y-relacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Registrar decisiones de encapsulamiento, responsabilidad y relación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38-preguntas-durante-la-practica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 Preguntas durante la practica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-crea-actividad-autonoma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Crea: actividad autónoma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Crea: actividad autónoma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-plantilla-de-evidencia-individual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Plantilla de evidencia individual
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Plantilla de evidencia individual">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411-datos-del-estudiante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.1 Datos del estudiante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412-trabajo-autonomo-realizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.2 Trabajo autónomo realizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#413-evidencia-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.3 Evidencia técnica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#414-error-o-hallazgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.4 Error o hallazgo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#415-reflexion-tecnica-breve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.5 Reflexión técnica breve
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-criterios-minimos-de-aceptacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Criterios mínimos de aceptación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-cierre-evaluativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Cierre evaluativo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Cierre evaluativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-resultados-esperados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Resultados esperados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-evidencia-del-producto-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Evidencia del producto de sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-preguntas-de-defensa-y-reflexion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Preguntas de defensa y reflexión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-rubrica-de-evaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Rúbrica de evaluación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S04_Herencia_Polimorfismo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4 Herencia, interfaces y polimorfismo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S05_CRUD_Memoria_ArrayList/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 Operaciones CRUD, validaciones y responsabilidad unica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S06_Evaluacion_Unidad_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 Modelado orientado a objetos y gestion de datos en memoria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Aplicación de Escritorio con Persistencia de Datos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2. Aplicación de Escritorio con Persistencia de Datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S07_GUI_CRUD_Memoria/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7 Interfaz grafica y CRUD desde GUI en memoria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S08_Arquitectura_DAO_CRUD_Persistente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8 Arquitectura por capas, DAO y CRUD persistente desde GUI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S09_Operaciones_Persistentes_Muchos_Muchos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9 Operaciones persistentes con relacion muchos a muchos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S10_Seguridad_Relacion_Uno_Muchos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 Seguridad basica y relacion uno a muchos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S11_Consultas_Integradas_Pruebas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11 Consultas integradas y pruebas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S12_Evaluacion_Unidad_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12 Aplicaciones de escritorio por capas y gestion de datos persistentes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Proyecto Integrador
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3. Proyecto Integrador
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S13_Proyecto_Integrador_Ensamblaje/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13 Integracion del sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S14_Proyecto_Integrador_Refinamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14 Validacion, refinamiento y ejecutable nativo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S15_Documentacion_Demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15 Sistema orientado a objetos integrado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S16_Evaluacion_Final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16 Evaluacion final individual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4. Anexos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../POOTaller01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Taller POO 01
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introducción
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introducción">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-proposito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Propósito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-resultado-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Resultado de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-producto-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Producto de sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-motivacion-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Motivación de la sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-ubicacion-en-el-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Ubicación en el curso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-explica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Explica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Explica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-conceptos-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Conceptos clave
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-separacion-inicial-de-responsabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Separación inicial de responsabilidades
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-arquitectura-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Arquitectura de la sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-encapsulamiento-y-comportamiento-basico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Encapsulamiento y comportamiento básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-tipos-de-relacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Tipos de relación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-errores-frecuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Errores frecuentes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-aplica-actividad-practica-guiada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Aplica: actividad práctica guiada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Aplica: actividad práctica guiada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-identificar-entidades-del-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Identificar entidades del dominio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-encapsular-producto-y-proteger-su-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Encapsular Producto y proteger su estado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-crear-productoservice-como-separacion-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Crear ProductoService como separación inicial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-crear-cliente-con-agregacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Crear Cliente con agregación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-representar-una-venta-con-composicion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Representar una venta con composición
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-probar-desde-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Probar desde Main
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-registrar-decisiones-de-encapsulamiento-responsabilidad-y-relacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Registrar decisiones de encapsulamiento, responsabilidad y relación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38-preguntas-durante-la-practica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 Preguntas durante la practica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-crea-actividad-autonoma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Crea: actividad autónoma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Crea: actividad autónoma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-plantilla-de-evidencia-individual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Plantilla de evidencia individual
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Plantilla de evidencia individual">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411-datos-del-estudiante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.1 Datos del estudiante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412-trabajo-autonomo-realizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.2 Trabajo autónomo realizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#413-evidencia-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.3 Evidencia técnica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#414-error-o-hallazgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.4 Error o hallazgo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#415-reflexion-tecnica-breve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.5 Reflexión técnica breve
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-criterios-minimos-de-aceptacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Criterios mínimos de aceptación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-cierre-evaluativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Cierre evaluativo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Cierre evaluativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-resultados-esperados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Resultados esperados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-evidencia-del-producto-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Evidencia del producto de sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-preguntas-de-defensa-y-reflexion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Preguntas de defensa y reflexión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-rubrica-de-evaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Rúbrica de evaluación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="s3-encapsulamiento-separacion-de-responsabilidades-y-relaciones-entre-objetos">S3 - Encapsulamiento, separación de responsabilidades y relaciones entre objetos<a class="headerlink" href="#s3-encapsulamiento-separacion-de-responsabilidades-y-relaciones-entre-objetos" title="Permanent link">&para;</a></h1>
+<h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
+<p>Tiempo: 20 min.</p>
+<h3 id="11-proposito">1.1 Propósito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
+<p>Aplicar encapsulamiento en entidades del dominio, separar responsabilidades básicas entre <code>Main</code>, servicio y entidades, y representar relaciones entre objetos mediante asociación, agregación/composición y colecciones dentro del modelo.</p>
+<h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
+<p>El estudiante encapsula entidades del dominio, diferencia responsabilidades entre <code>Main</code>, servicio y entidades, representa relaciones entre objetos y usa <code>ArrayList</code> para manejar grupos de objetos relacionados.</p>
+<h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
+<p>Modelo de dominio encapsulado, organizado por responsabilidades y con relaciones entre entidades, colecciones dentro del modelo y pruebas desde <code>Main</code>.</p>
+<h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
+<p>En S2 se crearon clases, objetos, constructores y comunicación básica entre objetos. Esa primera versión permite entender estado y comportamiento, pero todavía falta proteger los datos y organizar mejor el código.</p>
+<p>En un sistema real no existe una sola clase. Un cliente puede tener ventas, una venta puede estar compuesta por detalles, y cada detalle referencia un producto. La Programación Orientada a Objetos ayuda a convertir esas relaciones del problema en clases conectadas y con responsabilidades claras.</p>
+<p>Pregunta guía:</p>
+<div class="highlight"><pre><span></span><code>Cómo protegemos el estado de los objetos y cómo pasamos de clases aisladas
+a un modelo de dominio con objetos relacionados?
+</code></pre></div>
+<h3 id="15-ubicacion-en-el-curso">1.5 Ubicación en el curso<a class="headerlink" href="#15-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Unidad: U1 - Fundamentos de la Programación Orientada a Objetos.</li>
+<li>Producto de unidad: aplicación de consola en memoria con entidades, relaciones, colecciones y operaciones CRUD.</li>
+<li>Carpeta de trabajo: <code>comarket-cli</code>.</li>
+<li>Avance de sesión: modelo de dominio encapsulado, organizado por responsabilidades y con relaciones entre entidades.</li>
+</ul>
+<p>Roadmap para elaborar el producto de la unidad:</p>
+<pre class="mermaid"><code>flowchart TB
+    S1["S1&lt;br/&gt;Estructuras de control, métodos,&lt;br/&gt;arrays y ArrayList"]
+    S2["S2&lt;br/&gt;Coche, Persona y Producto&lt;br/&gt;clases, objetos y constructores"]
+    S3["S3&lt;br/&gt;Encapsulamiento, responsabilidades&lt;br/&gt;y relaciones entre objetos"]
+    S4["S4&lt;br/&gt;Herencia, interfaces&lt;br/&gt;y polimorfismo"]
+    S5["S5&lt;br/&gt;CRUD, validaciones&lt;br/&gt;y responsabilidad única"]
+    S6["S6&lt;br/&gt;Producto U1&lt;br/&gt;consola ejecutable"]
+
+    S1 --&gt; S2
+    S2 --&gt; S3
+    S3 --&gt; S4
+    S4 --&gt; S5
+    S5 --&gt; S6
+
+    classDef today fill:#ffe08a,stroke:#9a6b00,stroke-width:2px,color:#111;
+    class S3 today;</code></pre>
+<p>Hoy no se busca terminar todo el sistema. Se busca que el estudiante entienda que el dominio se arma con entidades encapsuladas, responsabilidades separadas y relaciones claras entre objetos.</p>
+<h2 id="2-explica">2. Explica<a class="headerlink" href="#2-explica" title="Permanent link">&para;</a></h2>
+<p>Tiempo: 25 min.</p>
+<h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Idea central</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Entidad</td>
+<td>Clase qué representa un elemento importante del dominio.</td>
+<td><code>Cliente</code>, <code>Producto</code>, <code>Venta</code>, <code>DetalleVenta</code></td>
+</tr>
+<tr>
+<td>Encapsulamiento</td>
+<td>Protege el estado interno de un objeto.</td>
+<td>Atributos <code>private</code></td>
+</tr>
+<tr>
+<td>Modificador de acceso</td>
+<td>Define desde dónde puede usarse un atributo o método.</td>
+<td><code>private</code>, <code>public</code></td>
+</tr>
+<tr>
+<td>Getter</td>
+<td>Permite consultar un dato encapsulado.</td>
+<td><code>getNombre()</code></td>
+</tr>
+<tr>
+<td>Setter limpio</td>
+<td>Permite asignar un dato simple sin mezclar demasiada lógica.</td>
+<td><code>setNombre(String nombre)</code></td>
+</tr>
+<tr>
+<td><code>service</code></td>
+<td>Capa o paquete con clases que coordinan operaciones del dominio sin reemplazar a las entidades.</td>
+<td><code>ProductoService</code>, <code>VentaService</code></td>
+</tr>
+<tr>
+<td>Asociación</td>
+<td>Un objeto conoce o usa a otro objeto.</td>
+<td><code>DetalleVenta</code> usa un <code>Producto</code></td>
+</tr>
+<tr>
+<td>Agregación</td>
+<td>Un objeto agrupa otros, pero esos objetos pueden existir por separado.</td>
+<td><code>Cliente</code> relacionado con varias <code>Venta</code></td>
+</tr>
+<tr>
+<td>Composición</td>
+<td>Un objeto contiene partes qué dependen de el.</td>
+<td><code>Venta</code> contiene <code>DetalleVenta</code></td>
+</tr>
+<tr>
+<td>Colección</td>
+<td>Estructura para manejar varios objetos del mismo tipo.</td>
+<td><code>ArrayList&lt;Producto&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>Regla métodológica de la sesión:</p>
+<div class="highlight"><pre><span></span><code>Las entidades representan información y comportamiento del dominio.
+Las relaciones muestran cómo colaboran los objetos.
+Las colecciones administran grupos de objetos dentro de una entidad.
+Main solo crea escenarios de prueba.
+El service coordina operaciones simples, pero no reemplaza a las entidades.
+Todavía no se introducen interfaces ni implementaciones.
+La asociación, agregación, composición y multiplicidad se representan en las entidades.
+</code></pre></div>
+<h3 id="22-separacion-inicial-de-responsabilidades">2.2 Separación inicial de responsabilidades<a class="headerlink" href="#22-separacion-inicial-de-responsabilidades" title="Permanent link">&para;</a></h3>
+<p>En esta sesión se usa una separación simple:</p>
+<div class="highlight"><pre><span></span><code>app      -&gt; Main: prueba el flujo desde consola.
+entity   -&gt; Producto, Cliente, Venta, DetalleVenta: representan el dominio.
+service  -&gt; ProductoService o VentaService: coordina operaciones simples.
+</code></pre></div>
+<p>La regla práctica es:</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Sí debe hacer</th>
+<th>No debe hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Main</code></td>
+<td>Crear objetos y probar escenarios</td>
+<td>Concentrar todas las reglas</td>
+</tr>
+<tr>
+<td>Entidad</td>
+<td>Guardar estado y exponer comportamiento propio</td>
+<td>Resolver menús o flujos completos</td>
+</tr>
+<tr>
+<td>Service</td>
+<td>Coordinar operaciones simples entre objetos</td>
+<td>Convertirse todavía en interface/implementación</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-arquitectura-de-la-sesion">2.3 Arquitectura de la sesión<a class="headerlink" href="#23-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>classDiagram
+    namespace app {
+        class Main {
+            main(String[] args)
+        }
+    }
+
+    namespace service {
+        class ProductoService {
+            cambiarPrecio(producto, nuevoPrecio)
+            reponerStock(producto, cantidad)
+            venderUnidades(producto, cantidad)
+        }
+    }
+
+    namespace entity {
+        class Cliente {
+            -String documento
+            -String nombre
+            -ArrayList~Venta~ ventas
+            agregarVenta(venta)
+        }
+        class Producto {
+            -String codigo
+            -String nombre
+            -double precio
+            -int stock
+            actualizarPrecio(nuevoPrecio)
+            aumentarStock(cantidad)
+            disminuirStock(cantidad)
+        }
+        class Venta {
+            -Cliente cliente
+            -ArrayList~DetalleVenta~ detalles
+            agregarDetalle(detalle)
+            calcularTotal()
+        }
+        class DetalleVenta {
+            -Producto producto
+            -int cantidad
+            calcularSubtotal()
+        }
+    }
+
+    Main ..&gt; Cliente : prueba
+    Main ..&gt; Venta : prueba
+    Main ..&gt; Producto : prueba
+    Main ..&gt; ProductoService : usa
+    ProductoService ..&gt; Producto : coordina operaciones
+
+    Cliente "1" o-- "0..*" Venta : agrega
+    Venta "1" *-- "1..*" DetalleVenta : composición
+    DetalleVenta "*" --&gt; "1" Producto : asociación</code></pre>
+<p>Convencion del diagrama: <code>--&gt;</code> representa asociación, <code>o--</code> representa agregación, <code>*--</code> representa composición y <code>..&gt;</code> representa dependencia de prueba o uso temporal. En esta sesión la multiplicidad se trabaja dentro de las entidades; el service aparece solo como separación inicial de responsabilidades. Las interfaces se dejan para S4.</p>
+<h3 id="24-encapsulamiento-y-comportamiento-basico">2.4 Encapsulamiento y comportamiento básico<a class="headerlink" href="#24-encapsulamiento-y-comportamiento-basico" title="Permanent link">&para;</a></h3>
+<p>Una entidad encapsulada protege su estado:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Producto</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">precio</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">stock</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>La entidad puede tener métodos de comportamiento que cambian su propio estado:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">actualizarPrecio</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">nuevoPrecio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuevoPrecio</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esto evita que <code>Main</code> manipule directamente los atributos. El service puede llamar este método, pero el cambio sigue ocurriendo mediante el comportamiento público de la entidad.</p>
+<h3 id="25-tipos-de-relacion">2.5 Tipos de relación<a class="headerlink" href="#25-tipos-de-relacion" title="Permanent link">&para;</a></h3>
+<p>Asociación:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Venta</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>La venta conoce al cliente que realiza la operación. Esta asociación ayuda a preparar el modelo para consultar ventas por cliente.</p>
+<p>Agregación:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Cliente</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Venta</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ventas</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>El cliente agrupa ventas. Para la practica inicial se entiende cómo una relación de agrupación: las ventas son objetos del sistema y pueden consultarse desde el cliente.</p>
+<p>Composición:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Venta</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">DetalleVenta</span><span class="o">&gt;</span><span class="w"> </span><span class="n">detalles</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Los detalles existen para explicar una venta. Si se elimina la venta, sus detalles ya no tienen sentido dentro del sistema.</p>
+<h3 id="26-errores-frecuentes">2.6 Errores frecuentes<a class="headerlink" href="#26-errores-frecuentes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Corrección esperada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Poner todas las variables en <code>Main</code>.</td>
+<td>Crear entidades con responsabilidades claras.</td>
+</tr>
+<tr>
+<td>Usar solo una clase para todo el dominio.</td>
+<td>Separar <code>Cliente</code>, <code>Producto</code>, <code>Venta</code>, <code>DetalleVenta</code> y otros conceptos necesarios.</td>
+</tr>
+<tr>
+<td>Confundir una lista con una entidad.</td>
+<td>La lista administra varios objetos; la entidad representa un objeto del dominio.</td>
+</tr>
+<tr>
+<td>Crear relaciones sin sentido.</td>
+<td>Cada relación debe responder a una regla del problema.</td>
+</tr>
+<tr>
+<td>Hacer CRUD completo antes de modelar.</td>
+<td>Primero se entiende el dominio; luego se agregan operaciones.</td>
+</tr>
+<tr>
+<td>Poner todos los cambios directamente en <code>Main</code>.</td>
+<td>Usar métodos de entidad o métodos del service según la responsabilidad.</td>
+</tr>
+<tr>
+<td>Meter interfaces antes de tiempo.</td>
+<td>Usar service simple en S3; dejar interface/implementación para S4 y S5.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
+<p>Tiempo: 2h.</p>
+<h3 id="31-identificar-entidades-del-dominio">3.1 Identificar entidades del dominio<a class="headerlink" href="#31-identificar-entidades-del-dominio" title="Permanent link">&para;</a></h3>
+<p>Parte de un caso simple de comercio:</p>
+<div class="highlight"><pre><span></span><code>Un sistema registra clientes, productos y ventas.
+Cada venta pertenece a un cliente.
+Cada venta tiene uno o más detalles.
+Cada detalle indica un producto, cantidad y precio.
+</code></pre></div>
+<p>Entidades iniciales:</p>
+<ul>
+<li><code>Cliente</code></li>
+<li><code>Producto</code></li>
+<li><code>Venta</code></li>
+<li><code>DetalleVenta</code></li>
+</ul>
+<p>Ubicación sugerida con separación inicial:</p>
+<div class="highlight"><pre><span></span><code>src/main/java/app/Main.java
+src/main/java/entity/Cliente.java
+src/main/java/entity/Producto.java
+src/main/java/entity/Venta.java
+src/main/java/entity/DetalleVenta.java
+src/main/java/service/ProductoService.java
+</code></pre></div>
+<h3 id="32-encapsular-producto-y-proteger-su-estado">3.2 Encapsular Producto y proteger su estado<a class="headerlink" href="#32-encapsular-producto-y-proteger-su-estado" title="Permanent link">&para;</a></h3>
+<p>Ejemplo de <code>Producto</code> con atributos privados, constructor y getters/setters limpios:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">entity</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Producto</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">precio</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">stock</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Producto</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">precio</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">stock</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">codigo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">codigo</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">precio</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stock</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getCodigo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">codigo</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getNombre</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getPrecio</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">precio</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getStock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">stock</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setNombre</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">actualizarPrecio</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">nuevoPrecio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuevoPrecio</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">aumentarStock</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">cantidad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">stock</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cantidad</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">disminuirStock</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">cantidad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">stock</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cantidad</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Lectura esperada:</p>
+<div class="highlight"><pre><span></span><code>Producto protege su estado.
+Main ya no modifica directamente los atributos.
+Los getters consultan datos.
+Los métodos con nombre de acción cambian el estado de forma más clara.
+</code></pre></div>
+<p>Prueba rápida en <code>Main</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">app</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">entity.Producto</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Producto</span><span class="p">(</span><span class="s">&quot;P001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Teclado&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">80.0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">producto</span><span class="p">.</span><span class="na">actualizarPrecio</span><span class="p">(</span><span class="mf">75.0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">producto</span><span class="p">.</span><span class="na">aumentarStock</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Código: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">producto</span><span class="p">.</span><span class="na">getCodigo</span><span class="p">());</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Nombre: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">producto</span><span class="p">.</span><span class="na">getNombre</span><span class="p">());</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Precio: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">producto</span><span class="p">.</span><span class="na">getPrecio</span><span class="p">());</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Stock: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">producto</span><span class="p">.</span><span class="na">getStock</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Lectura de la prueba:</p>
+<div class="highlight"><pre><span></span><code>Main no usa producto.precio ni producto.stock directamente.
+Main crea el objeto y llama métodos públicos.
+El estado se consulta mediante getters.
+</code></pre></div>
+<h3 id="33-crear-productoservice-como-separacion-inicial">3.3 Crear ProductoService como separación inicial<a class="headerlink" href="#33-crear-productoservice-como-separacion-inicial" title="Permanent link">&para;</a></h3>
+<p><code>ProductoService</code> no reemplaza a <code>Producto</code>. Solo coordina operaciones que <code>Main</code> no debería hacer directamente.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">service</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">entity.Producto</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProductoService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">cambiarPrecio</span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">nuevoPrecio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">producto</span><span class="p">.</span><span class="na">actualizarPrecio</span><span class="p">(</span><span class="n">nuevoPrecio</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">reponerStock</span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cantidad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">producto</span><span class="p">.</span><span class="na">aumentarStock</span><span class="p">(</span><span class="n">cantidad</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">venderUnidades</span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cantidad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">producto</span><span class="p">.</span><span class="na">disminuirStock</span><span class="p">(</span><span class="n">cantidad</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Prueba rápida en <code>Main</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">app</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">entity.Producto</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">service.ProductoService</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Producto</span><span class="p">(</span><span class="s">&quot;P001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Teclado&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">80.0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ProductoService</span><span class="w"> </span><span class="n">productoService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProductoService</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">productoService</span><span class="p">.</span><span class="na">cambiarPrecio</span><span class="p">(</span><span class="n">producto</span><span class="p">,</span><span class="w"> </span><span class="mf">75.0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">productoService</span><span class="p">.</span><span class="na">reponerStock</span><span class="p">(</span><span class="n">producto</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<span class="w">        </span><span class="n">productoService</span><span class="p">.</span><span class="na">venderUnidades</span><span class="p">(</span><span class="n">producto</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Precio: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">producto</span><span class="p">.</span><span class="na">getPrecio</span><span class="p">());</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Stock: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">producto</span><span class="p">.</span><span class="na">getStock</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Lectura de la prueba:</p>
+<div class="highlight"><pre><span></span><code>Main ya no coordina directamente todos los cambios.
+ProductoService recibe la solicitud.
+Producto mantiene los datos y los métodos que cambian su estado.
+</code></pre></div>
+<h3 id="34-crear-cliente-con-agregacion">3.4 Crear Cliente con agregación<a class="headerlink" href="#34-crear-cliente-con-agregacion" title="Permanent link">&para;</a></h3>
+<p>Ejemplo de <code>Cliente</code> con una colección de ventas:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">entity</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Cliente</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Venta</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ventas</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Cliente</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">documento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">documento</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">ventas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">agregarVenta</span><span class="p">(</span><span class="n">Venta</span><span class="w"> </span><span class="n">venta</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ventas</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">venta</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getDocumento</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">documento</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getNombre</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Venta</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getVentas</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ventas</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Prueba rápida de la idea:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cliente</span><span class="p">(</span><span class="s">&quot;DNI001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Ana Torres&quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Cliente: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cliente</span><span class="p">.</span><span class="na">getNombre</span><span class="p">());</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ventas registradas: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cliente</span><span class="p">.</span><span class="na">getVentas</span><span class="p">().</span><span class="na">size</span><span class="p">());</span>
+</code></pre></div>
+<p>Nota: esta prueba se ejecuta dentro de <code>Main</code> después de tener creada la clase <code>Venta</code>, porque <code>Cliente</code> declara una colección <code>ArrayList&lt;Venta&gt;</code>.</p>
+<p>Lectura de la prueba:</p>
+<div class="highlight"><pre><span></span><code>Cliente inicia con una lista de ventas vacía.
+La colección pertenece a Cliente porque representa una relación del dominio.
+</code></pre></div>
+<h3 id="35-representar-una-venta-con-composicion">3.5 Representar una venta con composición<a class="headerlink" href="#35-representar-una-venta-con-composicion" title="Permanent link">&para;</a></h3>
+<p><code>DetalleVenta</code> representa una parte de la venta:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">entity</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DetalleVenta</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cantidad</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">DetalleVenta</span><span class="p">(</span><span class="n">Producto</span><span class="w"> </span><span class="n">producto</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cantidad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">producto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">producto</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cantidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cantidad</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Producto</span><span class="w"> </span><span class="nf">getProducto</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">producto</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getCantidad</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">cantidad</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">calcularSubtotal</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">producto</span><span class="p">.</span><span class="na">getPrecio</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cantidad</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>Venta</code> contiene sus detalles:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">entity</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Venta</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">DetalleVenta</span><span class="o">&gt;</span><span class="w"> </span><span class="n">detalles</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Venta</span><span class="p">(</span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cliente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cliente</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">detalles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">agregarDetalle</span><span class="p">(</span><span class="n">DetalleVenta</span><span class="w"> </span><span class="n">detalle</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">detalles</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">detalle</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Cliente</span><span class="w"> </span><span class="nf">getCliente</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">cliente</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">DetalleVenta</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getDetalles</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">detalles</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">calcularTotal</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">DetalleVenta</span><span class="w"> </span><span class="n">detalle</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">detalles</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">total</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">detalle</span><span class="p">.</span><span class="na">calcularSubtotal</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">total</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Prueba rápida en <code>Main</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">app</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">entity.Cliente</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">entity.DetalleVenta</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">entity.Producto</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">entity.Venta</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cliente</span><span class="p">(</span><span class="s">&quot;DNI001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Ana Torres&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Producto</span><span class="w"> </span><span class="n">teclado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Producto</span><span class="p">(</span><span class="s">&quot;P001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Teclado&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">80.0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">Venta</span><span class="w"> </span><span class="n">venta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Venta</span><span class="p">(</span><span class="n">cliente</span><span class="p">);</span>
+<span class="w">        </span><span class="n">DetalleVenta</span><span class="w"> </span><span class="n">detalle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DetalleVenta</span><span class="p">(</span><span class="n">teclado</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">venta</span><span class="p">.</span><span class="na">agregarDetalle</span><span class="p">(</span><span class="n">detalle</span><span class="p">);</span>
+<span class="w">        </span><span class="n">cliente</span><span class="p">.</span><span class="na">agregarVenta</span><span class="p">(</span><span class="n">venta</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Cliente: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">venta</span><span class="p">.</span><span class="na">getCliente</span><span class="p">().</span><span class="na">getNombre</span><span class="p">());</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Detalles: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">venta</span><span class="p">.</span><span class="na">getDetalles</span><span class="p">().</span><span class="na">size</span><span class="p">());</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Total: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">venta</span><span class="p">.</span><span class="na">calcularTotal</span><span class="p">());</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ventas del cliente: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cliente</span><span class="p">.</span><span class="na">getVentas</span><span class="p">().</span><span class="na">size</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Lectura de la prueba:</p>
+<div class="highlight"><pre><span></span><code>Venta contiene detalles.
+DetalleVenta referencia un Producto.
+Cliente agrupa ventas.
+ArrayList aparece dentro de entidades, no como lista suelta en Main.
+</code></pre></div>
+<h3 id="36-probar-desde-main">3.6 Probar desde Main<a class="headerlink" href="#36-probar-desde-main" title="Permanent link">&para;</a></h3>
+<p>Esta prueba integra los conceptos anteriores en un solo flujo.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">app</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">entity.Cliente</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">entity.DetalleVenta</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">entity.Producto</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">entity.Venta</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">service.ProductoService</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ProductoService</span><span class="w"> </span><span class="n">productoService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProductoService</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">Cliente</span><span class="w"> </span><span class="n">cliente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cliente</span><span class="p">(</span><span class="s">&quot;DNI001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Ana Torres&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">Producto</span><span class="w"> </span><span class="n">teclado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Producto</span><span class="p">(</span><span class="s">&quot;P001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Teclado&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">80.0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Producto</span><span class="w"> </span><span class="n">mouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Producto</span><span class="p">(</span><span class="s">&quot;P002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mouse&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">45.0</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">productoService</span><span class="p">.</span><span class="na">cambiarPrecio</span><span class="p">(</span><span class="n">teclado</span><span class="p">,</span><span class="w"> </span><span class="mf">75.0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">productoService</span><span class="p">.</span><span class="na">venderUnidades</span><span class="p">(</span><span class="n">teclado</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">Venta</span><span class="w"> </span><span class="n">venta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Venta</span><span class="p">(</span><span class="n">cliente</span><span class="p">);</span>
+<span class="w">        </span><span class="n">venta</span><span class="p">.</span><span class="na">agregarDetalle</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DetalleVenta</span><span class="p">(</span><span class="n">teclado</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<span class="w">        </span><span class="n">venta</span><span class="p">.</span><span class="na">agregarDetalle</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DetalleVenta</span><span class="p">(</span><span class="n">mouse</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">));</span>
+<span class="w">        </span><span class="n">cliente</span><span class="p">.</span><span class="na">agregarVenta</span><span class="p">(</span><span class="n">venta</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Total: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">venta</span><span class="p">.</span><span class="na">calcularTotal</span><span class="p">());</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ventas del cliente: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cliente</span><span class="p">.</span><span class="na">getVentas</span><span class="p">().</span><span class="na">size</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="37-registrar-decisiones-de-encapsulamiento-responsabilidad-y-relacion">3.7 Registrar decisiones de encapsulamiento, responsabilidad y relación<a class="headerlink" href="#37-registrar-decisiones-de-encapsulamiento-responsabilidad-y-relacion" title="Permanent link">&para;</a></h3>
+<p>Completar una tabla breve:</p>
+<table>
+<thead>
+<tr>
+<th>Decisión</th>
+<th>Justificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Producto</code> usa atributos <code>private</code></td>
+<td>Su estado no debe modificarse directamente desde <code>Main</code></td>
+</tr>
+<tr>
+<td><code>Producto</code> cambia su precio y stock mediante métodos</td>
+<td>El estado no se modifica directamente desde <code>Main</code></td>
+</tr>
+<tr>
+<td><code>ProductoService</code> coordina operaciones</td>
+<td>Evita que <code>Main</code> concentre acciones del dominio</td>
+</tr>
+<tr>
+<td><code>Cliente</code> tiene <code>ArrayList&lt;Venta&gt;</code></td>
+<td>Un cliente puede agrupar varias ventas</td>
+</tr>
+<tr>
+<td><code>Venta</code> tiene <code>ArrayList&lt;DetalleVenta&gt;</code></td>
+<td>Una venta se compone de varios detalles</td>
+</tr>
+<tr>
+<td><code>DetalleVenta</code> tiene <code>Producto</code></td>
+<td>Cada detalle referencia el producto vendido</td>
+</tr>
+</tbody>
+</table>
+<h3 id="38-preguntas-durante-la-practica">3.8 Preguntas durante la practica<a class="headerlink" href="#38-preguntas-durante-la-practica" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Qué clases son entidades del dominio?</li>
+<li>Qué atributos quedaron protegidos con <code>private</code>?</li>
+<li>Qué responsabilidad tiene <code>ProductoService</code>?</li>
+<li>Qué relación existe entre <code>Venta</code> y <code>DetalleVenta</code>?</li>
+<li>Por qué <code>DetalleVenta</code> referencia un <code>Producto</code>?</li>
+<li>Dónde se ubica la colección en este modelo?</li>
+<li>Qué relación se representa con <code>ArrayList</code>?</li>
+</ol>
+<h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
+<p>Fuera del aula, cada estudiante consolida el aprendizaje ampliando el modelo del dominio y preparando una evidencia individual.</p>
+<p>Tiempo: 2h fuera del aula.</p>
+<h3 id="41-plantilla-de-evidencia-individual">4.1 Plantilla de evidencia individual<a class="headerlink" href="#41-plantilla-de-evidencia-individual" title="Permanent link">&para;</a></h3>
+<p>Entrega un PDF con el siguiente nombre:</p>
+<div class="highlight"><pre><span></span><code>S03_Equipo##_ApellidoNombre.pdf
+</code></pre></div>
+<p>Ejemplo:</p>
+<div class="highlight"><pre><span></span><code>S03_Equipo03_QuispeAna.pdf
+</code></pre></div>
+<p>El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.</p>
+<h4 id="411-datos-del-estudiante">4.1.1 Datos del estudiante<a class="headerlink" href="#411-datos-del-estudiante" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Nombre:</li>
+<li>Equipo:</li>
+<li>Sesión: S03 - Encapsulamiento, separación de responsabilidades y relaciones entre objetos</li>
+<li>Rol o aporte realizado:</li>
+<li>Link de GitHub:</li>
+</ul>
+<h4 id="412-trabajo-autonomo-realizado">4.1.2 Trabajo autónomo realizado<a class="headerlink" href="#412-trabajo-autonomo-realizado" title="Permanent link">&para;</a></h4>
+<p>Completa y evidencia estas tareas:</p>
+<ol>
+<li>Encapsular al menos una entidad usando atributos <code>private</code>.</li>
+<li>Crear constructor, getters y setters limpios cuando correspondan.</li>
+<li>Crear o mejorar al menos tres entidades relacionadas.</li>
+<li>Representar una asociación, agregación o composición.</li>
+<li>Usar <code>ArrayList</code> dentro de una entidad para una relación de uno a muchos.</li>
+<li>Crear una clase service simple para coordinar operaciones.</li>
+<li>Probar desde <code>Main</code> la creación de objetos relacionados.</li>
+<li>Explicar qué responsabilidad tiene <code>Main</code>, qué responsabilidad tienen las entidades y qué responsabilidad tiene el service.</li>
+</ol>
+<p>Puedes elegir una de estas opciones:</p>
+<ul>
+<li><code>Categoria</code> relacionada con varios <code>Producto</code>.</li>
+<li><code>Empleado</code> relacionado con varias <code>Venta</code>.</li>
+<li><code>Cliente</code> relacionado con varias <code>Venta</code>.</li>
+<li><code>Venta</code> relacionada con varios <code>DetalleVenta</code>.</li>
+</ul>
+<h4 id="413-evidencia-tecnica">4.1.3 Evidencia técnica<a class="headerlink" href="#413-evidencia-tecnica" title="Permanent link">&para;</a></h4>
+<p>Incluye capturas o salidas de consola con una breve explicación debajo de cada una:</p>
+<ul>
+<li>Diagrama simple del modelo.</li>
+<li>Código de una entidad encapsulada.</li>
+<li>Código de un service simple.</li>
+<li>Código de al menos tres entidades relacionadas.</li>
+<li>Uso de una colección con <code>ArrayList</code>.</li>
+<li>Salida de consola mostrando objetos relacionados.</li>
+<li>Explicación de la relación modelada y de la separación de responsabilidades.</li>
+</ul>
+<h4 id="414-error-o-hallazgo">4.1.4 Error o hallazgo<a class="headerlink" href="#414-error-o-hallazgo" title="Permanent link">&para;</a></h4>
+<p>Describe al menos un error, diferencia o hallazgo técnico:</p>
+<ul>
+<li>Qué ocurrió.</li>
+<li>Cómo lo diagnosticaste.</li>
+<li>Cómo lo corregiste o qué aprendiste.</li>
+</ul>
+<p>Ejemplos válidos:</p>
+<ul>
+<li>Un cambio de estado quedó inicialmente en <code>Main</code> y luego se movió a la entidad o al service.</li>
+<li>Una relación no tenía sentido en el dominio.</li>
+<li>Se confundió una colección con una entidad.</li>
+<li>Una lista no fue inicializada antes de usarla.</li>
+</ul>
+<h4 id="415-reflexion-tecnica-breve">4.1.5 Reflexión técnica breve<a class="headerlink" href="#415-reflexion-tecnica-breve" title="Permanent link">&para;</a></h4>
+<p>Responde en 5 a 8 líneas:</p>
+<div class="highlight"><pre><span></span><code>Por qué un sistema orientado a objetos necesita entidades encapsuladas,
+responsabilidades separadas y relaciones entre clases?
+</code></pre></div>
+<h3 id="42-criterios-minimos-de-aceptacion">4.2 Criterios mínimos de aceptación<a class="headerlink" href="#42-criterios-minimos-de-aceptacion" title="Permanent link">&para;</a></h3>
+<p>La evidencia individual se considera completa si:</p>
+<ul>
+<li>El archivo respeta el nombre <code>S03_Equipo##_ApellidoNombre.pdf</code>.</li>
+<li>Incluye evidencias técnicas legibles.</li>
+<li>Muestra al menos una entidad encapsulada.</li>
+<li>Muestra una separación inicial entre <code>Main</code>, entidades y service.</li>
+<li>Muestra al menos tres entidades relacionadas.</li>
+<li>Usa <code>ArrayList</code> para administrar varios objetos.</li>
+<li>Representa una relación de uno a muchos.</li>
+<li>Incluye una prueba desde <code>Main</code>.</li>
+<li>Explica si la relación es asociación, agregación o composición.</li>
+<li>No contiene solo pantallazos: cada evidencia tiene una descripción breve.</li>
+</ul>
+<h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
+<p>Tiempo: 20 min.</p>
+<p>Esta sección conecta el resultado de aprendizaje de la sesión con el producto que debe evidenciar cada estudiante.</p>
+<h3 id="51-resultados-esperados">5.1 Resultados esperados<a class="headerlink" href="#51-resultados-esperados" title="Permanent link">&para;</a></h3>
+<p>Al finalizar la sesión, el estudiante debe demostrar que:</p>
+<ul>
+<li>El modelo tiene varias entidades del dominio.</li>
+<li>Las entidades principales están encapsuladas.</li>
+<li>Existe separación inicial entre <code>Main</code>, entidades y service.</li>
+<li>Las relaciones no están sueltas; aparecen representadas en atributos o colecciones.</li>
+<li>Hay al menos una relación de uno a muchos.</li>
+<li>Se usa <code>ArrayList</code> para administrar varios objetos.</li>
+<li>La colección está ubicada dentro de una entidad del dominio.</li>
+<li><code>Main</code> solo arma escenarios de prueba y no concentra toda la lógica.</li>
+</ul>
+<h3 id="52-evidencia-del-producto-de-sesion">5.2 Evidencia del producto de sesión<a class="headerlink" href="#52-evidencia-del-producto-de-sesion" title="Permanent link">&para;</a></h3>
+<p>Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.</p>
+<p>Nombre del archivo:</p>
+<div class="highlight"><pre><span></span><code>S03_Equipo##_ApellidoNombre.pdf
+</code></pre></div>
+<p>La evidencia debe demostrar:</p>
+<ul>
+<li>Producto de sesión construido.</li>
+<li>Aporte individual verificable.</li>
+<li>Modelo con entidades relacionadas.</li>
+<li>Encapsulamiento y responsabilidades separadas.</li>
+<li>Pruebas por consola realizadas.</li>
+<li>Reflexión técnica breve.</li>
+</ul>
+<p>La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.</p>
+<h3 id="53-preguntas-de-defensa-y-reflexion">5.3 Preguntas de defensa y reflexión<a class="headerlink" href="#53-preguntas-de-defensa-y-reflexion" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Qué diferencia hay entre entidad y colección?</li>
+<li>Por qué no conviene dejar atributos públicos?</li>
+<li>Qué cambio de estado dejaste como método de una entidad?</li>
+<li>Qué responsabilidad tiene el service?</li>
+<li>Qué relación modelaste como asociación?</li>
+<li>Qué relación modelaste como agregación o composición?</li>
+<li>Por qué una venta necesita detalles?</li>
+<li>En qué entidad está ubicada la colección?</li>
+<li>Qué parte de este modelo se podría convertir en CRUD en S5?</li>
+</ol>
+<h3 id="54-rubrica-de-evaluacion">5.4 Rúbrica de evaluación<a class="headerlink" href="#54-rubrica-de-evaluacion" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Dimensión</th>
+<th style="text-align: right;">Peso</th>
+<th>3 - Logro destacado</th>
+<th>2 - Logro</th>
+<th>1 - Proceso</th>
+<th>0 - Inicio</th>
+<th style="text-align: right;">Puntuación obtenida</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Encapsulamiento</td>
+<td style="text-align: right;">2</td>
+<td>Protege el estado y expone métodos claros para consultarlo o modificarlo.</td>
+<td>Usa atributos privados y acceso controlado.</td>
+<td>Encapsulamiento parcial.</td>
+<td>No evidencia encapsulamiento.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>2. Separación de responsabilidades</td>
+<td style="text-align: right;">2</td>
+<td>Distingue claramente <code>Main</code>, entidades y service.</td>
+<td>Presenta separación funcional.</td>
+<td>Mezcla algunas responsabilidades.</td>
+<td>Toda la lógica queda en <code>Main</code>.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>3. Relaciones entre objetos</td>
+<td style="text-align: right;">2</td>
+<td>Distingue y justifica asociación, agregación o composición.</td>
+<td>Representa al menos una relación correcta.</td>
+<td>Relación parcial o confusa.</td>
+<td>No evidencia relaciones.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>4. Colecciones dentro del modelo</td>
+<td style="text-align: right;">2</td>
+<td>Usa <code>ArrayList</code> correctamente dentro de una entidad.</td>
+<td>Usa colección funcional.</td>
+<td>Uso parcial o mal ubicado.</td>
+<td>No usa colecciones.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>5. Prueba desde <code>Main</code></td>
+<td style="text-align: right;">1</td>
+<td><code>Main</code> crea un escenario claro sin reemplazar el modelo.</td>
+<td>Prueba funcional básica.</td>
+<td>Prueba parcial o confusa.</td>
+<td>No prueba el modelo.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>6. Reflexión y orden</td>
+<td style="text-align: right;">1</td>
+<td>PDF ordenado, evidencias legibles y reflexión precisa.</td>
+<td>Evidencias suficientes y reflexión clara.</td>
+<td>Evidencias incompletas o reflexión superficial.</td>
+<td>PDF desordenado o sin reflexión.</td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+<p>Puntuación acumulada = suma de (<code>Peso</code> * <code>Puntuación obtenida</code>) = ____.</p>
+<p>Nota final = (<code>Puntuación acumulada</code> / 30) * 20 = ____.</p>
+<p>Para usar la rúbrica con IA, solicita:</p>
+<div class="highlight"><pre><span></span><code>Evalúa el PDF usando la rúbrica de la sesión.
+Para cada dimensión selecciona la puntuación obtenida usando la escala Inicio=0, Proceso=1, Logro=2, Logro destacado=3.
+Justifica brevemente cada puntuación.
+Calcula la puntuación acumulada con la fórmula: suma de (Peso * Puntuación obtenida).
+Calcula la nota final sobre 20 con la fórmula: (Puntuación acumulada / 30) * 20.
+Indica 2 fortalezas y 2 recomendaciones.
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Angel Sullon @asullom - UPeU 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "toc.follow", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="../javascripts/mermaid.js"></script>
+      
+    
+  </body>
+</html>
