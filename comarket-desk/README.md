@@ -4,18 +4,18 @@ Proyecto de escritorio JavaFX para la Unidad 2 y Unidad 3.
 
 Tag sugerido: `sesion-11`
 
-Aqui se trabaja la evolucion de CoMarket hacia una aplicacion de escritorio con arquitectura por capas, JavaFX, FXML, controladores, servicios, DAO, JDBC y SQLite.
+Aquí se trabaja la evolución de CoMarket hacia una aplicación de escritorio con arquitectura por capas, JavaFX, FXML, controladores, servicios, DAO, JDBC y SQLite.
 
-En este hito, `Producto` se mantiene como catalogo persistente, `Venta` conserva cabecera y detalles, y se consolidan consultas integradas con filtros, vista maestro-detalle, totales y validaciones del flujo principal.
+En este hito, `Producto` se mantiene como catálogo persistente, `Venta` conserva cabecera y detalles, y se consolidan consultas integradas con filtros, vista maestro-detalle, totales y validaciones del flujo principal.
 
-La aplicacion incluye cuatro pestanas:
+La aplicación incluye cuatro pestañas:
 
-- `Productos`: CRUD persistente del catalogo.
+- `Productos`: CRUD persistente del catálogo.
 - `Ventas`: registro de cabecera y detalles asociado al usuario autenticado.
-- `Consulta de ventas`: listado de ventas registradas, detalle de la venta seleccionada y anulacion con reposicion de stock.
-- `Reporte de ventas`: filtros por cliente, fecha, usuario y estado; listado de ventas, detalle de la venta seleccionada, total mostrado y verificacion de total contra detalle.
+- `Anular ventas`: listado de ventas registradas, detalle de la venta seleccionada y anulación con reposición de stock.
+- `Reporte de ventas`: filtros por cliente, fecha, usuario y estado; listado de ventas, detalle de la venta seleccionada, total mostrado y verificación de total contra detalle.
 
-Antes de ingresar a esas pestanas, la aplicacion muestra un login. El usuario de prueba se crea automaticamente:
+Antes de ingresar a esas pestañas, la aplicación muestra un login. El usuario de prueba se crea automáticamente:
 
 ```text
 usuario: admin
@@ -23,20 +23,29 @@ clave: 123456
 rol: ADMIN
 ```
 
-La version en memoria de productos queda como referencia en `ProductoServiceImplMemoria`. Las versiones activas usan SQLite mediante `ProductoServiceImplSQLite`, `VentaServiceImplSQLite` y `UsuarioServiceImplSQLite`.
+La versión en memoria de productos queda como referencia en `ProductoServiceImplMemoria`. Las versiones activas usan SQLite mediante `ProductoServiceImplSQLite`, `VentaServiceImplSQLite` y `UsuarioServiceImplSQLite`.
+
+## Flujo final de demo
+
+1. Iniciar sesión con `admin` / `123456`.
+2. Abrir `Productos` y registrar o editar productos.
+3. Abrir `Ventas` y registrar una venta con cabecera y detalles.
+4. Abrir `Anular ventas`, seleccionar una venta activa y anularla.
+5. Abrir `Reporte de ventas` y aplicar filtros por cliente, fecha, usuario o estado.
+6. Verificar persistencia revisando que los datos sigan disponibles al recargar la aplicación o consultando `data/comarket.db`.
 
 ## Matriz de pruebas S11
 
 | Caso | Datos | Resultado esperado |
 |---|---|---|
 | Login correcto | `admin` / `123456` | Abre la ventana principal |
-| Login incorrecto | Usuario o clave invalida | Muestra mensaje de credenciales incorrectas |
+| Login incorrecto | Usuario o clave inválida | Muestra mensaje de credenciales incorrectas |
 | Consulta por fecha | Rango con registros | Lista ventas dentro del rango |
-| Consulta sin resultados | Filtro sin coincidencias | Muestra tabla vacia y resumen en cero |
+| Consulta sin resultados | Filtro sin coincidencias | Muestra tabla vacía y resumen en cero |
 | Ver detalle | Venta seleccionada | Muestra productos, cantidades, precios y subtotales |
 | Total | Venta con detalles | Total de cabecera coincide con total de detalle |
 | Anular venta | Venta activa seleccionada | Cambia estado a `ANULADA` y repone stock |
-| Sin seleccion | Anular sin fila seleccionada | Muestra mensaje claro |
+| Sin selección | Anular sin fila seleccionada | Muestra mensaje claro |
 
 ## Ejecutar
 
@@ -44,13 +53,13 @@ La version en memoria de productos queda como referencia en `ProductoServiceImpl
 .\mvnw.cmd clean javafx:run
 ```
 
-Tambien puedes usar Maven instalado localmente:
+También puedes usar Maven instalado localmente:
 
 ```bash
 mvn clean javafx:run
 ```
 
-Al ejecutar desde IntelliJ o Maven, la base de datos local se crea automaticamente en:
+Al ejecutar desde IntelliJ o Maven, la base de datos local se crea automáticamente en:
 
 ```text
 data/comarket.db
@@ -65,7 +74,7 @@ carpeta-del-ejecutable/
         comarket.db
 ```
 
-Las tablas creadas por la aplicacion son:
+Las tablas creadas por la aplicación son:
 
 ```sql
 producto(codigo, nombre, precio, stock)
@@ -85,7 +94,7 @@ sqlite3 data\comarket.db "SELECT * FROM detalle_venta;"
 
 ## Generar ejecutable nativo
 
-Requisito: GraalVM JDK instalado, `native-image` disponible en la terminal y herramientas de compilacion C++ del sistema operativo.
+Requisito: GraalVM JDK instalado, `native-image` disponible en la terminal y herramientas de compilación C++ del sistema operativo.
 
 ### Instalar GraalVM
 
@@ -105,9 +114,9 @@ $graalHome=(Get-ChildItem $dest -Directory | Where-Object Name -Like "graalvm-jd
 
 Cierra y abre una terminal nueva.
 
-En Windows, `native-image` tambien necesita las herramientas de compilacion C++ de Visual Studio. Si aparece un error relacionado con compilador C/C++, instala **Build Tools for Visual Studio** con la carga **Desktop development with C++** y vuelve a abrir la terminal.
+En Windows, `native-image` también necesita las herramientas de compilación C++ de Visual Studio. Si aparece un error relacionado con compilador C/C++, instala **Build Tools for Visual Studio** con la carga **Desktop development with C++** y vuelve a abrir la terminal.
 
-En Linux/macOS o WSL, SDKMAN si es una opcion comoda:
+En Linux/macOS o WSL, SDKMAN sí es una opción cómoda:
 
 ```bash
 curl -s "https://get.sdkman.io" | bash
@@ -117,7 +126,7 @@ sdk install java <version>-graal
 sdk default java <version>-graal
 ```
 
-Reemplaza `<version>-graal` por una version listada por `sdk list java`.
+Reemplaza `<version>-graal` por una versión listada por `sdk list java`.
 
 Verificar:
 
@@ -137,13 +146,13 @@ native-image --version
 
 Para dejarlo permanente, agrega `JAVA_HOME` en las variables de entorno de Windows y coloca `%JAVA_HOME%\bin` al inicio de `Path`. Luego abre una terminal nueva.
 
-Antes de compilar a nativo, ejecuta primero la aplicacion en JVM y prueba login, CRUD de `Producto`, registro de `Venta`, filtros de consulta, detalle, totales, anulacion y cierre de sesion:
+Antes de compilar a nativo, ejecuta primero la aplicación en JVM y prueba login, CRUD de `Producto`, registro de `Venta`, filtros de consulta, detalle, totales, anulación y cierre de sesión:
 
 ```powershell
 .\mvnw.cmd clean javafx:run
 ```
 
-Generar configuracion de GraalVM con el agente. Mientras la app este abierta, ingresa con `admin`, registra productos, crea una venta con varios detalles, consulta ventas usando filtros, selecciona una venta para ver su detalle, anula una venta y cierra sesion para que el agente detecte el uso de JavaFX, FXML, JDBC, SQLite y login:
+Generar configuración de GraalVM con el agente. Mientras la app esté abierta, ingresa con `admin`, registra productos, crea una venta con varios detalles, consulta ventas usando filtros, selecciona una venta para ver su detalle, anula una venta y cierra sesión para que el agente detecte el uso de JavaFX, FXML, JDBC, SQLite y login:
 
 ```powershell
 .\mvnw.cmd -DskipTests gluonfx:runagent
@@ -167,4 +176,4 @@ Crear un instalador o paquete para el sistema operativo:
 .\mvnw.cmd -DskipTests gluonfx:package
 ```
 
-La aplicacion de consola para Unidad 1 se trabaja en `../comarket-cli`.
+La aplicación de consola para Unidad 1 se trabaja en `../comarket-cli`.
