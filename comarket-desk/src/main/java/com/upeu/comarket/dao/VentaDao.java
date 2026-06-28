@@ -115,22 +115,53 @@ public class VentaDao {
     }
 
     public List<Venta> listar() {
-        String sql = """
+        return consultar(null, null, null, null, null);
+    }
+
+    public List<Venta> consultar(String cliente, LocalDate fechaDesde, LocalDate fechaHasta, String username, String estado) {
+        StringBuilder sql = new StringBuilder("""
                 SELECT v.id, v.cliente, v.fecha, v.total, v.estado,
                        u.id AS usuario_id, u.username, u.password_hash, u.rol
                 FROM venta v
                 LEFT JOIN usuario u ON u.id = v.usuario_id
-                ORDER BY v.id DESC
-                """;
+                WHERE 1 = 1
+                """);
+        List<Object> parametros = new ArrayList<>();
+
+        if (!estaVacio(cliente)) {
+            sql.append(" AND lower(v.cliente) LIKE lower(?)");
+            parametros.add("%" + cliente.trim() + "%");
+        }
+        if (fechaDesde != null) {
+            sql.append(" AND v.fecha >= ?");
+            parametros.add(fechaDesde.toString());
+        }
+        if (fechaHasta != null) {
+            sql.append(" AND v.fecha <= ?");
+            parametros.add(fechaHasta.toString());
+        }
+        if (!estaVacio(username)) {
+            sql.append(" AND lower(u.username) LIKE lower(?)");
+            parametros.add("%" + username.trim() + "%");
+        }
+        if (!estaVacio(estado) && !"TODOS".equalsIgnoreCase(estado)) {
+            sql.append(" AND v.estado = ?");
+            parametros.add(estado);
+        }
+
+        sql.append(" ORDER BY v.id DESC");
         List<Venta> ventas = new ArrayList<>();
 
         try (Connection connection = ConexionSQLite.obtenerConexion();
-             PreparedStatement statement = connection.prepareStatement(sql);
+             PreparedStatement statement = connection.prepareStatement(sql.toString())) {
+            asignarParametros(statement, parametros);
+            try (
             ResultSet resultSet = statement.executeQuery()) {
-            while (resultSet.next()) {
-                ventas.add(mapearVenta(resultSet));
+                while (resultSet.next()) {
+                    ventas.add(mapearVenta(resultSet));
+                }
+                return ventas;
             }
-            return ventas;
         } catch (SQLException e) {
             throw new IllegalStateException("No se pudieron listar las ventas.", e);
         }
@@ -228,5 +259,15 @@ public class VentaDao {
                 resultSet.getString("estado"),
                 usuario
         );
+    }
+
+    private void asignarParametros(PreparedStatement statement, List<Object> parametros) throws SQLException {
+        for (int i = 0; i < parametros.size(); i++) {
+            statement.setObject(i + 1, parametros.get(i));
+        }
+    }
+
+    private boolean estaVacio(String texto) {
+        return texto == null || texto.trim().isEmpty();
     }
 }

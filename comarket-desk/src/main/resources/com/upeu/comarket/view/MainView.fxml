@@ -28,14 +28,17 @@
     <center>
         <TabPane tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="Productos">
-                    <fx:include source="ProductoView.fxml" />
+                <Tab fx:id="tabProductos" text="Productos">
+                    <fx:include fx:id="productoView" source="ProductoView.fxml" />
                 </Tab>
                 <Tab text="Ventas">
                     <fx:include source="VentaView.fxml" />
                 </Tab>
-                <Tab text="Consulta de ventas">
-                    <fx:include source="ConsultaVentasView.fxml" />
+                <Tab fx:id="tabConsultaVentas" text="Consulta de ventas">
+                    <fx:include fx:id="consultaVentasView" source="ConsultaVentasView.fxml" />
+                </Tab>
+                <Tab text="Reporte de ventas">
+                    <fx:include source="ReporteVentasView.fxml" />
                 </Tab>
             </tabs>
         </TabPane>

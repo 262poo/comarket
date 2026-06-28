@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,11 +17,35 @@ public class MainController {
     private Label lblUsuario;
 
     @FXML
+    private Tab tabProductos;
+
+    @FXML
+    private Tab tabConsultaVentas;
+
+    @FXML
+    private ProductoController productoViewController;
+
+    @FXML
+    private ConsultaVentasController consultaVentasViewController;
+
+    @FXML
     private void initialize() {
         Usuario usuario = Sesion.getUsuarioActual();
         if (usuario != null) {
             lblUsuario.setText(usuario.getUsername() + " (" + usuario.getRol() + ")");
         }
+
+        tabProductos.selectedProperty().addListener((observable, estabaSeleccionado, estaSeleccionado) -> {
+            if (estaSeleccionado && productoViewController != null) {
+                productoViewController.recargarDatos();
+            }
+        });
+
+        tabConsultaVentas.selectedProperty().addListener((observable, estabaSeleccionado, estaSeleccionado) -> {
+            if (estaSeleccionado && consultaVentasViewController != null) {
+                consultaVentasViewController.recargarDatos();
+            }
+        });
     }
 
     @FXML
@@ -31,6 +56,10 @@ public class MainController {
             Scene scene = new Scene(loader.load(), 420, 260);
             Stage stage = (Stage) lblUsuario.getScene().getWindow();
             stage.setTitle("CoMarket Desk - Login");
+            stage.setMinWidth(420);
+            stage.setMinHeight(260);
+            stage.setWidth(420);
+            stage.setHeight(260);
             stage.setScene(scene);
         } catch (IOException e) {
             throw new IllegalStateException("No se pudo cerrar la sesion.", e);

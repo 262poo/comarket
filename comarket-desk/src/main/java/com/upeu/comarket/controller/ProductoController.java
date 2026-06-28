@@ -82,6 +82,25 @@ public class ProductoController {
         cambiarModo(ModoFormulario.CONSULTA);
     }
 
+    public void recargarDatos() {
+        Producto seleccionado = tablaProductos.getSelectionModel().getSelectedItem();
+        String codigoSeleccionado = seleccionado == null ? null : seleccionado.getCodigo();
+
+        actualizarTabla();
+
+        if (codigoSeleccionado != null) {
+            Producto actualizado = productoService.buscarPorCodigo(codigoSeleccionado);
+            if (actualizado != null) {
+                tablaProductos.getSelectionModel().select(actualizado);
+                cargarProductoSeleccionado(actualizado);
+                return;
+            }
+        }
+
+        limpiarFormulario();
+        cambiarModo(ModoFormulario.CONSULTA);
+    }
+
     @FXML
     private void onNuevoClick() {
         limpiarFormulario();

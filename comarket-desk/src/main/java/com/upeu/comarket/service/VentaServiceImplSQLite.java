@@ -8,6 +8,7 @@ import com.upeu.comarket.entity.Venta;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +53,14 @@ public class VentaServiceImplSQLite implements VentaService {
     @Override
     public List<Venta> listar() {
         return ventaDao.listar();
+    }
+
+    @Override
+    public List<Venta> consultar(String cliente, LocalDate fechaDesde, LocalDate fechaHasta, String username, String estado) {
+        if (fechaDesde != null && fechaHasta != null && fechaDesde.isAfter(fechaHasta)) {
+            throw new IllegalArgumentException("La fecha inicial no puede ser mayor que la fecha final.");
+        }
+        return ventaDao.consultar(cliente, fechaDesde, fechaHasta, username, estado);
     }
 
     @Override

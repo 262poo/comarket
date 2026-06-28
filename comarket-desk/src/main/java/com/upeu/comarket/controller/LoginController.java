@@ -44,6 +44,8 @@ public class LoginController {
             Scene scene = new Scene(loader.load(), 920, 640);
             Stage stage = (Stage) txtUsername.getScene().getWindow();
             stage.setTitle("CoMarket Desk");
+            stage.setMinWidth(920);
+            stage.setMinHeight(640);
             stage.setScene(scene);
         } catch (IOException e) {
             throw new IllegalStateException("No se pudo abrir la ventana principal.", e);

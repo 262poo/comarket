@@ -31,7 +31,7 @@
                            GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                 <Label text="Clave:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <PasswordField fx:id="txtPassword" promptText="123456"
+                <PasswordField fx:id="txtPassword" text="123456" promptText="123456"
                                GridPane.columnIndex="1" GridPane.rowIndex="1" />
             </GridPane>
 

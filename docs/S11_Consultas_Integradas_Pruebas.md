@@ -6,175 +6,273 @@ Tiempo: 20 min.
 
 ### 1.1 Propósito
 
-Implementar consultas integradas sobre datos persistentes y probar el flujo principal de la aplicación de escritorio.
+Consolidar las consultas de ventas sobre SQLite y validar el flujo principal de CoMarket Desk con evidencias de prueba funcional.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante consulta información relacionada, muestra resultados maestro-detalle, filtra datos y documenta pruebas funcionales del flujo principal.
+El estudiante consulta datos relacionados (cabecera y detalle), aplica filtros, verifica totales y registra resultados de prueba del flujo principal.
 
 ### 1.3 Producto de sesión
 
-Consultas integradas con filtros, vista de detalle, totales y matriz de pruebas del flujo principal.
+Consultas integradas operativas en GUI, verificación de consistencia total cabecera vs detalle y matriz de pruebas S11.
 
 ### 1.4 Motivación de la sesión
 
-Registrar información no es suficiente. Una aplicación debe permitir buscar, revisar, filtrar y explicar los datos que ya fueron guardados.
+Registrar ventas no basta. El usuario necesita recuperar informacion con filtros, revisar detalle y validar que los numeros sean consistentes.
 
-Pregunta guía:
+Pregunta guia:
 
 ```text
-Cómo consultamos información relacionada y verificamos que el flujo completo funciona?
+Como consultamos informacion relacionada y comprobamos que el flujo completo funciona?
 ```
 
 ### 1.5 Ubicación en el curso
 
 - Unidad: U2.
-- Carpeta de trabajo: `comarket-desk`.
-- Avance de sesión: consultas, pruebas y correcciones antes de la evaluación.
+- Carpeta de trabajo: comarket-desk.
+- Avance de sesion: consultas, validaciones y pruebas funcionales antes de la evaluacion.
 
 ## 2. Explica
 
 Tiempo: 25 min.
 
-### 2.1 Conceptos clave
+### 2.1 Lo implementado actualmente en el proyecto
 
-- Consulta integrada.
-- Búsqueda por criterio.
-- Filtro por fecha o usuario.
-- Vista maestro-detalle.
-- Totales simples.
-- Pruebas funcionales.
-- Manejo de errores.
-- Corrección de observaciones.
+- Login previo obligatorio (usuario de prueba: admin / 123456).
+- Pestana Consulta de ventas:
+  - Lista ventas registradas.
+  - Muestra detalle de la venta seleccionada.
+  - Permite anular venta activa con confirmacion.
+  - Reposicion de stock al anular.
+- Pestana Reporte de ventas:
+  - Filtro por cliente.
+  - Filtro por fecha desde y fecha hasta.
+  - Filtro por usuario.
+  - Filtro por estado (TODOS, ACTIVA, ANULADA).
+  - Vista maestro-detalle.
+  - Total mostrado de la consulta.
+  - Verificacion de consistencia contra total del detalle.
+- Persistencia en SQLite mediante JDBC.
+- Validacion de rango de fechas (fecha inicial no mayor a fecha final).
 
-Regla metodológica de la sesión:
+### 2.2 Capas y componentes usados en S11
 
-```text
-La validación se aplica en cada sesión.
-En S11 no se introduce un patrón nuevo.
-S11 consolida consultas y pruebas del flujo principal.
-El estudiante debe poder explicar cómo viaja la información entre capas.
-Las consultas reutilizan los DAO existentes o un ConsultaDAO, siempre usando util/ConexionBD para conectarse a SQLite.
-```
+- Vista (FXML): ConsultaVentasView y ReporteVentasView.
+- Controladores: ConsultaVentasController y ReporteVentasController.
+- Servicio: VentaService y VentaServiceImplSQLite.
+- DAO: VentaDao y DetalleVentaDao.
+- Conexion: ConexionSQLite.
+- Entidades: Venta, DetalleVenta, Producto, Usuario.
 
-### 2.2 Arquitectura de consulta
+No se uso un ConsultaDAO separado en este avance; la consulta se resuelve en VentaDao con filtros dinamicos.
+
+### 2.3 Arquitectura real de ReporteVentasView
 
 ```mermaid
 flowchart TB
-    Vista["view<br/>consultas / filtros / tabla / detalle"]
-    Controlador["controller<br/>ConsultaController"]
+  Vista["view<br/>ReporteVentasView.fxml"]
+  Controlador["controller<br/>ReporteVentasController"]
+    Servicio["service<br/>VentaServiceImplSQLite"]
 
-    subgraph Servicio["service"]
-        ConsultaService["ConsultaService"]
-        Validaciones["Validaciones/Excepciones"]
-    end
-
-    subgraph Persistencia["dao"]
-        ConsultaDAO["ConsultaDAO"]
-        ConexionBD["util/ConexionBD"]
+    subgraph Persistencia["dao + db"]
+        VentaDAO["VentaDao"]
+        DetalleDAO["DetalleVentaDao"]
+        Conexion["ConexionSQLite"]
         SQLite[("SQLite")]
     end
 
     Entidades["entity<br/>Venta / DetalleVenta / Producto / Usuario"]
 
     Vista --> Controlador
-    Controlador --> ConsultaService
-    ConsultaService -.-> Validaciones
-    ConsultaService --> ConsultaDAO
-    ConsultaDAO --> Entidades
-    ConsultaDAO --> ConexionBD
-    ConexionBD -->|"JDBC"| SQLite
+    Controlador -->|"onBuscarClick -> consultar(cliente, fechaDesde, fechaHasta, usuario, estado)"| Servicio
+    Controlador -->|"seleccion en tabla -> listarDetalles(ventaId)"| Servicio
+    Servicio -->|"consultar(...)"| VentaDAO
+    Servicio -->|"listarDetalles(ventaId)"| DetalleDAO
+    VentaDAO --> Entidades
+    DetalleDAO --> Entidades
+    VentaDAO --> Conexion
+    DetalleDAO --> Conexion
+    Conexion -->|"JDBC"| SQLite
 ```
+
+  Flujo implementado en ReporteVentasView:
+
+  1. El usuario aplica filtros (cliente, fecha desde, fecha hasta, usuario, estado) y presiona Buscar.
+  2. ReporteVentasController invoca VentaService.consultar(...).
+  3. VentaServiceImplSQLite valida el rango de fechas y delega a VentaDao.consultar(...).
+  4. VentaDao arma SQL dinamico con los filtros y devuelve la lista de ventas.
+  5. Al seleccionar una venta, ReporteVentasController invoca VentaService.listarDetalles(ventaId).
+  6. VentaServiceImplSQLite delega a DetalleVentaDao.listarPorVentaId(ventaId) para poblar el detalle.
+  7. El controlador calcula total mostrado y consistencia (total cabecera vs suma de detalle).
 
 ## 3. Aplica: actividad práctica guiada
 
 Tiempo: 2h.
 
-1. Crear una vista de consultas.
-2. Agregar filtros por fecha, usuario o texto.
-3. Crear `ConsultaDAO` o métodos de consulta en DAO existentes.
-4. Reutilizar `ConexionBD` desde `util`.
-5. Crear `ConsultaService` si el flujo lo requiere.
-6. Listar operaciones registradas.
-7. Mostrar detalle de la operación seleccionada.
-8. Calcular total mostrado.
-9. Verificar consistencia entre cabecera y detalle.
-10. Probar casos válidos.
-11. Probar casos inválidos.
-12. Registrar matriz de pruebas.
-13. Corregir observaciones encontradas.
+### 3.1 Preparar datos de prueba
 
-Matriz sugerida:
+Antes de abrir el reporte, registra ventas con estados y fechas distintas para validar filtros.
+
+Minimo sugerido:
+
+```text
+- 1 venta ACTIVA de hoy con usuario admin.
+- 1 venta ACTIVA de una fecha anterior.
+- 1 venta ANULADA para validar filtro por estado.
+```
+
+### 3.2 Diseñar filtros en ReporteVentasView
+
+Controles minimos que debe tener la vista:
+
+- TextField para cliente.
+- DatePicker para fecha desde.
+- DatePicker para fecha hasta.
+- TextField para usuario.
+- ComboBox para estado (TODOS, ACTIVA, ANULADA).
+- Boton Buscar.
+- Boton Limpiar.
+
+### 3.3 Implementar buscar y limpiar en ReporteVentasController
+
+El controlador debe tomar filtros y delegar al servicio.
+
+```java
+@FXML
+private void onBuscarClick() {
+  tablaVentas.getItems().setAll(ventaService.consultar(
+      txtFiltroCliente.getText(),
+      dpFechaDesde.getValue(),
+      dpFechaHasta.getValue(),
+      txtFiltroUsuario.getText(),
+      cboEstado.getValue()
+  ));
+}
+
+@FXML
+private void onLimpiarFiltrosClick() {
+  txtFiltroCliente.clear();
+  dpFechaDesde.setValue(null);
+  dpFechaHasta.setValue(null);
+  txtFiltroUsuario.clear();
+  cboEstado.setValue("TODOS");
+}
+```
+
+### 3.4 Implementar consulta con validacion en el servicio
+
+La validacion de fechas va en servicio, no en la vista.
+
+```java
+@Override
+public List<Venta> consultar(String cliente, LocalDate fechaDesde,
+               LocalDate fechaHasta, String username, String estado) {
+  if (fechaDesde != null && fechaHasta != null && fechaDesde.isAfter(fechaHasta)) {
+    throw new IllegalArgumentException("La fecha inicial no puede ser mayor que la fecha final.");
+  }
+  return ventaDao.consultar(cliente, fechaDesde, fechaHasta, username, estado);
+}
+```
+
+### 3.5 Implementar consulta dinamica en VentaDao
+
+El DAO construye la consulta SQL segun filtros ingresados.
+
+```java
+if (!estaVacio(cliente)) {
+  sql.append(" AND lower(v.cliente) LIKE lower(?)");
+  parametros.add("%" + cliente.trim() + "%");
+}
+if (fechaDesde != null) {
+  sql.append(" AND v.fecha >= ?");
+  parametros.add(fechaDesde.toString());
+}
+if (fechaHasta != null) {
+  sql.append(" AND v.fecha <= ?");
+  parametros.add(fechaHasta.toString());
+}
+if (!estaVacio(username)) {
+  sql.append(" AND lower(u.username) LIKE lower(?)");
+  parametros.add("%" + username.trim() + "%");
+}
+if (!estaVacio(estado) && !"TODOS".equalsIgnoreCase(estado)) {
+  sql.append(" AND v.estado = ?");
+  parametros.add(estado);
+}
+```
+
+### 3.6 Implementar maestro-detalle y consistencia
+
+Al seleccionar una venta, se cargan sus detalles y se compara total de cabecera contra detalle.
+
+```java
+tablaVentas.getSelectionModel().selectedItemProperty().addListener(
+    (obs, anterior, seleccionado) -> cargarDetalleVenta(seleccionado)
+);
+
+private void cargarDetalleVenta(Venta venta) {
+  tablaDetallesVenta.getItems().setAll(ventaService.listarDetalles(venta.getId()));
+  double totalDetalle = calcularTotalDetalle();
+  lblConsistencia.setText(
+      "Total detalle: " + formatearMoneda(totalDetalle)
+          + " | Diferencia: "
+          + formatearMoneda(Math.abs(venta.calcularTotal() - totalDetalle))
+  );
+}
+```
+
+### 3.7 Ejecutar pruebas funcionales de la consulta
+
+Casos obligatorios de prueba manual:
 
 | Caso | Datos | Resultado esperado | Resultado obtenido |
 |---|---|---|---|
-| Consulta por fecha | Fecha con registros | Lista operaciones | |
-| Consulta sin resultados | Fecha sin registros | Mensaje claro | |
-| Ver detalle | Operación seleccionada | Muestra detalles | |
-| Sin selección | Ninguna fila | Muestra alerta | |
-| Total | Operación con detalles | Total correcto | |
+| Consulta por cliente | Cliente existente | Lista ventas del cliente | |
+| Consulta por fecha | Rango con registros | Lista ventas del rango | |
+| Consulta por usuario | admin | Lista ventas de admin | |
+| Consulta por estado | ACTIVA o ANULADA | Muestra solo ese estado | |
+| Rango invalido | fechaDesde mayor que fechaHasta | Mensaje de validacion | |
+| Sin resultados | Filtros sin coincidencia | Tabla vacia y total en cero | |
+| Ver detalle | Venta seleccionada | Muestra detalle de productos | |
+| Consistencia | Venta con detalle | Diferencia igual a S/ 0.00 (o minima) | |
+
+Nota metodologica:
+
+```text
+En el estado actual de este proyecto, S11 se valida con pruebas funcionales manuales.
+No hay pruebas automatizadas en src/test para este flujo.
+```
 
 ## 4. Crea: actividad autónoma
 
-Fuera del aula, cada estudiante consolida consultas y pruebas del flujo principal.
-
 Tiempo: 2h fuera del aula.
 
-### 4.1 Plantilla de evidencia individual
+### 4.1 Evidencia individual solicitada
 
-Entrega un PDF con el siguiente nombre:
+Entregar PDF con nombre:
 
 ```text
 S11_Equipo##_ApellidoNombre.pdf
 ```
 
-#### 4.1.1 Datos del estudiante
+Debe incluir:
 
-- Nombre:
-- Equipo:
-- Sesión: S11 - Consultas integradas y pruebas
-- Rol o aporte realizado:
-- Link de GitHub:
-
-#### 4.1.2 Trabajo autónomo realizado
-
-1. Implementar al menos una consulta con filtro.
-2. Mostrar resultado en tabla.
-3. Mostrar detalle del registro seleccionado.
-4. Verificar totales.
-5. Documentar pruebas.
-6. Registrar una corrección aplicada.
-7. Explicar el flujo entre capas.
-
-#### 4.1.3 Evidencia técnica
-
-- Captura de consulta.
-- Captura de detalle.
-- Código o fragmento de consulta.
-- Matriz de pruebas.
-- Evidencia de corrección aplicada.
-- Explicación del flujo `Vista -> Controlador -> Servicio -> DAO -> SQLite`.
-
-#### 4.1.4 Error o hallazgo
-
-Describe un problema encontrado al consultar o mostrar detalle.
-
-#### 4.1.5 Reflexión técnica breve
-
-Responde en 5 a 8 líneas:
-
-```text
-Por qué consultar datos relacionados es diferente de listar una sola tabla?
-```
+1. Captura del login y acceso correcto.
+2. Captura de Consulta de ventas con detalle seleccionado.
+3. Captura de Reporte de ventas aplicando al menos 2 filtros.
+4. Captura del resumen de total mostrado.
+5. Captura de consistencia total cabecera vs detalle.
+6. Registro de una anulacion y su resultado.
+7. Matriz de pruebas completa (casos validos e invalidos).
+8. Breve explicacion del flujo entre capas.
 
 ### 4.2 Criterios mínimos de aceptación
 
-- PDF con nombre correcto.
-- Consulta con filtro.
-- Vista maestro-detalle o equivalente.
+- Consulta maestro-detalle funcional.
+- Filtros operativos (cliente, fecha, usuario, estado).
 - Totales verificados.
-- Matriz de pruebas.
-- Corrección aplicada o hallazgo técnico.
+- Prueba de anulacion con reposicion de stock.
+- Matriz de pruebas documentada.
 
 ## 5. Cierre evaluativo
 
@@ -182,33 +280,27 @@ Tiempo: 20 min.
 
 ### 5.1 Resultados esperados
 
-- El estudiante consulta información persistente relacionada.
-- El resultado se muestra en GUI.
-- El detalle se muestra al seleccionar un registro.
-- Los totales son consistentes.
-- Existe matriz de pruebas.
-- Las validaciones trabajadas en sesiones previas se mantienen.
+- Consulta de ventas persistentes en GUI.
+- Filtros de busqueda aplicados correctamente.
+- Detalle visible por seleccion.
+- Coherencia de totales comprobada.
+- Registro de pruebas funcionales con hallazgos.
 
-### 5.2 Evidencia del producto de sesión
+### 5.2 Preguntas de defensa
 
-Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.
+1. Que diferencia existe entre Consulta de ventas y Reporte de ventas en tu implementacion?
+2. Que filtros usa Reporte de ventas y donde se aplican?
+3. Como se valida el rango de fechas?
+4. Como verificas que el total de cabecera coincide con el detalle?
+5. Que ocurre al anular una venta y por que?
 
-### 5.3 Preguntas de defensa y reflexión
+### 5.3 Rúbrica de evaluación
 
-1. Qué consulta implementaste?
-2. Qué filtros usaste?
-3. Qué DAO participa en la consulta?
-4. Cómo muestras el detalle?
-5. Cómo verificas el total?
-6. Qué corrección aplicaste?
-
-### 5.4 Rúbrica de evaluación
-
-| Dimensión | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuación obtenida |
+| Dimension | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuacion obtenida |
 |---|---:|---|---|---|---|---:|
-| 1. Consulta integrada | 2 | Consulta relacionada, filtrada y funcional. | Consulta funcional. | Consulta parcial. | No consulta. | |
-| 2. Vista de resultados | 2 | Tabla y detalle claros. | Resultado funcional. | Vista parcial. | No muestra resultados. | |
-| 3. Consistencia | 2 | Totales y detalles coherentes con BD. | Consistencia suficiente. | Inconsistencias menores. | No verifica. | |
-| 4. Pruebas | 2 | Matriz cubre casos válidos e inválidos. | Pruebas principales. | Pruebas parciales. | No prueba. | |
-| 5. Error o hallazgo | 1 | Analiza causa y solución. | Explica un problema. | Menciona un problema. | No presenta. | |
-| 6. Orden y reflexión | 1 | Evidencia clara y reflexión precisa. | Evidencia suficiente. | Evidencia incompleta. | No sustenta. | |
+| 1. Consulta integrada | 2 | Consulta y detalle claros, funcionales y consistentes. | Consulta funcional. | Consulta parcial. | No consulta. | |
+| 2. Filtros | 2 | Aplica filtros completos y explica su efecto. | Aplica filtros principales. | Filtros incompletos. | No filtra. | |
+| 3. Consistencia de datos | 2 | Verifica total cabecera vs detalle sin diferencias relevantes. | Verifica total general. | Verificacion parcial. | No verifica. | |
+| 4. Pruebas | 2 | Matriz completa con casos validos e invalidos. | Matriz principal completa. | Matriz parcial. | No presenta pruebas. | |
+| 5. Hallazgos y correccion | 1 | Identifica causa y plantea correccion concreta. | Reporta hallazgo con explicacion. | Reporte superficial. | Sin hallazgo. | |
+| 6. Sustento tecnico | 1 | Evidencia ordenada y explicacion de capas precisa. | Evidencia suficiente. | Evidencia incompleta. | Sin sustento. | |

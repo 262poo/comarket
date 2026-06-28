@@ -2,17 +2,18 @@
 
 Proyecto de escritorio JavaFX para la Unidad 2 y Unidad 3.
 
-Tag sugerido: `sesion-10`
+Tag sugerido: `sesion-11`
 
 Aqui se trabaja la evolucion de CoMarket hacia una aplicacion de escritorio con arquitectura por capas, JavaFX, FXML, controladores, servicios, DAO, JDBC y SQLite.
 
-En este hito, `Producto` se mantiene como catalogo persistente, `Venta` conserva cabecera y detalles, y se agrega seguridad basica con usuario autenticado. Las ventas nuevas quedan asociadas al usuario activo mediante una relacion uno a muchos.
+En este hito, `Producto` se mantiene como catalogo persistente, `Venta` conserva cabecera y detalles, y se consolidan consultas integradas con filtros, vista maestro-detalle, totales y validaciones del flujo principal.
 
-La aplicacion incluye tres pestanas:
+La aplicacion incluye cuatro pestanas:
 
 - `Productos`: CRUD persistente del catalogo.
 - `Ventas`: registro de cabecera y detalles asociado al usuario autenticado.
 - `Consulta de ventas`: listado de ventas registradas, detalle de la venta seleccionada y anulacion con reposicion de stock.
+- `Reporte de ventas`: filtros por cliente, fecha, usuario y estado; listado de ventas, detalle de la venta seleccionada, total mostrado y verificacion de total contra detalle.
 
 Antes de ingresar a esas pestanas, la aplicacion muestra un login. El usuario de prueba se crea automaticamente:
 
@@ -23,6 +24,19 @@ rol: ADMIN
 ```
 
 La version en memoria de productos queda como referencia en `ProductoServiceImplMemoria`. Las versiones activas usan SQLite mediante `ProductoServiceImplSQLite`, `VentaServiceImplSQLite` y `UsuarioServiceImplSQLite`.
+
+## Matriz de pruebas S11
+
+| Caso | Datos | Resultado esperado |
+|---|---|---|
+| Login correcto | `admin` / `123456` | Abre la ventana principal |
+| Login incorrecto | Usuario o clave invalida | Muestra mensaje de credenciales incorrectas |
+| Consulta por fecha | Rango con registros | Lista ventas dentro del rango |
+| Consulta sin resultados | Filtro sin coincidencias | Muestra tabla vacia y resumen en cero |
+| Ver detalle | Venta seleccionada | Muestra productos, cantidades, precios y subtotales |
+| Total | Venta con detalles | Total de cabecera coincide con total de detalle |
+| Anular venta | Venta activa seleccionada | Cambia estado a `ANULADA` y repone stock |
+| Sin seleccion | Anular sin fila seleccionada | Muestra mensaje claro |
 
 ## Ejecutar
 
@@ -123,19 +137,19 @@ native-image --version
 
 Para dejarlo permanente, agrega `JAVA_HOME` en las variables de entorno de Windows y coloca `%JAVA_HOME%\bin` al inicio de `Path`. Luego abre una terminal nueva.
 
-Antes de compilar a nativo, ejecuta primero la aplicacion en JVM y prueba login, CRUD de `Producto`, registro de `Venta`, consulta, anulacion y cierre de sesion:
+Antes de compilar a nativo, ejecuta primero la aplicacion en JVM y prueba login, CRUD de `Producto`, registro de `Venta`, filtros de consulta, detalle, totales, anulacion y cierre de sesion:
 
 ```powershell
 .\mvnw.cmd clean javafx:run
 ```
 
-Generar configuracion de GraalVM con el agente. Mientras la app este abierta, ingresa con `admin`, registra productos, crea una venta con varios detalles, consulta ventas, anula una venta y cierra sesion para que el agente detecte el uso de JavaFX, FXML, JDBC, SQLite y login:
+Generar configuracion de GraalVM con el agente. Mientras la app este abierta, ingresa con `admin`, registra productos, crea una venta con varios detalles, consulta ventas usando filtros, selecciona una venta para ver su detalle, anula una venta y cierra sesion para que el agente detecte el uso de JavaFX, FXML, JDBC, SQLite y login:
 
 ```powershell
 .\mvnw.cmd -DskipTests gluonfx:runagent
 ```
 
-Generar el ejecutable nativo para el hito `sesion-10`:
+Generar el ejecutable nativo para el hito `sesion-11`:
 
 ```powershell
 .\mvnw.cmd -DskipTests gluonfx:build

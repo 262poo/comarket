@@ -48,113 +48,146 @@ Tiempo: 15 min.
 - Consultas integradas.
 - Pruebas manuales.
 
-### 2.2 Arquitectura del producto U2
+### 2.2 Arquitectura real del producto U2
 
 ```mermaid
 flowchart TB
-    Vista["view<br/>JavaFX/FXML"]
-    Controlador["controller"]
+    LoginView["view<br/>LoginView.fxml"]
+    MainView["view<br/>MainView.fxml"]
+    ProductoView["view<br/>ProductoView.fxml"]
+    VentaView["view<br/>VentaView.fxml"]
+    ConsultaView["view<br/>ConsultaVentasView.fxml"]
+    ReporteView["view<br/>ReporteVentasView.fxml"]
 
-    subgraph Servicio["service"]
-        ProductoService["ProductoServiceImplDB"]
-        VentaService["VentaServiceImplDB"]
-        UsuarioService["UsuarioServiceImplDB"]
-        ConsultaService["ConsultaService"]
-        Validaciones["Validaciones/Excepciones"]
+    LoginController["controller<br/>LoginController"]
+    MainController["controller<br/>MainController"]
+    ProductoController["controller<br/>ProductoController"]
+    VentaController["controller<br/>VentaController"]
+    ConsultaController["controller<br/>ConsultaVentasController"]
+    ReporteController["controller<br/>ReporteVentasController"]
+
+    ProductoService["service<br/>ProductoServiceImplSQLite"]
+    VentaService["service<br/>VentaServiceImplSQLite"]
+    UsuarioService["service<br/>UsuarioServiceImplSQLite"]
+    Sesion["security<br/>Sesion"]
+
+    subgraph Persistencia["dao + db"]
+        ProductoDAO["dao<br/>ProductoDao"]
+        VentaDAO["dao<br/>VentaDao"]
+        DetalleDAO["dao<br/>DetalleVentaDao"]
+        UsuarioDAO["dao<br/>UsuarioDao"]
+        Conexion["db<br/>ConexionSQLite"]
+        SQLite[("data/comarket.db")]
     end
 
     Entidades["entity<br/>Producto / Venta / DetalleVenta / Usuario"]
 
-    subgraph Persistencia["dao"]
-        ProductoDAO["ProductoDAO"]
-        VentaDAO["VentaDAO"]
-        DetalleDAO["DetalleVentaDAO"]
-        UsuarioDAO["UsuarioDAO"]
-        ConsultaDAO["ConsultaDAO"]
-        SQLite[("SQLite")]
-    end
+    LoginView --> LoginController
+    LoginController --> UsuarioService
+    LoginController --> Sesion
+    LoginController --> MainView
 
-    Vista --> Controlador
-    Controlador --> ProductoService
-    Controlador --> VentaService
-    Controlador --> UsuarioService
-    Controlador --> ConsultaService
-    ProductoService -.-> Validaciones
-    VentaService -.-> Validaciones
-    UsuarioService -.-> Validaciones
+    MainView --> MainController
+    MainController --> ProductoView
+    MainController --> VentaView
+    MainController --> ConsultaView
+    MainController --> ReporteView
+
+    ProductoView --> ProductoController
+    VentaView --> VentaController
+    ConsultaView --> ConsultaController
+    ReporteView --> ReporteController
+
+    ProductoController --> ProductoService
+    VentaController --> VentaService
+    ConsultaController --> VentaService
+    ReporteController --> VentaService
+
+    UsuarioService --> UsuarioDAO
     ProductoService --> ProductoDAO
     VentaService --> VentaDAO
     VentaService --> DetalleDAO
-    UsuarioService --> UsuarioDAO
-    ConsultaService --> ConsultaDAO
+
     ProductoDAO --> Entidades
     VentaDAO --> Entidades
     DetalleDAO --> Entidades
     UsuarioDAO --> Entidades
-    ConsultaDAO --> Entidades
-    ProductoDAO -->|"JDBC"| SQLite
-    VentaDAO -->|"JDBC"| SQLite
-    DetalleDAO -->|"JDBC"| SQLite
-    UsuarioDAO -->|"JDBC"| SQLite
-    ConsultaDAO -->|"JDBC"| SQLite
 
-    classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
-    class ProductoService,VentaService,UsuarioService serviceImpl;
+    UsuarioDAO --> Conexion
+    ProductoDAO --> Conexion
+    VentaDAO --> Conexion
+    DetalleDAO --> Conexion
+    Conexion -->|"JDBC"| SQLite
 ```
 
-### 2.3 Criterios mínimos de revisión
+### 2.3 Criterios mínimos de cierre U2
 
-- GUI operativa.
-- `controller` conectado con `service`.
-- CRUD persistente de una tabla simple.
-- Operación persistente con cabecera y detalle.
-- Seguridad básica con usuario.
-- Relación uno a muchos asociada al usuario.
-- Consultas integradas.
-- Validaciones por sesión.
-- Pruebas del flujo principal.
+- Login funcional con usuario admin.
+- Sesion activa visible en ventana principal.
+- CRUD persistente de productos en SQLite.
+- Registro de venta con cabecera y detalle.
+- Asociacion de venta al usuario autenticado.
+- Consulta de ventas con detalle y anulacion.
+- Reporte de ventas con filtros (cliente, fecha, usuario, estado).
+- Consistencia total cabecera vs detalle validada.
+- Matriz de pruebas funcionales completa.
 
 ## 3. Aplica: evaluación práctica
 
 Tiempo: 3h.
 
-### 3.1 Preparar demostración
+### 3.1 Ejecutar la aplicación y autenticar
 
-Orden recomendado:
+1. Ejecutar comarket-desk.
+2. Ingresar con admin / 123456.
+3. Confirmar que la ventana principal muestra el usuario autenticado.
 
-1. Abrir el proyecto.
-2. Mostrar estructura de capas.
-3. Ejecutar la aplicación JavaFX.
-4. Iniciar sesión.
-5. Demostrar CRUD persistente de una tabla simple.
-6. Registrar una operación con detalles.
-7. Verificar registros en SQLite.
-8. Ejecutar una consulta integrada.
-9. Mostrar matriz de pruebas.
-10. Explicar una decisión técnica.
+### 3.2 Demostrar CRUD persistente de productos
 
-### 3.2 Ejecutar pruebas base
+1. Registrar un producto nuevo.
+2. Editar el producto.
+3. Eliminar o desactivar un producto segun flujo disponible.
+4. Confirmar que los cambios se mantienen al recargar la pantalla.
 
-El estudiante demuestra:
+### 3.3 Demostrar venta con cabecera y detalle
 
-1. Login correcto e incorrecto.
-2. Registro persistente desde GUI.
-3. Edición y eliminación de una tabla simple.
-4. Registro de cabecera y detalle.
-5. Validación de cantidad, stock o venta sin detalles.
-6. Asociación de operación a usuario.
-7. Consulta por filtro y vista de detalle.
-8. Manejo básico de errores.
+1. Registrar una venta con al menos dos detalles.
+2. Verificar validaciones (cantidad mayor a cero y stock suficiente).
+3. Confirmar que la venta queda asociada al usuario autenticado.
 
-### 3.3 Demostración individual
+### 3.4 Demostrar consulta de ventas
 
-Cada integrante debe poder responder:
+1. Abrir Consulta de ventas.
+2. Seleccionar una venta y mostrar su detalle.
+3. Anular una venta activa.
+4. Verificar cambio de estado a ANULADA y reposicion de stock.
 
-- Qué parte implementó.
-- Qué clase o archivo modificó.
-- Qué prueba ejecutó.
-- Qué error diagnosticó.
-- Qué decisión técnica puede defender.
+### 3.5 Demostrar reporte de ventas y consistencia
+
+1. Abrir Reporte de ventas.
+2. Probar filtros por cliente, rango de fechas, usuario y estado.
+3. Seleccionar una venta filtrada y mostrar detalle.
+4. Verificar total mostrado y diferencia de consistencia.
+
+### 3.6 Ejecutar matriz final de pruebas U2
+
+| Caso | Evidencia esperada | Resultado obtenido |
+|---|---|---|
+| Login correcto e incorrecto | Control de acceso funcional | |
+| CRUD de productos | Persistencia correcta en GUI | |
+| Registro de venta | Cabecera y detalle guardados | |
+| Usuario en venta | Venta asociada a admin | |
+| Consulta de ventas | Maestro-detalle operativo | |
+| Anulacion | Estado ANULADA y stock repuesto | |
+| Reporte con filtros | Filtrado correcto por criterios | |
+| Consistencia | Total cabecera coincide con detalle | |
+
+Nota metodologica:
+
+```text
+En el estado actual del proyecto, el cierre U2 se sustenta con pruebas funcionales manuales.
+No hay suite automatizada en src/test para este producto.
+```
 
 ## 4. Crea: evidencia individual
 
