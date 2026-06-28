@@ -901,10 +901,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-demostrar-consulta-de-ventas" class="md-nav__link">
+  <a href="#34-demostrar-anulacion-de-ventas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4 Demostrar consulta de ventas
+        3.4 Demostrar anulación de ventas
       
     </span>
   </a>
@@ -1599,10 +1599,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-demostrar-consulta-de-ventas" class="md-nav__link">
+  <a href="#34-demostrar-anulacion-de-ventas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4 Demostrar consulta de ventas
+        3.4 Demostrar anulación de ventas
       
     </span>
   </a>
@@ -1857,14 +1857,14 @@
     MainView["view&lt;br/&gt;MainView.fxml"]
     ProductoView["view&lt;br/&gt;ProductoView.fxml"]
     VentaView["view&lt;br/&gt;VentaView.fxml"]
-    ConsultaView["view&lt;br/&gt;ConsultaVentasView.fxml"]
+    AnularVentasView["view&lt;br/&gt;AnularVentasView.fxml"]
     ReporteView["view&lt;br/&gt;ReporteVentasView.fxml"]
 
     LoginController["controller&lt;br/&gt;LoginController"]
     MainController["controller&lt;br/&gt;MainController"]
     ProductoController["controller&lt;br/&gt;ProductoController"]
     VentaController["controller&lt;br/&gt;VentaController"]
-    ConsultaController["controller&lt;br/&gt;ConsultaVentasController"]
+    AnularVentasController["controller&lt;br/&gt;AnularVentasController"]
     ReporteController["controller&lt;br/&gt;ReporteVentasController"]
 
     ProductoService["service&lt;br/&gt;ProductoServiceImplSQLite"]
@@ -1891,17 +1891,17 @@
     MainView --&gt; MainController
     MainController --&gt; ProductoView
     MainController --&gt; VentaView
-    MainController --&gt; ConsultaView
+    MainController --&gt; AnularVentasView
     MainController --&gt; ReporteView
 
     ProductoView --&gt; ProductoController
     VentaView --&gt; VentaController
-    ConsultaView --&gt; ConsultaController
+    AnularVentasView --&gt; AnularVentasController
     ReporteView --&gt; ReporteController
 
     ProductoController --&gt; ProductoService
     VentaController --&gt; VentaService
-    ConsultaController --&gt; VentaService
+    AnularVentasController --&gt; VentaService
     ReporteController --&gt; VentaService
 
     UsuarioService --&gt; UsuarioDAO
@@ -1922,11 +1922,11 @@
 <h3 id="23-criterios-minimos-de-cierre-u2">2.3 Criterios mínimos de cierre U2<a class="headerlink" href="#23-criterios-minimos-de-cierre-u2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Login funcional con usuario admin.</li>
-<li>Sesion activa visible en ventana principal.</li>
+<li>Sesión activa visible en ventana principal.</li>
 <li>CRUD persistente de productos en SQLite.</li>
 <li>Registro de venta con cabecera y detalle.</li>
-<li>Asociacion de venta al usuario autenticado.</li>
-<li>Consulta de ventas con detalle y anulacion.</li>
+<li>Asociación de venta al usuario autenticado.</li>
+<li>Anular ventas con detalle, estado, usuario y anulación.</li>
 <li>Reporte de ventas con filtros (cliente, fecha, usuario, estado).</li>
 <li>Consistencia total cabecera vs detalle validada.</li>
 <li>Matriz de pruebas funcionales completa.</li>
@@ -1943,7 +1943,7 @@
 <ol>
 <li>Registrar un producto nuevo.</li>
 <li>Editar el producto.</li>
-<li>Eliminar o desactivar un producto segun flujo disponible.</li>
+<li>Eliminar un producto según el flujo disponible.</li>
 <li>Confirmar que los cambios se mantienen al recargar la pantalla.</li>
 </ol>
 <h3 id="33-demostrar-venta-con-cabecera-y-detalle">3.3 Demostrar venta con cabecera y detalle<a class="headerlink" href="#33-demostrar-venta-con-cabecera-y-detalle" title="Permanent link">&para;</a></h3>
@@ -1952,12 +1952,13 @@
 <li>Verificar validaciones (cantidad mayor a cero y stock suficiente).</li>
 <li>Confirmar que la venta queda asociada al usuario autenticado.</li>
 </ol>
-<h3 id="34-demostrar-consulta-de-ventas">3.4 Demostrar consulta de ventas<a class="headerlink" href="#34-demostrar-consulta-de-ventas" title="Permanent link">&para;</a></h3>
+<h3 id="34-demostrar-anulacion-de-ventas">3.4 Demostrar anulación de ventas<a class="headerlink" href="#34-demostrar-anulacion-de-ventas" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Abrir Consulta de ventas.</li>
+<li>Abrir Anular ventas.</li>
 <li>Seleccionar una venta y mostrar su detalle.</li>
+<li>Verificar que se muestra el usuario que registró la venta.</li>
 <li>Anular una venta activa.</li>
-<li>Verificar cambio de estado a ANULADA y reposicion de stock.</li>
+<li>Verificar cambio de estado a ANULADA y reposición de stock.</li>
 </ol>
 <h3 id="35-demostrar-reporte-de-ventas-y-consistencia">3.5 Demostrar reporte de ventas y consistencia<a class="headerlink" href="#35-demostrar-reporte-de-ventas-y-consistencia" title="Permanent link">&para;</a></h3>
 <ol>
@@ -1997,12 +1998,12 @@
 <td></td>
 </tr>
 <tr>
-<td>Consulta de ventas</td>
-<td>Maestro-detalle operativo</td>
+<td>Anular ventas</td>
+<td>Maestro-detalle operativo, usuario visible y anulación</td>
 <td></td>
 </tr>
 <tr>
-<td>Anulacion</td>
+<td>Anulación</td>
 <td>Estado ANULADA y stock repuesto</td>
 <td></td>
 </tr>
@@ -2018,7 +2019,7 @@
 </tr>
 </tbody>
 </table>
-<p>Nota metodologica:</p>
+<p>Nota metodológica:</p>
 <div class="highlight"><pre><span></span><code>En el estado actual del proyecto, el cierre U2 se sustenta con pruebas funcionales manuales.
 No hay suite automatizada en src/test para este producto.
 </code></pre></div>

@@ -1953,11 +1953,11 @@ flowchart TD
     LoginView["view&lt;br/&gt;LoginView.fxml&lt;br/&gt;txtUsername / txtPassword / Ingresar"]
     MainView["view&lt;br/&gt;MainView.fxml&lt;br/&gt;lblUsuario"]
     VentaView["view&lt;br/&gt;VentaView.fxml&lt;br/&gt;registro de venta"]
-    ConsultaVentasView["view&lt;br/&gt;ConsultaVentasView.fxml&lt;br/&gt;colUsuario / Anular venta"]
+    AnularVentasView["view&lt;br/&gt;AnularVentasView.fxml&lt;br/&gt;colUsuario / Anular venta"]
     LoginController["controller&lt;br/&gt;LoginController&lt;br/&gt;onIngresarClick()"]
     MainController["controller&lt;br/&gt;MainController&lt;br/&gt;initialize()&lt;br/&gt;onCerrarSesionClick()"]
     VentaController["controller&lt;br/&gt;VentaController&lt;br/&gt;onGuardarVentaClick()"]
-    ConsultaVentasController["controller&lt;br/&gt;ConsultaVentasController&lt;br/&gt;colUsuario&lt;br/&gt;onAnularVentaClick()"]
+    AnularVentasController["controller&lt;br/&gt;AnularVentasController&lt;br/&gt;colUsuario&lt;br/&gt;onAnularVentaClick()"]
     UsuarioService["service&lt;br/&gt;UsuarioService&lt;br/&gt;autenticar(username, password)"]
     UsuarioServiceImplSQLite["service impl&lt;br/&gt;UsuarioServiceImplSQLite&lt;br/&gt;validar vacios / comparar password"]
     VentaService["service&lt;br/&gt;VentaService&lt;br/&gt;registrar(venta) / listar() / anular(ventaId)"]
@@ -1989,9 +1989,9 @@ flowchart TD
     VentaDao --&gt; ConexionSQLite
     VentaController --&gt; Venta
     Venta --&gt; Usuario
-    ConsultaVentasView --&gt; ConsultaVentasController
-    ConsultaVentasController --&gt; VentaService
-    ConsultaVentasController --&gt; Sesion
+    AnularVentasView --&gt; AnularVentasController
+    AnularVentasController --&gt; VentaService
+    AnularVentasController --&gt; Sesion
     VentaDao --&gt; Venta
 
     classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
@@ -2000,7 +2000,7 @@ flowchart TD
 <div class="highlight"><pre><span></span><code>com.upeu.comarket.controller.LoginController
 com.upeu.comarket.controller.MainController
 com.upeu.comarket.controller.VentaController
-com.upeu.comarket.controller.ConsultaVentasController
+com.upeu.comarket.controller.AnularVentasController
 com.upeu.comarket.security.Sesion
 com.upeu.comarket.entity.Usuario
 com.upeu.comarket.entity.Venta
@@ -2013,7 +2013,7 @@ com.upeu.comarket.db.ConexionSQLite
 src/main/resources/com/upeu/comarket/view/LoginView.fxml
 src/main/resources/com/upeu/comarket/view/MainView.fxml
 src/main/resources/com/upeu/comarket/view/VentaView.fxml
-src/main/resources/com/upeu/comarket/view/ConsultaVentasView.fxml
+src/main/resources/com/upeu/comarket/view/AnularVentasView.fxml
 </code></pre></div>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
@@ -2222,7 +2222,7 @@ Ningún controlador debe volver a pedir username/password para cada venta.
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>En el proyecto guía, <code>ConsultaVentasController</code> también muestra el usuario que registró la venta mediante la columna <code>colUsuario</code>. Si una venta antigua no tiene usuario, la tabla muestra <code>Sin usuario</code>.</p>
+<p>En el proyecto guía, <code>AnularVentasController</code> también muestra el usuario que registró la venta mediante la columna <code>colUsuario</code>. Si una venta antigua no tiene usuario, la tabla muestra <code>Sin usuario</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">colUsuario</span><span class="p">.</span><span class="na">setCellValueFactory</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">-&gt;</span>
 <span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">SimpleStringProperty</span><span class="p">(</span><span class="n">obtenerUsername</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="na">getValue</span><span class="p">()))</span>
 <span class="p">);</span>

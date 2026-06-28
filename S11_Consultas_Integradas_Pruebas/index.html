@@ -812,10 +812,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-arquitectura-real-de-reporteventasview" class="md-nav__link">
+  <a href="#23-arquitectura-real-de-s11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3 Arquitectura real de ReporteVentasView
+        2.3 Arquitectura real de S11
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-flujo-implementado-en-reporteventasview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Flujo implementado en ReporteVentasView
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-flujo-implementado-en-anularventasview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Flujo implementado en AnularVentasView
       
     </span>
   </a>
@@ -876,7 +898,7 @@
   <a href="#34-implementar-consulta-con-validacion-en-el-servicio" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4 Implementar consulta con validacion en el servicio
+        3.4 Implementar consulta con validación en el servicio
       
     </span>
   </a>
@@ -887,7 +909,7 @@
   <a href="#35-implementar-consulta-dinamica-en-ventadao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5 Implementar consulta dinamica en VentaDao
+        3.5 Implementar consulta dinámica en VentaDao
       
     </span>
   </a>
@@ -1477,10 +1499,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-arquitectura-real-de-reporteventasview" class="md-nav__link">
+  <a href="#23-arquitectura-real-de-s11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3 Arquitectura real de ReporteVentasView
+        2.3 Arquitectura real de S11
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-flujo-implementado-en-reporteventasview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Flujo implementado en ReporteVentasView
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-flujo-implementado-en-anularventasview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Flujo implementado en AnularVentasView
       
     </span>
   </a>
@@ -1541,7 +1585,7 @@
   <a href="#34-implementar-consulta-con-validacion-en-el-servicio" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4 Implementar consulta con validacion en el servicio
+        3.4 Implementar consulta con validación en el servicio
       
     </span>
   </a>
@@ -1552,7 +1596,7 @@
   <a href="#35-implementar-consulta-dinamica-en-ventadao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5 Implementar consulta dinamica en VentaDao
+        3.5 Implementar consulta dinámica en VentaDao
       
     </span>
   </a>
@@ -1702,101 +1746,139 @@
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
 <p>Consultas integradas operativas en GUI, verificación de consistencia total cabecera vs detalle y matriz de pruebas S11.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
-<p>Registrar ventas no basta. El usuario necesita recuperar informacion con filtros, revisar detalle y validar que los numeros sean consistentes.</p>
-<p>Pregunta guia:</p>
-<div class="highlight"><pre><span></span><code>Como consultamos informacion relacionada y comprobamos que el flujo completo funciona?
+<p>Registrar ventas no basta. El usuario necesita recuperar información con filtros, revisar detalle y validar que los números sean consistentes.</p>
+<p>Pregunta guía:</p>
+<div class="highlight"><pre><span></span><code>Cómo consultamos información relacionada y comprobamos que el flujo completo funciona?
 </code></pre></div>
 <h3 id="15-ubicacion-en-el-curso">1.5 Ubicación en el curso<a class="headerlink" href="#15-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Unidad: U2.</li>
-<li>Carpeta de trabajo: comarket-desk.</li>
-<li>Avance de sesion: consultas, validaciones y pruebas funcionales antes de la evaluacion.</li>
+<li>Carpeta de trabajo: <code>comarket-desk</code>.</li>
+<li>Avance de sesión: consultas, validaciones y pruebas funcionales antes de la evaluación.</li>
 </ul>
 <h2 id="2-explica">2. Explica<a class="headerlink" href="#2-explica" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 25 min.</p>
 <h3 id="21-lo-implementado-actualmente-en-el-proyecto">2.1 Lo implementado actualmente en el proyecto<a class="headerlink" href="#21-lo-implementado-actualmente-en-el-proyecto" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Login previo obligatorio (usuario de prueba: admin / 123456).</li>
-<li>Pestana Consulta de ventas:</li>
+<li>Pestaña Anular ventas:</li>
+<li>Usa <code>AnularVentasView.fxml</code>.</li>
+<li>Controlador: <code>AnularVentasController</code>.</li>
 <li>Lista ventas registradas.</li>
 <li>Muestra detalle de la venta seleccionada.</li>
-<li>Permite anular venta activa con confirmacion.</li>
-<li>Reposicion de stock al anular.</li>
-<li>Pestana Reporte de ventas:</li>
+<li>Permite anular venta activa con confirmación.</li>
+<li>Reposición de stock al anular.</li>
+<li>Muestra el usuario que registró cada venta mediante <code>colUsuario</code>.</li>
+<li>Pestaña Reporte de ventas:</li>
+<li>Usa <code>ReporteVentasView.fxml</code>.</li>
+<li>Controlador: <code>ReporteVentasController</code>.</li>
 <li>Filtro por cliente.</li>
 <li>Filtro por fecha desde y fecha hasta.</li>
 <li>Filtro por usuario.</li>
 <li>Filtro por estado (TODOS, ACTIVA, ANULADA).</li>
 <li>Vista maestro-detalle.</li>
 <li>Total mostrado de la consulta.</li>
-<li>Verificacion de consistencia contra total del detalle.</li>
+<li>Verificación de consistencia contra total del detalle.</li>
 <li>Persistencia en SQLite mediante JDBC.</li>
-<li>Validacion de rango de fechas (fecha inicial no mayor a fecha final).</li>
+<li>Validación de rango de fechas (fecha inicial no mayor a fecha final).</li>
 </ul>
 <h3 id="22-capas-y-componentes-usados-en-s11">2.2 Capas y componentes usados en S11<a class="headerlink" href="#22-capas-y-componentes-usados-en-s11" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Vista (FXML): ConsultaVentasView y ReporteVentasView.</li>
-<li>Controladores: ConsultaVentasController y ReporteVentasController.</li>
-<li>Servicio: VentaService y VentaServiceImplSQLite.</li>
-<li>DAO: VentaDao y DetalleVentaDao.</li>
-<li>Conexion: ConexionSQLite.</li>
-<li>Entidades: Venta, DetalleVenta, Producto, Usuario.</li>
+<li>Vista (FXML): <code>AnularVentasView.fxml</code> y <code>ReporteVentasView.fxml</code>.</li>
+<li>Controladores: <code>AnularVentasController</code>, <code>ReporteVentasController</code> y <code>MainController</code>.</li>
+<li>Servicio: <code>VentaService</code> y <code>VentaServiceImplSQLite</code>.</li>
+<li>DAO: <code>VentaDao</code> y <code>DetalleVentaDao</code>.</li>
+<li>Conexión: <code>ConexionSQLite</code>.</li>
+<li>Entidades: <code>Venta</code>, <code>DetalleVenta</code>, <code>Producto</code> y <code>Usuario</code>.</li>
 </ul>
-<p>No se uso un ConsultaDAO separado en este avance; la consulta se resuelve en VentaDao con filtros dinamicos.</p>
-<h3 id="23-arquitectura-real-de-reporteventasview">2.3 Arquitectura real de ReporteVentasView<a class="headerlink" href="#23-arquitectura-real-de-reporteventasview" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>flowchart TB
-  Vista["view&lt;br/&gt;ReporteVentasView.fxml"]
-  Controlador["controller&lt;br/&gt;ReporteVentasController"]
-    Servicio["service&lt;br/&gt;VentaServiceImplSQLite"]
-
-    subgraph Persistencia["dao + db"]
-        VentaDAO["VentaDao"]
-        DetalleDAO["DetalleVentaDao"]
-        Conexion["ConexionSQLite"]
-        SQLite[("SQLite")]
-    end
-
+<p>No se usó un <code>ConsultaDao</code> separado en este avance; la consulta se resuelve en <code>VentaDao.consultar(...)</code> con filtros dinámicos.</p>
+<h3 id="23-arquitectura-real-de-s11">2.3 Arquitectura real de S11<a class="headerlink" href="#23-arquitectura-real-de-s11" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>%%{init: {'flowchart': {'rankSpacing': 80, 'nodeSpacing': 35, 'curve': 'basis'}} }%%
+flowchart TD
+    MainView["view&lt;br/&gt;MainView.fxml&lt;br/&gt;tabs: Anular ventas / Reporte de ventas"]
+    AnularVentasView["view&lt;br/&gt;AnularVentasView.fxml&lt;br/&gt;tablaVentas / tablaDetallesVenta / colUsuario"]
+    ReporteVentasView["view&lt;br/&gt;ReporteVentasView.fxml&lt;br/&gt;filtros / resumen / consistencia"]
+    MainController["controller&lt;br/&gt;MainController&lt;br/&gt;recarga AnularVentas al seleccionar tab"]
+    AnularVentasController["controller&lt;br/&gt;AnularVentasController&lt;br/&gt;onActualizarClick()&lt;br/&gt;onAnularVentaClick()&lt;br/&gt;recargarDatos()"]
+    ReporteVentasController["controller&lt;br/&gt;ReporteVentasController&lt;br/&gt;onBuscarClick()&lt;br/&gt;onLimpiarFiltrosClick()&lt;br/&gt;cargarDetalleVenta(venta)"]
+    VentaService["service&lt;br/&gt;VentaService&lt;br/&gt;listar()&lt;br/&gt;listarDetalles(ventaId)&lt;br/&gt;anular(ventaId)&lt;br/&gt;consultar(...)"]
+    VentaServiceImplSQLite["service impl&lt;br/&gt;VentaServiceImplSQLite&lt;br/&gt;validar rango fechas&lt;br/&gt;delegar consulta"]
+    VentaDao["dao&lt;br/&gt;VentaDao&lt;br/&gt;listar()&lt;br/&gt;consultar(...)&lt;br/&gt;anular(...)&lt;br/&gt;reponerStock(...)"]
+    DetalleVentaDao["dao&lt;br/&gt;DetalleVentaDao&lt;br/&gt;listarPorVentaId(ventaId)"]
+    ConexionSQLite["db&lt;br/&gt;ConexionSQLite&lt;br/&gt;obtenerConexion()"]
     Entidades["entity&lt;br/&gt;Venta / DetalleVenta / Producto / Usuario"]
+    SQLite[("data/comarket.db&lt;br/&gt;venta / detalle_venta / producto / usuario")]
 
-    Vista --&gt; Controlador
-    Controlador --&gt;|"onBuscarClick -&gt; consultar(cliente, fechaDesde, fechaHasta, usuario, estado)"| Servicio
-    Controlador --&gt;|"seleccion en tabla -&gt; listarDetalles(ventaId)"| Servicio
-    Servicio --&gt;|"consultar(...)"| VentaDAO
-    Servicio --&gt;|"listarDetalles(ventaId)"| DetalleDAO
-    VentaDAO --&gt; Entidades
-    DetalleDAO --&gt; Entidades
-    VentaDAO --&gt; Conexion
-    DetalleDAO --&gt; Conexion
-    Conexion --&gt;|"JDBC"| SQLite</code></pre>
-<p>Flujo implementado en ReporteVentasView:</p>
+    MainView --&gt; MainController
+    MainView --&gt; AnularVentasView
+    MainView --&gt; ReporteVentasView
+    MainController --&gt; AnularVentasController
+    AnularVentasView --&gt; AnularVentasController
+    ReporteVentasView --&gt; ReporteVentasController
+    AnularVentasController --&gt; VentaService
+    ReporteVentasController --&gt; VentaService
+    VentaService --&gt; VentaServiceImplSQLite
+    VentaServiceImplSQLite --&gt; VentaDao
+    VentaServiceImplSQLite --&gt; DetalleVentaDao
+    VentaDao --&gt; ConexionSQLite
+    DetalleVentaDao --&gt; ConexionSQLite
+    VentaDao --&gt; Entidades
+    DetalleVentaDao --&gt; Entidades
+    ConexionSQLite --&gt; SQLite
+
+    classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    class VentaServiceImplSQLite serviceImpl;</code></pre>
+<p>Nombres reales del proyecto guía:</p>
+<div class="highlight"><pre><span></span><code>com.upeu.comarket.controller.AnularVentasController
+com.upeu.comarket.controller.ReporteVentasController
+com.upeu.comarket.controller.MainController
+com.upeu.comarket.service.VentaService
+com.upeu.comarket.service.VentaServiceImplSQLite
+com.upeu.comarket.dao.VentaDao
+com.upeu.comarket.dao.DetalleVentaDao
+com.upeu.comarket.db.ConexionSQLite
+src/main/resources/com/upeu/comarket/view/AnularVentasView.fxml
+src/main/resources/com/upeu/comarket/view/ReporteVentasView.fxml
+</code></pre></div>
+<h3 id="24-flujo-implementado-en-reporteventasview">2.4 Flujo implementado en ReporteVentasView<a class="headerlink" href="#24-flujo-implementado-en-reporteventasview" title="Permanent link">&para;</a></h3>
 <ol>
 <li>El usuario aplica filtros (cliente, fecha desde, fecha hasta, usuario, estado) y presiona Buscar.</li>
 <li>ReporteVentasController invoca VentaService.consultar(...).</li>
 <li>VentaServiceImplSQLite valida el rango de fechas y delega a VentaDao.consultar(...).</li>
-<li>VentaDao arma SQL dinamico con los filtros y devuelve la lista de ventas.</li>
+<li>VentaDao arma SQL dinámico con los filtros y devuelve la lista de ventas.</li>
 <li>Al seleccionar una venta, ReporteVentasController invoca VentaService.listarDetalles(ventaId).</li>
 <li>VentaServiceImplSQLite delega a DetalleVentaDao.listarPorVentaId(ventaId) para poblar el detalle.</li>
 <li>El controlador calcula total mostrado y consistencia (total cabecera vs suma de detalle).</li>
+</ol>
+<h3 id="25-flujo-implementado-en-anularventasview">2.5 Flujo implementado en AnularVentasView<a class="headerlink" href="#25-flujo-implementado-en-anularventasview" title="Permanent link">&para;</a></h3>
+<ol>
+<li>La pestaña carga ventas mediante <code>ventaService.listar()</code>.</li>
+<li>Al seleccionar una venta, se carga el detalle con <code>ventaService.listarDetalles(ventaId)</code>.</li>
+<li>La tabla muestra <code>estado</code> y <code>usuario</code>.</li>
+<li>Si el usuario presiona <strong>Anular venta</strong>, <code>AnularVentasController</code> valida sesión activa.</li>
+<li>El controlador pide confirmación.</li>
+<li><code>VentaServiceImplSQLite.anular(ventaId)</code> repone stock y marca la venta como <code>ANULADA</code>.</li>
+<li>La tabla se refresca después de anular.</li>
 </ol>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <h3 id="31-preparar-datos-de-prueba">3.1 Preparar datos de prueba<a class="headerlink" href="#31-preparar-datos-de-prueba" title="Permanent link">&para;</a></h3>
 <p>Antes de abrir el reporte, registra ventas con estados y fechas distintas para validar filtros.</p>
-<p>Minimo sugerido:</p>
+<p>Mínimo sugerido:</p>
 <div class="highlight"><pre><span></span><code>- 1 venta ACTIVA de hoy con usuario admin.
 - 1 venta ACTIVA de una fecha anterior.
 - 1 venta ANULADA para validar filtro por estado.
 </code></pre></div>
 <h3 id="32-disenar-filtros-en-reporteventasview">3.2 Diseñar filtros en ReporteVentasView<a class="headerlink" href="#32-disenar-filtros-en-reporteventasview" title="Permanent link">&para;</a></h3>
-<p>Controles minimos que debe tener la vista:</p>
+<p>Controles mínimos que debe tener la vista:</p>
 <ul>
 <li>TextField para cliente.</li>
 <li>DatePicker para fecha desde.</li>
 <li>DatePicker para fecha hasta.</li>
 <li>TextField para usuario.</li>
 <li>ComboBox para estado (TODOS, ACTIVA, ANULADA).</li>
-<li>Boton Buscar.</li>
-<li>Boton Limpiar.</li>
+<li>Botón Buscar.</li>
+<li>Botón Limpiar.</li>
 </ul>
 <h3 id="33-implementar-buscar-y-limpiar-en-reporteventascontroller">3.3 Implementar buscar y limpiar en ReporteVentasController<a class="headerlink" href="#33-implementar-buscar-y-limpiar-en-reporteventascontroller" title="Permanent link">&para;</a></h3>
 <p>El controlador debe tomar filtros y delegar al servicio.</p>
@@ -1820,8 +1902,8 @@
 <span class="w">  </span><span class="n">cboEstado</span><span class="p">.</span><span class="na">setValue</span><span class="p">(</span><span class="s">&quot;TODOS&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="34-implementar-consulta-con-validacion-en-el-servicio">3.4 Implementar consulta con validacion en el servicio<a class="headerlink" href="#34-implementar-consulta-con-validacion-en-el-servicio" title="Permanent link">&para;</a></h3>
-<p>La validacion de fechas va en servicio, no en la vista.</p>
+<h3 id="34-implementar-consulta-con-validacion-en-el-servicio">3.4 Implementar consulta con validación en el servicio<a class="headerlink" href="#34-implementar-consulta-con-validacion-en-el-servicio" title="Permanent link">&para;</a></h3>
+<p>La validación de fechas va en servicio, no en la vista.</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@Override</span>
 <span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Venta</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">consultar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">cliente</span><span class="p">,</span><span class="w"> </span><span class="n">LocalDate</span><span class="w"> </span><span class="n">fechaDesde</span><span class="p">,</span>
 <span class="w">               </span><span class="n">LocalDate</span><span class="w"> </span><span class="n">fechaHasta</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">estado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1831,8 +1913,8 @@
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">ventaDao</span><span class="p">.</span><span class="na">consultar</span><span class="p">(</span><span class="n">cliente</span><span class="p">,</span><span class="w"> </span><span class="n">fechaDesde</span><span class="p">,</span><span class="w"> </span><span class="n">fechaHasta</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">estado</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="35-implementar-consulta-dinamica-en-ventadao">3.5 Implementar consulta dinamica en VentaDao<a class="headerlink" href="#35-implementar-consulta-dinamica-en-ventadao" title="Permanent link">&para;</a></h3>
-<p>El DAO construye la consulta SQL segun filtros ingresados.</p>
+<h3 id="35-implementar-consulta-dinamica-en-ventadao">3.5 Implementar consulta dinámica en VentaDao<a class="headerlink" href="#35-implementar-consulta-dinamica-en-ventadao" title="Permanent link">&para;</a></h3>
+<p>El DAO construye la consulta SQL según filtros ingresados.</p>
 <div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">estaVacio</span><span class="p">(</span><span class="n">cliente</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">sql</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&quot; AND lower(v.cliente) LIKE lower(?)&quot;</span><span class="p">);</span>
 <span class="w">  </span><span class="n">parametros</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;%&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cliente</span><span class="p">.</span><span class="na">trim</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;%&quot;</span><span class="p">);</span>
@@ -1907,15 +1989,15 @@
 <td></td>
 </tr>
 <tr>
-<td>Rango invalido</td>
+<td>Rango inválido</td>
 <td>fechaDesde mayor que fechaHasta</td>
-<td>Mensaje de validacion</td>
+<td>Mensaje de validación</td>
 <td></td>
 </tr>
 <tr>
 <td>Sin resultados</td>
 <td>Filtros sin coincidencia</td>
-<td>Tabla vacia y total en cero</td>
+<td>Tabla vacía y total en cero</td>
 <td></td>
 </tr>
 <tr>
@@ -1927,12 +2009,18 @@
 <tr>
 <td>Consistencia</td>
 <td>Venta con detalle</td>
-<td>Diferencia igual a S/ 0.00 (o minima)</td>
+<td>Diferencia igual a S/ 0.00 (o mínima)</td>
+<td></td>
+</tr>
+<tr>
+<td>Anulación</td>
+<td>Venta ACTIVA seleccionada</td>
+<td>Estado ANULADA y stock repuesto</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<p>Nota metodologica:</p>
+<p>Nota metodológica:</p>
 <div class="highlight"><pre><span></span><code>En el estado actual de este proyecto, S11 se valida con pruebas funcionales manuales.
 No hay pruebas automatizadas en src/test para este flujo.
 </code></pre></div>
@@ -1945,20 +2033,20 @@ No hay pruebas automatizadas en src/test para este flujo.
 <p>Debe incluir:</p>
 <ol>
 <li>Captura del login y acceso correcto.</li>
-<li>Captura de Consulta de ventas con detalle seleccionado.</li>
+<li>Captura de Anular ventas con detalle seleccionado.</li>
 <li>Captura de Reporte de ventas aplicando al menos 2 filtros.</li>
 <li>Captura del resumen de total mostrado.</li>
 <li>Captura de consistencia total cabecera vs detalle.</li>
-<li>Registro de una anulacion y su resultado.</li>
-<li>Matriz de pruebas completa (casos validos e invalidos).</li>
-<li>Breve explicacion del flujo entre capas.</li>
+<li>Registro de una anulación y su resultado.</li>
+<li>Matriz de pruebas completa (casos válidos e inválidos).</li>
+<li>Breve explicación del flujo entre capas.</li>
 </ol>
 <h3 id="42-criterios-minimos-de-aceptacion">4.2 Criterios mínimos de aceptación<a class="headerlink" href="#42-criterios-minimos-de-aceptacion" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Consulta maestro-detalle funcional.</li>
 <li>Filtros operativos (cliente, fecha, usuario, estado).</li>
 <li>Totales verificados.</li>
-<li>Prueba de anulacion con reposicion de stock.</li>
+<li>Prueba de anulación con reposición de stock.</li>
 <li>Matriz de pruebas documentada.</li>
 </ul>
 <h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
@@ -1966,30 +2054,32 @@ No hay pruebas automatizadas en src/test para este flujo.
 <h3 id="51-resultados-esperados">5.1 Resultados esperados<a class="headerlink" href="#51-resultados-esperados" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Consulta de ventas persistentes en GUI.</li>
-<li>Filtros de busqueda aplicados correctamente.</li>
-<li>Detalle visible por seleccion.</li>
+<li>Filtros de búsqueda aplicados correctamente.</li>
+<li>Detalle visible por selección.</li>
+<li>Anulación de venta activa verificada.</li>
 <li>Coherencia de totales comprobada.</li>
 <li>Registro de pruebas funcionales con hallazgos.</li>
 </ul>
 <h3 id="52-preguntas-de-defensa">5.2 Preguntas de defensa<a class="headerlink" href="#52-preguntas-de-defensa" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Que diferencia existe entre Consulta de ventas y Reporte de ventas en tu implementacion?</li>
-<li>Que filtros usa Reporte de ventas y donde se aplican?</li>
-<li>Como se valida el rango de fechas?</li>
-<li>Como verificas que el total de cabecera coincide con el detalle?</li>
-<li>Que ocurre al anular una venta y por que?</li>
+<li>Qué diferencia existe entre Anular ventas y Reporte de ventas en tu implementación?</li>
+<li>Qué filtros usa Reporte de ventas y dónde se aplican?</li>
+<li>Cómo se valida el rango de fechas?</li>
+<li>Cómo verificas que el total de cabecera coincide con el detalle?</li>
+<li>Qué ocurre al anular una venta y por qué?</li>
+<li>Por qué <code>VentaDao.consultar(...)</code> usa <code>LEFT JOIN usuario</code>?</li>
 </ol>
 <h3 id="53-rubrica-de-evaluacion">5.3 Rúbrica de evaluación<a class="headerlink" href="#53-rubrica-de-evaluacion" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Dimension</th>
+<th>Dimensión</th>
 <th style="text-align: right;">Peso</th>
 <th>3 - Logro destacado</th>
 <th>2 - Logro</th>
 <th>1 - Proceso</th>
 <th>0 - Inicio</th>
-<th style="text-align: right;">Puntuacion obtenida</th>
+<th style="text-align: right;">Puntuación obtenida</th>
 </tr>
 </thead>
 <tbody>
@@ -2016,32 +2106,32 @@ No hay pruebas automatizadas en src/test para este flujo.
 <td style="text-align: right;">2</td>
 <td>Verifica total cabecera vs detalle sin diferencias relevantes.</td>
 <td>Verifica total general.</td>
-<td>Verificacion parcial.</td>
+<td>Verificación parcial.</td>
 <td>No verifica.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
 <td>4. Pruebas</td>
 <td style="text-align: right;">2</td>
-<td>Matriz completa con casos validos e invalidos.</td>
+<td>Matriz completa con casos válidos e inválidos.</td>
 <td>Matriz principal completa.</td>
 <td>Matriz parcial.</td>
 <td>No presenta pruebas.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>5. Hallazgos y correccion</td>
+<td>5. Hallazgos y corrección</td>
 <td style="text-align: right;">1</td>
-<td>Identifica causa y plantea correccion concreta.</td>
-<td>Reporta hallazgo con explicacion.</td>
+<td>Identifica causa y plantea corrección concreta.</td>
+<td>Reporta hallazgo con explicación.</td>
 <td>Reporte superficial.</td>
 <td>Sin hallazgo.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>6. Sustento tecnico</td>
+<td>6. Sustento técnico</td>
 <td style="text-align: right;">1</td>
-<td>Evidencia ordenada y explicacion de capas precisa.</td>
+<td>Evidencia ordenada y explicación de capas precisa.</td>
 <td>Evidencia suficiente.</td>
 <td>Evidencia incompleta.</td>
 <td>Sin sustento.</td>
