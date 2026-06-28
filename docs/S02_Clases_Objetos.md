@@ -131,7 +131,7 @@ classDiagram
     Persona ..> Coche : usa
 ```
 
-Convencion del diagrama: cada clase muestra sus atributos y métodos principales; `..>` indica dependencia o uso temporal desde la prueba.
+Convención del diagrama: cada clase muestra sus atributos y métodos principales; `..>` indica dependencia o uso temporal desde la prueba.
 
 Regla practica:
 
@@ -214,7 +214,7 @@ La Persona decide conducir.
 El Coche ejecuta acelerar o frenar y cambia su propia velocidad.
 ```
 
-Nota métodológica:
+Nota metodológica:
 
 ```text
 En S2 todavía no se aplica SOLID de manera formal.
@@ -287,7 +287,7 @@ public class Persona {
 }
 ```
 
-Lectura métodológica:
+Lectura metodológica:
 
 ```text
 Persona no cambia directamente la velocidad.

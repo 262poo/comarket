@@ -1,37 +1,37 @@
-﻿# S5 - Operaciones CRUD, validaciones y responsabilidad Ãºnica
+﻿# S5 - Operaciones CRUD, validaciones y responsabilidad única
 
-## 1. IntroducciÃ³n
+## 1. Introducción
 
 Tiempo: 20 min.
 
-### 1.1 PropÃ³sito
+### 1.1 Propósito
 
-Implementar operaciones CRUD en memoria usando `ArrayList`, validaciones de flujo y responsabilidad Ãºnica, mediante una interface de servicio y una implementaciÃ³n concreta, sin cargar toda la lÃ³gica en `Main`.
+Implementar operaciones CRUD en memoria usando `ArrayList`, validaciones de flujo y responsabilidad única, mediante una interface de servicio y una implementación concreta, sin cargar toda la lógica en `Main`.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante implementa registro, listado, bÃºsqueda, actualizaciÃ³n y eliminaciÃ³n en memoria, aplica validaciones bÃ¡sicas y consolida la separaciÃ³n de responsabilidades entre `Main`, contrato de servicio, implementaciÃ³n y entidades.
+El estudiante implementa registro, listado, búsqueda, actualización y eliminación en memoria, aplica validaciones básicas y consolida la separación de responsabilidades entre `Main`, contrato de servicio, implementación y entidades.
 
-### 1.3 Producto de sesiÃ³n
+### 1.3 Producto de sesión
 
-CRUD en consola con `ProductoService`, `ProductoServiceImplMemoria`, entidades encapsuladas, validaciones, bÃºsqueda por cÃ³digo, menÃº de consola y preparaciÃ³n de entrega con Maven/GraalVM.
+CRUD en consola con `ProductoService`, `ProductoServiceImplMemoria`, entidades encapsuladas, validaciones, búsqueda por código, menú de consola y preparación de entrega con Maven/GraalVM.
 
-### 1.4 MotivaciÃ³n de la sesiÃ³n
+### 1.4 Motivación de la sesión
 
-DespuÃ©s de modelar clases, relaciones, herencia e interfaces, el producto necesita operaciones reales. El objetivo es que el menÃº de consola use un servicio, que el servicio administre la colecciÃ³n y que cada clase mantenga una responsabilidad principal.
+Después de modelar clases, relaciones, herencia e interfaces, el producto necesita operaciones reales. El objetivo es que el menú de consola use un servicio, que el servicio administre la colección y que cada clase mantenga una responsabilidad principal.
 
-Pregunta guÃ­a:
+Pregunta guía:
 
 ```text
-CÃ³mo hacemos un CRUD en memoria sin convertir Main en una clase gigante?
+Cómo hacemos un CRUD en memoria sin convertir Main en una clase gigante?
 ```
 
-### 1.5 UbicaciÃ³n en el curso
+### 1.5 Ubicación en el curso
 
 - Unidad: U1.
-- Producto de unidad: aplicaciÃ³n de consola en memoria.
+- Producto de unidad: aplicación de consola en memoria.
 - Carpeta de trabajo: `comarket-cli`.
-- Avance de sesiÃ³n: versiÃ³n funcional previa a la evaluaciÃ³n U1.
+- Avance de sesión: versión funcional previa a la evaluación U1.
 
 ## 2. Explica
 
@@ -42,26 +42,26 @@ Tiempo: 25 min.
 | Concepto | Idea central |
 |---|---|
 | CRUD | Crear, leer, actualizar y eliminar datos. |
-| Interface de servicio | Contrato quÃ© define las operaciones esperadas. |
-| ImplementaciÃ³n en memoria | Clase quÃ© cumple el contrato usando `ArrayList`. |
-| Busqueda | Recorrido de la colecciÃ³n para ubicar un objeto. |
-| Validaciones bÃ¡sicas | Reglas simples antes de registrar o actualizar. |
-| Responsabilidad Ãºnica | Cada clase debe tener un motivo principal para cambiar. |
-| Maven | Organiza compilaciÃ³n y estructura del proyecto. |
-| GraalVM | Permite preparar un ejecutable nativo cÃ³mo cierre de U1. |
+| Interface de servicio | Contrato qué define las operaciones esperadas. |
+| Implementación en memoria | Clase qué cumple el contrato usando `ArrayList`. |
+| Busqueda | Recorrido de la colección para ubicar un objeto. |
+| Validaciones básicas | Reglas simples antes de registrar o actualizar. |
+| Responsabilidad única | Cada clase debe tener un motivo principal para cambiar. |
+| Maven | Organiza compilación y estructura del proyecto. |
+| GraalVM | Permite preparar un ejecutable nativo cómo cierre de U1. |
 
-Regla mÃ©todolÃ³gica de la sesiÃ³n:
+Regla metodológica de la sesión:
 
 ```text
 Main muestra el menu y recibe opciones.
 La interface declara operaciones CRUD.
-La implementaciÃ³n en memoria administra el ArrayList.
+La implementación en memoria administra el ArrayList.
 Las entidades representan datos y comportamiento del dominio.
-La responsabilidad Ãºnica se consolida evitando que Main, service y entidades hagan el mismo trabajo.
+La responsabilidad única se consolida evitando que Main, service y entidades hagan el mismo trabajo.
 Maven/GraalVM son parte de la entrega, no del flujo CRUD.
 ```
 
-### 2.2 Arquitectura de la sesiÃ³n
+### 2.2 Arquitectura de la sesión
 
 ```mermaid
 classDiagram
@@ -100,12 +100,12 @@ classDiagram
     ProductoServiceImplMemoria ..> Producto : usa
 
     classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
-    class ProductoServiceImplMemoria serviceImpl;
+    class ProductoServiceImplMemoria:::serviceImpl
 ```
 
-En S5, la arquitectura U1 se concreta con `Producto`, `ProductoService` y `ProductoServiceImplMemoria`. Este ejemplo guiado sirve como patrÃ³n para que luego cada equipo adapte el CRUD a la entidad principal de su propio proyecto.
+En S5, la arquitectura U1 se concreta con `Producto`, `ProductoService` y `ProductoServiceImplMemoria`. Este ejemplo guiado sirve como patrón para que luego cada equipo adapte el CRUD a la entidad principal de su propio proyecto.
 
-## 3. Aplica: actividad prÃ¡ctica guiada
+## 3. Aplica: actividad práctica guiada
 
 Tiempo: 2h.
 
@@ -123,7 +123,7 @@ public interface ProductoService {
 }
 ```
 
-### 3.2 Crear implementaciÃ³n en memoria
+### 3.2 Crear implementación en memoria
 
 ```java
 import java.util.ArrayList;
@@ -196,7 +196,7 @@ public class Main {
 
 El menu debe llamar al contrato `ProductoService`, no directamente al `ArrayList`.
 
-Opciones mÃ­nimas:
+Opciones mínimas:
 
 1. Registrar producto.
 2. Listar productos.
@@ -207,9 +207,9 @@ Opciones mÃ­nimas:
 
 ### 3.5 Organizar con Maven
 
-La migraciÃ³n a Maven se realiza al cierre de la unidad para preparar compilaciÃ³n ordenada.
+La migración a Maven se realiza al cierre de la unidad para preparar compilación ordenada.
 
-Estructura mÃ­nima:
+Estructura mínima:
 
 ```text
 src/main/java/
@@ -222,9 +222,9 @@ pom.xml
 
 ### 3.6 Preparar entrega con GraalVM
 
-En esta sesiÃ³n no se ensena GraalVM cÃ³mo arquitectura del sistema. Se usa cÃ³mo mecanismo de entrega para cerrar U1 con un ejecutable demostrable.
+En esta sesión no se ensena GraalVM cómo arquitectura del sistema. Se usa cómo mecanismo de entrega para cerrar U1 con un ejecutable demostrable.
 
-## 4. Crea: actividad autÃ³noma
+## 4. Crea: actividad autónoma
 
 Fuera del aula, cada estudiante consolida el aprendizaje completando un CRUD en memoria y preparando una evidencia individual.
 
@@ -244,96 +244,96 @@ Ejemplo:
 S05_Equipo03_QuispeAna.pdf
 ```
 
-El PDF debe usar esta estructura. La primera secciÃ³n define el trabajo autÃ³nomo; completa las demÃ¡s con tus evidencias.
+El PDF debe usar esta estructura. La primera sección define el trabajo autónomo; completa las demás con tus evidencias.
 
 #### 4.1.1 Datos del estudiante
 
 - Nombre:
 - Equipo:
-- SesiÃ³n: S05 - Operaciones CRUD, validaciones y responsabilidad Ãºnica
+- Sesión: S05 - Operaciones CRUD, validaciones y responsabilidad única
 - Rol o aporte realizado:
 - Link de GitHub:
 
-#### 4.1.2 Trabajo autÃ³nomo realizado
+#### 4.1.2 Trabajo autónomo realizado
 
 Completa y evidencia estas tareas:
 
 1. Completar el CRUD de una entidad del dominio.
 2. Definir o ajustar una interface CRUD.
 3. Implementar el CRUD en memoria con `ArrayList`.
-4. Probar registro, listado, bÃºsqueda, actualizaciÃ³n y eliminaciÃ³n.
-5. Agregar al menos una validaciÃ³n bÃ¡sica.
-6. Mostrar un menÃº de consola o flujo equivalente desde `Main`.
-7. Organizar el proyecto para la evaluaciÃ³n de U1.
+4. Probar registro, listado, búsqueda, actualización y eliminación.
+5. Agregar al menos una validación básica.
+6. Mostrar un menú de consola o flujo equivalente desde `Main`.
+7. Organizar el proyecto para la evaluación de U1.
 
-#### 4.1.3 Evidencia tÃ©cnica
+#### 4.1.3 Evidencia técnica
 
-Incluye capturas o salidas de consola con una breve explicaciÃ³n debajo de cada una:
+Incluye capturas o salidas de consola con una breve explicación debajo de cada una:
 
 - Interface CRUD.
-- ImplementaciÃ³n en memoria.
-- MenÃº de consola.
+- Implementación en memoria.
+- Menú de consola.
 - Salida de registrar, listar, buscar, actualizar y eliminar.
 - Evidencia de proyecto organizado con Maven.
-- Evidencia de preparaciÃ³n o generaciÃ³n de ejecutable nativo si corresponde.
-- ExplicaciÃ³n del flujo `Main -> Interface -> ImplementaciÃ³n en memoria -> Entidades`, indicando que el `ArrayList` es un atributo interno de la implementaciÃ³n.
+- Evidencia de preparación o generación de ejecutable nativo si corresponde.
+- Explicación del flujo `Main -> Interface -> Implementación en memoria -> Entidades`, indicando que el `ArrayList` es un atributo interno de la implementación.
 
 #### 4.1.4 Error o hallazgo
 
-Describe al menos un error, diferencia o hallazgo tÃ©cnico:
+Describe al menos un error, diferencia o hallazgo técnico:
 
-- QuÃ© ocurriÃ³.
-- CÃ³mo lo diagnosticaste.
-- CÃ³mo lo corregiste o quÃ© aprendiste.
+- Qué ocurrió.
+- Cómo lo diagnosticaste.
+- Cómo lo corregiste o qué aprendiste.
 
-Ejemplos vÃ¡lidos:
+Ejemplos válidos:
 
-- La bÃºsqueda no encontraba objetos por usar mal el criterio.
-- La actualizaciÃ³n modificaba el objeto incorrecto.
-- La eliminaciÃ³n fallaba al recorrer la lista.
-- `Main` terminÃ³ concentrando lÃ³gica que debÃ­a estar en el service.
+- La búsqueda no encontraba objetos por usar mal el criterio.
+- La actualización modificaba el objeto incorrecto.
+- La eliminación fallaba al recorrer la lista.
+- `Main` terminó concentrando lógica que debía estar en el service.
 
-#### 4.1.5 ReflexiÃ³n tÃ©cnica breve
+#### 4.1.5 Reflexión técnica breve
 
-Responde en 5 a 8 lÃ­neas:
+Responde en 5 a 8 líneas:
 
 ```text
-Por quÃ© un CRUD en memoria debe estar separado de Main aunque todavÃ­a no exista base de datos?
+Por qué un CRUD en memoria debe estar separado de Main aunque todavía no exista base de datos?
 ```
 
-### 4.2 Criterios mÃ­nimos de aceptaciÃ³n
+### 4.2 Criterios mínimos de aceptación
 
 La evidencia individual se considera completa si:
 
 - El archivo respeta el nombre `S05_Equipo##_ApellidoNombre.pdf`.
-- Incluye evidencias tÃ©cnicas legibles.
+- Incluye evidencias técnicas legibles.
 - Muestra una interface CRUD.
-- Muestra una implementaciÃ³n en memoria con `ArrayList`.
+- Muestra una implementación en memoria con `ArrayList`.
 - Demuestra registrar, listar, buscar, actualizar y eliminar.
-- Muestra al menos una validaciÃ³n bÃ¡sica.
+- Muestra al menos una validación básica.
 - Explica el flujo de responsabilidades.
-- No contiene solo pantallazos: cada evidencia tiene una descripciÃ³n breve.
+- No contiene solo pantallazos: cada evidencia tiene una descripción breve.
 
 ## 5. Cierre evaluativo
 
 Tiempo: 20 min.
 
-Esta secciÃ³n conecta el resultado de aprendizaje de la sesiÃ³n con el producto que debe evidenciar cada estudiante.
+Esta sección conecta el resultado de aprendizaje de la sesión con el producto que debe evidenciar cada estudiante.
 
 ### 5.1 Resultados esperados
 
-Al finalizar la sesiÃ³n, el estudiante debe demostrar que:
+Al finalizar la sesión, el estudiante debe demostrar que:
 
 - Existe CRUD funcional en memoria.
 - `Main` no contiene el `ArrayList` principal.
 - La interface declara el contrato.
-- La implementaciÃ³n en memoria administra la colecciÃ³n.
+- La implementación en memoria administra la colección.
 - Las entidades se mantienen encapsuladas.
-- El proyecto queda listo para evaluaciÃ³n U1.
+- El proyecto queda listo para evaluación U1.
 
-### 5.2 Evidencia del producto de sesiÃ³n
+### 5.2 Evidencia del producto de sesión
 
-Cada estudiante entrega un PDF individual siguiendo la plantilla de la secciÃ³n 4.1.
+Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.
 
 Nombre del archivo:
 
@@ -343,45 +343,45 @@ S05_Equipo##_ApellidoNombre.pdf
 
 La evidencia debe demostrar:
 
-- Producto de sesiÃ³n construido.
+- Producto de sesión construido.
 - Aporte individual verificable.
 - CRUD en memoria probado.
-- ReflexiÃ³n tÃ©cnica breve.
+- Reflexión técnica breve.
 
-La revisiÃ³n se realiza con los criterios mÃ­nimos de aceptaciÃ³n de la secciÃ³n 4.2 y la rÃºbrica de la secciÃ³n 5.4.
+La revisión se realiza con los criterios mínimos de aceptación de la sección 4.2 y la rúbrica de la sección 5.4.
 
-### 5.3 Preguntas de defensa y reflexiÃ³n
+### 5.3 Preguntas de defensa y reflexión
 
-1. QuÃ© responsabilidad tiene `Main`?
-2. QuÃ© responsabilidad tiene `ProductoService`?
-3. DÃ³nde se almacena temporalmente la informaciÃ³n?
-4. Por quÃ© `ArrayList` no debe estar como variable principal en `Main`?
-5. QuÃ© cambiarÃ­a cuando el almacenamiento sea SQLite?
-6. QuÃ© evidencia demuestra que el CRUD estÃ¡ completo?
+1. Qué responsabilidad tiene `Main`?
+2. Qué responsabilidad tiene `ProductoService`?
+3. Dónde se almacena temporalmente la información?
+4. Por qué `ArrayList` no debe estar como variable principal en `Main`?
+5. Qué cambiaría cuando el almacenamiento sea SQLite?
+6. Qué evidencia demuestra que el CRUD está completo?
 
-### 5.4 RÃºbrica de evaluaciÃ³n
+### 5.4 Rúbrica de evaluación
 
-| DimensiÃ³n | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | PuntuaciÃ³n obtenida |
+| Dimensión | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuación obtenida |
 |---|---:|---|---|---|---|---:|
 | 1. Contrato CRUD | 2 | Interface clara, completa y coherente con la entidad. | Interface funcional. | Interface incompleta o poco clara. | No evidencia contrato. | |
-| 2. ImplementaciÃ³n en memoria | 2 | `ArrayList` bien encapsulado en la implementaciÃ³n. | ImplementaciÃ³n funcional. | ImplementaciÃ³n parcial. | No evidencia implementaciÃ³n. | |
-| 3. Operaciones CRUD | 2 | Registrar, listar, buscar, actualizar y eliminar funcionan y estÃ¡n evidenciados. | Operaciones principales funcionan. | CRUD incompleto. | No evidencia CRUD. | |
-| 4. SeparaciÃ³n de responsabilidades | 2 | `Main`, interface, implementaciÃ³n y entidades tienen roles claros. | SeparaciÃ³n suficiente. | LÃ³gica mezclada. | No separa responsabilidades. | |
-| 5. Error o hallazgo | 1 | Analiza error/hallazgo, causa, soluciÃ³n y aprendizaje tÃ©cnico. | Explica un problema y una soluciÃ³n. | Menciona un problema sin anÃ¡lisis. | No presenta error ni hallazgo. | |
-| 6. ReflexiÃ³n y orden | 1 | PDF ordenado, evidencias legibles y reflexiÃ³n precisa. | Evidencias suficientes y reflexiÃ³n clara. | Evidencias incompletas o reflexiÃ³n superficial. | PDF desordenado o sin reflexiÃ³n. | |
+| 2. Implementación en memoria | 2 | `ArrayList` bien encapsulado en la implementación. | Implementación funcional. | Implementación parcial. | No evidencia implementación. | |
+| 3. Operaciones CRUD | 2 | Registrar, listar, buscar, actualizar y eliminar funcionan y están evidenciados. | Operaciones principales funcionan. | CRUD incompleto. | No evidencia CRUD. | |
+| 4. Separación de responsabilidades | 2 | `Main`, interface, implementación y entidades tienen roles claros. | Separación suficiente. | Lógica mezclada. | No separa responsabilidades. | |
+| 5. Error o hallazgo | 1 | Analiza error/hallazgo, causa, solución y aprendizaje técnico. | Explica un problema y una solución. | Menciona un problema sin análisis. | No presenta error ni hallazgo. | |
+| 6. Reflexión y orden | 1 | PDF ordenado, evidencias legibles y reflexión precisa. | Evidencias suficientes y reflexión clara. | Evidencias incompletas o reflexión superficial. | PDF desordenado o sin reflexión. | |
 
-PuntuaciÃ³n acumulada = suma de (`Peso` * `PuntuaciÃ³n obtenida`) = ____.
+Puntuación acumulada = suma de (`Peso` * `Puntuación obtenida`) = ____.
 
-Nota final = (`PuntuaciÃ³n acumulada` / 30) * 20 = ____.
+Nota final = (`Puntuación acumulada` / 30) * 20 = ____.
 
-Para usar la rÃºbrica con IA, solicita:
+Para usar la rúbrica con IA, solicita:
 
 ```text
-EvalÃºa el PDF usando la rÃºbrica de la sesiÃ³n.
-Para cada dimensiÃ³n selecciona la puntuaciÃ³n obtenida usando la escala Inicio=0, Proceso=1, Logro=2, Logro destacado=3.
-Justifica brevemente cada puntuaciÃ³n.
-Calcula la puntuaciÃ³n acumulada con la fÃ³rmula: suma de (Peso * PuntuaciÃ³n obtenida).
-Calcula la nota final sobre 20 con la fÃ³rmula: (PuntuaciÃ³n acumulada / 30) * 20.
+Evalúa el PDF usando la rúbrica de la sesión.
+Para cada dimensión selecciona la puntuación obtenida usando la escala Inicio=0, Proceso=1, Logro=2, Logro destacado=3.
+Justifica brevemente cada puntuación.
+Calcula la puntuación acumulada con la fórmula: suma de (Peso * Puntuación obtenida).
+Calcula la nota final sobre 20 con la fórmula: (Puntuación acumulada / 30) * 20.
 Indica 2 fortalezas y 2 recomendaciones.
 ```
 

@@ -46,7 +46,7 @@ Tiempo: 25 min.
 - Base de datos.
 - Preparación para ejecutable nativo.
 
-Regla métodológica de la sesión:
+Regla metodológica de la sesión:
 
 ```text
 Integrar no es agregar más clases.

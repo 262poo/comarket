@@ -46,7 +46,7 @@ Tiempo: 25 min.
 - Empaquetado.
 - Ejecutable nativo con GraalVM.
 
-Regla métodológica de la sesión:
+Regla metodológica de la sesión:
 
 ```text
 Primero se prueba el flujo crítico.

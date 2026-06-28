@@ -78,7 +78,7 @@ Tiempo: 25 min.
 | Composición | Un objeto contiene partes qué dependen de el. | `Venta` contiene `DetalleVenta` |
 | Colección | Estructura para manejar varios objetos del mismo tipo. | `ArrayList<Producto>` |
 
-Regla métodológica de la sesión:
+Regla metodológica de la sesión:
 
 ```text
 Las entidades representan información y comportamiento del dominio.
@@ -166,7 +166,7 @@ classDiagram
     DetalleVenta "*" --> "1" Producto : asociación
 ```
 
-Convencion del diagrama: `-->` representa asociación, `o--` representa agregación, `*--` representa composición y `..>` representa dependencia de prueba o uso temporal. En esta sesión la multiplicidad se trabaja dentro de las entidades; el service aparece solo como separación inicial de responsabilidades. Las interfaces se dejan para S4.
+Convención del diagrama: `-->` representa asociación, `o--` representa agregación, `*--` representa composición y `..>` representa dependencia de prueba o uso temporal. En esta sesión la multiplicidad se trabaja dentro de las entidades; el service aparece solo como separación inicial de responsabilidades. Las interfaces se dejan para S4.
 
 ### 2.4 Encapsulamiento y comportamiento básico
 
