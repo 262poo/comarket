@@ -94,6 +94,63 @@ sqlite3 data\comarket.db "SELECT * FROM detalle_venta;"
 
 ## Generar ejecutable nativo
 
+### Ruta rapida Windows para S14
+
+Ejecuta estos comandos desde la raiz de `comarket-desk`.
+
+1. Preparar GraalVM JDK 17 en `C:\java` y dejar `JAVA_HOME` configurado para el usuario:
+
+```powershell
+$version="17"
+$zip="$env:TEMP\graalvm-jdk-$version.zip"
+$dest="C:\java"
+New-Item -ItemType Directory -Force -Path $dest
+Invoke-WebRequest -Uri "https://download.oracle.com/graalvm/$version/latest/graalvm-jdk-$version`_windows-x64_bin.zip" -OutFile $zip
+Expand-Archive -Path $zip -DestinationPath $dest -Force
+$graalHome=(Get-ChildItem $dest -Directory | Where-Object Name -Like "graalvm-jdk-$version*").FullName
+[Environment]::SetEnvironmentVariable("JAVA_HOME", $graalHome, "User")
+[Environment]::SetEnvironmentVariable("Path", "$graalHome\bin;" + [Environment]::GetEnvironmentVariable("Path", "User"), "User")
+```
+
+Cierra y abre una terminal nueva. Luego verifica:
+
+```powershell
+java -version
+native-image --version
+```
+
+2. Ejecutar la app normal y validar el flujo principal:
+
+```powershell
+.\mvnw.cmd clean javafx:run
+```
+
+3. Generar configuracion con el agente de GluonFX. Mientras la app este abierta, recorre login, productos, ventas, anular ventas, reporte y cierre de sesion:
+
+```powershell
+.\mvnw.cmd -DskipTests gluonfx:runagent
+```
+
+4. Construir el `.exe` nativo:
+
+```powershell
+.\mvnw.cmd -DskipTests gluonfx:build
+```
+
+5. Probar el ejecutable nativo:
+
+```powershell
+.\mvnw.cmd -DskipTests gluonfx:nativerun
+```
+
+6. Opcional: generar paquete instalable:
+
+```powershell
+.\mvnw.cmd -DskipTests gluonfx:package
+```
+
+Si falla por compilador C/C++, instala **Build Tools for Visual Studio** con la carga **Desktop development with C++**, reinicia la terminal y vuelve a ejecutar desde el paso 4.
+
 Requisito: GraalVM JDK instalado, `native-image` disponible en la terminal y herramientas de compilación C++ del sistema operativo.
 
 ### Instalar GraalVM
