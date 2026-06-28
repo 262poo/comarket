@@ -68,6 +68,16 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.gluonhq</groupId>
+                <artifactId>gluonfx-maven-plugin</artifactId>
+                <version>1.0.29</version>
+                <configuration>
+                    <mainClass>com.upeu.comarket.CoMarketApplication</mainClass>
+                    <appIdentifier>com.upeu.comarket</appIdentifier>
+                    <appLabel>CoMarket Desk</appLabel>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>

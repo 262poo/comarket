@@ -1,51 +1,97 @@
-﻿# Libro Digital de Programación Orientada a Objetos - UPeU
+# comarket-desk
 
-Este repositorio pública el curso de Programación Orientada a Objetos cómo libro digital en Markdown. El material está organizado cómo un solo curso, con tres unidades y dieciseis sesiónes alineadas al desarrollo incremental de **CoMarket**, un sistema comercial de escritorio construido con enfoque orientado a objetos.
+Proyecto de escritorio JavaFX para la Unidad 2 y Unidad 3.
 
-## Qué encontrara el estudiante
+Aqui se trabaja la evolucion de CoMarket hacia una aplicacion de escritorio: interfaz grafica con JavaFX, controladores, servicios, arquitectura por capas y preparacion para persistencia e integracion del proyecto final.
 
-- Presentación actualizada del curso en `docs/index.md`.
-- Tres unidades organizadas por productos parciales.
-- Dieciseis sesiónes teórico-practicas en formato de lectura y guía de trabajo.
-- Un taller complementario para reforzar la configuración del proyecto.
-
-## Enfoque del curso
-
-El curso está centrado en diseñar e implementar una aplicación de escritorio aplicando modelado del dominio, encapsulamiento, herencia, polimorfismo, colecciones, arquitectura por capas, persistencia relacional, DAO e interfaz gráfica.
-
-La Unidad 1 inicia con Java, VS Code, consola y almacenamiento en memoria. Desde la Unidad 2 se trabaja con JavaFX, Scene Builder, Maven, JDBC y SQLite en un IDE adecuado para aplicaciónes de escritorio, cómo IntelliJ IDEA.
-
-Este repositorio no busca funciónar cómo un entorno de desarrollo embebido. Su propósito es servir cómo libro digital, guía clonable y referencia de estructura para qué cada estudiante mantenga su propio proyecto Java.
-
-## Ruta de aprendizaje
-
-| Unidad | Sesiónes | Producto esperado |
-|---|---:|---|
-| Fundamentos de POO | 1-6 | Aplicación funcional en memoria con clases, relaciones entre objetos, colecciones y operaciones principales del dominio. |
-| Aplicación de escritorio con persistencia | 7-12 | Aplicación de escritorio con arquitectura por capas, GUI, DAO, JDBC y base de datos relacional. |
-| Proyecto integrador CoMarket | 13-16 | Sistema comercial orientado a objetos documentado, probado y sustentado. |
-
-## Ejecución local
-
-### Con Python local
+## Ejecutar
 
 ```powershell
-python -m pip install mkdocs mkdocs-material pymdown-extensions
-mkdocs serve
+.\mvnw.cmd clean javafx:run
 ```
 
-## Generacion del sitio
+Tambien puedes usar Maven instalado localmente:
+
+```bash
+mvn clean javafx:run
+```
+
+## Generar ejecutable nativo
+
+Requisito: GraalVM JDK instalado, `native-image` disponible en la terminal y herramientas de compilacion C++ del sistema operativo.
+
+### Instalar GraalVM
+
+En Windows no necesitas SDKMAN. Puedes instalar GraalVM descargando el ZIP oficial y configurando `JAVA_HOME`:
 
 ```powershell
-mkdocs build
+$version="17"
+$zip="$env:TEMP\graalvm-jdk-$version.zip"
+$dest="C:\java"
+New-Item -ItemType Directory -Force -Path $dest
+Invoke-WebRequest -Uri "https://download.oracle.com/graalvm/$version/latest/graalvm-jdk-$version`_windows-x64_bin.zip" -OutFile $zip
+Expand-Archive -Path $zip -DestinationPath $dest -Force
+$graalHome=(Get-ChildItem $dest -Directory | Where-Object Name -Like "graalvm-jdk-$version*").FullName
+[Environment]::SetEnvironmentVariable("JAVA_HOME", $graalHome, "User")
+[Environment]::SetEnvironmentVariable("Path", "$graalHome\bin;" + [Environment]::GetEnvironmentVariable("Path", "User"), "User")
 ```
 
-El despliegue a GitHub Pages se realiza con `.github/workflows/deploy.yml`, qué instala Python 3.12, MkDocs, MkDocs Material y `pymdown-extensions`.
+Cierra y abre una terminal nueva.
 
-## Estructura del libro
+En Windows, `native-image` tambien necesita las herramientas de compilacion C++ de Visual Studio. Si aparece un error relacionado con compilador C/C++, instala **Build Tools for Visual Studio** con la carga **Desktop development with C++** y vuelve a abrir la terminal.
 
-- Inicio y presentacion del curso.
-- Unidad 1: fundamentos de modelado y programación orientada a objetos.
-- Unidad 2: arquitectura, persistencia e interfaz gráfica.
-- Unidad 3: integración, refinamiento, sustentación y evaluación final de CoMarket.
-- Taller complementario.
+En Linux/macOS o WSL, SDKMAN si es una opcion comoda:
+
+```bash
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk list java
+sdk install java <version>-graal
+sdk default java <version>-graal
+```
+
+Reemplaza `<version>-graal` por una version listada por `sdk list java`.
+
+Verificar:
+
+```bash
+java -version
+native-image --version
+```
+
+Si `native-image` no se reconoce en Windows, instala GraalVM JDK y configura la terminal para usarlo:
+
+```powershell
+$env:JAVA_HOME="C:\ruta\a\graalvm-jdk-17"
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+java -version
+native-image --version
+```
+
+Para dejarlo permanente, agrega `JAVA_HOME` en las variables de entorno de Windows y coloca `%JAVA_HOME%\bin` al inicio de `Path`. Luego abre una terminal nueva.
+
+Generar configuracion de GraalVM con el agente, recorriendo las pantallas de la aplicacion:
+
+```powershell
+.\mvnw.cmd -DskipTests gluonfx:runagent
+```
+
+Generar el ejecutable nativo:
+
+```powershell
+.\mvnw.cmd -DskipTests gluonfx:build
+```
+
+Ejecutar el binario nativo:
+
+```powershell
+.\mvnw.cmd -DskipTests gluonfx:nativerun
+```
+
+Crear un instalador o paquete para el sistema operativo:
+
+```powershell
+.\mvnw.cmd -DskipTests gluonfx:package
+```
+
+La aplicacion de consola para Unidad 1 se trabaja en `../comarket-cli`.
