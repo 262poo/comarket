@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+
+<TabPane tabClosingPolicy="UNAVAILABLE"
+         xmlns="http://javafx.com/javafx/17.0.12"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <tabs>
+        <Tab text="Productos">
+            <fx:include source="ProductoView.fxml" />
+        </Tab>
+        <Tab text="Ventas">
+            <fx:include source="VentaView.fxml" />
+        </Tab>
+        <Tab text="Consulta de ventas">
+            <fx:include source="ConsultaVentasView.fxml" />
+        </Tab>
+    </tabs>
+</TabPane>

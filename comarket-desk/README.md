@@ -2,11 +2,19 @@
 
 Proyecto de escritorio JavaFX para la Unidad 2 y Unidad 3.
 
-Tag sugerido: `sesion-08`
+Tag sugerido: `sesion-09`
 
 Aqui se trabaja la evolucion de CoMarket hacia una aplicacion de escritorio con arquitectura por capas, JavaFX, FXML, controladores, servicios, DAO, JDBC y SQLite.
 
-En este hito, el CRUD de `Producto` ya persiste datos en SQLite. La pantalla usa la interfaz `ProductoService`; la version en memoria queda como referencia en `ProductoServiceImplMemoria`, y la version activa usa `ProductoServiceImplSQLite`.
+En este hito, `Producto` se mantiene como catalogo persistente y se agrega el registro de `Venta` con cabecera y detalles. El detalle referencia productos existentes, calcula subtotales, descuenta stock y guarda todo en una transaccion.
+
+La aplicacion incluye tres pestanas:
+
+- `Productos`: CRUD persistente del catalogo.
+- `Ventas`: registro de cabecera y detalles.
+- `Consulta de ventas`: listado de ventas registradas, detalle de la venta seleccionada y anulacion con reposicion de stock.
+
+La version en memoria de productos queda como referencia en `ProductoServiceImplMemoria`. Las versiones activas usan SQLite mediante `ProductoServiceImplSQLite` y `VentaServiceImplSQLite`.
 
 ## Ejecutar
 
@@ -35,16 +43,20 @@ carpeta-del-ejecutable/
         comarket.db
 ```
 
-La tabla creada por la aplicacion es:
+Las tablas creadas por la aplicacion son:
 
 ```sql
 producto(codigo, nombre, precio, stock)
+venta(id, cliente, fecha, total, estado)
+detalle_venta(id, venta_id, producto_codigo, cantidad, precio_unitario, subtotal)
 ```
 
 Para revisar los datos con `sqlite3`:
 
 ```powershell
 sqlite3 data\comarket.db "SELECT * FROM producto;"
+sqlite3 data\comarket.db "SELECT * FROM venta;"
+sqlite3 data\comarket.db "SELECT * FROM detalle_venta;"
 ```
 
 ## Generar ejecutable nativo
@@ -101,19 +113,19 @@ native-image --version
 
 Para dejarlo permanente, agrega `JAVA_HOME` en las variables de entorno de Windows y coloca `%JAVA_HOME%\bin` al inicio de `Path`. Luego abre una terminal nueva.
 
-Antes de compilar a nativo, ejecuta primero la aplicacion en JVM y prueba el CRUD de `Producto`:
+Antes de compilar a nativo, ejecuta primero la aplicacion en JVM y prueba el CRUD de `Producto` y el registro de `Venta`:
 
 ```powershell
 .\mvnw.cmd clean javafx:run
 ```
 
-Generar configuracion de GraalVM con el agente. Mientras la app este abierta, registra, edita, elimina y lista productos para que el agente detecte el uso de JavaFX, FXML, JDBC y SQLite:
+Generar configuracion de GraalVM con el agente. Mientras la app este abierta, registra productos, crea una venta con varios detalles y guarda la operacion para que el agente detecte el uso de JavaFX, FXML, JDBC y SQLite:
 
 ```powershell
 .\mvnw.cmd -DskipTests gluonfx:runagent
 ```
 
-Generar el ejecutable nativo para el hito `sesion-08`:
+Generar el ejecutable nativo para el hito `sesion-09`:
 
 ```powershell
 .\mvnw.cmd -DskipTests gluonfx:build

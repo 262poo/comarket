@@ -63,11 +63,25 @@ La persistencia con DAO y SQLite se trabaja en S8.
 
 ```mermaid
 flowchart TB
-    ProductoController["ProductoController<br/>onRegistrar()<br/>onActualizar()<br/>onEliminar()<br/>cargarTabla()"]
-    ProductoService["ProductoService<br/>&lt;&lt;interface&gt;&gt;<br/>registrar(producto)<br/>listar()<br/>actualizar(producto)<br/>eliminar(codigo)"]
-    ProductoServiceImplMemoria["ProductoServiceImplMemoria<br/>-productos: ArrayList<br/>CRUD sobre ArrayList"]
-    Producto["Producto<br/>-codigo<br/>-nombre<br/>-precio<br/>-stock"]
+    subgraph View["view"]
+        ProductoView["ProductoView.fxml<br/>txtCodigo / txtNombre / txtPrecio / txtStock<br/>tablaProductos<br/>btnNuevo / btnEditar / btnAccion / btnEliminar / btnCancelar"]
+    end
 
+    subgraph Controller["controller"]
+        ProductoController["ProductoController<br/>initialize()<br/>onNuevoClick()<br/>onEditarClick()<br/>onAccionClick()<br/>onEliminarClick()<br/>onCancelarClick()"]
+    end
+
+    subgraph Service["service"]
+        ProductoService["ProductoService<br/>&lt;&lt;interface&gt;&gt;<br/>registrar(producto)<br/>listar()<br/>buscarPorCodigo(codigo)<br/>actualizar(producto)<br/>eliminar(codigo)"]
+        ProductoServiceImplMemoria["ProductoServiceImplMemoria<br/>-productos: ArrayList&lt;Producto&gt;<br/>CRUD sobre ArrayList"]
+    end
+
+    subgraph Entity["entity"]
+        Producto["Producto<br/>-codigo<br/>-nombre<br/>-precio<br/>-stock"]
+    end
+
+    ProductoView -->|"fx:controller"| ProductoController
+    ProductoView -.->|"fx:id / onAction"| ProductoController
     ProductoController -. usa contrato .-> ProductoService
     ProductoController -. crea/lee .-> Producto
     ProductoServiceImplMemoria -. implements .-> ProductoService
@@ -78,6 +92,19 @@ flowchart TB
     class ProductoServiceImplMemoria serviceImpl;
 ```
 
+En S7 la arquitectura se limita a vista, controlador, servicio en memoria y entidad. La persistencia queda fuera de esta sesión y se incorpora recién en S8.
+
+Nombres reales del proyecto guía:
+
+```text
+com.upeu.comarket.CoMarketApplication
+com.upeu.comarket.controller.ProductoController
+com.upeu.comarket.entity.Producto
+com.upeu.comarket.service.ProductoService
+com.upeu.comarket.service.ProductoServiceImplMemoria
+src/main/resources/com/upeu/comarket/view/ProductoView.fxml
+```
+
 ## 3. Aplica: actividad práctica guiada
 
 Tiempo: 2h.
@@ -86,42 +113,44 @@ Tiempo: 2h.
 
 Usa un IDE que soporte JavaFX, Maven y Scene Builder. Para U2 se recomienda IntelliJ IDEA o un entorno equivalente con Maven configurado. En este repositorio el proyecto de escritorio se trabaja en `comarket-desk`.
 
-Producto del paso: proyecto JavaFX/Maven creado o verificado en `comarket-desk`, con estructura inicial, carpetas base y clase `Main` preparada para cargar una vista FXML.
+Producto del paso: proyecto JavaFX/Maven creado o verificado en `comarket-desk`, con estructura inicial, carpetas base y `CoMarketApplication` preparada para cargar una vista FXML.
 
 Estructura base:
 
 ```text
 src/main/java/
-    app/
-        ProductoApplication.java
-    controller/
-        ProductoController.java
-    entity/
-        Producto.java
-    service/
-        ProductoService.java
-        ProductoServiceImplMemoria.java
+    com/upeu/comarket/
+        CoMarketApplication.java
+        controller/
+            ProductoController.java
+        entity/
+            Producto.java
+        service/
+            ProductoService.java
+            ProductoServiceImplMemoria.java
 
 src/main/resources/
-    view/
+    com/upeu/comarket/view/
         ProductoView.fxml
 ```
 
-La persistencia (`repository`, `util`, SQLite) se trabajará en S8. En S7 el foco es abrir una ventana, cargar FXML, conectar eventos y ejecutar CRUD en memoria desde la GUI.
+La persistencia (`dao`, `db`, SQLite) se trabajará en S8. En S7 el foco es abrir una ventana, cargar `ProductoView.fxml`, conectar eventos y ejecutar CRUD en memoria desde la GUI.
 
 ### 3.2 Crear vista FXML
 
 Controles mínimos:
 
-- `TextField` para código.
-- `TextField` para nombre.
-- `TextField` para precio.
-- `TextField` para stock.
-- `Button` para registrar.
-- `Button` para actualizar.
-- `Button` para eliminar.
-- `Button` para limpiar.
-- `TableView` para listar productos.
+- `TextField fx:id="txtCodigo"` para código.
+- `TextField fx:id="txtNombre"` para nombre.
+- `TextField fx:id="txtPrecio"` para precio.
+- `TextField fx:id="txtStock"` para stock.
+- `Button fx:id="btnNuevo"` con `onAction="#onNuevoClick"`.
+- `Button fx:id="btnEditar"` con `onAction="#onEditarClick"`.
+- `Button fx:id="btnAccion"` con `onAction="#onAccionClick"`.
+- `Button fx:id="btnEliminar"` con `onAction="#onEliminarClick"`.
+- `Button fx:id="btnCancelar"` con `onAction="#onCancelarClick"`.
+- `TableView fx:id="tablaProductos"` para listar productos.
+- `TableColumn fx:id="colCodigo"`, `colNombre`, `colPrecio` y `colStock`.
 
 ### 3.3 Conectar controles con `fx:id`
 
@@ -131,7 +160,7 @@ Ejemplo:
 
 ```xml
 <TextField fx:id="txtNombre" />
-<Button text="Registrar" onAction="#onRegistrar" />
+<Button fx:id="btnAccion" text="Guardar" onAction="#onAccionClick" />
 ```
 
 ### 3.4 Crear controlador
@@ -150,11 +179,11 @@ public class ProductoController {
     @FXML
     private TextField txtStock;
 
-    private ProductoService productoService = new ProductoServiceImplMemoria();
+    private final ProductoService productoService = new ProductoServiceImplMemoria();
 
     @FXML
-    private void onRegistrar() {
-        // Leer formulario, crear Producto y delegar al servicio.
+    private void onAccionClick() {
+        // Leer formulario, crear Producto y delegar al servicio en memoria.
     }
 }
 ```
