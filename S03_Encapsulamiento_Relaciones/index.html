@@ -2029,7 +2029,7 @@ a un modelo de dominio con objetos relacionados?
 </tr>
 </tbody>
 </table>
-<p>Regla métodológica de la sesión:</p>
+<p>Regla metodológica de la sesión:</p>
 <div class="highlight"><pre><span></span><code>Las entidades representan información y comportamiento del dominio.
 Las relaciones muestran cómo colaboran los objetos.
 Las colecciones administran grupos de objetos dentro de una entidad.
@@ -2125,7 +2125,7 @@ service  -&gt; ProductoService o VentaService: coordina operaciones simples.
     Cliente "1" o-- "0..*" Venta : agrega
     Venta "1" *-- "1..*" DetalleVenta : composición
     DetalleVenta "*" --&gt; "1" Producto : asociación</code></pre>
-<p>Convencion del diagrama: <code>--&gt;</code> representa asociación, <code>o--</code> representa agregación, <code>*--</code> representa composición y <code>..&gt;</code> representa dependencia de prueba o uso temporal. En esta sesión la multiplicidad se trabaja dentro de las entidades; el service aparece solo como separación inicial de responsabilidades. Las interfaces se dejan para S4.</p>
+<p>Convención del diagrama: <code>--&gt;</code> representa asociación, <code>o--</code> representa agregación, <code>*--</code> representa composición y <code>..&gt;</code> representa dependencia de prueba o uso temporal. En esta sesión la multiplicidad se trabaja dentro de las entidades; el service aparece solo como separación inicial de responsabilidades. Las interfaces se dejan para S4.</p>
 <h3 id="24-encapsulamiento-y-comportamiento-basico">2.4 Encapsulamiento y comportamiento básico<a class="headerlink" href="#24-encapsulamiento-y-comportamiento-basico" title="Permanent link">&para;</a></h3>
 <p>Una entidad encapsulada protege su estado:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Producto</span><span class="w"> </span><span class="p">{</span>
