@@ -98,10 +98,10 @@ sqlite3 data\comarket.db "SELECT * FROM detalle_venta;"
 
 Ejecuta estos comandos desde la raiz de `comarket-desk`.
 
-1. Preparar GraalVM JDK 17 en `C:\java` y dejar `JAVA_HOME` configurado para el usuario:
+1. Preparar GraalVM JDK 21 en `C:\java` y dejar `JAVA_HOME` configurado para el usuario. El proyecto sigue compilando para Java 17 porque `pom.xml` usa `maven.compiler.release=17`:
 
 ```powershell
-$version="17"
+$version="21"
 $zip="$env:TEMP\graalvm-jdk-$version.zip"
 $dest="C:\java"
 New-Item -ItemType Directory -Force -Path $dest
@@ -158,7 +158,7 @@ Requisito: GraalVM JDK instalado, `native-image` disponible en la terminal y her
 En Windows no necesitas SDKMAN. Puedes instalar GraalVM descargando el ZIP oficial y configurando `JAVA_HOME`:
 
 ```powershell
-$version="17"
+$version="21"
 $zip="$env:TEMP\graalvm-jdk-$version.zip"
 $dest="C:\java"
 New-Item -ItemType Directory -Force -Path $dest
