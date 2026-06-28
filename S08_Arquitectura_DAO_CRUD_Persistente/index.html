@@ -1693,61 +1693,27 @@ La conexión a la base de datos se centraliza en util/ConexionBD.
 `dao` cumple el rol de capa de acceso a datos en este curso.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>classDiagram
-    class ProductoController {
-        onRegistrar()
-        onActualizar()
-        onEliminar()
-        cargarTabla()
-    }
+<pre class="mermaid"><code>flowchart TB
+    ProductoController["ProductoController&lt;br/&gt;onRegistrar()&lt;br/&gt;onActualizar()&lt;br/&gt;onEliminar()&lt;br/&gt;cargarTabla()"]
+    ProductoService["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br/&gt;registrar(producto)&lt;br/&gt;listar()&lt;br/&gt;actualizar(producto)&lt;br/&gt;eliminar(codigo)"]
+    ProductoServiceImplDB["ProductoServiceImplDB&lt;br/&gt;-dao: ProductoDAO&lt;br/&gt;CRUD con DAO"]
+    ProductoDAO["ProductoDAO&lt;br/&gt;insertar(producto)&lt;br/&gt;listar()&lt;br/&gt;actualizar(producto)&lt;br/&gt;eliminar(codigo)"]
+    ConexionBD["ConexionBD&lt;br/&gt;obtenerConexion()"]
+    SQLite[("SQLite&lt;br/&gt;producto")]
+    Producto["Producto&lt;br/&gt;-codigo&lt;br/&gt;-nombre&lt;br/&gt;-precio&lt;br/&gt;-stock"]
 
-    class ProductoService {
-        &lt;&lt;interface&gt;&gt;
-        registrar(producto)
-        listar()
-        actualizar(producto)
-        eliminar(codigo)
-    }
-
-    class ProductoServiceImplDB {
-        -dao: ProductoDAO
-        CRUD con DAO
-    }
-
-    class ProductoDAO {
-        insertar(producto)
-        listar()
-        actualizar(producto)
-        eliminar(codigo)
-    }
-
-    class ConexionBD {
-        obtenerConexion()
-    }
-
-    class SQLite {
-        producto
-    }
-
-    class Producto {
-        -codigo
-        -nombre
-        -precio
-        -stock
-    }
-
-    ProductoController ..&gt; ProductoService : usa contrato
-    ProductoController ..&gt; Producto : crea/lee
-    ProductoService &lt;|.. ProductoServiceImplDB : implements
-    ProductoService ..&gt; Producto : usa
-    ProductoServiceImplDB ..&gt; Producto : usa
-    ProductoServiceImplDB --&gt; ProductoDAO : usa
-    ProductoDAO ..&gt; Producto : mapea
-    ProductoDAO --&gt; ConexionBD : usa
-    ConexionBD --&gt; SQLite : JDBC
+    ProductoController -. usa contrato .-&gt; ProductoService
+    ProductoController -. crea/lee .-&gt; Producto
+    ProductoServiceImplDB -. implements .-&gt; ProductoService
+    ProductoService -. usa .-&gt; Producto
+    ProductoServiceImplDB -. usa .-&gt; Producto
+    ProductoServiceImplDB --&gt;|"usa"| ProductoDAO
+    ProductoDAO -. mapea .-&gt; Producto
+    ProductoDAO --&gt;|"usa"| ConexionBD
+    ConexionBD --&gt;|"JDBC"| SQLite
 
     classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
-    class ProductoServiceImplDB:::serviceImpl</code></pre>
+    class ProductoServiceImplDB serviceImpl;</code></pre>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <ol>

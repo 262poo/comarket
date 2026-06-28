@@ -1867,43 +1867,20 @@ La responsabilidad única se consolida evitando que Main, service y entidades ha
 Maven/GraalVM son parte de la entrega, no del flujo CRUD.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>classDiagram
-    class Main {
-        main(String[] args)
-        mostrarMenu()
-    }
-    class Producto {
-        -codigo
-        -nombre
-        -precio
-        -stock
-        mostrarInformacion()
-    }
-    class ProductoService {
-        &lt;&lt;interface&gt;&gt;
-        registrar(producto)
-        listar()
-        buscarPorCodigo(codigo)
-        actualizar(producto)
-        eliminar(codigo)
-    }
-    class ProductoServiceImplMemoria {
-        -productos: ArrayList
-        registrar(producto)
-        listar()
-        buscarPorCodigo(codigo)
-        actualizar(producto)
-        eliminar(codigo)
-    }
+<pre class="mermaid"><code>flowchart TB
+    Main["Main&lt;br/&gt;main(String[] args)&lt;br/&gt;mostrarMenu()"]
+    Producto["Producto&lt;br/&gt;-codigo&lt;br/&gt;-nombre&lt;br/&gt;-precio&lt;br/&gt;-stock&lt;br/&gt;mostrarInformacion()"]
+    ProductoService["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br/&gt;registrar(producto)&lt;br/&gt;listar()&lt;br/&gt;buscarPorCodigo(codigo)&lt;br/&gt;actualizar(producto)&lt;br/&gt;eliminar(codigo)"]
+    ProductoServiceImplMemoria["ProductoServiceImplMemoria&lt;br/&gt;-productos: ArrayList&lt;br/&gt;registrar(producto)&lt;br/&gt;listar()&lt;br/&gt;buscarPorCodigo(codigo)&lt;br/&gt;actualizar(producto)&lt;br/&gt;eliminar(codigo)"]
 
-    Main ..&gt; ProductoService : usa contrato
-    Main ..&gt; Producto : crea datos
-    ProductoService &lt;|.. ProductoServiceImplMemoria : implements
-    ProductoService ..&gt; Producto : usa
-    ProductoServiceImplMemoria ..&gt; Producto : usa
+    Main -. usa contrato .-&gt; ProductoService
+    Main -. crea datos .-&gt; Producto
+    ProductoServiceImplMemoria -. implements .-&gt; ProductoService
+    ProductoService -. usa .-&gt; Producto
+    ProductoServiceImplMemoria -. usa .-&gt; Producto
 
     classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
-    class ProductoServiceImplMemoria:::serviceImpl</code></pre>
+    class ProductoServiceImplMemoria serviceImpl;</code></pre>
 <p>En S5, la arquitectura U1 se concreta con <code>Producto</code>, <code>ProductoService</code> y <code>ProductoServiceImplMemoria</code>. Este ejemplo guiado sirve como patrón para que luego cada equipo adapte el CRUD a la entidad principal de su propio proyecto.</p>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>

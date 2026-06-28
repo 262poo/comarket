@@ -1892,66 +1892,36 @@ En polimorfismo, el código consumidor accede por el padre/contrato.
 Si una implementación agrega métodos propios, esos métodos no forman parte del contrato y no deben ser necesarios para el flujo principal.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>classDiagram
-    class Main {
-        main(String[] args)
-    }
+<pre class="mermaid"><code>flowchart TB
+    Main["Main&lt;br/&gt;main(String[] args)"]
 
-    namespace entity {
-        class Persona {
-            &lt;&lt;abstract&gt;&gt;
-            -nombre
-            -documento
-            mostrarPerfil()
-        }
-        class Cliente {
-            -telefono
-            mostrarPerfil()
-        }
-        class Empleado {
-            -cargo
-            mostrarPerfil()
-        }
-        class Producto {
-            -codigo
-            -nombre
-            -precio
-        }
-    }
+    subgraph Entity["entity"]
+        direction TB
+        Persona["Persona&lt;br/&gt;&amp;lt;&amp;lt;abstract&amp;gt;&amp;gt;&lt;br/&gt;-nombre&lt;br/&gt;-documento&lt;br/&gt;mostrarPerfil()"]
+        Cliente["Cliente&lt;br/&gt;-telefono&lt;br/&gt;mostrarPerfil()"]
+        Empleado["Empleado&lt;br/&gt;-cargo&lt;br/&gt;mostrarPerfil()"]
+        Producto["Producto&lt;br/&gt;-codigo&lt;br/&gt;-nombre&lt;br/&gt;-precio"]
+    end
 
-    namespace service {
-        class ProductoService {
-            &lt;&lt;interface&gt;&gt;
-            registrar(producto)
-            listar()
-            buscarPorCodigo(codigo)
-        }
-        class ProductoServiceImplMemoria {
-            -productos
-            registrar(producto)
-            listar()
-            buscarPorCodigo(codigo)
-        }
-        class ProductoServiceImplDB {
-            registrar(producto)
-            listar()
-            buscarPorCodigo(codigo)
-        }
-    }
+    subgraph Service["service"]
+        direction TB
+        ProductoService["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br/&gt;registrar(producto)&lt;br/&gt;listar()&lt;br/&gt;buscarPorCodigo(codigo)"]
+        ProductoServiceImplMemoria["ProductoServiceImplMemoria&lt;br/&gt;-productos&lt;br/&gt;registrar(producto)&lt;br/&gt;listar()&lt;br/&gt;buscarPorCodigo(codigo)"]
+        ProductoServiceImplDB["ProductoServiceImplDB&lt;br/&gt;registrar(producto)&lt;br/&gt;listar()&lt;br/&gt;buscarPorCodigo(codigo)"]
+    end
 
-    Main ..&gt; Cliente : prueba
-    Main ..&gt; Empleado : prueba
-    Main ..&gt; ProductoService : prueba
-    Persona &lt;|-- Cliente : extends
-    Persona &lt;|-- Empleado : extends
-    ProductoService &lt;|.. ProductoServiceImplMemoria : implements
-    ProductoService &lt;|.. ProductoServiceImplDB : implements
-    ProductoServiceImplMemoria ..&gt; Producto : usa
-    ProductoServiceImplDB ..&gt; Producto : usa
+    Main -. prueba .-&gt; Cliente
+    Main -. prueba .-&gt; Empleado
+    Main -. prueba .-&gt; ProductoService
+    Cliente -- extends --&gt; Persona
+    Empleado -- extends --&gt; Persona
+    ProductoServiceImplMemoria -. implements .-&gt; ProductoService
+    ProductoServiceImplDB -. implements .-&gt; ProductoService
+    ProductoServiceImplMemoria -. usa .-&gt; Producto
+    ProductoServiceImplDB -. usa .-&gt; Producto
 
     classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
-    class ProductoServiceImplMemoria:::serviceImpl
-    class ProductoServiceImplDB:::serviceImpl</code></pre>
+    class ProductoServiceImplMemoria,ProductoServiceImplDB serviceImpl;</code></pre>
 <p>Convención del diagrama: flecha continua con triángulo representa <code>extends</code>; flecha punteada con triángulo representa <code>implements</code>; flecha punteada simple representa dependencia o uso.</p>
 <p>Lectura importante del diagrama:</p>
 <div class="highlight"><pre><span></span><code>Herencia:
