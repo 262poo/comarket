@@ -2,7 +2,7 @@ package com.upeu.comarket.controller;
 
 import com.upeu.comarket.entity.Producto;
 import com.upeu.comarket.service.ProductoService;
-import com.upeu.comarket.service.ProductoServiceImplMemoria;
+import com.upeu.comarket.service.ProductoServiceImplSQLite;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -63,7 +63,7 @@ public class ProductoController {
     @FXML
     private Button btnCancelar;
 
-    private final ProductoService productoService = new ProductoServiceImplMemoria();
+    private final ProductoService productoService = new ProductoServiceImplSQLite();
     private ModoFormulario modoFormulario = ModoFormulario.CONSULTA;
 
     @FXML
@@ -77,7 +77,7 @@ public class ProductoController {
                 (observable, anterior, seleccionado) -> cargarProductoSeleccionado(seleccionado)
         );
 
-        cargarDatosIniciales();
+        cargarDatosInicialesSiLaBaseEstaVacia();
         actualizarTabla();
         cambiarModo(ModoFormulario.CONSULTA);
     }
@@ -125,7 +125,7 @@ public class ProductoController {
             actualizarTabla();
             limpiarFormulario();
             cambiarModo(ModoFormulario.CONSULTA);
-        } catch (IllegalArgumentException ex) {
+        } catch (IllegalArgumentException | IllegalStateException ex) {
             mostrarMensaje(ex.getMessage());
         }
     }
@@ -150,7 +150,7 @@ public class ProductoController {
             actualizarTabla();
             tablaProductos.getSelectionModel().select(productoService.buscarPorCodigo(producto.getCodigo()));
             cambiarModo(ModoFormulario.CONSULTA);
-        } catch (IllegalArgumentException ex) {
+        } catch (IllegalArgumentException | IllegalStateException ex) {
             mostrarMensaje(ex.getMessage());
         }
     }
@@ -167,8 +167,13 @@ public class ProductoController {
             return;
         }
 
-        if (!productoService.eliminar(producto.getCodigo())) {
-            mostrarMensaje("Producto no encontrado.");
+        try {
+            if (!productoService.eliminar(producto.getCodigo())) {
+                mostrarMensaje("Producto no encontrado.");
+                return;
+            }
+        } catch (IllegalStateException ex) {
+            mostrarMensaje(ex.getMessage());
             return;
         }
 
@@ -229,7 +234,10 @@ public class ProductoController {
         }
     }
 
-    private void cargarDatosIniciales() {
+    private void cargarDatosInicialesSiLaBaseEstaVacia() {
+        if (!productoService.listar().isEmpty()) {
+            return;
+        }
         productoService.registrar(new Producto("P001", "Arroz", 4.5, 20));
         productoService.registrar(new Producto("P002", "Aceite", 9.9, 12));
     }

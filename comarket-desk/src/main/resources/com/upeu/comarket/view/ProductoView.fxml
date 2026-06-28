@@ -23,7 +23,7 @@
                 <Insets bottom="12.0" left="18.0" right="18.0" top="18.0" />
             </padding>
             <Label text="Gestion de Productos" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
-            <Label text="CRUD en memoria usando la capa service de la Unidad 1." style="-fx-text-fill: #5f6b7a;" />
+            <Label text="CRUD persistente con SQLite usando la misma interfaz de servicio." style="-fx-text-fill: #5f6b7a;" />
         </VBox>
     </top>
 
