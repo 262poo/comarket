@@ -826,7 +826,7 @@
   <a href="#33-crear-usuariodao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3 Crear UsuarioDAO
+        3.3 Crear UsuarioDao
       
     </span>
   </a>
@@ -845,10 +845,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-crear-usuarioserviceimpldb" class="md-nav__link">
+  <a href="#35-crear-usuarioserviceimplsqlite" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5 Crear UsuarioServiceImplDB
+        3.5 Crear UsuarioServiceImplSQLite
       
     </span>
   </a>
@@ -889,10 +889,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#39-asociar-una-operacion-al-usuario-actual" class="md-nav__link">
+  <a href="#39-asociar-la-venta-al-usuario-actual" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.9 Asociar una operación al usuario actual
+        3.9 Asociar la venta al usuario actual
       
     </span>
   </a>
@@ -1624,7 +1624,7 @@
   <a href="#33-crear-usuariodao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3 Crear UsuarioDAO
+        3.3 Crear UsuarioDao
       
     </span>
   </a>
@@ -1643,10 +1643,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-crear-usuarioserviceimpldb" class="md-nav__link">
+  <a href="#35-crear-usuarioserviceimplsqlite" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5 Crear UsuarioServiceImplDB
+        3.5 Crear UsuarioServiceImplSQLite
       
     </span>
   </a>
@@ -1687,10 +1687,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#39-asociar-una-operacion-al-usuario-actual" class="md-nav__link">
+  <a href="#39-asociar-la-venta-al-usuario-actual" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.9 Asociar una operación al usuario actual
+        3.9 Asociar la venta al usuario actual
       
     </span>
   </a>
@@ -1906,21 +1906,21 @@
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
 <h3 id="11-proposito">1.1 Propósito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
-<p>Incorporar seguridad básica mediante usuarios, autenticación simple y operaciones persistentes asociadas a una relación uno a muchos.</p>
+<p>Incorporar seguridad básica mediante usuarios, autenticación simple y ventas persistentes asociadas a una relación uno a muchos.</p>
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
-<p>El estudiante crea una tabla de usuarios, implementa un login básico, mantiene una sesión activa y asocia operaciones persistentes al usuario autenticado.</p>
+<p>El estudiante crea una tabla de usuarios, implementa un login básico, mantiene una sesión activa y asocia cada venta registrada al usuario autenticado.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>Autenticación básica y registro de operaciones asociadas a un usuario, usando GUI, servicio, DAO, SQLite y validaciones de acceso.</p>
+<p>Autenticación básica y registro de ventas asociadas a un usuario, usando GUI, servicio, DAO, SQLite y validaciones de acceso.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
-<p>Una aplicación de escritorio no solo guarda datos; también debe saber quién realiza una operación. Esta sesión agrega usuario y seguridad básica sin convertir el curso en seguridad avanzada.</p>
+<p>Una aplicación de escritorio no solo guarda ventas; también debe saber qué usuario registró cada venta. Esta sesión agrega usuario y seguridad básica sin convertir el curso en seguridad avanzada.</p>
 <p>Pregunta guía:</p>
-<div class="highlight"><pre><span></span><code>Cómo asociamos operaciones persistentes a un usuario autenticado sin consultar la base de datos en cada pantalla?
+<div class="highlight"><pre><span></span><code>Cómo asociamos una venta persistente a un usuario autenticado sin consultar la base de datos en cada pantalla?
 </code></pre></div>
 <h3 id="15-ubicacion-en-el-curso">1.5 Ubicación en el curso<a class="headerlink" href="#15-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Unidad: U2.</li>
 <li>Carpeta de trabajo: <code>comarket-desk</code>.</li>
-<li>Avance de sesión: seguridad básica y relación simple uno a muchos.</li>
+<li>Avance de sesión: seguridad básica y relación usuario-ventas.</li>
 </ul>
 <h2 id="2-explica">2. Explica<a class="headerlink" href="#2-explica" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 25 min.</p>
@@ -1930,7 +1930,7 @@
 <li>Autenticación básica.</li>
 <li>Sesión activa en aplicación de escritorio.</li>
 <li>Relación uno a muchos.</li>
-<li>Operaciones asociadas al usuario.</li>
+<li>Ventas asociadas al usuario.</li>
 <li>Validación de acceso.</li>
 <li>DAO para usuario.</li>
 <li>Manejo básico de errores.</li>
@@ -1938,76 +1938,83 @@
 <p>Regla metodológica de la sesión:</p>
 <div class="highlight"><pre><span></span><code>La seguridad se trabaja de forma básica.
 Usuario no reemplaza al dominio principal.
-Usuario permite asociar operaciones a quien las registra.
-La relación uno a muchos se entiende como un usuario con varias operaciones.
-Las validaciones de acceso se aplican antes de ejecutar la operación.
+Usuario permite asociar ventas a quien las registra.
+La relación uno a muchos se entiende como un usuario con varias ventas.
+Las validaciones de acceso se aplican antes de registrar o anular una venta.
 Sesion no es una sesión web.
 Sesion es un estado simple de la aplicación de escritorio.
 Sesion evita consultar la base de datos cada vez que una pantalla necesita saber qué usuario está autenticado.
-`UsuarioDAO` se ubica en `dao` y reutiliza `util/ConexionBD`.
+`UsuarioDao` se ubica en `dao` y reutiliza `db/ConexionSQLite`.
+En esta sesión no se asocia usuario a productos ni a otros mantenimientos; solo a ventas, porque la venta debe indicar quién la registró.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>classDiagram
-    class LoginController {
-        onIngresar()
-    }
+<pre class="mermaid"><code>%%{init: {'flowchart': {'rankSpacing': 80, 'nodeSpacing': 35, 'curve': 'basis'}} }%%
+flowchart TD
+    LoginView["view&lt;br/&gt;LoginView.fxml&lt;br/&gt;txtUsername / txtPassword / Ingresar"]
+    MainView["view&lt;br/&gt;MainView.fxml&lt;br/&gt;lblUsuario"]
+    VentaView["view&lt;br/&gt;VentaView.fxml&lt;br/&gt;registro de venta"]
+    ConsultaVentasView["view&lt;br/&gt;ConsultaVentasView.fxml&lt;br/&gt;colUsuario / Anular venta"]
+    LoginController["controller&lt;br/&gt;LoginController&lt;br/&gt;onIngresarClick()"]
+    MainController["controller&lt;br/&gt;MainController&lt;br/&gt;initialize()&lt;br/&gt;onCerrarSesionClick()"]
+    VentaController["controller&lt;br/&gt;VentaController&lt;br/&gt;onGuardarVentaClick()"]
+    ConsultaVentasController["controller&lt;br/&gt;ConsultaVentasController&lt;br/&gt;colUsuario&lt;br/&gt;onAnularVentaClick()"]
+    UsuarioService["service&lt;br/&gt;UsuarioService&lt;br/&gt;autenticar(username, password)"]
+    UsuarioServiceImplSQLite["service impl&lt;br/&gt;UsuarioServiceImplSQLite&lt;br/&gt;validar vacios / comparar password"]
+    VentaService["service&lt;br/&gt;VentaService&lt;br/&gt;registrar(venta) / listar() / anular(ventaId)"]
+    VentaServiceImplSQLite["service impl&lt;br/&gt;VentaServiceImplSQLite&lt;br/&gt;validar usuario en venta"]
+    UsuarioDao["dao&lt;br/&gt;UsuarioDao&lt;br/&gt;crear tabla usuario&lt;br/&gt;crear admin si no existe&lt;br/&gt;buscarPorUsername(username)"]
+    VentaDao["dao&lt;br/&gt;VentaDao&lt;br/&gt;insertar venta con usuario_id&lt;br/&gt;listar con LEFT JOIN usuario"]
+    ConexionSQLite["db&lt;br/&gt;ConexionSQLite&lt;br/&gt;obtenerConexion()"]
+    Sesion["security&lt;br/&gt;Sesion&lt;br/&gt;iniciar(usuario)&lt;br/&gt;getUsuarioActual()&lt;br/&gt;estaActiva()&lt;br/&gt;cerrar()"]
+    Usuario["entity&lt;br/&gt;Usuario&lt;br/&gt;id / username / passwordHash / rol"]
+    Venta["entity&lt;br/&gt;Venta&lt;br/&gt;cliente / fecha / estado / usuario"]
+    SQLite[("data/comarket.db&lt;br/&gt;usuario&lt;br/&gt;venta.usuario_id")]
 
-    class VentaController {
-        onGuardarVenta()
-    }
+    LoginView --&gt; LoginController
+    LoginController --&gt; UsuarioService
+    UsuarioService --&gt; UsuarioServiceImplSQLite
+    UsuarioServiceImplSQLite --&gt; UsuarioDao
+    UsuarioDao --&gt; ConexionSQLite
+    ConexionSQLite --&gt; SQLite
+    UsuarioDao --&gt; Usuario
+    LoginController --&gt; Sesion
+    LoginController --&gt; MainView
+    MainView --&gt; MainController
+    MainController --&gt; Sesion
+    VentaView --&gt; VentaController
+    VentaController --&gt; Sesion
+    VentaController --&gt; VentaService
+    VentaService --&gt; VentaServiceImplSQLite
+    VentaServiceImplSQLite --&gt; VentaDao
+    VentaDao --&gt; ConexionSQLite
+    VentaController --&gt; Venta
+    Venta --&gt; Usuario
+    ConsultaVentasView --&gt; ConsultaVentasController
+    ConsultaVentasController --&gt; VentaService
+    ConsultaVentasController --&gt; Sesion
+    VentaDao --&gt; Venta
 
-    class UsuarioService {
-        &lt;&lt;interface&gt;&gt;
-        autenticar(username, password)
-    }
-
-    class UsuarioServiceImplDB {
-        autenticar(username, password)
-    }
-
-    class UsuarioDAO {
-        buscarPorUsername(username)
-    }
-
-    class ConexionBD {
-        obtenerConexion()
-    }
-
-    class SQLite {
-        usuario
-        venta
-    }
-
-    class Sesion {
-        -usuarioActual
-        iniciar(usuario)
-        getUsuarioActual()
-        estaActiva()
-        cerrar()
-    }
-
-    class Usuario {
-        -id
-        -username
-        -passwordHash
-        -rol
-    }
-
-    class Venta {
-        -cliente
-        -fecha
-        -usuario
-    }
-
-    LoginController ..&gt; UsuarioService : usa contrato
-    UsuarioService &lt;|.. UsuarioServiceImplDB : implements
-    UsuarioServiceImplDB --&gt; UsuarioDAO : usa
-    UsuarioDAO --&gt; ConexionBD : usa
-    ConexionBD --&gt; SQLite : JDBC
-    UsuarioDAO ..&gt; Usuario : retorna
-    LoginController --&gt; Sesion : guarda usuario
-    VentaController ..&gt; Sesion : consulta
-    Venta "*" --&gt; "1" Usuario : registrada por</code></pre>
+    classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    class UsuarioServiceImplSQLite,VentaServiceImplSQLite serviceImpl;</code></pre>
+<p>Nombres reales del proyecto guía:</p>
+<div class="highlight"><pre><span></span><code>com.upeu.comarket.controller.LoginController
+com.upeu.comarket.controller.MainController
+com.upeu.comarket.controller.VentaController
+com.upeu.comarket.controller.ConsultaVentasController
+com.upeu.comarket.security.Sesion
+com.upeu.comarket.entity.Usuario
+com.upeu.comarket.entity.Venta
+com.upeu.comarket.service.UsuarioService
+com.upeu.comarket.service.UsuarioServiceImplSQLite
+com.upeu.comarket.service.VentaServiceImplSQLite
+com.upeu.comarket.dao.UsuarioDao
+com.upeu.comarket.dao.VentaDao
+com.upeu.comarket.db.ConexionSQLite
+src/main/resources/com/upeu/comarket/view/LoginView.fxml
+src/main/resources/com/upeu/comarket/view/MainView.fxml
+src/main/resources/com/upeu/comarket/view/VentaView.fxml
+src/main/resources/com/upeu/comarket/view/ConsultaVentasView.fxml
+</code></pre></div>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <h3 id="31-crear-tabla-usuario">3.1 Crear tabla <code>usuario</code><a class="headerlink" href="#31-crear-tabla-usuario" title="Permanent link">&para;</a></h3>
@@ -2057,9 +2064,14 @@ En una aplicación real la contraseña debe almacenarse usando hash seguro.
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="33-crear-usuariodao">3.3 Crear <code>UsuarioDAO</code><a class="headerlink" href="#33-crear-usuariodao" title="Permanent link">&para;</a></h3>
-<p><code>UsuarioDAO</code> solo conversa con la base de datos.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsuarioDAO</span><span class="w"> </span><span class="p">{</span>
+<h3 id="33-crear-usuariodao">3.3 Crear <code>UsuarioDao</code><a class="headerlink" href="#33-crear-usuariodao" title="Permanent link">&para;</a></h3>
+<p><code>UsuarioDao</code> solo conversa con la base de datos. En el proyecto guía también crea la tabla <code>usuario</code> y registra el usuario inicial <code>admin</code> si todavía no existe.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsuarioDao</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">UsuarioDao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">crearTablaSiNoExiste</span><span class="p">();</span>
+<span class="w">        </span><span class="n">crearUsuarioAdminSiNoExiste</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Usuario</span><span class="w"> </span><span class="nf">buscarPorUsername</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// SELECT id, username, password_hash, rol</span>
 <span class="w">        </span><span class="c1">// FROM usuario</span>
@@ -2073,14 +2085,18 @@ En una aplicación real la contraseña debe almacenarse usando hash seguro.
 <span class="w">    </span><span class="n">Usuario</span><span class="w"> </span><span class="nf">autenticar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="35-crear-usuarioserviceimpldb">3.5 Crear <code>UsuarioServiceImplDB</code><a class="headerlink" href="#35-crear-usuarioserviceimpldb" title="Permanent link">&para;</a></h3>
+<h3 id="35-crear-usuarioserviceimplsqlite">3.5 Crear <code>UsuarioServiceImplSQLite</code><a class="headerlink" href="#35-crear-usuarioserviceimplsqlite" title="Permanent link">&para;</a></h3>
 <p>El servicio decide si las credenciales son válidas. El controlador no debe comparar contraseñas ni ejecutar SQL.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsuarioServiceImplDB</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">UsuarioService</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UsuarioDAO</span><span class="w"> </span><span class="n">usuarioDAO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UsuarioDAO</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsuarioServiceImplSQLite</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">UsuarioService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">UsuarioDao</span><span class="w"> </span><span class="n">usuarioDao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UsuarioDao</span><span class="p">();</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Usuario</span><span class="w"> </span><span class="nf">autenticar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Usuario</span><span class="w"> </span><span class="n">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioDAO</span><span class="p">.</span><span class="na">buscarPorUsername</span><span class="p">(</span><span class="n">username</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">estaVacio</span><span class="p">(</span><span class="n">username</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">estaVacio</span><span class="p">(</span><span class="n">password</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Usuario</span><span class="w"> </span><span class="n">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioDao</span><span class="p">.</span><span class="na">buscarPorUsername</span><span class="p">(</span><span class="n">username</span><span class="p">.</span><span class="na">trim</span><span class="p">());</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">usuario</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
@@ -2099,8 +2115,8 @@ En una aplicación real la contraseña debe almacenarse usando hash seguro.
 <p>Utilidad:</p>
 <div class="highlight"><pre><span></span><code>1. Evita consultar la base de datos en cada pantalla para saber quién está autenticado.
 2. Centraliza el estado del usuario actual.
-3. Permite asociar operaciones al usuario sin pasar username y password por todo el sistema.
-4. Permite validar acceso antes de guardar una operación.
+3. Permite asociar ventas al usuario sin pasar username y password por todo el sistema.
+4. Permite validar acceso antes de registrar o anular una venta.
 5. Optimiza recursos porque el usuario ya fue validado una vez al iniciar sesión.
 </code></pre></div>
 <p>Implementación simple:</p>
@@ -2127,7 +2143,7 @@ En una aplicación real la contraseña debe almacenarse usando hash seguro.
 <p>Regla de uso:</p>
 <div class="highlight"><pre><span></span><code>LoginController escribe en Sesion después de autenticar.
 Los demás controladores solo consultan Sesion.
-Ningún controlador debe volver a pedir username/password para cada operación.
+Ningún controlador debe volver a pedir username/password para cada venta.
 </code></pre></div>
 <h3 id="37-disenar-vista-de-login">3.7 Diseñar vista de login<a class="headerlink" href="#37-disenar-vista-de-login" title="Permanent link">&para;</a></h3>
 <p>Controles mínimos:</p>
@@ -2139,7 +2155,7 @@ Ningún controlador debe volver a pedir username/password para cada operación.
 </ul>
 <h3 id="38-implementar-logincontroller">3.8 Implementar <code>LoginController</code><a class="headerlink" href="#38-implementar-logincontroller" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoginController</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UsuarioService</span><span class="w"> </span><span class="n">usuarioService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UsuarioServiceImplDB</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">UsuarioService</span><span class="w"> </span><span class="n">usuarioService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UsuarioServiceImplSQLite</span><span class="p">();</span>
 
 <span class="w">    </span><span class="nd">@FXML</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">TextField</span><span class="w"> </span><span class="n">txtUsername</span><span class="p">;</span>
@@ -2148,7 +2164,7 @@ Ningún controlador debe volver a pedir username/password para cada operación.
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">PasswordField</span><span class="w"> </span><span class="n">txtPassword</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nd">@FXML</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onIngresar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onIngresarClick</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">Usuario</span><span class="w"> </span><span class="n">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioService</span><span class="p">.</span><span class="na">autenticar</span><span class="p">(</span>
 <span class="w">                </span><span class="n">txtUsername</span><span class="p">.</span><span class="na">getText</span><span class="p">(),</span>
 <span class="w">                </span><span class="n">txtPassword</span><span class="p">.</span><span class="na">getText</span><span class="p">()</span>
@@ -2164,8 +2180,8 @@ Ningún controlador debe volver a pedir username/password para cada operación.
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="39-asociar-una-operacion-al-usuario-actual">3.9 Asociar una operación al usuario actual<a class="headerlink" href="#39-asociar-una-operacion-al-usuario-actual" title="Permanent link">&para;</a></h3>
-<p>La tabla de operación debe tener una referencia al usuario. En el flujo de venta:</p>
+<h3 id="39-asociar-la-venta-al-usuario-actual">3.9 Asociar la venta al usuario actual<a class="headerlink" href="#39-asociar-la-venta-al-usuario-actual" title="Permanent link">&para;</a></h3>
+<p>La tabla <code>venta</code> debe tener una referencia al usuario. En el flujo real de <code>comarket-desk</code>, no se asocian productos ni otros mantenimientos al usuario; se asocia la venta porque debe quedar claro quién la registró.</p>
 <div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">venta</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">usuario_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">usuario</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
 </code></pre></div>
 <p>Antes de guardar:</p>
@@ -2176,6 +2192,17 @@ Ningún controlador debe volver a pedir username/password para cada operación.
 
 <span class="n">Usuario</span><span class="w"> </span><span class="n">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Sesion</span><span class="p">.</span><span class="na">getUsuarioActual</span><span class="p">();</span>
 <span class="n">venta</span><span class="p">.</span><span class="na">setUsuario</span><span class="p">(</span><span class="n">usuario</span><span class="p">);</span>
+</code></pre></div>
+<p>En <code>VentaDao.insertar(...)</code>, la venta se guarda con <code>usuario_id</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">INSERT</span><span class="w"> </span><span class="n">INTO</span><span class="w"> </span><span class="nf">venta</span><span class="w"> </span><span class="p">(</span><span class="n">cliente</span><span class="p">,</span><span class="w"> </span><span class="n">fecha</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">estado</span><span class="p">,</span><span class="w"> </span><span class="n">usuario_id</span><span class="p">)</span>
+<span class="n">VALUES</span><span class="w"> </span><span class="p">(</span><span class="o">?</span><span class="p">,</span><span class="w"> </span><span class="o">?</span><span class="p">,</span><span class="w"> </span><span class="o">?</span><span class="p">,</span><span class="w"> </span><span class="o">?</span><span class="p">,</span><span class="w"> </span><span class="o">?</span><span class="p">)</span>
+</code></pre></div>
+<p>En <code>VentaDao.listar()</code>, las ventas se consultan junto con el usuario:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">cliente</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">fecha</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">estado</span><span class="p">,</span>
+<span class="w">       </span><span class="n">u</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">usuario_id</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">password_hash</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">rol</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">venta</span><span class="w"> </span><span class="n">v</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">usuario</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">usuario_id</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
 </code></pre></div>
 <h3 id="310-usar-sesion-desde-ventacontroller">3.10 Usar <code>Sesion</code> desde <code>VentaController</code><a class="headerlink" href="#310-usar-sesion-desde-ventacontroller" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">VentaController</span><span class="w"> </span><span class="p">{</span>
@@ -2195,18 +2222,23 @@ Ningún controlador debe volver a pedir username/password para cada operación.
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<p>En el proyecto guía, <code>ConsultaVentasController</code> también muestra el usuario que registró la venta mediante la columna <code>colUsuario</code>. Si una venta antigua no tiene usuario, la tabla muestra <code>Sin usuario</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">colUsuario</span><span class="p">.</span><span class="na">setCellValueFactory</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">SimpleStringProperty</span><span class="p">(</span><span class="n">obtenerUsername</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="na">getValue</span><span class="p">()))</span>
+<span class="p">);</span>
+</code></pre></div>
 <h3 id="311-validaciones-de-cierre-de-sesion">3.11 Validaciones de cierre de sesión<a class="headerlink" href="#311-validaciones-de-cierre-de-sesion" title="Permanent link">&para;</a></h3>
 <p>Probar:</p>
 <ol>
 <li>Login correcto.</li>
 <li>Login incorrecto.</li>
-<li>Guardar operación con sesión activa.</li>
-<li>Intentar guardar operación sin sesión activa.</li>
+<li>Guardar venta con sesión activa.</li>
+<li>Intentar guardar venta sin sesión activa.</li>
 <li>Cerrar sesión y verificar que ya no se pueda operar.</li>
-<li>Revisar en SQLite que la operación quedó asociada al usuario.</li>
+<li>Revisar en SQLite que la venta quedó asociada al usuario.</li>
 </ol>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
-<p>Fuera del aula, cada estudiante consolida la autenticación y la relación con operaciones persistentes.</p>
+<p>Fuera del aula, cada estudiante consolida la autenticación y la relación usuario-ventas.</p>
 <p>Tiempo: 2h fuera del aula.</p>
 <h3 id="41-plantilla-de-evidencia-individual">4.1 Plantilla de evidencia individual<a class="headerlink" href="#41-plantilla-de-evidencia-individual" title="Permanent link">&para;</a></h3>
 <p>Entrega un PDF con el siguiente nombre:</p>
@@ -2225,26 +2257,26 @@ Ningún controlador debe volver a pedir username/password para cada operación.
 <li>Crear usuario de prueba.</li>
 <li>Implementar login básico.</li>
 <li>Mantener sesión activa.</li>
-<li>Asociar una operación al usuario.</li>
+<li>Asociar una venta al usuario.</li>
 <li>Evidenciar relación uno a muchos.</li>
 <li>Validar credenciales incorrectas.</li>
-<li>Validar operación sin sesión.</li>
+<li>Validar venta sin sesión.</li>
 </ol>
 <h4 id="413-evidencia-tecnica">4.1.3 Evidencia técnica<a class="headerlink" href="#413-evidencia-tecnica" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Captura de login.</li>
-<li>Código o fragmento de <code>UsuarioDAO</code>.</li>
-<li>Código o fragmento de <code>UsuarioServiceImplDB</code>.</li>
+<li>Código o fragmento de <code>UsuarioDao</code>.</li>
+<li>Código o fragmento de <code>UsuarioServiceImplSQLite</code>.</li>
 <li>Código o fragmento de <code>Sesion</code>.</li>
 <li>Evidencia de usuario autenticado.</li>
-<li>Evidencia de operación asociada al usuario.</li>
+<li>Evidencia de venta asociada al usuario.</li>
 <li>Validación de acceso o credenciales.</li>
 </ul>
 <h4 id="414-error-o-hallazgo">4.1.4 Error o hallazgo<a class="headerlink" href="#414-error-o-hallazgo" title="Permanent link">&para;</a></h4>
 <p>Describe un problema encontrado al controlar sesión o acceso.</p>
 <h4 id="415-reflexion-tecnica-breve">4.1.5 Reflexión técnica breve<a class="headerlink" href="#415-reflexion-tecnica-breve" title="Permanent link">&para;</a></h4>
 <p>Responde en 5 a 8 líneas:</p>
-<div class="highlight"><pre><span></span><code>Por qué conviene guardar el usuario autenticado en Sesion en lugar de consultar la base de datos en cada operación?
+<div class="highlight"><pre><span></span><code>Por qué conviene guardar el usuario autenticado en Sesion en lugar de consultar la base de datos cada vez que se registra una venta?
 </code></pre></div>
 <h3 id="42-criterios-minimos-de-aceptacion">4.2 Criterios mínimos de aceptación<a class="headerlink" href="#42-criterios-minimos-de-aceptacion" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2252,7 +2284,7 @@ Ningún controlador debe volver a pedir username/password para cada operación.
 <li>Login básico funcional.</li>
 <li>Usuario persistido en SQLite.</li>
 <li>Sesión activa controlada.</li>
-<li>Operación asociada al usuario.</li>
+<li>Venta asociada al usuario.</li>
 <li>Validación de acceso.</li>
 </ul>
 <h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
@@ -2262,7 +2294,7 @@ Ningún controlador debe volver a pedir username/password para cada operación.
 <li>El estudiante explica autenticación básica.</li>
 <li>Usuario se persiste mediante DAO.</li>
 <li>La sesión activa se consulta desde controladores.</li>
-<li>Las operaciones se asocian al usuario.</li>
+<li>Las ventas se asocian al usuario.</li>
 <li>Se evidencia relación uno a muchos.</li>
 <li>Se aplican validaciones de acceso.</li>
 <li>El estudiante explica por qué <code>Sesion</code> evita consultas repetidas a la base de datos.</li>
@@ -2271,7 +2303,7 @@ Ningún controlador debe volver a pedir username/password para cada operación.
 <p>Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.</p>
 <h3 id="53-preguntas-de-defensa-y-reflexion">5.3 Preguntas de defensa y reflexión<a class="headerlink" href="#53-preguntas-de-defensa-y-reflexion" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Qué responsabilidad tiene <code>UsuarioDAO</code>?</li>
+<li>Qué responsabilidad tiene <code>UsuarioDao</code>?</li>
 <li>Qué responsabilidad tiene <code>UsuarioService</code>?</li>
 <li>Dónde se guarda el usuario autenticado durante la ejecución?</li>
 <li>Por qué <code>Sesion</code> no es una sesión web?</li>
@@ -2314,7 +2346,7 @@ Ningún controlador debe volver a pedir username/password para cada operación.
 <tr>
 <td>3. Relación uno a muchos</td>
 <td style="text-align: right;">2</td>
-<td>Operaciones asociadas al usuario correctamente.</td>
+<td>Ventas asociadas al usuario correctamente.</td>
 <td>Asociación funcional.</td>
 <td>Asociación parcial.</td>
 <td>No evidencia relación.</td>
