@@ -1652,11 +1652,11 @@
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
 <h3 id="11-proposito">1.1 Propósito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
-<p>Implementar operaciones persistentes sobre un modelo con relación muchos a muchos usando una clase de detalle con atributos propios.</p>
+<p>Implementar operaciones persistentes de venta con cabecera y detalle, usando una clase de detalle con atributos propios, productos existentes y anulación de ventas con reposición de stock.</p>
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
 <p>El estudiante modela una operación con cabecera y detalle, persiste datos relacionados mediante DAO y mantiene la separación entre controlador, servicio, entidades y persistencia.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>Registro persistente de una operación con detalles: cabecera, lista de detalles, entidad relacionada, cálculo de subtotal y total.</p>
+<p>Registro persistente de una operación con detalles: cabecera, lista de detalles, entidad relacionada, cálculo de subtotal y total, consulta de ventas registradas y anulación con reposición de stock.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
 <p>Después de persistir una tabla simple, el siguiente reto es registrar una operación real donde una cabecera contiene varios detalles y cada detalle referencia una entidad existente.</p>
 <p>Pregunta guía:</p>
@@ -1672,123 +1672,156 @@
 <p>Tiempo: 25 min.</p>
 <h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Relación muchos a muchos desde el modelo de objetos.</li>
+<li>Relación cabecera-detalle desde el modelo de objetos.</li>
 <li>Cabecera y detalle.</li>
 <li>Clase intermedia con atributos propios.</li>
 <li>Composición entre cabecera y detalle.</li>
 <li>Asociación entre detalle y entidad relacionada.</li>
 <li>DAO para cabecera y DAO para detalle.</li>
-<li>Transacción o secuencia controlada de guardado.</li>
+<li>Transacción para guardar cabecera, detalles y descuento de stock.</li>
+<li>Anulación lógica de venta mediante estado.</li>
+<li>Reposición de stock al anular.</li>
 <li>Validaciones del flujo.</li>
 </ul>
 <p>Regla metodológica de la sesión:</p>
-<div class="highlight"><pre><span></span><code>La relación se entiende primero como relación entre objetos.
-La base de datos persiste esa relación mediante tablas.
+<div class="highlight"><pre><span></span><code>La relación se entiende primero como cabecera-detalle entre objetos.
+La base de datos persiste esa relación mediante tablas `venta` y `detalle_venta`.
 El detalle no es una pantalla CRUD independiente.
 El detalle nace dentro del flujo de la cabecera.
-Los DAO se ubican en `dao` y reutilizan `util/ConexionBD` para conectarse a SQLite.
+La anulación no elimina la venta ni sus detalles; cambia el estado de la venta y repone el stock.
+Los DAO se ubican en `dao` y reutilizan `db/ConexionSQLite` para conectarse a SQLite.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>classDiagram
-    class VentaController {
-        onAgregarDetalle()
-        onGuardarVenta()
-        cargarProductos()
-    }
+<pre class="mermaid"><code>flowchart TB
+    subgraph View["view"]
+        VentaView["VentaView.fxml&lt;br/&gt;txtCliente / dpFecha / cboProducto / txtCantidad&lt;br/&gt;tablaDetalles / lblTotal"]
+        ConsultaVentasView["ConsultaVentasView.fxml&lt;br/&gt;tablaVentas / tablaDetallesVenta&lt;br/&gt;colEstado&lt;br/&gt;Anular venta / Actualizar"]
+    end
 
-    class VentaService {
-        &lt;&lt;interface&gt;&gt;
-        registrar(venta)
-        calcularTotal(venta)
-    }
+    subgraph Controller["controller"]
+        VentaController["VentaController&lt;br/&gt;initialize()&lt;br/&gt;onAgregarDetalleClick()&lt;br/&gt;onQuitarDetalleClick()&lt;br/&gt;onGuardarVentaClick()&lt;br/&gt;onNuevaVentaClick()&lt;br/&gt;cargarProductos()"]
+        ConsultaVentasController["ConsultaVentasController&lt;br/&gt;initialize()&lt;br/&gt;onActualizarClick()&lt;br/&gt;onAnularVentaClick()&lt;br/&gt;cargarDetalleVenta(venta)"]
+    end
 
-    class VentaServiceImplDB {
-        registrar(venta)
-        calcularTotal(venta)
-    }
+    subgraph Service["service"]
+        ProductoService["ProductoService&lt;br/&gt;listar()"]
+        ProductoServiceImplSQLite["ProductoServiceImplSQLite"]
+        VentaService["VentaService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br/&gt;registrar(venta)&lt;br/&gt;calcularTotal(venta)&lt;br/&gt;listar()&lt;br/&gt;listarDetalles(ventaId)&lt;br/&gt;anular(ventaId)"]
+        VentaServiceImplSQLite["VentaServiceImplSQLite&lt;br/&gt;validarVenta(venta)&lt;br/&gt;validarStock(connection, venta)&lt;br/&gt;anular(ventaId)&lt;br/&gt;transaccion"]
+    end
 
-    class VentaDAO {
-        insertar(venta)
-    }
+    subgraph Entity["entity"]
+        Venta["Venta&lt;br/&gt;id&lt;br/&gt;cliente&lt;br/&gt;fecha&lt;br/&gt;estado&lt;br/&gt;detalles&lt;br/&gt;calcularTotal()"]
+        DetalleVenta["DetalleVenta&lt;br/&gt;producto&lt;br/&gt;cantidad&lt;br/&gt;precioUnitario&lt;br/&gt;getSubtotal()"]
+        Producto["Producto&lt;br/&gt;codigo&lt;br/&gt;nombre&lt;br/&gt;precio&lt;br/&gt;stock"]
+    end
 
-    class DetalleVentaDAO {
-        insertar(detalle, ventaId)
-    }
+    subgraph Dao["dao"]
+        VentaDao["VentaDao&lt;br/&gt;insertar(connection, venta)&lt;br/&gt;obtenerStock(connection, codigo)&lt;br/&gt;descontarStock(connection, detalle)&lt;br/&gt;reponerStock(connection, detalle)&lt;br/&gt;buscarPorId(connection, ventaId)&lt;br/&gt;anular(connection, ventaId)&lt;br/&gt;listar()"]
+        DetalleVentaDao["DetalleVentaDao&lt;br/&gt;insertar(connection, ventaId, detalle)&lt;br/&gt;listarPorVentaId(ventaId)"]
+        ProductoDao["ProductoDao&lt;br/&gt;listar()"]
+    end
 
-    class ConexionBD {
-        obtenerConexion()
-    }
+    subgraph Db["db"]
+        ConexionSQLite["ConexionSQLite&lt;br/&gt;obtenerConexion()"]
+        SQLite[("data/comarket.db&lt;br/&gt;producto / venta / detalle_venta")]
+    end
 
-    class SQLite {
-        venta
-        detalle_venta
-        producto
-    }
+    VentaView --&gt;|"fx:controller"| VentaController
+    VentaView -.-&gt;|"fx:id / onAction"| VentaController
+    ConsultaVentasView --&gt;|"fx:controller"| ConsultaVentasController
+    ConsultaVentasView -.-&gt;|"fx:id / onAction"| ConsultaVentasController
+    VentaController -. usa .-&gt; ProductoService
+    VentaController -. usa contrato .-&gt; VentaService
+    ConsultaVentasController -. usa contrato .-&gt; VentaService
+    ProductoServiceImplSQLite -. implements .-&gt; ProductoService
+    VentaServiceImplSQLite -. implements .-&gt; VentaService
+    ProductoServiceImplSQLite --&gt; ProductoDao
+    VentaServiceImplSQLite --&gt; VentaDao
+    VentaServiceImplSQLite --&gt; DetalleVentaDao
+    VentaServiceImplSQLite --&gt; ConexionSQLite
+    ProductoDao --&gt; ConexionSQLite
+    VentaDao --&gt; ConexionSQLite
+    DetalleVentaDao --&gt; ConexionSQLite
+    ConexionSQLite --&gt;|"JDBC"| SQLite
+    VentaController -. crea .-&gt; Venta
+    VentaController -. agrega .-&gt; DetalleVenta
+    ConsultaVentasController -. consulta .-&gt; Venta
+    ConsultaVentasController -. consulta .-&gt; DetalleVenta
+    ConsultaVentasController -. anula .-&gt; VentaService
+    Venta --&gt;|"1 contiene muchos"| DetalleVenta
+    DetalleVenta --&gt;|"referencia 1 producto"| Producto
 
-    class Venta {
-        -cliente
-        -fecha
-        -detalles
-        calcularTotal()
-    }
-
-    class DetalleVenta {
-        -cantidad
-        -precioUnitario
-        calcularSubtotal()
-    }
-
-    class Producto {
-        -nombre
-        -precio
-        -stock
-    }
-
-    VentaController ..&gt; VentaService : usa contrato
-    VentaService &lt;|.. VentaServiceImplDB : implements
-    VentaServiceImplDB --&gt; VentaDAO : usa
-    VentaServiceImplDB --&gt; DetalleVentaDAO : usa
-    VentaDAO --&gt; ConexionBD : usa
-    DetalleVentaDAO --&gt; ConexionBD : usa
-    ConexionBD --&gt; SQLite : JDBC
-    VentaServiceImplDB ..&gt; Venta : usa
-    Venta "1" *-- "*" DetalleVenta : contiene
-    DetalleVenta "*" --&gt; "1" Producto : referencia</code></pre>
+    classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    class ProductoServiceImplSQLite,VentaServiceImplSQLite serviceImpl;</code></pre>
+<p>Nombres reales del proyecto guía:</p>
+<div class="highlight"><pre><span></span><code>com.upeu.comarket.controller.VentaController
+com.upeu.comarket.controller.ConsultaVentasController
+com.upeu.comarket.entity.Venta
+com.upeu.comarket.entity.DetalleVenta
+com.upeu.comarket.entity.Producto
+com.upeu.comarket.service.VentaService
+com.upeu.comarket.service.VentaServiceImplSQLite
+com.upeu.comarket.service.ProductoServiceImplSQLite
+com.upeu.comarket.dao.VentaDao
+com.upeu.comarket.dao.DetalleVentaDao
+com.upeu.comarket.dao.ProductoDao
+com.upeu.comarket.db.ConexionSQLite
+src/main/resources/com/upeu/comarket/view/VentaView.fxml
+src/main/resources/com/upeu/comarket/view/ConsultaVentasView.fxml
+</code></pre></div>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <ol>
 <li>Crear o revisar entidades <code>Venta</code>, <code>DetalleVenta</code> y <code>Producto</code>.</li>
-<li>Diseñar vista de registro de venta.</li>
+<li>Diseñar o revisar <code>VentaView.fxml</code>.</li>
 <li>Cargar productos existentes desde la base de datos.</li>
 <li>Seleccionar producto y cantidad.</li>
 <li>Crear <code>DetalleVenta</code>.</li>
 <li>Agregar detalles a la venta.</li>
 <li>Calcular subtotal y total.</li>
-<li>Crear <code>VentaDAO</code>.</li>
-<li>Crear <code>DetalleVentaDAO</code>.</li>
-<li>Reutilizar <code>ConexionBD</code> desde <code>util</code>.</li>
-<li>Crear <code>VentaServiceImplDB</code>.</li>
-<li>Guardar primero la cabecera y luego los detalles.</li>
-<li>Validar cantidad, stock, venta sin detalles y errores de persistencia.</li>
+<li>Crear <code>VentaDao</code>.</li>
+<li>Crear <code>DetalleVentaDao</code>.</li>
+<li>Reutilizar <code>ConexionSQLite</code> desde <code>db</code>.</li>
+<li>Crear <code>VentaServiceImplSQLite</code>.</li>
+<li>Guardar primero la cabecera y luego los detalles dentro de una transacción.</li>
+<li>Descontar stock desde el flujo de venta.</li>
+<li>Mostrar ventas registradas en <code>ConsultaVentasView.fxml</code>.</li>
+<li>Cargar detalles de la venta seleccionada.</li>
+<li>Anular una venta desde <code>ConsultaVentasController</code>.</li>
+<li>Cambiar <code>estado</code> a <code>ANULADA</code> y reponer stock dentro de una transacción.</li>
+<li>Validar cantidad, stock, venta sin detalles, venta ya anulada y errores de persistencia.</li>
 </ol>
 <p>Tablas de referencia:</p>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">venta</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
 <span class="w">    </span><span class="n">cliente</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <span class="w">    </span><span class="n">fecha</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">estado</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;ACTIVA&#39;</span>
 <span class="p">);</span>
 
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">detalle_venta</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
 <span class="w">    </span><span class="n">venta_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">producto_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">producto_codigo</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <span class="w">    </span><span class="n">cantidad</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <span class="w">    </span><span class="n">precio_unitario</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <span class="w">    </span><span class="n">subtotal</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">venta_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">venta</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
-<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">producto_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">producto</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">producto_codigo</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">producto</span><span class="p">(</span><span class="n">codigo</span><span class="p">)</span>
 <span class="p">);</span>
+</code></pre></div>
+<p>Flujo de anulación:</p>
+<div class="highlight"><pre><span></span><code>ConsultaVentasView.fxml
+-&gt; ConsultaVentasController.onAnularVentaClick()
+-&gt; VentaService.anular(ventaId)
+-&gt; VentaServiceImplSQLite.anular(ventaId)
+-&gt; VentaDao.buscarPorId(connection, ventaId)
+-&gt; DetalleVentaDao.listarPorVentaId(connection, ventaId)
+-&gt; VentaDao.reponerStock(connection, detalle)
+-&gt; VentaDao.anular(connection, ventaId)
+-&gt; venta.estado = &#39;ANULADA&#39;
 </code></pre></div>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
 <p>Fuera del aula, cada estudiante consolida el registro persistente con detalle y prepara una evidencia individual.</p>
@@ -1812,15 +1845,19 @@ Los DAO se ubican en `dao` y reutilizan `util/ConexionBD` para conectarse a SQLi
 <li>Evidenciar DAO de cabecera y DAO de detalle.</li>
 <li>Mostrar cálculo de total.</li>
 <li>Verificar registros en SQLite.</li>
+<li>Implementar o evidenciar consulta de ventas registradas.</li>
+<li>Anular una venta y verificar que el stock se repone.</li>
 <li>Documentar validaciones aplicadas.</li>
 </ol>
 <h4 id="413-evidencia-tecnica">4.1.3 Evidencia técnica<a class="headerlink" href="#413-evidencia-tecnica" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Captura de la pantalla de registro.</li>
-<li>Código o fragmento de <code>VentaServiceImplDB</code>.</li>
-<li>Código o fragmento de <code>VentaDAO</code> y <code>DetalleVentaDAO</code>.</li>
+<li>Captura de <code>ConsultaVentasView.fxml</code> con ventas registradas.</li>
+<li>Código o fragmento de <code>VentaServiceImplSQLite</code>.</li>
+<li>Código o fragmento de <code>VentaDao</code> y <code>DetalleVentaDao</code>.</li>
 <li>Captura de tablas persistidas.</li>
-<li>Evidencia de validación de cantidad, stock o venta sin detalles.</li>
+<li>Evidencia de anulación de venta y reposición de stock.</li>
+<li>Evidencia de validación de cantidad, stock, venta sin detalles o venta ya anulada.</li>
 </ul>
 <h4 id="414-error-o-hallazgo">4.1.4 Error o hallazgo<a class="headerlink" href="#414-error-o-hallazgo" title="Permanent link">&para;</a></h4>
 <p>Describe un problema encontrado al guardar cabecera y detalle.</p>
@@ -1832,6 +1869,9 @@ Los DAO se ubican en `dao` y reutilizan `util/ConexionBD` para conectarse a SQLi
 <ul>
 <li>PDF con nombre correcto.</li>
 <li>Registro de cabecera y detalles.</li>
+<li>Consulta de ventas registradas.</li>
+<li>Anulación de venta sin eliminar la cabecera ni el detalle.</li>
+<li>Reposición de stock al anular.</li>
 <li>Cálculo de subtotal y total.</li>
 <li>Persistencia en tablas relacionadas.</li>
 <li>Validaciones del flujo.</li>
@@ -1845,6 +1885,8 @@ Los DAO se ubican en `dao` y reutilizan `util/ConexionBD` para conectarse a SQLi
 <li>El detalle referencia una entidad existente.</li>
 <li>El servicio coordina el guardado.</li>
 <li>El DAO persiste cabecera y detalle.</li>
+<li>La consulta permite revisar ventas y detalles.</li>
+<li>La anulación cambia el estado y repone stock.</li>
 <li>La GUI muestra detalles y total.</li>
 <li>Hay validaciones al cierre de la sesión.</li>
 </ul>
@@ -1858,6 +1900,9 @@ Los DAO se ubican en `dao` y reutilizan `util/ConexionBD` para conectarse a SQLi
 <li>Qué DAO guarda la cabecera?</li>
 <li>Qué DAO guarda los detalles?</li>
 <li>Qué validación evita vender una cantidad inválida?</li>
+<li>Qué ocurre con el stock al registrar una venta?</li>
+<li>Por qué anular no debe eliminar físicamente la venta?</li>
+<li>Qué método repone el stock al anular?</li>
 </ol>
 <h3 id="54-rubrica-de-evaluacion">5.4 Rúbrica de evaluación<a class="headerlink" href="#54-rubrica-de-evaluacion" title="Permanent link">&para;</a></h3>
 <table>
@@ -1885,7 +1930,7 @@ Los DAO se ubican en `dao` y reutilizan `util/ConexionBD` para conectarse a SQLi
 <tr>
 <td>2. Persistencia relacionada</td>
 <td style="text-align: right;">2</td>
-<td>Guarda cabecera y detalles correctamente.</td>
+<td>Guarda cabecera y detalles, permite consulta y anula reponiendo stock.</td>
 <td>Persistencia principal funcional.</td>
 <td>Persistencia parcial.</td>
 <td>No persiste relación.</td>
@@ -1903,7 +1948,7 @@ Los DAO se ubican en `dao` y reutilizan `util/ConexionBD` para conectarse a SQLi
 <tr>
 <td>4. Validaciones</td>
 <td style="text-align: right;">2</td>
-<td>Valida cantidad, stock y venta sin detalles.</td>
+<td>Valida cantidad, stock, venta sin detalles y venta ya anulada.</td>
 <td>Validaciones básicas.</td>
 <td>Validaciones parciales.</td>
 <td>No valida.</td>

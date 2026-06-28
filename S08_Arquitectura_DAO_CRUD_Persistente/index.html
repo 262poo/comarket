@@ -1656,7 +1656,7 @@
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
 <p>El estudiante separa vista, controlador, servicio, entidades y persistencia; crea un DAO para una tabla simple y conecta el CRUD persistente con la interfaz gráfica.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>CRUD persistente de una entidad simple desde GUI, usando <code>ProductoServiceImplDB</code>, <code>ProductoDAO</code>, SQLite y validaciones básicas.</p>
+<p>CRUD persistente de producto desde GUI, usando <code>ProductoServiceImplSQLite</code>, <code>ProductoDao</code>, <code>ConexionSQLite</code>, SQLite y validaciones básicas.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
 <p>En S7 el CRUD funcionó en memoria. En esta sesión se reemplaza la implementación en memoria por una implementación persistente sin cambiar la responsabilidad del controlador ni de la entidad.</p>
 <p>Pregunta guía:</p>
@@ -1689,42 +1689,71 @@ El DAO ejecuta SQL y mapea filas a objetos.
 JDBC conecta Java con SQLite.
 La entidad sigue siendo clase del dominio.
 No se usa JPA ni ORM.
-La conexión a la base de datos se centraliza en util/ConexionBD.
+La conexión a la base de datos se centraliza en `db/ConexionSQLite`.
 `dao` cumple el rol de capa de acceso a datos en este curso.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart TB
-    ProductoController["ProductoController&lt;br/&gt;onRegistrar()&lt;br/&gt;onActualizar()&lt;br/&gt;onEliminar()&lt;br/&gt;cargarTabla()"]
-    ProductoService["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br/&gt;registrar(producto)&lt;br/&gt;listar()&lt;br/&gt;actualizar(producto)&lt;br/&gt;eliminar(codigo)"]
-    ProductoServiceImplDB["ProductoServiceImplDB&lt;br/&gt;-dao: ProductoDAO&lt;br/&gt;CRUD con DAO"]
-    ProductoDAO["ProductoDAO&lt;br/&gt;insertar(producto)&lt;br/&gt;listar()&lt;br/&gt;actualizar(producto)&lt;br/&gt;eliminar(codigo)"]
-    ConexionBD["ConexionBD&lt;br/&gt;obtenerConexion()"]
-    SQLite[("SQLite&lt;br/&gt;producto")]
-    Producto["Producto&lt;br/&gt;-codigo&lt;br/&gt;-nombre&lt;br/&gt;-precio&lt;br/&gt;-stock"]
+    subgraph View["view"]
+        ProductoView["ProductoView.fxml&lt;br/&gt;tablaProductos&lt;br/&gt;txtCodigo / txtNombre / txtPrecio / txtStock"]
+    end
 
+    subgraph Controller["controller"]
+        ProductoController["ProductoController&lt;br/&gt;initialize()&lt;br/&gt;onNuevoClick()&lt;br/&gt;onEditarClick()&lt;br/&gt;onAccionClick()&lt;br/&gt;onEliminarClick()&lt;br/&gt;actualizarTabla()"]
+    end
+
+    subgraph Service["service"]
+        ProductoService["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br/&gt;registrar(producto)&lt;br/&gt;listar()&lt;br/&gt;buscarPorCodigo(codigo)&lt;br/&gt;actualizar(producto)&lt;br/&gt;eliminar(codigo)"]
+        ProductoServiceImplSQLite["ProductoServiceImplSQLite&lt;br/&gt;-productoDao: ProductoDao&lt;br/&gt;validarProducto(producto)"]
+    end
+
+    subgraph Dao["dao"]
+        ProductoDao["ProductoDao&lt;br/&gt;insertar(producto)&lt;br/&gt;listar()&lt;br/&gt;buscarPorCodigo(codigo)&lt;br/&gt;actualizar(producto)&lt;br/&gt;eliminar(codigo)&lt;br/&gt;crearTablaSiNoExiste()"]
+    end
+
+    subgraph Db["db"]
+        ConexionSQLite["ConexionSQLite&lt;br/&gt;obtenerConexion()&lt;br/&gt;obtenerRutaBaseDatos()"]
+        SQLite[("data/comarket.db&lt;br/&gt;tabla producto")]
+    end
+
+    subgraph Entity["entity"]
+        Producto["Producto&lt;br/&gt;codigo&lt;br/&gt;nombre&lt;br/&gt;precio&lt;br/&gt;stock"]
+    end
+
+    ProductoView --&gt;|"fx:controller"| ProductoController
+    ProductoView -.-&gt;|"fx:id / onAction"| ProductoController
     ProductoController -. usa contrato .-&gt; ProductoService
     ProductoController -. crea/lee .-&gt; Producto
-    ProductoServiceImplDB -. implements .-&gt; ProductoService
+    ProductoServiceImplSQLite -. implements .-&gt; ProductoService
     ProductoService -. usa .-&gt; Producto
-    ProductoServiceImplDB -. usa .-&gt; Producto
-    ProductoServiceImplDB --&gt;|"usa"| ProductoDAO
-    ProductoDAO -. mapea .-&gt; Producto
-    ProductoDAO --&gt;|"usa"| ConexionBD
-    ConexionBD --&gt;|"JDBC"| SQLite
+    ProductoServiceImplSQLite -. usa .-&gt; Producto
+    ProductoServiceImplSQLite --&gt;|"usa"| ProductoDao
+    ProductoDao -. mapea .-&gt; Producto
+    ProductoDao --&gt;|"usa"| ConexionSQLite
+    ConexionSQLite --&gt;|"JDBC"| SQLite
 
     classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
-    class ProductoServiceImplDB serviceImpl;</code></pre>
+    class ProductoServiceImplSQLite serviceImpl;</code></pre>
+<p>Nombres reales del proyecto guía:</p>
+<div class="highlight"><pre><span></span><code>com.upeu.comarket.controller.ProductoController
+com.upeu.comarket.entity.Producto
+com.upeu.comarket.service.ProductoService
+com.upeu.comarket.service.ProductoServiceImplSQLite
+com.upeu.comarket.dao.ProductoDao
+com.upeu.comarket.db.ConexionSQLite
+src/main/resources/com/upeu/comarket/view/ProductoView.fxml
+</code></pre></div>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 2h.</p>
 <ol>
 <li>Revisar el proyecto JavaFX/Maven ubicado en <code>comarket-desk</code>.</li>
 <li>Agregar dependencia SQLite JDBC.</li>
 <li>Crear o verificar las carpetas de capas.</li>
-<li>Crear <code>ConexionBD</code> dentro de <code>util</code>.</li>
+<li>Crear <code>ConexionSQLite</code> dentro de <code>db</code>.</li>
 <li>Crear tabla <code>producto</code>.</li>
-<li>Crear <code>ProductoDAO</code> dentro de <code>dao</code>.</li>
+<li>Crear <code>ProductoDao</code> dentro de <code>dao</code>.</li>
 <li>Implementar <code>insert</code>, <code>select</code>, <code>update</code> y <code>delete</code>.</li>
-<li>Crear <code>ProductoServiceImplDB implements ProductoService</code>.</li>
+<li>Crear <code>ProductoServiceImplSQLite implements ProductoService</code>.</li>
 <li>Hacer que <code>ProductoController</code> use <code>ProductoService</code>, no el DAO directamente.</li>
 <li>Cargar <code>TableView</code> desde SQLite.</li>
 <li>Validar campos obligatorios, precio y stock.</li>
@@ -1732,38 +1761,34 @@ La conexión a la base de datos se centraliza en util/ConexionBD.
 </ol>
 <p>Estructura sugerida:</p>
 <div class="highlight"><pre><span></span><code>src/main/java/
-    app/
-        ProductoApplication.java
-    controller/
-        ProductoController.java
-    entity/
-        Producto.java
-    exception/
-        ValidacionException.java
-        PersistenciaException.java
-    dao/
-        ProductoDAO.java
-    service/
-        ProductoService.java
-        ProductoServiceImplDB.java
-    util/
-        ConexionBD.java
+    com/upeu/comarket/
+        CoMarketApplication.java
+        controller/
+            ProductoController.java
+        entity/
+            Producto.java
+        service/
+            ProductoService.java
+            ProductoServiceImplSQLite.java
+        dao/
+            ProductoDao.java
+        db/
+            ConexionSQLite.java
 src/main/resources/
-    view/
+    com/upeu/comarket/view/
         ProductoView.fxml
 </code></pre></div>
 <p>Nota metodológica:</p>
 <div class="highlight"><pre><span></span><code>`dao` se usa como carpeta para las clases DAO.
-util contiene clases técnicas compartidas, como ConexionBD.
+`db` contiene clases técnicas compartidas, como `ConexionSQLite`.
 No se agrega mapper, dto ni filter todavía porque no aportan al nivel de esta sesión.
 </code></pre></div>
 <p>Tabla mínima:</p>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">producto</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">codigo</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">codigo</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
 <span class="w">    </span><span class="n">nombre</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">precio</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">stock</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="n">precio</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">precio</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">    </span><span class="n">stock</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">stock</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
 <span class="p">);</span>
 </code></pre></div>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
@@ -1785,8 +1810,8 @@ No se agrega mapper, dto ni filter todavía porque no aportan al nivel de esta s
 <ol>
 <li>Completar CRUD persistente de producto.</li>
 <li>Evidenciar estructura por capas.</li>
-<li>Mostrar <code>ProductoDAO</code>.</li>
-<li>Mostrar <code>ProductoServiceImplDB</code>.</li>
+<li>Mostrar <code>ProductoDao</code>.</li>
+<li>Mostrar <code>ProductoServiceImplSQLite</code>.</li>
 <li>Ejecutar la GUI y registrar datos.</li>
 <li>Verificar registros en SQLite.</li>
 <li>Documentar una validación aplicada.</li>
