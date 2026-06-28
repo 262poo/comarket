@@ -64,61 +64,27 @@ La conexión a la base de datos se centraliza en util/ConexionBD.
 ### 2.2 Arquitectura de la sesión
 
 ```mermaid
-classDiagram
-    class ProductoController {
-        onRegistrar()
-        onActualizar()
-        onEliminar()
-        cargarTabla()
-    }
+flowchart TB
+    ProductoController["ProductoController<br/>onRegistrar()<br/>onActualizar()<br/>onEliminar()<br/>cargarTabla()"]
+    ProductoService["ProductoService<br/>&lt;&lt;interface&gt;&gt;<br/>registrar(producto)<br/>listar()<br/>actualizar(producto)<br/>eliminar(codigo)"]
+    ProductoServiceImplDB["ProductoServiceImplDB<br/>-dao: ProductoDAO<br/>CRUD con DAO"]
+    ProductoDAO["ProductoDAO<br/>insertar(producto)<br/>listar()<br/>actualizar(producto)<br/>eliminar(codigo)"]
+    ConexionBD["ConexionBD<br/>obtenerConexion()"]
+    SQLite[("SQLite<br/>producto")]
+    Producto["Producto<br/>-codigo<br/>-nombre<br/>-precio<br/>-stock"]
 
-    class ProductoService {
-        <<interface>>
-        registrar(producto)
-        listar()
-        actualizar(producto)
-        eliminar(codigo)
-    }
-
-    class ProductoServiceImplDB {
-        -dao: ProductoDAO
-        CRUD con DAO
-    }
-
-    class ProductoDAO {
-        insertar(producto)
-        listar()
-        actualizar(producto)
-        eliminar(codigo)
-    }
-
-    class ConexionBD {
-        obtenerConexion()
-    }
-
-    class SQLite {
-        producto
-    }
-
-    class Producto {
-        -codigo
-        -nombre
-        -precio
-        -stock
-    }
-
-    ProductoController ..> ProductoService : usa contrato
-    ProductoController ..> Producto : crea/lee
-    ProductoService <|.. ProductoServiceImplDB : implements
-    ProductoService ..> Producto : usa
-    ProductoServiceImplDB ..> Producto : usa
-    ProductoServiceImplDB --> ProductoDAO : usa
-    ProductoDAO ..> Producto : mapea
-    ProductoDAO --> ConexionBD : usa
-    ConexionBD --> SQLite : JDBC
+    ProductoController -. usa contrato .-> ProductoService
+    ProductoController -. crea/lee .-> Producto
+    ProductoServiceImplDB -. implements .-> ProductoService
+    ProductoService -. usa .-> Producto
+    ProductoServiceImplDB -. usa .-> Producto
+    ProductoServiceImplDB -->|"usa"| ProductoDAO
+    ProductoDAO -. mapea .-> Producto
+    ProductoDAO -->|"usa"| ConexionBD
+    ConexionBD -->|"JDBC"| SQLite
 
     classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
-    class ProductoServiceImplDB:::serviceImpl
+    class ProductoServiceImplDB serviceImpl;
 ```
 
 ## 3. Aplica: actividad práctica guiada

@@ -62,42 +62,20 @@ La persistencia con DAO y SQLite se trabaja en S8.
 ### 2.2 Arquitectura de la sesión
 
 ```mermaid
-classDiagram
-    class ProductoController {
-        onRegistrar()
-        onActualizar()
-        onEliminar()
-        cargarTabla()
-    }
+flowchart TB
+    ProductoController["ProductoController<br/>onRegistrar()<br/>onActualizar()<br/>onEliminar()<br/>cargarTabla()"]
+    ProductoService["ProductoService<br/>&lt;&lt;interface&gt;&gt;<br/>registrar(producto)<br/>listar()<br/>actualizar(producto)<br/>eliminar(codigo)"]
+    ProductoServiceImplMemoria["ProductoServiceImplMemoria<br/>-productos: ArrayList<br/>CRUD sobre ArrayList"]
+    Producto["Producto<br/>-codigo<br/>-nombre<br/>-precio<br/>-stock"]
 
-    class ProductoService {
-        <<interface>>
-        registrar(producto)
-        listar()
-        actualizar(producto)
-        eliminar(codigo)
-    }
-
-    class ProductoServiceImplMemoria {
-        -productos: ArrayList
-        CRUD sobre ArrayList
-    }
-
-    class Producto {
-        -codigo
-        -nombre
-        -precio
-        -stock
-    }
-
-    ProductoController ..> ProductoService : usa contrato
-    ProductoController ..> Producto : crea/lee
-    ProductoService <|.. ProductoServiceImplMemoria : implements
-    ProductoService ..> Producto : usa
-    ProductoServiceImplMemoria ..> Producto : usa
+    ProductoController -. usa contrato .-> ProductoService
+    ProductoController -. crea/lee .-> Producto
+    ProductoServiceImplMemoria -. implements .-> ProductoService
+    ProductoService -. usa .-> Producto
+    ProductoServiceImplMemoria -. usa .-> Producto
 
     classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
-    class ProductoServiceImplMemoria:::serviceImpl
+    class ProductoServiceImplMemoria serviceImpl;
 ```
 
 ## 3. Aplica: actividad práctica guiada

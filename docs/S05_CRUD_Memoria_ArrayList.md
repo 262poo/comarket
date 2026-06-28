@@ -64,43 +64,20 @@ Maven/GraalVM son parte de la entrega, no del flujo CRUD.
 ### 2.2 Arquitectura de la sesión
 
 ```mermaid
-classDiagram
-    class Main {
-        main(String[] args)
-        mostrarMenu()
-    }
-    class Producto {
-        -codigo
-        -nombre
-        -precio
-        -stock
-        mostrarInformacion()
-    }
-    class ProductoService {
-        <<interface>>
-        registrar(producto)
-        listar()
-        buscarPorCodigo(codigo)
-        actualizar(producto)
-        eliminar(codigo)
-    }
-    class ProductoServiceImplMemoria {
-        -productos: ArrayList
-        registrar(producto)
-        listar()
-        buscarPorCodigo(codigo)
-        actualizar(producto)
-        eliminar(codigo)
-    }
+flowchart TB
+    Main["Main<br/>main(String[] args)<br/>mostrarMenu()"]
+    Producto["Producto<br/>-codigo<br/>-nombre<br/>-precio<br/>-stock<br/>mostrarInformacion()"]
+    ProductoService["ProductoService<br/>&lt;&lt;interface&gt;&gt;<br/>registrar(producto)<br/>listar()<br/>buscarPorCodigo(codigo)<br/>actualizar(producto)<br/>eliminar(codigo)"]
+    ProductoServiceImplMemoria["ProductoServiceImplMemoria<br/>-productos: ArrayList<br/>registrar(producto)<br/>listar()<br/>buscarPorCodigo(codigo)<br/>actualizar(producto)<br/>eliminar(codigo)"]
 
-    Main ..> ProductoService : usa contrato
-    Main ..> Producto : crea datos
-    ProductoService <|.. ProductoServiceImplMemoria : implements
-    ProductoService ..> Producto : usa
-    ProductoServiceImplMemoria ..> Producto : usa
+    Main -. usa contrato .-> ProductoService
+    Main -. crea datos .-> Producto
+    ProductoServiceImplMemoria -. implements .-> ProductoService
+    ProductoService -. usa .-> Producto
+    ProductoServiceImplMemoria -. usa .-> Producto
 
     classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
-    class ProductoServiceImplMemoria:::serviceImpl
+    class ProductoServiceImplMemoria serviceImpl;
 ```
 
 En S5, la arquitectura U1 se concreta con `Producto`, `ProductoService` y `ProductoServiceImplMemoria`. Este ejemplo guiado sirve como patrón para que luego cada equipo adapte el CRUD a la entidad principal de su propio proyecto.

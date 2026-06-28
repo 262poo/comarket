@@ -66,66 +66,36 @@ Si una implementación agrega métodos propios, esos métodos no forman parte de
 ### 2.2 Arquitectura de la sesión
 
 ```mermaid
-classDiagram
-    class Main {
-        main(String[] args)
-    }
+flowchart TB
+    Main["Main<br/>main(String[] args)"]
 
-    namespace entity {
-        class Persona {
-            <<abstract>>
-            -nombre
-            -documento
-            mostrarPerfil()
-        }
-        class Cliente {
-            -telefono
-            mostrarPerfil()
-        }
-        class Empleado {
-            -cargo
-            mostrarPerfil()
-        }
-        class Producto {
-            -codigo
-            -nombre
-            -precio
-        }
-    }
+    subgraph Entity["entity"]
+        direction TB
+        Persona["Persona<br/>&lt;&lt;abstract&gt;&gt;<br/>-nombre<br/>-documento<br/>mostrarPerfil()"]
+        Cliente["Cliente<br/>-telefono<br/>mostrarPerfil()"]
+        Empleado["Empleado<br/>-cargo<br/>mostrarPerfil()"]
+        Producto["Producto<br/>-codigo<br/>-nombre<br/>-precio"]
+    end
 
-    namespace service {
-        class ProductoService {
-            <<interface>>
-            registrar(producto)
-            listar()
-            buscarPorCodigo(codigo)
-        }
-        class ProductoServiceImplMemoria {
-            -productos
-            registrar(producto)
-            listar()
-            buscarPorCodigo(codigo)
-        }
-        class ProductoServiceImplDB {
-            registrar(producto)
-            listar()
-            buscarPorCodigo(codigo)
-        }
-    }
+    subgraph Service["service"]
+        direction TB
+        ProductoService["ProductoService<br/>&lt;&lt;interface&gt;&gt;<br/>registrar(producto)<br/>listar()<br/>buscarPorCodigo(codigo)"]
+        ProductoServiceImplMemoria["ProductoServiceImplMemoria<br/>-productos<br/>registrar(producto)<br/>listar()<br/>buscarPorCodigo(codigo)"]
+        ProductoServiceImplDB["ProductoServiceImplDB<br/>registrar(producto)<br/>listar()<br/>buscarPorCodigo(codigo)"]
+    end
 
-    Main ..> Cliente : prueba
-    Main ..> Empleado : prueba
-    Main ..> ProductoService : prueba
-    Persona <|-- Cliente : extends
-    Persona <|-- Empleado : extends
-    ProductoService <|.. ProductoServiceImplMemoria : implements
-    ProductoService <|.. ProductoServiceImplDB : implements
-    ProductoServiceImplMemoria ..> Producto : usa
-    ProductoServiceImplDB ..> Producto : usa
+    Main -. prueba .-> Cliente
+    Main -. prueba .-> Empleado
+    Main -. prueba .-> ProductoService
+    Cliente -- extends --> Persona
+    Empleado -- extends --> Persona
+    ProductoServiceImplMemoria -. implements .-> ProductoService
+    ProductoServiceImplDB -. implements .-> ProductoService
+    ProductoServiceImplMemoria -. usa .-> Producto
+    ProductoServiceImplDB -. usa .-> Producto
 
     classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
-    class ProductoServiceImplMemoria:::serviceImpl
-    class ProductoServiceImplDB:::serviceImpl
+    class ProductoServiceImplMemoria,ProductoServiceImplDB serviceImpl;
 ```
 
 Convención del diagrama: flecha continua con triángulo representa `extends`; flecha punteada con triángulo representa `implements`; flecha punteada simple representa dependencia o uso.
