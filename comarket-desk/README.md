@@ -94,11 +94,9 @@ sqlite3 data\comarket.db "SELECT * FROM detalle_venta;"
 
 ## Generar ejecutable nativo
 
-### Ruta rapida Windows para S14
+Esta es la ruta principal para Windows. Ejecuta los comandos desde la raiz de `comarket-desk`.
 
-Ejecuta estos comandos desde la raiz de `comarket-desk`.
-
-1. Preparar GraalVM JDK 21 en `C:\java` y dejar `JAVA_HOME` configurado para el usuario. El proyecto sigue compilando para Java 17 porque `pom.xml` usa `maven.compiler.release=17`:
+### 1. Instalar GraalVM JDK 21
 
 ```powershell
 $version="21"
@@ -109,71 +107,110 @@ Invoke-WebRequest -Uri "https://download.oracle.com/graalvm/$version/latest/graa
 Expand-Archive -Path $zip -DestinationPath $dest -Force
 $graalHome=(Get-ChildItem $dest -Directory | Where-Object Name -Like "graalvm-jdk-$version*").FullName
 [Environment]::SetEnvironmentVariable("JAVA_HOME", $graalHome, "User")
+[Environment]::SetEnvironmentVariable("GRAALVM_HOME", $graalHome, "User")
 [Environment]::SetEnvironmentVariable("Path", "$graalHome\bin;" + [Environment]::GetEnvironmentVariable("Path", "User"), "User")
 ```
 
-Cierra y abre una terminal nueva. Luego verifica:
+Cierra y abre una terminal nueva. Si `java -version` todavia muestra otro JDK como Temurin 17, o si GluonFX muestra `GraalVM installation directory not found`, fuerza GraalVM solo para la terminal actual:
+
+```powershell
+$env:JAVA_HOME="C:\java\graalvm-jdk-21.0.11+9.1"
+$env:GRAALVM_HOME=$env:JAVA_HOME
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+```
+
+Verifica que GraalVM y Native Image esten disponibles:
 
 ```powershell
 java -version
 native-image --version
 ```
 
-2. Ejecutar la app normal y validar el flujo principal:
+El proyecto sigue compilando para Java 17 porque `pom.xml` usa `maven.compiler.release=17`.
+
+### 2. Instalar Visual Studio Build Tools
+
+- Descarga **Visual Studio Build Tools 2022 or later** desde la pagina de descargas de Visual Studio, seccion **Todas las descargas**.
+- En el instalador selecciona la carga **Desktop development with C++**.
+- Confirma que incluya **MSVC** y **Windows SDK**.
+- Finaliza la instalacion y abre una terminal nueva.
+
+Verifica que el compilador este disponible:
+
+```powershell
+where cl
+```
+
+La salida debe mostrar una ruta con `Hostx64\x64`, por ejemplo:
+
+```text
+C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.42.34433\bin\Hostx64\x64\cl.exe
+```
+
+Si `where cl` no muestra nada, o si la ruta muestra `HostX86\x86`, no continues. Abre **x64 Native Tools Command Prompt for VS 2022** y ejecuta desde alli los comandos de Maven.
+
+### 3. Ejecutar la app normal
 
 ```powershell
 .\mvnw.cmd clean javafx:run
 ```
 
-3. Generar configuracion con el agente de GluonFX. Mientras la app este abierta, recorre login, productos, ventas, anular ventas, reporte y cierre de sesion:
+Prueba login, CRUD de `Producto`, registro de `Venta`, anular ventas, filtros de reporte, detalle, totales y cierre de sesion.
 
-```powershell
+### 4. Generar configuracion con el agente de GluonFX
+
+Desde este paso usa **x64 Native Tools Command Prompt for VS 2022**. No uses PowerShell normal. Configura GraalVM en esa terminal con `set`:
+
+```bat
+cd C:\262\262poo\comarket\comarket-desk
+set JAVA_HOME=C:\java\graalvm-jdk-21.0.11+9.1
+set GRAALVM_HOME=%JAVA_HOME%
+set Path=%JAVA_HOME%\bin;%Path%
+echo %GRAALVM_HOME%
+```
+
+Mientras la app este abierta, recorre login, productos, ventas, anular ventas, reporte y cierre de sesion:
+
+```bat
 .\mvnw.cmd -DskipTests gluonfx:runagent
 ```
 
-4. Construir el `.exe` nativo:
+### 5. Construir el `.exe` nativo
 
-```powershell
+Continua en **x64 Native Tools Command Prompt for VS 2022** y usa comandos `set`, no comandos `$env:` de PowerShell.
+
+Para construir el `.exe`, usa una terminal con el compilador de Visual Studio cargado en x64. En Windows Terminal, abre una nueva pestaña con **x64 Native Tools Command Prompt for VS 2022**. Si usas **Developer PowerShell for VS 2022**, asegúrate de que este inicializado para x64; si el error muestra `HostX86\x86\cl.exe` o `version ... para x86`, estas usando el compilador x86 y debes cambiar a la terminal x64.
+
+Si aparece `Cannot run program "cl"` o `CreateProcess error=2`, significa que Maven se ejecuto desde una terminal que no encuentra el compilador.
+
+En esa terminal, vuelve a entrar al proyecto y ejecuta:
+
+```bat
+cd C:\262\262poo\comarket\comarket-desk
+set JAVA_HOME=C:\java\graalvm-jdk-21.0.11+9.1
+set GRAALVM_HOME=%JAVA_HOME%
+set Path=%JAVA_HOME%\bin;%Path%
+where cl
 .\mvnw.cmd -DskipTests gluonfx:build
 ```
 
-5. Probar el ejecutable nativo:
+### 6. Probar el ejecutable nativo
 
-```powershell
+```bat
 .\mvnw.cmd -DskipTests gluonfx:nativerun
 ```
 
-6. Opcional: generar paquete instalable:
+### 7. Opcional: generar paquete instalable
 
-```powershell
+```bat
 .\mvnw.cmd -DskipTests gluonfx:package
 ```
 
-Si falla por compilador C/C++, instala **Build Tools for Visual Studio** con la carga **Desktop development with C++**, reinicia la terminal y vuelve a ejecutar desde el paso 4.
+Si falla por compilador C/C++, revisa el paso 2 y vuelve a ejecutar desde `gluonfx:build`.
 
-Requisito: GraalVM JDK instalado, `native-image` disponible en la terminal y herramientas de compilación C++ del sistema operativo.
+### Alternativa: SDKMAN en Linux, macOS o WSL
 
-### Instalar GraalVM
-
-En Windows no necesitas SDKMAN. Puedes instalar GraalVM descargando el ZIP oficial y configurando `JAVA_HOME`:
-
-```powershell
-$version="21"
-$zip="$env:TEMP\graalvm-jdk-$version.zip"
-$dest="C:\java"
-New-Item -ItemType Directory -Force -Path $dest
-Invoke-WebRequest -Uri "https://download.oracle.com/graalvm/$version/latest/graalvm-jdk-$version`_windows-x64_bin.zip" -OutFile $zip
-Expand-Archive -Path $zip -DestinationPath $dest -Force
-$graalHome=(Get-ChildItem $dest -Directory | Where-Object Name -Like "graalvm-jdk-$version*").FullName
-[Environment]::SetEnvironmentVariable("JAVA_HOME", $graalHome, "User")
-[Environment]::SetEnvironmentVariable("Path", "$graalHome\bin;" + [Environment]::GetEnvironmentVariable("Path", "User"), "User")
-```
-
-Cierra y abre una terminal nueva.
-
-En Windows, `native-image` también necesita las herramientas de compilación C++ de Visual Studio. Si aparece un error relacionado con compilador C/C++, instala **Build Tools for Visual Studio** con la carga **Desktop development with C++** y vuelve a abrir la terminal.
-
-En Linux/macOS o WSL, SDKMAN sí es una opción cómoda:
+No ejecutes esta seccion si ya instalaste GraalVM en Windows con los pasos anteriores. Esta es una alternativa para Linux, macOS o WSL:
 
 ```bash
 curl -s "https://get.sdkman.io" | bash
@@ -183,54 +220,13 @@ sdk install java <version>-graal
 sdk default java <version>-graal
 ```
 
-Reemplaza `<version>-graal` por una versión listada por `sdk list java`.
+Reemplaza `<version>-graal` por una version listada por `sdk list java`.
 
-Verificar:
+Verifica:
 
 ```bash
 java -version
 native-image --version
-```
-
-Si `native-image` no se reconoce en Windows, instala GraalVM JDK y configura la terminal para usarlo:
-
-```powershell
-$env:JAVA_HOME="C:\ruta\a\graalvm-jdk-17"
-$env:Path="$env:JAVA_HOME\bin;$env:Path"
-java -version
-native-image --version
-```
-
-Para dejarlo permanente, agrega `JAVA_HOME` en las variables de entorno de Windows y coloca `%JAVA_HOME%\bin` al inicio de `Path`. Luego abre una terminal nueva.
-
-Antes de compilar a nativo, ejecuta primero la aplicación en JVM y prueba login, CRUD de `Producto`, registro de `Venta`, filtros de consulta, detalle, totales, anulación y cierre de sesión:
-
-```powershell
-.\mvnw.cmd clean javafx:run
-```
-
-Generar configuración de GraalVM con el agente. Mientras la app esté abierta, ingresa con `admin`, registra productos, crea una venta con varios detalles, consulta ventas usando filtros, selecciona una venta para ver su detalle, anula una venta y cierra sesión para que el agente detecte el uso de JavaFX, FXML, JDBC, SQLite y login:
-
-```powershell
-.\mvnw.cmd -DskipTests gluonfx:runagent
-```
-
-Generar el ejecutable nativo para el hito `sesion-11`:
-
-```powershell
-.\mvnw.cmd -DskipTests gluonfx:build
-```
-
-Ejecutar el binario nativo y verificar que cree/use `data/comarket.db` junto al `.exe`:
-
-```powershell
-.\mvnw.cmd -DskipTests gluonfx:nativerun
-```
-
-Crear un instalador o paquete para el sistema operativo:
-
-```powershell
-.\mvnw.cmd -DskipTests gluonfx:package
 ```
 
 La aplicación de consola para Unidad 1 se trabaja en `../comarket-cli`.

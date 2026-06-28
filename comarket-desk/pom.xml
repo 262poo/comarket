@@ -81,6 +81,18 @@
                     <mainClass>com.upeu.comarket.CoMarketApplication</mainClass>
                     <appIdentifier>com.upeu.comarket</appIdentifier>
                     <appLabel>CoMarket Desk</appLabel>
+                    <reflectionList>
+                        <list>com.upeu.comarket.controller.LoginController</list>
+                        <list>com.upeu.comarket.controller.MainController</list>
+                        <list>com.upeu.comarket.controller.ProductoController</list>
+                        <list>com.upeu.comarket.controller.VentaController</list>
+                        <list>com.upeu.comarket.controller.AnularVentasController</list>
+                        <list>com.upeu.comarket.controller.ReporteVentasController</list>
+                        <list>com.upeu.comarket.entity.Producto</list>
+                        <list>com.upeu.comarket.entity.Venta</list>
+                        <list>com.upeu.comarket.entity.DetalleVenta</list>
+                        <list>com.upeu.comarket.entity.Usuario</list>
+                    </reflectionList>
                 </configuration>
             </plugin>
         </plugins>
