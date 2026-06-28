@@ -11,6 +11,7 @@ public class Venta {
     private LocalDate fecha;
     private Double totalRegistrado;
     private String estado = "ACTIVA";
+    private Usuario usuario;
     private final List<DetalleVenta> detalles = new ArrayList<>();
 
     public Venta(String cliente, LocalDate fecha) {
@@ -31,6 +32,11 @@ public class Venta {
     public Venta(Long id, String cliente, LocalDate fecha, double totalRegistrado, String estado) {
         this(id, cliente, fecha, totalRegistrado);
         this.estado = estado;
+    }
+
+    public Venta(Long id, String cliente, LocalDate fecha, double totalRegistrado, String estado, Usuario usuario) {
+        this(id, cliente, fecha, totalRegistrado, estado);
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -63,6 +69,14 @@ public class Venta {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public void agregarDetalle(DetalleVenta detalleVenta) {

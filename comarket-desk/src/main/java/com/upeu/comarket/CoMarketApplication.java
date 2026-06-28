@@ -14,9 +14,9 @@ public class CoMarketApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CoMarketApplication.class.getResource("view/MainView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 920, 640);
-        stage.setTitle("CoMarket Desk");
+        FXMLLoader fxmlLoader = new FXMLLoader(CoMarketApplication.class.getResource("view/LoginView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 420, 260);
+        stage.setTitle("CoMarket Desk - Login");
         stage.setScene(scene);
         stage.show();
     }

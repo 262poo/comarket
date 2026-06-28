@@ -10,5 +10,6 @@ module com.upeu.comarket {
     exports com.upeu.comarket.dao;
     exports com.upeu.comarket.db;
     exports com.upeu.comarket.entity;
+    exports com.upeu.comarket.security;
     exports com.upeu.comarket.service;
 }

@@ -2,6 +2,7 @@ package com.upeu.comarket.dao;
 
 import com.upeu.comarket.db.ConexionSQLite;
 import com.upeu.comarket.entity.DetalleVenta;
+import com.upeu.comarket.entity.Usuario;
 import com.upeu.comarket.entity.Venta;
 
 import java.sql.Connection;
@@ -15,13 +16,14 @@ import java.util.List;
 
 public class VentaDao {
     public VentaDao() {
+        new UsuarioDao();
         crearTablasSiNoExisten();
     }
 
     public long insertar(Connection connection, Venta venta) throws SQLException {
         String sql = """
-                INSERT INTO venta (cliente, fecha, total, estado)
-                VALUES (?, ?, ?, ?)
+                INSERT INTO venta (cliente, fecha, total, estado, usuario_id)
+                VALUES (?, ?, ?, ?, ?)
                 """;
 
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -29,6 +31,7 @@ public class VentaDao {
             statement.setString(2, venta.getFecha().toString());
             statement.setDouble(3, venta.calcularTotal());
             statement.setString(4, "ACTIVA");
+            statement.setInt(5, venta.getUsuario().getId());
             statement.executeUpdate();
 
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
@@ -84,9 +87,11 @@ public class VentaDao {
 
     public Venta buscarPorId(Connection connection, long ventaId) throws SQLException {
         String sql = """
-                SELECT id, cliente, fecha, total, estado
-                FROM venta
-                WHERE id = ?
+                SELECT v.id, v.cliente, v.fecha, v.total, v.estado,
+                       u.id AS usuario_id, u.username, u.password_hash, u.rol
+                FROM venta v
+                LEFT JOIN usuario u ON u.id = v.usuario_id
+                WHERE v.id = ?
                 """;
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -111,9 +116,11 @@ public class VentaDao {
 
     public List<Venta> listar() {
         String sql = """
-                SELECT id, cliente, fecha, total, estado
-                FROM venta
-                ORDER BY id DESC
+                SELECT v.id, v.cliente, v.fecha, v.total, v.estado,
+                       u.id AS usuario_id, u.username, u.password_hash, u.rol
+                FROM venta v
+                LEFT JOIN usuario u ON u.id = v.usuario_id
+                ORDER BY v.id DESC
                 """;
         List<Venta> ventas = new ArrayList<>();
 
@@ -136,7 +143,9 @@ public class VentaDao {
                     cliente TEXT NOT NULL,
                     fecha TEXT NOT NULL,
                     total REAL NOT NULL,
-                    estado TEXT NOT NULL DEFAULT 'ACTIVA'
+                    estado TEXT NOT NULL DEFAULT 'ACTIVA',
+                    usuario_id INTEGER,
+                    FOREIGN KEY (usuario_id) REFERENCES usuario(id)
                 )
                 """;
 
@@ -158,6 +167,7 @@ public class VentaDao {
             statement.execute("PRAGMA foreign_keys = ON");
             statement.execute(ventaSql);
             agregarColumnaEstadoSiNoExiste(connection);
+            agregarColumnaUsuarioSiNoExiste(connection);
             statement.execute(detalleSql);
         } catch (SQLException e) {
             throw new IllegalStateException("No se pudieron preparar las tablas de venta.", e);
@@ -171,6 +181,16 @@ public class VentaDao {
 
         try (Statement statement = connection.createStatement()) {
             statement.execute("ALTER TABLE venta ADD COLUMN estado TEXT NOT NULL DEFAULT 'ACTIVA'");
+        }
+    }
+
+    private void agregarColumnaUsuarioSiNoExiste(Connection connection) throws SQLException {
+        if (existeColumna(connection, "venta", "usuario_id")) {
+            return;
+        }
+
+        try (Statement statement = connection.createStatement()) {
+            statement.execute("ALTER TABLE venta ADD COLUMN usuario_id INTEGER REFERENCES usuario(id)");
         }
     }
 
@@ -189,12 +209,24 @@ public class VentaDao {
     }
 
     private Venta mapearVenta(ResultSet resultSet) throws SQLException {
+        Usuario usuario = null;
+        int usuarioId = resultSet.getInt("usuario_id");
+        if (!resultSet.wasNull()) {
+            usuario = new Usuario(
+                    usuarioId,
+                    resultSet.getString("username"),
+                    resultSet.getString("password_hash"),
+                    resultSet.getString("rol")
+            );
+        }
+
         return new Venta(
                 resultSet.getLong("id"),
                 resultSet.getString("cliente"),
                 LocalDate.parse(resultSet.getString("fecha")),
                 resultSet.getDouble("total"),
-                resultSet.getString("estado")
+                resultSet.getString("estado"),
+                usuario
         );
     }
 }

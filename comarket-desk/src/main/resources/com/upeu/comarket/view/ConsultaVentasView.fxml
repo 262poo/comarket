@@ -42,6 +42,7 @@
                     <TableColumn fx:id="colFecha" prefWidth="160.0" text="Fecha" />
                     <TableColumn fx:id="colTotalVenta" prefWidth="160.0" text="Total" />
                     <TableColumn fx:id="colEstado" prefWidth="120.0" text="Estado" />
+                    <TableColumn fx:id="colUsuario" prefWidth="130.0" text="Usuario" />
                 </columns>
             </TableView>
 

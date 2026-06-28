@@ -104,6 +104,9 @@ public class VentaServiceImplSQLite implements VentaService {
         if (venta.getDetalles().isEmpty()) {
             throw new IllegalArgumentException("Agregue al menos un detalle a la venta.");
         }
+        if (venta.getUsuario() == null) {
+            throw new IllegalArgumentException("Debe iniciar sesion para registrar la venta.");
+        }
 
         for (DetalleVenta detalle : venta.getDetalles()) {
             if (detalle.getProducto() == null) {

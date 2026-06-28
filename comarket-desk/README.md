@@ -2,19 +2,27 @@
 
 Proyecto de escritorio JavaFX para la Unidad 2 y Unidad 3.
 
-Tag sugerido: `sesion-09`
+Tag sugerido: `sesion-10`
 
 Aqui se trabaja la evolucion de CoMarket hacia una aplicacion de escritorio con arquitectura por capas, JavaFX, FXML, controladores, servicios, DAO, JDBC y SQLite.
 
-En este hito, `Producto` se mantiene como catalogo persistente y se agrega el registro de `Venta` con cabecera y detalles. El detalle referencia productos existentes, calcula subtotales, descuenta stock y guarda todo en una transaccion.
+En este hito, `Producto` se mantiene como catalogo persistente, `Venta` conserva cabecera y detalles, y se agrega seguridad basica con usuario autenticado. Las ventas nuevas quedan asociadas al usuario activo mediante una relacion uno a muchos.
 
 La aplicacion incluye tres pestanas:
 
 - `Productos`: CRUD persistente del catalogo.
-- `Ventas`: registro de cabecera y detalles.
+- `Ventas`: registro de cabecera y detalles asociado al usuario autenticado.
 - `Consulta de ventas`: listado de ventas registradas, detalle de la venta seleccionada y anulacion con reposicion de stock.
 
-La version en memoria de productos queda como referencia en `ProductoServiceImplMemoria`. Las versiones activas usan SQLite mediante `ProductoServiceImplSQLite` y `VentaServiceImplSQLite`.
+Antes de ingresar a esas pestanas, la aplicacion muestra un login. El usuario de prueba se crea automaticamente:
+
+```text
+usuario: admin
+clave: 123456
+rol: ADMIN
+```
+
+La version en memoria de productos queda como referencia en `ProductoServiceImplMemoria`. Las versiones activas usan SQLite mediante `ProductoServiceImplSQLite`, `VentaServiceImplSQLite` y `UsuarioServiceImplSQLite`.
 
 ## Ejecutar
 
@@ -47,7 +55,8 @@ Las tablas creadas por la aplicacion son:
 
 ```sql
 producto(codigo, nombre, precio, stock)
-venta(id, cliente, fecha, total, estado)
+usuario(id, username, password_hash, rol)
+venta(id, cliente, fecha, total, estado, usuario_id)
 detalle_venta(id, venta_id, producto_codigo, cantidad, precio_unitario, subtotal)
 ```
 
@@ -55,6 +64,7 @@ Para revisar los datos con `sqlite3`:
 
 ```powershell
 sqlite3 data\comarket.db "SELECT * FROM producto;"
+sqlite3 data\comarket.db "SELECT * FROM usuario;"
 sqlite3 data\comarket.db "SELECT * FROM venta;"
 sqlite3 data\comarket.db "SELECT * FROM detalle_venta;"
 ```
@@ -113,19 +123,19 @@ native-image --version
 
 Para dejarlo permanente, agrega `JAVA_HOME` en las variables de entorno de Windows y coloca `%JAVA_HOME%\bin` al inicio de `Path`. Luego abre una terminal nueva.
 
-Antes de compilar a nativo, ejecuta primero la aplicacion en JVM y prueba el CRUD de `Producto` y el registro de `Venta`:
+Antes de compilar a nativo, ejecuta primero la aplicacion en JVM y prueba login, CRUD de `Producto`, registro de `Venta`, consulta, anulacion y cierre de sesion:
 
 ```powershell
 .\mvnw.cmd clean javafx:run
 ```
 
-Generar configuracion de GraalVM con el agente. Mientras la app este abierta, registra productos, crea una venta con varios detalles y guarda la operacion para que el agente detecte el uso de JavaFX, FXML, JDBC y SQLite:
+Generar configuracion de GraalVM con el agente. Mientras la app este abierta, ingresa con `admin`, registra productos, crea una venta con varios detalles, consulta ventas, anula una venta y cierra sesion para que el agente detecte el uso de JavaFX, FXML, JDBC, SQLite y login:
 
 ```powershell
 .\mvnw.cmd -DskipTests gluonfx:runagent
 ```
 
-Generar el ejecutable nativo para el hito `sesion-09`:
+Generar el ejecutable nativo para el hito `sesion-10`:
 
 ```powershell
 .\mvnw.cmd -DskipTests gluonfx:build

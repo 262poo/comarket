@@ -3,6 +3,7 @@ package com.upeu.comarket.controller;
 import com.upeu.comarket.entity.DetalleVenta;
 import com.upeu.comarket.entity.Producto;
 import com.upeu.comarket.entity.Venta;
+import com.upeu.comarket.security.Sesion;
 import com.upeu.comarket.service.ProductoService;
 import com.upeu.comarket.service.ProductoServiceImplSQLite;
 import com.upeu.comarket.service.VentaService;
@@ -120,7 +121,13 @@ public class VentaController {
 
     @FXML
     private void onGuardarVentaClick() {
+        if (!Sesion.estaActiva()) {
+            mostrarMensaje("Debe iniciar sesion para registrar ventas.");
+            return;
+        }
+
         Venta venta = new Venta(txtCliente.getText().trim(), dpFecha.getValue());
+        venta.setUsuario(Sesion.getUsuarioActual());
         for (DetalleVenta detalle : detalles) {
             venta.agregarDetalle(detalle);
         }

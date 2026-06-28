@@ -2,6 +2,7 @@ package com.upeu.comarket.controller;
 
 import com.upeu.comarket.entity.DetalleVenta;
 import com.upeu.comarket.entity.Venta;
+import com.upeu.comarket.security.Sesion;
 import com.upeu.comarket.service.VentaService;
 import com.upeu.comarket.service.VentaServiceImplSQLite;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -33,6 +34,9 @@ public class ConsultaVentasController {
     private TableColumn<Venta, String> colEstado;
 
     @FXML
+    private TableColumn<Venta, String> colUsuario;
+
+    @FXML
     private TableView<DetalleVenta> tablaDetallesVenta;
 
     @FXML
@@ -59,6 +63,7 @@ public class ConsultaVentasController {
         colFecha.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFecha().toString()));
         colTotalVenta.setCellValueFactory(data -> new SimpleStringProperty(formatearMoneda(data.getValue().calcularTotal())));
         colEstado.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEstado()));
+        colUsuario.setCellValueFactory(data -> new SimpleStringProperty(obtenerUsername(data.getValue())));
 
         colDetalleProducto.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProducto().getNombre()));
         colDetalleCantidad.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getCantidad()));
@@ -79,6 +84,11 @@ public class ConsultaVentasController {
 
     @FXML
     private void onAnularVentaClick() {
+        if (!Sesion.estaActiva()) {
+            mostrarMensaje("Debe iniciar sesion para anular ventas.");
+            return;
+        }
+
         Venta venta = tablaVentas.getSelectionModel().getSelectedItem();
         if (venta == null || venta.getId() == null) {
             mostrarMensaje("Seleccione una venta para anular.");
@@ -135,6 +145,13 @@ public class ConsultaVentasController {
 
     private String formatearMoneda(double valor) {
         return String.format("S/ %.2f", valor);
+    }
+
+    private String obtenerUsername(Venta venta) {
+        if (venta.getUsuario() == null) {
+            return "Sin usuario";
+        }
+        return venta.getUsuario().getUsername();
     }
 
     private void mostrarMensaje(String mensaje) {
