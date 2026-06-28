@@ -14,7 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class ConsultaVentasController {
+public class AnularVentasController {
     @FXML
     private TableView<Venta> tablaVentas;
 
@@ -160,7 +160,7 @@ public class ConsultaVentasController {
 
     private void mostrarMensaje(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Consulta de ventas");
+        alert.setTitle("Anular ventas");
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
@@ -168,7 +168,7 @@ public class ConsultaVentasController {
 
     private boolean confirmar(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Consulta de ventas");
+        alert.setTitle("Anular ventas");
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         return alert.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK;

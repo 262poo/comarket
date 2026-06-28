@@ -70,11 +70,11 @@ flowchart TD
     LoginView["view<br/>LoginView.fxml<br/>txtUsername / txtPassword / Ingresar"]
     MainView["view<br/>MainView.fxml<br/>lblUsuario"]
     VentaView["view<br/>VentaView.fxml<br/>registro de venta"]
-    ConsultaVentasView["view<br/>ConsultaVentasView.fxml<br/>colUsuario / Anular venta"]
+    AnularVentasView["view<br/>AnularVentasView.fxml<br/>colUsuario / Anular venta"]
     LoginController["controller<br/>LoginController<br/>onIngresarClick()"]
     MainController["controller<br/>MainController<br/>initialize()<br/>onCerrarSesionClick()"]
     VentaController["controller<br/>VentaController<br/>onGuardarVentaClick()"]
-    ConsultaVentasController["controller<br/>ConsultaVentasController<br/>colUsuario<br/>onAnularVentaClick()"]
+    AnularVentasController["controller<br/>AnularVentasController<br/>colUsuario<br/>onAnularVentaClick()"]
     UsuarioService["service<br/>UsuarioService<br/>autenticar(username, password)"]
     UsuarioServiceImplSQLite["service impl<br/>UsuarioServiceImplSQLite<br/>validar vacios / comparar password"]
     VentaService["service<br/>VentaService<br/>registrar(venta) / listar() / anular(ventaId)"]
@@ -106,9 +106,9 @@ flowchart TD
     VentaDao --> ConexionSQLite
     VentaController --> Venta
     Venta --> Usuario
-    ConsultaVentasView --> ConsultaVentasController
-    ConsultaVentasController --> VentaService
-    ConsultaVentasController --> Sesion
+    AnularVentasView --> AnularVentasController
+    AnularVentasController --> VentaService
+    AnularVentasController --> Sesion
     VentaDao --> Venta
 
     classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
@@ -121,7 +121,7 @@ Nombres reales del proyecto guía:
 com.upeu.comarket.controller.LoginController
 com.upeu.comarket.controller.MainController
 com.upeu.comarket.controller.VentaController
-com.upeu.comarket.controller.ConsultaVentasController
+com.upeu.comarket.controller.AnularVentasController
 com.upeu.comarket.security.Sesion
 com.upeu.comarket.entity.Usuario
 com.upeu.comarket.entity.Venta
@@ -134,7 +134,7 @@ com.upeu.comarket.db.ConexionSQLite
 src/main/resources/com/upeu/comarket/view/LoginView.fxml
 src/main/resources/com/upeu/comarket/view/MainView.fxml
 src/main/resources/com/upeu/comarket/view/VentaView.fxml
-src/main/resources/com/upeu/comarket/view/ConsultaVentasView.fxml
+src/main/resources/com/upeu/comarket/view/AnularVentasView.fxml
 ```
 
 ## 3. Aplica: actividad práctica guiada
@@ -400,7 +400,7 @@ public class VentaController {
 }
 ```
 
-En el proyecto guía, `ConsultaVentasController` también muestra el usuario que registró la venta mediante la columna `colUsuario`. Si una venta antigua no tiene usuario, la tabla muestra `Sin usuario`.
+En el proyecto guía, `AnularVentasController` también muestra el usuario que registró la venta mediante la columna `colUsuario`. Si una venta antigua no tiene usuario, la tabla muestra `Sin usuario`.
 
 ```java
 colUsuario.setCellValueFactory(data ->

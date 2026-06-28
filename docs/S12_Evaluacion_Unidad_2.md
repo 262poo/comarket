@@ -56,14 +56,14 @@ flowchart TB
     MainView["view<br/>MainView.fxml"]
     ProductoView["view<br/>ProductoView.fxml"]
     VentaView["view<br/>VentaView.fxml"]
-    ConsultaView["view<br/>ConsultaVentasView.fxml"]
+    AnularVentasView["view<br/>AnularVentasView.fxml"]
     ReporteView["view<br/>ReporteVentasView.fxml"]
 
     LoginController["controller<br/>LoginController"]
     MainController["controller<br/>MainController"]
     ProductoController["controller<br/>ProductoController"]
     VentaController["controller<br/>VentaController"]
-    ConsultaController["controller<br/>ConsultaVentasController"]
+    AnularVentasController["controller<br/>AnularVentasController"]
     ReporteController["controller<br/>ReporteVentasController"]
 
     ProductoService["service<br/>ProductoServiceImplSQLite"]
@@ -90,17 +90,17 @@ flowchart TB
     MainView --> MainController
     MainController --> ProductoView
     MainController --> VentaView
-    MainController --> ConsultaView
+    MainController --> AnularVentasView
     MainController --> ReporteView
 
     ProductoView --> ProductoController
     VentaView --> VentaController
-    ConsultaView --> ConsultaController
+    AnularVentasView --> AnularVentasController
     ReporteView --> ReporteController
 
     ProductoController --> ProductoService
     VentaController --> VentaService
-    ConsultaController --> VentaService
+    AnularVentasController --> VentaService
     ReporteController --> VentaService
 
     UsuarioService --> UsuarioDAO
@@ -123,11 +123,11 @@ flowchart TB
 ### 2.3 Criterios mínimos de cierre U2
 
 - Login funcional con usuario admin.
-- Sesion activa visible en ventana principal.
+- Sesión activa visible en ventana principal.
 - CRUD persistente de productos en SQLite.
 - Registro de venta con cabecera y detalle.
-- Asociacion de venta al usuario autenticado.
-- Consulta de ventas con detalle y anulacion.
+- Asociación de venta al usuario autenticado.
+- Anular ventas con detalle, estado, usuario y anulación.
 - Reporte de ventas con filtros (cliente, fecha, usuario, estado).
 - Consistencia total cabecera vs detalle validada.
 - Matriz de pruebas funcionales completa.
@@ -146,7 +146,7 @@ Tiempo: 3h.
 
 1. Registrar un producto nuevo.
 2. Editar el producto.
-3. Eliminar o desactivar un producto segun flujo disponible.
+3. Eliminar un producto según el flujo disponible.
 4. Confirmar que los cambios se mantienen al recargar la pantalla.
 
 ### 3.3 Demostrar venta con cabecera y detalle
@@ -155,12 +155,13 @@ Tiempo: 3h.
 2. Verificar validaciones (cantidad mayor a cero y stock suficiente).
 3. Confirmar que la venta queda asociada al usuario autenticado.
 
-### 3.4 Demostrar consulta de ventas
+### 3.4 Demostrar anulación de ventas
 
-1. Abrir Consulta de ventas.
+1. Abrir Anular ventas.
 2. Seleccionar una venta y mostrar su detalle.
-3. Anular una venta activa.
-4. Verificar cambio de estado a ANULADA y reposicion de stock.
+3. Verificar que se muestra el usuario que registró la venta.
+4. Anular una venta activa.
+5. Verificar cambio de estado a ANULADA y reposición de stock.
 
 ### 3.5 Demostrar reporte de ventas y consistencia
 
@@ -177,12 +178,12 @@ Tiempo: 3h.
 | CRUD de productos | Persistencia correcta en GUI | |
 | Registro de venta | Cabecera y detalle guardados | |
 | Usuario en venta | Venta asociada a admin | |
-| Consulta de ventas | Maestro-detalle operativo | |
-| Anulacion | Estado ANULADA y stock repuesto | |
+| Anular ventas | Maestro-detalle operativo, usuario visible y anulación | |
+| Anulación | Estado ANULADA y stock repuesto | |
 | Reporte con filtros | Filtrado correcto por criterios | |
 | Consistencia | Total cabecera coincide con detalle | |
 
-Nota metodologica:
+Nota metodológica:
 
 ```text
 En el estado actual del proyecto, el cierre U2 se sustenta con pruebas funcionales manuales.

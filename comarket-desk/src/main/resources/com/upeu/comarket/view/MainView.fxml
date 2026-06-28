@@ -34,8 +34,8 @@
                 <Tab text="Ventas">
                     <fx:include source="VentaView.fxml" />
                 </Tab>
-                <Tab fx:id="tabConsultaVentas" text="Consulta de ventas">
-                    <fx:include fx:id="consultaVentasView" source="ConsultaVentasView.fxml" />
+                <Tab fx:id="tabAnularVentas" text="Anular ventas">
+                    <fx:include fx:id="anularVentasView" source="AnularVentasView.fxml" />
                 </Tab>
                 <Tab text="Reporte de ventas">
                     <fx:include source="ReporteVentasView.fxml" />

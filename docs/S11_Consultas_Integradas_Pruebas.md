@@ -18,19 +18,19 @@ Consultas integradas operativas en GUI, verificación de consistencia total cabe
 
 ### 1.4 Motivación de la sesión
 
-Registrar ventas no basta. El usuario necesita recuperar informacion con filtros, revisar detalle y validar que los numeros sean consistentes.
+Registrar ventas no basta. El usuario necesita recuperar información con filtros, revisar detalle y validar que los números sean consistentes.
 
-Pregunta guia:
+Pregunta guía:
 
 ```text
-Como consultamos informacion relacionada y comprobamos que el flujo completo funciona?
+Cómo consultamos información relacionada y comprobamos que el flujo completo funciona?
 ```
 
 ### 1.5 Ubicación en el curso
 
 - Unidad: U2.
-- Carpeta de trabajo: comarket-desk.
-- Avance de sesion: consultas, validaciones y pruebas funcionales antes de la evaluacion.
+- Carpeta de trabajo: `comarket-desk`.
+- Avance de sesión: consultas, validaciones y pruebas funcionales antes de la evaluación.
 
 ## 2. Explica
 
@@ -39,71 +39,112 @@ Tiempo: 25 min.
 ### 2.1 Lo implementado actualmente en el proyecto
 
 - Login previo obligatorio (usuario de prueba: admin / 123456).
-- Pestana Consulta de ventas:
+- Pestaña Anular ventas:
+  - Usa `AnularVentasView.fxml`.
+  - Controlador: `AnularVentasController`.
   - Lista ventas registradas.
   - Muestra detalle de la venta seleccionada.
-  - Permite anular venta activa con confirmacion.
-  - Reposicion de stock al anular.
-- Pestana Reporte de ventas:
+  - Permite anular venta activa con confirmación.
+  - Reposición de stock al anular.
+  - Muestra el usuario que registró cada venta mediante `colUsuario`.
+- Pestaña Reporte de ventas:
+  - Usa `ReporteVentasView.fxml`.
+  - Controlador: `ReporteVentasController`.
   - Filtro por cliente.
   - Filtro por fecha desde y fecha hasta.
   - Filtro por usuario.
   - Filtro por estado (TODOS, ACTIVA, ANULADA).
   - Vista maestro-detalle.
   - Total mostrado de la consulta.
-  - Verificacion de consistencia contra total del detalle.
+  - Verificación de consistencia contra total del detalle.
 - Persistencia en SQLite mediante JDBC.
-- Validacion de rango de fechas (fecha inicial no mayor a fecha final).
+- Validación de rango de fechas (fecha inicial no mayor a fecha final).
 
 ### 2.2 Capas y componentes usados en S11
 
-- Vista (FXML): ConsultaVentasView y ReporteVentasView.
-- Controladores: ConsultaVentasController y ReporteVentasController.
-- Servicio: VentaService y VentaServiceImplSQLite.
-- DAO: VentaDao y DetalleVentaDao.
-- Conexion: ConexionSQLite.
-- Entidades: Venta, DetalleVenta, Producto, Usuario.
+- Vista (FXML): `AnularVentasView.fxml` y `ReporteVentasView.fxml`.
+- Controladores: `AnularVentasController`, `ReporteVentasController` y `MainController`.
+- Servicio: `VentaService` y `VentaServiceImplSQLite`.
+- DAO: `VentaDao` y `DetalleVentaDao`.
+- Conexión: `ConexionSQLite`.
+- Entidades: `Venta`, `DetalleVenta`, `Producto` y `Usuario`.
 
-No se uso un ConsultaDAO separado en este avance; la consulta se resuelve en VentaDao con filtros dinamicos.
+No se usó un `ConsultaDao` separado en este avance; la consulta se resuelve en `VentaDao.consultar(...)` con filtros dinámicos.
 
-### 2.3 Arquitectura real de ReporteVentasView
+### 2.3 Arquitectura real de S11
 
 ```mermaid
-flowchart TB
-  Vista["view<br/>ReporteVentasView.fxml"]
-  Controlador["controller<br/>ReporteVentasController"]
-    Servicio["service<br/>VentaServiceImplSQLite"]
-
-    subgraph Persistencia["dao + db"]
-        VentaDAO["VentaDao"]
-        DetalleDAO["DetalleVentaDao"]
-        Conexion["ConexionSQLite"]
-        SQLite[("SQLite")]
-    end
-
+%%{init: {'flowchart': {'rankSpacing': 80, 'nodeSpacing': 35, 'curve': 'basis'}} }%%
+flowchart TD
+    MainView["view<br/>MainView.fxml<br/>tabs: Anular ventas / Reporte de ventas"]
+    AnularVentasView["view<br/>AnularVentasView.fxml<br/>tablaVentas / tablaDetallesVenta / colUsuario"]
+    ReporteVentasView["view<br/>ReporteVentasView.fxml<br/>filtros / resumen / consistencia"]
+    MainController["controller<br/>MainController<br/>recarga AnularVentas al seleccionar tab"]
+    AnularVentasController["controller<br/>AnularVentasController<br/>onActualizarClick()<br/>onAnularVentaClick()<br/>recargarDatos()"]
+    ReporteVentasController["controller<br/>ReporteVentasController<br/>onBuscarClick()<br/>onLimpiarFiltrosClick()<br/>cargarDetalleVenta(venta)"]
+    VentaService["service<br/>VentaService<br/>listar()<br/>listarDetalles(ventaId)<br/>anular(ventaId)<br/>consultar(...)"]
+    VentaServiceImplSQLite["service impl<br/>VentaServiceImplSQLite<br/>validar rango fechas<br/>delegar consulta"]
+    VentaDao["dao<br/>VentaDao<br/>listar()<br/>consultar(...)<br/>anular(...)<br/>reponerStock(...)"]
+    DetalleVentaDao["dao<br/>DetalleVentaDao<br/>listarPorVentaId(ventaId)"]
+    ConexionSQLite["db<br/>ConexionSQLite<br/>obtenerConexion()"]
     Entidades["entity<br/>Venta / DetalleVenta / Producto / Usuario"]
+    SQLite[("data/comarket.db<br/>venta / detalle_venta / producto / usuario")]
 
-    Vista --> Controlador
-    Controlador -->|"onBuscarClick -> consultar(cliente, fechaDesde, fechaHasta, usuario, estado)"| Servicio
-    Controlador -->|"seleccion en tabla -> listarDetalles(ventaId)"| Servicio
-    Servicio -->|"consultar(...)"| VentaDAO
-    Servicio -->|"listarDetalles(ventaId)"| DetalleDAO
-    VentaDAO --> Entidades
-    DetalleDAO --> Entidades
-    VentaDAO --> Conexion
-    DetalleDAO --> Conexion
-    Conexion -->|"JDBC"| SQLite
+    MainView --> MainController
+    MainView --> AnularVentasView
+    MainView --> ReporteVentasView
+    MainController --> AnularVentasController
+    AnularVentasView --> AnularVentasController
+    ReporteVentasView --> ReporteVentasController
+    AnularVentasController --> VentaService
+    ReporteVentasController --> VentaService
+    VentaService --> VentaServiceImplSQLite
+    VentaServiceImplSQLite --> VentaDao
+    VentaServiceImplSQLite --> DetalleVentaDao
+    VentaDao --> ConexionSQLite
+    DetalleVentaDao --> ConexionSQLite
+    VentaDao --> Entidades
+    DetalleVentaDao --> Entidades
+    ConexionSQLite --> SQLite
+
+    classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    class VentaServiceImplSQLite serviceImpl;
 ```
 
-  Flujo implementado en ReporteVentasView:
+Nombres reales del proyecto guía:
+
+```text
+com.upeu.comarket.controller.AnularVentasController
+com.upeu.comarket.controller.ReporteVentasController
+com.upeu.comarket.controller.MainController
+com.upeu.comarket.service.VentaService
+com.upeu.comarket.service.VentaServiceImplSQLite
+com.upeu.comarket.dao.VentaDao
+com.upeu.comarket.dao.DetalleVentaDao
+com.upeu.comarket.db.ConexionSQLite
+src/main/resources/com/upeu/comarket/view/AnularVentasView.fxml
+src/main/resources/com/upeu/comarket/view/ReporteVentasView.fxml
+```
+
+### 2.4 Flujo implementado en ReporteVentasView
 
   1. El usuario aplica filtros (cliente, fecha desde, fecha hasta, usuario, estado) y presiona Buscar.
   2. ReporteVentasController invoca VentaService.consultar(...).
   3. VentaServiceImplSQLite valida el rango de fechas y delega a VentaDao.consultar(...).
-  4. VentaDao arma SQL dinamico con los filtros y devuelve la lista de ventas.
+  4. VentaDao arma SQL dinámico con los filtros y devuelve la lista de ventas.
   5. Al seleccionar una venta, ReporteVentasController invoca VentaService.listarDetalles(ventaId).
   6. VentaServiceImplSQLite delega a DetalleVentaDao.listarPorVentaId(ventaId) para poblar el detalle.
   7. El controlador calcula total mostrado y consistencia (total cabecera vs suma de detalle).
+
+### 2.5 Flujo implementado en AnularVentasView
+
+1. La pestaña carga ventas mediante `ventaService.listar()`.
+2. Al seleccionar una venta, se carga el detalle con `ventaService.listarDetalles(ventaId)`.
+3. La tabla muestra `estado` y `usuario`.
+4. Si el usuario presiona **Anular venta**, `AnularVentasController` valida sesión activa.
+5. El controlador pide confirmación.
+6. `VentaServiceImplSQLite.anular(ventaId)` repone stock y marca la venta como `ANULADA`.
+7. La tabla se refresca después de anular.
 
 ## 3. Aplica: actividad práctica guiada
 
@@ -113,7 +154,7 @@ Tiempo: 2h.
 
 Antes de abrir el reporte, registra ventas con estados y fechas distintas para validar filtros.
 
-Minimo sugerido:
+Mínimo sugerido:
 
 ```text
 - 1 venta ACTIVA de hoy con usuario admin.
@@ -123,15 +164,15 @@ Minimo sugerido:
 
 ### 3.2 Diseñar filtros en ReporteVentasView
 
-Controles minimos que debe tener la vista:
+Controles mínimos que debe tener la vista:
 
 - TextField para cliente.
 - DatePicker para fecha desde.
 - DatePicker para fecha hasta.
 - TextField para usuario.
 - ComboBox para estado (TODOS, ACTIVA, ANULADA).
-- Boton Buscar.
-- Boton Limpiar.
+- Botón Buscar.
+- Botón Limpiar.
 
 ### 3.3 Implementar buscar y limpiar en ReporteVentasController
 
@@ -159,9 +200,9 @@ private void onLimpiarFiltrosClick() {
 }
 ```
 
-### 3.4 Implementar consulta con validacion en el servicio
+### 3.4 Implementar consulta con validación en el servicio
 
-La validacion de fechas va en servicio, no en la vista.
+La validación de fechas va en servicio, no en la vista.
 
 ```java
 @Override
@@ -174,9 +215,9 @@ public List<Venta> consultar(String cliente, LocalDate fechaDesde,
 }
 ```
 
-### 3.5 Implementar consulta dinamica en VentaDao
+### 3.5 Implementar consulta dinámica en VentaDao
 
-El DAO construye la consulta SQL segun filtros ingresados.
+El DAO construye la consulta SQL según filtros ingresados.
 
 ```java
 if (!estaVacio(cliente)) {
@@ -231,12 +272,13 @@ Casos obligatorios de prueba manual:
 | Consulta por fecha | Rango con registros | Lista ventas del rango | |
 | Consulta por usuario | admin | Lista ventas de admin | |
 | Consulta por estado | ACTIVA o ANULADA | Muestra solo ese estado | |
-| Rango invalido | fechaDesde mayor que fechaHasta | Mensaje de validacion | |
-| Sin resultados | Filtros sin coincidencia | Tabla vacia y total en cero | |
+| Rango inválido | fechaDesde mayor que fechaHasta | Mensaje de validación | |
+| Sin resultados | Filtros sin coincidencia | Tabla vacía y total en cero | |
 | Ver detalle | Venta seleccionada | Muestra detalle de productos | |
-| Consistencia | Venta con detalle | Diferencia igual a S/ 0.00 (o minima) | |
+| Consistencia | Venta con detalle | Diferencia igual a S/ 0.00 (o mínima) | |
+| Anulación | Venta ACTIVA seleccionada | Estado ANULADA y stock repuesto | |
 
-Nota metodologica:
+Nota metodológica:
 
 ```text
 En el estado actual de este proyecto, S11 se valida con pruebas funcionales manuales.
@@ -258,20 +300,20 @@ S11_Equipo##_ApellidoNombre.pdf
 Debe incluir:
 
 1. Captura del login y acceso correcto.
-2. Captura de Consulta de ventas con detalle seleccionado.
+2. Captura de Anular ventas con detalle seleccionado.
 3. Captura de Reporte de ventas aplicando al menos 2 filtros.
 4. Captura del resumen de total mostrado.
 5. Captura de consistencia total cabecera vs detalle.
-6. Registro de una anulacion y su resultado.
-7. Matriz de pruebas completa (casos validos e invalidos).
-8. Breve explicacion del flujo entre capas.
+6. Registro de una anulación y su resultado.
+7. Matriz de pruebas completa (casos válidos e inválidos).
+8. Breve explicación del flujo entre capas.
 
 ### 4.2 Criterios mínimos de aceptación
 
 - Consulta maestro-detalle funcional.
 - Filtros operativos (cliente, fecha, usuario, estado).
 - Totales verificados.
-- Prueba de anulacion con reposicion de stock.
+- Prueba de anulación con reposición de stock.
 - Matriz de pruebas documentada.
 
 ## 5. Cierre evaluativo
@@ -281,26 +323,28 @@ Tiempo: 20 min.
 ### 5.1 Resultados esperados
 
 - Consulta de ventas persistentes en GUI.
-- Filtros de busqueda aplicados correctamente.
-- Detalle visible por seleccion.
+- Filtros de búsqueda aplicados correctamente.
+- Detalle visible por selección.
+- Anulación de venta activa verificada.
 - Coherencia de totales comprobada.
 - Registro de pruebas funcionales con hallazgos.
 
 ### 5.2 Preguntas de defensa
 
-1. Que diferencia existe entre Consulta de ventas y Reporte de ventas en tu implementacion?
-2. Que filtros usa Reporte de ventas y donde se aplican?
-3. Como se valida el rango de fechas?
-4. Como verificas que el total de cabecera coincide con el detalle?
-5. Que ocurre al anular una venta y por que?
+1. Qué diferencia existe entre Anular ventas y Reporte de ventas en tu implementación?
+2. Qué filtros usa Reporte de ventas y dónde se aplican?
+3. Cómo se valida el rango de fechas?
+4. Cómo verificas que el total de cabecera coincide con el detalle?
+5. Qué ocurre al anular una venta y por qué?
+6. Por qué `VentaDao.consultar(...)` usa `LEFT JOIN usuario`?
 
 ### 5.3 Rúbrica de evaluación
 
-| Dimension | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuacion obtenida |
+| Dimensión | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuación obtenida |
 |---|---:|---|---|---|---|---:|
 | 1. Consulta integrada | 2 | Consulta y detalle claros, funcionales y consistentes. | Consulta funcional. | Consulta parcial. | No consulta. | |
 | 2. Filtros | 2 | Aplica filtros completos y explica su efecto. | Aplica filtros principales. | Filtros incompletos. | No filtra. | |
-| 3. Consistencia de datos | 2 | Verifica total cabecera vs detalle sin diferencias relevantes. | Verifica total general. | Verificacion parcial. | No verifica. | |
-| 4. Pruebas | 2 | Matriz completa con casos validos e invalidos. | Matriz principal completa. | Matriz parcial. | No presenta pruebas. | |
-| 5. Hallazgos y correccion | 1 | Identifica causa y plantea correccion concreta. | Reporta hallazgo con explicacion. | Reporte superficial. | Sin hallazgo. | |
-| 6. Sustento tecnico | 1 | Evidencia ordenada y explicacion de capas precisa. | Evidencia suficiente. | Evidencia incompleta. | Sin sustento. | |
+| 3. Consistencia de datos | 2 | Verifica total cabecera vs detalle sin diferencias relevantes. | Verifica total general. | Verificación parcial. | No verifica. | |
+| 4. Pruebas | 2 | Matriz completa con casos válidos e inválidos. | Matriz principal completa. | Matriz parcial. | No presenta pruebas. | |
+| 5. Hallazgos y corrección | 1 | Identifica causa y plantea corrección concreta. | Reporta hallazgo con explicación. | Reporte superficial. | Sin hallazgo. | |
+| 6. Sustento técnico | 1 | Evidencia ordenada y explicación de capas precisa. | Evidencia suficiente. | Evidencia incompleta. | Sin sustento. | |

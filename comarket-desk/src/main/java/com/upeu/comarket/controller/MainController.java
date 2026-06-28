@@ -20,13 +20,13 @@ public class MainController {
     private Tab tabProductos;
 
     @FXML
-    private Tab tabConsultaVentas;
+    private Tab tabAnularVentas;
 
     @FXML
     private ProductoController productoViewController;
 
     @FXML
-    private ConsultaVentasController consultaVentasViewController;
+    private AnularVentasController anularVentasViewController;
 
     @FXML
     private void initialize() {
@@ -41,9 +41,9 @@ public class MainController {
             }
         });
 
-        tabConsultaVentas.selectedProperty().addListener((observable, estabaSeleccionado, estaSeleccionado) -> {
-            if (estaSeleccionado && consultaVentasViewController != null) {
-                consultaVentasViewController.recargarDatos();
+        tabAnularVentas.selectedProperty().addListener((observable, estabaSeleccionado, estaSeleccionado) -> {
+            if (estaSeleccionado && anularVentasViewController != null) {
+                anularVentasViewController.recargarDatos();
             }
         });
     }
