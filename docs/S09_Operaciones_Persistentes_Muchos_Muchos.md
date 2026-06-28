@@ -63,65 +63,51 @@ Los DAO se ubican en `dao` y reutilizan `db/ConexionSQLite` para conectarse a SQ
 ### 2.2 Arquitectura de la sesión
 
 ```mermaid
-flowchart TB
-    subgraph View["view"]
-        VentaView["VentaView.fxml<br/>txtCliente / dpFecha / cboProducto / txtCantidad<br/>tablaDetalles / lblTotal"]
-        ConsultaVentasView["ConsultaVentasView.fxml<br/>tablaVentas / tablaDetallesVenta<br/>colEstado<br/>Anular venta / Actualizar"]
-    end
+%%{init: {'flowchart': {'rankSpacing': 90, 'nodeSpacing': 35, 'curve': 'basis'}} }%%
+flowchart TD
+    VentaView["view<br/>VentaView.fxml<br/>txtCliente / dpFecha / cboProducto / txtCantidad<br/>tablaDetalles / lblTotal"]
+    ConsultaVentasView["view<br/>ConsultaVentasView.fxml<br/>tablaVentas / tablaDetallesVenta<br/>colEstado<br/>Anular venta / Actualizar"]
+    VentaController["controller<br/>VentaController<br/>initialize()<br/>onAgregarDetalleClick()<br/>onQuitarDetalleClick()<br/>onGuardarVentaClick()<br/>onNuevaVentaClick()<br/>cargarProductos()"]
+    ConsultaVentasController["controller<br/>ConsultaVentasController<br/>initialize()<br/>onActualizarClick()<br/>onAnularVentaClick()<br/>cargarDetalleVenta(venta)"]
+    ProductoService["service<br/>ProductoService<br/>listar()"]
+    ProductoServiceImplSQLite["service impl<br/>ProductoServiceImplSQLite"]
+    VentaService["service<br/>VentaService<br/>&lt;&lt;interface&gt;&gt;<br/>registrar(venta)<br/>calcularTotal(venta)<br/>listar()<br/>listarDetalles(ventaId)<br/>anular(ventaId)"]
+    VentaServiceImplSQLite["service impl<br/>VentaServiceImplSQLite<br/>validarVenta(venta)<br/>validarStock(connection, venta)<br/>anular(ventaId)<br/>transaccion"]
+    Venta["entity<br/>Venta<br/>id<br/>cliente<br/>fecha<br/>estado<br/>detalles<br/>calcularTotal()"]
+    DetalleVenta["entity<br/>DetalleVenta<br/>producto<br/>cantidad<br/>precioUnitario<br/>getSubtotal()"]
+    Producto["entity<br/>Producto<br/>codigo / nombre / precio / stock"]
+    ProductoDao["dao<br/>ProductoDao<br/>listar()"]
+    VentaDao["dao<br/>VentaDao<br/>insertar(connection, venta)<br/>obtenerStock(connection, codigo)<br/>descontarStock(connection, detalle)<br/>reponerStock(connection, detalle)<br/>buscarPorId(connection, ventaId)<br/>anular(connection, ventaId)<br/>listar()"]
+    DetalleVentaDao["dao<br/>DetalleVentaDao<br/>insertar / listarPorVentaId"]
+    ConexionSQLite["db<br/>ConexionSQLite<br/>obtenerConexion()"]
+    SQLite[("data/comarket.db<br/>producto / venta / detalle_venta")]
 
-    subgraph Controller["controller"]
-        VentaController["VentaController<br/>initialize()<br/>onAgregarDetalleClick()<br/>onQuitarDetalleClick()<br/>onGuardarVentaClick()<br/>onNuevaVentaClick()<br/>cargarProductos()"]
-        ConsultaVentasController["ConsultaVentasController<br/>initialize()<br/>onActualizarClick()<br/>onAnularVentaClick()<br/>cargarDetalleVenta(venta)"]
-    end
-
-    subgraph Service["service"]
-        ProductoService["ProductoService<br/>listar()"]
-        ProductoServiceImplSQLite["ProductoServiceImplSQLite"]
-        VentaService["VentaService<br/>&lt;&lt;interface&gt;&gt;<br/>registrar(venta)<br/>calcularTotal(venta)<br/>listar()<br/>listarDetalles(ventaId)<br/>anular(ventaId)"]
-        VentaServiceImplSQLite["VentaServiceImplSQLite<br/>validarVenta(venta)<br/>validarStock(connection, venta)<br/>anular(ventaId)<br/>transaccion"]
-    end
-
-    subgraph Entity["entity"]
-        Venta["Venta<br/>id<br/>cliente<br/>fecha<br/>estado<br/>detalles<br/>calcularTotal()"]
-        DetalleVenta["DetalleVenta<br/>producto<br/>cantidad<br/>precioUnitario<br/>getSubtotal()"]
-        Producto["Producto<br/>codigo<br/>nombre<br/>precio<br/>stock"]
-    end
-
-    subgraph Dao["dao"]
-        VentaDao["VentaDao<br/>insertar(connection, venta)<br/>obtenerStock(connection, codigo)<br/>descontarStock(connection, detalle)<br/>reponerStock(connection, detalle)<br/>buscarPorId(connection, ventaId)<br/>anular(connection, ventaId)<br/>listar()"]
-        DetalleVentaDao["DetalleVentaDao<br/>insertar(connection, ventaId, detalle)<br/>listarPorVentaId(ventaId)"]
-        ProductoDao["ProductoDao<br/>listar()"]
-    end
-
-    subgraph Db["db"]
-        ConexionSQLite["ConexionSQLite<br/>obtenerConexion()"]
-        SQLite[("data/comarket.db<br/>producto / venta / detalle_venta")]
-    end
-
-    VentaView -->|"fx:controller"| VentaController
-    VentaView -.->|"fx:id / onAction"| VentaController
-    ConsultaVentasView -->|"fx:controller"| ConsultaVentasController
-    ConsultaVentasView -.->|"fx:id / onAction"| ConsultaVentasController
-    VentaController -. usa .-> ProductoService
-    VentaController -. usa contrato .-> VentaService
-    ConsultaVentasController -. usa contrato .-> VentaService
-    ProductoServiceImplSQLite -. implements .-> ProductoService
-    VentaServiceImplSQLite -. implements .-> VentaService
+    VentaView -->|fx:controller| VentaController
+    VentaView -.->|fx:id / onAction| VentaController
+    ConsultaVentasView -->|fx:controller| ConsultaVentasController
+    ConsultaVentasView -.->|fx:id / onAction| ConsultaVentasController
+    VentaController -.->|usa| ProductoService
+    VentaController -.->|usa contrato| VentaService
+    ConsultaVentasController -.->|usa contrato| VentaService
+    ProductoServiceImplSQLite -.->|implements| ProductoService
+    VentaServiceImplSQLite -.->|implements| VentaService
+    ProductoService --> ProductoServiceImplSQLite
+    VentaService --> VentaServiceImplSQLite
     ProductoServiceImplSQLite --> ProductoDao
     VentaServiceImplSQLite --> VentaDao
     VentaServiceImplSQLite --> DetalleVentaDao
     VentaServiceImplSQLite --> ConexionSQLite
-    ProductoDao --> ConexionSQLite
     VentaDao --> ConexionSQLite
     DetalleVentaDao --> ConexionSQLite
-    ConexionSQLite -->|"JDBC"| SQLite
-    VentaController -. crea .-> Venta
-    VentaController -. agrega .-> DetalleVenta
-    ConsultaVentasController -. consulta .-> Venta
-    ConsultaVentasController -. consulta .-> DetalleVenta
-    ConsultaVentasController -. anula .-> VentaService
-    Venta -->|"1 contiene muchos"| DetalleVenta
-    DetalleVenta -->|"referencia 1 producto"| Producto
+    ProductoDao --> ConexionSQLite
+    ConexionSQLite --> SQLite
+    VentaController -.->|crea| Venta
+    VentaController -.->|agrega| DetalleVenta
+    ConsultaVentasController -.->|consulta| Venta
+    ConsultaVentasController -.->|consulta| DetalleVenta
+    ConsultaVentasController -.->|anula| VentaService
+    Venta -->|1 contiene muchos| DetalleVenta
+    DetalleVenta -->|referencia 1 producto| Producto
 
     classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
     class ProductoServiceImplSQLite,VentaServiceImplSQLite serviceImpl;
