@@ -1,0 +1,1982 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Libro digital de apoyo para el curso de Programación Orientada a Objetos - UPeU 2026">
+      
+      
+        <meta name="author" content="UPeU">
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../S01_Fundamentos_Estructuras_Datos/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Sílabo oficial - Programación Orientada a Objetos</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#silabo-programacion-orientada-a-objetos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Programación Orientada a Objetos" class="md-header__button md-logo" aria-label="Programación Orientada a Objetos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Programación Orientada a Objetos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sílabo oficial
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Programación Orientada a Objetos" class="md-nav__button md-logo" aria-label="Programación Orientada a Objetos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Programación Orientada a Objetos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sílabo oficial
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sílabo oficial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-informacion-general-de-asignatura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I. Información General de Asignatura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-sumilla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        II. Sumilla
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-competencia-del-perfil-de-egreso-con-relacion-a-la-asignatura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        III. Competencia del perfil de egreso con relación a la asignatura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-resultado-de-aprendizaje-de-la-asignatura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IV. Resultado de aprendizaje de la asignatura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-unidades-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V. Unidades de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-estrategias-metodologicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VI. Estrategias metodológicas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-recursos-medios-y-materiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VII. Recursos, medios y materiales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viii-evaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VIII. Evaluación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ix-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IX. Referencias
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IX. Referencias">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basica-fuentes-primarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Básica (Fuentes primarias)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complementaria-fuentes-secundarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complementaria (Fuentes secundarias)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enlaces-de-internet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enlaces de internet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Fundamentos de la Programación Orientada a Objetos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. Fundamentos de la Programación Orientada a Objetos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S01_Fundamentos_Estructuras_Datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Entorno, estructuras de control, metodos y estructuras de datos lineales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S02_Clases_Objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 Clases, objetos, constructores y comunicacion entre objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S03_Encapsulamiento_Relaciones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 Encapsulamiento, separacion de responsabilidades y relaciones entre objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S04_Herencia_Polimorfismo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4 Herencia, interfaces y polimorfismo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S05_CRUD_Memoria_ArrayList/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 Operaciones CRUD, validaciones y responsabilidad unica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S06_Evaluacion_Unidad_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 Modelado orientado a objetos y gestion de datos en memoria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Aplicación de Escritorio con Persistencia de Datos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2. Aplicación de Escritorio con Persistencia de Datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S07_GUI_CRUD_Memoria/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7 Interfaz grafica y CRUD desde GUI en memoria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S08_Arquitectura_DAO_CRUD_Persistente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8 Arquitectura por capas, DAO y CRUD persistente desde GUI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S09_Operaciones_Persistentes_Muchos_Muchos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9 Operaciones persistentes con relacion muchos a muchos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S10_Seguridad_Relacion_Uno_Muchos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 Seguridad basica y relacion uno a muchos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S11_Consultas_Integradas_Pruebas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11 Consultas integradas y pruebas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S12_Evaluacion_Unidad_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12 Aplicaciones de escritorio por capas y gestion de datos persistentes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Proyecto Integrador
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3. Proyecto Integrador
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S13_Proyecto_Integrador_Ensamblaje/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13 Integracion del sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S14_Proyecto_Integrador_Refinamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14 Validacion, refinamiento y ejecutable nativo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S15_Documentacion_Demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15 Sistema orientado a objetos integrado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S16_Evaluacion_Final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16 Evaluacion final individual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4. Anexos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../POOTaller01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Taller POO 01
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../POOTaller02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Taller POO 02
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-informacion-general-de-asignatura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I. Información General de Asignatura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-sumilla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        II. Sumilla
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-competencia-del-perfil-de-egreso-con-relacion-a-la-asignatura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        III. Competencia del perfil de egreso con relación a la asignatura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-resultado-de-aprendizaje-de-la-asignatura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IV. Resultado de aprendizaje de la asignatura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-unidades-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V. Unidades de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-estrategias-metodologicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VI. Estrategias metodológicas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-recursos-medios-y-materiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VII. Recursos, medios y materiales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viii-evaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VIII. Evaluación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ix-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IX. Referencias
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IX. Referencias">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basica-fuentes-primarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Básica (Fuentes primarias)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complementaria-fuentes-secundarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complementaria (Fuentes secundarias)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enlaces-de-internet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enlaces de internet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<!-- Transcripción fiel generada desde: Ciclo2 Silabo-POO por David Mamani (1) (2).docx -->
+
+<p>Universidad Peruana Unión
+Carret. Central km. 19.5 Ñaña. Telf. 01-6186300 Casilla 3564 Lima 1, Perú</p>
+<h1 id="silabo-programacion-orientada-a-objetos">Silabo: Programación Orientada a Objetos<a class="headerlink" href="#silabo-programacion-orientada-a-objetos" title="Permanent link">&para;</a></h1>
+<h2 id="i-informacion-general-de-asignatura">I. Información General de Asignatura<a class="headerlink" href="#i-informacion-general-de-asignatura" title="Permanent link">&para;</a></h2>
+<table>
+  <tr>
+    <td>01</td>
+    <td>Facultad/EGP</td>
+    <td>Facultad de Ingeniería y Arquitectura</td>
+    <td>09</td>
+    <td>Año de plan de estudio</td>
+    <td>2026-1</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>10</td>
+    <td>Ciclo de estudio</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>02</td>
+    <td>Programa de estudio</td>
+    <td>EP Ingeniería de Sistemas</td>
+    <td>11</td>
+    <td>Código de asignatura</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>03</td>
+    <td>Tipo de estudio</td>
+    <td>Especialidad</td>
+    <td>12</td>
+    <td>Número de créditos</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>04</td>
+    <td>Nombre de asignatura</td>
+    <td>Programación Orientada a Objetos</td>
+    <td>13</td>
+    <td>Nota mínima probatoria</td>
+    <td>13</td>
+  </tr>
+  <tr>
+    <td>05</td>
+    <td>Duración</td>
+    <td></td>
+    <td>14</td>
+    <td>Año y semestre académico</td>
+    <td>2026-1</td>
+  </tr>
+  <tr>
+    <td>06</td>
+    <td>Horas de la asignatura</td>
+    <td colspan="4">H. Te. Pract 3 H. Prc. Pres 4 H. Te. On. Sin H. Te. On. Asin H. Pr. On. Sin H. Pr. On. Asin</td>
+  </tr>
+  <tr>
+    <td>07</td>
+    <td>Docente</td>
+    <td>Mamani Pari David</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>08</td>
+    <td>Pre-requisito</td>
+    <td>Fundamentos de Programación</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<h2 id="ii-sumilla">II. Sumilla<a class="headerlink" href="#ii-sumilla" title="Permanent link">&para;</a></h2>
+<p>La asignatura de Programación Orientada a Objetos es de carácter teórico/práctico, aporta al perfil de egreso en la competencia pensamiento de orden superior de nivel 1 y de la competencia específica ciencias de ingeniería de nivel 1, investigación formativa de nivel 1 y gestión y desarrollo de software de nivel 1, cuyo propósito es que el estudiante desarrolle soluciones de escritorio utilizando el paradigma de Programación Orientada a Objetos en base a requerimientos. Los temas por tratar son: Fundamentos de la Programación Orientada a Objetos (POO), Conexión a Base de Datos y Desarrollo de un Proyecto Integrador.</p>
+<h2 id="iii-competencia-del-perfil-de-egreso-con-relacion-a-la-asignatura">III. Competencia del perfil de egreso con relación a la asignatura<a class="headerlink" href="#iii-competencia-del-perfil-de-egreso-con-relacion-a-la-asignatura" title="Permanent link">&para;</a></h2>
+<table>
+  <tr>
+    <td colspan="2">General</td>
+  </tr>
+  <tr>
+    <td colspan="2">CARÁCTER Y APRENDIZAJE AUTÓNOMO Cultiva un carácter íntegro y autónomo, guiado por principios bíblicos y adventistas, integrando un enfoque espiritual con la proactividad en el aprendizaje y el desarrollo personal.</td>
+  </tr>
+  <tr>
+    <td colspan="2">Dimensiones</td>
+  </tr>
+  <tr>
+    <td>1.1</td>
+    <td>Firmeza de Propósito. Ejecución. Dominio Propio. Mantener el Esfuerzo</td>
+  </tr>
+  <tr>
+    <td colspan="2">Específica</td>
+  </tr>
+  <tr>
+    <td colspan="2">Desarrolla aplicaciones de tipo escritorio utilizando el paradigma de la programación orientada a objetos para la búsqueda de soluciones innovadoras y eficientes, desenvolviéndose con creatividad y actitud proactiva.</td>
+  </tr>
+  <tr>
+    <td colspan="2">Dimensiones</td>
+  </tr>
+  <tr>
+    <td>1.1</td>
+    <td>Programación</td>
+  </tr>
+</table>
+
+<h2 id="iv-resultado-de-aprendizaje-de-la-asignatura">IV. Resultado de aprendizaje de la asignatura<a class="headerlink" href="#iv-resultado-de-aprendizaje-de-la-asignatura" title="Permanent link">&para;</a></h2>
+<table>
+  <tr>
+    <td>Resultado de aprendizaje</td>
+    <td>Producto Académico</td>
+  </tr>
+  <tr>
+    <td>Desarrolla una aplicación de escritorio aplicando los principios de la Programación Orientada a Objetos, integrando una interfaz gráfica de usuario y una base de datos relacional, mediante una arquitectura en capas, para resolver un caso de negocio.</td>
+    <td>Nombre: Aplicación entorno escritorio Funcional (Arquitectura en Capas, Interacción con Base de datos Relacional, Requerimientos principales del negocio, manual de usuario).</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Descripción Diseño e implementación de una aplicación de escritorio que aplica principios de POO, incorpora una interfaz gráfica, gestiona datos mediante una base de datos relacional y organiza la solución usando una arquitectura en capas (GUI–Servicio–DAO).</td>
+  </tr>
+</table>
+
+<h2 id="v-unidades-de-aprendizaje">V. Unidades de aprendizaje<a class="headerlink" href="#v-unidades-de-aprendizaje" title="Permanent link">&para;</a></h2>
+<table>
+  <tr>
+    <td colspan="7">Unidad 1: Fundamentos de la Programación Orientada a Objetos</td>
+  </tr>
+  <tr>
+    <td colspan="4">Resultado de aprendizaje</td>
+    <td colspan="3">Producto</td>
+  </tr>
+  <tr>
+    <td colspan="4">Aplica los principios fundamentales de la Programación Orientada a Objetos para modelar entidades del dominio e implementar un CRUD básico en consola.</td>
+    <td colspan="3">Nombre: Aplicación CRUD en consola.</td>
+  </tr>
+  <tr>
+    <td colspan="4">Criterios de evaluación del producto</td>
+    <td colspan="3">Descripción del producto</td>
+  </tr>
+  <tr>
+    <td colspan="4">1 Aplica los conceptos de POO (herencia, encapsulamiento, polimorfismo, etc.).<br>2 Implementa un CRUD funcional usando ArrayList.<br>3 Diagrama el Modelo clases y relaciones en UML<br>4 Aplicación a nivel de Consola.</td>
+    <td colspan="3">Aplicación de consola que modela entidades del dominio mediante clases, atributos, métodos, herencia y polimorfismo, e implementa operaciones CRUD utilizando estructuras dinámicas (ArrayList).</td>
+  </tr>
+  <tr>
+    <td colspan="7">Sesiones de aprendizaje</td>
+  </tr>
+  <tr>
+    <td>N°</td>
+    <td>Fecha</td>
+    <td>Contenido</td>
+    <td>HT</td>
+    <td>HP</td>
+    <td>Actividad práctica</td>
+    <td>Actividad autónoma</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>16/03/2026  20/03/2026</td>
+    <td>Introducción a la Programación Orientada a Objetos</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Configurar el entorno de desarrollo y creación de la primera clase.<br>Desarrollar operaciones básicas<br>utilizando ArrayList</td>
+    <td>Lectura sobre fundamentos de la POO y análisis de ejemplos prácticos.</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>23/03/2026  27/03/2027</td>
+    <td>Abstracción: Clases y Objetos</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Implementar clases con atributos y métodos en ejercicios prácticos.<br>Representar diagrama de clases con UML</td>
+    <td>Elaboración de diagramas UML para representar clases.</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>30/03/2026  03/04/2027</td>
+    <td>Herencia, reutilización</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Desarrollar las jerarquías de clases aplicando herencia y composición.</td>
+    <td>Resolución de ejercicios sobre relaciones de herencia y asociación.</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>06/04/2026  10/04/2028</td>
+    <td>Polimorfismo, sustitución correcta</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Resolver ejercicios prácticos sobre sobrecarga y sobreescritura de métodos.<br>Aplicar herencia y polimorfismo de un proceso de negocio utilizando un lenguaje de programación.</td>
+    <td>Desarrollo de casos prácticos aplicando polimorfismo.</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>13/04/2026  17/04/2028</td>
+    <td>CRUD a nivel de ArrayList</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Implementar las operaciones CRUD utilizando colecciones dinámicas (ArrayList).</td>
+    <td>Ampliación del CRUD con funciones de búsqueda y ordenamiento.</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>20/04/2026  24/04/2029</td>
+    <td>Clases, Herencia,<br>Encapsulamiento y/o Polimorfismo, CRUD a nivel de ArrayList</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Evaluación Unidad 1: Explicar los requerimientos del producto a construir<br>en la evaluación</td>
+    <td>Desarrollar un CRUD utilizando Clases, Herencia, Encapsulamiento y/o Polimorfismo con persistencia de datos en memoria del computador.</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td colspan="7">Unidad 2: Aplicaciones de escritorio con interfaz gráfica y conexión a bases de datos</td>
+  </tr>
+  <tr>
+    <td colspan="4">Resultado de aprendizaje</td>
+    <td colspan="3">Producto</td>
+  </tr>
+  <tr>
+    <td colspan="4">Desarrolla una aplicación de escritorio con interfaz gráfica, aplicando una arquitectura en capas y conectando la aplicación a una base de datos relacional para gestionar información.</td>
+    <td colspan="3">Nombre: Aplicación de escritorio con interfaz gráfica y base de datos relacional.</td>
+  </tr>
+  <tr>
+    <td colspan="4">Criterios de evaluación del producto</td>
+    <td colspan="3">Descripción del producto</td>
+  </tr>
+  <tr>
+    <td colspan="4">1 Diseña e implementa una arquitectura en capas.<br>2 Aplica conceptos de POO en la aplicación de escritorio.<br>3 Implementa CRUD desde la interfaz gráfica (Gestiona validaciones, inserción, consulta, edición y eliminación de datos.) con base de datos.<br>4 Aplica búsqueda, filtrado con GUI y aprendizaje autónomo.</td>
+    <td colspan="3">Aplicación de escritorio que integra una interfaz gráfica (GUI), lógica de negocio y acceso a datos mediante una arquitectura en capas, implementando operaciones CRUD persistentes sobre una base de datos relacional.</td>
+  </tr>
+  <tr>
+    <td colspan="7">Sesiones de aprendizaje</td>
+  </tr>
+  <tr>
+    <td>N°</td>
+    <td>Fecha</td>
+    <td>Contenido</td>
+    <td>HT</td>
+    <td>HP</td>
+    <td>Actividad práctica</td>
+    <td>Actividad autónoma</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>27/04/2026  01/05/2026</td>
+    <td>Arquitectura de desarrollo en capas con Base de datos</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Crear la arquitectura de un proyecto en java con interacción a base de datos de un proceso de negocio</td>
+    <td>Desarrollo una arquitectura coherente según el proceso negocios asignado</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>04/05/2026   08/05/2026</td>
+    <td>Conexión a Bases de Datos Relacionales (Asociación entre clases a nivel de objetos)</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Conectar Java con una base de datos SQLite</td>
+    <td>Creación de una base de datos relacional para la aplicación.</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>11/05/2026   15/05/2026</td>
+    <td>Registro, validación de campos y reporte de datos.</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Desarrollar la inserción y consulta (listado) de registros desde la Interfaz gráfica de usuario (GUI)</td>
+    <td>Desarrolla las consultas al servidor de base de datos, por medio de la implementación de una interfaz gráfica.</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>18/05/2026   22/05/2026</td>
+    <td>Edicción y eliminación de datos.</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Desarrollarla eliminación y edición de registros desde la Interfaz gráfica de usuario (GUI)</td>
+    <td>Realiza edición y eliminación de registros en una Base de datos desde una interfaz gráfica</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>25/05/2026   29/05/2026</td>
+    <td>Búsqueda y filtro de datos.</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Desarrollar la búsqueda de registros desde la Interfaz gráfica de usuario (GUI) - Participar en concurso de programación (viaje de estudio en caso corresponda)</td>
+    <td>Realiza búsqueda y filtros de registros de datos desde una interfaz gráfica</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>01/06/2026   05/06/2026</td>
+    <td>Arquitectura, Clases, y CRUD, Búsqueda y filtros</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Evaluación Unidad 2: Aplicar los conocimientos para construir la aplicación de escritorio con Base de datos relacionales</td>
+    <td>Desarrollar un CRUD utilizando Clases, Herencia, Encapsulamiento y Polimorfismo con interacción a Base de Datos relacionales</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td colspan="7">Unidad 3: Proyecto de Aplicación de Escritorio GUI + BD</td>
+  </tr>
+  <tr>
+    <td colspan="4">Resultado de aprendizaje</td>
+    <td colspan="3">Producto</td>
+  </tr>
+  <tr>
+    <td colspan="4">Integra los conceptos de Programación Orientada a Objetos, interfaz gráfica y persistencia de datos en una aplicación de escritorio completa, validando su funcionamiento para un caso de negocio.</td>
+    <td colspan="3">Nombre:  Aplicación CRUD de escritorio con interfaz gráfica y conexión a base de datos relacional.</td>
+  </tr>
+  <tr>
+    <td colspan="4">Criterios de evaluación del producto</td>
+    <td colspan="3">Descripción del producto</td>
+  </tr>
+  <tr>
+    <td colspan="4">1 Analiza los requerimientos del proyecto y define alcance.<br>2 Diseña modelo de datos.<br>3 Implementa módulos funcionales siguiendo buenas prácticas.<br>4 Integra GUI, CRUD y BD en un proyecto completo.<br>5 Estructura el proyecto siguiendo arquitectura en capas.<br>6 Manual de Usuario y aprendizaje autónomo.</td>
+    <td colspan="3">Aplicación de escritorio completa que integra el CRUD desarrollado en consola (U1) y la aplicación GUI con BD (U2), aplicando principios de POO, arquitectura en capas, validaciones básicas y reportes simples, lista para su sustentación técnica.</td>
+  </tr>
+  <tr>
+    <td colspan="7">Sesiones de aprendizaje</td>
+  </tr>
+  <tr>
+    <td>N°</td>
+    <td>Fecha</td>
+    <td>Contenido</td>
+    <td>HT</td>
+    <td>HP</td>
+    <td>Actividad práctica</td>
+    <td>Actividad autónoma</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>08/06/2026  12/06/2026</td>
+    <td>Desarrollo del proyecto – Parte I, Lógica de Programación.</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Definir alcance, casos de uso y diagramas UML para el proyecto. Presentar código del proyecto desarrollado, Concurso de programación.</td>
+    <td>Subsana observaciones del proyecto. Desarrollar módulos del proyecto.</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>15/06/2026   19/06/2026</td>
+    <td>Desarrollo del proyecto – Parte II</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Definir alcance, casos de uso y diagramas UML para el proyecto. Presentar código del proyecto desarrollado. Informe de participación del concurso internacional de programación.</td>
+    <td>Subsana observaciones del proyecto. Desarrollar módulos del proyecto.</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>22/06/2026   26/06/2026</td>
+    <td>Proyecto Final: Exposición y<br>Sustentación</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Presentar el proyecto desarrollado</td>
+    <td>Mejora de su proyecto final</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>29/06/2026   03/07/2026</td>
+    <td>Aplicación de escritorio utilizando Clases, Herencia, Encapsulamiento y Polimorfismo con Base de Datos</td>
+    <td>3</td>
+    <td>4</td>
+    <td>Evaluación Unidad 3: Explicar los<br>requerimientos del producto a construir<br>en la evaluación</td>
+    <td>Desarrollar Aplicación de escritorio utilizando<br>Clases, Herencia, Encapsulamiento y<br>Polimorfismo con Base de Datos</td>
+  </tr>
+</table>
+
+<h2 id="vi-estrategias-metodologicas">VI. Estrategias metodológicas<a class="headerlink" href="#vi-estrategias-metodologicas" title="Permanent link">&para;</a></h2>
+<table>
+  <tr>
+    <td colspan="2">Estrategias de enseñanza y de aprendizaje que se aplicarán en la asignatura</td>
+  </tr>
+  <tr>
+    <td>1.1</td>
+    <td>Aprendizaje Cooperativo: Fomenta habilidades colaborativas y de trabajo en equipo, cruciales en la mayoría de los entornos laborales modernos.</td>
+  </tr>
+  <tr>
+    <td>1.2</td>
+    <td>Estudios de caso: Desarrolla el pensamiento crítico y la toma de decisiones al analizar situaciones complejas, preparando a los estudiantes para enfrentar problemas similares en sus futuras carreras profesional.</td>
+  </tr>
+  <tr>
+    <td>1.3</td>
+    <td>Proyectos: Fomentan habilidades de investigación, gestión del tiempo y trabajo en equipo, todas cruciales en el mundo profesional</td>
+  </tr>
+</table>
+
+<h2 id="vii-recursos-medios-y-materiales">VII. Recursos, medios y materiales<a class="headerlink" href="#vii-recursos-medios-y-materiales" title="Permanent link">&para;</a></h2>
+<table>
+  <tr>
+    <td colspan="2">Recursos medios y materiales</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Guías y/o tutoriales</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Laboratorios</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Internet - Wifi</td>
+  </tr>
+</table>
+
+<h2 id="viii-evaluacion">VIII. Evaluación<a class="headerlink" href="#viii-evaluacion" title="Permanent link">&para;</a></h2>
+<table>
+  <tr>
+    <td colspan="5">Programación de evaluaciones</td>
+  </tr>
+  <tr>
+    <td>Fecha</td>
+    <td>Unidad</td>
+    <td>Producto</td>
+    <td>Evaluación de proceso y de resultado</td>
+    <td>Pesos</td>
+  </tr>
+  <tr>
+    <td>21/04/2026</td>
+    <td>Unidad 1: Fundamentos de la Programación Orientada a Objetos</td>
+    <td>Aplicación CRUD en consola</td>
+    <td>Evaluación del producto</td>
+    <td>20%</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>Evaluación de sesiones</td>
+    <td>5%</td>
+  </tr>
+  <tr>
+    <td>02/06/2026</td>
+    <td>Unidad 2: Aplicaciones de escritorio con interfaz gráfica y conexión a bases de datos</td>
+    <td>Aplicación de escritorio con interfaz gráfica y base<br>de datos relacional</td>
+    <td>Evaluación del producto</td>
+    <td>20%</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>Evaluación de sesiones</td>
+    <td>5%</td>
+  </tr>
+  <tr>
+    <td>01/07/2026</td>
+    <td>Unidad 3: Proyecto de Aplicación de Escritorio</td>
+    <td>Aplicación CRUD de escritorio con interfaz gráfica y conexión a base de datos relacional aplicado en un caso real.</td>
+    <td>Evaluación del producto</td>
+    <td>30%</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>Evaluación de sesiones</td>
+    <td>10%</td>
+  </tr>
+  <tr>
+    <td>01/07/2026</td>
+    <td>Competencia General</td>
+    <td>CARÁCTER Y APRENDIZAJE AUTÓNOMO Cultiva un carácter íntegro y autónomo, guiado por principios bíblicos y adventistas, integrando un enfoque espiritual con la proactividad en el aprendizaje y el desarrollo personal.</td>
+    <td>Competencia General</td>
+    <td>10%</td>
+  </tr>
+</table>
+
+<h2 id="ix-referencias">IX. Referencias<a class="headerlink" href="#ix-referencias" title="Permanent link">&para;</a></h2>
+<h3 id="basica-fuentes-primarias">Básica (Fuentes primarias)<a class="headerlink" href="#basica-fuentes-primarias" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Básica (Fuentes primarias)</p>
+</li>
+<li>
+<p>López, B., (2016). Curso de programación orientada a objetos en C# .NET. España: . RA-MA: Alfaomega 437 p.</p>
+</li>
+<li>
+<p>Sznajdleder, P., (2016). Java a fondo Curso de programación. 2a ed. Argentina: Alfaomega.452 p</p>
+</li>
+<li>
+<p>Reina Valera (1960). La Santa Biblia</p>
+</li>
+<li>
+<p>Levano D y Cerdán F. (2023) Manual de Programación Orientada a Objetos. Lima - Perú</p>
+</li>
+<li>
+<p>Sznajdleder, P., (2017). Programación Orientada a Objetos y Estructura de Datos a Fondo. Madrid: Alfaomega 328 p.</p>
+</li>
+<li>
+<p>Blasco, F., (2019). Programación Orientada a Objetos en Java. Madrid: Ra-Ma. 341 p. Guardati, S., (2015). Estructuras de Datos Básicas Programación orientada a objetos con Java. España: Alfaomega 410 p</p>
+</li>
+<li>
+<p>Machacuay M., (2021). Tesis: SCRUM y KANBAN para la implementación de un Sistema de Información Transaccional en la mejora del monitoreo del proceso de Investigación Formativa en la Facultad de Ingeniería y Arquitectura de la Universidad Peruana Unión.</p>
+</li>
+</ol>
+<h3 id="complementaria-fuentes-secundarias">Complementaria (Fuentes secundarias)<a class="headerlink" href="#complementaria-fuentes-secundarias" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Martín, A., (2018). JAVA Curso práctico de formación. Colombia: Alfaomega. 277 p.</li>
+</ol>
+<h3 id="enlaces-de-internet">Enlaces de internet<a class="headerlink" href="#enlaces-de-internet" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>https://docs.oracle.com/javase/tutorial/uiswing/start/index.html</p>
+</li>
+<li>
+<p>https://docs.oracle.com/javase/tutorial/java/concepts/index.html</p>
+</li>
+<li>
+<p>https://www.w3schools.com/java/default.asp</p>
+</li>
+<li>
+<p>https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html</p>
+</li>
+<li>
+<p>https://www.youtube.com/playlist?list=PLQxX2eiEaqbwNP20GMMCjRslRq2lOLWlg</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Angel Sullon @asullom - UPeU 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "toc.follow", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="../javascripts/mermaid.js"></script>
+      
+    
+  </body>
+</html>
