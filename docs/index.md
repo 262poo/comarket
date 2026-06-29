@@ -5,8 +5,6 @@
 **Institución:** Universidad Peruana Unión  
 **Año:** 2026  
 **Repositorio:** [262poo/comarket](https://github.com/262poo/comarket)   
-**Elaborado por :** Angel A. Sullon  
-**Revisado por :** Docentes del curso POO  
 
 ---
 
