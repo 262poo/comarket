@@ -523,21 +523,13 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
 
 ### Enlaces de internet
 
-1. https://dev.java/learn/
-
-2. https://github.com/262poo/comarket
-
-3. https://262poo.github.io/comarket/
-
-4. https://docs.oracle.com/javase/tutorial/java/concepts/
-
-5. https://openjfx.io/openjfx-docs/
-
-6. https://docs.oracle.com/javase/tutorial/jdbc/basics/
-
-7. https://www.sqlite.org/docs.html
-
-8. https://www.graalvm.org/downloads/
-
-9. https://git-scm.com/book/es/v2
+1. [https://dev.java/learn/](https://dev.java/learn/)
+2. [https://github.com/262poo/comarket](https://github.com/262poo/comarket)
+3. [https://262poo.github.io/comarket/](https://262poo.github.io/comarket/)
+4. [https://docs.oracle.com/javase/tutorial/java/concepts/](https://docs.oracle.com/javase/tutorial/java/concepts/)
+5. [https://openjfx.io/openjfx-docs/](https://openjfx.io/openjfx-docs/)
+6. [https://docs.oracle.com/javase/tutorial/jdbc/basics/](https://docs.oracle.com/javase/tutorial/jdbc/basics/)
+7. [https://www.sqlite.org/docs.html](https://www.sqlite.org/docs.html)
+8. [https://www.graalvm.org/downloads/](https://www.graalvm.org/downloads/)
+9. [https://git-scm.com/book/es/v2](https://git-scm.com/book/es/v2)
 
