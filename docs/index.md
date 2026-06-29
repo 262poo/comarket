@@ -1,4 +1,16 @@
-﻿# Programación Orientada a Objetos 2026-2
+﻿# Programación Orientada a Objetos (POO)
+
+**Recursos del curso de POO 2026-2**
+
+**Institución:** Universidad Peruana Unión  
+**Año:** 2026  
+**Repositorio:** [262poo/comarket](https://github.com/262poo/comarket)   
+**Elaborado por :** Angel A. Sullon  
+**Revisado por :** Docentes del curso POO  
+
+---
+
+## Presentación
 
 Curso práctico de Programación Orientada a Objetos con Java, modelado de dominio, encapsulamiento, relaciones entre clases, herencia, polimorfismo, colecciones, arquitectura por capas, persistencia relacional, DAO, JavaFX y sustentación técnica del proyecto integrador.
 
@@ -8,8 +20,8 @@ Curso práctico de Programación Orientada a Objetos con Java, modelado de domin
 
 ```text
 comarket/
-    comarket-cli/      Producto U1: consola, POO, colecciones y CRUD en memoria
-    comarket-desk/     Producto U2-U3: JavaFX, arquitectura por capas, DAO y SQLite
+    comarket-cli/      Producto U1: consola, POO, colecciones y gestión de datos en memoria
+    comarket-desk/     Producto U2-U3: GUI, arquitectura por capas, acceso a datos y persistencia relacional
     docs/              Libro digital, evidencias y guía de sesiones
 ```
 
@@ -20,23 +32,24 @@ Esta separación permite que la Unidad 1 conserve un proyecto simple de consola 
 Producto del curso = Producto U3:
 
 ```text
-Aplicación de escritorio orientada a objetos aplicada a un dominio definido,
-con modelo de dominio, operaciones CRUD, arquitectura por capas,
-persistencia relacional, interfaz gráfica funcional, evidencias de
-funcionamiento y sustentación técnica.
+Aplicación de escritorio orientada a objetos aplicada a un proceso
+transaccional de negocio, con modelo de dominio, entidades maestras y
+transaccionales, relaciones entre entidades, flujo principal de gestión,
+arquitectura por capas, persistencia relacional, interfaz gráfica funcional,
+demo funcional, evidencias de funcionamiento y sustentación técnica.
 ```
 
-Resultado esperado del curso:
+Resultado de aprendizaje del curso:
 
-Al finalizar el curso, el estudiante diseña, implementa y sustenta una aplicación de escritorio basada en objetos. La solución integra modelado del dominio, encapsulamiento, herencia, polimorfismo, colecciones, persistencia con base de datos relacional, DAO, interfaz gráfica y organización modular del código. El producto se presenta cómo avance de curso, pero cada estudiante evidencia y defiende su aporte técnico.
+Al finalizar el curso, el estudiante diseña, implementa y sustenta una aplicación de escritorio basada en objetos. La solución integra modelado del dominio, encapsulamiento, herencia, polimorfismo, colecciones, persistencia con base de datos relacional, DAO, interfaz gráfica y organización modular del código.
 
 ## Contenido
 
 ### U1: Fundamentos de la Programación Orientada a Objetos
 
-Producto U1: aplicación de consola funcional en memoria con clases, relaciones entre objetos, colecciones, operaciones principales del dominio y preparación para ejecutable nativo.
+Producto U1: aplicación de consola orientada a objetos con gestión de datos en memoria.
 
-Resultado esperado U1: el estudiante modela y construye objetos de software aplicando principios fundamentales de programación orientada a objetos, relaciones entre clases y estructuras de almacenamiento en memoria.
+Resultado de aprendizaje U1: al finalizar la unidad, el estudiante modela e implementa una aplicación de consola basada en objetos, aplicando clases, objetos, encapsulamiento, relaciones entre entidades, herencia o interfaces cuando correspondan, polimorfismo, colecciones y gestión de datos en memoria.
 
 | Sesión | Tema | Producto de sesión |
 |---|---|---|
@@ -44,38 +57,38 @@ Resultado esperado U1: el estudiante modela y construye objetos de software apli
 | S2 | **Clases, objetos, constructores y comunicación entre objetos:**<br>Diferencia entre clase y objeto, atributos, métodos, estado, comportamiento, abstracción inicial, constructores, sobrecarga, comunicación entre objetos y responsabilidad como características y acciones de una clase | Primer modelo con clases del dominio, objetos instanciados y comunicación básica entre ellos, usando objetos tangibles como `Coche` y `Persona` y un ejemplo puente con `Producto` |
 | S3 | **Encapsulamiento, separación de responsabilidades y relaciones entre objetos:**<br>Modificadores de acceso, métodos de consulta y modificación, comportamiento básico de entidades, separación inicial de responsabilidades, asociación, agregación/composición y colecciones dentro del modelo | Modelo de dominio encapsulado, organizado por responsabilidades y con relaciones entre entidades, probado desde un programa principal |
 | S4 | **Herencia, interfaces y polimorfismo:**<br>Generalización, clase base o clase abstracta cuando el dominio lo justifica, sobrescritura de métodos, contratos, implementaciones y uso polimórfico desde el servicio | Modelo ampliado con herencia, contrato de servicio e implementación polimórfica |
-| S5 | **Operaciones CRUD, validaciones y responsabilidad única:**<br>Registro, listado, búsqueda, actualización, eliminación, menú de consola, validaciones de flujo, almacenamiento interno en memoria, consolidación de responsabilidad única y preparación para entrega | CRUD en memoria organizado con menú, validaciones, contrato, implementación con `ArrayList` y entidades |
-| S6 | **Modelado orientado a objetos y gestión de datos en memoria (Evaluación U1):**<br>Cierre del Producto U1: aplicación de consola funcional en memoria con clases del dominio, encapsulamiento, constructores, relaciones entre objetos, herencia o interfaces cuando correspondan, CRUD en memoria, búsquedas, validaciones y ejecución del producto | Producto U1 validado con modelo orientado a objetos, gestión de datos en memoria y ejecución demostrable |
+| S5 | **Operaciones CRUD, validaciones y responsabilidad única:**<br>Registro, listado, búsqueda, actualización, eliminación, menú de consola, validaciones de flujo, almacenamiento interno en memoria, consolidación de responsabilidad única y preparación para entrega | Gestión de datos en memoria organizada con menú, validaciones, contrato, implementación con colecciones dinámicas y entidades |
+| S6 | **Modelado orientado a objetos y gestión de datos en memoria (Evaluación U1):**<br>Cierre del Producto U1: aplicación de consola orientada a objetos con clases del dominio, encapsulamiento, constructores, relaciones entre objetos, herencia o interfaces cuando correspondan, gestión de datos en memoria, búsquedas, validaciones y ejecución del producto | Producto U1 validado con modelo orientado a objetos, gestión de datos en memoria y ejecución demostrable |
 
 ### U2: Aplicación de escritorio con persistencia de datos
 
-Producto U2: aplicación de escritorio funcional con arquitectura por capas, interfaz gráfica y persistencia en base de datos relacional.
+Producto U2: aplicación de escritorio por capas con interfaz gráfica y persistencia relacional.
 
-Resultado esperado U2: el estudiante construye aplicaciónes de escritorio organizadas por capas, integrando persistencia de datos, acceso a información e interfaz gráfica mediante una arquitectura modular.
+Resultado de aprendizaje U2: al finalizar la unidad, el estudiante construye una aplicación de escritorio organizada por capas, integrando interfaz gráfica, acceso a datos, persistencia relacional, seguridad básica, consultas y gestión de un flujo transaccional con cabecera y detalle.
 
 | Sesión | Tema | Producto de sesión |
 |---|---|---|
-| S7 | **Interfaz gráfica y CRUD desde GUI en memoria:**<br>Aplicación de escritorio con JavaFX, FXML, Scene Builder, controladores, formularios, eventos, tablas y CRUD en memoria de una entidad ya trabajada en U1. Validación básica al cierre de la sesión | Flujo `view`-`controller`-`service`-`entity` funcionando desde GUI con memoria |
-| S8 | **Arquitectura por capas, patrón DAO y CRUD persistente desde GUI:**<br>Organización por capas, JDBC, SQLite, DAO, servicio persistente, formularios, tablas, operaciones CRUD persistentes y validación de datos de una tabla simple | CRUD persistente desde GUI con arquitectura por capas y DAO |
+| S7 | **Interfaz gráfica y gestión de datos desde GUI en memoria:**<br>Aplicación de escritorio con interfaz gráfica, vista, controladores, formularios, eventos, tablas y gestión de datos en memoria de una entidad ya trabajada en U1. Validación básica al cierre de la sesión | Flujo vista-controlador-servicio-entidad funcionando desde GUI con memoria |
+| S8 | **Arquitectura por capas, patrón DAO y gestión persistente desde GUI:**<br>Organización por capas, acceso a datos, base de datos relacional local, DAO, servicio persistente, formularios, tablas, operaciones de gestión persistentes y validación de datos de una tabla simple | Gestión persistente desde GUI con arquitectura por capas y acceso a datos |
 | S9 | **Operaciones persistentes con relación muchos a muchos:**<br>Modelo de dominio con cabecera, detalle y entidad relacionada; tabla intermedia con atributos, cálculo de subtotales/totales, control de stock, persistencia y validaciones del flujo | Flujo persistente con relación muchos a muchos y tabla intermedia |
 | S10 | **Seguridad básica y relación uno a muchos:**<br>Usuario, autenticación básica, sesión activa, relación uno a muchos, operaciones persistentes asociadas al usuario, validaciones de acceso y manejo básico de errores | Seguridad básica y operaciones persistentes con relación uno a muchos |
 | S11 | **Consultas integradas y pruebas del flujo principal:**<br>Búsquedas, filtros, consultas maestro-detalle, consultas por fecha/usuario, totales, verificación de consistencia, manejo de errores y pruebas funcionales por capas | Consultas integradas y flujo principal probado |
-| S12 | **Aplicaciones de escritorio por capas y gestión de datos persistentes (Evaluación U2):**<br>Cierre del Producto U2: aplicación de escritorio funcional con arquitectura por capas, interfaz gráfica, DAO, SQLite, CRUD persistente, relaciones, seguridad básica, consultas, validaciones y pruebas | Producto U2 validado con interfaz gráfica, persistencia, relaciones y seguridad básica |
+| S12 | **Aplicaciones de escritorio por capas y gestión de datos persistentes (Evaluación U2):**<br>Cierre del Producto U2: aplicación de escritorio por capas con interfaz gráfica, acceso a datos, persistencia relacional, relaciones, seguridad básica, consultas, validaciones y pruebas | Producto U2 validado con interfaz gráfica, persistencia relacional, flujo transaccional, relaciones y seguridad básica |
 
 ### U3: Proyecto Integrador
 
-Producto U3 / producto del curso: **sistema orientado a objetos integrado**, aplicado a un dominio definido por el docente o la filial.
+Producto U3 / producto del curso: **sistema orientado a objetos integrado para un proceso transaccional de negocio**.
 
-Resultado esperado U3: el estudiante integra el modelo orientado a objetos, la interfaz gráfica, la persistencia de datos y la organización modular del código en una aplicación completa alineada al proyecto integrador del curso.
+Resultado de aprendizaje U3: al finalizar la unidad, el estudiante integra, valida y sustenta una aplicación de escritorio orientada a objetos, articulando modelo de dominio, interfaz gráfica, persistencia relacional, flujo transaccional, arquitectura por capas, evidencias de funcionamiento y demo técnica.
 
 | Sesión | Tema | Producto de sesión |
 |---|---|---|
 | S13 | **Integración del sistema:**<br>Revisión de alcance, integración de módulos, consistencia entre paquetes, nombres, flujo, dependencias, recursos y preparación inicial para ejecutable nativo | Modelo, GUI, persistencia y funcionalidades principales ensambladas |
 | S14 | **Validación, refinamiento y ejecutable nativo:**<br>Corrección de fallos, limpieza de código, organización final, mensajes, validaciones, consistencia visual, flujo crítico, ejecutable nativo y preparación para sustentación | Manejo de errores, corrección de observaciones, refinamiento del diseño, ejecutable nativo y preparación para sustentación |
-| S15 | **Sistema orientado a objetos integrado (Evaluación U3):**<br>Cierre del Producto U3: sistema aplicado a un dominio definido, con modelo de dominio, operaciones CRUD, arquitectura por capas, persistencia relacional, interfaz gráfica funcional, evidencias de funcionamiento y sustentación técnica | Producto U3 validado mediante demostración funcional y defensa técnica |
+| S15 | **Sistema orientado a objetos integrado (Evaluación U3):**<br>Cierre del Producto U3: sistema orientado a objetos integrado para un proceso transaccional de negocio, con modelo de dominio, entidades maestras y transaccionales, arquitectura por capas, persistencia relacional, interfaz gráfica funcional, demo, evidencias de funcionamiento y sustentación técnica | Producto U3 validado mediante demo funcional, evidencias de funcionamiento y sustentación técnica |
 | S16 | **Evaluación final individual:**<br>Evaluación individual, recuperación de sustentaciones pendientes y cierre académico del curso | Evaluación final individual, recuperacion de sustentaciones pendientes y cierre académico |
 
-## Arquitectura U1: aplicación de consola en memoria
+## Arquitectura base U1: aplicación de consola en memoria
 
 La arquitectura de la Unidad 1 se concentra en Programación Orientada a Objetos sin interfaz gráfica y se trabaja dentro de `comarket-cli`. El estudiante trabaja con una clase `Main` para probar desde consola, entidades del dominio ubicadas en `entity`, un contrato de servicio y una implementación en memoria ubicados en `service`. En el caso guía se implementa un CRUD de productos con `ProductoService`, `ProductoServiceImplMemoria` y `ArrayList<Producto>`, pero esos nombres se reemplazan por la entidad principal de cada proyecto cuando el dominio sea distinto. Al cierre de la unidad, el proyecto se organiza con Maven y se prepara un ejecutable nativo con GraalVM.
 
@@ -140,7 +153,7 @@ Flujo de trabajo U1:
 6. En S5 completa las operaciones CRUD, las validaciones y el menú, consolidando la responsabilidad única.
 7. En S6 presenta un producto de consola ejecutable, con modelo de dominio y CRUD en memoria.
 
-## Arquitectura POO: U2 y U3
+## Arquitectura base U2 y U3: Aplicación Desktop
 
 La arquitectura final del proyecto integrador se implementa dentro de `comarket-desk` y organiza la aplicación de escritorio en capas simples. `view` contiene FXML, formularios y tablas JavaFX; `controller` atiende eventos de usuario; `service` conserva el contrato de operaciones CRUD trabajado desde U1, pero en U2-U3 se implementa contra base de datos; `entity` representa los objetos principales del sistema; y `dao` gestiona el acceso a datos mediante JDBC. En el caso guía se muestra el flujo de productos; cada proyecto reemplaza esos nombres por su entidad principal.
 
