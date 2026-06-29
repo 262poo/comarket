@@ -167,7 +167,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>1</td>
-    <td>16/03/2026  20/03/2026</td>
+    <td>10/08/2026  15/08/2026</td>
     <td><strong>Entorno de programación, estructuras de control, métodos y estructuras de datos lineales:</strong><br>Preparación del ambiente local, variables, entrada y salida, condicionales, ciclos, métodos, estructuras lineales, recorridos, búsquedas y representación temporal de datos mediante estructuras separadas</td>
     <td>3</td>
     <td>4</td>
@@ -176,7 +176,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>2</td>
-    <td>23/03/2026  27/03/2027</td>
+    <td>16/08/2026  22/08/2026</td>
     <td><strong>Clases, objetos, constructores y comunicación entre objetos:</strong><br>Diferencia entre clase y objeto, atributos, métodos, estado, comportamiento, abstracción inicial, constructores, sobrecarga, comunicación entre objetos y responsabilidad como características y acciones de una clase</td>
     <td>3</td>
     <td>4</td>
@@ -185,7 +185,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>3</td>
-    <td>30/03/2026  03/04/2027</td>
+    <td>23/08/2026  29/08/2026</td>
     <td><strong>Encapsulamiento, separación de responsabilidades y relaciones entre objetos:</strong><br>Modificadores de acceso, métodos de consulta y modificación, comportamiento básico de entidades, separación inicial de responsabilidades, asociación, agregación/composición y colecciones dentro del modelo</td>
     <td>3</td>
     <td>4</td>
@@ -194,7 +194,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>4</td>
-    <td>06/04/2026  10/04/2028</td>
+    <td>30/08/2026  05/09/2026</td>
     <td><strong>Herencia, interfaces y polimorfismo:</strong><br>Generalización, clase base o clase abstracta cuando el dominio lo justifica, sobrescritura de métodos, contratos, implementaciones y uso polimórfico desde el servicio</td>
     <td>3</td>
     <td>4</td>
@@ -203,7 +203,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>5</td>
-    <td>13/04/2026  17/04/2028</td>
+    <td>06/09/2026  12/09/2026</td>
     <td><strong>Operaciones CRUD, validaciones y responsabilidad única:</strong><br>Registro, listado, búsqueda, actualización, eliminación, menú de consola, validaciones de flujo, almacenamiento interno en memoria, consolidación de responsabilidad única y preparación para entrega</td>
     <td>3</td>
     <td>4</td>
@@ -212,7 +212,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>6</td>
-    <td>20/04/2026  24/04/2029</td>
+    <td>13/09/2026  19/09/2026</td>
     <td><strong>Modelado orientado a objetos y gestión de datos en memoria (Evaluación U1):</strong><br>Cierre del Producto U1: aplicación de consola funcional en memoria con clases del dominio, encapsulamiento, constructores, relaciones entre objetos, herencia o interfaces cuando correspondan, CRUD en memoria, búsquedas, validaciones y ejecución del producto</td>
     <td>3</td>
     <td>4</td>
@@ -255,7 +255,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>1</td>
-    <td>27/04/2026  01/05/2026</td>
+    <td>20/09/2026  26/09/2026</td>
     <td><strong>Interfaz gráfica y CRUD desde GUI en memoria:</strong><br>Aplicación de escritorio con framework de interfaz gráfica, archivos de vista, herramienta de diseño visual, controladores, formularios, eventos, tablas y gestión de datos en memoria de una entidad ya trabajada en U1. Validación básica al cierre de la sesión</td>
     <td>3</td>
     <td>4</td>
@@ -264,7 +264,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>2</td>
-    <td>04/05/2026   08/05/2026</td>
+    <td>27/09/2026  03/10/2026</td>
     <td><strong>Arquitectura por capas, patrón DAO y CRUD persistente desde GUI:</strong><br>Organización por capas, acceso a datos, base de datos relacional local, DAO, servicio persistente, formularios, tablas, operaciones de gestión persistentes y validación de datos de una tabla simple</td>
     <td>3</td>
     <td>4</td>
@@ -273,7 +273,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>3</td>
-    <td>11/05/2026   15/05/2026</td>
+    <td>04/10/2026  10/10/2026</td>
     <td><strong>Operaciones persistentes con relación muchos a muchos:</strong><br>Modelo de dominio con cabecera, detalle y entidad relacionada; tabla intermedia con atributos, cálculo de subtotales/totales, control de stock, persistencia y validaciones del flujo</td>
     <td>3</td>
     <td>4</td>
@@ -282,7 +282,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>4</td>
-    <td>18/05/2026   22/05/2026</td>
+    <td>11/10/2026  17/10/2026</td>
     <td><strong>Seguridad básica y relación uno a muchos:</strong><br>Usuario, autenticación básica, sesión activa, relación uno a muchos, operaciones persistentes asociadas al usuario, validaciones de acceso y manejo básico de errores</td>
     <td>3</td>
     <td>4</td>
@@ -291,7 +291,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>5</td>
-    <td>25/05/2026   29/05/2026</td>
+    <td>18/10/2026  24/10/2026</td>
     <td><strong>Consultas integradas y pruebas del flujo principal:</strong><br>Búsquedas, filtros, consultas maestro-detalle, consultas por fecha/usuario, totales, verificación de consistencia, manejo de errores y pruebas funcionales por capas</td>
     <td>3</td>
     <td>4</td>
@@ -300,7 +300,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>6</td>
-    <td>01/06/2026   05/06/2026</td>
+    <td>25/10/2026  31/10/2026</td>
     <td><strong>Aplicaciones de escritorio por capas y gestión de datos persistentes (Evaluación U2):</strong><br>Cierre del Producto U2: aplicación de escritorio funcional con arquitectura por capas, interfaz gráfica, acceso a datos, base de datos relacional local, gestión persistente, relaciones, seguridad básica, consultas, validaciones y pruebas</td>
     <td>3</td>
     <td>4</td>
@@ -343,7 +343,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>1</td>
-    <td>08/06/2026  12/06/2026</td>
+    <td>01/11/2026  07/11/2026</td>
     <td><strong>Integración del sistema:</strong><br>Revisión de alcance, integración de módulos, consistencia entre paquetes, nombres, flujo, dependencias, recursos y preparación inicial para ejecutable nativo</td>
     <td>3</td>
     <td>4</td>
@@ -352,7 +352,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>2</td>
-    <td>15/06/2026   19/06/2026</td>
+    <td>08/11/2026  14/11/2026</td>
     <td><strong>Validación, refinamiento y ejecutable nativo:</strong><br>Corrección de fallos, limpieza de código, organización final, mensajes, validaciones, consistencia visual, flujo crítico, ejecutable nativo y preparación para sustentación</td>
     <td>3</td>
     <td>4</td>
@@ -361,7 +361,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>3</td>
-    <td>22/06/2026   26/06/2026</td>
+    <td>15/11/2026  21/11/2026</td>
     <td><strong>Sistema orientado a objetos integrado (Evaluación U3):</strong><br>Cierre del Producto U3: sistema aplicado a un dominio definido, con modelo de dominio, operaciones CRUD, arquitectura por capas, persistencia relacional, interfaz gráfica funcional, evidencias de funcionamiento y sustentación técnica</td>
     <td>3</td>
     <td>4</td>
@@ -370,7 +370,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   </tr>
   <tr>
     <td>4</td>
-    <td>29/06/2026   03/07/2026</td>
+    <td>22/11/2026  28/11/2026</td>
     <td><strong>Evaluación final individual:</strong><br>Evaluación individual, recuperación de sustentaciones pendientes y cierre académico del curso</td>
     <td>3</td>
     <td>4</td>
@@ -445,7 +445,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
     <td>Pesos</td>
   </tr>
   <tr>
-    <td>21/04/2026</td>
+    <td>18/09/2026</td>
     <td>Unidad 1: Fundamentos de la Programación Orientada a Objetos</td>
     <td>Aplicación de consola orientada a objetos con gestión de datos en memoria</td>
     <td>Evaluación del producto</td>
@@ -459,7 +459,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
     <td>5%</td>
   </tr>
   <tr>
-    <td>02/06/2026</td>
+    <td>30/10/2026</td>
     <td>Unidad 2: Aplicaciones de escritorio con interfaz gráfica y conexión a bases de datos</td>
     <td>Aplicación de escritorio por capas con interfaz gráfica y persistencia relacional</td>
     <td>Evaluación del producto</td>
@@ -473,7 +473,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
     <td>5%</td>
   </tr>
   <tr>
-    <td>01/07/2026</td>
+    <td>20/11/2026</td>
     <td>Unidad 3: Proyecto de Aplicación de Escritorio GUI + BD</td>
     <td>Sistema orientado a objetos integrado para un proceso transaccional de negocio</td>
     <td>Evaluación del producto</td>
@@ -487,7 +487,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
     <td>10%</td>
   </tr>
   <tr>
-    <td>01/07/2026</td>
+    <td>20/11/2026</td>
     <td>Competencia General</td>
     <td>CARÁCTER Y APRENDIZAJE AUTÓNOMO Cultiva un carácter íntegro y autónomo, guiado por principios bíblicos y adventistas, integrando un enfoque espiritual con la proactividad en el aprendizaje y el desarrollo personal.</td>
     <td>Competencia General</td>
