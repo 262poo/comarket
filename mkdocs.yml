@@ -44,6 +44,7 @@ extra_javascript:
 
 nav:
   - Inicio: index.md
+  - Sílabo oficial: silabo_poo_2026.md
   - 1. Fundamentos de la Programación Orientada a Objetos:
     - 1 Entorno, estructuras de control, metodos y estructuras de datos lineales: S01_Fundamentos_Estructuras_Datos.md
     - 2 Clases, objetos, constructores y comunicacion entre objetos: S02_Clases_Objetos.md
