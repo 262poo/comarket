@@ -79,6 +79,24 @@ Este alineamiento muestra cómo el proyecto evoluciona desde la comprensión del
 
 ## 5. Producto Final
 
+### Repositorio académico y topics
+
+Desde la primera presentación del proyecto, el repositorio debe estar creado y configurado con los topics académicos mínimos. Esta configuración es obligatoria porque permite identificar campus, semestre, línea, tipo de proyecto, curso, sección y grupo.
+
+El detalle oficial del estándar se encuentra en [Estándar transversal de topics para repositorios académicos](https://upeuoficial.github.io/planb/anexos/estandar-topics-repositorios/).
+
+Ejemplo base para POO:
+
+```text
+campus-juliaca
+semestre-2026-2
+linea-software
+tipo-ps
+poo
+seccion-g1
+grupo-<numero>-<nombre-proyecto>
+```
+
 Al finalizar el curso, la aplicación debe incorporar como mínimo:
 
 - Modelo de dominio con entidades coherentes.
@@ -116,7 +134,7 @@ Artefactos mínimos:
 | Calidad del código | El código es legible, modular y consistente con buenas prácticas básicas. |
 | Pruebas y evidencias | Se presentan casos de prueba, capturas, datos de prueba y resultados verificables. |
 | Sustentación técnica | El estudiante explica diseño, código, decisiones, limitaciones y funcionamiento. |
-| Sustentación profesional | El estudiante expone con orden, demuestra en vivo su aporte, responde preguntas y mantiene una presentación adecuada. |
+| Sustentación profesional | El estudiante expone con orden, demuestra en vivo su aporte, responde preguntas, mantiene una presentación adecuada y presenta el repositorio académico disponible desde la primera presentación con los topics mínimos configurados correctamente y evidencia el cumplimiento de estándares básicos de programación, organización del repositorio, documentación y reproducibilidad. |
 
 ## 7. Sustentación
 
@@ -138,4 +156,3 @@ Al finalizar el curso, el estudiante debe demostrar que puede transformar un dom
 ```text
 Dominio -> Modelo POO -> CRUD -> GUI -> Persistencia -> Sistema integrado -> Sustentación
 ```
-
