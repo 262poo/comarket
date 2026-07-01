@@ -54,7 +54,7 @@ Carret. Central km. 19.5 Ñaña. Telf. 01-6186300 Casilla 3564 Lima 1, Perú
     <td></td>
     <td>14</td>
     <td>Año y semestre académico</td>
-    <td>2026-1</td>
+    <td>2026-2</td>
   </tr>
   <tr>
     <td>06</td>
