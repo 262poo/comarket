@@ -44,6 +44,8 @@ extra_javascript:
 
 nav:
   - Inicio: index.md
+  - Proyecto Sello:
+      - Guía del proyecto: proyecto-sello/index.md
   - Sílabo 2026-1: silabo_poo_2026_1.md
   - Sílabo 2026-2: silabo_poo_2026_2.md
   - 1. Fundamentos de la Programación Orientada a Objetos:
