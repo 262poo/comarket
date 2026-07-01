@@ -123,18 +123,20 @@ Artefactos mínimos:
 
 ## 6. Evaluación
 
-| Criterio | Qué se observa |
-|---|---|
-| Dominio y alcance | El sistema responde a un proceso de negocio claro y mantiene un alcance viable. |
-| Modelado POO | Las clases, atributos, métodos y relaciones representan correctamente el dominio. |
-| Aplicación de fundamentos POO | Se evidencia encapsulamiento, responsabilidades, herencia, interfaces o polimorfismo cuando corresponde. |
-| Funcionalidad | El sistema permite gestionar datos, ejecutar el flujo principal y consultar información relevante. |
-| Arquitectura | La solución separa vista, controlador, servicio, entidad y acceso a datos. |
-| Persistencia | La aplicación guarda, recupera y consulta datos mediante DAO, JDBC y base relacional local. |
-| Calidad del código | El código es legible, modular y consistente con buenas prácticas básicas. |
-| Pruebas y evidencias | Se presentan casos de prueba, capturas, datos de prueba y resultados verificables. |
-| Sustentación técnica | El estudiante explica diseño, código, decisiones, limitaciones y funcionamiento. |
-| Sustentación profesional | El estudiante expone con orden, demuestra en vivo su aporte, responde preguntas, mantiene una presentación adecuada y presenta el repositorio académico disponible desde la primera presentación con los topics mínimos configurados correctamente y evidencia el cumplimiento de estándares básicos de programación, organización del repositorio, documentación y reproducibilidad. |
+Los criterios se organizan según una matriz común de evaluación de proyectos académicos: problema, funcionalidad, diseño o estructura, implementación, datos, integración, calidad, validación y sustentación. Cada criterio se adapta al enfoque de POO y se verifica mediante evidencias del producto, el repositorio y la demostración.
+
+| Dimensión común | Criterio del PS | Qué se observa |
+|---|---|---|
+| Problema y alcance | Dominio y alcance | El sistema responde a un proceso de negocio claro y mantiene un alcance viable. |
+| Requerimientos o funcionalidad esperada | Funcionalidad | El sistema permite gestionar datos, ejecutar el flujo principal y consultar información relevante. |
+| Diseño, modelo o arquitectura | Modelado POO | Las clases, atributos, métodos y relaciones representan correctamente el dominio. |
+| Implementación técnica | Aplicación de fundamentos POO | Se evidencia encapsulamiento, responsabilidades, herencia, interfaces o polimorfismo cuando corresponde. |
+| Datos, persistencia o procesamiento | Persistencia | La aplicación guarda, recupera y consulta datos mediante DAO, JDBC y base relacional local. |
+| Integración del producto | Arquitectura | La solución separa e integra vista, controlador, servicio, entidad y acceso a datos en un mismo producto. |
+| Calidad técnica | Calidad del código | El código es legible, modular y consistente con buenas prácticas básicas. |
+| Validación, pruebas o resultados | Pruebas y evidencias | Se presentan casos de prueba, capturas, datos de prueba y resultados verificables. |
+| Sustentación técnica | Sustentación técnica | El estudiante explica diseño, código, decisiones, limitaciones, funcionamiento y evidencias generadas. |
+| Sustentación profesional | Sustentación profesional | El estudiante expone con orden, demuestra en vivo su aporte, responde preguntas, mantiene una presentación adecuada y presenta el repositorio académico disponible desde la primera presentación con los topics mínimos configurados correctamente y evidencia el cumplimiento de estándares básicos de programación, organización del repositorio, documentación y reproducibilidad. |
 
 ## 7. Sustentación
 
