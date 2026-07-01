@@ -1,4 +1,4 @@
-?# Proyecto Sello de Programación Orientada a Objetos
+# Proyecto Sello de Programación Orientada a Objetos
 
 ## 1. Propósito
 
