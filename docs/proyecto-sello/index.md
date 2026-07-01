@@ -136,7 +136,7 @@ Los criterios se organizan según una matriz común de evaluación de proyectos 
 | Calidad técnica | Calidad del código | El código es legible, modular y consistente con buenas prácticas básicas. |
 | Validación, pruebas o resultados | Pruebas y evidencias | Se presentan casos de prueba, capturas, datos de prueba y resultados verificables. |
 | Sustentación técnica | Sustentación técnica | El estudiante explica diseño, código, decisiones, limitaciones, funcionamiento y evidencias generadas. |
-| Sustentación profesional | Sustentación profesional | El estudiante expone con orden, demuestra en vivo su aporte, responde preguntas, mantiene una presentación adecuada y presenta el repositorio académico disponible desde la primera presentación con los topics mínimos configurados correctamente y evidencia el cumplimiento de estándares básicos de programación, organización del repositorio, documentación y reproducibilidad. |
+| Sustentación profesional | Sustentación profesional | El estudiante expone con orden, demuestra en vivo su aporte, responde preguntas y evidencia comunicación clara, puntualidad, vestimenta limpia y adecuada, cabello ordenado, higiene personal y actitud profesional; además presenta el repositorio académico disponible desde la primera presentación con los topics mínimos configurados correctamente y evidencia el cumplimiento de estándares básicos de programación, organización del repositorio, documentación y reproducibilidad. |
 
 ## 7. Sustentación
 
@@ -148,8 +148,6 @@ La sustentación debe demostrar que el equipo comprende el sistema y que cada in
 | Demostración en vivo | 5 minutos | Ejecutar el flujo principal, CRUD, consultas, persistencia y validaciones. |
 
 Cada integrante debe mostrar en vivo la parte que desarrolló o explicar una sección concreta del código. Las diapositivas apoyan la explicación, pero la evidencia principal es el sistema ejecutándose.
-
-Se espera comunicación clara, puntualidad, vestimenta limpia y adecuada, cabello ordenado, higiene personal y actitud profesional.
 
 ## 8. Resultado Esperado
 
