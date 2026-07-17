@@ -347,7 +347,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
     <td><strong>Integración del sistema:</strong><br>Revisión de alcance, integración de módulos, consistencia entre paquetes, nombres, flujo, dependencias, recursos y preparación inicial para ejecutable nativo</td>
     <td>3</td>
     <td>4</td>
-    <td>Revisar la estructura del proyecto, integrar pantallas, controladores, servicios, entidades y componentes de acceso a datos, ejecutar el flujo principal de punta a punta y registrar correcciones.</td>
+    <td>Revisar la estructura del proyecto, integrar pantallas, controladores, servicios, entidades y componentes de acceso a datos, ejecutar el flujo principal de punta a punta y registrar correcciones. Participar en el concurso de programación y presentar el código del proyecto desarrollado.</td>
     <td>Integrar una funcionalidad pendiente o corregir una inconsistencia, revisar paquetes, nombres y clases duplicadas, y evidenciar el avance de integración del sistema.</td>
   </tr>
   <tr>
@@ -356,7 +356,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
     <td><strong>Validación, refinamiento y ejecutable nativo:</strong><br>Corrección de fallos, limpieza de código, organización final, mensajes, validaciones, consistencia visual, flujo crítico, ejecutable nativo y preparación para sustentación</td>
     <td>3</td>
     <td>4</td>
-    <td>Ejecutar el flujo crítico, registrar fallos, corregir validaciones, mensajes, navegación, persistencia y recursos de vista, y preparar o generar el ejecutable nativo.</td>
+    <td>Ejecutar el flujo crítico, registrar fallos, corregir validaciones, mensajes, navegación, persistencia y recursos de vista, y preparar o generar el ejecutable nativo. Presentar el informe de participación del concurso internacional de programación.</td>
     <td>Ejecutar el flujo crítico, registrar fallos u observaciones, corregir validaciones, mensajes, navegación o persistencia, y preparar la versión candidata del producto.</td>
   </tr>
   <tr>
