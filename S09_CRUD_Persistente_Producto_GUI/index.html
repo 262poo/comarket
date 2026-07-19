@@ -13,25 +13,25 @@
       
       
       
-        <link rel="prev" href="../S08_Arquitectura_DAO_CRUD_Persistente/">
+        <link rel="prev" href="../S08_Arquitectura_DAO_Listado_Persistente/">
       
       
-        <link rel="next" href="../S10_Seguridad_Relacion_Uno_Muchos/">
+        <link rel="next" href="../S10_Objetos_Relacionados_Usuario_Venta/">
       
       
         
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>9 Operaciones persistentes con relacion muchos a muchos - Programación Orientada a Objetos</title>
+        <title>9 CRUD persistente completo de Producto desde GUI - Programación Orientada a Objetos</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#s9-operaciones-persistentes-con-relacion-muchos-a-muchos" class="md-skip">
+        <a href="#s9-crud-persistente-completo-de-producto-desde-gui" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              9 Operaciones persistentes con relacion muchos a muchos
+              9 CRUD persistente completo de Producto desde GUI
             
           </span>
         </div>
@@ -705,14 +705,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../S08_Arquitectura_DAO_CRUD_Persistente/" class="md-nav__link">
+      <a href="../S08_Arquitectura_DAO_Listado_Persistente/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    8 Arquitectura por capas, DAO y CRUD persistente desde GUI
+    8 Arquitectura por capas, DAO y primer listado persistente desde GUI
   
 
     
@@ -749,7 +749,7 @@
   <span class="md-ellipsis">
     
   
-    9 Operaciones persistentes con relacion muchos a muchos
+    9 CRUD persistente completo de Producto desde GUI
   
 
     
@@ -767,7 +767,7 @@
   <span class="md-ellipsis">
     
   
-    9 Operaciones persistentes con relacion muchos a muchos
+    9 CRUD persistente completo de Producto desde GUI
   
 
     
@@ -1091,14 +1091,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../S10_Seguridad_Relacion_Uno_Muchos/" class="md-nav__link">
+      <a href="../S10_Objetos_Relacionados_Usuario_Venta/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    10 Seguridad basica y relacion uno a muchos
+    10 Gestion de objetos relacionados Usuario-Venta
   
 
     
@@ -1119,14 +1119,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../S11_Consultas_Integradas_Pruebas/" class="md-nav__link">
+      <a href="../S11_Venta_DetalleVenta_Producto/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    11 Consultas integradas y pruebas
+    11 Procesamiento de Venta-DetalleVenta
   
 
     
@@ -1147,7 +1147,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../S12_Evaluacion_Unidad_2/" class="md-nav__link">
+      <a href="../S12_Evaluacion_Unidad_2_Persistencia/" class="md-nav__link">
         
   
   
@@ -1236,14 +1236,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../S13_Proyecto_Integrador_Ensamblaje/" class="md-nav__link">
+      <a href="../S13_Control_Acceso_Sesion_IGU/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    13 Integracion del sistema
+    13 Control de acceso y sesion desde la IGU
   
 
     
@@ -1264,14 +1264,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../S14_Proyecto_Integrador_Refinamiento/" class="md-nav__link">
+      <a href="../S14_Consultas_Integradas_Pruebas/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    14 Validacion, refinamiento y ejecutable nativo
+    14 Consultas integradas y pruebas del flujo principal
   
 
     
@@ -1791,169 +1791,151 @@
 
 
 
-<h1 id="s9-operaciones-persistentes-con-relacion-muchos-a-muchos">S9 - Operaciones persistentes con relación muchos a muchos<a class="headerlink" href="#s9-operaciones-persistentes-con-relacion-muchos-a-muchos" title="Permanent link">&para;</a></h1>
+<h1 id="s9-crud-persistente-completo-de-producto-desde-gui">S9 - CRUD persistente completo de Producto desde GUI<a class="headerlink" href="#s9-crud-persistente-completo-de-producto-desde-gui" title="Permanent link">&para;</a></h1>
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
 <h3 id="11-proposito">1.1 Propósito<a class="headerlink" href="#11-proposito" title="Permanent link">&para;</a></h3>
-<p>Implementar operaciones persistentes de venta con cabecera y detalle, usando una clase de detalle con atributos propios, productos existentes y anulación de ventas con reposición de stock.</p>
+<p>Completar el CRUD persistente de <code>Producto</code> desde la interfaz gráfica, reutilizando la arquitectura por capas, conexión, DAO y listado implementados en S8.</p>
 <h3 id="12-resultado-de-aprendizaje">1.2 Resultado de aprendizaje<a class="headerlink" href="#12-resultado-de-aprendizaje" title="Permanent link">&para;</a></h3>
-<p>El estudiante modela una operación con cabecera y detalle, persiste datos relacionados mediante DAO y mantiene la separación entre controlador, servicio, entidades y persistencia.</p>
+<p>El estudiante implementa registro, búsqueda, listado, actualización y eliminación de productos mediante DAO, servicio, controlador, formularios y tablas, aplicando validaciones y errores controlados.</p>
 <h3 id="13-producto-de-sesion">1.3 Producto de sesión<a class="headerlink" href="#13-producto-de-sesion" title="Permanent link">&para;</a></h3>
-<p>Registro persistente de una operación con detalles: cabecera, lista de detalles, entidad relacionada, cálculo de subtotal y total, consulta de ventas registradas y anulación con reposición de stock.</p>
+<p>CRUD persistente de producto desde GUI, usando <code>ProductoServiceImplSQLite</code>, <code>ProductoDao</code>, <code>ConexionSQLite</code>, SQLite y validaciones básicas.</p>
 <h3 id="14-motivacion-de-la-sesion">1.4 Motivación de la sesión<a class="headerlink" href="#14-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
-<p>Después de persistir una tabla simple, el siguiente reto es registrar una operación real donde una cabecera contiene varios detalles y cada detalle referencia una entidad existente.</p>
+<p>En S8 se comprobó el corte base de datos–DAO–servicio–controlador–vista mediante <code>listar()</code>. En S9 se amplía ese corte sin alterar responsabilidades hasta completar todas las operaciones del CRUD.</p>
 <p>Pregunta guía:</p>
-<div class="highlight"><pre><span></span><code>Cómo guardamos una operación con varios detalles sin perder la separación por capas?
+<div class="highlight"><pre><span></span><code>Cómo guardamos datos desde la GUI sin poner SQL en el controlador?
 </code></pre></div>
 <h3 id="15-ubicacion-en-el-curso">1.5 Ubicación en el curso<a class="headerlink" href="#15-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Unidad: U2.</li>
 <li>Carpeta de trabajo: <code>comarket-desk</code>.</li>
-<li>Avance de sesión: persistencia de una relación avanzada muchos a muchos desde objetos.</li>
+<li>Avance de sesión: CRUD persistente completo de <code>Producto</code>.</li>
 </ul>
 <h2 id="2-explica">2. Explica<a class="headerlink" href="#2-explica" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 25 min.</p>
 <h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Relación cabecera-detalle desde el modelo de objetos.</li>
-<li>Cabecera y detalle.</li>
-<li>Clase intermedia con atributos propios.</li>
-<li>Composición entre cabecera y detalle.</li>
-<li>Asociación entre detalle y entidad relacionada.</li>
-<li>DAO para cabecera y DAO para detalle.</li>
-<li>Transacción para guardar cabecera, detalles y descuento de stock.</li>
-<li>Anulación lógica de venta mediante estado.</li>
-<li>Reposición de stock al anular.</li>
-<li>Validaciones del flujo.</li>
+<li>Arquitectura por capas.</li>
+<li>Vista FXML y controlador JavaFX.</li>
+<li>Servicio como contrato de operaciones.</li>
+<li>Implementación persistente del servicio.</li>
+<li>Patrón DAO.</li>
+<li>JDBC como conector.</li>
+<li>SQLite como base de datos local.</li>
+<li>Validaciones básicas y manejo inicial de errores.</li>
 </ul>
 <p>Regla metodológica de la sesión:</p>
-<div class="highlight"><pre><span></span><code>La relación se entiende primero como cabecera-detalle entre objetos.
-La base de datos persiste esa relación mediante tablas `venta` y `detalle_venta`.
-El detalle no es una pantalla CRUD independiente.
-El detalle nace dentro del flujo de la cabecera.
-La anulación no elimina la venta ni sus detalles; cambia el estado de la venta y repone el stock.
-Los DAO se ubican en `dao` y reutilizan `db/ConexionSQLite` para conectarse a SQLite.
+<div class="highlight"><pre><span></span><code>El controlador no escribe SQL.
+El controlador llama al contrato del servicio.
+La implementación persistente coordina validaciones y DAO.
+El DAO ejecuta SQL y mapea filas a objetos.
+JDBC conecta Java con SQLite.
+La entidad sigue siendo clase del dominio.
+No se usa JPA ni ORM.
+La conexión a la base de datos se centraliza en `db/ConexionSQLite`.
+`dao` cumple el rol de capa de acceso a datos en este curso.
 </code></pre></div>
 <h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>%%{init: {'flowchart': {'rankSpacing': 90, 'nodeSpacing': 35, 'curve': 'basis'}} }%%
-flowchart TD
-    VentaView["view&lt;br/&gt;VentaView.fxml&lt;br/&gt;txtCliente / dpFecha / cboProducto / txtCantidad&lt;br/&gt;tablaDetalles / lblTotal"]
-    ConsultaVentasView["view&lt;br/&gt;ConsultaVentasView.fxml&lt;br/&gt;tablaVentas / tablaDetallesVenta&lt;br/&gt;colEstado&lt;br/&gt;Anular venta / Actualizar"]
-    VentaController["controller&lt;br/&gt;VentaController&lt;br/&gt;initialize()&lt;br/&gt;onAgregarDetalleClick()&lt;br/&gt;onQuitarDetalleClick()&lt;br/&gt;onGuardarVentaClick()&lt;br/&gt;onNuevaVentaClick()&lt;br/&gt;cargarProductos()"]
-    ConsultaVentasController["controller&lt;br/&gt;ConsultaVentasController&lt;br/&gt;initialize()&lt;br/&gt;onActualizarClick()&lt;br/&gt;onAnularVentaClick()&lt;br/&gt;cargarDetalleVenta(venta)"]
-    ProductoService["service&lt;br/&gt;ProductoService&lt;br/&gt;listar()"]
-    ProductoServiceImplSQLite["service impl&lt;br/&gt;ProductoServiceImplSQLite"]
-    VentaService["service&lt;br/&gt;VentaService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br/&gt;registrar(venta)&lt;br/&gt;calcularTotal(venta)&lt;br/&gt;listar()&lt;br/&gt;listarDetalles(ventaId)&lt;br/&gt;anular(ventaId)"]
-    VentaServiceImplSQLite["service impl&lt;br/&gt;VentaServiceImplSQLite&lt;br/&gt;validarVenta(venta)&lt;br/&gt;validarStock(connection, venta)&lt;br/&gt;anular(ventaId)&lt;br/&gt;transaccion"]
-    Venta["entity&lt;br/&gt;Venta&lt;br/&gt;id&lt;br/&gt;cliente&lt;br/&gt;fecha&lt;br/&gt;estado&lt;br/&gt;detalles&lt;br/&gt;calcularTotal()"]
-    DetalleVenta["entity&lt;br/&gt;DetalleVenta&lt;br/&gt;producto&lt;br/&gt;cantidad&lt;br/&gt;precioUnitario&lt;br/&gt;getSubtotal()"]
-    Producto["entity&lt;br/&gt;Producto&lt;br/&gt;codigo / nombre / precio / stock"]
-    ProductoDao["dao&lt;br/&gt;ProductoDao&lt;br/&gt;listar()"]
-    VentaDao["dao&lt;br/&gt;VentaDao&lt;br/&gt;insertar(connection, venta)&lt;br/&gt;obtenerStock(connection, codigo)&lt;br/&gt;descontarStock(connection, detalle)&lt;br/&gt;reponerStock(connection, detalle)&lt;br/&gt;buscarPorId(connection, ventaId)&lt;br/&gt;anular(connection, ventaId)&lt;br/&gt;listar()"]
-    DetalleVentaDao["dao&lt;br/&gt;DetalleVentaDao&lt;br/&gt;insertar / listarPorVentaId"]
-    ConexionSQLite["db&lt;br/&gt;ConexionSQLite&lt;br/&gt;obtenerConexion()"]
-    SQLite[("data/comarket.db&lt;br/&gt;producto / venta / detalle_venta")]
+<pre class="mermaid"><code>flowchart TB
+    subgraph View["view"]
+        ProductoView["ProductoView.fxml&lt;br/&gt;tablaProductos&lt;br/&gt;txtCodigo / txtNombre / txtPrecio / txtStock"]
+    end
 
-    VentaView --&gt;|fx:controller| VentaController
-    VentaView -.-&gt;|fx:id / onAction| VentaController
-    ConsultaVentasView --&gt;|fx:controller| ConsultaVentasController
-    ConsultaVentasView -.-&gt;|fx:id / onAction| ConsultaVentasController
-    VentaController -.-&gt;|usa| ProductoService
-    VentaController -.-&gt;|usa contrato| VentaService
-    ConsultaVentasController -.-&gt;|usa contrato| VentaService
-    ProductoServiceImplSQLite -.-&gt;|implements| ProductoService
-    VentaServiceImplSQLite -.-&gt;|implements| VentaService
-    ProductoService --&gt; ProductoServiceImplSQLite
-    VentaService --&gt; VentaServiceImplSQLite
-    ProductoServiceImplSQLite --&gt; ProductoDao
-    VentaServiceImplSQLite --&gt; VentaDao
-    VentaServiceImplSQLite --&gt; DetalleVentaDao
-    VentaServiceImplSQLite --&gt; ConexionSQLite
-    VentaDao --&gt; ConexionSQLite
-    DetalleVentaDao --&gt; ConexionSQLite
-    ProductoDao --&gt; ConexionSQLite
-    ConexionSQLite --&gt; SQLite
-    VentaController -.-&gt;|crea| Venta
-    VentaController -.-&gt;|agrega| DetalleVenta
-    ConsultaVentasController -.-&gt;|consulta| Venta
-    ConsultaVentasController -.-&gt;|consulta| DetalleVenta
-    ConsultaVentasController -.-&gt;|anula| VentaService
-    Venta --&gt;|1 contiene muchos| DetalleVenta
-    DetalleVenta --&gt;|referencia 1 producto| Producto
+    subgraph Controller["controller"]
+        ProductoController["ProductoController&lt;br/&gt;initialize()&lt;br/&gt;onNuevoClick()&lt;br/&gt;onEditarClick()&lt;br/&gt;onAccionClick()&lt;br/&gt;onEliminarClick()&lt;br/&gt;actualizarTabla()"]
+    end
+
+    subgraph Service["service"]
+        ProductoService["ProductoService&lt;br/&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br/&gt;registrar(producto)&lt;br/&gt;listar()&lt;br/&gt;buscarPorCodigo(codigo)&lt;br/&gt;actualizar(producto)&lt;br/&gt;eliminar(codigo)"]
+        ProductoServiceImplSQLite["ProductoServiceImplSQLite&lt;br/&gt;-productoDao: ProductoDao&lt;br/&gt;validarProducto(producto)"]
+    end
+
+    subgraph Dao["dao"]
+        ProductoDao["ProductoDao&lt;br/&gt;insertar(producto)&lt;br/&gt;listar()&lt;br/&gt;buscarPorCodigo(codigo)&lt;br/&gt;actualizar(producto)&lt;br/&gt;eliminar(codigo)&lt;br/&gt;crearTablaSiNoExiste()"]
+    end
+
+    subgraph Db["db"]
+        ConexionSQLite["ConexionSQLite&lt;br/&gt;obtenerConexion()&lt;br/&gt;obtenerRutaBaseDatos()"]
+        SQLite[("data/comarket.db&lt;br/&gt;tabla producto")]
+    end
+
+    subgraph Entity["entity"]
+        Producto["Producto&lt;br/&gt;codigo&lt;br/&gt;nombre&lt;br/&gt;precio&lt;br/&gt;stock"]
+    end
+
+    ProductoView --&gt;|"fx:controller"| ProductoController
+    ProductoView -.-&gt;|"fx:id / onAction"| ProductoController
+    ProductoController -. usa contrato .-&gt; ProductoService
+    ProductoController -. crea/lee .-&gt; Producto
+    ProductoServiceImplSQLite -. implements .-&gt; ProductoService
+    ProductoService -. usa .-&gt; Producto
+    ProductoServiceImplSQLite -. usa .-&gt; Producto
+    ProductoServiceImplSQLite --&gt;|"usa"| ProductoDao
+    ProductoDao -. mapea .-&gt; Producto
+    ProductoDao --&gt;|"usa"| ConexionSQLite
+    ConexionSQLite --&gt;|"JDBC"| SQLite
 
     classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
-    class ProductoServiceImplSQLite,VentaServiceImplSQLite serviceImpl;</code></pre>
+    class ProductoServiceImplSQLite serviceImpl;</code></pre>
 <p>Nombres reales del proyecto guía:</p>
-<div class="highlight"><pre><span></span><code>com.upeu.comarket.controller.VentaController
-com.upeu.comarket.controller.ConsultaVentasController
-com.upeu.comarket.entity.Venta
-com.upeu.comarket.entity.DetalleVenta
+<div class="highlight"><pre><span></span><code>com.upeu.comarket.controller.ProductoController
 com.upeu.comarket.entity.Producto
-com.upeu.comarket.service.VentaService
-com.upeu.comarket.service.VentaServiceImplSQLite
+com.upeu.comarket.service.ProductoService
 com.upeu.comarket.service.ProductoServiceImplSQLite
-com.upeu.comarket.dao.VentaDao
-com.upeu.comarket.dao.DetalleVentaDao
 com.upeu.comarket.dao.ProductoDao
 com.upeu.comarket.db.ConexionSQLite
-src/main/resources/com/upeu/comarket/view/VentaView.fxml
-src/main/resources/com/upeu/comarket/view/ConsultaVentasView.fxml
+src/main/resources/com/upeu/comarket/view/ProductoView.fxml
 </code></pre></div>
 <h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
-<p>Tiempo: 2h.</p>
+<p>Tiempo: 3 h.</p>
 <ol>
-<li>Crear o revisar entidades <code>Venta</code>, <code>DetalleVenta</code> y <code>Producto</code>.</li>
-<li>Diseñar o revisar <code>VentaView.fxml</code>.</li>
-<li>Cargar productos existentes desde la base de datos.</li>
-<li>Seleccionar producto y cantidad.</li>
-<li>Crear <code>DetalleVenta</code>.</li>
-<li>Agregar detalles a la venta.</li>
-<li>Calcular subtotal y total.</li>
-<li>Crear <code>VentaDao</code>.</li>
-<li>Crear <code>DetalleVentaDao</code>.</li>
-<li>Reutilizar <code>ConexionSQLite</code> desde <code>db</code>.</li>
-<li>Crear <code>VentaServiceImplSQLite</code>.</li>
-<li>Guardar primero la cabecera y luego los detalles dentro de una transacción.</li>
-<li>Descontar stock desde el flujo de venta.</li>
-<li>Mostrar ventas registradas en <code>ConsultaVentasView.fxml</code>.</li>
-<li>Cargar detalles de la venta seleccionada.</li>
-<li>Anular una venta desde <code>ConsultaVentasController</code>.</li>
-<li>Cambiar <code>estado</code> a <code>ANULADA</code> y reponer stock dentro de una transacción.</li>
-<li>Validar cantidad, stock, venta sin detalles, venta ya anulada y errores de persistencia.</li>
+<li>Revisar el proyecto JavaFX/Maven ubicado en <code>comarket-desk</code>.</li>
+<li>Agregar dependencia SQLite JDBC.</li>
+<li>Crear o verificar las carpetas de capas.</li>
+<li>Crear <code>ConexionSQLite</code> dentro de <code>db</code>.</li>
+<li>Crear tabla <code>producto</code>.</li>
+<li>Crear <code>ProductoDao</code> dentro de <code>dao</code>.</li>
+<li>Implementar <code>insert</code>, <code>select</code>, <code>update</code> y <code>delete</code>.</li>
+<li>Crear <code>ProductoServiceImplSQLite implements ProductoService</code>.</li>
+<li>Hacer que <code>ProductoController</code> use <code>ProductoService</code>, no el DAO directamente.</li>
+<li>Cargar <code>TableView</code> desde SQLite.</li>
+<li>Validar campos obligatorios, precio y stock.</li>
+<li>Mostrar mensajes de error claros.</li>
 </ol>
-<p>Tablas de referencia:</p>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">venta</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">cliente</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">fecha</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">estado</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;ACTIVA&#39;</span>
-<span class="p">);</span>
-
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">detalle_venta</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">venta_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">producto_codigo</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">cantidad</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">precio_unitario</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">subtotal</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">venta_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">venta</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
-<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">producto_codigo</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">producto</span><span class="p">(</span><span class="n">codigo</span><span class="p">)</span>
-<span class="p">);</span>
+<p>Estructura sugerida:</p>
+<div class="highlight"><pre><span></span><code>src/main/java/
+    com/upeu/comarket/
+        CoMarketApplication.java
+        controller/
+            ProductoController.java
+        entity/
+            Producto.java
+        service/
+            ProductoService.java
+            ProductoServiceImplSQLite.java
+        dao/
+            ProductoDao.java
+        db/
+            ConexionSQLite.java
+src/main/resources/
+    com/upeu/comarket/view/
+        ProductoView.fxml
 </code></pre></div>
-<p>Flujo de anulación:</p>
-<div class="highlight"><pre><span></span><code>ConsultaVentasView.fxml
--&gt; ConsultaVentasController.onAnularVentaClick()
--&gt; VentaService.anular(ventaId)
--&gt; VentaServiceImplSQLite.anular(ventaId)
--&gt; VentaDao.buscarPorId(connection, ventaId)
--&gt; DetalleVentaDao.listarPorVentaId(connection, ventaId)
--&gt; VentaDao.reponerStock(connection, detalle)
--&gt; VentaDao.anular(connection, ventaId)
--&gt; venta.estado = &#39;ANULADA&#39;
+<p>Nota metodológica:</p>
+<div class="highlight"><pre><span></span><code>`dao` se usa como carpeta para las clases DAO.
+`db` contiene clases técnicas compartidas, como `ConexionSQLite`.
+No se agrega mapper, dto ni filter todavía porque no aportan al nivel de esta sesión.
+</code></pre></div>
+<p>Tabla mínima:</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">producto</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">codigo</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">nombre</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">precio</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">precio</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">    </span><span class="n">stock</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">stock</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="p">);</span>
 </code></pre></div>
 <h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
-<p>Fuera del aula, cada estudiante consolida el registro persistente con detalle y prepara una evidencia individual.</p>
+<p>Fuera del aula, cada estudiante consolida el CRUD persistente y prepara una evidencia individual.</p>
 <p>Tiempo: 2h fuera del aula.</p>
 <h3 id="41-plantilla-de-evidencia-individual">4.1 Plantilla de evidencia individual<a class="headerlink" href="#41-plantilla-de-evidencia-individual" title="Permanent link">&para;</a></h3>
 <p>Entrega un PDF con el siguiente nombre:</p>
@@ -1963,75 +1945,65 @@ src/main/resources/com/upeu/comarket/view/ConsultaVentasView.fxml
 <ul>
 <li>Nombre:</li>
 <li>Equipo:</li>
-<li>Sesión: S09 - Operaciones persistentes con relación muchos a muchos</li>
+<li>Sesión: S09 - CRUD persistente completo de Producto desde GUI</li>
 <li>Rol o aporte realizado:</li>
 <li>Link de GitHub:</li>
 </ul>
 <h4 id="412-trabajo-autonomo-realizado">4.1.2 Trabajo autónomo realizado<a class="headerlink" href="#412-trabajo-autonomo-realizado" title="Permanent link">&para;</a></h4>
 <ol>
-<li>Completar registro de cabecera y detalle.</li>
-<li>Evidenciar <code>Venta</code>, <code>DetalleVenta</code> y <code>Producto</code>.</li>
-<li>Evidenciar DAO de cabecera y DAO de detalle.</li>
-<li>Mostrar cálculo de total.</li>
+<li>Completar CRUD persistente de producto.</li>
+<li>Evidenciar estructura por capas.</li>
+<li>Mostrar <code>ProductoDao</code>.</li>
+<li>Mostrar <code>ProductoServiceImplSQLite</code>.</li>
+<li>Ejecutar la GUI y registrar datos.</li>
 <li>Verificar registros en SQLite.</li>
-<li>Implementar o evidenciar consulta de ventas registradas.</li>
-<li>Anular una venta y verificar que el stock se repone.</li>
-<li>Documentar validaciones aplicadas.</li>
+<li>Documentar una validación aplicada.</li>
 </ol>
 <h4 id="413-evidencia-tecnica">4.1.3 Evidencia técnica<a class="headerlink" href="#413-evidencia-tecnica" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Captura de la pantalla de registro.</li>
-<li>Captura de <code>ConsultaVentasView.fxml</code> con ventas registradas.</li>
-<li>Código o fragmento de <code>VentaServiceImplSQLite</code>.</li>
-<li>Código o fragmento de <code>VentaDao</code> y <code>DetalleVentaDao</code>.</li>
-<li>Captura de tablas persistidas.</li>
-<li>Evidencia de anulación de venta y reposición de stock.</li>
-<li>Evidencia de validación de cantidad, stock, venta sin detalles o venta ya anulada.</li>
+<li>Captura de la GUI.</li>
+<li>Código o fragmento de DAO.</li>
+<li>Código o fragmento de servicio persistente.</li>
+<li>Captura de registros en SQLite.</li>
+<li>Evidencia de validación o mensaje de error.</li>
+<li>Explicación del flujo <code>Vista -&gt; Controlador -&gt; Servicio -&gt; DAO -&gt; SQLite</code>.</li>
 </ul>
 <h4 id="414-error-o-hallazgo">4.1.4 Error o hallazgo<a class="headerlink" href="#414-error-o-hallazgo" title="Permanent link">&para;</a></h4>
-<p>Describe un problema encontrado al guardar cabecera y detalle.</p>
+<p>Describe un problema técnico y cómo lo corregiste.</p>
 <h4 id="415-reflexion-tecnica-breve">4.1.5 Reflexión técnica breve<a class="headerlink" href="#415-reflexion-tecnica-breve" title="Permanent link">&para;</a></h4>
 <p>Responde en 5 a 8 líneas:</p>
-<div class="highlight"><pre><span></span><code>Por qué DetalleVenta no debe manejarse como un CRUD independiente?
+<div class="highlight"><pre><span></span><code>Por qué el controlador no debe ejecutar SQL directamente?
 </code></pre></div>
 <h3 id="42-criterios-minimos-de-aceptacion">4.2 Criterios mínimos de aceptación<a class="headerlink" href="#42-criterios-minimos-de-aceptacion" title="Permanent link">&para;</a></h3>
 <ul>
 <li>PDF con nombre correcto.</li>
-<li>Registro de cabecera y detalles.</li>
-<li>Consulta de ventas registradas.</li>
-<li>Anulación de venta sin eliminar la cabecera ni el detalle.</li>
-<li>Reposición de stock al anular.</li>
-<li>Cálculo de subtotal y total.</li>
-<li>Persistencia en tablas relacionadas.</li>
-<li>Validaciones del flujo.</li>
-<li>Evidencia de separación por capas.</li>
+<li>CRUD persistente funcional desde GUI.</li>
+<li>DAO separado del controlador.</li>
+<li>Servicio persistente usando el DAO.</li>
+<li>SQLite con datos verificables.</li>
+<li>Validaciones básicas evidenciadas.</li>
 </ul>
 <h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
 <p>Tiempo: 20 min.</p>
 <h3 id="51-resultados-esperados">5.1 Resultados esperados<a class="headerlink" href="#51-resultados-esperados" title="Permanent link">&para;</a></h3>
 <ul>
-<li>El estudiante explica la relación cabecera-detalle.</li>
-<li>El detalle referencia una entidad existente.</li>
-<li>El servicio coordina el guardado.</li>
-<li>El DAO persiste cabecera y detalle.</li>
-<li>La consulta permite revisar ventas y detalles.</li>
-<li>La anulación cambia el estado y repone stock.</li>
-<li>La GUI muestra detalles y total.</li>
-<li>Hay validaciones al cierre de la sesión.</li>
+<li>El estudiante explica las capas principales.</li>
+<li>El controlador delega al servicio.</li>
+<li>El servicio persistente usa DAO.</li>
+<li>El DAO concentra SQL.</li>
+<li>La tabla se refresca desde SQLite.</li>
+<li>Hay validaciones básicas al registrar o actualizar.</li>
 </ul>
 <h3 id="52-evidencia-del-producto-de-sesion">5.2 Evidencia del producto de sesión<a class="headerlink" href="#52-evidencia-del-producto-de-sesion" title="Permanent link">&para;</a></h3>
 <p>Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.</p>
 <h3 id="53-preguntas-de-defensa-y-reflexion">5.3 Preguntas de defensa y reflexión<a class="headerlink" href="#53-preguntas-de-defensa-y-reflexion" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Qué representa la cabecera?</li>
-<li>Qué representa el detalle?</li>
-<li>Por qué el detalle tiene atributos propios?</li>
-<li>Qué DAO guarda la cabecera?</li>
-<li>Qué DAO guarda los detalles?</li>
-<li>Qué validación evita vender una cantidad inválida?</li>
-<li>Qué ocurre con el stock al registrar una venta?</li>
-<li>Por qué anular no debe eliminar físicamente la venta?</li>
-<li>Qué método repone el stock al anular?</li>
+<li>Qué responsabilidad tiene el controlador?</li>
+<li>Qué responsabilidad tiene el servicio?</li>
+<li>Qué responsabilidad tiene el DAO?</li>
+<li>Cómo se conecta Java con SQLite?</li>
+<li>Qué validación implementaste?</li>
+<li>Cómo verificas que el dato quedó persistido?</li>
 </ol>
 <h3 id="54-rubrica-de-evaluacion">5.4 Rúbrica de evaluación<a class="headerlink" href="#54-rubrica-de-evaluacion" title="Permanent link">&para;</a></h3>
 <table>
@@ -2048,38 +2020,38 @@ src/main/resources/com/upeu/comarket/view/ConsultaVentasView.fxml
 </thead>
 <tbody>
 <tr>
-<td>1. Modelo cabecera-detalle</td>
+<td>1. Capas</td>
 <td style="text-align: right;">2</td>
-<td>Modelo claro y coherente.</td>
-<td>Modelo funcional.</td>
-<td>Modelo parcial.</td>
-<td>No evidencia modelo.</td>
+<td>Vista, controlador, servicio, entidad y DAO claramente separados.</td>
+<td>Capas funcionales.</td>
+<td>Separación parcial.</td>
+<td>No separa capas.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>2. Persistencia relacionada</td>
+<td>2. DAO</td>
 <td style="text-align: right;">2</td>
-<td>Guarda cabecera y detalles, permite consulta y anula reponiendo stock.</td>
-<td>Persistencia principal funcional.</td>
-<td>Persistencia parcial.</td>
-<td>No persiste relación.</td>
+<td>DAO ejecuta SQL y mapea objetos correctamente.</td>
+<td>DAO funcional.</td>
+<td>DAO incompleto.</td>
+<td>No evidencia DAO.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
-<td>3. Servicio y DAO</td>
+<td>3. CRUD persistente</td>
 <td style="text-align: right;">2</td>
-<td>Servicio coordina y DAO separa SQL.</td>
-<td>Separación funcional.</td>
-<td>Mezcla responsabilidades.</td>
-<td>No separa.</td>
+<td>CRUD completo desde GUI y verificado en SQLite.</td>
+<td>CRUD principal funcional.</td>
+<td>CRUD parcial.</td>
+<td>No persiste.</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr>
 <td>4. Validaciones</td>
 <td style="text-align: right;">2</td>
-<td>Valida cantidad, stock, venta sin detalles y venta ya anulada.</td>
+<td>Valida datos y muestra mensajes claros.</td>
 <td>Validaciones básicas.</td>
-<td>Validaciones parciales.</td>
+<td>Validación parcial.</td>
 <td>No valida.</td>
 <td style="text-align: right;"></td>
 </tr>
@@ -2165,7 +2137,7 @@ src/main/resources/com/upeu/comarket/view/ConsultaVentasView.fxml
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "toc.follow", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
       
