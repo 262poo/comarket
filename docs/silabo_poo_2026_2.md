@@ -122,12 +122,12 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
     <td>Producto Académico</td>
   </tr>
   <tr>
-    <td>Al finalizar el curso, el estudiante diseña, implementa y sustenta una aplicación de escritorio basada en objetos. La solución integra modelado del dominio, encapsulamiento, herencia, polimorfismo, colecciones, persistencia de datos, componentes de acceso a datos, interfaz gráfica y organización modular del código.</td>
+    <td>Al finalizar el curso, el estudiante diseña, implementa y sustenta una aplicación de escritorio basada en objetos. La solución integra modelado del dominio, encapsulamiento, herencia, polimorfismo, colecciones, persistencia, componentes de acceso a datos, interfaz gráfica, control de acceso, sesión, consultas, pruebas y organización modular del código.</td>
     <td>Nombre: Aplicación de escritorio funcional con arquitectura en capas, persistencia de datos y gestión de un proceso de negocio.</td>
   </tr>
   <tr>
     <td></td>
-    <td>Descripción: Aplicación de escritorio orientada a objetos aplicada a un proceso de negocio, con modelo de dominio, objetos principales y relacionados, flujo principal de gestión, arquitectura por capas, persistencia de datos, interfaz gráfica funcional, demo funcional, evidencias de funcionamiento y sustentación técnica.</td>
+    <td>Descripción: Aplicación de escritorio orientada a objetos aplicada a un proceso de negocio, con modelo de dominio, objetos principales y relacionados, flujo cabecera–detalle, arquitectura por capas, persistencia, interfaz gráfica, control de acceso, sesión, consultas, pruebas, demo, evidencias y sustentación técnica.</td>
   </tr>
 </table>
 
@@ -230,7 +230,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
     <td colspan="3">Producto</td>
   </tr>
   <tr>
-    <td colspan="4">Al finalizar la unidad, el estudiante construye una aplicación de escritorio organizada por capas, integrando interfaz gráfica, acceso a datos, persistencia, control de acceso, consultas y gestión de un flujo de negocio con objetos relacionados mediante cabecera y detalle.</td>
+    <td colspan="4">Al finalizar la unidad, el estudiante construye una aplicación de escritorio organizada por capas, integrando interfaz gráfica, acceso a datos, primer listado persistente, CRUD, objetos relacionados y gestión de un flujo de negocio mediante cabecera y detalle.</td>
     <td colspan="3">Nombre: Aplicación de escritorio por capas con interfaz gráfica y persistencia de datos.</td>
   </tr>
   <tr>
@@ -238,8 +238,8 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
     <td colspan="3">Descripción del producto</td>
   </tr>
   <tr>
-    <td colspan="4">1 Diseña e implementa una arquitectura por capas separando vista, controlador, servicio, entidades y acceso a datos.<br>2 Integra una interfaz gráfica funcional con formularios, tablas, eventos y validaciones de entrada.<br>3 Implementa un mecanismo de persistencia mediante componentes de acceso a datos y servicios, manteniendo separadas las responsabilidades del dominio y del almacenamiento.<br>4 Desarrolla un flujo de negocio con objetos relacionados mediante cabecera y detalle, incorporando cálculos, validaciones y consistencia de datos.<br>5 Incorpora control de acceso y sesión, consultas, filtros, manejo de errores y evidencias de pruebas funcionales.</td>
-    <td colspan="3">Descripción: Aplicación de escritorio funcional que integra interfaz gráfica, arquitectura por capas, persistencia de datos, operaciones de gestión, flujo de negocio con objetos relacionados mediante cabecera y detalle, control de acceso y sesión, consultas, validaciones y evidencias de funcionamiento.</td>
+    <td colspan="4">1 Diseña e implementa una arquitectura por capas separando vista, controlador, servicio, entidades y acceso a datos.<br>2 Demuestra el flujo completo de persistencia mediante un primer listado presentado en la interfaz gráfica.<br>3 Implementa un CRUD persistente con formularios, tablas, eventos, validaciones y manejo de errores.<br>4 Gestiona objetos relacionados y sus reglas de asociación.<br>5 Desarrolla un flujo de negocio mediante cabecera y detalle, incorporando cálculos, validaciones, actualización de estado y consistencia.</td>
+    <td colspan="3">Descripción: Aplicación de escritorio funcional que integra interfaz gráfica, arquitectura por capas, primer listado persistente, CRUD, objetos relacionados y un flujo de negocio mediante cabecera y detalle.</td>
   </tr>
   <tr>
     <td colspan="7">Sesiones de aprendizaje</td>
@@ -265,46 +265,46 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   <tr>
     <td>2</td>
     <td>27/09/2026  03/10/2026</td>
-    <td><strong>Arquitectura por capas, acceso a datos y CRUD con persistencia desde GUI:</strong><br>Organización por capas, mecanismo de persistencia, componentes de acceso a datos, servicio, formularios, tablas, operaciones de gestión y validación de datos de una entidad simple</td>
+    <td><strong>Arquitectura por capas, acceso a datos y primer listado persistente desde GUI:</strong><br>Organización por capas, mecanismo de persistencia, componentes de acceso a datos, servicio, controlador, consulta de una entidad simple y presentación de resultados en una tabla de la interfaz gráfica</td>
     <td>3</td>
     <td>4</td>
-    <td>Configurar el mecanismo de persistencia, crear los componentes de conexión o almacenamiento, acceso a datos y servicio, implementar la persistencia y cargar los datos almacenados en la interfaz gráfica.</td>
-    <td>Completar la gestión persistente de datos, evidenciar la estructura por capas, los componentes de acceso a datos, el servicio, los datos almacenados y una validación aplicada.</td>
+    <td>Configurar el mecanismo de persistencia, crear los componentes de conexión, acceso a datos y servicio, y presentar en la interfaz gráfica el listado obtenido desde el almacenamiento.</td>
+    <td>Evidenciar la estructura por capas y explicar el flujo almacenamiento–acceso a datos–servicio–controlador–vista, incluidos los casos de lista vacía y error de conexión.</td>
   </tr>
   <tr>
     <td>3</td>
     <td>04/10/2026  10/10/2026</td>
-    <td><strong>Relaciones entre objetos y modelado de un flujo cabecera-detalle:</strong><br>Modelo de dominio con objeto cabecera, colección de objetos detalle y entidad relacionada; objeto detalle con atributos propios, colaboración entre objetos, cálculo de subtotales y totales, actualización del estado, validaciones y consistencia del flujo</td>
+    <td><strong>CRUD persistente completo desde GUI:</strong><br>Registro, consulta, actualización y eliminación mediante acceso a datos, servicio, controlador, formularios y tablas; validaciones, mensajes y manejo de errores</td>
     <td>3</td>
     <td>4</td>
-    <td>Implementar un flujo con cabecera, detalles y objetos relacionados; agregar y retirar detalles, calcular subtotales y totales, validar las reglas del dominio, actualizar el estado de los objetos involucrados y conservar la información mediante el mecanismo de persistencia definido.</td>
-    <td>Completar el flujo cabecera-detalle, evidenciar las relaciones y responsabilidades entre objetos, los cálculos, los cambios de estado, la recuperación de la información, las anulaciones y las validaciones aplicadas.</td>
+    <td>Completar las operaciones de registro, búsqueda, listado, actualización y eliminación desde la interfaz gráfica.</td>
+    <td>Probar cada operación con datos válidos e inválidos y documentar validaciones, mensajes, errores controlados y responsabilidades por capa.</td>
   </tr>
   <tr>
     <td>4</td>
     <td>11/10/2026  17/10/2026</td>
-    <td><strong>Control de acceso, sesión y asociación entre objetos:</strong><br>Objeto usuario, verificación de credenciales, sesión activa, asociación del usuario con las operaciones realizadas, colaboración entre objetos, validaciones de acceso y manejo básico de errores</td>
+    <td><strong>Gestión de objetos relacionados en aplicaciones de escritorio:</strong><br>Incorporación de un objeto de clasificación, asociación con la entidad principal, navegación entre objetos, selección desde formularios, presentación de datos relacionados y validación de reglas de asociación</td>
     <td>3</td>
     <td>4</td>
-    <td>Implementar la gestión de usuarios y la verificación de credenciales, manejar la sesión activa y asociar las operaciones realizadas con el usuario autenticado mediante relaciones entre objetos y validaciones de acceso.</td>
-    <td>Crear un usuario de prueba, verificar el acceso, la sesión activa, la operación asociada al usuario y las validaciones de credenciales o de operaciones realizadas sin sesión.</td>
+    <td>Implementar el registro, consulta y presentación de objetos relacionados desde la interfaz gráfica.</td>
+    <td>Probar asociaciones válidas e inválidas, selección de objetos relacionados y navegación entre las vistas involucradas.</td>
   </tr>
   <tr>
     <td>5</td>
     <td>18/10/2026  24/10/2026</td>
-    <td><strong>Consultas integradas y pruebas del flujo principal:</strong><br>Búsquedas, filtros, consultas maestro-detalle, consultas por fecha/usuario, totales, verificación de consistencia, manejo de errores y pruebas funcionales por capas</td>
+    <td><strong>Modelado y procesamiento de un flujo cabecera–detalle:</strong><br>Objeto cabecera, colección de objetos detalle y entidad relacionada; detalle con atributos y comportamiento propios, cálculos, actualización de estado, validaciones, consistencia y persistencia del flujo</td>
     <td>3</td>
     <td>4</td>
-    <td>Preparar datos de prueba, diseñar filtros de reporte, consultar el flujo principal, verificar detalle, totales, estados y consistencia de datos mediante pruebas funcionales.</td>
-    <td>Preparar evidencias de acceso, anulación, reporte con filtros, resumen de total, consistencia cabecera-detalle, matriz de pruebas y explicación del flujo por capas.</td>
+    <td>Implementar un flujo con cabecera y detalles; agregar y retirar detalles, calcular resultados, validar reglas, actualizar el estado de los objetos y conservar la operación.</td>
+    <td>Probar detalle vacío, cantidades inválidas, restricciones del dominio, cálculos, cambios de estado, recuperación de información y anulación.</td>
   </tr>
   <tr>
     <td>6</td>
     <td>25/10/2026  31/10/2026</td>
-    <td><strong>Aplicaciones de escritorio por capas y gestión de datos persistentes (Evaluación U2):</strong><br>Cierre del Producto U2: aplicación de escritorio funcional con arquitectura por capas, interfaz gráfica, acceso a datos, mecanismo de persistencia, relaciones entre objetos, control de acceso y sesión, consultas, validaciones y pruebas</td>
+    <td><strong>Aplicaciones de escritorio por capas y gestión de datos persistentes (Evaluación U2):</strong><br>Cierre del Producto U2: aplicación de escritorio funcional con arquitectura por capas, interfaz gráfica, primer listado persistente, CRUD, objetos relacionados y un flujo de negocio mediante cabecera y detalle</td>
     <td>3</td>
     <td>4</td>
-    <td>Ejecutar la evaluación práctica del Producto U2, demostrando control de acceso, gestión persistente, flujo de negocio con objetos relacionados mediante cabecera y detalle, anulación, consultas, evidencias de funcionamiento y atención de observaciones del docente.</td>
+    <td>Ejecutar la evaluación práctica del Producto U2, demostrando arquitectura por capas, listado persistente, CRUD, objetos relacionados y flujo cabecera–detalle con cálculos, consistencia y anulación.</td>
     <td>Ordenar evidencias de U2, registrar el aporte individual, aplicar las observaciones del docente, preparar la defensa técnica y documentar el flujo integrado.</td>
   </tr>
 </table>
@@ -318,7 +318,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
     <td colspan="3">Producto</td>
   </tr>
   <tr>
-    <td colspan="4">Al finalizar la unidad, el estudiante integra, valida y sustenta una aplicación de escritorio orientada a objetos, articulando modelo de dominio, interfaz gráfica, persistencia de datos, flujo de negocio, arquitectura por capas, evidencias de funcionamiento y demo técnica.</td>
+    <td colspan="4">Al finalizar la unidad, el estudiante integra, protege, consulta, valida y sustenta una aplicación de escritorio orientada a objetos, articulando control de acceso, sesión, consultas, pruebas, modelo de dominio, interfaz gráfica, persistencia, flujo de negocio y arquitectura por capas.</td>
     <td colspan="3">Nombre: Sistema orientado a objetos integrado para un proceso de negocio.</td>
   </tr>
   <tr>
@@ -326,8 +326,8 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
     <td colspan="3">Descripción del producto</td>
   </tr>
   <tr>
-    <td colspan="4">1 Integra módulos, pantallas, controladores, servicios, entidades y componentes de acceso a datos en una aplicación coherente.<br>2 Valida el flujo principal del proceso de negocio, incluyendo persistencia, consultas, evidencias y consistencia de datos.<br>3 Refina interfaz, mensajes, validaciones, navegación, organización del código y recursos del proyecto.<br>4 Prepara una demo funcional con evidencias de funcionamiento y atención de observaciones del docente.<br>5 Sustenta técnicamente la arquitectura, decisiones de diseño, aporte individual y funcionamiento del producto final.</td>
-    <td colspan="3">Descripción: Sistema de escritorio integrado que aplica programación orientada a objetos a un proceso de negocio, consolidando modelo de dominio, objetos principales y relacionados, arquitectura por capas, persistencia de datos, interfaz gráfica funcional, demo, evidencias de funcionamiento y sustentación técnica.</td>
+    <td colspan="4">1 Implementa control de acceso, sesión activa y asociación del usuario con las operaciones realizadas.<br>2 Construye consultas y filtros sobre el flujo principal y presenta resultados consistentes.<br>3 Ejecuta pruebas funcionales, corrige fallos y refina interfaz, mensajes, navegación, código y recursos.<br>4 Prepara una demo funcional con evidencias y atención de observaciones del docente.<br>5 Sustenta técnicamente la arquitectura, decisiones de diseño, aporte individual y funcionamiento del producto final.</td>
+    <td colspan="3">Descripción: Sistema de escritorio integrado que aplica programación orientada a objetos a un proceso de negocio, incorporando control de acceso, sesión, consultas, pruebas, modelo de dominio, arquitectura por capas, persistencia, interfaz gráfica, evidencias y sustentación técnica.</td>
   </tr>
   <tr>
     <td colspan="7">Sesiones de aprendizaje</td>
@@ -344,28 +344,28 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   <tr>
     <td>1</td>
     <td>01/11/2026  07/11/2026</td>
-    <td><strong>Integración del sistema:</strong><br>Revisión de alcance, integración de módulos, consistencia entre paquetes, nombres, flujo, dependencias, recursos y preparación inicial para ejecutable nativo</td>
+    <td><strong>Control de acceso, sesión y asociación del usuario con las operaciones:</strong><br>Objeto usuario, verificación de credenciales, sesión activa, asociación del usuario con las operaciones realizadas, validaciones de acceso, pantallas protegidas y manejo básico de errores</td>
     <td>3</td>
     <td>4</td>
-    <td>Revisar la estructura del proyecto, integrar pantallas, controladores, servicios, entidades y componentes de acceso a datos, ejecutar el flujo principal de punta a punta y registrar correcciones. Participar en el concurso de programación y presentar el código del proyecto desarrollado.</td>
-    <td>Integrar una funcionalidad pendiente o corregir una inconsistencia, revisar paquetes, nombres y clases duplicadas, y evidenciar el avance de integración del sistema.</td>
+    <td>Implementar la verificación de credenciales, manejar la sesión activa, proteger las pantallas y asociar las operaciones con el usuario autenticado. Participar en el concurso de programación y presentar el código del proyecto desarrollado.</td>
+    <td>Crear un usuario de prueba y evidenciar acceso válido e inválido, cierre de sesión, operación asociada al usuario y bloqueo de acciones sin sesión.</td>
   </tr>
   <tr>
     <td>2</td>
     <td>08/11/2026  14/11/2026</td>
-    <td><strong>Validación, refinamiento y ejecutable nativo:</strong><br>Corrección de fallos, limpieza de código, organización final, mensajes, validaciones, consistencia visual, flujo crítico, ejecutable nativo y preparación para sustentación</td>
+    <td><strong>Consultas integradas, pruebas y refinamiento del flujo principal:</strong><br>Búsquedas, filtros, consultas cabecera–detalle, consultas por fecha, usuario o estado, totales, pruebas funcionales, corrección de fallos, consistencia visual y preparación del ejecutable nativo</td>
     <td>3</td>
     <td>4</td>
-    <td>Ejecutar el flujo crítico, registrar fallos, corregir validaciones, mensajes, navegación, persistencia y recursos de vista, y preparar o generar el ejecutable nativo. Presentar el informe de participación del concurso internacional de programación.</td>
-    <td>Ejecutar el flujo crítico, registrar fallos u observaciones, corregir validaciones, mensajes, navegación o persistencia, y preparar la versión candidata del producto.</td>
+    <td>Implementar consultas y filtros protegidos, ejecutar pruebas del flujo principal, corregir fallos y preparar o generar el ejecutable nativo. Presentar el informe de participación del concurso internacional de programación.</td>
+    <td>Preparar la matriz de pruebas, evidencias de consultas, filtros, totales, acceso autorizado, correcciones realizadas y versión candidata del producto.</td>
   </tr>
   <tr>
     <td>3</td>
     <td>15/11/2026  21/11/2026</td>
-    <td><strong>Sistema orientado a objetos integrado (Evaluación U3):</strong><br>Cierre del Producto U3: sistema aplicado a un dominio definido, con modelo de dominio, operaciones CRUD, arquitectura por capas, persistencia de datos, interfaz gráfica funcional, evidencias de funcionamiento y sustentación técnica</td>
+    <td><strong>Sistema orientado a objetos integrado (Evaluación U3):</strong><br>Cierre del Producto U3: sistema aplicado a un dominio definido, con modelo de dominio, CRUD, objetos relacionados, flujo cabecera–detalle, control de acceso, sesión, consultas, arquitectura por capas, persistencia, interfaz gráfica, evidencias y sustentación técnica</td>
     <td>3</td>
     <td>4</td>
-    <td>Ejecutar el producto final, mostrar el flujo principal, explicar la arquitectura por capas, entidades, servicios, acceso a datos, persistencia, validaciones, evidencias y atención de observaciones del docente.</td>
+    <td>Ejecutar el producto final, mostrar acceso, sesión, flujo principal, consultas y pruebas, y explicar arquitectura, entidades, servicios, acceso a datos, persistencia y validaciones.</td>
     <td>Preparar el guion de demostración, definir el flujo principal, organizar evidencias, aplicar observaciones del docente y preparar la explicación de arquitectura para la sustentación técnica.</td>
   </tr>
   <tr>

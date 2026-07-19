@@ -1,4 +1,4 @@
-﻿# S10 - Seguridad básica y relación uno a muchos
+# S13 - Control de acceso y sesión desde la IGU
 
 ## 1. Introducción
 
@@ -6,19 +6,19 @@ Tiempo: 20 min.
 
 ### 1.1 Propósito
 
-Incorporar seguridad básica mediante usuarios, autenticación simple y ventas persistentes asociadas a una relación uno a muchos.
+Implementar el acceso desde la interfaz gráfica sobre el modelo `Usuario–Venta` ya persistido, usando login, clase `Sesion`, roles, permisos básicos y protección de operaciones.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante crea una tabla de usuarios, implementa un login básico, mantiene una sesión activa y asocia cada venta registrada al usuario autenticado.
+El estudiante implementa login, conserva el usuario activo, adapta menús y pantallas según permisos y asocia automáticamente cada nueva venta al usuario autenticado.
 
 ### 1.3 Producto de sesión
 
-Autenticación básica y registro de ventas asociadas a un usuario, usando GUI, servicio, DAO, SQLite y validaciones de acceso.
+IGU con login, sesión activa, roles y permisos básicos, cierre de sesión, pantallas protegidas y ventas asociadas automáticamente al usuario activo.
 
 ### 1.4 Motivación de la sesión
 
-Una aplicación de escritorio no solo guarda ventas; también debe saber qué usuario registró cada venta. Esta sesión agrega usuario y seguridad básica sin convertir el curso en seguridad avanzada.
+En S10 las ventas se asociaron a un usuario seleccionado manualmente. En S13 esa selección desaparece: la aplicación identifica al usuario desde el login y lo conserva durante la ejecución.
 
 Pregunta guía:
 
@@ -28,9 +28,9 @@ Cómo asociamos una venta persistente a un usuario autenticado sin consultar la 
 
 ### 1.5 Ubicación en el curso
 
-- Unidad: U2.
+- Unidad: U3.
 - Carpeta de trabajo: `comarket-desk`.
-- Avance de sesión: seguridad básica y relación usuario-ventas.
+- Avance de sesión: seguridad desde la IGU sobre la asociación `Usuario–Venta` existente.
 
 ## 2. Explica
 
@@ -41,7 +41,9 @@ Tiempo: 25 min.
 - Usuario.
 - Autenticación básica.
 - Sesión activa en aplicación de escritorio.
-- Relación uno a muchos.
+- Clase `Sesion` como contexto del usuario activo.
+- Roles y permisos básicos.
+- Menús y pantallas protegidas.
 - Ventas asociadas al usuario.
 - Validación de acceso.
 - DAO para usuario.
@@ -53,13 +55,14 @@ Regla metodológica de la sesión:
 La seguridad se trabaja de forma básica.
 Usuario no reemplaza al dominio principal.
 Usuario permite asociar ventas a quien las registra.
-La relación uno a muchos se entiende como un usuario con varias ventas.
+La asociación `Usuario–Venta` ya fue implementada en S10 y no se vuelve a enseñar.
 Las validaciones de acceso se aplican antes de registrar o anular una venta.
 Sesion no es una sesión web.
 Sesion es un estado simple de la aplicación de escritorio.
 Sesion evita consultar la base de datos cada vez que una pantalla necesita saber qué usuario está autenticado.
 `UsuarioDao` se ubica en `dao` y reutiliza `db/ConexionSQLite`.
-En esta sesión no se asocia usuario a productos ni a otros mantenimientos; solo a ventas, porque la venta debe indicar quién la registró.
+Ocultar o deshabilitar controles mejora la experiencia, pero el servicio debe volver a validar las acciones sensibles.
+La contraseña no se almacena dentro de `Sesion` ni se transporta a otras pantallas.
 ```
 
 ### 2.2 Arquitectura de la sesión
@@ -79,7 +82,7 @@ flowchart TD
     UsuarioServiceImplSQLite["service impl<br/>UsuarioServiceImplSQLite<br/>validar vacios / comparar password"]
     VentaService["service<br/>VentaService<br/>registrar(venta) / listar() / anular(ventaId)"]
     VentaServiceImplSQLite["service impl<br/>VentaServiceImplSQLite<br/>validar usuario en venta"]
-    UsuarioDao["dao<br/>UsuarioDao<br/>crear tabla usuario<br/>crear admin si no existe<br/>buscarPorUsername(username)"]
+    UsuarioDao["dao<br/>UsuarioDao<br/>buscarPorUsername(username)"]
     VentaDao["dao<br/>VentaDao<br/>insertar venta con usuario_id<br/>listar con LEFT JOIN usuario"]
     ConexionSQLite["db<br/>ConexionSQLite<br/>obtenerConexion()"]
     Sesion["security<br/>Sesion<br/>iniciar(usuario)<br/>getUsuarioActual()<br/>estaActiva()<br/>cerrar()"]
@@ -139,9 +142,11 @@ src/main/resources/com/upeu/comarket/view/AnularVentasView.fxml
 
 ## 3. Aplica: actividad práctica guiada
 
-Tiempo: 2h.
+Tiempo: 4 h.
 
-### 3.1 Crear tabla `usuario`
+### 3.1 Reutilizar la persistencia de `Usuario`
+
+La estructura de `Usuario` y su asociación con `Venta` provienen de S10. El docente proporciona el script y un usuario de prueba; el estudiante no diseña nuevas tablas en S13.
 
 ```sql
 CREATE TABLE usuario (
@@ -156,17 +161,17 @@ Usuario de prueba:
 
 ```sql
 INSERT INTO usuario (username, password_hash, rol)
-VALUES ('admin', '123456', 'ADMIN');
+VALUES ('admin', '<hash-proporcionado>', 'ADMIN');
 ```
 
 Nota metodológica:
 
 ```text
-Para la práctica se puede usar texto simple.
-En una aplicación real la contraseña debe almacenarse usando hash seguro.
+No se guarda la contraseña en texto plano.
+El docente puede proporcionar una utilidad de hash para concentrar la sesión en la IGU, la sesión activa y los permisos.
 ```
 
-### 3.2 Crear entidad `Usuario`
+### 3.2 Reutilizar y completar la entidad `Usuario`
 
 ```java
 public class Usuario {
@@ -200,17 +205,12 @@ public class Usuario {
 }
 ```
 
-### 3.3 Crear `UsuarioDao`
+### 3.3 Reutilizar `UsuarioDao`
 
-`UsuarioDao` solo conversa con la base de datos. En el proyecto guía también crea la tabla `usuario` y registra el usuario inicial `admin` si todavía no existe.
+`UsuarioDao` ya persiste usuarios desde S10. En S13 se agrega o verifica únicamente la búsqueda necesaria para autenticar.
 
 ```java
 public class UsuarioDao {
-    public UsuarioDao() {
-        crearTablaSiNoExiste();
-        crearUsuarioAdminSiNoExiste();
-    }
-
     public Usuario buscarPorUsername(String username) {
         // SELECT id, username, password_hash, rol
         // FROM usuario
@@ -248,7 +248,7 @@ public class UsuarioServiceImplSQLite implements UsuarioService {
             return null;
         }
 
-        if (!usuario.getPasswordHash().equals(password)) {
+        if (!PasswordHasher.verificar(password, usuario.getPasswordHash())) {
             return null;
         }
 
@@ -287,6 +287,10 @@ public class Sesion {
 
     public static boolean estaActiva() {
         return usuarioActual != null;
+    }
+
+    public static boolean tieneRol(String rol) {
+        return estaActiva() && usuarioActual.getRol().equals(rol);
     }
 
     public static void cerrar() {
@@ -342,13 +346,9 @@ public class LoginController {
 }
 ```
 
-### 3.9 Asociar la venta al usuario actual
+### 3.9 Asociar automáticamente la venta al usuario actual
 
-La tabla `venta` debe tener una referencia al usuario. En el flujo real de `comarket-desk`, no se asocian productos ni otros mantenimientos al usuario; se asocia la venta porque debe quedar claro quién la registró.
-
-```sql
-ALTER TABLE venta ADD COLUMN usuario_id INTEGER REFERENCES usuario(id);
-```
+La referencia de `Venta` a `Usuario` ya existe desde S10. En S13 se elimina el selector manual de usuario y se obtiene el usuario autenticado desde `Sesion`.
 
 Antes de guardar:
 
@@ -408,7 +408,23 @@ colUsuario.setCellValueFactory(data ->
 );
 ```
 
-### 3.11 Validaciones de cierre de sesión
+### 3.11 Aplicar roles y permisos básicos
+
+La IGU puede ocultar o deshabilitar opciones no autorizadas:
+
+```java
+btnAnular.setDisable(!Sesion.tieneRol("ADMIN"));
+```
+
+La validación visual no es suficiente. El servicio también protege la acción:
+
+```java
+if (!Sesion.tieneRol("ADMIN")) {
+    throw new AccesoDenegadoException("No tiene permiso para anular ventas");
+}
+```
+
+### 3.12 Validaciones de cierre de sesión
 
 Probar:
 
@@ -430,14 +446,14 @@ Tiempo: 2h fuera del aula.
 Entrega un PDF con el siguiente nombre:
 
 ```text
-S10_Equipo##_ApellidoNombre.pdf
+S13_Equipo##_ApellidoNombre.pdf
 ```
 
 #### 4.1.1 Datos del estudiante
 
 - Nombre:
 - Equipo:
-- Sesión: S10 - Seguridad básica y relación uno a muchos
+- Sesión: S13 - Control de acceso y sesión desde la IGU
 - Rol o aporte realizado:
 - Link de GitHub:
 
@@ -447,7 +463,7 @@ S10_Equipo##_ApellidoNombre.pdf
 2. Implementar login básico.
 3. Mantener sesión activa.
 4. Asociar una venta al usuario.
-5. Evidenciar relación uno a muchos.
+5. Evidenciar roles y permisos en la IGU y el servicio.
 6. Validar credenciales incorrectas.
 7. Validar venta sin sesión.
 
@@ -460,6 +476,7 @@ S10_Equipo##_ApellidoNombre.pdf
 - Evidencia de usuario autenticado.
 - Evidencia de venta asociada al usuario.
 - Validación de acceso o credenciales.
+- Evidencia de participación en el concurso de programación y presentación del código desarrollado.
 
 #### 4.1.4 Error o hallazgo
 
@@ -492,7 +509,8 @@ Tiempo: 20 min.
 - Usuario se persiste mediante DAO.
 - La sesión activa se consulta desde controladores.
 - Las ventas se asocian al usuario.
-- Se evidencia relación uno a muchos.
+- Se reutiliza la asociación `Usuario–Venta` sin selección manual.
+- Se aplican roles o permisos básicos en la IGU y el servicio.
 - Se aplican validaciones de acceso.
 - El estudiante explica por qué `Sesion` evita consultas repetidas a la base de datos.
 
@@ -506,7 +524,7 @@ Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 
 2. Qué responsabilidad tiene `UsuarioService`?
 3. Dónde se guarda el usuario autenticado durante la ejecución?
 4. Por qué `Sesion` no es una sesión web?
-5. Qué significa relación uno a muchos en esta sesión?
+5. Por qué ocultar un botón no reemplaza la validación del servicio?
 6. Qué validación evita operar sin sesión?
 7. Por qué no debe guardarse contraseña en texto plano?
 
@@ -516,7 +534,7 @@ Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 
 |---|---:|---|---|---|---|---:|
 | 1. Usuario y login | 2 | Login funcional y usuario persistido correctamente. | Login funcional. | Login parcial. | No evidencia login. | |
 | 2. Sesión activa | 2 | Controla sesión y acceso con claridad. | Sesión funcional. | Sesión parcial. | No controla sesión. | |
-| 3. Relación uno a muchos | 2 | Ventas asociadas al usuario correctamente. | Asociación funcional. | Asociación parcial. | No evidencia relación. | |
+| 3. Permisos y asociación | 2 | Aplica permisos en IGU y servicio; asocia la venta al usuario activo. | Permisos y asociación funcionales. | Implementación parcial. | No controla acceso. | |
 | 4. Capas | 2 | Controlador, servicio y DAO separados. | Separación suficiente. | Mezcla responsabilidades. | No separa. | |
 | 5. Error o hallazgo | 1 | Analiza causa y solución. | Explica un problema. | Menciona un problema. | No presenta. | |
 | 6. Orden y reflexión | 1 | Evidencia clara y reflexión precisa. | Evidencia suficiente. | Evidencia incompleta. | No sustenta. | |

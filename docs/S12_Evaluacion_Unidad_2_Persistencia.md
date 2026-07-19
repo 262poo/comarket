@@ -1,4 +1,4 @@
-﻿# S12 - Aplicaciones de escritorio por capas y gestión de datos persistentes (Evaluación U2)
+# S12 - Aplicaciones de escritorio por capas y gestión de datos persistentes (Evaluación U2)
 
 ## 1. Introducción
 
@@ -6,7 +6,7 @@ Tiempo: 20 min.
 
 ### 1.1 Propósito
 
-Validar la aplicación de escritorio por capas con GUI, DAO, SQLite, operaciones persistentes, relaciones entre objetos, seguridad básica, consultas y pruebas.
+Validar la aplicación de escritorio por capas con GUI, DAO, SQLite, listado persistente, CRUD, asociación `Usuario–Venta` y flujo `Venta–DetalleVenta–Producto`.
 
 ### 1.2 Resultado de aprendizaje
 
@@ -14,17 +14,17 @@ El estudiante demuestra que puede construir, ejecutar, probar y defender una apl
 
 ### 1.3 Producto de sesión
 
-Producto U2 integrado: GUI JavaFX, controladores, servicios, entidades, DAO, SQLite, relación muchos a muchos, relación uno a muchos, seguridad básica, consultas y evidencias de pruebas.
+Producto U2 integrado: GUI JavaFX, controladores, servicios, entidades, DAO, SQLite, CRUD de `Producto`, asociación `Usuario–Venta` y flujo `Venta–DetalleVenta–Producto`, todavía sin autenticación ni reportes.
 
 ### 1.4 Motivación de la sesión
 
-Una aplicación de escritorio se evalúa por el flujo completo: el usuario ingresa, opera pantallas, el controlador delega, el servicio coordina, el DAO persiste y las consultas muestran información consistente.
+Una aplicación de escritorio se evalúa por el flujo completo: la vista recibe acciones, el controlador delega, el servicio coordina objetos y reglas, el DAO persiste y la GUI recupera información consistente.
 
 Preguntas para los estudiantes:
 
 1. Qué evidencia demuestra que la GUI funciona integrada con SQLite?
 2. Qué parte puedes defender individualmente?
-3. Qué revisas cuando una operación no aparece en una consulta?
+3. Qué revisas cuando una operación no se recupera después de reiniciar la aplicación?
 
 ### 1.5 Ubicación en el curso
 
@@ -42,34 +42,22 @@ Tiempo: 15 min.
 - Integración GUI-persistencia.
 - Arquitectura por capas.
 - DAO y JDBC.
-- Relación muchos a muchos mediante detalle.
-- Relación uno a muchos asociada al usuario.
-- Seguridad básica.
-- Consultas integradas.
+- Asociación `Usuario–Venta` sin autenticación.
+- Composición `Venta–DetalleVenta` y referencia a `Producto`.
+- Persistencia atómica y consistencia del flujo.
+- Validaciones y errores controlados.
 - Pruebas manuales.
 
 ### 2.2 Arquitectura real del producto U2
 
 ```mermaid
 flowchart TB
-    LoginView["view<br/>LoginView.fxml"]
-    MainView["view<br/>MainView.fxml"]
     ProductoView["view<br/>ProductoView.fxml"]
     VentaView["view<br/>VentaView.fxml"]
-    AnularVentasView["view<br/>AnularVentasView.fxml"]
-    ReporteView["view<br/>ReporteVentasView.fxml"]
-
-    LoginController["controller<br/>LoginController"]
-    MainController["controller<br/>MainController"]
     ProductoController["controller<br/>ProductoController"]
     VentaController["controller<br/>VentaController"]
-    AnularVentasController["controller<br/>AnularVentasController"]
-    ReporteController["controller<br/>ReporteVentasController"]
-
     ProductoService["service<br/>ProductoServiceImplSQLite"]
     VentaService["service<br/>VentaServiceImplSQLite"]
-    UsuarioService["service<br/>UsuarioServiceImplSQLite"]
-    Sesion["security<br/>Sesion"]
 
     subgraph Persistencia["dao + db"]
         ProductoDAO["dao<br/>ProductoDao"]
@@ -82,31 +70,14 @@ flowchart TB
 
     Entidades["entity<br/>Producto / Venta / DetalleVenta / Usuario"]
 
-    LoginView --> LoginController
-    LoginController --> UsuarioService
-    LoginController --> Sesion
-    LoginController --> MainView
-
-    MainView --> MainController
-    MainController --> ProductoView
-    MainController --> VentaView
-    MainController --> AnularVentasView
-    MainController --> ReporteView
-
     ProductoView --> ProductoController
     VentaView --> VentaController
-    AnularVentasView --> AnularVentasController
-    ReporteView --> ReporteController
-
     ProductoController --> ProductoService
     VentaController --> VentaService
-    AnularVentasController --> VentaService
-    ReporteController --> VentaService
-
-    UsuarioService --> UsuarioDAO
     ProductoService --> ProductoDAO
     VentaService --> VentaDAO
     VentaService --> DetalleDAO
+    VentaService --> UsuarioDAO
 
     ProductoDAO --> Entidades
     VentaDAO --> Entidades
@@ -122,25 +93,26 @@ flowchart TB
 
 ### 2.3 Criterios mínimos de cierre U2
 
-- Login funcional con usuario admin.
-- Sesión activa visible en ventana principal.
+- Proyecto organizado por capas y conectado.
+- Listado persistente de productos desde la GUI.
 - CRUD persistente de productos en SQLite.
+- Venta asociada a un usuario seleccionado, sin login.
 - Registro de venta con cabecera y detalle.
-- Asociación de venta al usuario autenticado.
-- Anular ventas con detalle, estado, usuario y anulación.
-- Reporte de ventas con filtros (cliente, fecha, usuario, estado).
+- Recuperación de ventas con usuario y detalles.
+- Anulación con cambio de estado y reposición de stock.
 - Consistencia total cabecera vs detalle validada.
-- Matriz de pruebas funcionales completa.
+- Validaciones y errores controlados.
 
 ## 3. Aplica: evaluación práctica
 
 Tiempo: 3h.
 
-### 3.1 Ejecutar la aplicación y autenticar
+### 3.1 Demostrar el listado persistente por capas
 
 1. Ejecutar comarket-desk.
-2. Ingresar con admin / 123456.
-3. Confirmar que la ventana principal muestra el usuario autenticado.
+2. Abrir la vista de productos.
+3. Explicar el flujo base de datos–DAO–servicio–controlador–tabla.
+4. Confirmar que los productos se recuperan después de reiniciar.
 
 ### 3.2 Demostrar CRUD persistente de productos
 
@@ -153,34 +125,33 @@ Tiempo: 3h.
 
 1. Registrar una venta con al menos dos detalles.
 2. Verificar validaciones (cantidad mayor a cero y stock suficiente).
-3. Confirmar que la venta queda asociada al usuario autenticado.
+3. Seleccionar un usuario de prueba y confirmar que la venta queda asociada.
 
 ### 3.4 Demostrar anulación de ventas
 
 1. Abrir Anular ventas.
 2. Seleccionar una venta y mostrar su detalle.
-3. Verificar que se muestra el usuario que registró la venta.
+3. Verificar que se muestra el usuario asociado a la venta.
 4. Anular una venta activa.
 5. Verificar cambio de estado a ANULADA y reposición de stock.
 
-### 3.5 Demostrar reporte de ventas y consistencia
+### 3.5 Demostrar objetos relacionados y consistencia
 
-1. Abrir Reporte de ventas.
-2. Probar filtros por cliente, rango de fechas, usuario y estado.
-3. Seleccionar una venta filtrada y mostrar detalle.
-4. Verificar total mostrado y diferencia de consistencia.
+1. Listar las ventas asociadas a un usuario de prueba.
+2. Seleccionar una venta y mostrar sus detalles.
+3. Verificar que cada detalle referencia un producto existente.
+4. Comparar el total de la venta con la suma de subtotales.
 
 ### 3.6 Ejecutar matriz final de pruebas U2
 
 | Caso | Evidencia esperada | Resultado obtenido |
 |---|---|---|
-| Login correcto e incorrecto | Control de acceso funcional | |
+| Listado persistente | Productos recuperados desde la base de datos | |
 | CRUD de productos | Persistencia correcta en GUI | |
 | Registro de venta | Cabecera y detalle guardados | |
-| Usuario en venta | Venta asociada a admin | |
+| Usuario en venta | Venta asociada al usuario seleccionado | |
 | Anular ventas | Maestro-detalle operativo, usuario visible y anulación | |
 | Anulación | Estado ANULADA y stock repuesto | |
-| Reporte con filtros | Filtrado correcto por criterios | |
 | Consistencia | Total cabecera coincide con detalle | |
 
 Nota metodológica:
@@ -222,12 +193,11 @@ S12_Equipo##_ApellidoNombre.pdf
 
 - Capturas de GUI.
 - Evidencia de registros en SQLite.
-- Código o descripción de DAO.
-- Código o descripción de servicios.
-- Evidencia de seguridad básica.
-- Evidencia de relación muchos a muchos.
-- Evidencia de relación uno a muchos.
-- Consulta integrada.
+- Evidencia del listado persistente por capas.
+- Evidencia del CRUD persistente de `Producto`.
+- Evidencia de la asociación `Usuario–Venta` mediante selección manual.
+- Evidencia del flujo `Venta–DetalleVenta–Producto`.
+- Evidencia de anulación, reposición de stock y consistencia de totales.
 - Matriz mínima de pruebas.
 - Aporte individual.
 
@@ -244,9 +214,9 @@ Explica cómo fluye una operación desde la vista hasta SQLite.
 - PDF con nombre correcto.
 - Evidencia de aplicación JavaFX funcionando.
 - CRUD persistente demostrado.
-- Operación con detalle demostrada.
-- Seguridad básica demostrada.
-- Consulta integrada demostrada.
+- Asociación `Usuario–Venta` demostrada sin autenticación.
+- Operación `Venta–DetalleVenta–Producto` demostrada.
+- Anulación y consistencia del flujo demostradas.
 - Validaciones demostradas.
 - Aporte individual verificable.
 
@@ -259,8 +229,8 @@ Tiempo: 20 min.
 - Producto U2 ejecutado.
 - Persistencia demostrada.
 - Relaciones entre objetos explicadas.
-- Seguridad básica operativa.
-- Consultas integradas funcionando.
+- Flujo cabecera–detalle funcionando.
+- Stock y totales consistentes.
 - Validaciones y pruebas documentadas.
 - Evidencia individual entregada.
 
@@ -275,9 +245,9 @@ Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 
 3. Qué responsabilidad tiene el servicio?
 4. Qué responsabilidad tiene el DAO?
 5. Cómo se guarda una operación con detalles?
-6. Qué relación se asocia al usuario?
-7. Qué consulta integrada implementaste?
-8. Qué mejorarás en U3?
+6. Cómo se asocia una venta con el usuario seleccionado sin iniciar sesión?
+7. Cómo garantizas la consistencia entre cabecera, detalles, total y stock?
+8. Qué cambiará en S13 cuando el usuario provenga de una sesión autenticada?
 
 ### 5.4 Rúbrica de evaluación
 
@@ -286,6 +256,6 @@ Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 
 | 1. GUI funcional | 2 | GUI completa, clara y conectada al flujo principal. | GUI principal funcional. | GUI parcial o inestable. | No ejecuta GUI. | |
 | 2. Capas y responsabilidades | 2 | `controller`, `service`, `entity` y `dao` bien separados. | Separación suficiente. | Mezclas importantes. | No separa. | |
 | 3. Persistencia y relaciones | 2 | CRUD simple, detalle y relaciones persistentes funcionando. | Persistencia principal funcional. | Persistencia incompleta. | No persiste. | |
-| 4. Seguridad y consultas | 2 | Login, usuario asociado y consultas integradas funcionando. | Funcionalidad principal presente. | Funcionalidad parcial. | No evidencia. | |
+| 4. Flujo y consistencia | 2 | Venta con usuario, detalles, total, stock y anulación consistentes. | Flujo principal funcional y consistente. | Flujo parcial o con inconsistencias. | No evidencia el flujo. | |
 | 5. Evidencia individual | 1 | Evidencia clara, ordenada y verificable. | Evidencia suficiente. | Evidencia incompleta. | No entrega. | |
 | 6. Defensa técnica | 1 | Responde con precisión y criterio. | Responde adecuadamente. | Responde parcialmente. | No sustenta. | |

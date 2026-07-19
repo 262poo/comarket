@@ -1,4 +1,4 @@
-# S11 - Consultas integradas y pruebas
+# S14 - Consultas integradas y pruebas del flujo principal
 
 ## 1. Introducción
 
@@ -6,15 +6,15 @@ Tiempo: 20 min.
 
 ### 1.1 Propósito
 
-Consolidar las consultas de ventas sobre SQLite y validar el flujo principal de CoMarket Desk con evidencias de prueba funcional.
+Consolidar consultas protegidas sobre el flujo `Usuario–Venta–DetalleVenta–Producto`, ejecutar pruebas funcionales, corregir fallos y preparar la versión candidata del proyecto.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante consulta datos relacionados (cabecera y detalle), aplica filtros, verifica totales y registra resultados de prueba del flujo principal.
+El estudiante consulta datos relacionados según el usuario o permiso activo, aplica filtros, verifica totales, registra pruebas y corrige incidencias del flujo principal.
 
 ### 1.3 Producto de sesión
 
-Consultas integradas operativas en GUI, verificación de consistencia total cabecera vs detalle y matriz de pruebas S11.
+Consultas protegidas en la IGU, consistencia cabecera–detalle, matriz de pruebas S14, correcciones, preparación del ejecutable nativo e informe del concurso internacional de programación.
 
 ### 1.4 Motivación de la sesión
 
@@ -28,9 +28,9 @@ Cómo consultamos información relacionada y comprobamos que el flujo completo f
 
 ### 1.5 Ubicación en el curso
 
-- Unidad: U2.
+- Unidad: U3.
 - Carpeta de trabajo: `comarket-desk`.
-- Avance de sesión: consultas, validaciones y pruebas funcionales antes de la evaluación.
+- Avance de sesión: consultas protegidas, pruebas, refinamiento y versión candidata antes de la evaluación U3.
 
 ## 2. Explica
 
@@ -38,7 +38,7 @@ Tiempo: 25 min.
 
 ### 2.1 Lo implementado actualmente en el proyecto
 
-- Login previo obligatorio (usuario de prueba: admin / 123456).
+- Login previo obligatorio con las credenciales de prueba proporcionadas por el docente.
 - Pestaña Anular ventas:
   - Usa `AnularVentasView.fxml`.
   - Controlador: `AnularVentasController`.
@@ -60,7 +60,7 @@ Tiempo: 25 min.
 - Persistencia en SQLite mediante JDBC.
 - Validación de rango de fechas (fecha inicial no mayor a fecha final).
 
-### 2.2 Capas y componentes usados en S11
+### 2.2 Capas y componentes usados en S14
 
 - Vista (FXML): `AnularVentasView.fxml` y `ReporteVentasView.fxml`.
 - Controladores: `AnularVentasController`, `ReporteVentasController` y `MainController`.
@@ -71,7 +71,7 @@ Tiempo: 25 min.
 
 No se usó un `ConsultaDao` separado en este avance; la consulta se resuelve en `VentaDao.consultar(...)` con filtros dinámicos.
 
-### 2.3 Arquitectura real de S11
+### 2.3 Arquitectura real de S14
 
 ```mermaid
 %%{init: {'flowchart': {'rankSpacing': 80, 'nodeSpacing': 35, 'curve': 'basis'}} }%%
@@ -148,7 +148,7 @@ src/main/resources/com/upeu/comarket/view/ReporteVentasView.fxml
 
 ## 3. Aplica: actividad práctica guiada
 
-Tiempo: 2h.
+Tiempo: 4 h.
 
 ### 3.1 Preparar datos de prueba
 
@@ -281,7 +281,7 @@ Casos obligatorios de prueba manual:
 Nota metodológica:
 
 ```text
-En el estado actual de este proyecto, S11 se valida con pruebas funcionales manuales.
+En el estado actual de este proyecto, S14 se valida con pruebas funcionales manuales y evidencias reproducibles.
 No hay pruebas automatizadas en src/test para este flujo.
 ```
 
@@ -294,7 +294,7 @@ Tiempo: 2h fuera del aula.
 Entregar PDF con nombre:
 
 ```text
-S11_Equipo##_ApellidoNombre.pdf
+S14_Equipo##_ApellidoNombre.pdf
 ```
 
 Debe incluir:
@@ -307,6 +307,9 @@ Debe incluir:
 6. Registro de una anulación y su resultado.
 7. Matriz de pruebas completa (casos válidos e inválidos).
 8. Breve explicación del flujo entre capas.
+9. Evidencia de acceso permitido y denegado a una consulta o acción.
+10. Evidencia del ejecutable nativo o del procedimiento reproducible de generación.
+11. Informe de participación del concurso internacional de programación.
 
 ### 4.2 Criterios mínimos de aceptación
 
@@ -315,6 +318,9 @@ Debe incluir:
 - Totales verificados.
 - Prueba de anulación con reposición de stock.
 - Matriz de pruebas documentada.
+- Acceso a consultas validado según usuario o permiso.
+- Ejecutable nativo o evidencia reproducible de generación.
+- Informe del concurso presentado.
 
 ## 5. Cierre evaluativo
 
@@ -328,6 +334,8 @@ Tiempo: 20 min.
 - Anulación de venta activa verificada.
 - Coherencia de totales comprobada.
 - Registro de pruebas funcionales con hallazgos.
+- Consultas y acciones sensibles protegidas.
+- Versión candidata preparada para sustentación.
 
 ### 5.2 Preguntas de defensa
 

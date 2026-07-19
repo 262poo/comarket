@@ -1,4 +1,4 @@
-﻿# S9 - Operaciones persistentes con relación muchos a muchos
+# S11 - Procesamiento de Venta–DetalleVenta–Producto
 
 ## 1. Introducción
 
@@ -18,7 +18,7 @@ Registro persistente de una operación con detalles: cabecera, lista de detalles
 
 ### 1.4 Motivación de la sesión
 
-Después de persistir una tabla simple, el siguiente reto es registrar una operación real donde una cabecera contiene varios detalles y cada detalle referencia una entidad existente.
+Después de completar el CRUD de `Producto` y asociar `Usuario–Venta`, el siguiente reto es ampliar la venta con varios detalles, donde cada detalle referencia un producto existente.
 
 Pregunta guía:
 
@@ -30,7 +30,7 @@ Cómo guardamos una operación con varios detalles sin perder la separación por
 
 - Unidad: U2.
 - Carpeta de trabajo: `comarket-desk`.
-- Avance de sesión: persistencia de una relación avanzada muchos a muchos desde objetos.
+- Avance de sesión: flujo persistente `Usuario–Venta–DetalleVenta–Producto`.
 
 ## 2. Explica
 
@@ -65,7 +65,7 @@ Los DAO se ubican en `dao` y reutilizan `db/ConexionSQLite` para conectarse a SQ
 ```mermaid
 %%{init: {'flowchart': {'rankSpacing': 90, 'nodeSpacing': 35, 'curve': 'basis'}} }%%
 flowchart TD
-    VentaView["view<br/>VentaView.fxml<br/>txtCliente / dpFecha / cboProducto / txtCantidad<br/>tablaDetalles / lblTotal"]
+    VentaView["view<br/>VentaView.fxml<br/>lblUsuario / dpFecha / cboProducto / txtCantidad<br/>tablaDetalles / lblTotal"]
     ConsultaVentasView["view<br/>ConsultaVentasView.fxml<br/>tablaVentas / tablaDetallesVenta<br/>colEstado<br/>Anular venta / Actualizar"]
     VentaController["controller<br/>VentaController<br/>initialize()<br/>onAgregarDetalleClick()<br/>onQuitarDetalleClick()<br/>onGuardarVentaClick()<br/>onNuevaVentaClick()<br/>cargarProductos()"]
     ConsultaVentasController["controller<br/>ConsultaVentasController<br/>initialize()<br/>onActualizarClick()<br/>onAnularVentaClick()<br/>cargarDetalleVenta(venta)"]
@@ -73,7 +73,8 @@ flowchart TD
     ProductoServiceImplSQLite["service impl<br/>ProductoServiceImplSQLite"]
     VentaService["service<br/>VentaService<br/>&lt;&lt;interface&gt;&gt;<br/>registrar(venta)<br/>calcularTotal(venta)<br/>listar()<br/>listarDetalles(ventaId)<br/>anular(ventaId)"]
     VentaServiceImplSQLite["service impl<br/>VentaServiceImplSQLite<br/>validarVenta(venta)<br/>validarStock(connection, venta)<br/>anular(ventaId)<br/>transaccion"]
-    Venta["entity<br/>Venta<br/>id<br/>cliente<br/>fecha<br/>estado<br/>detalles<br/>calcularTotal()"]
+    Venta["entity<br/>Venta<br/>id<br/>usuario<br/>fecha<br/>estado<br/>detalles<br/>calcularTotal()"]
+    Usuario["entity<br/>Usuario<br/>id / username / rol"]
     DetalleVenta["entity<br/>DetalleVenta<br/>producto<br/>cantidad<br/>precioUnitario<br/>getSubtotal()"]
     Producto["entity<br/>Producto<br/>codigo / nombre / precio / stock"]
     ProductoDao["dao<br/>ProductoDao<br/>listar()"]
@@ -107,6 +108,7 @@ flowchart TD
     ConsultaVentasController -.->|consulta| DetalleVenta
     ConsultaVentasController -.->|anula| VentaService
     Venta -->|1 contiene muchos| DetalleVenta
+    Venta -->|registrada por| Usuario
     DetalleVenta -->|referencia 1 producto| Producto
 
     classDef serviceImpl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
@@ -134,7 +136,7 @@ src/main/resources/com/upeu/comarket/view/ConsultaVentasView.fxml
 
 ## 3. Aplica: actividad práctica guiada
 
-Tiempo: 2h.
+Tiempo: 3 h.
 
 1. Crear o revisar entidades `Venta`, `DetalleVenta` y `Producto`.
 2. Diseñar o revisar `VentaView.fxml`.
@@ -155,15 +157,16 @@ Tiempo: 2h.
 17. Cambiar `estado` a `ANULADA` y reponer stock dentro de una transacción.
 18. Validar cantidad, stock, venta sin detalles, venta ya anulada y errores de persistencia.
 
-Tablas de referencia:
+Estructuras persistentes proporcionadas como referencia. La tabla `venta` proviene de S10 y conserva la asociación con `usuario`; en S11 se incorpora `detalle_venta` y los datos calculados del flujo:
 
 ```sql
 CREATE TABLE venta (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    cliente TEXT NOT NULL,
+    usuario_id INTEGER NOT NULL,
     fecha TEXT NOT NULL,
     total REAL NOT NULL,
-    estado TEXT NOT NULL DEFAULT 'ACTIVA'
+    estado TEXT NOT NULL DEFAULT 'ACTIVA',
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 );
 
 CREATE TABLE detalle_venta (
@@ -203,14 +206,14 @@ Tiempo: 2h fuera del aula.
 Entrega un PDF con el siguiente nombre:
 
 ```text
-S09_Equipo##_ApellidoNombre.pdf
+S11_Equipo##_ApellidoNombre.pdf
 ```
 
 #### 4.1.1 Datos del estudiante
 
 - Nombre:
 - Equipo:
-- Sesión: S09 - Operaciones persistentes con relación muchos a muchos
+- Sesión: S11 - Procesamiento de Venta–DetalleVenta–Producto
 - Rol o aporte realizado:
 - Link de GitHub:
 

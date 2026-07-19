@@ -34,12 +34,13 @@ Aplicación de escritorio orientada a objetos aplicada a un proceso
 transaccional de negocio, con modelo de dominio, entidades maestras y
 transaccionales, relaciones entre entidades, flujo principal de gestión,
 arquitectura por capas, persistencia relacional, interfaz gráfica funcional,
-demo funcional, evidencias de funcionamiento y sustentación técnica.
+control de acceso, sesión, consultas, pruebas, demo funcional, evidencias de
+funcionamiento y sustentación técnica.
 ```
 
 Resultado de aprendizaje del curso:
 
-Al finalizar el curso, el estudiante diseña, implementa y sustenta una aplicación de escritorio basada en objetos. La solución integra modelado del dominio, encapsulamiento, herencia, polimorfismo, colecciones, persistencia con base de datos relacional, DAO, interfaz gráfica y organización modular del código.
+Al finalizar el curso, el estudiante diseña, implementa y sustenta una aplicación de escritorio basada en objetos. La solución integra modelado del dominio, encapsulamiento, herencia, polimorfismo, colecciones, persistencia relacional, DAO, interfaz gráfica, control de acceso, sesión, consultas, pruebas y organización modular del código.
 
 ## Contenido
 
@@ -62,29 +63,48 @@ Resultado de aprendizaje U1: al finalizar la unidad, el estudiante modela e impl
 
 Producto U2: aplicación de escritorio por capas con interfaz gráfica y persistencia relacional.
 
-Resultado de aprendizaje U2: al finalizar la unidad, el estudiante construye una aplicación de escritorio organizada por capas, integrando interfaz gráfica, acceso a datos, persistencia relacional, seguridad básica, consultas y gestión de un flujo transaccional con cabecera y detalle.
+Resultado de aprendizaje U2: al finalizar la unidad, el estudiante construye una aplicación de escritorio organizada por capas, integrando interfaz gráfica, acceso a datos, primer listado persistente, CRUD de `Producto`, asociación `Usuario–Venta` y un flujo `Venta–DetalleVenta–Producto`.
 
 | Sesión | Tema | Producto de sesión |
 |---|---|---|
 | S7 | **Interfaz gráfica y gestión de datos desde GUI en memoria:**<br>Aplicación de escritorio con interfaz gráfica, vista, controladores, formularios, eventos, tablas y gestión de datos en memoria de una entidad ya trabajada en U1. Validación básica al cierre de la sesión | Flujo vista-controlador-servicio-entidad funcionando desde GUI con memoria |
-| S8 | **Arquitectura por capas, patrón DAO y gestión persistente desde GUI:**<br>Organización por capas, acceso a datos, base de datos relacional local, DAO, servicio persistente, formularios, tablas, operaciones de gestión persistentes y validación de datos de una tabla simple | Gestión persistente desde GUI con arquitectura por capas y acceso a datos |
-| S9 | **Operaciones persistentes con relación muchos a muchos:**<br>Modelo de dominio con cabecera, detalle y entidad relacionada; tabla intermedia con atributos, cálculo de subtotales/totales, control de stock, persistencia y validaciones del flujo | Flujo persistente con relación muchos a muchos y tabla intermedia |
-| S10 | **Seguridad básica y relación uno a muchos:**<br>Usuario, autenticación básica, sesión activa, relación uno a muchos, operaciones persistentes asociadas al usuario, validaciones de acceso y manejo básico de errores | Seguridad básica y operaciones persistentes con relación uno a muchos |
-| S11 | **Consultas integradas y pruebas del flujo principal:**<br>Búsquedas, filtros, consultas maestro-detalle, consultas por fecha/usuario, totales, verificación de consistencia, manejo de errores y pruebas funcionales por capas | Consultas integradas y flujo principal probado |
-| S12 | **Aplicaciones de escritorio por capas y gestión de datos persistentes (Evaluación U2):**<br>Cierre del Producto U2: aplicación de escritorio por capas con interfaz gráfica, acceso a datos, persistencia relacional, relaciones, seguridad básica, consultas, validaciones y pruebas | Producto U2 validado con interfaz gráfica, persistencia relacional, flujo transaccional, relaciones y seguridad básica |
+| S8 | **Arquitectura por capas, DAO y primer listado persistente desde GUI:**<br>Conexión, DAO de consulta, servicio, controlador y tabla para listar `Producto` desde la base de datos; lista vacía y errores de conexión | Proyecto por capas conectado y listado persistente de `Producto` en la GUI |
+| S9 | **CRUD persistente completo de Producto desde GUI:**<br>Registro, búsqueda, listado, actualización y eliminación mediante DAO, servicio, controlador, formularios y tablas; validaciones, mensajes y errores controlados | CRUD persistente completo de `Producto` desde la GUI |
+| S10 | **Gestión de objetos relacionados Usuario–Venta:**<br>Persistencia y consulta de `Usuario`, creación inicial de `Venta` asociada a un usuario y listado de ventas por usuario. En esta sesión no se implementan credenciales, sesión ni permisos | Módulo persistente de `Usuario–Venta` desde la GUI |
+| S11 | **Procesamiento de Venta–DetalleVenta:**<br>La `Venta` de S10 incorpora una colección de `DetalleVenta`; cada detalle referencia un `Producto` y contiene cantidad, precio unitario y subtotal. Se calculan totales, se actualiza el stock y se conserva el flujo atómicamente | Flujo persistente de `Usuario–Venta–DetalleVenta–Producto` |
+| S12 | **Aplicaciones de escritorio por capas y gestión de datos persistentes (Evaluación U2):**<br>Cierre del Producto U2 con `Producto`, `Usuario–Venta` y `Venta–DetalleVenta–Producto`, todavía sin autenticación | Producto U2 validado con GUI, persistencia, CRUD, objetos relacionados y flujo cabecera–detalle |
 
 ### U3: Proyecto Integrador
 
 Producto U3 / producto del curso: **sistema orientado a objetos integrado para un proceso transaccional de negocio**.
 
-Resultado de aprendizaje U3: al finalizar la unidad, el estudiante integra, valida y sustenta una aplicación de escritorio orientada a objetos, articulando modelo de dominio, interfaz gráfica, persistencia relacional, flujo transaccional, arquitectura por capas, evidencias de funcionamiento y demo técnica.
+Resultado de aprendizaje U3: al finalizar la unidad, el estudiante protege, consulta, prueba y sustenta una aplicación de escritorio orientada a objetos, incorporando `Usuario–Venta`, sesión activa, consultas del flujo principal, correcciones, evidencias y demo técnica.
 
 | Sesión | Tema | Producto de sesión |
 |---|---|---|
-| S13 | **Integración del sistema:**<br>Revisión de alcance, integración de módulos, consistencia entre paquetes, nombres, flujo, dependencias, recursos y preparación inicial para ejecutable nativo | Modelo, GUI, persistencia y funcionalidades principales ensambladas |
-| S14 | **Validación, refinamiento y ejecutable nativo:**<br>Corrección de fallos, limpieza de código, organización final, mensajes, validaciones, consistencia visual, flujo crítico, ejecutable nativo y preparación para sustentación | Manejo de errores, corrección de observaciones, refinamiento del diseño, ejecutable nativo y preparación para sustentación |
-| S15 | **Sistema orientado a objetos integrado (Evaluación U3):**<br>Cierre del Producto U3: sistema orientado a objetos integrado para un proceso transaccional de negocio, con modelo de dominio, entidades maestras y transaccionales, arquitectura por capas, persistencia relacional, interfaz gráfica funcional, demo, evidencias de funcionamiento y sustentación técnica | Producto U3 validado mediante demo funcional, evidencias de funcionamiento y sustentación técnica |
+| S13 | **Control de acceso y sesión desde la IGU:**<br>Pantalla de login, verificación de credenciales mediante servicio y DAO, clase `Sesion` para conservar el usuario activo, roles y permisos básicos, menú y pantallas protegidas, cierre de sesión y asociación automática de cada nueva `Venta` con el usuario autenticado. Participación en el concurso de programación y presentación del código desarrollado | IGU con login, sesión activa, permisos básicos y ventas asociadas automáticamente al `Usuario`; evidencia de participación en el concurso |
+| S14 | **Consultas integradas y pruebas del flujo principal:**<br>Consultas de productos y ventas, filtros por fecha, usuario o estado, totales, acceso autorizado, matriz de pruebas, correcciones y ejecutable nativo. Informe de participación del concurso internacional de programación | Consultas protegidas, flujo principal probado y versión candidata del producto |
+| S15 | **Sistema orientado a objetos integrado (Evaluación U3):**<br>Cierre del Producto U3 con `Producto`, `Usuario–Venta`, `Venta–DetalleVenta–Producto`, clase `Sesion`, seguridad desde la IGU, consultas, pruebas, persistencia e interfaz gráfica | Producto U3 validado mediante demo funcional, evidencias y sustentación técnica |
 | S16 | **Evaluación final individual:**<br>Evaluación individual, recuperación de sustentaciones pendientes y cierre académico del curso | Evaluación final individual, recuperacion de sustentaciones pendientes y cierre académico |
+
+### De la asociación Usuario–Venta al control de sesión
+
+En S10 se trabaja únicamente la relación del dominio: una venta referencia al usuario que la registra y un usuario puede estar asociado con varias ventas. El formulario permite seleccionar un usuario de prueba para comprobar la asociación; todavía no existe login ni control de permisos.
+
+En S13 se elimina esa selección manual. La pantalla de acceso autentica al usuario y la clase `Sesion` conserva el usuario activo. Al registrar una venta, el controlador obtiene el usuario desde `Sesion` y lo asigna automáticamente.
+
+```mermaid
+flowchart LR
+    LoginView[LoginView] --> LoginController[LoginController]
+    LoginController --> AuthService[AuthService]
+    AuthService --> UsuarioDAO[UsuarioDAO]
+    AuthService --> Sesion[Sesion: usuario activo]
+    VentaController[VentaController] --> Sesion
+    VentaController --> VentaService[VentaService]
+    VentaService --> VentaDAO[VentaDAO]
+```
+
+La clase `Sesion` conserva el usuario y su rol durante la ejecución, pero no almacena la contraseña, conexiones, ventanas ni colecciones completas de operaciones. La IGU adapta menús y pantallas según permisos; el servicio vuelve a validar las acciones sensibles antes de ejecutarlas.
 
 ## Arquitectura base U1: aplicación de consola en memoria
 
@@ -262,14 +282,14 @@ Flujo de trabajo U2-U3:
 
 1. La Unidad 2 inicia o continúa el proyecto JavaFX/Maven ubicado en `comarket-desk` desde IntelliJ IDEA.
 2. En S7 pasa de consola a GUI y reutiliza el servicio en memoria de una entidad simple.
-3. En S8 incorpora arquitectura por capas, DAO, JDBC y SQLite con CRUD persistente para una tabla simple.
-4. En S9 implementa operaciones persistentes con relación muchos a muchos mediante cabecera, detalle y tabla intermedia.
-5. En S10 agrega seguridad básica y una relación uno a muchos asociada al usuario.
-6. En S11 desarrolla consultas integradas, filtros, pruebas funcionales y correcciones por sesión.
-7. La Unidad 3 integra pantallas, controladores, servicios, entidades, DAO, base de datos, documentacion y evidencias.
-8. En S13 y S14 estabiliza el producto y genera el ejecutable nativo final con GraalVM.
-9. En S15 cierra el Producto U3 mediante demostración funcional y defensa técnica.
-10. En S16 se realiza la evaluación final individual, la recuperación de sustentaciones pendientes y el cierre académico.
+3. En S8 incorpora arquitectura por capas, DAO, JDBC y SQLite para listar `Producto` desde la base de datos en la GUI.
+4. En S9 completa el CRUD persistente de `Producto` con validaciones y errores controlados.
+5. En S10 persiste `Usuario–Venta` como asociación entre objetos, sin implementar todavía autenticación ni permisos.
+6. En S11 amplía la venta con `DetalleVenta–Producto`, cálculos, stock y persistencia atómica.
+7. En S12 demuestra el Producto U2 integrado, todavía sin seguridad ni reportes.
+8. En S13 construye la pantalla de login y la clase `Sesion`, aplica roles y permisos básicos en la IGU y asocia automáticamente cada venta con el usuario activo; además participa en el concurso de programación y presenta el código desarrollado.
+9. En S14 implementa consultas y filtros protegidos, ejecuta pruebas, corrige fallos, prepara el ejecutable nativo y presenta el informe del concurso internacional de programación.
+10. En S15 cierra el Producto U3 mediante demostración funcional y defensa técnica; en S16 se realiza la evaluación final individual y el cierre académico.
 
 ## Enlaces
 
@@ -280,13 +300,13 @@ Flujo de trabajo U2-U3:
 - [S5: Operaciones CRUD, validaciones y responsabilidad única](S05_CRUD_Memoria_ArrayList.md)
 - [S6: Modelado orientado a objetos y gestión de datos en memoria](S06_Evaluacion_Unidad_1.md)
 - [S7: Interfaz grafica y CRUD desde GUI en memoria](S07_GUI_CRUD_Memoria.md)
-- [S8: Arquitectura por capas, DAO y CRUD persistente desde GUI](S08_Arquitectura_DAO_CRUD_Persistente.md)
-- [S9: Operaciones persistentes con relación muchos a muchos](S09_Operaciones_Persistentes_Muchos_Muchos.md)
-- [S10: Seguridad básica y relación uno a muchos](S10_Seguridad_Relacion_Uno_Muchos.md)
-- [S11: Consultas integradas y pruebas](S11_Consultas_Integradas_Pruebas.md)
-- [S12: Aplicaciones de escritorio por capas y gestión de datos persistentes](S12_Evaluacion_Unidad_2.md)
-- [S13: Integracion del sistema](S13_Proyecto_Integrador_Ensamblaje.md)
-- [S14: Validacion y refinamiento](S14_Proyecto_Integrador_Refinamiento.md)
+- [S8: Arquitectura por capas, DAO y primer listado persistente desde GUI](S08_Arquitectura_DAO_Listado_Persistente.md)
+- [S9: CRUD persistente completo de Producto desde GUI](S09_CRUD_Persistente_Producto_GUI.md)
+- [S10: Gestión de objetos relacionados Usuario–Venta](S10_Objetos_Relacionados_Usuario_Venta.md)
+- [S11: Procesamiento de Venta–DetalleVenta](S11_Venta_DetalleVenta_Producto.md)
+- [S12: Aplicaciones de escritorio por capas y gestión de datos persistentes](S12_Evaluacion_Unidad_2_Persistencia.md)
+- [S13: Control de acceso y sesión desde la IGU](S13_Control_Acceso_Sesion_IGU.md)
+- [S14: Consultas integradas y pruebas del flujo principal](S14_Consultas_Integradas_Pruebas.md)
 - [S15: Sistema orientado a objetos integrado](S15_Documentacion_Demo.md)
 - [S16: Evaluación final individual](S16_Evaluacion_Final.md)
 - [Taller POO 01: construir el producto U1 en consola](POOTaller01.md)

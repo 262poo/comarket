@@ -1,4 +1,4 @@
-﻿# S8 - Arquitectura por capas, DAO y CRUD persistente desde GUI
+# S9 - CRUD persistente completo de Producto desde GUI
 
 ## 1. Introducción
 
@@ -6,11 +6,11 @@ Tiempo: 20 min.
 
 ### 1.1 Propósito
 
-Implementar una primera versión persistente de la aplicación de escritorio usando arquitectura por capas, patrón DAO, JDBC, SQLite y CRUD desde JavaFX.
+Completar el CRUD persistente de `Producto` desde la interfaz gráfica, reutilizando la arquitectura por capas, conexión, DAO y listado implementados en S8.
 
 ### 1.2 Resultado de aprendizaje
 
-El estudiante separa vista, controlador, servicio, entidades y persistencia; crea un DAO para una tabla simple y conecta el CRUD persistente con la interfaz gráfica.
+El estudiante implementa registro, búsqueda, listado, actualización y eliminación de productos mediante DAO, servicio, controlador, formularios y tablas, aplicando validaciones y errores controlados.
 
 ### 1.3 Producto de sesión
 
@@ -18,7 +18,7 @@ CRUD persistente de producto desde GUI, usando `ProductoServiceImplSQLite`, `Pro
 
 ### 1.4 Motivación de la sesión
 
-En S7 el CRUD funcionó en memoria. En esta sesión se reemplaza la implementación en memoria por una implementación persistente sin cambiar la responsabilidad del controlador ni de la entidad.
+En S8 se comprobó el corte base de datos–DAO–servicio–controlador–vista mediante `listar()`. En S9 se amplía ese corte sin alterar responsabilidades hasta completar todas las operaciones del CRUD.
 
 Pregunta guía:
 
@@ -30,7 +30,7 @@ Cómo guardamos datos desde la GUI sin poner SQL en el controlador?
 
 - Unidad: U2.
 - Carpeta de trabajo: `comarket-desk`.
-- Avance de sesión: primera persistencia real con DAO y una tabla simple.
+- Avance de sesión: CRUD persistente completo de `Producto`.
 
 ## 2. Explica
 
@@ -121,7 +121,7 @@ src/main/resources/com/upeu/comarket/view/ProductoView.fxml
 
 ## 3. Aplica: actividad práctica guiada
 
-Tiempo: 2h.
+Tiempo: 3 h.
 
 1. Revisar el proyecto JavaFX/Maven ubicado en `comarket-desk`.
 2. Agregar dependencia SQLite JDBC.
@@ -188,14 +188,14 @@ Tiempo: 2h fuera del aula.
 Entrega un PDF con el siguiente nombre:
 
 ```text
-S08_Equipo##_ApellidoNombre.pdf
+S09_Equipo##_ApellidoNombre.pdf
 ```
 
 #### 4.1.1 Datos del estudiante
 
 - Nombre:
 - Equipo:
-- Sesión: S08 - Arquitectura por capas, DAO y CRUD persistente desde GUI
+- Sesión: S09 - CRUD persistente completo de Producto desde GUI
 - Rol o aporte realizado:
 - Link de GitHub:
 
