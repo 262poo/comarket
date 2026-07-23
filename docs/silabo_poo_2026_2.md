@@ -213,11 +213,11 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   <tr>
     <td>6</td>
     <td>13/09/2026  19/09/2026</td>
-    <td><strong>Modelado orientado a objetos y gestión de datos en memoria (Evaluación U1):</strong><br>Cierre del Producto U1: aplicación de consola funcional en memoria con clases del dominio, encapsulamiento, constructores, relaciones entre objetos, herencia o interfaces cuando correspondan, CRUD en memoria, búsquedas, validaciones y ejecución del producto</td>
+    <td><strong>Clases y objetos, encapsulamiento, constructores, relaciones entre objetos, herencia, interfaces, polimorfismo, colecciones, CRUD en memoria, búsquedas y validaciones.</strong></td>
     <td>3</td>
     <td>4</td>
-    <td>Preparar y ejecutar la evaluación práctica del Producto U1, demostrando estructura de paquetes, flujo de gestión, entidades, servicio, validaciones, decisiones técnicas y atención de observaciones del docente.</td>
-    <td>Ordenar evidencias de U1, aplicar las observaciones del docente, completar la descripción breve del producto, preparar la defensa individual y registrar comandos o salidas de consola.</td>
+    <td><strong>Evaluación de la Unidad I:</strong><br>1. Resolver el examen teórico-práctico de los temas de la Unidad I.<br>2. Presentar y sustentar la Aplicación de consola orientada a objetos con gestión de datos en memoria.</td>
+    <td>Reflexionar sobre los logros y dificultades identificados en la evaluación y sustentación.</td>
   </tr>
 </table>
 
@@ -301,11 +301,11 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
   <tr>
     <td>6</td>
     <td>25/10/2026  31/10/2026</td>
-    <td><strong>Aplicaciones de escritorio por capas y gestión de datos persistentes (Evaluación U2):</strong><br>Cierre del Producto U2: aplicación de escritorio funcional con arquitectura por capas, interfaz gráfica, primer listado persistente, CRUD, objetos relacionados y un flujo de negocio mediante cabecera y detalle</td>
+    <td><strong>Arquitectura por capas, interfaz gráfica, acceso a datos, listado persistente, CRUD, objetos relacionados y flujo de negocio mediante cabecera y detalle.</strong></td>
     <td>3</td>
     <td>4</td>
-    <td>Ejecutar la evaluación práctica del Producto U2, demostrando arquitectura por capas, listado persistente, CRUD, objetos relacionados y flujo cabecera–detalle con cálculos, consistencia y anulación.</td>
-    <td>Ordenar evidencias de U2, registrar el aporte individual, aplicar las observaciones del docente, preparar la defensa técnica y documentar el flujo integrado.</td>
+    <td><strong>Evaluación de la Unidad II:</strong><br>1. Resolver el examen teórico-práctico de los temas de la Unidad II.<br>2. Presentar y sustentar la Aplicación de escritorio por capas con interfaz gráfica y persistencia de datos.<br>Participar en el concurso de programación (viaje de estudios, de ser requerido).</td>
+    <td>Reflexionar sobre los logros y dificultades identificados en la evaluación y sustentación.</td>
   </tr>
 </table>
 
@@ -347,7 +347,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
     <td><strong>Control de acceso, sesión y asociación del usuario con las operaciones:</strong><br>Objeto usuario, verificación de credenciales, sesión activa, asociación del usuario con las operaciones realizadas, validaciones de acceso, pantallas protegidas y manejo básico de errores</td>
     <td>3</td>
     <td>4</td>
-    <td>Implementar la verificación de credenciales, manejar la sesión activa, proteger las pantallas y asociar las operaciones con el usuario autenticado. Participar en el concurso de programación y presentar el código del proyecto desarrollado.</td>
+    <td>Implementar la verificación de credenciales, manejar la sesión activa, proteger las pantallas y asociar las operaciones con el usuario autenticado. Presentar el informe de participación en el concurso de programación.</td>
     <td>Crear un usuario de prueba y evidenciar acceso válido e inválido, cierre de sesión, operación asociada al usuario y bloqueo de acciones sin sesión.</td>
   </tr>
   <tr>
@@ -356,25 +356,25 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
     <td><strong>Consultas integradas, pruebas y refinamiento del flujo principal:</strong><br>Búsquedas, filtros, consultas cabecera–detalle, consultas por fecha, usuario o estado, totales, pruebas funcionales, corrección de fallos, consistencia visual y preparación del ejecutable nativo</td>
     <td>3</td>
     <td>4</td>
-    <td>Implementar consultas y filtros protegidos, ejecutar pruebas del flujo principal, corregir fallos y preparar o generar el ejecutable nativo. Presentar el informe de participación del concurso internacional de programación.</td>
-    <td>Preparar la matriz de pruebas, evidencias de consultas, filtros, totales, acceso autorizado, correcciones realizadas y versión candidata del producto.</td>
+    <td>Implementar consultas y filtros protegidos, ejecutar pruebas del flujo principal, corregir fallos y preparar o generar el ejecutable nativo.</td>
+    <td>Preparar la matriz de pruebas y el guion de demostración; definir el flujo principal; organizar las evidencias de consultas, filtros, totales, acceso autorizado y correcciones realizadas; verificar la versión candidata del producto y preparar la explicación de su arquitectura.</td>
   </tr>
   <tr>
     <td>3</td>
     <td>15/11/2026  21/11/2026</td>
-    <td><strong>Sistema orientado a objetos integrado (Evaluación U3):</strong><br>Cierre del Producto U3: sistema aplicado a un dominio definido, con modelo de dominio, CRUD, objetos relacionados, flujo cabecera–detalle, control de acceso, sesión, consultas, arquitectura por capas, persistencia, interfaz gráfica, evidencias y sustentación técnica</td>
+    <td><strong>Integración de aplicaciones de escritorio orientadas a objetos:</strong><br>Modelo de dominio, CRUD, objetos relacionados, flujo cabecera–detalle, control de acceso, sesión, consultas, arquitectura por capas, persistencia, interfaz gráfica y pruebas</td>
     <td>3</td>
     <td>4</td>
-    <td>Ejecutar el producto final, mostrar acceso, sesión, flujo principal, consultas y pruebas, y explicar arquitectura, entidades, servicios, acceso a datos, persistencia y validaciones.</td>
-    <td>Preparar el guion de demostración, definir el flujo principal, organizar evidencias, aplicar observaciones del docente y preparar la explicación de arquitectura para la sustentación técnica.</td>
+    <td><strong>Evaluación de la Unidad III:</strong><br>1. Resolver la evaluación teórico-práctica de los temas de la Unidad III.<br>2. Presentar y sustentar el Sistema orientado a objetos integrado para un proceso de negocio.</td>
+    <td>Registrar las observaciones del docente y actualizar las evidencias y la entrega final del producto.</td>
   </tr>
   <tr>
     <td>4</td>
     <td>22/11/2026  28/11/2026</td>
-    <td><strong>Evaluación final individual:</strong><br>Evaluación individual, recuperación de sustentaciones pendientes y cierre académico del curso</td>
+    <td><strong>Integración de programación orientada a objetos y aplicaciones de escritorio:</strong><br>Modelado de dominio, relaciones entre objetos, colecciones, arquitectura por capas, persistencia, interfaz gráfica, seguridad, consultas y pruebas</td>
     <td>3</td>
     <td>4</td>
-    <td>Realizar la evaluación final individual mediante demostración, preguntas técnicas, revisión de evidencias, aplicación de observaciones del docente y recuperación de sustentación pendiente.</td>
+    <td><strong>Continuación de la evaluación de la Unidad III:</strong><br>Realizar, según corresponda, la evaluación final individual o las presentaciones y sustentaciones pendientes mediante demostración, preguntas técnicas y revisión de evidencias.</td>
     <td>Actualizar la entrega final con evidencias del producto, ejecutable o evidencia de generación, aporte individual, correcciones solicitadas por el docente y reflexión técnica final.</td>
   </tr>
 </table>
@@ -497,7 +497,7 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
 
 ## IX. Referencias
 
-### Básica (libros físicos/digitales recientes)
+### Básica (Fuentes primarias)
 
 1. Levano, D., & Cerdán, F. (2023). *Manual de Programación Orientada a Objetos*. Lima, Perú.
 
@@ -509,17 +509,9 @@ La asignatura de Programación Orientada a Objetos es de carácter teórico/prá
 
 5. Ford, N., Richards, M., Sadalage, P., & Dehghani, Z. (2021). *Software Architecture: The Hard Parts*. O'Reilly Media.
 
-### Complementaria
+### Complementaria (Fuentes secundarias)
 
-1. Blasco, F. (2019). *Programación Orientada a Objetos en Java*. Ra-Ma.
-
-2. Sznajdleder, P. (2017). *Programación Orientada a Objetos y Estructura de Datos a Fondo*. Alfaomega.
-
-3. Joyanes Aguilar, L. (2008). *Fundamentos de programación: algoritmos, estructuras de datos y objetos* (4.ª ed.). McGraw-Hill.
-
-4. Reina Valera. (1960). *La Santa Biblia*.
-
-5. Martin, R. C. (2009). *Clean Code: A Handbook of Agile Software Craftsmanship*. Prentice Hall.
+1. Martín, A., (2018). *JAVA Curso práctico de formación*. Colombia: Alfaomega. 277 p.
 
 ### Enlaces de internet
 
