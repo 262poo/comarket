@@ -67,7 +67,7 @@ comarket-cli/
 
 ## 3. Crear el proyecto Maven
 
-El proyecto usa Java 17 y ejecuta `com.upeu.comarket.app.Main`.
+El proyecto usa Java 21 LTS y ejecuta `com.upeu.comarket.app.Main`.
 
 Desde `comarket-cli`:
 

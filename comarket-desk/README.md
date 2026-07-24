@@ -126,7 +126,7 @@ java -version
 native-image --version
 ```
 
-El proyecto sigue compilando para Java 17 porque `pom.xml` usa `maven.compiler.release=17`.
+El proyecto compila con Java 21 LTS porque `pom.xml` usa `maven.compiler.release=21`.
 
 ### 2. Instalar Visual Studio Build Tools
 

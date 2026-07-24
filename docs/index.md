@@ -52,7 +52,7 @@ Resultado de aprendizaje U1: al finalizar la unidad, el estudiante modela e impl
 
 | Sesión | Tema | Producto de sesión |
 |---|---|---|
-| S1 | **Entorno de programación, estructuras de control, métodos y estructuras de datos lineales:**<br>Preparación del ambiente local, variables, entrada y salida, condicionales, ciclos, métodos, estructuras lineales, recorridos, búsquedas y representación temporal de datos mediante estructuras separadas | Programa de consola organizado mediante métodos que administra datos simples con arrays y `ArrayList`, e identifica la necesidad de agrupar los datos mediante objetos |
+| S1 | **Entorno de programación con Java 21, estructuras de control, métodos y estructuras de datos lineales:**<br>Instalación y verificación de Java 21 LTS, preparación del ambiente local, variables, entrada y salida, condicionales, ciclos, métodos, estructuras lineales, recorridos, búsquedas y representación temporal de datos mediante estructuras separadas | Entorno Java 21 verificado y programa de consola organizado mediante métodos que administra datos simples con arrays y `ArrayList`, e identifica la necesidad de agrupar los datos mediante objetos |
 | S2 | **Clases, objetos, constructores y comunicación entre objetos:**<br>Diferencia entre clase y objeto, atributos, métodos, estado, comportamiento, abstracción inicial, constructores, sobrecarga, comunicación entre objetos y responsabilidad como características y acciones de una clase | Primer modelo con clases del dominio, objetos instanciados y comunicación básica entre ellos, usando objetos tangibles como `Coche` y `Persona` y un ejemplo puente con `Producto` |
 | S3 | **Encapsulamiento, separación de responsabilidades y relaciones entre objetos:**<br>Modificadores de acceso, métodos de consulta y modificación, comportamiento básico de entidades, separación inicial de responsabilidades, asociación, agregación/composición y colecciones dentro del modelo | Modelo de dominio encapsulado, organizado por responsabilidades y con relaciones entre entidades, probado desde un programa principal |
 | S4 | **Herencia, interfaces y polimorfismo:**<br>Generalización, clase base o clase abstracta cuando el dominio lo justifica, sobrescritura de métodos, contratos, implementaciones y uso polimórfico desde el servicio | Modelo ampliado con herencia, contrato de servicio e implementación polimórfica |
@@ -153,7 +153,7 @@ Nota metodológica: en S1 se recuperan estructuras de control, métodos, arrays 
 
 Stack tecnologico U1:
 
-1. Java cómo lenguaje orientado a objetos.
+1. Java 21 LTS como lenguaje orientado a objetos.
 2. VS Code cómo entorno inicial de edición y ejecución.
 3. Proyecto Java simple para repasar estructuras de control, métodos y estructuras de datos lineales.
 4. Consola para verificar comportamiento y resultados.

@@ -180,13 +180,13 @@ Si una lista se modifica incorrectamente, los datos dejan de corresponder. Esta 
 
 Tiempo: 2h.
 
-### 3.1 Preparar ambiente local: Java 17, Maven y VS Code
+### 3.1 Preparar ambiente local: Java 21 LTS, Maven y VS Code
 
-**Producto del paso:** ambiente local con Java 17, Maven y VS Code verificados, listo para crear y ejecutar programas Java desde consola.
+**Producto del paso:** ambiente local con Java 21 LTS, Maven y VS Code verificados, listo para crear y ejecutar programas Java desde consola.
 
 Herramientas necesarias:
 
-- Java 17.
+- Java 21 LTS.
 - Maven 3.x.
 - VS Code.
 - Extension Pack for Java.
@@ -212,25 +212,25 @@ macOS bash/zsh, si no tienes Homebrew:
 
 Luego cierra y vuelve a abrir Terminal.
 
-#### 3.1.2 Instalar Java 17
+#### 3.1.2 Instalar Java 21 LTS
 
 Windows PowerShell con Chocolatey:
 
 ```powershell
-choco install temurin17 -y
+choco install temurin21 -y
 ```
 
 macOS bash/zsh con Homebrew:
 
 ```bash
-brew install --cask temurin@17
+brew install --cask temurin@21
 ```
 
 Linux Debian/Ubuntu bash:
 
 ```bash
 sudo apt update
-sudo apt install -y openjdk-17-jdk
+sudo apt install -y openjdk-21-jdk
 ```
 
 #### 3.1.3 Instalar Maven 3.x
@@ -282,7 +282,7 @@ Extension Pack for Java
 
 #### 3.1.5 Verificar instalación
 
-Verificar Java 17:
+Verificar Java 21:
 
 ```bash
 java -version
@@ -291,7 +291,7 @@ java -version
 Resultado esperado:
 
 ```text
-version 17
+version 21
 ```
 
 Verificar el compilador:
@@ -310,7 +310,10 @@ Resultado esperado:
 
 ```text
 Apache Maven 3.x
+Java version: 21
 ```
+
+Si Maven muestra otra versión de Java, configure `JAVA_HOME` con la ruta del JDK 21, asegure que su carpeta `bin` tenga prioridad en `Path` y abra una terminal nueva.
 
 ### 3.2 Crear y ejecutar un programa Java simple
 
@@ -496,7 +499,7 @@ S01_Equipo##_ApellidoNombre.pdf
 
 ### 4.1.2 Trabajo autónomo realizado
 
-1. Verificar Java 17, Maven y VS Code.
+1. Verificar Java 21, Maven y VS Code.
 2. Crear un menú con `do-while` y `switch`.
 3. Separar las operaciones mediante métodos.
 4. Utilizar un array de tamaño fijo.
