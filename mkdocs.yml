@@ -2,6 +2,8 @@ site_name: Programación Orientada a Objetos
 site_description: Libro digital de apoyo para el curso de Programación Orientada a Objetos - UPeU 2026
 site_author: UPeU
 copyright: Angel Sullon @asullom - UPeU 2026
+repo_url: https://github.com/262poo/comarket
+repo_name: 262poo/comarket
 
 theme:
   name: material
