@@ -4,6 +4,9 @@ target/
 !**/src/test/**/target/
 .kotlin
 
+### comarket-cli (proyecto simple sin Maven, U1) ###
+*.class
+
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml

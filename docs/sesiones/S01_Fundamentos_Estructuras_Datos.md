@@ -393,11 +393,23 @@ Si Maven muestra otra versión de Java, configure `JAVA_HOME` con la ruta del JD
 
 **Producto del paso:** programa Java ejecutado correctamente desde VS Code.
 
-1. Crear una carpeta para el proyecto.
-2. Abrir la carpeta en VS Code.
-3. Crear una carpeta `src`.
-4. Crear el archivo `Main.java`.
-5. Ejecutar un mensaje desde consola.
+1. Crea la carpeta del proyecto. En este ejemplo se usa `comarket-cli`; tu equipo la nombra según su propio proyecto, pero mantiene esta misma estructura interna (`src/` con los `.java`):
+
+```bash
+mkdir comarket-cli
+cd comarket-cli
+mkdir src
+```
+
+2. Abre la carpeta del proyecto en VS Code:
+
+```bash
+code .
+```
+
+   (o desde VS Code: **Archivo → Abrir carpeta...** y selecciona `comarket-cli`.)
+
+3. Dentro de `src`, crea el archivo `Main.java` (clic derecho sobre `src` en el explorador de VS Code → **Nuevo archivo...** → escribe `Main.java`) con este contenido:
 
 ```java
 public class Main {
@@ -407,9 +419,21 @@ public class Main {
 }
 ```
 
+4. Abre una terminal integrada en VS Code (**Terminal → Nueva terminal**), ubícate dentro de `src` y compila/ejecuta:
+
+```bash
+cd src
+javac Main.java
+java Main
+```
+
+Debe imprimir `Repaso de Fundamentos de Programación`. Los pasos 3.3, 3.5 y 3.6 siguen modificando este mismo `Main.java`; los pasos 3.4 y 3.7 crean archivos nuevos, independientes, dentro de la misma carpeta `src`.
+
 ### 3.3 Repasar estructuras de control
 
 **Producto del paso:** menú repetitivo controlado mediante condicionales y ciclos.
+
+Reemplaza el contenido del método `main()` en tu `Main.java` (el `println` de 3.2 ya no hace falta) y agrega `import java.util.Scanner;` como primera línea del archivo, antes de `public class Main`:
 
 ```java
 Scanner scanner = new Scanner(System.in);
@@ -441,27 +465,43 @@ do {
 
 **Producto del paso:** evidencia de la diferencia entre tamaño fijo y tamaño dinámico.
 
-Array:
+Este es un archivo nuevo e independiente de `Main.java`. Crea `ComparacionArrayArrayList.java` dentro de `src` con este contenido completo:
 
 ```java
-String[] nombresArray = new String[3];
-nombresArray[0] = "Teclado";
-nombresArray[1] = "Mouse";
+import java.util.ArrayList;
+
+public class ComparacionArrayArrayList {
+    public static void main(String[] args) {
+        String[] nombresArray = new String[3];
+        nombresArray[0] = "Teclado";
+        nombresArray[1] = "Mouse";
+
+        ArrayList<String> nombres = new ArrayList<>();
+        nombres.add("Teclado");
+        nombres.add("Mouse");
+        nombres.add("Monitor");
+        nombres.add("Audífonos");
+
+        System.out.println("Array (tamaño fijo " + nombresArray.length + "):");
+        for (String nombre : nombresArray) {
+            System.out.println(nombre);
+        }
+
+        System.out.println("ArrayList (tamaño dinámico " + nombres.size() + "):");
+        for (String nombre : nombres) {
+            System.out.println(nombre);
+        }
+    }
+}
 ```
 
-`ArrayList`:
-
-```java
-ArrayList<String> nombres = new ArrayList<>();
-nombres.add("Teclado");
-nombres.add("Mouse");
-nombres.add("Monitor");
-nombres.add("Audífonos");
-```
+Compila y ejecuta igual que en 3.2, pero con este archivo (`javac ComparacionArrayArrayList.java` y `java ComparacionArrayArrayList`). Nota que `nombresArray[2]` nunca se asigna: al imprimirlo, Java muestra `null` — evidencia directa de que el array reservó tamaño fijo desde su creación, tenga o no todos los valores asignados.
 
 ### 3.5 Organizar operaciones mediante métodos
 
 **Producto del paso:** programa dividido en operaciones pequeñas.
+
+Sigues en `Main.java`. Primero agrega `import java.util.ArrayList;` junto al `import java.util.Scanner;` del inicio del archivo. Luego agrega estos tres métodos **dentro de la clase `Main`, pero fuera de `main()`** (después de la llave que cierra `main`, antes de la llave que cierra la clase):
 
 ```java
 public static void registrar(ArrayList<String> nombres, Scanner scanner) {
@@ -486,6 +526,25 @@ public static int buscar(ArrayList<String> nombres, String nombreBuscado) {
 }
 ```
 
+Para que el menú los use, dentro de `main()` declara la lista justo antes del `do`:
+
+```java
+ArrayList<String> nombres = new ArrayList<>();
+```
+
+y reemplaza el `case 1` y `case 2` del `switch` de 3.3, que hoy solo imprimen texto, para que llamen a los métodos:
+
+```java
+case 1:
+    registrar(nombres, scanner);
+    break;
+case 2:
+    listar(nombres);
+    break;
+```
+
+(`buscar()` se conecta recién en 3.6, junto con `actualizar()` y `eliminar()`.)
+
 ### 3.6 Completar operaciones sobre datos simples
 
 **Producto del paso:** registro, listado, búsqueda, actualización y eliminación sobre un `ArrayList`.
@@ -504,7 +563,9 @@ public static int buscar(ArrayList<String> nombres, String nombreBuscado) {
 5. **Pruebas**:
    - caso normal: actualizar y eliminar un nombre existente.
    - caso límite: intentar actualizar o eliminar un nombre que no está en la lista.
-6. **Código**: completa `actualizar(ArrayList<String> nombres, Scanner scanner)` y `eliminar(ArrayList<String> nombres, Scanner scanner)` siguiendo el estilo de los métodos de 3.5.
+6. **Código**: completa `actualizar(ArrayList<String> nombres, Scanner scanner)` y `eliminar(ArrayList<String> nombres, Scanner scanner)` siguiendo el estilo de los métodos de 3.5, y agrégalos a la clase `Main` igual que en 3.5.
+
+Con `actualizar()` y `eliminar()` ya escritos, completa el `switch` de `main()`: agrega `case 3` para llamar a `buscar()` (mostrando la posición encontrada o un aviso si devuelve `-1`), `case 4` para llamar a `actualizar()`, y `case 5` para llamar a `eliminar()` — siguiendo el mismo patrón que ya usaste en 3.5 para `case 1` y `case 2`. Ajusta también las opciones del menú impreso en el `do` para que el número 6 ("Salir") quede después de "Actualizar" y "Eliminar".
 
 Operaciones mínimas del menú completo:
 
@@ -521,30 +582,36 @@ En esta sesión estas operaciones sirven para recuperar estructuras de control y
 
 **Producto del paso:** datos de productos registrados sin utilizar clases propias.
 
-```java
-ArrayList<String> codigos = new ArrayList<>();
-ArrayList<String> nombres = new ArrayList<>();
-ArrayList<Double> precios = new ArrayList<>();
-ArrayList<Integer> stocks = new ArrayList<>();
-
-codigos.add("P001");
-nombres.add("Teclado");
-precios.add(80.0);
-stocks.add(10);
-```
-
-Recorrido:
+Otro archivo nuevo e independiente. Crea `ProductosListasParalelas.java` dentro de `src` con este contenido completo:
 
 ```java
-for (int i = 0; i < codigos.size(); i++) {
-    System.out.println(
-            codigos.get(i) + " - " +
-            nombres.get(i) + " - S/ " +
-            precios.get(i) + " - Stock: " +
-            stocks.get(i)
-    );
+import java.util.ArrayList;
+
+public class ProductosListasParalelas {
+    public static void main(String[] args) {
+        ArrayList<String> codigos = new ArrayList<>();
+        ArrayList<String> nombres = new ArrayList<>();
+        ArrayList<Double> precios = new ArrayList<>();
+        ArrayList<Integer> stocks = new ArrayList<>();
+
+        codigos.add("P001");
+        nombres.add("Teclado");
+        precios.add(80.0);
+        stocks.add(10);
+
+        for (int i = 0; i < codigos.size(); i++) {
+            System.out.println(
+                    codigos.get(i) + " - " +
+                    nombres.get(i) + " - S/ " +
+                    precios.get(i) + " - Stock: " +
+                    stocks.get(i)
+            );
+        }
+    }
 }
 ```
+
+Compila y ejecuta igual que en 3.2 y 3.4, con este archivo (`javac ProductosListasParalelas.java` y `java ProductosListasParalelas`).
 
 ### 3.8 Identificar la necesidad de agrupar datos
 
