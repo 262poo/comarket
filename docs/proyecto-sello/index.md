@@ -33,7 +33,7 @@ El proyecto debe cumplir estas condiciones:
 - Modelar un dominio de negocio concreto.
 - Definir entidades, atributos, comportamientos y relaciones.
 - Aplicar encapsulamiento, responsabilidades, herencia, interfaces o polimorfismo cuando el dominio lo justifique.
-- Evolucionar de consola en memoria hacia aplicación JavaFX con persistencia.
+- Evolucionar de consola en memoria hacia aplicación de escritorio (JavaFX o Java Swing) con persistencia.
 - Integrar arquitectura por capas, DAO, JDBC y SQLite.
 - Ser sustentado técnicamente por todos los integrantes del equipo.
 
@@ -50,7 +50,7 @@ No se considera Proyecto Sello:
 | Unidad | Temas principales | Evolución del proyecto |
 |---|---|---|
 | Unidad 1 | Clases, objetos, encapsulamiento, relaciones, herencia, interfaces, polimorfismo y colecciones. | Aplicación de consola orientada a objetos con gestión de datos en memoria. |
-| Unidad 2 | JavaFX, arquitectura por capas, DAO, JDBC, SQLite, seguridad básica, relaciones y consultas. | Aplicación de escritorio por capas con interfaz gráfica y persistencia relacional. |
+| Unidad 2 | JavaFX o Java Swing, arquitectura por capas, DAO, JDBC, SQLite, seguridad básica, relaciones y consultas. | Aplicación de escritorio por capas con interfaz gráfica y persistencia relacional. |
 | Unidad 3 | Integración, validación, refinamiento, ejecutable y sustentación. | Sistema orientado a objetos integrado para un proceso transaccional de negocio. |
 
 ```mermaid
@@ -59,7 +59,7 @@ flowchart TB
     B --> C[Encapsulamiento]
     C --> D[Relaciones]
     D --> E[CRUD en memoria]
-    E --> F[GUI JavaFX]
+    E --> F[GUI JavaFX o Swing]
     F --> G[DAO y persistencia]
     G --> H[Flujo transaccional]
     H --> I[Consultas y pruebas]
@@ -75,7 +75,7 @@ Este alineamiento muestra cómo el proyecto evoluciona desde la comprensión del
 | S1-S2 | Estructuras base, métodos, clases, objetos y constructores. | Brief del dominio, entidades iniciales, objetos instanciados y comunicación básica. |
 | S3-S4 | Encapsulamiento, responsabilidades, relaciones, herencia, interfaces y polimorfismo. | Modelo de dominio organizado, relaciones entre objetos y decisiones POO justificadas. |
 | S5-S6 | CRUD en memoria, validaciones y evaluación U1. | Aplicación de consola orientada a objetos con colecciones, menú y evidencias. |
-| S7-S8 | JavaFX, controladores, arquitectura por capas, DAO y persistencia. | Paso de consola a escritorio con GUI, servicio y base de datos local. |
+| S7-S8 | JavaFX o Java Swing, controladores, arquitectura por capas, DAO y persistencia. | Paso de consola a escritorio con GUI, servicio y base de datos local. |
 | S9-S10 | Relaciones persistentes, flujo transaccional y seguridad básica. | Cabecera-detalle o relación equivalente, control de acceso y consistencia de datos. |
 | S11-S12 | Consultas, pruebas y evaluación U2. | Aplicación de escritorio por capas validada con consultas y evidencias. |
 | S13-S14 | Integración, validación, refinamiento y ejecutable. | Sistema ensamblado, corregido y preparado para sustentación. |
@@ -87,7 +87,7 @@ Este alineamiento muestra cómo el proyecto evoluciona desde la comprensión del
 |---|---|---|
 | S2 | Aprobación del brief | Dominio, entidades iniciales, responsabilidades, operaciones y alcance. |
 | S6 | Producto U1 | Aplicación de consola orientada a objetos con clases, relaciones, CRUD en memoria y validaciones. |
-| S12 | Producto U2 | Aplicación JavaFX por capas con persistencia relacional, seguridad básica, relaciones, consultas y pruebas. |
+| S12 | Producto U2 | Aplicación de escritorio (JavaFX o Java Swing) por capas con persistencia relacional, seguridad básica, relaciones, consultas y pruebas. |
 | S15 | Producto final | Sistema orientado a objetos integrado, validado, documentado y sustentado técnicamente. |
 | S16 | Cierre individual | Evaluación final, recuperación de sustentaciones pendientes y cierre académico. |
 
@@ -118,7 +118,7 @@ Al finalizar el curso, la aplicación debe incorporar como mínimo:
 - Relaciones entre objetos.
 - Uso justificado de herencia, interfaces o polimorfismo.
 - CRUD en memoria y persistente.
-- Interfaz gráfica JavaFX con formularios, tablas y eventos.
+- Interfaz gráfica JavaFX o Java Swing con formularios, tablas y eventos.
 - Arquitectura por capas: vista, controlador, servicio, entidad y DAO.
 - Persistencia con JDBC y SQLite.
 - Flujo transaccional con cabecera, detalle o relación equivalente.

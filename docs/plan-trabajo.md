@@ -22,6 +22,10 @@ operativa de dónde vive cada cosa en el repositorio).
   - `comarket-cli/` — Unidad 1 (S1–S6): consola, sin persistencia.
   - `comarket-desk/` — Unidades 2 y 3 (S7–S16): JavaFX + FXML + SQLite,
     arquitectura por capas (`db`, `security` desde S13).
+  - El código de referencia usa JavaFX. Java Swing es una alternativa
+    igualmente válida para docentes o estudiantes que lo prefieran; no
+    cambia el alcance de sesión ni la arquitectura por capas, solo el
+    framework de interfaz gráfica.
 - El detalle de qué implementa cada sesión en el código vive en
   `CLAUDE.md`, sección "Dónde está cada cosa" — este archivo no lo
   repite; se actualiza aquí solo cuando cambie el estado general del

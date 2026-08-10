@@ -14,6 +14,8 @@ Curso práctico de Programación Orientada a Objetos con Java, modelado de domin
 
 [`comarket`](https://github.com/262poo/comarket.git) es un repositorio académico de referencia para guiar la construcción progresiva de un **sistema orientado a objetos**. En este repositorio se usa CoMarket como caso base, pero cada docente o filial puede adaptar el dominio del proyecto integrador según su contexto. La ruta inicia en `comarket-cli` con una aplicación de consola en memoria usando Java y VS Code, avanza en `comarket-desk` hacia una aplicación de escritorio con JavaFX, Scene Builder, DAO, JDBC y SQLite, y culmina con un producto integrado, documentado, ejecutable y sustentado técnicamente.
 
+El código de referencia y las guías de sesión de este repositorio usan JavaFX como framework de interfaz gráfica. Usar Java Swing en su lugar es una alternativa igualmente válida: es normal que algunos docentes o estudiantes trabajen con Swing en vez de JavaFX; la arquitectura por capas, el DAO, JDBC y la persistencia con SQLite no cambian por esa elección.
+
 ## Organización del repositorio
 
 ```text
