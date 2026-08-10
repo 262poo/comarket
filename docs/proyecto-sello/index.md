@@ -1,4 +1,4 @@
-﻿# Proyecto Sello de Programación Orientada a Objetos
+﻿# Guía del Proyecto Sello de Programación Orientada a Objetos
 
 ## 1. Propósito
 
@@ -15,6 +15,8 @@ Al finalizar el Proyecto Sello, el estudiante demuestra que puede modelar, imple
 | CE023 | Programación | Evidencia desarrollo de una aplicación de escritorio funcional, modular y orientada a objetos. |
 | CE022 | Ingeniería de la Información | Evidencia persistencia relacional, consultas y manejo estructurado de datos. |
 | CE024 | Calidad de Software | Evidencia pruebas, organización del código, documentación, repositorio y sustentación integral. |
+
+Fuente oficial de los códigos: [Transcripción de evidencias por competencia — Ingeniería de Software](https://upeuoficial.github.io/planb/transcripcion/#c-area-de-ingenieria-de-software).
 
 ```text
 Dominio -> Clases -> Relaciones -> CRUD -> GUI -> Persistencia -> Integración -> Sustentación

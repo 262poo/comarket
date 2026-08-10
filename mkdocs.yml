@@ -45,12 +45,13 @@ extra_javascript:
 nav:
   - Inicio: index.md
   - Plan de trabajo: plan-trabajo.md
-  - Proyecto Sello:
+  - Guía de Proyecto Sello:
       - Guía del proyecto: proyecto-sello/index.md
-  - Sílabo 2026-1: silabo_poo_2026_1.md
-  - Sílabo 2026-2: silabo_poo_2026_2.md
+  - Silabos:
+      - Silabo 2026-1: silabo_poo_2026_1.md
+      - Silabo 2026-2: silabo_poo_2026_2.md
   - 1. Fundamentos de la Programación Orientada a Objetos:
-    - 1 Entorno, estructuras de control, metodos y estructuras de datos lineales: sesiones/S01_Fundamentos_Estructuras_Datos.md
+      - S1 - Entorno, estructuras de control, métodos y estructuras de datos lineales: sesiones/S01_Fundamentos_Estructuras_Datos.md
   - Anexos:
       - Taller POO 01: POOTaller01.md
       - Taller POO 02: POOTaller02.md
