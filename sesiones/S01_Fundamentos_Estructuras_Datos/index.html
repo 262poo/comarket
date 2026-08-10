@@ -2157,11 +2157,20 @@ Java version: 21
 <h3 id="32-crear-y-ejecutar-un-programa-java-simple">3.2 Crear y ejecutar un programa Java simple<a class="headerlink" href="#32-crear-y-ejecutar-un-programa-java-simple" title="Permanent link">&para;</a></h3>
 <p><strong>Producto del paso:</strong> programa Java ejecutado correctamente desde VS Code.</p>
 <ol>
-<li>Crear una carpeta para el proyecto.</li>
-<li>Abrir la carpeta en VS Code.</li>
-<li>Crear una carpeta <code>src</code>.</li>
-<li>Crear el archivo <code>Main.java</code>.</li>
-<li>Ejecutar un mensaje desde consola.</li>
+<li>Crea la carpeta del proyecto. En este ejemplo se usa <code>comarket-cli</code>; tu equipo la nombra según su propio proyecto, pero mantiene esta misma estructura interna (<code>src/</code> con los <code>.java</code>):</li>
+</ol>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>comarket-cli
+<span class="nb">cd</span><span class="w"> </span>comarket-cli
+mkdir<span class="w"> </span>src
+</code></pre></div>
+<ol>
+<li>Abre la carpeta del proyecto en VS Code:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>code<span class="w"> </span>.
+</code></pre></div>
+<p>(o desde VS Code: <strong>Archivo → Abrir carpeta...</strong> y selecciona <code>comarket-cli</code>.)</p>
+<ol>
+<li>Dentro de <code>src</code>, crea el archivo <code>Main.java</code> (clic derecho sobre <code>src</code> en el explorador de VS Code → <strong>Nuevo archivo...</strong> → escribe <code>Main.java</code>) con este contenido:</li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -2169,8 +2178,17 @@ Java version: 21
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<ol>
+<li>Abre una terminal integrada en VS Code (<strong>Terminal → Nueva terminal</strong>), ubícate dentro de <code>src</code> y compila/ejecuta:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>src
+javac<span class="w"> </span>Main.java
+java<span class="w"> </span>Main
+</code></pre></div>
+<p>Debe imprimir <code>Repaso de Fundamentos de Programación</code>. Los pasos 3.3, 3.5 y 3.6 siguen modificando este mismo <code>Main.java</code>; los pasos 3.4 y 3.7 crean archivos nuevos, independientes, dentro de la misma carpeta <code>src</code>.</p>
 <h3 id="33-repasar-estructuras-de-control">3.3 Repasar estructuras de control<a class="headerlink" href="#33-repasar-estructuras-de-control" title="Permanent link">&para;</a></h3>
 <p><strong>Producto del paso:</strong> menú repetitivo controlado mediante condicionales y ciclos.</p>
+<p>Reemplaza el contenido del método <code>main()</code> en tu <code>Main.java</code> (el <code>println</code> de 3.2 ya no hace falta) y agrega <code>import java.util.Scanner;</code> como primera línea del archivo, antes de <code>public class Main</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Scanner</span><span class="w"> </span><span class="n">scanner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">opcion</span><span class="p">;</span>
 
@@ -2197,20 +2215,37 @@ Java version: 21
 </code></pre></div>
 <h3 id="34-comparar-un-array-con-un-arraylist">3.4 Comparar un array con un <code>ArrayList</code><a class="headerlink" href="#34-comparar-un-array-con-un-arraylist" title="Permanent link">&para;</a></h3>
 <p><strong>Producto del paso:</strong> evidencia de la diferencia entre tamaño fijo y tamaño dinámico.</p>
-<p>Array:</p>
-<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">nombresArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">;</span>
-<span class="n">nombresArray</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Teclado&quot;</span><span class="p">;</span>
-<span class="n">nombresArray</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mouse&quot;</span><span class="p">;</span>
+<p>Este es un archivo nuevo e independiente de <code>Main.java</code>. Crea <code>ComparacionArrayArrayList.java</code> dentro de <code>src</code> con este contenido completo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ComparacionArrayArrayList</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">nombresArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="n">nombresArray</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Teclado&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">nombresArray</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mouse&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nombres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Teclado&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Mouse&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Monitor&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Audífonos&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Array (tamaño fijo &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nombresArray</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;):&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">nombresArray</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">nombre</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;ArrayList (tamaño dinámico &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nombres</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;):&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">nombres</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">nombre</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<p><code>ArrayList</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nombres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-<span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Teclado&quot;</span><span class="p">);</span>
-<span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Mouse&quot;</span><span class="p">);</span>
-<span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Monitor&quot;</span><span class="p">);</span>
-<span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Audífonos&quot;</span><span class="p">);</span>
-</code></pre></div>
+<p>Compila y ejecuta igual que en 3.2, pero con este archivo (<code>javac ComparacionArrayArrayList.java</code> y <code>java ComparacionArrayArrayList</code>). Nota que <code>nombresArray[2]</code> nunca se asigna: al imprimirlo, Java muestra <code>null</code> — evidencia directa de que el array reservó tamaño fijo desde su creación, tenga o no todos los valores asignados.</p>
 <h3 id="35-organizar-operaciones-mediante-metodos">3.5 Organizar operaciones mediante métodos<a class="headerlink" href="#35-organizar-operaciones-mediante-metodos" title="Permanent link">&para;</a></h3>
 <p><strong>Producto del paso:</strong> programa dividido en operaciones pequeñas.</p>
+<p>Sigues en <code>Main.java</code>. Primero agrega <code>import java.util.ArrayList;</code> junto al <code>import java.util.Scanner;</code> del inicio del archivo. Luego agrega estos tres métodos <strong>dentro de la clase <code>Main</code>, pero fuera de <code>main()</code></strong> (después de la llave que cierra <code>main</code>, antes de la llave que cierra la clase):</p>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">registrar</span><span class="p">(</span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nombres</span><span class="p">,</span><span class="w"> </span><span class="n">Scanner</span><span class="w"> </span><span class="n">scanner</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;Nombre: &quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
@@ -2232,6 +2267,18 @@ Java version: 21
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
+<p>Para que el menú los use, dentro de <code>main()</code> declara la lista justo antes del <code>do</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nombres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</code></pre></div>
+<p>y reemplaza el <code>case 1</code> y <code>case 2</code> del <code>switch</code> de 3.3, que hoy solo imprimen texto, para que llamen a los métodos:</p>
+<div class="highlight"><pre><span></span><code><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+<span class="w">    </span><span class="n">registrar</span><span class="p">(</span><span class="n">nombres</span><span class="p">,</span><span class="w"> </span><span class="n">scanner</span><span class="p">);</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+<span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span>
+<span class="w">    </span><span class="n">listar</span><span class="p">(</span><span class="n">nombres</span><span class="p">);</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+</code></pre></div>
+<p>(<code>buscar()</code> se conecta recién en 3.6, junto con <code>actualizar()</code> y <code>eliminar()</code>.)</p>
 <h3 id="36-completar-operaciones-sobre-datos-simples">3.6 Completar operaciones sobre datos simples<a class="headerlink" href="#36-completar-operaciones-sobre-datos-simples" title="Permanent link">&para;</a></h3>
 <p><strong>Producto del paso:</strong> registro, listado, búsqueda, actualización y eliminación sobre un <code>ArrayList</code>.</p>
 <p><strong>Problema:</strong> el menú de 3.3 y los métodos de 3.5 cubren registrar, listar y buscar; falta completar actualizar y eliminar para tener el CRUD mínimo sobre datos simples.</p>
@@ -2247,8 +2294,9 @@ Java version: 21
 <li><strong>Pruebas</strong>:</li>
 <li>caso normal: actualizar y eliminar un nombre existente.</li>
 <li>caso límite: intentar actualizar o eliminar un nombre que no está en la lista.</li>
-<li><strong>Código</strong>: completa <code>actualizar(ArrayList&lt;String&gt; nombres, Scanner scanner)</code> y <code>eliminar(ArrayList&lt;String&gt; nombres, Scanner scanner)</code> siguiendo el estilo de los métodos de 3.5.</li>
+<li><strong>Código</strong>: completa <code>actualizar(ArrayList&lt;String&gt; nombres, Scanner scanner)</code> y <code>eliminar(ArrayList&lt;String&gt; nombres, Scanner scanner)</code> siguiendo el estilo de los métodos de 3.5, y agrégalos a la clase <code>Main</code> igual que en 3.5.</li>
 </ol>
+<p>Con <code>actualizar()</code> y <code>eliminar()</code> ya escritos, completa el <code>switch</code> de <code>main()</code>: agrega <code>case 3</code> para llamar a <code>buscar()</code> (mostrando la posición encontrada o un aviso si devuelve <code>-1</code>), <code>case 4</code> para llamar a <code>actualizar()</code>, y <code>case 5</code> para llamar a <code>eliminar()</code> — siguiendo el mismo patrón que ya usaste en 3.5 para <code>case 1</code> y <code>case 2</code>. Ajusta también las opciones del menú impreso en el <code>do</code> para que el número 6 ("Salir") quede después de "Actualizar" y "Eliminar".</p>
 <p>Operaciones mínimas del menú completo:</p>
 <ol>
 <li>Registrar un nombre.</li>
@@ -2261,26 +2309,33 @@ Java version: 21
 <p>En esta sesión estas operaciones sirven para recuperar estructuras de control y métodos. El CRUD organizado por capas se desarrollará en S5.</p>
 <h3 id="37-representar-productos-mediante-listas-paralelas">3.7 Representar productos mediante listas paralelas<a class="headerlink" href="#37-representar-productos-mediante-listas-paralelas" title="Permanent link">&para;</a></h3>
 <p><strong>Producto del paso:</strong> datos de productos registrados sin utilizar clases propias.</p>
-<div class="highlight"><pre><span></span><code><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">codigos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nombres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">precios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<p>Otro archivo nuevo e independiente. Crea <code>ProductosListasParalelas.java</code> dentro de <code>src</code> con este contenido completo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
 
-<span class="n">codigos</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;P001&quot;</span><span class="p">);</span>
-<span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Teclado&quot;</span><span class="p">);</span>
-<span class="n">precios</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mf">80.0</span><span class="p">);</span>
-<span class="n">stocks</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-</code></pre></div>
-<p>Recorrido:</p>
-<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">codigos</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span>
-<span class="w">            </span><span class="n">codigos</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - &quot;</span><span class="w"> </span><span class="o">+</span>
-<span class="w">            </span><span class="n">nombres</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - S/ &quot;</span><span class="w"> </span><span class="o">+</span>
-<span class="w">            </span><span class="n">precios</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - Stock: &quot;</span><span class="w"> </span><span class="o">+</span>
-<span class="w">            </span><span class="n">stocks</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="w">    </span><span class="p">);</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProductosListasParalelas</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">codigos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nombres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">precios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">codigos</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;P001&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Teclado&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">precios</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mf">80.0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">stocks</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">codigos</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span>
+<span class="w">                    </span><span class="n">codigos</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                    </span><span class="n">nombres</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - S/ &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                    </span><span class="n">precios</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - Stock: &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                    </span><span class="n">stocks</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">            </span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<p>Compila y ejecuta igual que en 3.2 y 3.4, con este archivo (<code>javac ProductosListasParalelas.java</code> y <code>java ProductosListasParalelas</code>).</p>
 <h3 id="38-identificar-la-necesidad-de-agrupar-datos">3.8 Identificar la necesidad de agrupar datos<a class="headerlink" href="#38-identificar-la-necesidad-de-agrupar-datos" title="Permanent link">&para;</a></h3>
 <p><strong>Producto del paso:</strong> explicación del problema que será resuelto en S2.</p>
 <p>Responder:</p>
