@@ -1,0 +1,54 @@
+site_name: Programación Orientada a Objetos
+site_description: Libro digital de apoyo para el curso de Programación Orientada a Objetos - UPeU 2026
+site_author: UPeU
+copyright: Angel Sullon @asullom - UPeU 2026
+
+theme:
+  name: material
+  language: es
+  palette:
+    - scheme: default
+      primary: blue grey
+      accent: amber
+  features:
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+extra_javascript:
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+  - javascripts/mermaid.js
+
+nav:
+  - Inicio: index.md
+  - Plan de trabajo: plan-trabajo.md
+  - Proyecto Sello:
+      - Guía del proyecto: proyecto-sello/index.md
+  - Sílabo 2026-1: silabo_poo_2026_1.md
+  - Sílabo 2026-2: silabo_poo_2026_2.md
+  - 1. Fundamentos de la Programación Orientada a Objetos:
+    - 1 Entorno, estructuras de control, metodos y estructuras de datos lineales: sesiones/S01_Fundamentos_Estructuras_Datos.md
+  - Anexos:
+      - Taller POO 01: POOTaller01.md
+      - Taller POO 02: POOTaller02.md
