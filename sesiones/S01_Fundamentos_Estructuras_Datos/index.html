@@ -1,0 +1,2529 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Libro digital de apoyo para el curso de Programación Orientada a Objetos - UPeU 2026">
+      
+      
+        <meta name="author" content="UPeU">
+      
+      
+      
+        <link rel="prev" href="../../silabo_poo_2026_2/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>1 Entorno, estructuras de control, metodos y estructuras de datos lineales - Programación Orientada a Objetos</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#s1-entorno-de-programacion-estructuras-de-control-metodos-y-estructuras-de-datos-lineales" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Programación Orientada a Objetos" class="md-header__button md-logo" aria-label="Programación Orientada a Objetos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Programación Orientada a Objetos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1 Entorno, estructuras de control, metodos y estructuras de datos lineales
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Programación Orientada a Objetos" class="md-nav__button md-logo" aria-label="Programación Orientada a Objetos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Programación Orientada a Objetos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plan-trabajo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan de trabajo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proyecto Sello
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Proyecto Sello
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proyecto-sello/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía del proyecto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../silabo_poo_2026_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sílabo 2026-1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../silabo_poo_2026_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sílabo 2026-2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Fundamentos de la Programación Orientada a Objetos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. Fundamentos de la Programación Orientada a Objetos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Entorno, estructuras de control, metodos y estructuras de datos lineales
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Entorno, estructuras de control, metodos y estructuras de datos lineales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introducción
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introducción">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Contexto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Índice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-proposito-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Propósito de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-producto-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Producto de sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-metodologia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Metodología
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-motivacion-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 Motivación de la sesión
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 Motivación de la sesión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-caso-la-primera-coleccion-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6.1 Caso: la primera colección de datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-ubicacion-en-el-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7 Ubicación en el curso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-explica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Explica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Explica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-conceptos-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Conceptos clave
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-arrays-y-arraylist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Arrays y ArrayList
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-operaciones-principales-de-arraylist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Operaciones principales de ArrayList
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-organizacion-mediante-metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Organización mediante métodos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-limitacion-de-los-datos-separados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Limitación de los datos separados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-errores-frecuentes-y-diagnostico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Errores frecuentes y diagnóstico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-metodologia-para-resolver-problemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 Metodología para resolver problemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-aplica-actividad-practica-guiada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Aplica: actividad práctica guiada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Aplica: actividad práctica guiada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-preparar-ambiente-local-java-21-lts-maven-y-vs-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Preparar ambiente local: Java 21 LTS, Maven y VS Code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Preparar ambiente local: Java 21 LTS, Maven y VS Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-instalar-gestor-de-paquetes-si-hace-falta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1 Instalar gestor de paquetes, si hace falta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-instalar-java-21-lts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2 Instalar Java 21 LTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313-instalar-maven-3x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.3 Instalar Maven 3.x
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#314-instalar-vs-code-y-extension-pack-for-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.4 Instalar VS Code y Extension Pack for Java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#315-verificar-instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.5 Verificar instalación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-crear-y-ejecutar-un-programa-java-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Crear y ejecutar un programa Java simple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-repasar-estructuras-de-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Repasar estructuras de control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-comparar-un-array-con-un-arraylist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Comparar un array con un ArrayList
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-organizar-operaciones-mediante-metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Organizar operaciones mediante métodos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-completar-operaciones-sobre-datos-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Completar operaciones sobre datos simples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-representar-productos-mediante-listas-paralelas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Representar productos mediante listas paralelas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38-identificar-la-necesidad-de-agrupar-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 Identificar la necesidad de agrupar datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-crea-actividad-autonoma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Crea: actividad autónoma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Crea: actividad autónoma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-plantilla-de-evidencia-individual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Plantilla de evidencia individual
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Plantilla de evidencia individual">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411-datos-del-estudiante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.1 Datos del estudiante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412-trabajo-autonomo-realizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.2 Trabajo autónomo realizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#413-evidencia-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.3 Evidencia técnica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#414-error-o-hallazgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.4 Error o hallazgo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#415-reflexion-tecnica-breve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.5 Reflexión técnica breve
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-criterios-minimos-de-aceptacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Criterios mínimos de aceptación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-cierre-evaluativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Cierre evaluativo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Cierre evaluativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-resultados-esperados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Resultados esperados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-evidencia-del-producto-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Evidencia del producto de sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-preguntas-de-defensa-y-reflexion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Preguntas de defensa y reflexión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-rubrica-de-evaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Rúbrica de evaluación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Anexos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../POOTaller01.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Taller POO 01
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../POOTaller02.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Taller POO 02
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introducción
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introducción">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Contexto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Índice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-proposito-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Propósito de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-producto-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Producto de sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-metodologia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Metodología
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-motivacion-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 Motivación de la sesión
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 Motivación de la sesión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-caso-la-primera-coleccion-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6.1 Caso: la primera colección de datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-ubicacion-en-el-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7 Ubicación en el curso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-explica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Explica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Explica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-conceptos-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Conceptos clave
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-arrays-y-arraylist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Arrays y ArrayList
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-operaciones-principales-de-arraylist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Operaciones principales de ArrayList
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-organizacion-mediante-metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Organización mediante métodos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-limitacion-de-los-datos-separados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Limitación de los datos separados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-errores-frecuentes-y-diagnostico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Errores frecuentes y diagnóstico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-metodologia-para-resolver-problemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 Metodología para resolver problemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-aplica-actividad-practica-guiada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Aplica: actividad práctica guiada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Aplica: actividad práctica guiada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-preparar-ambiente-local-java-21-lts-maven-y-vs-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Preparar ambiente local: Java 21 LTS, Maven y VS Code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Preparar ambiente local: Java 21 LTS, Maven y VS Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-instalar-gestor-de-paquetes-si-hace-falta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1 Instalar gestor de paquetes, si hace falta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-instalar-java-21-lts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2 Instalar Java 21 LTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313-instalar-maven-3x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.3 Instalar Maven 3.x
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#314-instalar-vs-code-y-extension-pack-for-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.4 Instalar VS Code y Extension Pack for Java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#315-verificar-instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.5 Verificar instalación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-crear-y-ejecutar-un-programa-java-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Crear y ejecutar un programa Java simple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-repasar-estructuras-de-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Repasar estructuras de control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-comparar-un-array-con-un-arraylist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Comparar un array con un ArrayList
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-organizar-operaciones-mediante-metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Organizar operaciones mediante métodos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-completar-operaciones-sobre-datos-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Completar operaciones sobre datos simples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-representar-productos-mediante-listas-paralelas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Representar productos mediante listas paralelas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38-identificar-la-necesidad-de-agrupar-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 Identificar la necesidad de agrupar datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-crea-actividad-autonoma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Crea: actividad autónoma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Crea: actividad autónoma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-plantilla-de-evidencia-individual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Plantilla de evidencia individual
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Plantilla de evidencia individual">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411-datos-del-estudiante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.1 Datos del estudiante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412-trabajo-autonomo-realizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.2 Trabajo autónomo realizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#413-evidencia-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.3 Evidencia técnica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#414-error-o-hallazgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.4 Error o hallazgo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#415-reflexion-tecnica-breve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.5 Reflexión técnica breve
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-criterios-minimos-de-aceptacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Criterios mínimos de aceptación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-cierre-evaluativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Cierre evaluativo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Cierre evaluativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-resultados-esperados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Resultados esperados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-evidencia-del-producto-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Evidencia del producto de sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-preguntas-de-defensa-y-reflexion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Preguntas de defensa y reflexión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-rubrica-de-evaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Rúbrica de evaluación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="s1-entorno-de-programacion-estructuras-de-control-metodos-y-estructuras-de-datos-lineales">S1 - Entorno de programación, estructuras de control, métodos y estructuras de datos lineales<a class="headerlink" href="#s1-entorno-de-programacion-estructuras-de-control-metodos-y-estructuras-de-datos-lineales" title="Permanent link">&para;</a></h1>
+<h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
+<p>Tiempo: 1h 30min (40 min de contexto y propósito + 50 min de presentación del curso y del sílabo).</p>
+<h3 id="11-contexto">1.1 Contexto<a class="headerlink" href="#11-contexto" title="Permanent link">&para;</a></h3>
+<p>Este curso retoma variables, condicionales, ciclos, métodos y arrays que ya conoces, como base para iniciar la Programación Orientada a Objetos. Esta sesión prepara el entorno de desarrollo (Java 21, Maven, VS Code), ejecuta el primer programa y organiza un programa mediante métodos, arrays y <code>ArrayList</code>, antes de introducir clases y objetos en S2.</p>
+<p>Al ser la primera sesión del curso, no hay trabajo de una sesión anterior que revisar; en su lugar, los 50 min adicionales de esta sección se usan para la presentación del curso y del sílabo (docente, evaluación, cronograma de unidades, Proyecto Sello como cierre del semestre). Desde S2, este mismo bloque de tiempo se dedica a revisar el trabajo autónomo de la sesión anterior.</p>
+<h3 id="12-indice">1.2 Índice<a class="headerlink" href="#12-indice" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Estructuras de control y métodos (repaso).</li>
+<li>Arrays y <code>ArrayList</code>.</li>
+<li>Operaciones principales de <code>ArrayList</code>.</li>
+<li>Limitación de representar una entidad mediante datos separados.</li>
+</ol>
+<h3 id="13-proposito-de-aprendizaje">1.3 Propósito de aprendizaje<a class="headerlink" href="#13-proposito-de-aprendizaje" title="Permanent link">&para;</a></h3>
+<p>Al concluir la clase, estarás en condiciones de:</p>
+<ul>
+<li><strong>Configurar y verificar</strong> tu entorno, y <strong>organizar</strong> un programa mediante métodos, condicionales, ciclos, arrays y <code>ArrayList</code> para registrar, recorrer, buscar, actualizar y eliminar datos simples.</li>
+</ul>
+<h3 id="14-producto-de-sesion">1.4 Producto de sesión<a class="headerlink" href="#14-producto-de-sesion" title="Permanent link">&para;</a></h3>
+<p>Programa de consola organizado mediante métodos que administra datos simples con arrays y <code>ArrayList</code>, e identifica las limitaciones de representar una entidad mediante datos separados.</p>
+<h3 id="15-metodologia">1.5 Metodología<a class="headerlink" href="#15-metodologia" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Actividades</th>
+<th>Orientaciones</th>
+<th>Material</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Revisión previa individual</td>
+<td>Instalar y verificar Java 21 LTS, Maven y VS Code.</td>
+<td>Trabajo individual, antes de clase; traer evidencia de <code>java -version</code> y <code>mvn -version</code> funcionando.</td>
+<td>Guía de instalación (3.1).</td>
+</tr>
+<tr>
+<td>Clase presencial</td>
+<td>Explicación guiada de conceptos (arrays, <code>ArrayList</code>, métodos) y desarrollo guiado de los ejercicios prácticos.</td>
+<td>Trabajo individual en la propia laptop, siguiendo al docente paso a paso; consulta inmediata ante errores de compilación o de índice.</td>
+<td>Enunciados de los ejercicios, VS Code, terminal.</td>
+</tr>
+<tr>
+<td>Evaluación formativa</td>
+<td>Verificación en clase de la ejecución del menú y de las operaciones sobre <code>ArrayList</code>; inicio de la plantilla de evidencia individual.</td>
+<td>La evidencia se completa y sustenta de forma individual, fuera del aula, según los criterios mínimos de la sección 4.2.</td>
+<td>Plantilla de evidencia individual (4.1), rúbrica de evaluación (5.4).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="16-motivacion-de-la-sesion">1.6 Motivación de la sesión<a class="headerlink" href="#16-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
+<h4 id="161-caso-la-primera-coleccion-de-datos">1.6.1 Caso: la primera colección de datos<a class="headerlink" href="#161-caso-la-primera-coleccion-de-datos" title="Permanent link">&para;</a></h4>
+<p>Los estudiantes llegan al curso después de trabajar variables, condicionales, ciclos, métodos y arrays. Antes de iniciar la Programación Orientada a Objetos, se recuperan esos conocimientos usando una estructura dinámica: <code>ArrayList</code>.</p>
+<p>En esta sesión todavía no se crean clases propias del dominio. Primero se observa cómo se administran datos simples y qué dificultades aparecen cuando los datos que representan una misma entidad quedan separados.</p>
+<p>Preguntas para los estudiantes:</p>
+<ol>
+<li>¿Cómo organizamos y procesamos varios datos cuando la cantidad de elementos puede cambiar durante la ejecución del programa?</li>
+<li>¿Qué ocurre si eliminas un dato de una lista, pero olvidas eliminarlo de las demás listas paralelas?</li>
+<li>¿Por qué cuatro listas paralelas deben conservar siempre el mismo tamaño y el mismo orden?</li>
+<li>¿Cómo podríamos mantener juntos el código, nombre, precio y stock que pertenecen a un mismo producto?</li>
+</ol>
+<h3 id="17-ubicacion-en-el-curso">1.7 Ubicación en el curso<a class="headerlink" href="#17-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Unidad: U1 - Fundamentos de la Programación Orientada a Objetos.</li>
+<li>Producto de unidad: aplicación de consola en memoria con entidades, relaciones, colecciones y operaciones CRUD.</li>
+<li>Producto del curso: Proyecto Sello - aplicación de escritorio orientada a objetos, con persistencia relacional (Unidad III).</li>
+<li>Carpeta de trabajo: <code>comarket-cli</code>.</li>
+<li>Avance de sesión: entorno preparado y fundamentos recuperados mediante estructuras de datos lineales.</li>
+</ul>
+<p>Roadmap para elaborar el producto de la unidad:</p>
+<pre class="mermaid"><code>flowchart TB
+    S1["S1&lt;br/&gt;Estructuras de control, métodos,&lt;br/&gt;arrays y ArrayList"]
+    S2["S2&lt;br/&gt;Clases, objetos y constructores&lt;br/&gt;Coche, Persona y Producto"]
+    S3["S3&lt;br/&gt;Encapsulamiento, responsabilidades&lt;br/&gt;y relaciones entre objetos"]
+    S4["S4&lt;br/&gt;Herencia, interfaces&lt;br/&gt;y polimorfismo"]
+    S5["S5&lt;br/&gt;CRUD, validaciones&lt;br/&gt;y responsabilidad única"]
+    S6["S6&lt;br/&gt;Producto U1&lt;br/&gt;consola ejecutable"]
+
+    S1 --&gt; S2
+    S2 --&gt; S3
+    S3 --&gt; S4
+    S4 --&gt; S5
+    S5 --&gt; S6
+
+    classDef today fill:#ffe08a,stroke:#9a6b00,stroke-width:2px,color:#111;
+    class S1 today;</code></pre>
+<h2 id="2-explica">2. Explica<a class="headerlink" href="#2-explica" title="Permanent link">&para;</a></h2>
+<p>Tiempo: 50 min.</p>
+<h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Idea central</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Variable</td>
+<td>Almacena un dato durante la ejecución.</td>
+<td><code>int stock = 10;</code></td>
+</tr>
+<tr>
+<td>Condicional</td>
+<td>Permite decidir según una condición.</td>
+<td><code>if</code>, <code>else</code>, <code>switch</code></td>
+</tr>
+<tr>
+<td>Ciclo</td>
+<td>Repite instrucciones mientras se cumpla una condición.</td>
+<td><code>for</code>, <code>while</code></td>
+</tr>
+<tr>
+<td>Método</td>
+<td>Agrupa instrucciones para resolver una tarea.</td>
+<td><code>buscarProducto()</code></td>
+</tr>
+<tr>
+<td>Array</td>
+<td>Estructura lineal de tamaño fijo.</td>
+<td><code>String[] nombres</code></td>
+</tr>
+<tr>
+<td>Colección</td>
+<td>Estructura que administra varios elementos.</td>
+<td>Lista de nombres</td>
+</tr>
+<tr>
+<td><code>ArrayList</code></td>
+<td>Lista dinámica que puede crecer o disminuir.</td>
+<td><code>ArrayList&lt;String&gt;</code></td>
+</tr>
+<tr>
+<td>Índice</td>
+<td>Posición de un elemento dentro de una estructura lineal.</td>
+<td><code>nombres.get(0)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-arrays-y-arraylist">2.2 Arrays y <code>ArrayList</code><a class="headerlink" href="#22-arrays-y-arraylist" title="Permanent link">&para;</a></h3>
+<p>Un array tiene un tamaño definido al crearse:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">nombres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">;</span>
+</code></pre></div>
+<p>Un <code>ArrayList</code> permite agregar y eliminar elementos durante la ejecución:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nombres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Teclado&quot;</span><span class="p">);</span>
+<span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Mouse&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Comparación:</p>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Array</th>
+<th><code>ArrayList</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tamaño</td>
+<td>Fijo</td>
+<td>Dinámico</td>
+</tr>
+<tr>
+<td>Acceso por índice</td>
+<td>Sí</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Agregar elementos</td>
+<td>Limitado al tamaño creado</td>
+<td><code>add()</code></td>
+</tr>
+<tr>
+<td>Actualizar elementos</td>
+<td>Asignación por índice</td>
+<td><code>set()</code></td>
+</tr>
+<tr>
+<td>Eliminar elementos</td>
+<td>Requiere reorganización manual</td>
+<td><code>remove()</code></td>
+</tr>
+<tr>
+<td>Cantidad de elementos</td>
+<td><code>length</code></td>
+<td><code>size()</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-operaciones-principales-de-arraylist">2.3 Operaciones principales de <code>ArrayList</code><a class="headerlink" href="#23-operaciones-principales-de-arraylist" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nombres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Teclado&quot;</span><span class="p">);</span>
+<span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Mouse&quot;</span><span class="p">);</span>
+
+<span class="n">String</span><span class="w"> </span><span class="n">primero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombres</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">nombres</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mouse inalámbrico&quot;</span><span class="p">);</span>
+<span class="n">nombres</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">cantidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombres</span><span class="p">.</span><span class="na">size</span><span class="p">();</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">existe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombres</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;Mouse inalámbrico&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>En esta sesión se usan datos simples:</p>
+<ul>
+<li><code>String</code></li>
+<li><code>Integer</code></li>
+<li><code>Double</code></li>
+</ul>
+<p>Las colecciones de objetos se trabajarán desde S2, después de definir clases y crear objetos.</p>
+<h3 id="24-organizacion-mediante-metodos">2.4 Organización mediante métodos<a class="headerlink" href="#24-organizacion-mediante-metodos" title="Permanent link">&para;</a></h3>
+<p>El programa debe separar las operaciones principales:</p>
+<div class="highlight"><pre><span></span><code>mostrarMenu()
+registrar()
+listar()
+buscar()
+actualizar()
+eliminar()
+</code></pre></div>
+<p>Todavía no se aplican capas ni clases propias del dominio. El objetivo es recuperar la descomposición de problemas mediante métodos.</p>
+<h3 id="25-limitacion-de-los-datos-separados">2.5 Limitación de los datos separados<a class="headerlink" href="#25-limitacion-de-los-datos-separados" title="Permanent link">&para;</a></h3>
+<p>Un producto podría representarse temporalmente mediante listas paralelas:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">codigos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nombres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">precios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</code></pre></div>
+<p>Los datos de un producto dependen de conservar el mismo índice:</p>
+<div class="highlight"><pre><span></span><code>codigos[0]  nombres[0]  precios[0]  stocks[0]
+</code></pre></div>
+<p>Si una lista se modifica incorrectamente, los datos dejan de corresponder. Esta limitación prepara la necesidad de clases y objetos en S2.</p>
+<h3 id="26-errores-frecuentes-y-diagnostico">2.6 Errores frecuentes y diagnóstico<a class="headerlink" href="#26-errores-frecuentes-y-diagnostico" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Causa probable</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>IndexOutOfBoundsException</code></td>
+<td>Se accede a una posición inexistente</td>
+<td>Verificar el índice con <code>size()</code></td>
+</tr>
+<tr>
+<td>El ciclo no termina</td>
+<td>La condición no cambia</td>
+<td>Revisar la variable de control</td>
+</tr>
+<tr>
+<td>La búsqueda no encuentra el texto</td>
+<td>Se comparan cadenas con <code>==</code></td>
+<td>Usar <code>equals()</code> o <code>equalsIgnoreCase()</code></td>
+</tr>
+<tr>
+<td>Los datos quedan desalineados</td>
+<td>Se modificó una lista paralela y otra no</td>
+<td>Aplicar la operación en todas las listas</td>
+</tr>
+<tr>
+<td>El menú repite una opción incorrecta</td>
+<td>La lectura de datos quedó desordenada</td>
+<td>Revisar el uso de <code>Scanner</code></td>
+</tr>
+<tr>
+<td>Todo está dentro de <code>main</code></td>
+<td>No se descompuso el problema</td>
+<td>Crear métodos para cada operación</td>
+</tr>
+</tbody>
+</table>
+<h3 id="27-metodologia-para-resolver-problemas">2.7 Metodología para resolver problemas<a class="headerlink" href="#27-metodologia-para-resolver-problemas" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Comprender el problema: ¿qué operación necesito realizar?</li>
+<li>Identificar los datos: ¿qué variables o estructuras necesito?</li>
+<li>Diseñar el proceso: ¿qué método o métodos resolverán la tarea?</li>
+<li>Definir la salida: ¿qué debe mostrar o devolver el programa?</li>
+<li>Diseñar pruebas: ¿con qué casos comprobaré que funciona, incluyendo posiciones límite del índice?</li>
+<li>Escribir, compilar, ejecutar y corregir el código.</li>
+</ol>
+<p>En cada ejercicio de este curso se aplican estos pasos antes de programar.</p>
+<h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
+<p>Tiempo: 3h 20min (4 horas académicas de 50 min, en laboratorio).</p>
+<p>Hoja de ruta de la sesión práctica:</p>
+<ul>
+<li><strong>3.1</strong> Preparar ambiente local: Java 21 LTS, Maven y VS Code.</li>
+<li><strong>3.2</strong> Crear y ejecutar un programa Java simple.</li>
+<li><strong>3.3</strong> Repasar estructuras de control.</li>
+<li><strong>3.4</strong> Comparar un array con un <code>ArrayList</code>.</li>
+<li><strong>3.5</strong> Organizar operaciones mediante métodos.</li>
+<li><strong>3.6</strong> Completar operaciones sobre datos simples.</li>
+<li><strong>3.7</strong> Representar productos mediante listas paralelas.</li>
+<li><strong>3.8</strong> Identificar la necesidad de agrupar datos.</li>
+</ul>
+<h3 id="31-preparar-ambiente-local-java-21-lts-maven-y-vs-code">3.1 Preparar ambiente local: Java 21 LTS, Maven y VS Code<a class="headerlink" href="#31-preparar-ambiente-local-java-21-lts-maven-y-vs-code" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> ambiente local con Java 21 LTS, Maven y VS Code verificados, listo para crear y ejecutar programas Java desde consola.</p>
+<p>Herramientas necesarias:</p>
+<ul>
+<li>Java 21 LTS.</li>
+<li>Maven 3.x.</li>
+<li>VS Code.</li>
+<li>Extension Pack for Java.</li>
+<li>Terminal integrada de VS Code.</li>
+</ul>
+<p>En esta sesión se usa un proyecto Java simple. Maven se verifica desde el inicio porque será necesario para organizar la entrega de la U1 en sesiones posteriores.</p>
+<h4 id="311-instalar-gestor-de-paquetes-si-hace-falta">3.1.1 Instalar gestor de paquetes, si hace falta<a class="headerlink" href="#311-instalar-gestor-de-paquetes-si-hace-falta" title="Permanent link">&para;</a></h4>
+<p>Windows ya trae <code>winget</code> instalado en Windows 10/11, así que no necesita un paso de arranque adicional.</p>
+<p>macOS bash/zsh, si no tienes Homebrew:</p>
+<div class="highlight"><pre><span></span><code>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+</code></pre></div>
+<p>Luego cierra y vuelve a abrir Terminal.</p>
+<h4 id="312-instalar-java-21-lts">3.1.2 Instalar Java 21 LTS<a class="headerlink" href="#312-instalar-java-21-lts" title="Permanent link">&para;</a></h4>
+<p>Se recomienda Eclipse Temurin 21, una distribución OpenJDK de soporte
+prolongado, instalada con el gestor de paquetes nativo de cada sistema
+operativo (evita instaladores manuales y mantiene el JDK actualizable).</p>
+<p><strong>Windows</strong> — PowerShell como usuario normal:</p>
+<div class="highlight"><pre><span></span><code><span class="n">winget</span> <span class="n">install</span> <span class="p">-</span><span class="n">-id</span> <span class="n">EclipseAdoptium</span><span class="p">.</span><span class="n">Temurin</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">JDK</span> <span class="p">-</span><span class="o">-exact</span>
+</code></pre></div>
+<p><strong>macOS</strong> (Homebrew no viene preinstalado en ningún Mac; una vez instalado,
+el comando de Temurin es el mismo para Intel y para Apple Silicon
+M1/M2/M3/M4 — Homebrew detecta la arquitectura automáticamente):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Instalar Homebrew (si no lo tiene)</span>
+/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="c1"># 2. Solo en Apple Silicon (M1/M2/M3/M4): agregar Homebrew al PATH.</span>
+<span class="c1">#    Se instala en /opt/homebrew (no en /usr/local como en Intel), y el</span>
+<span class="c1">#    propio instalador lo pide como paso obligatorio, no opcional.</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;eval &quot;$(/opt/homebrew/bin/brew shellenv)&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zprofile
+<span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>/opt/homebrew/bin/brew<span class="w"> </span>shellenv<span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="c1"># 3. Instalar Temurin 21</span>
+brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>temurin@21
+</code></pre></div>
+<p><strong>Linux (Ubuntu/Debian)</strong> — repositorio oficial de Adoptium vía <code>apt</code>:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>wget<span class="w"> </span>apt-transport-https<span class="w"> </span>gpg
+wget<span class="w"> </span>-qO<span class="w"> </span>-<span class="w"> </span>https://packages.adoptium.net/artifactory/api/gpg/key/public<span class="w"> </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/trusted.gpg.d/adoptium.gpg<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb https://packages.adoptium.net/artifactory/deb </span><span class="k">$(</span>awk<span class="w"> </span>-F<span class="o">=</span><span class="w"> </span><span class="s1">&#39;/^VERSION_CODENAME/{print$2}&#39;</span><span class="w"> </span>/etc/os-release<span class="k">)</span><span class="s2"> main&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/adoptium.list
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>temurin-21-jdk
+</code></pre></div>
+<p><strong>Linux (Fedora/RHEL)</strong> — repositorio oficial de Adoptium vía <code>dnf</code>:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/yum.repos.d/adoptium.repo<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
+<span class="s">[Adoptium]</span>
+<span class="s">name=Adoptium</span>
+<span class="s">baseurl=https://packages.adoptium.net/artifactory/rpm/$(. /etc/os-release; echo $ID)/$releasever/$basearch</span>
+<span class="s">enabled=1</span>
+<span class="s">gpgcheck=1</span>
+<span class="s">gpgkey=https://packages.adoptium.net/artifactory/api/gpg/key/public</span>
+<span class="s">EOF</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>temurin-21-jdk
+</code></pre></div>
+<h4 id="313-instalar-maven-3x">3.1.3 Instalar Maven 3.x<a class="headerlink" href="#313-instalar-maven-3x" title="Permanent link">&para;</a></h4>
+<p><strong>Windows</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">winget</span> <span class="n">install</span> <span class="p">-</span><span class="n">-id</span> <span class="n">Apache</span><span class="p">.</span><span class="n">Maven</span> <span class="p">-</span><span class="o">-exact</span>
+</code></pre></div>
+<p><strong>macOS</strong> (con Homebrew, ya instalado en el paso anterior):</p>
+<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>maven
+</code></pre></div>
+<p><strong>Linux (Ubuntu/Debian)</strong>:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>maven
+</code></pre></div>
+<p><strong>Linux (Fedora/RHEL)</strong>:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>maven
+</code></pre></div>
+<h4 id="314-instalar-vs-code-y-extension-pack-for-java">3.1.4 Instalar VS Code y Extension Pack for Java<a class="headerlink" href="#314-instalar-vs-code-y-extension-pack-for-java" title="Permanent link">&para;</a></h4>
+<p>El curso usa <strong>VS Code</strong> como editor por defecto.</p>
+<p><strong>Windows</strong> — con <code>winget</code> (viene instalado en Windows 10/11):</p>
+<div class="highlight"><pre><span></span><code><span class="n">winget</span> <span class="n">install</span> <span class="n">-e</span> <span class="p">-</span><span class="n">-id</span> <span class="n">Microsoft</span><span class="p">.</span><span class="n">VisualStudioCode</span>
+</code></pre></div>
+<p><strong>macOS</strong> (con Homebrew, ya instalado en el paso 3.1.2):</p>
+<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>visual-studio-code
+</code></pre></div>
+<p><strong>Linux (Ubuntu/Debian)</strong> — con <code>snap</code> (viene instalado en Ubuntu):</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>snap<span class="w"> </span>install<span class="w"> </span>--classic<span class="w"> </span>code
+</code></pre></div>
+<p>En cualquier sistema también puede descargarse el instalador desde <a href="https://code.visualstudio.com/download">https://code.visualstudio.com/download</a>.</p>
+<p>Al finalizar, instale la extensión de Java desde la terminal:</p>
+<div class="highlight"><pre><span></span><code>code<span class="w"> </span>--install-extension<span class="w"> </span>vscjava.vscode-java-pack
+</code></pre></div>
+<h4 id="315-verificar-instalacion">3.1.5 Verificar instalación<a class="headerlink" href="#315-verificar-instalacion" title="Permanent link">&para;</a></h4>
+<p>Verificar Java 21:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>-version
+</code></pre></div>
+<p>Resultado esperado:</p>
+<div class="highlight"><pre><span></span><code>version 21
+</code></pre></div>
+<p>Verificar el compilador:</p>
+<div class="highlight"><pre><span></span><code>javac<span class="w"> </span>-version
+</code></pre></div>
+<p>Verificar Maven:</p>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>-version
+</code></pre></div>
+<p>Resultado esperado:</p>
+<div class="highlight"><pre><span></span><code>Apache Maven 3.x
+Java version: 21
+</code></pre></div>
+<p>Si Maven muestra otra versión de Java, configure <code>JAVA_HOME</code> con la ruta del JDK 21, asegure que su carpeta <code>bin</code> tenga prioridad en <code>Path</code> y abra una terminal nueva.</p>
+<h3 id="32-crear-y-ejecutar-un-programa-java-simple">3.2 Crear y ejecutar un programa Java simple<a class="headerlink" href="#32-crear-y-ejecutar-un-programa-java-simple" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> programa Java ejecutado correctamente desde VS Code.</p>
+<ol>
+<li>Crear una carpeta para el proyecto.</li>
+<li>Abrir la carpeta en VS Code.</li>
+<li>Crear una carpeta <code>src</code>.</li>
+<li>Crear el archivo <code>Main.java</code>.</li>
+<li>Ejecutar un mensaje desde consola.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Repaso de Fundamentos de Programación&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="33-repasar-estructuras-de-control">3.3 Repasar estructuras de control<a class="headerlink" href="#33-repasar-estructuras-de-control" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> menú repetitivo controlado mediante condicionales y ciclos.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Scanner</span><span class="w"> </span><span class="n">scanner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">opcion</span><span class="p">;</span>
+
+<span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;1. Registrar&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;2. Listar&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;3. Salir&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">opcion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextInt</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">opcion</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Registrar&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Listar&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Fin&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">default</span><span class="p">:</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Opción inválida&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">opcion</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="34-comparar-un-array-con-un-arraylist">3.4 Comparar un array con un <code>ArrayList</code><a class="headerlink" href="#34-comparar-un-array-con-un-arraylist" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> evidencia de la diferencia entre tamaño fijo y tamaño dinámico.</p>
+<p>Array:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">nombresArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">;</span>
+<span class="n">nombresArray</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Teclado&quot;</span><span class="p">;</span>
+<span class="n">nombresArray</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mouse&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p><code>ArrayList</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nombres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Teclado&quot;</span><span class="p">);</span>
+<span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Mouse&quot;</span><span class="p">);</span>
+<span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Monitor&quot;</span><span class="p">);</span>
+<span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Audífonos&quot;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="35-organizar-operaciones-mediante-metodos">3.5 Organizar operaciones mediante métodos<a class="headerlink" href="#35-organizar-operaciones-mediante-metodos" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> programa dividido en operaciones pequeñas.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">registrar</span><span class="p">(</span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nombres</span><span class="p">,</span><span class="w"> </span><span class="n">Scanner</span><span class="w"> </span><span class="n">scanner</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;Nombre: &quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
+<span class="w">    </span><span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">nombre</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">listar</span><span class="p">(</span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nombres</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nombres</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nombres</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">buscar</span><span class="p">(</span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nombres</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombreBuscado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nombres</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nombres</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="na">equalsIgnoreCase</span><span class="p">(</span><span class="n">nombreBuscado</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="36-completar-operaciones-sobre-datos-simples">3.6 Completar operaciones sobre datos simples<a class="headerlink" href="#36-completar-operaciones-sobre-datos-simples" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> registro, listado, búsqueda, actualización y eliminación sobre un <code>ArrayList</code>.</p>
+<p><strong>Problema:</strong> el menú de 3.3 y los métodos de 3.5 cubren registrar, listar y buscar; falta completar actualizar y eliminar para tener el CRUD mínimo sobre datos simples.</p>
+<p><strong>Resolución guiada:</strong></p>
+<ol>
+<li><strong>Comprender</strong>: cada operación del menú debe delegar en un método propio, siguiendo el mismo patrón de <code>registrar</code>, <code>listar</code> y <code>buscar</code>.</li>
+<li><strong>Entradas</strong>: posición (índice) o nombre a actualizar/eliminar, y el nuevo valor cuando corresponda.</li>
+<li><strong>Procesos</strong>:</li>
+<li><code>actualizar</code>: localizar la posición con <code>buscar()</code> y reemplazar el valor con <code>set()</code>.</li>
+<li><code>eliminar</code>: localizar la posición con <code>buscar()</code> y quitar el valor con <code>remove()</code>.</li>
+<li>validar que la posición exista (<code>buscar()</code> distinto de <code>-1</code>) antes de operar.</li>
+<li><strong>Salidas</strong>: lista actualizada, mensaje de confirmación o de error si el dato no existe.</li>
+<li><strong>Pruebas</strong>:</li>
+<li>caso normal: actualizar y eliminar un nombre existente.</li>
+<li>caso límite: intentar actualizar o eliminar un nombre que no está en la lista.</li>
+<li><strong>Código</strong>: completa <code>actualizar(ArrayList&lt;String&gt; nombres, Scanner scanner)</code> y <code>eliminar(ArrayList&lt;String&gt; nombres, Scanner scanner)</code> siguiendo el estilo de los métodos de 3.5.</li>
+</ol>
+<p>Operaciones mínimas del menú completo:</p>
+<ol>
+<li>Registrar un nombre.</li>
+<li>Listar nombres.</li>
+<li>Buscar un nombre.</li>
+<li>Actualizar un nombre por posición.</li>
+<li>Eliminar un nombre.</li>
+<li>Salir.</li>
+</ol>
+<p>En esta sesión estas operaciones sirven para recuperar estructuras de control y métodos. El CRUD organizado por capas se desarrollará en S5.</p>
+<h3 id="37-representar-productos-mediante-listas-paralelas">3.7 Representar productos mediante listas paralelas<a class="headerlink" href="#37-representar-productos-mediante-listas-paralelas" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> datos de productos registrados sin utilizar clases propias.</p>
+<div class="highlight"><pre><span></span><code><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">codigos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nombres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">precios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="n">codigos</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;P001&quot;</span><span class="p">);</span>
+<span class="n">nombres</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Teclado&quot;</span><span class="p">);</span>
+<span class="n">precios</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mf">80.0</span><span class="p">);</span>
+<span class="n">stocks</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</code></pre></div>
+<p>Recorrido:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">codigos</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span>
+<span class="w">            </span><span class="n">codigos</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">            </span><span class="n">nombres</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - S/ &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">            </span><span class="n">precios</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - Stock: &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">            </span><span class="n">stocks</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="38-identificar-la-necesidad-de-agrupar-datos">3.8 Identificar la necesidad de agrupar datos<a class="headerlink" href="#38-identificar-la-necesidad-de-agrupar-datos" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> explicación del problema que será resuelto en S2.</p>
+<p>Responder:</p>
+<ol>
+<li>¿Qué ocurre si se elimina un nombre, pero no su código, precio y stock?</li>
+<li>¿Por qué las cuatro listas deben conservar el mismo tamaño?</li>
+<li>¿Qué representa el índice <code>i</code>?</li>
+<li>¿Cómo podríamos mantener juntos los datos de cada producto?</li>
+</ol>
+<p>Conclusión:</p>
+<div class="highlight"><pre><span></span><code>Las listas paralelas permiten repasar programación, pero resultan frágiles
+cuando varios datos representan una sola entidad.
+
+En S2 se definirá la clase Producto y cada producto se representará
+mediante un objeto.
+</code></pre></div>
+<h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
+<p>Tiempo: 2h fuera del aula.</p>
+<h3 id="41-plantilla-de-evidencia-individual">4.1 Plantilla de evidencia individual<a class="headerlink" href="#41-plantilla-de-evidencia-individual" title="Permanent link">&para;</a></h3>
+<p>Entrega un PDF con el siguiente nombre:</p>
+<div class="highlight"><pre><span></span><code>S01_Equipo##_ApellidoNombre.pdf
+</code></pre></div>
+<h4 id="411-datos-del-estudiante">4.1.1 Datos del estudiante<a class="headerlink" href="#411-datos-del-estudiante" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Nombre:</li>
+<li>Equipo:</li>
+<li>Sesión: S01 - Entorno de programación, estructuras de control, métodos y estructuras de datos lineales</li>
+<li>Rol o aporte realizado:</li>
+<li>Link de GitHub:</li>
+</ul>
+<h4 id="412-trabajo-autonomo-realizado">4.1.2 Trabajo autónomo realizado<a class="headerlink" href="#412-trabajo-autonomo-realizado" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Verificar Java 21, Maven y VS Code.</li>
+<li>Crear un menú con <code>do-while</code> y <code>switch</code>.</li>
+<li>Separar las operaciones mediante métodos.</li>
+<li>Utilizar un array de tamaño fijo.</li>
+<li>Utilizar un <code>ArrayList</code> de datos simples.</li>
+<li>Registrar, listar, buscar, actualizar y eliminar elementos.</li>
+<li>Representar al menos tres productos mediante listas paralelas.</li>
+<li>Explicar dos limitaciones de las listas paralelas.</li>
+</ol>
+<h4 id="413-evidencia-tecnica">4.1.3 Evidencia técnica<a class="headerlink" href="#413-evidencia-tecnica" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Versiones de Java y Maven.</li>
+<li>Código del menú.</li>
+<li>Código de los métodos.</li>
+<li>Comparación entre array y <code>ArrayList</code>.</li>
+<li>Salida de registro, búsqueda, actualización y eliminación.</li>
+<li>Código de las listas paralelas.</li>
+<li>Explicación de la necesidad de agrupar los datos de un producto.</li>
+</ul>
+<h4 id="414-error-o-hallazgo">4.1.4 Error o hallazgo<a class="headerlink" href="#414-error-o-hallazgo" title="Permanent link">&para;</a></h4>
+<p>Describe:</p>
+<ul>
+<li>Qué ocurrió.</li>
+<li>Cómo lo diagnosticaste.</li>
+<li>Cómo lo corregiste o qué aprendiste.</li>
+</ul>
+<h4 id="415-reflexion-tecnica-breve">4.1.5 Reflexión técnica breve<a class="headerlink" href="#415-reflexion-tecnica-breve" title="Permanent link">&para;</a></h4>
+<p>Responde en 5 a 8 líneas:</p>
+<div class="highlight"><pre><span></span><code>¿Por qué representar productos mediante listas paralelas puede producir
+errores cuando el programa crece?
+</code></pre></div>
+<h3 id="42-criterios-minimos-de-aceptacion">4.2 Criterios mínimos de aceptación<a class="headerlink" href="#42-criterios-minimos-de-aceptacion" title="Permanent link">&para;</a></h3>
+<ul>
+<li>El archivo respeta el nombre <code>S01_Equipo##_ApellidoNombre.pdf</code>.</li>
+<li>El ambiente local está verificado.</li>
+<li>El programa utiliza estructuras de control.</li>
+<li>Las operaciones están separadas mediante métodos.</li>
+<li>Se evidencia el uso de un array.</li>
+<li>Se evidencia el uso de <code>ArrayList</code>.</li>
+<li>Se realizan recorridos y búsquedas.</li>
+<li>Se muestran listas paralelas con datos de productos.</li>
+<li>Se explican sus limitaciones.</li>
+<li>No se utilizan todavía clases propias del dominio.</li>
+</ul>
+<h2 id="5-cierre-evaluativo">5. Cierre evaluativo<a class="headerlink" href="#5-cierre-evaluativo" title="Permanent link">&para;</a></h2>
+<p>Tiempo: 10 min.</p>
+<h3 id="51-resultados-esperados">5.1 Resultados esperados<a class="headerlink" href="#51-resultados-esperados" title="Permanent link">&para;</a></h3>
+<p>Al finalizar la sesión, el estudiante debe demostrar que:</p>
+<ul>
+<li>El entorno ejecuta programas Java.</li>
+<li>Distingue una estructura de control de una estructura de datos.</li>
+<li>Organiza operaciones mediante métodos.</li>
+<li>Diferencia un array de un <code>ArrayList</code>.</li>
+<li>Utiliza las operaciones principales de <code>ArrayList</code>.</li>
+<li>Recorre y busca datos mediante ciclos.</li>
+<li>Reconoce el problema de representar una entidad mediante listas paralelas.</li>
+<li>Explica por qué las clases y los objetos serán necesarios en S2.</li>
+</ul>
+<h3 id="52-evidencia-del-producto-de-sesion">5.2 Evidencia del producto de sesión<a class="headerlink" href="#52-evidencia-del-producto-de-sesion" title="Permanent link">&para;</a></h3>
+<p>Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.</p>
+<h3 id="53-preguntas-de-defensa-y-reflexion">5.3 Preguntas de defensa y reflexión<a class="headerlink" href="#53-preguntas-de-defensa-y-reflexion" title="Permanent link">&para;</a></h3>
+<ol>
+<li>¿Cuál es la diferencia entre una estructura de control y una estructura de datos?</li>
+<li>¿Qué diferencia existe entre un array y un <code>ArrayList</code>?</li>
+<li>¿Para qué sirve <code>size()</code>?</li>
+<li>¿Por qué una búsqueda puede devolver <code>-1</code>?</li>
+<li>¿Qué ventaja aporta separar las operaciones mediante métodos?</li>
+<li>¿Qué problema presentan las listas paralelas?</li>
+<li>¿Por qué todavía no usamos <code>ArrayList&lt;Producto&gt;</code>?</li>
+<li>¿Qué contenido de S2 permitirá agrupar los datos de un producto?</li>
+</ol>
+<h3 id="54-rubrica-de-evaluacion">5.4 Rúbrica de evaluación<a class="headerlink" href="#54-rubrica-de-evaluacion" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Dimensión</th>
+<th style="text-align: right;">Peso</th>
+<th>3 - Logro destacado</th>
+<th>2 - Logro</th>
+<th>1 - Proceso</th>
+<th>0 - Inicio</th>
+<th style="text-align: right;">Puntuación obtenida</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Entorno y ejecución</td>
+<td style="text-align: right;">1</td>
+<td>Verifica las herramientas y ejecuta el programa sin errores.</td>
+<td>Ejecuta el programa correctamente.</td>
+<td>Presenta dificultades de configuración o ejecución.</td>
+<td>No logra ejecutar el programa.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>2. Estructuras de control</td>
+<td style="text-align: right;">2</td>
+<td>Usa condicionales y ciclos con flujo claro y controlado.</td>
+<td>Usa estructuras de control funcionales.</td>
+<td>Uso parcial o con errores.</td>
+<td>No evidencia estructuras de control.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>3. Métodos</td>
+<td style="text-align: right;">2</td>
+<td>Descompone correctamente las operaciones y usa parámetros con claridad.</td>
+<td>Organiza las operaciones principales mediante métodos.</td>
+<td>La separación es parcial.</td>
+<td>Todo permanece en <code>main</code>.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>4. Arrays y <code>ArrayList</code></td>
+<td style="text-align: right;">2</td>
+<td>Compara y utiliza ambas estructuras correctamente.</td>
+<td>Utiliza array y <code>ArrayList</code>.</td>
+<td>Uso incompleto o confuso.</td>
+<td>No evidencia estructuras lineales.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>5. Operaciones y búsqueda</td>
+<td style="text-align: right;">2</td>
+<td>Registra, lista, busca, actualiza y elimina datos correctamente.</td>
+<td>Implementa las operaciones principales.</td>
+<td>Operaciones incompletas.</td>
+<td>No administra los datos.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>6. Análisis y evidencia</td>
+<td style="text-align: right;">1</td>
+<td>Explica claramente las limitaciones de las listas paralelas con evidencias ordenadas.</td>
+<td>Identifica la limitación principal.</td>
+<td>Explicación superficial o evidencia incompleta.</td>
+<td>No identifica el problema.</td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+<p>Puntuación acumulada = suma de (<code>Peso</code> * <code>Puntuación obtenida</code>) = ____.</p>
+<p>Nota final = (<code>Puntuación acumulada</code> / 30) * 20 = ____.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Angel Sullon @asullom - UPeU 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "toc.follow", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="../../javascripts/mermaid.js"></script>
+      
+    
+  </body>
+</html>
