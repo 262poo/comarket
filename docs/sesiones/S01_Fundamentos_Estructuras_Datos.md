@@ -4,9 +4,9 @@
 
 Tiempo: 1h 30min (40 min de contexto y propósito + 50 min de presentación del curso y del sílabo).
 
-### 1.1 Contexto
+### 1.1 Presentación de la sesión
 
-Este curso retoma variables, condicionales, ciclos, métodos y arrays que ya conoces, como base para iniciar la Programación Orientada a Objetos. Esta sesión prepara el entorno de desarrollo (Java 21, Maven, VS Code), ejecuta el primer programa y organiza un programa mediante métodos, arrays y `ArrayList`, antes de introducir clases y objetos en S2.
+Antes de organizar el código en clases y objetos, hace falta dominar lo que esos objetos van a contener por dentro: variables, condicionales, ciclos, métodos y colecciones. Esta sesión prepara el entorno (Java 21, VS Code), organiza un programa mediante métodos, y evidencia —con listas paralelas de productos— el problema que las clases resuelven desde la próxima sesión.
 
 Al ser la primera sesión del curso, no hay trabajo de una sesión anterior que revisar; en su lugar, los 50 min adicionales de esta sección se usan para la presentación del curso y del sílabo (docente, evaluación, cronograma de unidades, Proyecto Sello como cierre del semestre). Desde S2, este mismo bloque de tiempo se dedica a revisar el trabajo autónomo de la sesión anterior.
 
@@ -29,11 +29,13 @@ Programa de consola organizado mediante métodos que administra datos simples co
 
 ### 1.5 Metodología
 
-| Fase | Actividades | Orientaciones | Material |
-|---|---|---|---|
-| Revisión previa individual | Instalar y verificar Java 21 LTS, Maven y VS Code. | Trabajo individual, antes de clase; traer evidencia de `java -version` y `mvn -version` funcionando. | Guía de instalación (3.1). |
-| Clase presencial | Explicación guiada de conceptos (arrays, `ArrayList`, métodos) y desarrollo guiado de los ejercicios prácticos. | Trabajo individual en la propia laptop, siguiendo al docente paso a paso; consulta inmediata ante errores de compilación o de índice. | Enunciados de los ejercicios, VS Code, terminal. |
-| Evaluación formativa | Verificación en clase de la ejecución del menú y de las operaciones sobre `ArrayList`; inicio de la plantilla de evidencia individual. | La evidencia se completa y sustenta de forma individual, fuera del aula, según los criterios mínimos de la sección 4.2. | Plantilla de evidencia individual (4.1), rúbrica de evaluación (5.4). |
+**Tabla 1. Metodología de la sesión**
+
+| Actividades a Realizar en el Periodo | Orientaciones generales (Orientaciones Metodológicas) | Material de estudio recomendado |
+|---|---|---|
+| Revisión previa individual | Instalar y verificar Java 21 LTS y VS Code. Trabajo individual, antes de clase; traer evidencia de `java -version` funcionando. | Guía de instalación (3.1). |
+| Clase presencial | Explicación guiada de conceptos (arrays, `ArrayList`, métodos) y desarrollo guiado de los ejercicios prácticos. Trabajo individual en la propia laptop, siguiendo al docente paso a paso; consulta inmediata ante errores de compilación o de índice. | Enunciados de los ejercicios, VS Code, terminal. |
+| Evaluación formativa | Verificación en clase de la ejecución del menú y de las operaciones sobre `ArrayList`; inicio del informe de evidencia individual. La evidencia se completa y sustenta de forma individual, fuera del aula, según los criterios mínimos de la sección 4.4. | Indicaciones del informe (4.3), rúbrica de evaluación (4.6). |
 
 ### 1.6 Motivación de la sesión
 
@@ -43,12 +45,17 @@ Los estudiantes llegan al curso después de trabajar variables, condicionales, c
 
 En esta sesión todavía no se crean clases propias del dominio. Primero se observa cómo se administran datos simples y qué dificultades aparecen cuando los datos que representan una misma entidad quedan separados.
 
-Preguntas para los estudiantes:
+**Preguntas de análisis**
+
+**Activación de conocimientos previos**
+
+1. ¿Qué ocurre si eliminas un dato de una lista, pero olvidas eliminarlo de las demás listas paralelas?
+2. ¿Por qué cuatro listas paralelas deben conservar siempre el mismo tamaño y el mismo orden?
+3. ¿Cómo podríamos mantener juntos el código, nombre, precio y stock que pertenecen a un mismo producto?
+
+**Comprensión de estructuras de datos**
 
 1. ¿Cómo organizamos y procesamos varios datos cuando la cantidad de elementos puede cambiar durante la ejecución del programa?
-2. ¿Qué ocurre si eliminas un dato de una lista, pero olvidas eliminarlo de las demás listas paralelas?
-3. ¿Por qué cuatro listas paralelas deben conservar siempre el mismo tamaño y el mismo orden?
-4. ¿Cómo podríamos mantener juntos el código, nombre, precio y stock que pertenecen a un mismo producto?
 
 ### 1.7 Ubicación en el curso
 
@@ -59,6 +66,8 @@ Preguntas para los estudiantes:
 - Avance de sesión: entorno preparado y fundamentos recuperados mediante estructuras de datos lineales.
 
 Roadmap para elaborar el producto de la unidad:
+
+**Figura 1. Roadmap de la Unidad 1**
 
 ```mermaid
 flowchart TB
@@ -84,6 +93,8 @@ flowchart TB
 Tiempo: 50 min.
 
 ### 2.1 Conceptos clave
+
+**Tabla 2. Conceptos clave de la sesión**
 
 | Concepto | Idea central | Ejemplo |
 |---|---|---|
@@ -113,6 +124,8 @@ nombres.add("Mouse");
 ```
 
 Comparación:
+
+**Tabla 3. Comparación entre array y `ArrayList`**
 
 | Característica | Array | `ArrayList` |
 |---|---|---|
@@ -182,6 +195,8 @@ Si una lista se modifica incorrectamente, los datos dejan de corresponder. Esta 
 
 ### 2.6 Errores frecuentes y diagnóstico
 
+**Tabla 4. Errores frecuentes y diagnóstico**
+
 | Problema | Causa probable | Solución |
 |---|---|---|
 | `IndexOutOfBoundsException` | Se accede a una posición inexistente | Verificar el índice con `size()` |
@@ -206,9 +221,15 @@ En cada ejercicio de este curso se aplican estos pasos antes de programar.
 
 Tiempo: 3h 20min (4 horas académicas de 50 min, en laboratorio).
 
-Hoja de ruta de la sesión práctica:
+**Actividad:** organización de un menú de consola con métodos, arrays, `ArrayList` y listas paralelas en Java.
 
-- **3.1** Preparar ambiente local: Java 21 LTS, Maven y VS Code.
+**Propósito de la actividad:** recuperar estructuras de control, métodos, arrays y `ArrayList` organizando un menú con operaciones CRUD sobre datos simples, y evidenciar la limitación de representar una entidad mediante listas paralelas.
+
+**Orientaciones metodológicas:** en el laboratorio, el docente guía la preparación del entorno (Java 21, VS Code) y la creación del menú con estructuras de control, seguida de la organización mediante métodos y las operaciones sobre `ArrayList`, paso a paso frente a la clase; los estudiantes replican cada paso en su propio equipo, verificando la compilación y ejecución antes de avanzar al siguiente, hasta llegar a las listas paralelas que evidencian la limitación que motiva las clases y objetos de S2.
+
+**Actividades para realizar:**
+
+- **3.1** Preparar ambiente local: Java 21 LTS y VS Code.
 - **3.2** Crear y ejecutar un programa Java simple.
 - **3.3** Repasar estructuras de control.
 - **3.4** Comparar un array con un `ArrayList`.
@@ -217,33 +238,18 @@ Hoja de ruta de la sesión práctica:
 - **3.7** Representar productos mediante listas paralelas.
 - **3.8** Identificar la necesidad de agrupar datos.
 
-### 3.1 Preparar ambiente local: Java 21 LTS, Maven y VS Code
+### 3.1 Preparar ambiente local: Java 21 LTS y VS Code
 
-**Producto del paso:** ambiente local con Java 21 LTS, Maven y VS Code verificados, listo para crear y ejecutar programas Java desde consola.
+**Producto del paso:** ambiente local con Java 21 LTS y VS Code verificados, listo para crear y ejecutar programas Java desde consola.
 
 Herramientas necesarias:
 
 - Java 21 LTS.
-- Maven 3.x.
 - VS Code.
 - Extension Pack for Java.
 - Terminal integrada de VS Code.
 
-En esta sesión se usa un proyecto Java simple. Maven se verifica desde el inicio porque será necesario para organizar la entrega de la U1 en sesiones posteriores.
-
-#### 3.1.1 Instalar gestor de paquetes, si hace falta
-
-Windows ya trae `winget` instalado en Windows 10/11, así que no necesita un paso de arranque adicional.
-
-macOS bash/zsh, si no tienes Homebrew:
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-Luego cierra y vuelve a abrir Terminal.
-
-#### 3.1.2 Instalar Java 21 LTS
+En esta sesión se usa un proyecto Java simple, compilado y ejecutado directo con `javac`/`java` — no hace falta Maven todavía. Cuando el curso lo necesite, llega mediante el **wrapper** del propio proyecto (`mvnw`/`mvnw.cmd`, incluido en el repositorio), no como una instalación global — mismo criterio que ya usa LP2.
 
 Se recomienda Eclipse Temurin 21, una distribución OpenJDK de soporte
 prolongado, instalada con el gestor de paquetes nativo de cada sistema
@@ -297,34 +303,18 @@ EOF
 sudo dnf install -y temurin-21-jdk
 ```
 
-#### 3.1.3 Instalar Maven 3.x
-
-**Windows**:
-
-```powershell
-winget install --id Apache.Maven --exact
-```
-
-**macOS** (con Homebrew, ya instalado en el paso anterior):
+Al finalizar, cierre y vuelva a abrir la terminal. Verifique la instalación:
 
 ```bash
-brew install maven
+java -version
+javac -version
 ```
 
-**Linux (Ubuntu/Debian)**:
+**NOTA:** Ambas comprobaciones deben mostrar Java 21. Si conserva una versión anterior, configure `JAVA_HOME` con la ruta del JDK 21, asegure que su carpeta `bin` tenga prioridad en `Path` y abra una terminal nueva.
 
-```bash
-sudo apt update
-sudo apt install -y maven
-```
+#### 3.1.1 Instalar VS Code y extensiones
 
-**Linux (Fedora/RHEL)**:
-
-```bash
-sudo dnf install -y maven
-```
-
-#### 3.1.4 Instalar VS Code y Extension Pack for Java
+**Producto del paso:** VS Code instalado con la extensión necesaria para el resto de la sesión.
 
 El curso usa **VS Code** como editor por defecto.
 
@@ -334,7 +324,7 @@ El curso usa **VS Code** como editor por defecto.
 winget install -e --id Microsoft.VisualStudioCode
 ```
 
-**macOS** (con Homebrew, ya instalado en el paso 3.1.2):
+**macOS** (con Homebrew, ya instalado en el paso anterior):
 
 ```bash
 brew install --cask visual-studio-code
@@ -353,41 +343,6 @@ Al finalizar, instale la extensión de Java desde la terminal:
 ```bash
 code --install-extension vscjava.vscode-java-pack
 ```
-
-#### 3.1.5 Verificar instalación
-
-Verificar Java 21:
-
-```bash
-java -version
-```
-
-Resultado esperado:
-
-```text
-version 21
-```
-
-Verificar el compilador:
-
-```bash
-javac -version
-```
-
-Verificar Maven:
-
-```bash
-mvn -version
-```
-
-Resultado esperado:
-
-```text
-Apache Maven 3.x
-Java version: 21
-```
-
-Si Maven muestra otra versión de Java, configure `JAVA_HOME` con la ruta del JDK 21, asegure que su carpeta `bin` tenga prioridad en `Path` y abra una terminal nueva.
 
 ### 3.2 Crear y ejecutar un programa Java simple
 
@@ -638,25 +593,13 @@ mediante un objeto.
 
 Tiempo: 2h fuera del aula.
 
-### 4.1 Plantilla de evidencia individual
+### 4.1 Actividad
 
-Entrega un PDF con el siguiente nombre:
+Completar y documentar, de forma individual, el ambiente de desarrollo y el programa de consola con métodos, arrays, `ArrayList` y listas paralelas trabajado en el laboratorio.
 
-```text
-S01_Equipo##_ApellidoNombre.pdf
-```
+Completa y evidencia estas tareas:
 
-#### 4.1.1 Datos del estudiante
-
-- Nombre:
-- Equipo:
-- Sesión: S01 - Entorno de programación, estructuras de control, métodos y estructuras de datos lineales
-- Rol o aporte realizado:
-- Link de GitHub:
-
-#### 4.1.2 Trabajo autónomo realizado
-
-1. Verificar Java 21, Maven y VS Code.
+1. Verificar Java 21 y VS Code.
 2. Crear un menú con `do-while` y `switch`.
 3. Separar las operaciones mediante métodos.
 4. Utilizar un array de tamaño fijo.
@@ -665,17 +608,50 @@ S01_Equipo##_ApellidoNombre.pdf
 7. Representar al menos tres productos mediante listas paralelas.
 8. Explicar dos limitaciones de las listas paralelas.
 
-#### 4.1.3 Evidencia técnica
+### 4.2 Propósito
 
-- Versiones de Java y Maven.
-- Código del menú.
-- Código de los métodos.
-- Comparación entre array y `ArrayList`.
-- Salida de registro, búsqueda, actualización y eliminación.
-- Código de las listas paralelas.
-- Explicación de la necesidad de agrupar los datos de un producto.
+Que cada estudiante demuestre, de forma individual y fuera del aula, que puede reproducir el patrón construido en clase sin el acompañamiento del docente.
 
-#### 4.1.4 Error o hallazgo
+En esta sesión, esa reproducción incluye completar por su cuenta las operaciones de actualización y eliminación, y explicar con sus propias palabras por qué las listas paralelas dejan de ser una representación confiable a medida que el programa crece.
+
+### 4.3 Indicaciones
+
+Entrega un PDF con el siguiente nombre:
+
+```text
+S01_Equipo##_ApellidoNombre.pdf
+```
+
+Cada captura de pantalla del informe debe mostrar, sin recortar, el reloj del sistema (fecha y hora) y tu usuario o foto de perfil (Windows, VS Code o navegador) visibles en pantalla — es lo que permite verificar que la evidencia es tuya y que corresponde al momento real de tu trabajo.
+
+#### 4.3.1 Estructura del informe
+
+**Datos del estudiante**
+
+- Nombre:
+- Equipo:
+- Sesión: S01 - Entorno de programación, estructuras de control, métodos y estructuras de datos lineales
+- Rol o aporte realizado:
+- Link de GitHub:
+
+**Evidencia técnica**
+
+Incluye capturas o salidas con una breve explicación debajo de cada una, organizadas en los mismos 5 bloques de la rúbrica (4.6) — así queda claro qué evidencia corresponde a cada criterio evaluado:
+
+1. *Entorno y ejecución*
+    - Capturas de `java -version` y de la ejecución del programa.
+2. *Estructuras de control*
+    - Código del menú (`do-while` + `switch`) y captura de su ejecución.
+3. *Métodos*
+    - Código de los métodos `registrar`, `listar`, `buscar`, `actualizar` y `eliminar`.
+4. *Arrays y `ArrayList`*
+    - Código y salida de la comparación entre array y `ArrayList`.
+    - Código de las listas paralelas con al menos tres productos registrados.
+5. *Operaciones y análisis*
+    - Salida de registro, búsqueda, actualización y eliminación sobre el `ArrayList`.
+    - Explicación escrita de dos limitaciones de las listas paralelas.
+
+**Error o hallazgo**
 
 Describe:
 
@@ -683,7 +659,7 @@ Describe:
 - Cómo lo diagnosticaste.
 - Cómo lo corregiste o qué aprendiste.
 
-#### 4.1.5 Reflexión técnica breve
+**Reflexión técnica breve**
 
 Responde en 5 a 8 líneas:
 
@@ -692,7 +668,9 @@ Responde en 5 a 8 líneas:
 errores cuando el programa crece?
 ```
 
-### 4.2 Criterios mínimos de aceptación
+### 4.4 Criterios mínimos de aceptación
+
+La evidencia individual se considera completa si:
 
 - El archivo respeta el nombre `S01_Equipo##_ApellidoNombre.pdf`.
 - El ambiente local está verificado.
@@ -704,29 +682,12 @@ errores cuando el programa crece?
 - Se muestran listas paralelas con datos de productos.
 - Se explican sus limitaciones.
 - No se utilizan todavía clases propias del dominio.
+- Cada captura de la evidencia técnica muestra el reloj del sistema y el usuario/perfil visible, sin recortar.
+- Las fechas y horas de las capturas son coherentes con el historial de commits de su repositorio en GitHub.
+- Incluye un error o hallazgo técnico diagnosticado.
+- Incluye la reflexión técnica breve solicitada.
 
-## 5. Cierre evaluativo
-
-Tiempo: 10 min.
-
-### 5.1 Resultados esperados
-
-Al finalizar la sesión, el estudiante debe demostrar que:
-
-- El entorno ejecuta programas Java.
-- Distingue una estructura de control de una estructura de datos.
-- Organiza operaciones mediante métodos.
-- Diferencia un array de un `ArrayList`.
-- Utiliza las operaciones principales de `ArrayList`.
-- Recorre y busca datos mediante ciclos.
-- Reconoce el problema de representar una entidad mediante listas paralelas.
-- Explica por qué las clases y los objetos serán necesarios en S2.
-
-### 5.2 Evidencia del producto de sesión
-
-Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 4.1.
-
-### 5.3 Preguntas de defensa y reflexión
+### 4.5 Preguntas de defensa
 
 1. ¿Cuál es la diferencia entre una estructura de control y una estructura de datos?
 2. ¿Qué diferencia existe entre un array y un `ArrayList`?
@@ -737,17 +698,47 @@ Cada estudiante entrega un PDF individual siguiendo la plantilla de la sección 
 7. ¿Por qué todavía no usamos `ArrayList<Producto>`?
 8. ¿Qué contenido de S2 permitirá agrupar los datos de un producto?
 
-### 5.4 Rúbrica de evaluación
+### 4.6 Rúbrica de evaluación
 
-| Dimensión | Peso | 3 - Logro destacado | 2 - Logro | 1 - Proceso | 0 - Inicio | Puntuación obtenida |
+**Tabla 5. Rúbrica de evaluación**
+
+| Criterio | Peso (%) | A (20 pts) | B (15 pts) | C (10 pts) | D (5 pts) | Nivel obtenido |
 |---|---:|---|---|---|---|---:|
-| 1. Entorno y ejecución | 1 | Verifica las herramientas y ejecuta el programa sin errores. | Ejecuta el programa correctamente. | Presenta dificultades de configuración o ejecución. | No logra ejecutar el programa. | |
-| 2. Estructuras de control | 2 | Usa condicionales y ciclos con flujo claro y controlado. | Usa estructuras de control funcionales. | Uso parcial o con errores. | No evidencia estructuras de control. | |
-| 3. Métodos | 2 | Descompone correctamente las operaciones y usa parámetros con claridad. | Organiza las operaciones principales mediante métodos. | La separación es parcial. | Todo permanece en `main`. | |
-| 4. Arrays y `ArrayList` | 2 | Compara y utiliza ambas estructuras correctamente. | Utiliza array y `ArrayList`. | Uso incompleto o confuso. | No evidencia estructuras lineales. | |
-| 5. Operaciones y búsqueda | 2 | Registra, lista, busca, actualiza y elimina datos correctamente. | Implementa las operaciones principales. | Operaciones incompletas. | No administra los datos. | |
-| 6. Análisis y evidencia | 1 | Explica claramente las limitaciones de las listas paralelas con evidencias ordenadas. | Identifica la limitación principal. | Explicación superficial o evidencia incompleta. | No identifica el problema. | |
+| 1. Entorno y ejecución* | 20 | Verifica Java 21 y VS Code, y ejecuta el programa sin errores, con evidencia clara de cada verificación. | Verifica las herramientas y ejecuta el programa correctamente, con evidencia parcial. | Ejecuta el programa con dificultades de configuración o evidencia incompleta. | No logra ejecutar el programa o no presenta evidencia de la verificación. | |
+| 2. Estructuras de control* | 20 | El menú usa condicionales y ciclos con flujo claro, controlado y sin errores. | El menú usa condicionales y ciclos funcionales, con algún detalle menor. | Uso parcial o con errores de las estructuras de control. | No evidencia el uso de estructuras de control. | |
+| 3. Métodos* | 20 | Descompone todas las operaciones del menú en métodos, con parámetros y retornos claros. | Organiza las operaciones principales mediante métodos, con separación adecuada. | La separación mediante métodos es parcial o inconsistente. | Todo el código permanece dentro de `main`. | |
+| 4. Arrays y `ArrayList`* | 20 | Compara correctamente array y `ArrayList`, y representa las listas paralelas de productos sin errores. | Utiliza array, `ArrayList` y listas paralelas correctamente, con comparación básica. | Uso incompleto o confuso de las estructuras lineales o de las listas paralelas. | No evidencia el uso de array, `ArrayList` o listas paralelas. | |
+| 5. Operaciones y análisis* | 20 | Registra, lista, busca, actualiza y elimina datos correctamente, y explica con claridad las limitaciones de las listas paralelas. | Implementa las operaciones principales y explica la limitación principal de las listas paralelas. | Operaciones incompletas o explicación superficial de las limitaciones. | No administra los datos ni identifica el problema de las listas paralelas. | |
 
-Puntuación acumulada = suma de (`Peso` * `Puntuación obtenida`) = ____.
+\* Agregado manual.
 
-Nota final = (`Puntuación acumulada` / 30) * 20 = ____.
+Nota final = suma de (`Peso` / 100 × `Puntos del nivel obtenido`) = ____ / 20.
+
+Para usar la rúbrica con IA, solicita:
+
+```text
+Evalúa el PDF usando la rúbrica de la sesión.
+Para cada criterio selecciona el nivel obtenido usando la escala A=20, B=15, C=10, D=5 puntos.
+Justifica brevemente cada nivel asignado.
+Verifica que cada captura muestre reloj del sistema y usuario/perfil visible, y que las fechas sean coherentes con el historial de commits de GitHub. Si falta esta evidencia o hay inconsistencias, indícalo explícitamente antes de calificar.
+Calcula la nota final con la fórmula: suma de (Peso/100 × Puntos del nivel obtenido), directamente sobre 20.
+Indica 2 fortalezas y 2 recomendaciones.
+```
+
+## 5. Cierre
+
+Tiempo: 5 min.
+
+**Resumen breve:** hoy se recuperaron estructuras de control, métodos, arrays y `ArrayList`, y se evidenció la limitación de representar un producto mediante listas paralelas.
+
+**Dinámica participativa:** cada estudiante comparte en una frase la limitación de las listas paralelas que le resultó más clara al construir `ProductosListasParalelas.java`.
+
+**Metacognición:** cada estudiante responde en voz alta o por escrito: ¿qué parte de la sesión te costó más entender, y cómo la resolviste?
+
+**Proyección:** en S2 se define la clase `Producto` y cada producto pasa a representarse mediante un objeto, reemplazando las listas paralelas de hoy; en un entorno profesional, esta misma decisión (agrupar datos relacionados en una estructura propia en vez de mantenerlos en colecciones separadas y sincronizadas a mano) es la que evita errores de integridad en cualquier sistema que crezca más allá de un prototipo.
+
+## Bibliografía
+
+- Eclipse Adoptium. (s. f.). *Temurin releases*. https://adoptium.net/temurin/releases/
+- Oracle. (s. f.). *Class ArrayList\<E\>*. Java SE 21 Documentation. https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html
+- Visual Studio Code. (s. f.). *Java in Visual Studio Code*. Microsoft. https://code.visualstudio.com/docs/languages/java
