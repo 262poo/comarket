@@ -16,6 +16,10 @@ Curso práctico de Programación Orientada a Objetos con Java, modelado de domin
 
 El código de referencia y las guías de sesión de este repositorio usan JavaFX como framework de interfaz gráfica. Usar Java Swing en su lugar es una alternativa igualmente válida: es normal que algunos docentes o estudiantes trabajen con Swing en vez de JavaFX; la arquitectura por capas, el DAO, JDBC y la persistencia con SQLite no cambian por esa elección.
 
+## Implementación vigente
+
+Las 16 guías están escritas en Java 21, sin migración de lenguaje pendiente. Sí hay una migración de **plantilla** en curso: **S1** y **S2** ya siguen la estructura ampliada actual (Índice, Metodología, Motivación clasificada, Actividad/Propósito/Orientaciones, evidencia técnica alineada a la rúbrica) y son las únicas publicadas en el menú por ahora; **S3–S16** siguen escritas con la plantilla anterior, más breve, y se muestran aquí solo como referencia de los temas mientras se alinean.
+
 ## Organización del repositorio
 
 ```text
@@ -296,7 +300,7 @@ Flujo de trabajo U2-U3:
 ## Enlaces
 
 - [S1: Entorno de programación, estructuras de control, métodos y estructuras de datos lineales](sesiones/S01_Fundamentos_Estructuras_Datos.md)
-- [S2: Clases, objetos, constructores y comunicación entre objetos](S02_Clases_Objetos.md)
+- [S2: Clases, objetos, constructores y comunicación entre objetos](sesiones/S02_Clases_Objetos.md)
 - [S3: Encapsulamiento, separación de responsabilidades y relaciones entre objetos](S03_Encapsulamiento_Relaciones.md)
 - [S4: Herencia, interfaces y polimorfismo](S04_Herencia_Polimorfismo.md)
 - [S5: Operaciones CRUD, validaciones y responsabilidad única](S05_CRUD_Memoria_ArrayList.md)

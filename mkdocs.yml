@@ -45,7 +45,6 @@ extra_javascript:
 
 nav:
   - Inicio: index.md
-  - Plan de trabajo: plan-trabajo.md
   - Guía de Proyecto Sello:
       - Guía del proyecto: proyecto-sello/index.md
   - Silabos:
@@ -53,3 +52,4 @@ nav:
       - Silabo 2026-2: silabo_poo_2026_2.md
   - 1. Fundamentos de la Programación Orientada a Objetos:
       - S1 - Entorno, estructuras de control, métodos y estructuras de datos lineales: sesiones/S01_Fundamentos_Estructuras_Datos.md
+      - S2 - Clases, objetos, constructores y comunicación entre objetos: sesiones/S02_Clases_Objetos.md
