@@ -1,0 +1,2282 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Libro digital de apoyo para el curso de Programación Orientada a Objetos - UPeU 2026">
+      
+      
+        <meta name="author" content="UPeU">
+      
+      
+      
+        <link rel="prev" href="../S01_Fundamentos_Estructuras_Datos/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+  
+    <title>Comarket - S2 - Clases, objetos, constructores y comunicación entre objetos</title>
+  
+
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#s2-clases-objetos-constructores-y-comunicacion-entre-objetos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Comarket" class="md-header__button md-logo" aria-label="Comarket" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Comarket
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              S2 - Clases, objetos, constructores y comunicación entre objetos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/262poo/comarket" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    262poo/comarket
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Comarket" class="md-nav__button md-logo" aria-label="Comarket" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Comarket
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/262poo/comarket" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    262poo/comarket
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía de Proyecto Sello
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guía de Proyecto Sello
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proyecto-sello/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía del proyecto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Silabos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Silabos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../silabo_poo_2026_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Silabo 2026-1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../silabo_poo_2026_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Silabo 2026-2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Fundamentos de la Programación Orientada a Objetos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. Fundamentos de la Programación Orientada a Objetos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S01_Fundamentos_Estructuras_Datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S1 - Entorno, estructuras de control, métodos y estructuras de datos lineales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S2 - Clases, objetos, constructores y comunicación entre objetos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S2 - Clases, objetos, constructores y comunicación entre objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introducción
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introducción">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-presentacion-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Presentación de la sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Índice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-proposito-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Propósito de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-producto-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Producto de sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-metodologia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Metodología
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-motivacion-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 Motivación de la sesión
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 Motivación de la sesión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-caso-sistema-de-dominio-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6.1 Caso: sistema de dominio inicial
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-ubicacion-en-el-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7 Ubicación en el curso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-explica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Explica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Explica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-conceptos-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Conceptos clave
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-arquitectura-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Arquitectura de la sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-constructores-y-sobrecarga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Constructores y sobrecarga
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-flujo-de-trabajo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Flujo de trabajo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-errores-frecuentes-y-diagnostico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Errores frecuentes y diagnóstico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-metodologia-para-resolver-problemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Metodología para resolver problemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-aplica-actividad-practica-guiada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Aplica: actividad práctica guiada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Aplica: actividad práctica guiada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-retomar-el-proyecto-java-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Retomar el proyecto Java simple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-abstraer-objetos-tangibles-coche-y-persona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Abstraer objetos tangibles: Coche y Persona
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-crear-la-clase-coche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Crear la clase Coche
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-crear-la-clase-persona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Crear la clase Persona
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-crear-objetos-desde-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Crear objetos desde Main
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-identificar-estado-comportamiento-y-responsabilidad-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Identificar estado, comportamiento y responsabilidad inicial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-ejemplo-2-producto-como-puente-hacia-el-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Ejemplo 2: Producto como puente hacia el dominio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-crea-actividad-autonoma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Crea: actividad autónoma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Crea: actividad autónoma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-actividad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Actividad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-proposito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Propósito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-indicaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Indicaciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Indicaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431-estructura-del-informe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1 Estructura del informe
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-criterios-minimos-de-aceptacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Criterios mínimos de aceptación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-preguntas-de-defensa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Preguntas de defensa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-rubrica-de-evaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 Rúbrica de evaluación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-cierre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Cierre
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bibliografia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bibliografía
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introducción
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introducción">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-presentacion-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Presentación de la sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Índice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-proposito-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Propósito de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-producto-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Producto de sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-metodologia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Metodología
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-motivacion-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 Motivación de la sesión
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 Motivación de la sesión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-caso-sistema-de-dominio-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6.1 Caso: sistema de dominio inicial
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-ubicacion-en-el-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7 Ubicación en el curso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-explica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Explica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Explica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-conceptos-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Conceptos clave
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-arquitectura-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Arquitectura de la sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-constructores-y-sobrecarga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Constructores y sobrecarga
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-flujo-de-trabajo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Flujo de trabajo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-errores-frecuentes-y-diagnostico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Errores frecuentes y diagnóstico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-metodologia-para-resolver-problemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Metodología para resolver problemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-aplica-actividad-practica-guiada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Aplica: actividad práctica guiada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Aplica: actividad práctica guiada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-retomar-el-proyecto-java-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Retomar el proyecto Java simple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-abstraer-objetos-tangibles-coche-y-persona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Abstraer objetos tangibles: Coche y Persona
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-crear-la-clase-coche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Crear la clase Coche
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-crear-la-clase-persona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Crear la clase Persona
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-crear-objetos-desde-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Crear objetos desde Main
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-identificar-estado-comportamiento-y-responsabilidad-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Identificar estado, comportamiento y responsabilidad inicial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-ejemplo-2-producto-como-puente-hacia-el-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Ejemplo 2: Producto como puente hacia el dominio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-crea-actividad-autonoma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Crea: actividad autónoma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Crea: actividad autónoma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-actividad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Actividad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-proposito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Propósito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-indicaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Indicaciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Indicaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431-estructura-del-informe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1 Estructura del informe
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-criterios-minimos-de-aceptacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Criterios mínimos de aceptación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-preguntas-de-defensa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Preguntas de defensa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-rubrica-de-evaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 Rúbrica de evaluación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-cierre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Cierre
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bibliografia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bibliografía
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="s2-clases-objetos-constructores-y-comunicacion-entre-objetos">S2 - Clases, objetos, constructores y comunicación entre objetos<a class="headerlink" href="#s2-clases-objetos-constructores-y-comunicacion-entre-objetos" title="Permanent link">&para;</a></h1>
+<h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
+<p>Tiempo: 1h 30min (40 min de contexto y propósito + 50 min de revisión del trabajo autónomo de S1).</p>
+<h3 id="11-presentacion-de-la-sesion">1.1 Presentación de la sesión<a class="headerlink" href="#11-presentacion-de-la-sesion" title="Permanent link">&para;</a></h3>
+<p>Los datos que ayer vivían sueltos en listas paralelas hoy se agrupan por primera vez dentro de una clase — el paso que la Programación Orientada a Objetos existe para dar. Esta sesión define atributos, constructores (con sobrecarga) y métodos, crea los primeros objetos, y observa cómo colaboran entre sí desde una aplicación de consola.</p>
+<p>Los 50 min adicionales de esta sección se usan para revisar el trabajo autónomo de S1: el menú con estructuras de control, las operaciones sobre <code>ArrayList</code> y la explicación de las limitaciones de las listas paralelas.</p>
+<h3 id="12-indice">1.2 Índice<a class="headerlink" href="#12-indice" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Clase y objeto.</li>
+<li>Atributos, métodos, estado y comportamiento.</li>
+<li>Constructores y sobrecarga.</li>
+<li>Comunicación entre objetos y responsabilidad inicial.</li>
+</ol>
+<h3 id="13-proposito-de-aprendizaje">1.3 Propósito de aprendizaje<a class="headerlink" href="#13-proposito-de-aprendizaje" title="Permanent link">&para;</a></h3>
+<p>Al concluir la clase, estarás en condiciones de:</p>
+<ul>
+<li><strong>Construir</strong> clases simples del dominio, <strong>crear</strong> objetos mediante constructores (incluida su sobrecarga), reconocer su estado y comportamiento, y observar la comunicación básica entre objetos desde una aplicación de consola.</li>
+</ul>
+<h3 id="14-producto-de-sesion">1.4 Producto de sesión<a class="headerlink" href="#14-producto-de-sesion" title="Permanent link">&para;</a></h3>
+<p>Proyecto Java simple con clases del dominio, objetos instanciados mediante constructores (con al menos un caso de sobrecarga), comunicación básica entre objetos y salida por consola.</p>
+<h3 id="15-metodologia">1.5 Metodología<a class="headerlink" href="#15-metodologia" title="Permanent link">&para;</a></h3>
+<p><strong>Tabla 1. Metodología de la sesión</strong></p>
+<table>
+<thead>
+<tr>
+<th>Actividades a Realizar en el Periodo</th>
+<th>Orientaciones generales (Orientaciones Metodológicas)</th>
+<th>Material de estudio recomendado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Revisión previa individual</td>
+<td>Repasar el proyecto de S1 (menú, métodos, <code>ArrayList</code>) y traer evidencia de que compila y ejecuta. Trabajo individual, antes de clase.</td>
+<td>Proyecto de S1.</td>
+</tr>
+<tr>
+<td>Clase presencial</td>
+<td>Explicación guiada de clase, objeto, atributos, métodos, constructores y sobrecarga; desarrollo guiado de <code>Coche</code>, <code>Persona</code> y <code>Producto</code>. Trabajo individual en la propia laptop, siguiendo al docente paso a paso; consulta inmediata ante errores.</td>
+<td>Enunciados de los ejercicios, VS Code, terminal.</td>
+</tr>
+<tr>
+<td>Evaluación formativa</td>
+<td>Verificación en clase de la ejecución de los objetos creados desde <code>Main</code>; inicio de la evidencia individual. La evidencia se completa y sustenta de forma individual, fuera del aula, según los criterios mínimos de la sección 4.4.</td>
+<td>Indicaciones de entrega (4.3), rúbrica de evaluación (4.6).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="16-motivacion-de-la-sesion">1.6 Motivación de la sesión<a class="headerlink" href="#16-motivacion-de-la-sesion" title="Permanent link">&para;</a></h3>
+<h4 id="161-caso-sistema-de-dominio-inicial">1.6.1 Caso: sistema de dominio inicial<a class="headerlink" href="#161-caso-sistema-de-dominio-inicial" title="Permanent link">&para;</a></h4>
+<p>Una organización necesita ordenar la información de un proceso de negocio. Puede tratarse de ventas, biblioteca, reservas, inventario, matrículas, atención de clientes u otro contexto definido por el docente.</p>
+<p>Antes de construir pantallas, base de datos o reportes, el sistema necesita representar objetos del dominio. En POO, esos objetos nacen a partir de clases.</p>
+<p>En esta sesión se retoman las estructuras trabajadas en S1 y se reorganizan como objetos del dominio, probándolos desde consola.</p>
+<p><strong>Preguntas de análisis</strong></p>
+<p><strong>Activación de conocimientos previos</strong></p>
+<ol>
+<li>¿Qué objetos reales aparecen en el dominio elegido?</li>
+<li>¿Qué datos necesita guardar uno de esos objetos?</li>
+</ol>
+<p><strong>Comprensión de clases y objetos</strong></p>
+<ol>
+<li>¿Qué comportamiento podría tener ese objeto?</li>
+<li>¿Por qué no conviene escribir todo directamente en <code>Main</code>?</li>
+</ol>
+<h3 id="17-ubicacion-en-el-curso">1.7 Ubicación en el curso<a class="headerlink" href="#17-ubicacion-en-el-curso" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Unidad: U1 - Fundamentos de la Programación Orientada a Objetos.</li>
+<li>Producto de unidad: aplicación de consola en memoria con entidades, relaciones, colecciones y CRUD.</li>
+<li>Producto del curso: Proyecto Sello - aplicación de escritorio orientada a objetos, con persistencia relacional (Unidad III).</li>
+<li>Carpeta de trabajo: <code>comarket-cli</code>.</li>
+<li>Avance del producto en esta sesión: primeras clases del dominio, constructores (con sobrecarga) y comunicación básica entre objetos probadas desde <code>Main</code>.</li>
+</ul>
+<p>Roadmap para elaborar el producto de la unidad:</p>
+<p><strong>Figura 1. Roadmap de la Unidad 1</strong></p>
+<pre class="mermaid"><code>flowchart TB
+    S1["S1&lt;br/&gt;Estructuras de control, métodos,&lt;br/&gt;arrays y ArrayList"]
+    S2["S2&lt;br/&gt;Clases, objetos y constructores&lt;br/&gt;Coche, Persona y Producto"]
+    S3["S3&lt;br/&gt;Encapsulamiento, responsabilidades&lt;br/&gt;y relaciones entre objetos"]
+    S4["S4&lt;br/&gt;Herencia, interfaces&lt;br/&gt;y polimorfismo"]
+    S5["S5&lt;br/&gt;CRUD, validaciones&lt;br/&gt;y responsabilidad única"]
+    S6["S6&lt;br/&gt;Producto U1&lt;br/&gt;consola ejecutable"]
+
+    S1 --&gt; S2
+    S2 --&gt; S3
+    S3 --&gt; S4
+    S4 --&gt; S5
+    S5 --&gt; S6
+
+    classDef today fill:#ffe08a,stroke:#9a6b00,stroke-width:2px,color:#111;
+    class S2 today;</code></pre>
+<p>Hoy se trabaja con objetos tangibles del mundo real: <code>Coche</code> y <code>Persona</code>. Luego se usa <code>Producto</code> como ejemplo puente hacia el dominio de CoMarket. La ruta principal avanza hacia encapsulamiento, separación de responsabilidades, relaciones entre objetos y CRUD en memoria. La herencia, las interfaces y el polimorfismo se trabajan después, cuando el modelo ya tenga más contexto.</p>
+<h2 id="2-explica">2. Explica<a class="headerlink" href="#2-explica" title="Permanent link">&para;</a></h2>
+<p>Tiempo: 50 min.</p>
+<h3 id="21-conceptos-clave">2.1 Conceptos clave<a class="headerlink" href="#21-conceptos-clave" title="Permanent link">&para;</a></h3>
+<p>Una clase es un molde para crear objetos. Un objeto es una instancia concreta que tiene estado y comportamiento.</p>
+<p>Ejemplo base: <code>Coche</code> y <code>Persona</code> permiten iniciar desde objetos tangibles. Un coche tiene marca y velocidad; una persona tiene nombre y puede conducir. Luego se usa <code>Producto</code> para observar cambios naturales de estado como precio y stock, preparando el trabajo de encapsulamiento y relaciones de S3.</p>
+<p>Conceptos de la sesión:</p>
+<ul>
+<li>Clase como molde.</li>
+<li>Objeto como instancia.</li>
+<li>Atributos como estado.</li>
+<li>Métodos como comportamiento.</li>
+<li>Constructores como forma inicial de crear objetos con datos.</li>
+<li>Sobrecarga de constructores: más de una forma de crear el mismo tipo de objeto.</li>
+<li>Abstracción inicial del dominio.</li>
+<li>Responsabilidad de clase.</li>
+<li>Comunicación entre objetos.</li>
+<li><code>Main</code> como punto de prueba inicial.</li>
+<li>Salida por consola como evidencia de ejecución.</li>
+</ul>
+<p>Alcance metodológico de S2:</p>
+<div class="highlight"><pre><span></span><code>En S2 se llega hasta clase, objeto, atributos, métodos, constructores,
+sobrecarga de constructores, estado, comportamiento, abstracción inicial,
+responsabilidad de clase y comunicación básica entre objetos.
+
+El encapsulamiento formal, las validaciones internas y la separación
+por responsabilidades se desarrollan en S3.
+</code></pre></div>
+<h3 id="22-arquitectura-de-la-sesion">2.2 Arquitectura de la sesión<a class="headerlink" href="#22-arquitectura-de-la-sesion" title="Permanent link">&para;</a></h3>
+<p><strong>Figura 2. Clases y colaboración de la sesión</strong></p>
+<pre class="mermaid"><code>classDiagram
+    class Main {
+        main(String[] args)
+    }
+    class Coche {
+        marca
+        velocidad
+        acelerar()
+        frenar()
+        mostrarEstado()
+    }
+    class Persona {
+        nombre
+        conducir(coche)
+    }
+    class Producto {
+        codigo
+        nombre
+        precio
+        stock
+        mostrarInformacion()
+        actualizarPrecio()
+        aumentarStock()
+    }
+
+    Main ..&gt; Coche : crea/prueba
+    Main ..&gt; Persona : crea/prueba
+    Main ..&gt; Producto : crea/prueba
+    Persona ..&gt; Coche : usa</code></pre>
+<p>Convención del diagrama: cada clase muestra sus atributos y métodos principales; <code>..&gt;</code> indica dependencia o uso temporal desde la prueba.</p>
+<p>Regla práctica:</p>
+<ul>
+<li><code>Main</code> se usa para probar.</li>
+<li>La clase representa características y acciones de un objeto del mundo real.</li>
+<li>Los objetos son instancias concretas de la clase.</li>
+<li>Los atributos guardan estado.</li>
+<li>Los métodos muestran o procesan comportamiento propio del objeto.</li>
+<li>La abstracción consiste en elegir solo los datos y comportamientos necesarios para esta primera versión.</li>
+</ul>
+<h3 id="23-constructores-y-sobrecarga">2.3 Constructores y sobrecarga<a class="headerlink" href="#23-constructores-y-sobrecarga" title="Permanent link">&para;</a></h3>
+<p>Un constructor inicializa el estado de un objeto en el momento de crearlo. Una clase puede tener <strong>más de un constructor</strong>, siempre que se distingan por la cantidad o el tipo de sus parámetros; esto se llama <strong>sobrecarga</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Coche</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">marca</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">velocidad</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Coche</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">marca</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">velocidadInicial</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">marca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marca</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">velocidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">velocidadInicial</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Coche</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">marca</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">(</span><span class="n">marca</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>this(marca, 0)</code> invoca al otro constructor de la misma clase para no repetir la asignación de <code>marca</code>. Se usa cuando falta un dato al crear el objeto y existe un valor inicial razonable por defecto (en este caso, velocidad 0).</p>
+<p><strong>Error frecuente</strong>: repetir toda la lógica de asignación en cada constructor en vez de reutilizar uno desde el otro con <code>this(...)</code> — duplica código y facilita que ambos constructores queden desincronizados si se modifica un atributo.</p>
+<h3 id="24-flujo-de-trabajo">2.4 Flujo de trabajo<a class="headerlink" href="#24-flujo-de-trabajo" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Retomar el proyecto Java simple preparado en S1.</li>
+<li>Abstraer objetos tangibles del mundo real.</li>
+<li>Definir la responsabilidad inicial de la clase.</li>
+<li>Elegir atributos y métodos coherentes con sus características y acciones.</li>
+<li>Crear constructores para inicializar objetos, sobrecargando cuando falte un dato con valor por defecto razonable.</li>
+<li>Crear <code>Coche</code> y <code>Persona</code> para observar colaboración simple.</li>
+<li>Crear <code>Producto</code> como ejemplo puente hacia el dominio.</li>
+<li>Ejecutar el programa por consola.</li>
+<li>Registrar evidencia y explicar responsabilidades.</li>
+</ol>
+<h3 id="25-errores-frecuentes-y-diagnostico">2.5 Errores frecuentes y diagnóstico<a class="headerlink" href="#25-errores-frecuentes-y-diagnostico" title="Permanent link">&para;</a></h3>
+<p><strong>Tabla 2. Errores frecuentes y diagnóstico</strong></p>
+<table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Causa probable</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No ejecuta <code>Main</code></td>
+<td>Falta método <code>public static void main</code></td>
+<td>Revisar firma del método</td>
+</tr>
+<tr>
+<td>No reconoce la clase</td>
+<td>Archivo, clase o paquete no coincide</td>
+<td>Revisar nombre de archivo y paquete</td>
+</tr>
+<tr>
+<td>Los datos salen en cero o <code>null</code></td>
+<td>No se asignaron valores al objeto</td>
+<td>Inicializar atributos antes de imprimir</td>
+</tr>
+<tr>
+<td>Todo está en <code>Main</code></td>
+<td>No se separó la responsabilidad</td>
+<td>Mover datos y comportamiento a una clase</td>
+</tr>
+<tr>
+<td>Salida poco clara</td>
+<td><code>Main</code> no imprime datos suficientes</td>
+<td>Mejorar la salida desde <code>Main</code> sin meter consola en la entidad</td>
+</tr>
+<tr>
+<td>La clase tiene métodos de muchas cosas</td>
+<td>No se identificaron bien sus características y acciones</td>
+<td>Volver a la abstracción inicial del objeto</td>
+</tr>
+<tr>
+<td>Ambigüedad entre constructores sobrecargados</td>
+<td>Dos constructores con parámetros del mismo tipo y cantidad</td>
+<td>Los constructores deben distinguirse por cantidad o tipo de parámetros</td>
+</tr>
+<tr>
+<td>Se usan <code>private</code>, getters/setters o validaciones complejas antes de tiempo</td>
+<td>Se adelantó contenido de S3</td>
+<td>En S2 usar constructores simples; el encapsulamiento formal queda para S3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="26-metodologia-para-resolver-problemas">2.6 Metodología para resolver problemas<a class="headerlink" href="#26-metodologia-para-resolver-problemas" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Comprender el problema: ¿qué objeto del dominio necesito representar?</li>
+<li>Identificar sus características (atributos) y acciones (métodos).</li>
+<li>Diseñar el constructor: ¿qué datos necesita al crearse? ¿necesita más de una forma de crearse (sobrecarga)?</li>
+<li>Definir qué debe mostrar o devolver cada método.</li>
+<li>Diseñar pruebas: crear el objeto, ejecutar sus métodos y verificar el estado antes y después.</li>
+<li>Escribir, compilar, ejecutar y corregir el código.</li>
+</ol>
+<p>En cada ejercicio de este curso se aplican estos pasos antes de programar.</p>
+<h2 id="3-aplica-actividad-practica-guiada">3. Aplica: actividad práctica guiada<a class="headerlink" href="#3-aplica-actividad-practica-guiada" title="Permanent link">&para;</a></h2>
+<p>Tiempo: 3h 20min (4 horas académicas de 50 min, en laboratorio).</p>
+<p><strong>Actividad:</strong> creación guiada de las primeras clases del dominio (<code>Coche</code>, <code>Persona</code>, <code>Producto</code>), con atributos, constructores (incluida su sobrecarga) y métodos, probadas desde <code>Main</code>.</p>
+<p><strong>Propósito de la actividad:</strong> construir clases simples que agrupen datos y comportamiento, crear objetos mediante constructores sobrecargados, y observar la comunicación básica entre objetos, verificando cada incremento por consola antes de continuar.</p>
+<p><strong>Orientaciones metodológicas:</strong> en el laboratorio, el docente guía la creación de <code>Coche</code>, <code>Persona</code> y <code>Producto</code> paso a paso frente a la clase, probando cada clase desde <code>Main</code> antes de avanzar a la siguiente; los estudiantes replican cada paso en su propio equipo, verificando la compilación y la salida por consola antes de continuar.</p>
+<p><strong>Actividades para realizar:</strong></p>
+<ul>
+<li><strong>3.1</strong> Retomar el proyecto Java simple.</li>
+<li><strong>3.2</strong> Abstraer objetos tangibles: Coche y Persona.</li>
+<li><strong>3.3</strong> Crear la clase Coche, con constructor sobrecargado.</li>
+<li><strong>3.4</strong> Crear la clase Persona.</li>
+<li><strong>3.5</strong> Crear objetos desde Main.</li>
+<li><strong>3.6</strong> Identificar estado, comportamiento y responsabilidad inicial.</li>
+<li><strong>3.7</strong> Ejemplo 2: Producto como puente hacia el dominio.</li>
+</ul>
+<h3 id="31-retomar-el-proyecto-java-simple">3.1 Retomar el proyecto Java simple<a class="headerlink" href="#31-retomar-el-proyecto-java-simple" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> carpeta de trabajo con estructura inicial.</p>
+<ol>
+<li>Crear una carpeta para el proyecto.</li>
+<li>Abrir la carpeta en VS Code.</li>
+<li>Crear una carpeta <code>src</code>.</li>
+<li>Crear el archivo <code>Main.java</code>.</li>
+<li>Ejecutar un mensaje simple para comprobar el entorno.</li>
+</ol>
+<p>Ejemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Proyecto iniciado"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="32-abstraer-objetos-tangibles-coche-y-persona">3.2 Abstraer objetos tangibles: Coche y Persona<a class="headerlink" href="#32-abstraer-objetos-tangibles-coche-y-persona" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> dos clases candidatas identificadas desde el mundo real.</p>
+<p>Antes de escribir código, observar objetos tangibles. Para iniciar, se usan <code>Coche</code> y <code>Persona</code> porque permiten distinguir características, acciones y colaboración entre objetos.</p>
+<p>Completar una tabla de abstracción inicial:</p>
+<p><strong>Tabla 3. Abstracción inicial de Coche y Persona</strong></p>
+<table>
+<thead>
+<tr>
+<th>Clase</th>
+<th>Características</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Coche</code></td>
+<td>marca, velocidad</td>
+<td>acelerar, frenar, mostrar estado</td>
+</tr>
+<tr>
+<td><code>Persona</code></td>
+<td>nombre</td>
+<td>conducir</td>
+</tr>
+</tbody>
+</table>
+<p>En S2, responsabilidad de clase no significa responsabilidad legal, vial o moral. Significa identificar qué características y qué acciones le corresponden a una clase dentro del programa.</p>
+<p>Ejemplo:</p>
+<div class="highlight"><pre><span></span><code>La Persona decide conducir.
+El Coche ejecuta acelerar o frenar y cambia su propia velocidad.
+</code></pre></div>
+<p>Nota metodológica:</p>
+<div class="highlight"><pre><span></span><code>En S2 todavía no se aplica SOLID de manera formal.
+Tampoco se trabaja encapsulamiento como tema fuerte.
+
+El objetivo es entender clase, objeto, atributos, métodos, estado,
+comportamiento, constructores (con sobrecarga), responsabilidad
+inicial y abstracción.
+</code></pre></div>
+<h3 id="33-crear-la-clase-coche">3.3 Crear la clase Coche<a class="headerlink" href="#33-crear-la-clase-coche" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> clase tangible con atributos, estado, métodos y un constructor sobrecargado.</p>
+<p>Crear <code>Coche.java</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Coche</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">marca</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">velocidad</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Coche</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">marca</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">velocidadInicial</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">marca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marca</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">velocidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">velocidadInicial</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Coche</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">marca</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">(</span><span class="n">marca</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">acelerar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">velocidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">velocidad</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">frenar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">velocidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">velocidad</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">mostrarEstado</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">marca</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" - Velocidad: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">velocidad</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>En este punto ya aparecen los primeros conceptos:</p>
+<p><strong>Tabla 4. Conceptos POO en el código de Coche</strong></p>
+<table>
+<thead>
+<tr>
+<th>Elemento del código</th>
+<th>Concepto POO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public class Coche</code></td>
+<td>Clase</td>
+</tr>
+<tr>
+<td><code>marca</code>, <code>velocidad</code></td>
+<td>Atributos</td>
+</tr>
+<tr>
+<td><code>Coche(String marca, int velocidadInicial)</code></td>
+<td>Constructor</td>
+</tr>
+<tr>
+<td><code>Coche(String marca)</code></td>
+<td>Constructor sobrecargado (velocidad por defecto)</td>
+</tr>
+<tr>
+<td>Valor actual de <code>velocidad</code></td>
+<td>Estado</td>
+</tr>
+<tr>
+<td><code>acelerar()</code> y <code>frenar()</code></td>
+<td>Métodos</td>
+</tr>
+<tr>
+<td>Cambiar la velocidad</td>
+<td>Comportamiento</td>
+</tr>
+</tbody>
+</table>
+<h3 id="34-crear-la-clase-persona">3.4 Crear la clase Persona<a class="headerlink" href="#34-crear-la-clase-persona" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> segunda clase tangible que usa un objeto <code>Coche</code>.</p>
+<p>Crear <code>Persona.java</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Persona</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Persona</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">conducir</span><span class="p">(</span><span class="n">Coche</span><span class="w"> </span><span class="n">coche</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">nombre</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" conduce el coche"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">coche</span><span class="p">.</span><span class="na">acelerar</span><span class="p">();</span>
+<span class="w">        </span><span class="n">coche</span><span class="p">.</span><span class="na">frenar</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Lectura metodológica:</p>
+<div class="highlight"><pre><span></span><code>Persona no cambia directamente la velocidad.
+Persona usa acciones disponibles del Coche.
+Coche modifica su propio estado.
+</code></pre></div>
+<p>La idea de pedales o volante puede usarse como analogía: la persona no manipula todo el motor; interactúa mediante acciones visibles. La interfaz formal de Java se trabajará después, en S4.</p>
+<h3 id="35-crear-objetos-desde-main">3.5 Crear objetos desde Main<a class="headerlink" href="#35-crear-objetos-desde-main" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> objetos <code>coche1</code>, <code>coche2</code> y <code>persona1</code> instanciados y visibles por consola.</p>
+<p>Actualizar <code>Main.java</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Coche</span><span class="w"> </span><span class="n">coche1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Coche</span><span class="p">(</span><span class="s">"Toyota"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Coche</span><span class="w"> </span><span class="n">coche2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Coche</span><span class="p">(</span><span class="s">"Kia"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Persona</span><span class="w"> </span><span class="n">persona1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Persona</span><span class="p">(</span><span class="s">"Ana"</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">coche1</span><span class="p">.</span><span class="na">mostrarEstado</span><span class="p">();</span>
+<span class="w">        </span><span class="n">coche2</span><span class="p">.</span><span class="na">mostrarEstado</span><span class="p">();</span>
+<span class="w">        </span><span class="n">persona1</span><span class="p">.</span><span class="na">conducir</span><span class="p">(</span><span class="n">coche1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">coche1</span><span class="p">.</span><span class="na">mostrarEstado</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>En este punto se observa la diferencia entre clase y objeto, y entre los dos constructores:</p>
+<p><strong>Tabla 5. Diferencia entre clase y objeto en el ejemplo</strong></p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Explicación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Coche</code></td>
+<td>Molde o definición general</td>
+</tr>
+<tr>
+<td><code>coche1</code></td>
+<td>Objeto creado desde la clase <code>Coche</code> con el constructor de dos parámetros</td>
+</tr>
+<tr>
+<td><code>coche2</code></td>
+<td>Objeto creado desde la clase <code>Coche</code> con el constructor sobrecargado (velocidad 0 por defecto)</td>
+</tr>
+<tr>
+<td><code>Persona</code></td>
+<td>Molde o definición general</td>
+</tr>
+<tr>
+<td><code>persona1</code></td>
+<td>Objeto creado desde la clase <code>Persona</code> mediante constructor</td>
+</tr>
+<tr>
+<td>Estado de <code>coche1</code></td>
+<td>Toyota, velocidad actual</td>
+</tr>
+</tbody>
+</table>
+<h3 id="36-identificar-estado-comportamiento-y-responsabilidad-inicial">3.6 Identificar estado, comportamiento y responsabilidad inicial<a class="headerlink" href="#36-identificar-estado-comportamiento-y-responsabilidad-inicial" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> explicación de cómo los objetos guardan datos, ejecutan acciones y colaboran.</p>
+<p>Analizar el código creado:</p>
+<div class="highlight"><pre><span></span><code>El estado de coche1 cambia cuando se ejecuta acelerar o frenar.
+El comportamiento está en los métodos de cada clase.
+La responsabilidad inicial se entiende como características y acciones
+que le corresponden a cada clase.
+</code></pre></div>
+<p>Completar:</p>
+<p><strong>Tabla 6. Responsabilidad inicial de Coche y Persona</strong></p>
+<table>
+<thead>
+<tr>
+<th>Clase</th>
+<th>Sabe</th>
+<th>Puede</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Coche</code></td>
+<td>marca, velocidad</td>
+<td>acelerar, frenar, mostrar estado</td>
+</tr>
+<tr>
+<td><code>Persona</code></td>
+<td>nombre</td>
+<td>conducir un coche</td>
+</tr>
+</tbody>
+</table>
+<h3 id="37-ejemplo-2-producto-como-puente-hacia-el-dominio">3.7 Ejemplo 2: Producto como puente hacia el dominio<a class="headerlink" href="#37-ejemplo-2-producto-como-puente-hacia-el-dominio" title="Permanent link">&para;</a></h3>
+<p><strong>Producto del paso:</strong> clase <code>Producto</code> simple con constructor, estado cambiante y comportamiento propio.</p>
+<p>Ahora se usa <code>Producto</code> como segundo ejemplo porque conecta los objetos tangibles con el dominio comercial de CoMarket.</p>
+<p>Crear <code>Producto.java</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Producto</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">;</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">precio</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">stock</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Producto</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">codigo</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">precio</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">stock</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">codigo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">codigo</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombre</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">precio</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stock</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">mostrarInformacion</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">codigo</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" - "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" - S/ "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">precio</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" - Stock: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stock</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">actualizarPrecio</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">nuevoPrecio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuevoPrecio</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">aumentarStock</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">cantidad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stock</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cantidad</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Probar desde <code>Main</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Producto</span><span class="w"> </span><span class="n">producto1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Producto</span><span class="p">(</span><span class="s">"P001"</span><span class="p">,</span><span class="w"> </span><span class="s">"Teclado"</span><span class="p">,</span><span class="w"> </span><span class="mf">80.0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+
+<span class="n">producto1</span><span class="p">.</span><span class="na">mostrarInformacion</span><span class="p">();</span>
+<span class="n">producto1</span><span class="p">.</span><span class="na">actualizarPrecio</span><span class="p">(</span><span class="mf">75.0</span><span class="p">);</span>
+<span class="n">producto1</span><span class="p">.</span><span class="na">aumentarStock</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="n">producto1</span><span class="p">.</span><span class="na">mostrarInformacion</span><span class="p">();</span>
+</code></pre></div>
+<p>Lectura esperada:</p>
+<div class="highlight"><pre><span></span><code>producto1 sigue siendo el mismo objeto.
+Lo que cambió fue su estado: precio y stock.
+En S3 se controlará mejor este cambio con encapsulamiento,
+validaciones e invariantes simples.
+</code></pre></div>
+<h2 id="4-crea-actividad-autonoma">4. Crea: actividad autónoma<a class="headerlink" href="#4-crea-actividad-autonoma" title="Permanent link">&para;</a></h2>
+<p>Tiempo: 2h fuera del aula.</p>
+<h3 id="41-actividad">4.1 Actividad<a class="headerlink" href="#41-actividad" title="Permanent link">&para;</a></h3>
+<p>Creación autónoma de un par de clases propias del dominio elegido por el equipo, con atributos, constructores (incluida su sobrecarga) y métodos, probadas desde <code>Main</code>, documentada en evidencia individual.</p>
+<p>Completa y evidencia estas tareas:</p>
+<ol>
+<li>Crear otro par de clases tangibles que colaboren entre sí, por ejemplo <code>Estudiante</code> y <code>Cuaderno</code>, <code>Jugador</code> y <code>Pelota</code>, o <code>Vendedor</code> y <code>Pedido</code>.</li>
+<li>Crear una clase simple similar a <code>Producto</code> que pueda prepararse para encapsulamiento en S3.</li>
+<li>Sobrecargar el constructor de al menos una de tus clases.</li>
+<li>Instanciar objetos desde <code>Main</code>, incluyendo un objeto creado con cada constructor sobrecargado.</li>
+<li>Mostrar por consola el estado inicial de al menos un objeto.</li>
+<li>Ejecutar métodos que cambien o muestren comportamiento.</li>
+<li>Explicar qué datos y acciones pertenecen a cada clase.</li>
+<li>Explicar qué parte del código demuestra abstracción inicial.</li>
+</ol>
+<h3 id="42-proposito">4.2 Propósito<a class="headerlink" href="#42-proposito" title="Permanent link">&para;</a></h3>
+<p>Que cada estudiante demuestre, de forma individual y fuera del aula, que puede reproducir el patrón de clases, objetos y constructores construido en clase sin el acompañamiento del docente.</p>
+<p>Cada estudiante consolida el aprendizaje creando clases propias del dominio y preparando una evidencia individual.</p>
+<h3 id="43-indicaciones">4.3 Indicaciones<a class="headerlink" href="#43-indicaciones" title="Permanent link">&para;</a></h3>
+<p>Entrega un PDF con el siguiente nombre:</p>
+<div class="highlight"><pre><span></span><code>S02_Equipo##_ApellidoNombre.pdf
+</code></pre></div>
+<p>Cada captura de pantalla del informe debe mostrar, sin recortar, el reloj del sistema (fecha y hora) y tu usuario o foto de perfil (Windows, VS Code o navegador) visibles en pantalla — es lo que permite verificar que la evidencia es tuya y que corresponde al momento real de tu trabajo.</p>
+<h4 id="431-estructura-del-informe">4.3.1 Estructura del informe<a class="headerlink" href="#431-estructura-del-informe" title="Permanent link">&para;</a></h4>
+<p><strong>Datos del estudiante</strong></p>
+<ul>
+<li>Nombre:</li>
+<li>Equipo:</li>
+<li>Sesión: S02 - Clases, objetos, constructores y comunicación entre objetos</li>
+<li>Rol o aporte realizado:</li>
+<li>Link de GitHub:</li>
+</ul>
+<p><strong>Evidencia técnica</strong></p>
+<p>Incluye capturas o salidas de consola con una breve explicación debajo de cada una, organizadas en los mismos 4 bloques de la rúbrica (4.6) — así queda claro qué evidencia corresponde a cada criterio evaluado:</p>
+<ol>
+<li><em>Clases y objetos</em><ul>
+<li>Código de tus dos clases tangibles propias que colaboran entre sí.</li>
+<li>Código de la instanciación de sus objetos desde <code>Main</code>.</li>
+</ul>
+</li>
+<li><em>Constructores y sobrecarga</em><ul>
+<li>Código del constructor sobrecargado, con un objeto creado desde cada versión.</li>
+</ul>
+</li>
+<li><em>Responsabilidad y abstracción</em><ul>
+<li>Tabla breve con clase, atributos, métodos y responsabilidad inicial (igual que la Tabla 6 de la sesión).</li>
+<li>Explicación de qué datos y comportamientos dejaste fuera por abstracción.</li>
+</ul>
+</li>
+<li><em>Prueba desde Main</em><ul>
+<li>Código de la clase puente similar a <code>Producto</code>.</li>
+<li>Salida de consola antes y después de ejecutar un método que cambie el estado de un objeto.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Error o hallazgo</strong></p>
+<p>Describe al menos un error, diferencia o hallazgo técnico: el archivo no coincidía con el nombre de la clase, <code>Main</code> no encontraba una clase, un atributo salía <code>null</code> o <code>0</code> por no inicializarlo, un método no cambiaba el estado esperado, o dos constructores quedaron ambiguos por tener parámetros del mismo tipo.</p>
+<p><strong>Reflexión técnica breve</strong></p>
+<p>Responde en 5 a 8 líneas:</p>
+<div class="highlight"><pre><span></span><code>¿Por qué una clase no debe ser solo una lista de variables?
+</code></pre></div>
+<p><strong>Anexo: Feedback de la sesión</strong></p>
+<p>Pega esta página como la última hoja del PDF, con tus respuestas.</p>
+<ol>
+<li>¿Cuál es el aprendizaje más importante que te llevas de la clase de hoy?</li>
+<li>¿Qué punto de la clase te resultó más confuso o te dejó con dudas?</li>
+<li>¿Tienes alguna pregunta que te gustaría que sea respondida la siguiente clase?</li>
+<li>Sobre tu nivel de comprensión de la clase de hoy, marca una opción:<ul>
+<li>¡Entendido! - Lo domino y podría explicarlo.</li>
+<li>Más o menos. - Entendí la idea general, pero tengo dudas.</li>
+<li>Necesito ayuda. - Me siento perdido/a con este tema.</li>
+</ul>
+</li>
+<li>¿Cómo puedo ayudarte a comprender mejor el tema?</li>
+<li>Pensando en tu participación y esfuerzo en la clase de hoy, ¿cómo te autoevaluarías? Marca una opción:<ul>
+<li>Muy Comprometido/a: Me esforcé al máximo.</li>
+<li>Comprometido/a: Sé que podría haberme esforzado un poco más.</li>
+<li>Poco Comprometido/a: Hoy no di mi mejor esfuerzo.</li>
+</ul>
+</li>
+<li>Mi satisfacción con la clase fue... (califica del 1 al 10, donde 1 es insatisfecho y 10 es muy satisfecho).</li>
+</ol>
+<h3 id="44-criterios-minimos-de-aceptacion">4.4 Criterios mínimos de aceptación<a class="headerlink" href="#44-criterios-minimos-de-aceptacion" title="Permanent link">&para;</a></h3>
+<p>La evidencia individual se considera completa si:</p>
+<ul>
+<li>El archivo respeta el nombre <code>S02_Equipo##_ApellidoNombre.pdf</code>.</li>
+<li>Muestra al menos dos clases tangibles propias que colaboran entre sí.</li>
+<li>Muestra una clase puente similar a <code>Producto</code>, preparada para S3.</li>
+<li>Muestra al menos un constructor sobrecargado en uso, con un objeto creado desde cada versión.</li>
+<li>Muestra objetos creados desde <code>Main</code>, con salida de consola.</li>
+<li>Explica responsabilidad inicial, estado y comportamiento de cada clase.</li>
+<li>No usa atributos <code>private</code>, getters/setters ni validaciones complejas como tema central — eso queda para S3.</li>
+<li>Cada captura de la evidencia técnica muestra el reloj del sistema y el usuario/perfil visible, sin recortar.</li>
+<li>Las fechas y horas de las capturas son coherentes con el historial de commits de su repositorio en GitHub.</li>
+<li>Incluye un error o hallazgo técnico diagnosticado.</li>
+<li>Incluye la reflexión técnica breve solicitada.</li>
+<li>Incluye el Anexo de feedback de la sesión respondido, como última página del PDF.</li>
+</ul>
+<h3 id="45-preguntas-de-defensa">4.5 Preguntas de defensa<a class="headerlink" href="#45-preguntas-de-defensa" title="Permanent link">&para;</a></h3>
+<ol>
+<li>¿Cuál es la diferencia entre clase y objeto?</li>
+<li>¿Qué representa el estado de un objeto?</li>
+<li>¿Qué significa responsabilidad de clase en S2?</li>
+<li>¿Qué método representa comportamiento en tu clase?</li>
+<li>¿Qué datos dejaste fuera por abstracción inicial?</li>
+<li>¿Qué características y acciones identificaste en tu clase?</li>
+<li>¿Por qué sobrecargaste un constructor y qué valor por defecto elegiste?</li>
+<li>¿Qué responsabilidad tiene <code>Main</code> en esta sesión?</li>
+<li>¿Qué cambiará en S3 cuando aparezca encapsulamiento?</li>
+</ol>
+<h3 id="46-rubrica-de-evaluacion">4.6 Rúbrica de evaluación<a class="headerlink" href="#46-rubrica-de-evaluacion" title="Permanent link">&para;</a></h3>
+<p><strong>Tabla 7. Rúbrica de evaluación</strong></p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th style="text-align: right;">Peso (%)</th>
+<th>A (20 pts)</th>
+<th>B (15 pts)</th>
+<th>C (10 pts)</th>
+<th>D (5 pts)</th>
+<th style="text-align: right;">Nivel obtenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Clases y objetos*</td>
+<td style="text-align: right;">25</td>
+<td>Define clases claras, con atributos y métodos que representan correctamente estado y comportamiento; crea objetos y explica la diferencia con precisión.</td>
+<td>Define clases y crea objetos funcionales, con atributos y métodos coherentes.</td>
+<td>Presenta clases incompletas, confunde clase con objeto, o tiene atributos/métodos poco claros.</td>
+<td>No evidencia clases y objetos funcionales.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>2. Constructores y sobrecarga*</td>
+<td style="text-align: right;">25</td>
+<td>Usa al menos dos constructores sobrecargados de forma correcta y justificada, sin ambigüedad entre ellos.</td>
+<td>Usa un constructor sobrecargado funcional.</td>
+<td>Sobrecarga incompleta o con errores de ambigüedad.</td>
+<td>No evidencia sobrecarga de constructores.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>3. Responsabilidad y abstracción*</td>
+<td style="text-align: right;">25</td>
+<td>Explica con claridad qué pertenece a cada clase y qué se dejó fuera por abstracción.</td>
+<td>Explica responsabilidad básica de las clases.</td>
+<td>Explicación parcial o confusa.</td>
+<td>No explica responsabilidad ni abstracción.</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td>4. Prueba desde Main*</td>
+<td style="text-align: right;">25</td>
+<td><code>Main</code> crea objetos, ejecuta métodos y muestra una salida clara del estado antes y después.</td>
+<td><code>Main</code> prueba el flujo principal, con salida comprensible.</td>
+<td>Prueba incompleta o salida poco clara.</td>
+<td>No hay prueba desde <code>Main</code>.</td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+<p>* Agregado manual.</p>
+<p>Nota final = suma de (<code>Peso</code> / 100 × <code>Puntos del nivel obtenido</code>) = ____ / 20.</p>
+<p>Para usar la rúbrica con IA, solicita:</p>
+<div class="highlight"><pre><span></span><code>Evalúa el PDF usando la rúbrica de la sesión.
+Para cada criterio selecciona el nivel obtenido usando la escala A=20, B=15, C=10, D=5 puntos.
+Justifica brevemente cada nivel asignado.
+Verifica que cada captura muestre reloj del sistema y usuario/perfil visible, y que las fechas sean coherentes con el historial de commits de GitHub. Si falta esta evidencia o hay inconsistencias, indícalo explícitamente antes de calificar.
+Calcula la nota final con la fórmula: suma de (Peso/100 × Puntos del nivel obtenido), directamente sobre 20.
+Indica 2 fortalezas y 2 recomendaciones.
+</code></pre></div>
+<h2 id="5-cierre">5. Cierre<a class="headerlink" href="#5-cierre" title="Permanent link">&para;</a></h2>
+<p>Tiempo: 5 min.</p>
+<p><strong>Resumen breve:</strong> hoy los datos que en S1 vivían en listas paralelas se agruparon por primera vez dentro de una clase — atributos como estado, métodos como comportamiento, constructores (con sobrecarga) para crear objetos, y una primera comunicación básica entre ellos, probada desde <code>Main</code>.</p>
+<p><strong>Dinámica participativa:</strong> cada estudiante comparte en una frase qué par de clases propias eligió para su actividad autónoma y por qué colaboran entre sí.</p>
+<p><strong>Metacognición:</strong> cada estudiante responde en voz alta o por escrito: ¿qué parte de la sesión te costó más entender, y cómo la resolviste?</p>
+<p><strong>Proyección:</strong> en S3 estas mismas clases reciben encapsulamiento formal (<code>private</code>, getters/setters, validaciones) y se organizan por responsabilidades y relaciones entre objetos; en un entorno profesional, esta misma decisión de agrupar datos y comportamiento en una clase propia —en vez de mantenerlos sueltos— es la base de cualquier diseño orientado a objetos que necesite crecer más allá de un prototipo.</p>
+<h2 id="bibliografia">Bibliografía<a class="headerlink" href="#bibliografia" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Eclipse Adoptium. (s. f.). <em>Temurin releases</em>. https://adoptium.net/temurin/releases/</li>
+<li>Oracle. (s. f.). <em>Classes</em>. The Java Tutorials. https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html</li>
+<li>Oracle. (s. f.). <em>Providing Multiple Constructors for Your Classes</em>. The Java Tutorials. https://docs.oracle.com/javase/tutorial/java/javaOO/moreconstructors.html</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Angel Sullon @asullom - UPeU 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "toc.follow", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="../../javascripts/mermaid.js"></script>
+      
+    
+  </body>
+</html>
